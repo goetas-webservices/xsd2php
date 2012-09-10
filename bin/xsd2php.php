@@ -13,7 +13,7 @@ $loader = new \Symfony\Component\ClassLoader\UniversalClassLoader();
 
 $loader->registerNamespaces(array(
     'Symfony'          => $symfonyPath,
-	'Goetas\DoctrineToXsd'      => __DIR__.'/../lib',
+	'Goetas\Xsd\XsdToPhp'      => __DIR__.'/../lib',
 ));
 
 $loader->register();

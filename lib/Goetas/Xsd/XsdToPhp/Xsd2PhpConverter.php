@@ -78,11 +78,18 @@ class Xsd2PhpConverter {
 		$xsd = $this->proc->transformToDoc($xsd);
 		
 		$files = $this->generator->generate($xsd, $tns);
+		$generated = array();
 		foreach ($files as $fullClass => $content){
 			
 			$fileName = basename(strtr($fullClass,"\\","//"));
-			file_put_contents("$destinationDir/$fileName.php", $content);
+			
+			$dst = "$destinationDir/$fileName.php";
+			
+			$generated[$fullClass] = $dst;
+			file_put_contents($dst, $content);
 		}
+		ksort($generated);
+		return $generated;
 		
 	}
 }

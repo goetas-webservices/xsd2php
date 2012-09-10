@@ -13,7 +13,8 @@ class ClassGenerator {
 		$this->addDefaultPart();
 	}
 	protected function addDefaultPart(){
-		$this->addAlias('http://www.w3.org/2001/XMLSchema', "string", "string");
+		
+		//$this->addAlias('http://www.w3.org/2001/XMLSchema', "string", "string");
 		$this->addAlias('http://www.w3.org/2001/XMLSchema', "anyURI", "string");
 		$this->addAlias('http://www.w3.org/2001/XMLSchema', "anySimpleType", "string");
 		
@@ -144,7 +145,7 @@ class ClassGenerator {
 		
 		
 		$content = '<?php'.PHP_EOL.
-		'namsespace '.$ns.';'.PHP_EOL;
+		'namespace '.$ns.';'.PHP_EOL;
 		
 		$content .= '/**'.PHP_EOL;
 		if($typ = $xp->evaluate("string(@complexity)", $node)){
@@ -261,8 +262,10 @@ class ClassGenerator {
 		
 		if ($type = $this->getAlias($ns, $name)){
 			$return  = $type; 
+			var_dump($return);
 		}elseif (isset ( $this->namespaces [$ns] )) {
 			$return  = rtrim ( $this->namespaces [$ns], "\\" ) . "\\" . $this->fixClassName ( $name );
+
 		} else {
 			throw new \Exception ( "Non trovo nessun associazione al namespace '$ns' per il tipo '$name'" );
 		}
