@@ -47,7 +47,7 @@ class Convert extends Console\Command\Command
         	),  
         	new InputOption(
         		'array-map', null, InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY,
-        		'Array map Syntax = XMLns:*'
+        		'Array map Syntax = *:XMLns'
         	)           
         ))
         ->setHelp("Generate repository classes from your mapping information.");
