@@ -1,0 +1,16 @@
+{
+    "name": "goetas/xsd2php",
+    "type": "library",
+    "description": "Convert XSD  (XML Schema ) definitions into PHP classes",
+    "keywords": ["converter", "xml", "xsd", "php"],
+    "license": "LGPL",
+    "authors": [
+        {"name": "Asmir Mustafic"}
+    ],
+    "require": {
+        "php": ">=5.3.2"
+    },
+    "autoload": {
+        "psr-0": { "Goetas\\Xsd\\XsdToPhp": "lib/" }
+    }
+}
