@@ -12,6 +12,7 @@ xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:env="goetas:envelope"
 			<xsl:apply-templates select="."/>
 		</xsl:for-each>
 	</env:env>
+	<
 </xsl:template>
 
 

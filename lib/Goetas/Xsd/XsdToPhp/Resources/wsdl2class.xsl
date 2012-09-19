@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0"
 				xmlns:env="goetas:envelope"	
-				xmlns:exslt="http://exslt.org/common"
+
 				xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 				xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
 				xmlns:php="http://php.net/xsl"
-				xmlns:xs2php="http://www.mercuriosistemi.com/mercurio/php/schema2php"
 				xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-	<xsl:output omit-xml-declaration="yes" method="xml"/>
+
 
 
 	<xsl:template match="/">
@@ -37,8 +36,6 @@
 	   <xsl:variable name="output_name" select="php:function('Goetas\Xsd\XsdToPhp\Xsd2PhpConverter::splitPart', wsdl:output, string(wsdl:output/@message),'name')"/>
        <xsl:variable name="output_ns" select="php:function('Goetas\Xsd\XsdToPhp\Xsd2PhpConverter::splitPart', wsdl:output, string(wsdl:output/@message),'ns')"/>
 
-	   
-	
 		<method name="{@name}">
 		  <xsl:if test="wsdl:documentation">
 		      <doc><xsl:value-of select="wsdl:documentation" /></doc>
@@ -65,12 +62,23 @@
 	        </xsl:if>
 	        
 	        <xsl:if test="@element">
-                 <xsl:attribute name="element-name">
-                     <xsl:value-of select="php:function('Goetas\Xsd\XsdToPhp\Xsd2PhpConverter::splitPart',., string(@element),'name')"/>
-                 </xsl:attribute>
-                  <xsl:attribute name="element-ns">
-                     <xsl:value-of select="php:function('Goetas\Xsd\XsdToPhp\Xsd2PhpConverter::splitPart',., string(@element),'ns')"/>
-                 </xsl:attribute>
+	        
+                <xsl:variable name="el_name" select="php:function('Goetas\Xsd\XsdToPhp\Xsd2PhpConverter::splitPart',., string(@element),'name')"/>
+	            <xsl:variable name="el_ns"  select="php:function('Goetas\Xsd\XsdToPhp\Xsd2PhpConverter::splitPart',., string(@element),'ns')"/>
+	            
+	            <xsl:variable name="elementType"  select="//xsd:schema[@targetNamespace=$el_ns]/xsd:element[@name=$el_name and @type]"/>
+	           
+	           <xsl:choose>
+	               <xsl:when test="$elementType">
+	                   <xsl:attribute name="type-name"><xsl:value-of select="php:function('Goetas\Xsd\XsdToPhp\Xsd2PhpConverter::splitPart',$elementType, string($elementType/@type),'name')"/></xsl:attribute>
+                       <xsl:attribute name="type-ns"><xsl:value-of select="php:function('Goetas\Xsd\XsdToPhp\Xsd2PhpConverter::splitPart',$elementType, string($elementType/@type),'ns')"/></xsl:attribute>     
+	               </xsl:when>
+	               <xsl:otherwise>
+	                   <xsl:attribute name="element-name"><xsl:value-of select="$el_name"/></xsl:attribute>
+                       <xsl:attribute name="element-ns"><xsl:value-of select="$el_ns"/></xsl:attribute>       
+	               </xsl:otherwise>
+	           </xsl:choose>
+	           
              </xsl:if>
 		</param>
 	</xsl:template>

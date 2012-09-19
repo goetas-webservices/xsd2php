@@ -113,7 +113,7 @@ class Server extends Console\Command\Command
 		if($result){
 			
 			foreach ($result as $class => $path) {				
-				$output->writeln("Saved <info>$class</info>");
+				$output->writeln("Saved <info>$class</info> to <comment>$path</comment>");
 			}
 			return 0;
 		}

@@ -343,28 +343,18 @@ class ClassGenerator {
 		$content .= " {".PHP_EOL;
 		
 		
-		if ($this->isPhpNative($fullExtends)){
-			$content .= '	private $__value;
-	public function set($value) {
-		$this->__value = $value;
-		return $this;
-	}
-	public function get() {
-		return $this->__value;
-	}
-	public function __toString() {
-		return strval($this->__value);
-	}'.PHP_EOL;
-		}
-		
-		
 		if (!$this->isArrayType($node)){
 		
 			$content .= implode(PHP_EOL, $this->geneateConstants($node, $xp)).PHP_EOL;
 			
 			$content .= implode(PHP_EOL, $this->geneateProperties($node, $xp)).PHP_EOL;
 			
+			
+			
 			$content .= $this->geneateConstructor($node, $xp).PHP_EOL;
+			if ($this->isPhpNative($fullExtends)){
+				$content .= $this->generateNativeData($node, $xp).PHP_EOL;
+			}
 			
 			$content .= implode(PHP_EOL, $this->geneatePropertiesMethods($node, $xp)).PHP_EOL;
 		}
@@ -372,6 +362,37 @@ class ClassGenerator {
 		$content.="}";
 		
 		return $content;
+	}
+	protected function generateNativeData(DOMElement $node, DOMXPath $xp) {
+		$content  = PHP_EOL;
+		$content .= 'private $__value = \'\';'.PHP_EOL.PHP_EOL;
+		
+		$content .= 'public function set($value) {'.PHP_EOL;
+		$content .= $this->tabize('$this->__value = $value;').PHP_EOL;
+		$content .= $this->tabize('return $this;').PHP_EOL;
+		$content .= '}'.PHP_EOL;
+		
+		$content .= 'public function get() {'.PHP_EOL;
+		$content .= $this->tabize('return $this->__value;').PHP_EOL;
+		$content .= '}'.PHP_EOL;
+		
+		$content .= 'public function __toString() {'.PHP_EOL;
+		$content .= $this->tabize('return $this->__value;').PHP_EOL;
+		$content .= '}'.PHP_EOL;
+		
+		
+		
+		$content.= '/**'.PHP_EOL;
+		$content.= ' * @return \\'.$this->getFullClassName($node).PHP_EOL;
+		$content.= '*/'.PHP_EOL;
+		
+		$content.= 'public static function create( $value ){'.PHP_EOL;
+		$content.= $this->tabize('$i = new static();').PHP_EOL;
+		$content.= $this->tabize('$i->set($value);').PHP_EOL;
+		$content.= $this->tabize('return $i;').PHP_EOL;
+		
+		$content.= '}'.PHP_EOL;
+		return $this->tabize($content);
 	}
 	protected function geneateConstructor(DOMElement $node, DOMXPath $xp){
 		

@@ -28,7 +28,7 @@ class Xsd2PhpServer extends Xsd2PhpBase {
 		
 		$xsd->preserveWhiteSpace = false;
 		$xsd->formatOutput = true;
-			
+					
 		$generated = $this->generator->generateServer($xsd, $tns, $destinationDir,$destinationPHP, $isClient);
 		ksort($generated);
 		return $generated;
