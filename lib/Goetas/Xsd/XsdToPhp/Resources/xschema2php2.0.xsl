@@ -11,7 +11,7 @@
 
 	<xsl:template match="/">
 		<all>
-			<xsl:apply-templates select="env:env/xsd:schema/*" mode="class"/>
+			<xsl:apply-templates select="env:env//xsd:schema/*" mode="class"/>
 		</all>
 	</xsl:template>
 		
@@ -51,6 +51,18 @@
 			<xsl:if test="@abstract='true'">
 				<xsl:attribute name="abstract">true</xsl:attribute>
 			</xsl:if>
+			
+			<xsl:if test="@type and local-name()='element'">
+				<extension>
+		            <xsl:attribute name="name">
+		                <xsl:value-of select="php:function('Goetas\Xsd\XsdToPhp\Xsd2PhpConverter::splitPart', . , string(@type),'name')"/>
+		            </xsl:attribute>
+		            <xsl:attribute name="ns">
+		                <xsl:value-of select="php:function('Goetas\Xsd\XsdToPhp\Xsd2PhpConverter::splitPart', . , string(@type),'ns')"/>
+		            </xsl:attribute>
+		        </extension>
+			</xsl:if>
+			
 			<xsl:apply-templates />
 		</class>
 	</xsl:template>
