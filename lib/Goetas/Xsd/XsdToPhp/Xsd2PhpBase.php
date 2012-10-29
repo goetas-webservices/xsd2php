@@ -25,7 +25,13 @@ abstract class Xsd2PhpBase {
 		$this->parseIncludes($el, $this->loadXsd($src));
 
 		$this->uniqueTypes($xsd);
+
+
+
 		return $xsd;
+	}
+	public function getNamespace($namespace) {
+		return $this->generator->getNamespace($namespace);
 	}
 	public function addNamespace($namesapce, $phpNamespace) {
 		$this->generator->addNamespace($namesapce, $phpNamespace);

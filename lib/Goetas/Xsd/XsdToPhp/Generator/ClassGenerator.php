@@ -25,6 +25,7 @@ class ClassGenerator {
 				'dateTime'=>'DateTime'
 		);
 
+		$this->addAlias('http://www.w3.org/2001/XMLSchema', "base64Binary", "string");
 		$this->addAlias('http://www.w3.org/2001/XMLSchema', "anyURI", "string");
 		$this->addAlias('http://www.w3.org/2001/XMLSchema', "anySimpleType", "string");
 
@@ -33,12 +34,16 @@ class ClassGenerator {
 		$this->addAlias('http://www.w3.org/2001/XMLSchema', "gYear", "integer");
 		$this->addAlias('http://www.w3.org/2001/XMLSchema', "short", "integer");
 		$this->addAlias('http://www.w3.org/2001/XMLSchema', "int", "integer");
+		$this->addAlias('http://www.w3.org/2001/XMLSchema', "nonNegativeInteger", "integer");
 
 
 		$this->addAlias('http://www.w3.org/2001/XMLSchema', "decimal", "float");
 		$this->addAlias('http://www.w3.org/2001/XMLSchema', "double", "float");
 
 
+	}
+	public function getNamespace($xsdNs) {
+		return $this->namespaces [$xsdNs];
 	}
 	public function addNamespace($xsdNs, $phpNs) {
 		$this->namespaces [$xsdNs] = $phpNs;
@@ -55,10 +60,15 @@ class ClassGenerator {
 		}
 		$this->alias [$ns] [$name] = array("ns"=>$ns2, "name"=>$name2);
 	}
-	protected function isArrayType(DOMElement $node) {
+
+	protected function isArrayTypeProp(DOMElement $node) {
 		if ($node->getAttribute("array")=="true"){
-			//return true;
+			return 1;
 		}
+		return $this->isArrayType($node);
+	}
+	protected function isArrayType(DOMElement $node, $check = true) {
+
 
 		if($node->getAttribute ( "ns" )){
 			$ns = $node->getAttribute ( "ns" );
@@ -72,7 +82,7 @@ class ClassGenerator {
 			foreach ($this->arrays[$ns] as $match => $class){
 
 
-				$match = "/".str_replace("\\*",".*",preg_quote($match,"/"))."/";
+				$match = "/".str_replace("\\*",".+",preg_quote($match,"/"))."/";
 
 				if(preg_match($match, $name)){
 					return true;
@@ -134,6 +144,7 @@ class ClassGenerator {
 		return $files;
 	}
 	public function generate(DOMDocument $doc, $tns) {
+
 		$xp = new DOMXPath ( $doc );
 
 		$files = array ();
@@ -141,18 +152,18 @@ class ClassGenerator {
 
 			$ns = $node->getAttribute("ns");
 
-
 			$name = $node->getAttribute("name");
-
 			if($tns==$ns && !$this->hasToSkip($node) && !isset($this->alias[$ns][$name]) && !$this->isArrayType($node)){
 				$fullName = $this->getFullClassName ( $node );
+
 				$files [$fullName] = $this->generateClass($node, $xp);
 			}
 		}
+
 		return $files;
 	}
 	protected static function calmelCase($name, $lower= false){
-		$name = preg_replace ( "/[^a-z0-9]/i", " ", $name );
+		$name = preg_replace ( "/[^a-z0-9#]/i", " ", $name );
 		$name = ucwords ( $name );
 		$name = str_replace ( " ", "", $name );
 		if($lower){
@@ -164,6 +175,12 @@ class ClassGenerator {
 		$extnodeset = $xp->evaluate("extension", $node);
 		if($extnodeset->length){
 			return $this->getFullClassName($extnodeset->item(0));
+		}
+	}
+	protected function getExtendsNode(DOMElement $node, DOMXPath $xp) {
+		$extnodeset = $xp->evaluate("extension", $node);
+		if($extnodeset->length){
+			return $extnodeset->item(0);
 		}
 	}
 	protected function isPhpNative($type){
@@ -332,11 +349,12 @@ class ClassGenerator {
 		$content .= 'class '.$class;
 
 		$fullExtends = $this->getExtends($node, $xp);
+		$extendsNode = $this->getExtendsNode($node, $xp);
 
-		if ($fullExtends && !$this->isPhpNative($fullExtends)){
-			$content .= ' extends \\'.$fullExtends;
-		}elseif ($this->isArrayType($node)){
+		if ($extendsNode && $this->isArrayType($extendsNode)){
 			$content .= ' extends \ArrayObject';
+		}elseif ($fullExtends && !$this->isPhpNative($fullExtends)){
+			$content .= ' extends \\'.$fullExtends;
 		}
 
 		$content .= " {".PHP_EOL;
@@ -404,7 +422,7 @@ class ClassGenerator {
 		}
 
 		foreach ($xp->query("prop", $node) as $snode){
-			if($this->isArrayType($snode)){
+			if($this->isArrayTypeProp($snode)){
 				$content.=$this->tabize('$this->'.self::calmelCase($snode->getAttribute("name"), true).' = new \ArrayObject();').PHP_EOL;
 			}
 		}
@@ -424,21 +442,29 @@ class ClassGenerator {
 		$content = '';
 
 		$constName = $node->getAttribute("name")?:$node->getAttribute("value");
-		$constName = preg_replace("/[^a-z0-9_]i/", "", $constName);
+		$constName = strtr($constName, "-\\/", "___");
+		$constName = preg_replace("/[^a-z0-9_]/i", "", $constName);
 		$constName = substr($constName,0, 50);
 
-		$content.= 'const '.strtoupper($constName).' = \''.addcslashes($node->getAttribute("value"),"\n'").'\';'.PHP_EOL;
 
-		$content.= '/**'.PHP_EOL;
-		$content.= ' * @return \\'.$this->getFullClassName($node->parentNode).PHP_EOL;
-		$content.= '*/'.PHP_EOL;
-		$content.= 'public static function '.strtoupper($constName).'(){'.PHP_EOL;
-		$content.= $this->tabize('$i = new static();').PHP_EOL;
-		$content.= $this->tabize('$i->set(self::'.strtoupper($constName).');').PHP_EOL;
-		$content.= $this->tabize('return $i;').PHP_EOL;
-		$content.= '}'.PHP_EOL;
+		$keywords = array('__halt_compiler', 'abstract', 'and', 'array', 'as', 'break', 'callable', 'case', 'catch', 'class', 'clone', 'const', 'continue', 'declare', 'default', 'die', 'do', 'echo', 'else', 'elseif', 'empty', 'enddeclare', 'endfor', 'endforeach', 'endif', 'endswitch', 'endwhile', 'eval', 'exit', 'extends', 'final', 'for', 'foreach', 'function', 'global', 'goto', 'if', 'implements', 'include', 'include_once', 'instanceof', 'insteadof', 'interface', 'isset', 'list', 'namespace', 'new', 'or', 'print', 'private', 'protected', 'public', 'require', 'require_once', 'return', 'static', 'switch', 'throw', 'trait', 'try', 'unset', 'use', 'var', 'while', 'xor');
 
-		return $this->tabize($content);
+
+		if($constName && !in_array(strtolower($constName), $keywords)){
+
+			$content.= 'const '.strtoupper($constName).' = \''.addcslashes($node->getAttribute("value"),"\n'").'\';'.PHP_EOL;
+
+			$content.= '/**'.PHP_EOL;
+			$content.= ' * @return \\'.$this->getFullClassName($node->parentNode).PHP_EOL;
+			$content.= '*/'.PHP_EOL;
+			$content.= 'public static function '.strtoupper($constName).'(){'.PHP_EOL;
+			$content.= $this->tabize('$i = new static();').PHP_EOL;
+			$content.= $this->tabize('$i->set(self::'.strtoupper($constName).');').PHP_EOL;
+			$content.= $this->tabize('return $i;').PHP_EOL;
+			$content.= '}'.PHP_EOL;
+
+			return $this->tabize($content);
+		}
 	}
 
 	protected function geneateProperties(DOMElement $node, DOMXPath $xp) {
@@ -458,17 +484,18 @@ class ClassGenerator {
 
 
 	protected function getFullClassName(DOMElement $node) {
-		if($node->getAttribute ( "element-ns" )){
+		if($node->hasAttribute ( "element-ns" )){
 			$ns = $node->getAttribute ( "element-ns" );
 			$name = $node->getAttribute ( "element-name" );
-		}elseif($node->getAttribute ( "ns" )){
+		}elseif($node->hasAttribute ( "ns" )){
 			$ns = $node->getAttribute ( "ns" );
 			$name = $node->getAttribute ( "name" );
 		}else{
 			$ns = $node->getAttribute ( "type-ns" );
 			$name = $node->getAttribute ( "type-name" );
 		}
-		return $this->getFullClassNamePhp($ns, $name);
+
+		return $this->getFullClassNamePhp($ns,$name);
 	}
 
 	protected function getFullClassNamePhp($ns, $name){
@@ -496,6 +523,20 @@ class ClassGenerator {
 			$name = $node->getAttribute ( "type-name" );
 		}
 		$res = $xp->query("//class[@name='$name' and @ns='$ns']/prop");
+		if(!$res->length){
+			throw new \Exception("Non trovo $ns#$name");
+		}
+		return $res->item(0);
+	}
+	protected function getArrayTypeNode1($node, DOMXPath $xp) {
+		if($node->getAttribute ( "ns" )){
+			$ns = $node->getAttribute ( "ns" );
+			$name = $node->getAttribute ( "name" );
+		}else{
+			$ns = $node->getAttribute ( "type-ns" );
+			$name = $node->getAttribute ( "type-name" );
+		}
+		$res = $xp->query("//class[@name='$name' and @ns='$ns']");
 		if(!$res->length){
 			throw new \Exception("Non trovo $ns#$name");
 		}
@@ -572,7 +613,7 @@ class ClassGenerator {
 
 		$content = '';
 		$content .= '/**'.PHP_EOL;
-		if($this->isArrayType($node)){
+		if($this->isArrayTypeProp($node)){
 			$content .= ' * @return \ArrayObject';
 		}else{
 			$cls = $this->getFullClassName($node);
@@ -598,10 +639,14 @@ class ClassGenerator {
 
 		$content .= PHP_EOL;
 
+		$atype = $this->isArrayTypeProp($node);
+		if($atype){
 
-		if($this->isArrayType($node)){
-
-			$arrayNode = $this->getArrayTypeNode($node, $xp);
+			if($atype===1){
+				$arrayNode = $this->getArrayTypeNode1($node, $xp);
+			}else{
+				$arrayNode = $this->getArrayTypeNode($node, $xp);
+			}
 
 
 			$cls = $this->getFullClassName($arrayNode);
@@ -693,7 +738,7 @@ class ClassGenerator {
 
 		if($this->isPhpNative($cls)){
 			$content .= ' * @var '.$cls;
-		}elseif($this->isArrayType($node)){
+		}elseif($this->isArrayTypeProp($node)){
 			$content .= ' * @var \ArrayObject[]';
 		}else{
 			$content .= ' * @var \\'.$cls;
@@ -716,24 +761,12 @@ class ClassGenerator {
 		return $this->tabize($content);
 	}
 	private function fixClassName($class) {
-		$ns = '';
-		if (strpos ( $class, '#' ) !== false) {
-			$parts = explode ( "#", $class );
-			$class = array_pop ( $parts );
-			$ns = implode ( "\\", $parts );
-		}
 
-		$fix = function ($name) {
-
-			return $name;
-		};
+		$class = str_replace("#", "# ", $class);
 
 		$class = self::calmelCase( $class );
-		if ($ns) {
-			$ns = self::calmelCase( $ns ) . "\\";
-		}
 
-		return $ns . $class;
+		return strtr($class, "#", "\\");
 
 	}
 }

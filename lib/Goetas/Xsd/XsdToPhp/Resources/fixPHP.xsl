@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 xmlns:xsd="http://www.w3.org/2001/XMLSchema"
 >
 
@@ -36,7 +36,7 @@ xmlns:xsd="http://www.w3.org/2001/XMLSchema"
 			<xsl:value-of select="@ns"/>
 		</xsl:attribute>
 		<xsl:attribute name="name" >
-			<xsl:value-of select="@sub-ns"/>
+			<xsl:value-of select="substring(@sub-ns, 0, string-length(@sub-ns))"/>
 			<xsl:text>#</xsl:text>
 			<xsl:value-of select="@name"/>
 		</xsl:attribute>

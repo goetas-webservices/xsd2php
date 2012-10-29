@@ -45,16 +45,37 @@ class Xsd2PhpConverter extends Xsd2PhpBase {
 
 
 
+
+		$xp = new \DOMXPath($xsd);
+		foreach ($xp->query("//@type-name[contains(., '##')]") as $attr){
+			$attr->value = trim(str_replace("##", "#", $attr->value), "#");
+		}
+
+
 		$files = $this->generator->generate($xsd, $tns);
 		$generated = array();
+		$phpNs = $this->getNamespace($tns);
+
+
 		foreach ($files as $fullClass => $content){
 
-			$fileName = basename(strtr($fullClass,"\\","//"));
 
-			$dst = "$destinationDir/$fileName.php";
+			if(strpos($fullClass, $phpNs)===0){
 
-			$generated[$fullClass] = $dst;
-			file_put_contents($dst, $content);
+				$fileName = trim(strtr(substr($fullClass,strlen($phpNs)), "\\","//"), "/");
+
+
+
+
+				$dst = "$destinationDir/$fileName.php";
+
+				if(!is_dir(dirname($dst))){
+					mkdir(dirname($dst));
+				}
+
+				$generated[$fullClass] = $dst;
+				file_put_contents($dst, $content);
+			}
 		}
 		ksort($generated);
 		return $generated;
