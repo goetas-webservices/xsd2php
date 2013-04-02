@@ -51,10 +51,12 @@ class Xsd2PhpConverter extends Xsd2PhpBase {
 			$attr->value = trim(str_replace("##", "#", $attr->value), "#");
 		}
 
-
 		$files = $this->generator->generate($xsd, $tns);
+	
 		$generated = array();
 		$phpNs = $this->getNamespace($tns);
+		
+		
 
 
 		foreach ($files as $fullClass => $content){

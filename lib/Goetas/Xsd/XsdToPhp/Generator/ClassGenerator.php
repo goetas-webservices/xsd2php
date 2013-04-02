@@ -63,6 +63,7 @@ class ClassGenerator {
 
 	protected function isArrayTypeProp(DOMElement $node) {
 		if ($node->getAttribute("array")=="true"){
+			//die($node->ownerDocument->saveXML($node->parentNode));
 			return 1;
 		}
 		return $this->isArrayType($node);
@@ -356,26 +357,26 @@ class ClassGenerator {
 		}elseif ($fullExtends && !$this->isPhpNative($fullExtends)){
 			$content .= ' extends \\'.$fullExtends;
 		}
-
+		
 		$content .= " {".PHP_EOL;
 
 
 		if (!$this->isArrayType($node)){
-
+			
 			$content .= implode(PHP_EOL, $this->geneateConstants($node, $xp)).PHP_EOL;
-
+			
 			$content .= implode(PHP_EOL, $this->geneateProperties($node, $xp)).PHP_EOL;
 
 
-
 			$content .= $this->geneateConstructor($node, $xp).PHP_EOL;
+	
 			if ($this->isPhpNative($fullExtends)){
 				$content .= $this->generateNativeData($node, $xp).PHP_EOL;
 			}
 
 			$content .= implode(PHP_EOL, $this->geneatePropertiesMethods($node, $xp)).PHP_EOL;
 		}
-
+		
 		$content.="}";
 
 		return $content;
@@ -734,8 +735,9 @@ class ClassGenerator {
 		if($doc = $xp->evaluate("string(doc)", $node)){
 			$content .=' * '.str_replace("\n", "\n * ", trim($doc)).PHP_EOL;
 		}
+		
 		$cls = $this->getFullClassName($node);
-
+		
 		if($this->isPhpNative($cls)){
 			$content .= ' * @var '.$cls;
 		}elseif($this->isArrayTypeProp($node)){
@@ -743,7 +745,7 @@ class ClassGenerator {
 		}else{
 			$content .= ' * @var \\'.$cls;
 		}
-
+		
 		$content .= PHP_EOL;
 
 		$content .= ' */'.PHP_EOL;
@@ -756,7 +758,7 @@ class ClassGenerator {
 		}elseif($node->hasAttribute("default") && $this->isPhpNative($cls)=="float"){
 			$content .= ' = '.floatval($node->getAttribute("default"));
 		}
-
+		
 		$content.=";";
 		return $this->tabize($content);
 	}
