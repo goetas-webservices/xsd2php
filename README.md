@@ -8,7 +8,7 @@ Installation with composer
 
 `php composer.phar require goetas/xsd2php:dev-master`
 
-Usage
+Usage (with Composer)
 -----
 
 
@@ -17,8 +17,7 @@ Usage
 
 include __DIR__ . '/vendor/autoload.php';
 
-use Goetas\Xsd\XsdToPhp\Console\ConsoleRunner;
 
-$cli = new ConsoleRunner();
-$cli->run();
+\Goetas\Xsd\XsdToPhp\Console\ConsoleRunner::run();
+
 ```
