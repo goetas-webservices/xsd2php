@@ -10,11 +10,11 @@ class ConsoleRunner
     /**
      * Run console with the given helperset.
      *
-     * @param \Symfony\Component\Console\Helper\HelperSet $helperSet
-     * @param \Symfony\Component\Console\Command\Command[] $commands 
+     * @param  \Symfony\Component\Console\Helper\HelperSet  $helperSet
+     * @param  \Symfony\Component\Console\Command\Command[] $commands
      * @return void
      */
-    static public function run($commands = array())
+    public static function run($commands = array())
     {
         $cli = new Application('Convert XSD to PHP classes Command Line Interface', "1.0");
         $cli->setCatchExceptions(true);
@@ -26,7 +26,7 @@ class ConsoleRunner
     /**
      * @param Application $cli
      */
-    static public function addCommands(Application $cli)
+    public static function addCommands(Application $cli)
     {
         $cli->addCommands(array(
             new \Goetas\Xsd\XsdToPhp\Command\Convert()
