@@ -89,11 +89,9 @@ class Convert extends Console\Command\Command
         $result = $converter->convert($src, $destinationNs, $destination);
 
         if ($result) {
-
             foreach ($result as $path) {
                 $output->writeln("Saved <info>$path</info>");
             }
-
             return 0;
         }
 

@@ -99,13 +99,10 @@ class Server extends Console\Command\Command
         }
 
         $result = $converter->convert($src, $destinationNs, $destination, $destinationPHP, $input->getOption('extends'),  $input->getOption('is-client'));
-
         if ($result) {
-
             foreach ($result as $class => $path) {
                 $output->writeln("Saved <info>$class</info> to <comment>$path</comment>");
             }
-
             return 0;
         }
 

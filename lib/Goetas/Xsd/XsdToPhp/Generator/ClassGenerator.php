@@ -69,7 +69,6 @@ class ClassGenerator
     protected function isArrayTypeProp(DOMElement $node)
     {
         if ($node->getAttribute("array")=="true") {
-            //die($node->ownerDocument->saveXML($node->parentNode));
             return 1;
         }
 
@@ -102,9 +101,7 @@ class ClassGenerator
     {
         if (isset($this->alias[$ns])) {
             foreach ($this->alias[$ns] as $match => $class) {
-
                 $match = "/".str_replace("\\*",".*",preg_quote($match,"/"))."/";
-
                 if (preg_match($match, $name)) {
                     return $class;
                 }
@@ -137,14 +134,12 @@ class ClassGenerator
         foreach ( $xp->query ( "//class" ) as $node ) {
 
             $ns = $node->getAttribute("ns");
-
             $name = $node->getAttribute("name");
 
             if (("wsdl:portType#".$tns)==$ns && !$this->isArrayType($node)) {
                 $fullClass = $this->getFullClassName ( $node );
 
                 $fileName = basename(strtr($fullClass,"\\","//"));
-
                 $this->generateServerClass($node, $xp, "$destDir/$fileName.php", $extends, $isClient);
 
                 $files [$fullClass] = "$destDir/$fileName.php";
@@ -223,9 +218,7 @@ class ClassGenerator
                 }
             }
             $body = implode(PHP_EOL, $methods).PHP_EOL;
-
             $last = strrpos($currentCode, '}');
-
             $content = substr($currentCode, 0, $last) . $body . (strlen($body) > 0 ? "\n" : ''). "}";
 
             file_put_contents($save, $content);
@@ -236,11 +229,9 @@ class ClassGenerator
             $ns = substr($fullClass, 0, $pos);
             $class = substr($fullClass, $pos+1);
 
-            $content = '<?php'.PHP_EOL.
-            'namespace '.$ns.';'.PHP_EOL;
-
+            $content = '<?php'.PHP_EOL;
+            $content .='namespace '.$ns.';'.PHP_EOL;
             $content .= '/**'.PHP_EOL;
-
             $content.= ' * \\'.$this->getFullClassName($node).PHP_EOL;
 
             if ($doc = $xp->evaluate("string(doc)", $node)) {
@@ -262,11 +253,8 @@ class ClassGenerator
             if ($isClient) {
 
                 $construct = 'private $proxy;'.PHP_EOL.PHP_EOL;
-
                 $construct .= 'public function __construct($proxy) {'.PHP_EOL;
-
                 $construct .= $this->tabize('$this->proxy = $proxy;').PHP_EOL;
-
                 $construct .= '}';
                 $content.=$this->tabize($construct).PHP_EOL;
 
@@ -279,7 +267,6 @@ class ClassGenerator
             }
 
             $content .= implode(PHP_EOL, $methods).PHP_EOL;
-
             $content.="}";
 
             file_put_contents($save, $content);
@@ -345,7 +332,6 @@ class ClassGenerator
         $ns = substr($fullClass, 0, $pos);
         $class = substr($fullClass, $pos+1);
 
-
         $content = '<?php'.PHP_EOL.
         'namespace '.$ns.';'.PHP_EOL;
 
@@ -373,9 +359,7 @@ class ClassGenerator
         if (!$this->isArrayType($node)) {
 
             $content .= implode(PHP_EOL, $this->geneateConstants($node, $xp)).PHP_EOL;
-
             $content .= implode(PHP_EOL, $this->geneateProperties($node, $xp)).PHP_EOL;
-
 
             $content .= $this->geneateConstructor($node, $xp).PHP_EOL;
 
@@ -424,7 +408,6 @@ class ClassGenerator
     protected function geneateConstructor(DOMElement $node, DOMXPath $xp)
     {
         $content = '';
-
         $content.= 'public function __construct() {'.PHP_EOL;
 
         if (($ext = $this->getExtends($node, $xp)) && !$this->isPhpNative($ext)) {
@@ -602,7 +585,6 @@ class ClassGenerator
         }
 
         $content.= implode(", ", $contentParams);
-
         $content.= ')';
         $content.= '{'.PHP_EOL;
 
@@ -611,7 +593,6 @@ class ClassGenerator
         }
 
         $content.= '}'.PHP_EOL;
-
         $content .= PHP_EOL;
 
         return $this->tabize($content);
@@ -652,7 +633,6 @@ class ClassGenerator
         $content.= $this->tabize('return $this->'.self::calmelCase($node->getAttribute("name"), true).';').PHP_EOL;
 
         $content.= '}'.PHP_EOL;
-
         $content .= PHP_EOL;
 
         $atype = $this->isArrayTypeProp($node);
@@ -685,10 +665,6 @@ class ClassGenerator
 
             $content.= ')';
             $content.= '{'.PHP_EOL;
-
-            //$content2 .= 'if ( $this->'.self::calmelCase($node->getAttribute("name"), true)." === null ) {".PHP_EOL;
-            //$content2 .= $this->tabize('$this->'.self::calmelCase($node->getAttribute("name"), true).' = new \ArrayObject();').PHP_EOL;
-            //$content2 .= '}'.PHP_EOL;
 
             $content2 .= '$this->'.self::calmelCase($node->getAttribute("name"), true);
             $content2 .= '[] = $'.self::calmelCase($node->getAttribute("name"), true);
@@ -769,15 +745,12 @@ class ClassGenerator
         }
 
         $content.=";";
-
         return $this->tabize($content);
     }
     private function fixClassName($class)
     {
         $class = str_replace("#", "# ", $class);
-
         $class = self::calmelCase( $class );
-
         return strtr($class, "#", "\\");
 
     }
