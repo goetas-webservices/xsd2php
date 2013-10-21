@@ -1,17 +1,17 @@
 xsd2php
 =======
 
-Convert XSD into PHP classes
+Convert XSD into PHP classes.
+
+With `goetas/xsd2php` you can convert any XSD/WSDL definition into PHP classes.
 
 Installation with composer
 --------------------------
 
 `php composer.phar require goetas/xsd2php:dev-master`
 
-Usage (with Composer)
+Usage
 -----
-
-With `goetas/xsd2php` you can convert any XSD/WSDL definition into PHP classes.
 
 The syntax for php executable is: 
 
