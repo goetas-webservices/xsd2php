@@ -11,13 +11,36 @@ Installation with composer
 Usage (with Composer)
 -----
 
+With `goetas/xsd2php` you can convert any XSD/WSDL definition into PHP classes.
 
-``` php
-<?php
+The syntax for php executable is: 
 
-include __DIR__ . '/vendor/autoload.php';
-
-
-\Goetas\Xsd\XsdToPhp\Console\ConsoleRunner::run();
-
+```sh
+php bin/xsd2php.php generate:xsd2php:entities  \
+--ns-map="desired_php_namesapce:http://www.yournamespaceuri...." \
+$SRC $DEST_DIR $TARGET_XSD_NS;
 ```
+
+- `$SRC` is the location of XSD or WSDL file
+- `$DEST_DIR` is the place where save generated entities
+- `$TARGET_XSD_NS` the target xml ns. (one XSD can contain several types, in different namespaces... with this parameter we choose witch types we would convert to PHP)
+
+The`--ns-map` is a multiple parameter. All types defined inside an XSD must have PHP equvalent class (except for XSD default types). 
+The syntax is `--ns-map=PHPNS:XSDNS`
+
+Example:
+```sh
+php bin/xsd2php.php generate:xsd2php:entities  \
+--ns-map='mycompany\\myproject:http://www.company.com/projectOne' \
+--ns-map='mycompany\\myproject\\subproject\:http://www.company.com/projectTwo' \
+
+'http://www.example.com/data.xsd' '/var/www/classes' 'http://www.company.com/projectTwo'
+```
+
+- This command will download `http://www.example.com/data.xsd`;
+- Bind `http://www.company.com/projectOne` xsd data types to `mycompany\myproject` php namespace;
+- Bind `http://www.company.com/projectTwo` xsd data types to `mycompany\myproject\subproject` php namespace;
+- Save `mycompany\myproject\subproject` classes into `/var/www/classes` dir.
+
+You have always to specify `--ns-map='mycompany\\myproject:http://www.company.com/projectOne' ` because `http://www.company.com/projectTwo` should use some types contained into `http://www.company.com/projectOne`
+
