@@ -30,6 +30,7 @@ class ClassGenerator
         $this->addAlias('http://www.w3.org/2001/XMLSchema', "base64Binary", "string");
         $this->addAlias('http://www.w3.org/2001/XMLSchema', "anyURI", "string");
         $this->addAlias('http://www.w3.org/2001/XMLSchema', "anySimpleType", "string");
+        $this->addAlias('http://www.w3.org/2001/XMLSchema', "language", "string");
 
         $this->addAlias('http://www.w3.org/2001/XMLSchema', "date", "dateTime");
 
@@ -634,6 +635,7 @@ class ClassGenerator
 
         $content.= '}'.PHP_EOL;
         $content .= PHP_EOL;
+        $content2 = '';
 
         $atype = $this->isArrayTypeProp($node);
         if ($atype) {

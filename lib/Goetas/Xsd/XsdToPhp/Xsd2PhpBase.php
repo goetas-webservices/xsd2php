@@ -49,6 +49,7 @@ abstract class Xsd2PhpBase
     }
     public static function splitPart($node, $base, $find)
     {
+        $prefix = null;
         if (strpos($base,':')===false) {
             $name = $base;
         } else {
@@ -60,6 +61,7 @@ abstract class Xsd2PhpBase
             return $name;
         }
     }
+    protected $loaded = array();
     public function parseIncludes(\DOMElement $root, \DOMDocument $src)
     {
 
@@ -91,10 +93,11 @@ abstract class Xsd2PhpBase
 
         foreach ($nodes as $node) {
             $url = UrlUtils::resolve_url($src->documentURI, $node->getAttribute("schemaLocation"));
-
-            $ci = $this->loadXsd($url);
-
-            $this->parseIncludes($root, $ci);
+            if(!isset($this->loaded[$url])){
+                $ci = $this->loadXsd($url);
+                $this->loaded[$url] = true;
+                $this->parseIncludes($root, $ci);
+            }
 
             $node->parentNode->removeChild($node);
         }
@@ -122,6 +125,7 @@ abstract class Xsd2PhpBase
     protected function loadXsd($src)
     {
         $ci = new DOMDocument();
+        var_dump($src);
         if(!@$ci->load($src)){
             throw new \Exception("Can not load/find $src");
         }
