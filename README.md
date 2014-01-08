@@ -30,7 +30,7 @@ The syntax is `--ns-map=PHPNS:XSDNS`
 
 Example:
 ```sh
-php bin/xsd2php.php generate:xsd2php:entities  \
+php bin/xsd2php.php convert  \
 --ns-map='mycompany\\myproject:http://www.company.com/projectOne' \
 --ns-map='mycompany\\myproject\\subproject\:http://www.company.com/projectTwo' \
 
