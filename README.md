@@ -16,7 +16,7 @@ Usage
 The syntax for php executable is: 
 
 ```sh
-php bin/xsd2php.php generate:xsd2php:entities  \
+php bin/xsd2php.php convert  \
 --ns-map="desired_php_namesapce:http://www.yournamespaceuri...." \
 $SRC $DEST_DIR $TARGET_XSD_NS;
 ```
