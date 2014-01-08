@@ -8,7 +8,7 @@ With `goetas/xsd2php` you can convert any XSD/WSDL definition into PHP classes.
 Installation with composer
 --------------------------
 
-`php composer.phar require goetas/xsd2php:dev-master`
+`php composer.phar require goetas/xsd2php:master-dev`
 
 Usage
 -----
