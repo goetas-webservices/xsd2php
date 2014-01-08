@@ -125,7 +125,6 @@ abstract class Xsd2PhpBase
     protected function loadXsd($src)
     {
         $ci = new DOMDocument();
-        var_dump($src);
         if(!@$ci->load($src)){
             throw new \Exception("Can not load/find $src");
         }
