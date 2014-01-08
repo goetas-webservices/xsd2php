@@ -9,6 +9,7 @@
     ],
     "require": {
         "php": ">=5.3.2",
+        "ext-xsl": "*",
         "symfony/console": "2.*",
         "symfony/class-loader": "2.*"
     },
