@@ -62,6 +62,7 @@ abstract class Xsd2PhpBase
     }
     public function parseIncludes(\DOMElement $root, \DOMDocument $src)
     {
+
         $cloned = $root->ownerDocument->importNode($src->documentElement, true);
 
         $root->appendChild($cloned);
@@ -90,6 +91,7 @@ abstract class Xsd2PhpBase
 
         foreach ($nodes as $node) {
             $url = UrlUtils::resolve_url($src->documentURI, $node->getAttribute("schemaLocation"));
+
             $ci = $this->loadXsd($url);
 
             $this->parseIncludes($root, $ci);
@@ -120,7 +122,9 @@ abstract class Xsd2PhpBase
     protected function loadXsd($src)
     {
         $ci = new DOMDocument();
-        $ci->load($src);
+        if(!@$ci->load($src)){
+            throw new \Exception("Can not load/find $src");
+        }
 
         $xp = new \DOMXPath($ci);
         $xp->registerNamespace("xsd", "http://www.w3.org/2001/XMLSchema");
