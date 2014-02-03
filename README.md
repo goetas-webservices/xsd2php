@@ -44,3 +44,7 @@ php bin/xsd2php.php convert  \
 
 You have always to specify `--ns-map='mycompany\\myproject:http://www.company.com/projectOne' ` because `http://www.company.com/projectTwo` should use some types contained into `http://www.company.com/projectOne`
 
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/goetas/xsd2php/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
