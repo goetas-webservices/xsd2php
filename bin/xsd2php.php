@@ -1,7 +1,7 @@
 #!/bin/php
 <?php
 
-include __DIR__ . '/../vendor/autoload.php';
+include __DIR__ . '/../../../autoload.php';
 
 use Goetas\Xsd\XsdToPhp\Console\ConsoleRunner;
 
