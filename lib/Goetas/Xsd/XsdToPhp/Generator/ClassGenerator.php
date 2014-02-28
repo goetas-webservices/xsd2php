@@ -233,6 +233,9 @@ class ClassGenerator
             $content = '<?php'.PHP_EOL;
             $content .='namespace '.$ns.';'.PHP_EOL;
             $content .= '/**'.PHP_EOL;
+
+            $content .= ' * XSD NS: '.$node->getAttribute("ns")."#".$node->getAttribute("name").PHP_EOL;
+
             $content.= ' * \\'.$this->getFullClassName($node).PHP_EOL;
 
             if ($doc = $xp->evaluate("string(doc)", $node)) {
@@ -496,7 +499,19 @@ class ClassGenerator
 
         return $this->getFullClassNamePhp($ns,$name);
     }
+    protected function hasPrimitive($ns, $name)
+    {
+        if (isset ( $this->namespaces [$ns] )) {
+            return rtrim ( $this->namespaces [$ns], "\\" ) . "\\" . $this->fixClassName ( $name );
+        } elseif (isset ( $this->primitive [$ns]  [$name])) {
+            return $this->primitive [$ns]  [$name];
 
+        } elseif (isset ( $this->alias [$ns]  [$name])) {
+            return $this->getFullClassNamePhp($this->alias [$ns]  [$name]["ns"], $this->alias [$ns] [$name] ["name"]);
+        } else {
+            throw new \Exception ( "Non trovo nessun associazione al namespace '$ns' per il tipo '$name'" );
+        }
+    }
     protected function getFullClassNamePhp($ns, $name)
     {
         if (isset ( $this->namespaces [$ns] )) {
@@ -638,21 +653,28 @@ class ClassGenerator
         $content2 = '';
 
         $atype = $this->isArrayTypeProp($node);
+
+        $varName = '$'.self::calmelCase($node->getAttribute("name"), true);
         if ($atype) {
 
             if ($atype===1) {
-                $arrayNode = $this->getArrayTypeNode1($node, $xp);
+                try {
+                    $arrayNode = $this->getArrayTypeNode1($node, $xp);
+                } catch (\Exception $e) {
+                    throw new \Exception("May be array type?", 0, $e);
+                }
             } else {
                 $arrayNode = $this->getArrayTypeNode($node, $xp);
             }
-
             $cls = $this->getFullClassName($arrayNode);
+
+
 
             $content .= '/**'.PHP_EOL;
             if ($this->isPhpNative($cls)) {
-                $content .= ' * @param '.$cls;
+                $content .= ' * @param '.$varName.' '.$cls;
             } else {
-                $content .= ' * @param \\'.$cls;
+                $content .= ' * @param '.$varName.' \\'.$cls;
             }
 
             $content .= PHP_EOL;
@@ -676,9 +698,9 @@ class ClassGenerator
             $cls = $this->getFullClassName($node);
             $content .= '/**'.PHP_EOL;
             if ($this->isPhpNative($cls)) {
-                $content .= ' * @param '.$this->getFullClassName($node);
+                $content .= ' * @param '.$varName.' '.$this->getFullClassName($node);
             } else {
-                $content .= ' * @param \\'.$this->getFullClassName($node);
+                $content .= ' * @param '.$varName.' \\'.$this->getFullClassName($node);
             }
 
             $content .= PHP_EOL;
@@ -690,7 +712,7 @@ class ClassGenerator
             if (!$this->isPhpNative($cls)) {
                 $content.= '\\'.$cls.' ';
             }
-            $content.= '$'.self::calmelCase($node->getAttribute("name"), true);
+            $content.= $varName;
 
             if (!$node->getAttribute("required")!=='true') {
                 $content.=" = null ";
@@ -724,7 +746,7 @@ class ClassGenerator
         }
 
         $cls = $this->getFullClassName($node);
-
+        $content .= ' * XSD NS: '.$node->getAttribute("type-ns")."#".$node->getAttribute("type-name").PHP_EOL;
         if ($this->isPhpNative($cls)) {
             $content .= ' * @var '.$cls;
         } elseif ($this->isArrayTypeProp($node)) {

@@ -45,6 +45,19 @@ php bin/xsd2php.php convert  \
 You have always to specify `--ns-map='mycompany\\myproject:http://www.company.com/projectOne' ` because `http://www.company.com/projectTwo` should use some types contained into `http://www.company.com/projectOne`
 
 
+When some properties are arrays you can hint it:
+
+
+Example:
+```sh
+php bin/xsd2php.php convert  \
+--ns-map='mycompany\\myproject:http://www.company.com/projectOne' \
+--array-map='ArrayOfReservations:http://www.company.com/projectTwo' \
+--array-map='ArrayOf*:http://www.company.com/projectTwo' \
+
+'http://www.example.com/data.xsd' '/var/www/classes' 'http://www.company.com/projectTwo'
+```
+
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/goetas/xsd2php/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
