@@ -701,13 +701,13 @@ class ClassGenerator
             $cls = $this->getFullClassName($node);
             $content .= '/**'.PHP_EOL;
             if ($this->isPhpNative($cls)) {
-                $content .= ' * @param '.$varName.' '.$this->getFullClassName($node);
+                $content .= ' * @param '.$varName.' '.$this->getFullClassName($node) . PHP_EOL;
             } else {
-                $content .= ' * @param '.$varName.' \\'.$this->getFullClassName($node);
+                $content .= ' * @param '.$varName.' \\'.$this->getFullClassName($node) . PHP_EOL;
             }
 
-            $content .= ' * @return $this'.PHP_EOL;
-            $content .= ' */'.PHP_EOL;
+            $content .= ' * @return $this' . PHP_EOL;
+            $content .= ' */' . PHP_EOL;
 
             $content.= 'public function set'.self::calmelCase($node->getAttribute("name"));
             $content.= '(';
