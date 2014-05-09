@@ -383,6 +383,9 @@ class ClassGenerator
         $content  = PHP_EOL;
         $content .= 'private $__value = \'\';'.PHP_EOL.PHP_EOL;
 
+        $content .= '/**'.PHP_EOL;
+        $content .= ' * @return $this'.PHP_EOL;
+        $content .= ' */'.PHP_EOL;
         $content .= 'public function set($value) {'.PHP_EOL;
         $content .= $this->tabize('$this->__value = $value;').PHP_EOL;
         $content .= $this->tabize('return $this;').PHP_EOL;
@@ -703,7 +706,7 @@ class ClassGenerator
                 $content .= ' * @param '.$varName.' \\'.$this->getFullClassName($node);
             }
 
-            $content .= PHP_EOL;
+            $content .= ' * @return $this'.PHP_EOL;
             $content .= ' */'.PHP_EOL;
 
             $content.= 'public function set'.self::calmelCase($node->getAttribute("name"));
