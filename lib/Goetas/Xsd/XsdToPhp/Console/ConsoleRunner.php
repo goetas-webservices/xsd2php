@@ -19,7 +19,8 @@ class ConsoleRunner
         $cli = new Application('Convert XSD to PHP classes Command Line Interface', "1.0");
         $cli->setCatchExceptions(true);
         $cli->addCommands(array(
-            new \Goetas\Xsd\XsdToPhp\Command\Convert()
+            new \Goetas\Xsd\XsdToPhp\Command\ConvertToPHP(),
+            new \Goetas\Xsd\XsdToPhp\Command\ConvertToYaml()
         ));
         $cli->addCommands($commands);
         $cli->run();

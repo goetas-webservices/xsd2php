@@ -13,51 +13,35 @@ Installation with composer
 Usage
 -----
 
+With this example we will convert [OTA XSD definitions](http://opentravel.org/Specifications/OnlineXmlSchema.aspx) into PHP classes.
+
+Suppose that you have allo XSD files in `/home/my/ota`. 
+
 The syntax for php executable is: 
 
 ```sh
-php bin/xsd2php.php convert  \
---ns-map="desired_php_namesapce:http://www.yournamespaceuri...." \
-$SRC $DEST_DIR $TARGET_XSD_NS;
+app/console convert \
+`/home/my/ota/OTA_HotelAvail*.xsd \
+
+--ns-dest='src/Mercurio/OTA/V2007B;http://www.opentravel.org/OTA/2003/05' \
+--ns-dest='src/Mercurio/OTA/V2007B/Common;' \
+
+--ns-map='Mercurio/OTA/2007B;http://www.opentravel.org/OTA/2003/05'  \
+--ns-map='Mercurio/OTA/V2007B/Common;'
+
+--array-map-callback='ota'
 ```
 
-- `$SRC` is the location of XSD or WSDL file
-- `$DEST_DIR` is the place where save generated entities
-- `$TARGET_XSD_NS` the target xml ns. (one XSD can contain several types, in different namespaces... with this parameter we choose witch types we would convert to PHP)
+Where place the files? (use `--ns-dest`)
+* `http://www.opentravel.org/OTA/2003/05` will be placed into `src/Mercurio/OTA/V2007B` directory
+* `` (no target namespace) will be placed into `src/Mercurio/OTA/V2007B/Common` directory
 
-The`--ns-map` is a multiple parameter. All types defined inside an XSD must have PHP equvalent class (except for XSD default types). 
-The syntax is `--ns-map=PHPNS:XSDNS`
+What about namespaces? (use `--ns-map`)
+* `http://www.opentravel.org/OTA/2003/05` will be converted into `Mercurio/OTA/2007B` PHP namespace
+* `` (no target namespace) will be converted into `Mercurio/OTA/V2007B/Common`PHP namespace
 
-Example:
-```sh
-php bin/xsd2php.php convert  \
---ns-map='mycompany\\myproject:http://www.company.com/projectOne' \
---ns-map='mycompany\\myproject\\subproject\:http://www.company.com/projectTwo' \
-
-'http://www.example.com/data.xsd' '/var/www/classes' 'http://www.company.com/projectTwo'
-```
-
-- This command will download `http://www.example.com/data.xsd`;
-- Bind `http://www.company.com/projectOne` xsd data types to `mycompany\myproject` php namespace;
-- Bind `http://www.company.com/projectTwo` xsd data types to `mycompany\myproject\subproject` php namespace;
-- Save `mycompany\myproject\subproject` classes into `/var/www/classes` dir.
-
-You have always to specify `--ns-map='mycompany\\myproject:http://www.company.com/projectOne' ` because `http://www.company.com/projectTwo` should use some types contained into `http://www.company.com/projectOne`
+What about arrays? (use `--array-map-callback` or `--array-map`)
+* `--array-map-callback='ota'` will use "ota" conventions to detect array types (built in types are `ota` and `microsoft`)
 
 
-When some properties are arrays you can hint it:
-
-
-Example:
-```sh
-php bin/xsd2php.php convert  \
---ns-map='mycompany\\myproject:http://www.company.com/projectOne' \
---array-map='ArrayOfReservations:http://www.company.com/projectTwo' \
---array-map='ArrayOf*:http://www.company.com/projectTwo' \
-
-'http://www.example.com/data.xsd' '/var/www/classes' 'http://www.company.com/projectTwo'
-```
-
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/goetas/xsd2php/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
