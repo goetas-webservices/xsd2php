@@ -15,6 +15,57 @@ use Goetas\Xsd\XsdToPhp\Structure\PHPConstant;
 
 class ClassGenerator
 {
+    protected function handleChecks(PHPType $type)
+    {
+        $str = '';
+        if (($type instanceof PHPClass) && ($type->getChecks('__value') || $type->hasProperty('__value'))){
+
+            $str .="protected function _checkValue(\$value)".PHP_EOL;
+            $str .= "{".PHP_EOL;
+
+            $methodBody = '';
+
+            if ($type->getExtends()){
+                $methodBody .= '$value = parent::_checkValue($value);'.PHP_EOL;
+            }
+
+            foreach ($type->getChecks('__value') as $checkType => $checks){
+                if($checkType == "enumeration"){
+                    $vs = array_map(function($v){ return $v["value"];},$checks);
+                    $methodBody .= 'if (!in_array($value, '.var_export($vs, 1).')) {'.PHP_EOL;
+                    $methodBody .= $this->indent("throw new \InvalidArgumentException('The restriction $checkType with \'".implode(", ", $vs)."\' is not true');").PHP_EOL;
+                    $methodBody .= '}'.PHP_EOL;
+                }elseif($checkType == "pattern"){
+                    foreach($checks as $check){
+                        $methodBody .= 'if (!preg_match('.var_export("/".$check["value"]."/",1).', $value)) {'.PHP_EOL;
+                        $methodBody .= $this->indent("throw new \InvalidArgumentException('The restriction $checkType with value \'".$check["value"]."\' is not true');").PHP_EOL;
+                        $methodBody .= '}'.PHP_EOL;
+                    }
+                }elseif($checkType == "minLength"){
+                    foreach($checks as $check){
+                        $methodBody .= 'if (strlen($value) < '.$check['value'].' ) {'.PHP_EOL;
+                        $methodBody .= $this->indent("throw new \InvalidArgumentException('The restriction $checkType with value \'".$check["value"]."\' is not true');").PHP_EOL;
+                        $methodBody .= '}'.PHP_EOL;
+                    }
+                }elseif($checkType == "maxLength"){
+                    foreach($checks as $check){
+                        $methodBody .= 'if (strlen($value) > '.$check['value'].' ) {'.PHP_EOL;
+                        $methodBody .= $this->indent("throw new \InvalidArgumentException('The restriction $checkType with value \'".$check["value"]."\' is not true');").PHP_EOL;
+                        $methodBody .= '}'.PHP_EOL;
+                    }
+                }
+            }
+
+            $methodBody .= 'return $value;';
+
+            $str .= $this->indent($methodBody).PHP_EOL;
+            $str .= "}".PHP_EOL;
+            $str .=PHP_EOL;
+
+        }
+
+        return $str;
+    }
     protected function handleBody(PHPType $type)
     {
         $str = '';
@@ -30,51 +81,15 @@ class ClassGenerator
                 $str .= $this->handleConstant($const).PHP_EOL.PHP_EOL;
             }
 
-            if (($type instanceof PHPClass) && ($checksPerType = $type->getChecks('__value'))){
-
-                $str .="protected function _checkValue(\$value)".PHP_EOL;
-                $str .= "{".PHP_EOL;
-
-                $methodBody = '';
-                if ($type->getExtends()){
-                    $methodBody .= 'parent::_checkValue(\$value);'.PHP_EOL;
-                }
-                foreach ($checksPerType as $checkType => $checks){
-                    if($checkType == "enumeration"){
-                        $vs = array_map(function($v){ return $v["value"];},$checks);
-                        $methodBody .= 'if (!in_array($value, '.var_export($vs, 1).')) {'.PHP_EOL;
-                        $methodBody .= $this->indent("throw new \InvalidArgumentException('The restriction $checkType with \'".implode(", ", $vs)."\' is not true');").PHP_EOL;
-                        $methodBody .= '}'.PHP_EOL;
-                    }elseif($checkType == "pattern"){
-                        foreach($checks as $check){
-                            $methodBody .= 'if (!preg_match('.var_export("/".$check["value"]."/",1).', $value)) {'.PHP_EOL;
-                            $methodBody .= $this->indent("throw new \InvalidArgumentException('The restriction $checkType with value \'".$check["value"]."\' is not true');").PHP_EOL;
-                            $methodBody .= '}'.PHP_EOL;
-                        }
-                    }elseif($checkType == "minLength"){
-                        foreach($checks as $check){
-                            $methodBody .= 'if (strlen($value) < '.$check['value'].' ) {'.PHP_EOL;
-                            $methodBody .= $this->indent("throw new \InvalidArgumentException('The restriction $checkType with value \'".$check["value"]."\' is not true');").PHP_EOL;
-                            $methodBody .= '}'.PHP_EOL;
-                        }
-                    }elseif($checkType == "maxLength"){
-                        foreach($checks as $check){
-                            $methodBody .= 'if (strlen($value) > '.$check['value'].' ) {'.PHP_EOL;
-                            $methodBody .= $this->indent("throw new \InvalidArgumentException('The restriction $checkType with value \'".$check["value"]."\' is not true');").PHP_EOL;
-                            $methodBody .= '}'.PHP_EOL;
-                        }
-                    }
-                }
-
-                $str .= $this->indent($methodBody).PHP_EOL;
-                $str .= "}".PHP_EOL;
-                $str .=PHP_EOL;
-
-            }
-
             foreach($type->getProperties() as $prop){
                 $str .= $this->handleProperty($prop).PHP_EOL.PHP_EOL;
             }
+            foreach($type->getConstants() as $const){
+                $str .= $this->handleConstantMethods($type, $const).PHP_EOL.PHP_EOL;
+            }
+
+            $str .= $this->handleChecks($type);
+
             foreach($type->getProperties() as $prop){
                 $str .= $this->handleMethods($prop, $type).PHP_EOL;
             }
@@ -185,9 +200,7 @@ class ClassGenerator
 
 
             $methodBody = "if (\$value !== null) {".PHP_EOL;
-
-            $methodBody .= $this->indent("\$this->_checkValue(\$value);").PHP_EOL;
-            $methodBody .= $this->indent("\$this->".$prop->getName()." = \$value;").PHP_EOL;
+            $methodBody .= $this->indent("\$this->".$prop->getName()." = \$this->_checkValue(\$value);").PHP_EOL;
             $methodBody .= "}".PHP_EOL;
 
             $methodBody .= "return \$this->".$prop->getName().";".PHP_EOL;
@@ -249,6 +262,32 @@ class ClassGenerator
 
 
         }else{
+
+            if($prop->getType() && $prop->getType()->hasPropertyInHierarchy('__value')){
+                $doc = '';
+
+                if($c = $this->getFirstLineComment($prop->getDoc())){
+                    $doc .= $c.PHP_EOL.PHP_EOL;
+                }
+
+                if ($type) {
+                    $doc .= "@return ".$this->getPhpType($prop->getType()->getPropertyInHierarchy('__value')->getType());
+                } else {
+                    $doc .= "@return mixed";
+                }
+
+                if($doc){
+                    $str .= $this->writeDocBlock($doc);
+                }
+                $str .="public function extract".Inflector::classify($prop->getName())."()".PHP_EOL;
+                $str .= "{".PHP_EOL;
+                $methodBody = "return \$this->".$prop->getName()." ? \$this->".$prop->getName()."->value() : null;";
+                $str .= $this->indent($methodBody).PHP_EOL;
+
+                $str .= "}".PHP_EOL;
+            }
+
+
             $doc = '';
 
             if($c = $this->getFirstLineComment($prop->getDoc())){
@@ -272,6 +311,8 @@ class ClassGenerator
             $str .= $this->indent($methodBody).PHP_EOL;
 
             $str .= "}".PHP_EOL;
+
+
 
 
             $doc = '';
@@ -328,6 +369,24 @@ class ClassGenerator
         return '';
     }
 
+    protected function handleConstantMethods(PHPType $type, PHPConstant $const)
+    {
+
+        $doc = "Create a new instance with ".var_export($const->getValue(),1)." as value.";
+        $doc .= PHP_EOL;
+        $doc .= "@return ".$type->getName();
+
+        if($doc){
+            $str .= $this->writeDocBlock($doc);
+        }
+        $str .="public static function ".strtolower($const->getName())."()".PHP_EOL;
+        $str .= "{".PHP_EOL;
+        $str .= $this->indent("return new static(".var_export($const->getValue(),1).");").PHP_EOL;
+
+        $str .= "}".PHP_EOL;
+
+        return $str;
+    }
     protected function handleConstant(PHPConstant $const)
     {
         $doc = '';

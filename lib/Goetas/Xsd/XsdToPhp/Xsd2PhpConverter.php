@@ -44,6 +44,10 @@ class Xsd2PhpConverter extends AbstractXsd2Converter
      */
     public function getTypes()
     {
+        uasort($this->classes, function($a, $b){
+            return strcmp($a->getFullName(),$b->getFullName());
+        });
+
         return array_filter($this->classes, function (PHPType $php)
         {
             return $php->getNamespace();
@@ -98,14 +102,11 @@ class Xsd2PhpConverter extends AbstractXsd2Converter
             $trait->setName(Inflector::classify($group->getName()));
             $trait->setDoc($group->getDoc());
 
-            if ($schema->getTargetNamespace()) {
-                if (! isset($this->namespaces[$schema->getTargetNamespace()])) {
-                    throw new Exception(sprintf("Non trovo un namespace php per %s", $schema->getTargetNamespace()));
-                }
-                $trait->setNamespace($this->namespaces[$schema->getTargetNamespace()]);
-            } else {
-                $trait->setNamespace($this->fallbackNamespace);
+            if (! isset($this->namespaces[$schema->getTargetNamespace()])) {
+                throw new Exception(sprintf("Non trovo un namespace php per %s", $schema->getTargetNamespace()));
             }
+            $trait->setNamespace($this->namespaces[$schema->getTargetNamespace()]);
+
 
             foreach ($group->getElements() as $childGroup) {
                 if ($childGroup instanceof Group) {
@@ -126,14 +127,12 @@ class Xsd2PhpConverter extends AbstractXsd2Converter
             $trait->setName(Inflector::classify($att->getName()));
             $trait->setDoc($att->getDoc());
 
-            if ($schema->getTargetNamespace()) {
-                if (! isset($this->namespaces[$schema->getTargetNamespace()])) {
-                    throw new Exception(sprintf("Non trovo un namespace php per %s", $schema->getTargetNamespace()));
-                }
-                $trait->setNamespace($this->namespaces[$schema->getTargetNamespace()]);
-            } else {
-                $trait->setNamespace($this->fallbackNamespace);
+
+            if (! isset($this->namespaces[$schema->getTargetNamespace()])) {
+                throw new Exception(sprintf("Non trovo un namespace php per %s", $schema->getTargetNamespace()));
             }
+            $trait->setNamespace($this->namespaces[$schema->getTargetNamespace()]);
+
 
             foreach ($att->getAttributes() as $childAttr) {
                 if ($childAttr instanceof AttributeGroup) {
@@ -154,14 +153,11 @@ class Xsd2PhpConverter extends AbstractXsd2Converter
         $class->setName(Inflector::classify($element->getName()));
         $class->setDoc($element->getDoc());
 
-        if ($schema->getTargetNamespace()) {
-            if (! isset($this->namespaces[$schema->getTargetNamespace()])) {
-                throw new Exception(sprintf("Non trovo un namespace php per %s", $schema->getTargetNamespace()));
-            }
-            $class->setNamespace($this->namespaces[$schema->getTargetNamespace()]);
-        } else {
-            $class->setNamespace($this->fallbackNamespace);
+
+        if (! isset($this->namespaces[$schema->getTargetNamespace()])) {
+            throw new Exception(sprintf("Non trovo un namespace php per %s", $schema->getTargetNamespace()));
         }
+        $class->setNamespace($this->namespaces[$schema->getTargetNamespace()]);
 
         if (isset($this->classes[$class->getFullName()])) {
             return $this->classes[$class->getFullName()];
@@ -187,19 +183,33 @@ class Xsd2PhpConverter extends AbstractXsd2Converter
     {
         $schema = $type->getSchema();
 
-        if (isset($this->associationTypes[$schema->getTargetNamespace()][$type->getName()])) {
-            return $this->associationTypes[$schema->getTargetNamespace()][$type->getName()];
+        if (isset($this->typeAliases[$schema->getTargetNamespace()][$type->getName()])){
+            $className = call_user_func($this->typeAliases[$schema->getTargetNamespace()][$type->getName()], $type);
+
+            if(($pos = strpos($className, '<'))!==false){
+                $className = substr($className, 0, $pos);
+            }
+
+            if (($pos = strrpos($className, '\\'))!==false){
+                return [
+                    substr($className, $pos+1),
+                    substr($className, 0, $pos)
+                    ];
+            }else{
+                return [
+                    $className,
+                    null
+                    ];
+            }
         }
 
+
         $name = Inflector::classify($type->getName());
-        if ($schema->getTargetNamespace()) {
-            if (! isset($this->namespaces[$schema->getTargetNamespace()])) {
-                throw new Exception(sprintf("Non trovo un namespace php per %s", $schema->getTargetNamespace()));
-            }
-            $ns = $this->namespaces[$schema->getTargetNamespace()];
-        } else {
-            $ns = $this->fallbackNamespace;
+        if (! isset($this->namespaces[$schema->getTargetNamespace()])) {
+            throw new Exception(sprintf("Non trovo un namespace php per %s", $schema->getTargetNamespace()));
         }
+        $ns = $this->namespaces[$schema->getTargetNamespace()];
+
         return [
             $name,
             $ns
@@ -219,7 +229,7 @@ class Xsd2PhpConverter extends AbstractXsd2Converter
 
             $this->visitTypeBase($class, $type);
 
-            if($this->isArray($type)){
+            if($this->isArray($type) || $this->isSimplePHP($type)){
                 return $class;
             }
             $this->classes[spl_object_hash($type)] = $class;
@@ -229,11 +239,13 @@ class Xsd2PhpConverter extends AbstractXsd2Converter
 
     protected function visitAnonymousType(Schema $schema, Type $type, $name, PHPType $parentClass)
     {
+
+
         $this->classes[spl_object_hash($type)] = $class = new PHPClass();
-        $class->setName(Inflector::classify($name) . "AnonymousType");
+        $class->setName(Inflector::classify($name) . "Type");
+
         $class->setNamespace($parentClass->getNamespace() . "\\" . $parentClass->getName());
         $class->setDoc($type->getDoc());
-
         $this->visitTypeBase($class, $type);
 
         return $class;
@@ -256,8 +268,12 @@ class Xsd2PhpConverter extends AbstractXsd2Converter
 
     protected function visitSimpleType(PHPClass $class, SimpleType $type)
     {
+
+
+
         if($restriction = $type->getRestriction()){
             $parent = $restriction->getBase();
+
             if ($parent instanceof Type) {
                 $this->handleClassExtension($class, $parent);
             }
@@ -275,6 +291,23 @@ class Xsd2PhpConverter extends AbstractXsd2Converter
                     $class->addCheck('__value', $typeCheck, $check);
                 }
             }
+        }elseif($unions = $type->getUnions()){
+
+            $types = array();
+            foreach($unions as $unon){
+                if ($this->isSimplePHP($unon)){
+                    $types[$this->findPHPName($unon)] = $unon;
+                }elseif($unon->getRestriction() && $unon->getRestriction()->getBase() && $this->isSimplePHP($unon->getRestriction()->getBase())){
+                    list($name) = $this->findPHPName($unon->getRestriction()->getBase());
+                    $types[$name] = $unon->getRestriction()->getBase();
+                }
+            }
+            $val = new PHPProperty('__value');
+            if(count($types)==1 && ($candidato = reset($types))){
+                $val->setType($this->visitType($candidato));
+            }
+            $class->addProperty($val);
+
         }
 
 
