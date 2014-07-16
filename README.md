@@ -5,6 +5,8 @@ Convert XSD into PHP classes.
 
 With `goetas/xsd2php` you can convert any XSD/WSDL definition into PHP classes.
 
+XSD2PHP can also generate [JMS Serializer](http://jmsyst.com/libs/serializer) compatible metadata that can be used to serialize/unserialize the object instances.
+
 Installation
 -----------
 
@@ -74,6 +76,7 @@ bin/xsd2php.php  convert:jms-yaml \
 
 --ns-map='Mercurio/OTA/2007B/;http://www.opentravel.org/OTA/2003/05'  \
 
+--alias-map='Vendor/Project/CustomDateClass;http://www.opentravel.org/OTA/2003/05#CustomOTADateTimeFormat'
 
 ```
 
