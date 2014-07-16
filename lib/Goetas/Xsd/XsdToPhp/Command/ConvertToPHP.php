@@ -48,7 +48,6 @@ class ConvertToPHP extends AbstractConvert
 
             $bytes = $writer->write($item, $source);
             $output->writeln("saved source <comment>$bytes bytes</comment>.");
-
         }
         $progress->finish();
     }

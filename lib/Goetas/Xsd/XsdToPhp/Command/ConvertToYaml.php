@@ -1,12 +1,8 @@
 <?php
-
 namespace Goetas\Xsd\XsdToPhp\Command;
 
 use Goetas\Xsd\XsdToPhp\Xsd2PhpConverter;
-
 use Exception;
-
-
 use Goetas\Xsd\XsdToPhp\Generator\ClassGenerator;
 use Goetas\Xsd\XsdToPhp\YamlWriter\Psr4Writer;
 use Goetas\XML\XSDReader\SchemaReader;
@@ -17,7 +13,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ConvertToYaml extends AbstractConvert
 {
+
     /**
+     *
      * @see Console\Command\Command
      */
     protected function configure()
@@ -31,8 +29,9 @@ class ConvertToYaml extends AbstractConvert
     {
         return new Xsd2JmsSerializerYamlConverter();
     }
-    protected function convert(AbstractXsd2Converter $converter, array $schemas, array $targets, OutputInterface $output){
 
+    protected function convert(AbstractXsd2Converter $converter, array $schemas, array $targets, OutputInterface $output)
+    {
         $items = $converter->convert($schemas);
 
         $dumper = new Dumper();
@@ -42,16 +41,15 @@ class ConvertToYaml extends AbstractConvert
 
         $progress->start($output, count($items));
 
-        foreach($items as $item){
+        foreach ($items as $item) {
             $progress->advance(1, true);
-            //$output->write(" Item <info>".key($item)."</info>... ");
+            $output->write(" Item <info>" . key($item) . "</info>... ");
 
             $source = $dumper->dump($item, 10000);
-            //$output->write("created source... ");
+            $output->write("created source... ");
 
             $bytes = $writer->write($item, $source);
-           // $output->writeln("saved source <comment>$bytes bytes</comment>.");
-
+            $output->writeln("saved source <comment>$bytes bytes</comment>.");
         }
         $progress->finish();
     }

@@ -23,7 +23,6 @@ use Goetas\XML\XSDReader\Schema\Type\SimpleType;
 use Goetas\Xsd\XsdToPhp\Generator\ClassGenerator;
 use Goetas\Xsd\XsdToPhp\Structure\PHPClassOf;
 use Goetas\Xsd\XsdToPhp\Structure\PHPConstant;
-
 use ArrayObject;
 
 class Xsd2JmsSerializerYamlConverter extends AbstractXsd2Converter
@@ -47,13 +46,15 @@ class Xsd2JmsSerializerYamlConverter extends AbstractXsd2Converter
      */
     public function getTypes()
     {
-        uasort($this->classes, function($a, $b){
-           return strcmp(key($a),key($b));
+        uasort($this->classes, function ($a, $b)
+        {
+            return strcmp(key($a), key($b));
         });
 
         return array_filter($this->classes, function ($php)
         {
-            return strpos(key($php),'\\')!==false;
+            var_dump(key($php));
+            return strpos(key($php), '\\') !== false;
         });
     }
 
@@ -91,9 +92,8 @@ class Xsd2JmsSerializerYamlConverter extends AbstractXsd2Converter
         }
     }
 
-    protected function & visitElement(Schema $schema, ElementNode $element)
+    protected function &visitElement(Schema $schema, ElementNode $element)
     {
-
         $className = $this->findPHPName($element, $schema);
         $class = array();
         $data = array();
@@ -101,7 +101,7 @@ class Xsd2JmsSerializerYamlConverter extends AbstractXsd2Converter
         $class[$ns] = &$data;
         $data["xml_root_name"] = $element->getName();
 
-        if($schema->getTargetNamespace()){
+        if ($schema->getTargetNamespace()) {
             $data["xml_root_namespace"] = $schema->getTargetNamespace();
             $data["xml_namespaces"][""] = $schema->getTargetNamespace();
         }
@@ -125,41 +125,41 @@ class Xsd2JmsSerializerYamlConverter extends AbstractXsd2Converter
         $className = $this->findPHPName($type);
         return in_array($className, $this->baseTypes);
     }
+
     protected function findPHPName($type, Schema $schemapos = null)
     {
-        $schema = $schemapos?:$type->getSchema();
+        $schema = $schemapos ?  : $type->getSchema();
 
-        if ($alias = $this->getTypeAlias($type, $schema)){
+        if ($alias = $this->getTypeAlias($type, $schema)) {
             return $alias;
         }
         /*
-        if ($schema->getTargetNamespace()=="http://www.w3.org/2001/XMLSchema") {
-            var_dump($schema->getTargetNamespace()."#".$type->getName());
-            die();
-        }
-        */
+         * if ($schema->getTargetNamespace()=="http://www.w3.org/2001/XMLSchema") {
+         * var_dump($schema->getTargetNamespace()."#".$type->getName());
+         * die();
+         * }
+         */
 
         if (! isset($this->namespaces[$schema->getTargetNamespace()])) {
             throw new Exception(sprintf("Non trovo un namespace php per %s, nel file %s", $schema->getTargetNamespace(), $schema->getFile()));
         }
         $ns = $this->namespaces[$schema->getTargetNamespace()];
         $name = Inflector::classify($type->getName());
-        return $ns ."\\".$name;
+        return $ns . "\\" . $name;
     }
 
-    protected function & visitType(Type $type)
+    protected function &visitType(Type $type)
     {
         if (! isset($this->classes[spl_object_hash($type)])) {
 
             $className = $this->findPHPName($type);
-
 
             $class = array();
             $data = array();
             $class[$className] = &$data;
             $this->visitTypeBase($class, $data, $type);
 
-            if($this->isArray($type) || $this->getTypeAlias($type)){
+            if ($this->isArray($type) || $this->getTypeAlias($type)) {
                 return $class;
             }
 
@@ -168,13 +168,12 @@ class Xsd2JmsSerializerYamlConverter extends AbstractXsd2Converter
         return $this->classes[spl_object_hash($type)];
     }
 
-    protected function & visitAnonymousType(Schema $schema, Type $type, $name, &$parentClass)
+    protected function &visitAnonymousType(Schema $schema, Type $type, $name, &$parentClass)
     {
         $class = array();
         $data = array();
 
-
-        $class[key($parentClass)."\\".Inflector::classify($name) . "Type"] = &$data;
+        $class[key($parentClass) . "\\" . Inflector::classify($name) . "Type"] = &$data;
 
         $this->visitTypeBase($class, $data, $type);
 
@@ -198,7 +197,7 @@ class Xsd2JmsSerializerYamlConverter extends AbstractXsd2Converter
 
     protected function visitSimpleType(&$class, &$data, SimpleType $type)
     {
-        if($restriction = $type->getRestriction()){
+        if ($restriction = $type->getRestriction()) {
             $parent = $restriction->getBase();
             if ($parent instanceof Type) {
                 $this->handleClassExtension($class, $data, $parent);
@@ -208,9 +207,8 @@ class Xsd2JmsSerializerYamlConverter extends AbstractXsd2Converter
 
     protected function visitBaseComplexType(&$class, &$data, BaseComplexType $type)
     {
-
         $parent = $type->getParent();
-        if($parent){
+        if ($parent) {
             $parentType = $parent->getBase();
             if ($parentType instanceof Type) {
                 $this->handleClassExtension($class, $data, $parentType);
@@ -220,16 +218,16 @@ class Xsd2JmsSerializerYamlConverter extends AbstractXsd2Converter
         $schema = $type->getSchema();
 
         foreach ($type->getAttributes() as $attr) {
-            if ( $attr instanceof AttributeGroup) {
+            if ($attr instanceof AttributeGroup) {
                 $this->visitAttributeGroup($data, $schema, $attr);
             } else {
                 $data["properties"][Inflector::camelize($attr->getName())] = $this->visitAttributeReal($class, $schema, $attr);
             }
         }
     }
+
     protected function &visitGroup(&$data, Schema $schema, Group $group)
     {
-
         $groupClass = array();
         $groupData = array();
         $className = $this->findPHPName($group, $schema);
@@ -242,12 +240,10 @@ class Xsd2JmsSerializerYamlConverter extends AbstractXsd2Converter
                 $data["properties"][Inflector::camelize($childGroup->getName())] = $this->visitElementReal($groupClass, $schema, $childGroup);
             }
         }
-
     }
 
     protected function visitAttributeGroup(&$data, Schema $schema, AttributeGroup $att)
     {
-
         $groupClass = array();
         $groupData = array();
         $className = $this->findPHPName($att, $schema);
@@ -261,11 +257,12 @@ class Xsd2JmsSerializerYamlConverter extends AbstractXsd2Converter
             }
         }
     }
+
     protected function handleClassExtension(&$class, &$data, Type $type)
     {
         if (! $this->isSimplePHP($type)) {
-            //$extension = $this->visitType($type);
-            //$class->setExtends($extension);
+            // $extension = $this->visitType($type);
+            // $class->setExtends($extension);
         } else {
             $extension = $this->visitType($type);
 
@@ -278,29 +275,27 @@ class Xsd2JmsSerializerYamlConverter extends AbstractXsd2Converter
             $property["type"] = key($extension);
 
             $data["properties"]["__value"] = $property;
-
         }
     }
+
     protected function visitAttributeReal(&$class, Schema $schema, AttributeReal $attribute)
     {
-
         $property = array();
         $property["expose"] = true;
         $property["access_type"] = "public_method";
         $property["serialized_name"] = $attribute->getName();
 
-        $property["accessor"]["getter"] = "get".Inflector::classify($attribute->getName());
-        $property["accessor"]["setter"] = "set".Inflector::classify($attribute->getName());
+        $property["accessor"]["getter"] = "get" . Inflector::classify($attribute->getName());
+        $property["accessor"]["setter"] = "set" . Inflector::classify($attribute->getName());
 
         $property["xml_attribute"] = true;
         $property["type"] = $this->findPHPType($class, $schema, $attribute);
 
-
-        if (!$this->isSimplePHP($attribute->getType()) && !$this->getTypeAlias($attribute->getType())){
+        if (! $this->isSimplePHP($attribute->getType()) && ! $this->getTypeAlias($attribute->getType())) {
 
             if ($attribute->isAnonymousType()) {
                 $typeClass = $this->visitAnonymousType($schema, $attribute->getType(), $attribute->getName(), $class);
-            }else{
+            } else {
                 $typeClass = $this->visitType($attribute->getType());
             }
 
@@ -311,9 +306,9 @@ class Xsd2JmsSerializerYamlConverter extends AbstractXsd2Converter
             }
         }
 
-
         return $property;
     }
+
     /**
      *
      * @param PHPType $class
@@ -333,29 +328,27 @@ class Xsd2JmsSerializerYamlConverter extends AbstractXsd2Converter
             $property["xml_element"]["namespace"] = $schema->getTargetNamespace();
         }
 
-        $property["accessor"]["getter"] = "get".Inflector::classify($element->getName());
-        $property["accessor"]["setter"] = "set".Inflector::classify($element->getName());
+        $property["accessor"]["getter"] = "get" . Inflector::classify($element->getName());
+        $property["accessor"]["setter"] = "set" . Inflector::classify($element->getName());
 
-        if(($t = $element->getType()) && ($itemOfArray = $this->isArray($t))){
+        if (($t = $element->getType()) && ($itemOfArray = $this->isArray($t))) {
             $visited = $this->visitElementReal($class, $schema, $itemOfArray, false);
-            $property["type"] = "array<".$visited["type"].">";
+            $property["type"] = "array<" . $visited["type"] . ">";
             $property["xml_list"]["inline"] = false;
             $property["xml_list"]["entry_name"] = $itemOfArray->getName();
-        }else{
-            if($arrayize && $element instanceof ElementReal && ($element->getMax()>1 || $element->getMax()===-1)){
+        } else {
+            if ($arrayize && $element instanceof ElementReal && ($element->getMax() > 1 || $element->getMax() === - 1)) {
                 $property["xml_list"]["inline"] = true;
                 $property["xml_list"]["entry_name"] = $element->getName();
-                $property["type"] = "array<".$this->findPHPType($class, $schema, $element).">";
-            }else{
-
-
+                $property["type"] = "array<" . $this->findPHPType($class, $schema, $element) . ">";
+            } else {
 
                 $property["type"] = $this->findPHPType($class, $schema, $element);
 
-                if (!$this->isSimplePHP($element->getType()) && !$this->getTypeAlias($element->getType())){
+                if (! $this->isSimplePHP($element->getType()) && ! $this->getTypeAlias($element->getType())) {
                     if ($element->isAnonymousType()) {
                         $typeClass = $this->visitAnonymousType($schema, $element->getType(), $element->getName(), $class);
-                    }else{
+                    } else {
                         $typeClass = $this->visitType($element->getType());
                     }
                     $props = reset($typeClass);
@@ -367,50 +360,49 @@ class Xsd2JmsSerializerYamlConverter extends AbstractXsd2Converter
             }
         }
 
-
         return $property;
     }
+
     protected function nestType($outherType, $innerType, $newType)
     {
         $mch = array();
-        if(preg_match("/([^<]+)<(.*)>/", $outherType, $mch)){
-            return $newType."<'".$mch[1]."', '$innerType', $mch[2]>";
-        }else{
-            return $newType."<'$outherType', '$innerType'>";
+        if (preg_match("/([^<]+)<(.*)>/", $outherType, $mch)) {
+            return $newType . "<'" . $mch[1] . "', '$innerType', $mch[2]>";
+        } else {
+            return $newType . "<'$outherType', '$innerType'>";
         }
     }
-
 
     protected function findPHPType(&$class, Schema $schema, TypeNodeChild $node)
     {
         $type = $node->getType();
 
-        if (isset($this->typeAliases[$schema->getTargetNamespace()][$type->getName()])){
-            return call_user_func($this->typeAliases[$schema->getTargetNamespace()][$type->getName()],$node);
+        if (isset($this->typeAliases[$schema->getTargetNamespace()][$type->getName()])) {
+            return call_user_func($this->typeAliases[$schema->getTargetNamespace()][$type->getName()], $node);
         }
 
-        if ($this->isSimplePHP($type)){
+        if ($this->isSimplePHP($type)) {
             $className = $this->findPHPName($type);
             return $className;
         }
         /*
-        if($type instanceof SimpleType){
-
-            $base = $type;
-
-            while (!$this->isSimplePHP($base) && $type->getRestriction()){
-                $newBase = $type->getRestriction()->getBase();
-                if($newBase===$base){
-                    break;
-                }
-                $base = $newBase;
-            }
-            if($base){
-                $className = $this->findPHPName($base);
-                return $className;
-            }
-        }
-        */
+         * if($type instanceof SimpleType){
+         *
+         * $base = $type;
+         *
+         * while (!$this->isSimplePHP($base) && $type->getRestriction()){
+         * $newBase = $type->getRestriction()->getBase();
+         * if($newBase===$base){
+         * break;
+         * }
+         * $base = $newBase;
+         * }
+         * if($base){
+         * $className = $this->findPHPName($base);
+         * return $className;
+         * }
+         * }
+         */
         if ($node->isAnonymousType()) {
             $visited = $this->visitAnonymousType($schema, $node->getType(), $node->getName(), $class);
         } else {

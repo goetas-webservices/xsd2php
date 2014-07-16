@@ -3,10 +3,15 @@ namespace Goetas\Xsd\XsdToPhp\Structure;
 
 class PHPArg
 {
+
     protected $doc;
+
     protected $type;
+
     protected $name;
+
     protected $default;
+
     public function __construct($name = null)
     {
         $this->name = $name;
@@ -22,7 +27,9 @@ class PHPArg
         $this->doc = $doc;
         return $this;
     }
+
     /**
+     *
      * @return PHPClass
      */
     public function getType()
@@ -57,5 +64,4 @@ class PHPArg
         $this->default = $default;
         return $this;
     }
-
 }

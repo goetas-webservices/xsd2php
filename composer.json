@@ -10,14 +10,16 @@
 		"converter",
 		"xml",
 		"xsd",
-		"php"
+		"php",
+		"jms",
+		"serializer"
 	],
 	"license" : "LGPL",
 	"require" : {
 		"symfony/console" : "2.*",
 		"php" : ">=5.3.2",
 		"symfony/class-loader" : "2.*",
-		"goetas/goetas-xsd-reader": "~2.0"
+		"goetas/goetas-xsd-reader" : "~2.0"
 	},
 	"autoload" : {
 		"psr-0" : {

@@ -24,7 +24,6 @@ class PHPClass extends PHPType
         return $this;
     }
 
-
     public function getInterfaces()
     {
         return $this->interfaces;
@@ -40,6 +39,4 @@ class PHPClass extends PHPType
     {
         return "class " . $this->getFullName();
     }
-
-
 }

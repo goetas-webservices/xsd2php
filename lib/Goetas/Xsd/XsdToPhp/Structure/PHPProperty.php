@@ -3,6 +3,7 @@ namespace Goetas\Xsd\XsdToPhp\Structure;
 
 class PHPProperty extends PHPArg
 {
+
     protected $visibility = 'protected';
 
     public function getVisibility()
@@ -15,5 +16,4 @@ class PHPProperty extends PHPArg
         $this->visibility = $visibility;
         return $this;
     }
-
 }

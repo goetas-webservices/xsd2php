@@ -3,14 +3,18 @@ namespace Goetas\Xsd\XsdToPhp\Structure;
 
 abstract class PHPType
 {
+
     protected $name;
+
     protected $namespace;
+
     protected $doc;
 
     public function __construct($name = null)
     {
         $this->name = $name;
     }
+
     public function getName()
     {
         return $this->name;
@@ -53,5 +57,4 @@ abstract class PHPType
     {
         return "{$this->namespace}\\{$this->name}";
     }
-
 }

@@ -7,7 +7,6 @@ class PHPTrait extends PHPType
 
     public function __toString()
     {
-        return "trait ".$this->getFullName();
+        return "trait " . $this->getFullName();
     }
-
 }

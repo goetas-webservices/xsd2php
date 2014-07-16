@@ -3,9 +3,13 @@ namespace Goetas\Xsd\XsdToPhp\Structure;
 
 class PHPConstant
 {
+
     protected $doc;
+
     protected $name;
+
     protected $value;
+
     public function __construct($name = null)
     {
         $this->name = $name;
@@ -43,6 +47,4 @@ class PHPConstant
         $this->value = $value;
         return $this;
     }
-
-
 }

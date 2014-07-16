@@ -21,13 +21,14 @@ class PHPClassOf extends PHPClass
     {
         return $this->named;
     }
+
     /**
+     *
      * @return PHPArg
      */
     public function getArg()
     {
         return $this->arg;
     }
-
 }
 
