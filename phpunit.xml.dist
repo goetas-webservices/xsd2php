@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit backupGlobals="true"
+         backupStaticAttributes="false"
+         bootstrap="./vendor/autoload.php"
+         colors="false"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="false"
+         convertWarningsToExceptions="true"
+         forceCoversAnnotation="false"
+
+         processIsolation="false"
+         stopOnError="false"
+         stopOnFailure="false"
+         stopOnIncomplete="false"
+         stopOnSkipped="false"
+         
+         strict="false"
+         verbose="false">
+         
+    <testsuites>
+        <testsuite name="Goetas XSD to PHP Test Suite">
+            <directory>./tests/</directory>
+        </testsuite>
+    </testsuites>
+    
+    <filter>
+  <blacklist>
+    <directory>vendor</directory>
+  </blacklist>
+  </filter>    
+
+</phpunit>
+
+

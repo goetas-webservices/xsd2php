@@ -40,7 +40,6 @@ class Psr4Writer implements ClassWriter
                     throw new Exception("Non riesco a creare la cartella $dir");
                 }
                 $f = strtr(substr($ns, strlen($namespace)), "\\/", "..");
-                return 1;
                 return file_put_contents($dir . "/" . $f . ".yml", $content);
             }
         }

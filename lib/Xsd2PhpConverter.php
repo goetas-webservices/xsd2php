@@ -23,6 +23,7 @@ use Goetas\XML\XSDReader\Schema\Type\SimpleType;
 use Goetas\Xsd\XsdToPhp\Generator\ClassGenerator;
 use Goetas\Xsd\XsdToPhp\Structure\PHPClassOf;
 use Goetas\Xsd\XsdToPhp\Structure\PHPConstant;
+use Goetas\Xsd\XsdToPhp\Structure\PHPArg;
 
 class Xsd2PhpConverter extends AbstractXsd2Converter
 {
@@ -45,15 +46,18 @@ class Xsd2PhpConverter extends AbstractXsd2Converter
      */
     public function getTypes()
     {
-        uasort($this->classes, function ($a, $b)
-        {
-            return strcmp($a->getFullName(), $b->getFullName());
-        });
 
-        return array_filter($this->classes, function (PHPType $php)
-        {
-            return $php->getNamespace();
+        uasort($this->classes, function ($a, $b) {
+            return strcmp($a["class"]->getFullName(), $b["class"]->getFullName());
         });
+        $ret = array();
+        foreach ($this->classes as $classData) {
+            if(!isset($classData["skip"]) || !$classData["skip"]){
+                $ret[$classData["class"]->getFullName()]=$classData["class"];
+            }
+        }
+
+        return $ret;
     }
 
     protected function navigate(Schema $schema, array &$visited)
@@ -69,14 +73,7 @@ class Xsd2PhpConverter extends AbstractXsd2Converter
         foreach ($schema->getElements() as $element) {
             $this->visitElement($schema, $element);
         }
-        /*
-         * foreach ($schema->getAttributeGroups() as $att) {
-         * $this->visitAttributeGroup($schema, $att);
-         * }
-         * foreach ($schema->getGroups() as $group) {
-         * $this->visitGroup($schema, $group);
-         * }
-         */
+
         foreach ($schema->getSchemas() as $schildSchema) {
             if (! in_array($schildSchema->getTargetNamespace(), $this->baseSchemas, true)) {
                 $this->navigate($schildSchema, $visited);
@@ -100,7 +97,7 @@ class Xsd2PhpConverter extends AbstractXsd2Converter
     protected function visitGroup(Schema $schema, Group $group)
     {
         if (! isset($this->classes[spl_object_hash($group)])) {
-            $this->classes[spl_object_hash($group)] = $trait = new PHPTrait();
+            $this->classes[spl_object_hash($group)]["class"] = $trait = new PHPTrait();
             $trait->setName(Inflector::classify($group->getName()));
             $trait->setDoc($group->getDoc());
 
@@ -118,13 +115,13 @@ class Xsd2PhpConverter extends AbstractXsd2Converter
                 }
             }
         }
-        return $this->classes[spl_object_hash($group)];
+        return $this->classes[spl_object_hash($group)]["class"];
     }
 
     protected function visitAttributeGroup(Schema $schema, AttributeGroup $att)
     {
         if (! isset($this->classes[spl_object_hash($att)])) {
-            $this->classes[spl_object_hash($att)] = $trait = new PHPTrait();
+            $this->classes[spl_object_hash($att)]["class"] = $trait = new PHPTrait();
             $trait->setName(Inflector::classify($att->getName()));
             $trait->setDoc($att->getDoc());
 
@@ -142,7 +139,7 @@ class Xsd2PhpConverter extends AbstractXsd2Converter
                 }
             }
         }
-        return $this->classes[spl_object_hash($att)];
+        return $this->classes[spl_object_hash($att)]["class"];
     }
 
     protected function visitElement(Schema $schema, ElementNode $element)
@@ -158,9 +155,9 @@ class Xsd2PhpConverter extends AbstractXsd2Converter
         $class->setNamespace($this->namespaces[$schema->getTargetNamespace()]);
 
         if (isset($this->classes[$class->getFullName()])) {
-            return $this->classes[$class->getFullName()];
+            return $this->classes[$class->getFullName()]["class"];
         }
-        $this->classes[$class->getFullName()] = $class;
+        $this->classes[$class->getFullName()]["class"] = $class;
 
         if ($element->isAnonymousType()) {
             $this->visitTypeBase($class, $element->getType());
@@ -229,14 +226,15 @@ class Xsd2PhpConverter extends AbstractXsd2Converter
             if ($this->isArray($type) || $this->isSimplePHP($type)) {
                 return $class;
             }
-            $this->classes[spl_object_hash($type)] = $class;
+            $this->classes[spl_object_hash($type)]["class"] = $class;
+            $this->classes[spl_object_hash($type)]["skip"] = !!$this->getTypeAlias($type);
         }
-        return $this->classes[spl_object_hash($type)];
+        return $this->classes[spl_object_hash($type)]["class"];
     }
 
     protected function visitAnonymousType(Schema $schema, Type $type, $name, PHPType $parentClass)
     {
-        $this->classes[spl_object_hash($type)] = $class = new PHPClass();
+        $this->classes[spl_object_hash($type)]["class"] = $class = new PHPClass();
         $class->setName(Inflector::classify($name) . "Type");
 
         $class->setNamespace($parentClass->getNamespace() . "\\" . $parentClass->getName());
@@ -363,7 +361,12 @@ class Xsd2PhpConverter extends AbstractXsd2Converter
             $property->setType(new PHPClassOf($this->visitElementReal($class, $schema, $itemOfArray, false)));
         } else {
             if ($arrayize && $element instanceof ElementReal && ($element->getMax() > 1 || $element->getMax() === - 1)) {
-                $property->setType(new PHPClass('array'));
+
+                $arg = new PHPArg();
+                $arg->setType($this->findPHPType($class, $schema, $element));
+                $arg->setDefault('array()');
+                $arg->setName($element->getName());
+                $property->setType(new PHPClassOf($arg));
             } else {
                 $property->setType($this->findPHPType($class, $schema, $element));
             }

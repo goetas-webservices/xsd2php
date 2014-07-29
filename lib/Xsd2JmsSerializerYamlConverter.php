@@ -53,7 +53,6 @@ class Xsd2JmsSerializerYamlConverter extends AbstractXsd2Converter
 
         return array_filter($this->classes, function ($php)
         {
-            var_dump(key($php));
             return strpos(key($php), '\\') !== false;
         });
     }
@@ -103,7 +102,7 @@ class Xsd2JmsSerializerYamlConverter extends AbstractXsd2Converter
 
         if ($schema->getTargetNamespace()) {
             $data["xml_root_namespace"] = $schema->getTargetNamespace();
-            $data["xml_namespaces"][""] = $schema->getTargetNamespace();
+//            $data["xml_namespaces"][""] = $schema->getTargetNamespace();
         }
 
         if (isset($this->classes[$ns])) {
@@ -133,12 +132,6 @@ class Xsd2JmsSerializerYamlConverter extends AbstractXsd2Converter
         if ($alias = $this->getTypeAlias($type, $schema)) {
             return $alias;
         }
-        /*
-         * if ($schema->getTargetNamespace()=="http://www.w3.org/2001/XMLSchema") {
-         * var_dump($schema->getTargetNamespace()."#".$type->getName());
-         * die();
-         * }
-         */
 
         if (! isset($this->namespaces[$schema->getTargetNamespace()])) {
             throw new Exception(sprintf("Non trovo un namespace php per %s, nel file %s", $schema->getTargetNamespace(), $schema->getFile()));
@@ -260,10 +253,8 @@ class Xsd2JmsSerializerYamlConverter extends AbstractXsd2Converter
 
     protected function handleClassExtension(&$class, &$data, Type $type)
     {
-        if (! $this->isSimplePHP($type)) {
-            // $extension = $this->visitType($type);
-            // $class->setExtends($extension);
-        } else {
+        if ($this->isSimplePHP($type)) {
+
             $extension = $this->visitType($type);
 
             $property = array();
@@ -292,21 +283,32 @@ class Xsd2JmsSerializerYamlConverter extends AbstractXsd2Converter
         $property["type"] = $this->findPHPType($class, $schema, $attribute);
 
         if (! $this->isSimplePHP($attribute->getType()) && ! $this->getTypeAlias($attribute->getType())) {
-
-            if ($attribute->isAnonymousType()) {
-                $typeClass = $this->visitAnonymousType($schema, $attribute->getType(), $attribute->getName(), $class);
-            } else {
-                $typeClass = $this->visitType($attribute->getType());
-            }
-
-            $props = reset($typeClass);
-
-            if (isset($props['properties']['__value'])) {
-                $property["type"] = $this->nestType($property["type"], $props['properties']['__value']['type'], 'Goetas\Xsd\XsdToPhp\BaseTypeValue');
+            if ($valueProp = $this->typeHasValue($attribute->getType(), $class, $attribute->getName())) {
+                $property["type"] = $this->nestType($property["type"], $valueProp['type'], 'Goetas\Xsd\XsdToPhp\BaseTypeValue');
             }
         }
 
         return $property;
+    }
+
+    protected function typeHasValue(Type $type, &$parentClass, $name)
+    {
+
+        do{
+            if ($this->isSimplePHP($type)){
+                if ($type->getName()) {
+                    $class = $this->visitType($type);
+                }else{
+                    $class = $this->visitAnonymousType($type->getSchema(), $type, $name, $parentClass);
+                }
+                $props = reset($class);
+                if(isset($props['properties']['__value'])){
+                    return $props['properties']['__value'];
+                }
+            }
+        }while(method_exists($type, 'getRestriction') && $type->getRestriction() && $type = $type->getRestriction()->getBase());
+
+        return false;
     }
 
     /**
@@ -336,25 +338,20 @@ class Xsd2JmsSerializerYamlConverter extends AbstractXsd2Converter
             $property["type"] = "array<" . $visited["type"] . ">";
             $property["xml_list"]["inline"] = false;
             $property["xml_list"]["entry_name"] = $itemOfArray->getName();
+            $property["xml_list"]["entry_namespace"] = $schema->getTargetNamespace();
         } else {
             if ($arrayize && $element instanceof ElementReal && ($element->getMax() > 1 || $element->getMax() === - 1)) {
                 $property["xml_list"]["inline"] = true;
                 $property["xml_list"]["entry_name"] = $element->getName();
+                $property["xml_list"]["entry_namespace"] = $schema->getTargetNamespace();
                 $property["type"] = "array<" . $this->findPHPType($class, $schema, $element) . ">";
             } else {
 
                 $property["type"] = $this->findPHPType($class, $schema, $element);
 
                 if (! $this->isSimplePHP($element->getType()) && ! $this->getTypeAlias($element->getType())) {
-                    if ($element->isAnonymousType()) {
-                        $typeClass = $this->visitAnonymousType($schema, $element->getType(), $element->getName(), $class);
-                    } else {
-                        $typeClass = $this->visitType($element->getType());
-                    }
-                    $props = reset($typeClass);
-
-                    if (isset($props['properties']['__value'])) {
-                        $property["type"] = $this->nestType($property["type"], $props['properties']['__value']['type'], 'Goetas\Xsd\XsdToPhp\BaseTypeValue');
+                    if ($valueProp = $this->typeHasValue($element->getType(), $class, $element->getName())) {
+                        $property["type"] = $this->nestType($property["type"], $valueProp['type'], 'Goetas\Xsd\XsdToPhp\BaseTypeValue');
                     }
                 }
             }

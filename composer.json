@@ -1,34 +1,44 @@
 {
-	"name" : "goetas/xsd2php",
-	"description" : "Convert XSD  (XML Schema) definitions into PHP classes",
-	"type" : "library",
-	"authors" : [{
-			"name" : "Asmir Mustafic"
-		}
-	],
-	"keywords" : [
-		"converter",
-		"xml",
-		"xsd",
-		"php",
-		"jms",
-		"serializer"
-	],
-	"license" : "LGPL",
-	"require" : {
-		"symfony/console" : "2.*",
-		"php" : ">=5.3.2",
-		"symfony/class-loader" : "2.*",
-		"goetas/goetas-xsd-reader" : "~2.0"
-	},
-	"autoload" : {
-		"psr-0" : {
-			"Goetas\\Xsd\\XsdToPhp" : "lib/"
-		}
-	},
-	"extra" : {
-		"branch-alias" : {
-			"dev-master" : "2.0-dev"
-		}
-	}
+    "name": "goetas/xsd2php",
+    "description": "Convert XSD  (XML Schema) definitions into PHP classes",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Asmir Mustafic"
+        }
+    ],
+    "keywords": [
+        "converter",
+        "xml",
+        "xsd",
+        "php",
+        "jms",
+        "serializer"
+    ],
+    "license": "LGPL",
+    "require": {
+        "php": "~5.4",
+        "symfony/console": "~2.1",
+        "symfony/yaml": "~2.1",
+        "goetas/xsd-reader": "~1.0@dev",
+        "doctrine/inflector": "1.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Goetas\\Xsd\\XsdToPhp\\": "lib/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Goetas\\Xsd\\XsdToPhp\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.0-dev"
+        }
+    }
 }

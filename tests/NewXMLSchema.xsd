@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.example.org/NewXMLSchema" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.example.org/NewXMLSchema">
+
+    <xs:complexType name="NewComplexType"></xs:complexType>
+
+    <xs:complexType name="NewComplexType1">
+        <xs:complexContent>
+            <xs:extension base="tns:NewComplexType"></xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+</xs:schema>

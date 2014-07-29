@@ -61,7 +61,7 @@ abstract class AbstractXsd2Converter
         });
         $this->addAliasMap("http://www.w3.org/2001/XMLSchema", "dateTime", function (Type $type)
         {
-            return "DateTime<'Y-m-d\TH:i:s'>";
+            return "DateTime<'XMLSchema#dateTime'>";
         });
         $this->addAliasMap("http://www.w3.org/2001/XMLSchema", "date", function (Type $type)
         {
