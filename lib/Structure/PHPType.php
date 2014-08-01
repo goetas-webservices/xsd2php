@@ -10,9 +10,10 @@ abstract class PHPType
 
     protected $doc;
 
-    public function __construct($name = null)
+    public function __construct($name = null, $namespace = null)
     {
         $this->name = $name;
+        $this->namespace = $namespace;
     }
 
     public function getName()
