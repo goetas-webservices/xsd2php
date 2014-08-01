@@ -38,4 +38,4 @@ tools:
     external_code_coverage: true
 filter:
     paths:
-        - src/*
+        - lib/*
