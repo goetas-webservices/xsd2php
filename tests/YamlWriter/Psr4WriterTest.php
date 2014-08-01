@@ -2,23 +2,29 @@
 namespace Goetas\Xsd\XsdToPhp\Tests\YamlWriter;
 
 use Goetas\Xsd\XsdToPhp\YamlWriter\Psr4Writer;
+
 class Psr4WriterTest extends \PHPUnit_Framework_TestCase
 {
 
     protected $cacheDir = null;
+
     public function setUp()
     {
-        $this->cacheDir = sys_get_temp_dir()."/Psr4WriterTest";
+        $this->cacheDir = sys_get_temp_dir() . "/Psr4WriterTest";
 
         $this->tearDown();
 
-        if (!is_dir($this->cacheDir)) {
+        if (! is_dir($this->cacheDir)) {
             mkdir($this->cacheDir);
         }
     }
 
-    private static function delTree($dir) {
-        $files = array_diff(scandir($dir), array('.','..'));
+    private static function delTree($dir)
+    {
+        $files = array_diff(scandir($dir), array(
+            '.',
+            '..'
+        ));
         foreach ($files as $file) {
             (is_dir("$dir/$file")) ? self::selTree("$dir/$file") : unlink("$dir/$file");
         }
@@ -27,7 +33,6 @@ class Psr4WriterTest extends \PHPUnit_Framework_TestCase
 
     public function tearDown()
     {
-
         if ($this->cacheDir && is_dir($this->cacheDir)) {
             self::delTree($this->cacheDir);
         }
@@ -35,9 +40,8 @@ class Psr4WriterTest extends \PHPUnit_Framework_TestCase
 
     public function testWriter()
     {
-
         $writer = new Psr4Writer(array(
-            'myns\\'=> $this->cacheDir
+            'myns\\' => $this->cacheDir
         ));
         ;
 
@@ -45,54 +49,53 @@ class Psr4WriterTest extends \PHPUnit_Framework_TestCase
             'myns\\Bar' => '.'
         ], '.');
 
-        $filename = $this->cacheDir  . "/Bar.yml";
+        $filename = $this->cacheDir . "/Bar.yml";
 
         $this->assertFileExists($filename);
         $this->assertEquals('.', file_get_contents($filename));
     }
+
     public function testWriterLong()
     {
-
         $writer = new Psr4Writer(array(
-            'myns\\'=> $this->cacheDir
+            'myns\\' => $this->cacheDir
         ));
         ;
 
         $writer->write([
             'myns\foo\Bar' => '.'
-            ], '.');
+        ], '.');
 
-        $filename = $this->cacheDir  . "/foo.Bar.yml";
+        $filename = $this->cacheDir . "/foo.Bar.yml";
 
         $this->assertFileExists($filename);
         $this->assertEquals('.', file_get_contents($filename));
     }
+
     public function testNonExistingDir()
     {
-
         $this->setExpectedException('Exception');
         new Psr4Writer(array(
-            'myns\\'=> "aaaa"
+            'myns\\' => "aaaa"
         ));
-
     }
+
     public function testNoNs()
     {
         $this->setExpectedException('Exception');
         $writer = new Psr4Writer(array(
-            'myns\\'=> $this->cacheDir
+            'myns\\' => $this->cacheDir
         ));
         $writer->write([
             'myns2\\Bar' => '.'
         ], '.');
     }
+
     public function testInvalidNs()
     {
-
         $this->setExpectedException('Exception');
         new Psr4Writer(array(
-            'myns'=> "aaaa"
+            'myns' => "aaaa"
         ));
-
     }
 }

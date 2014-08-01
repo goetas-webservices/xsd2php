@@ -51,10 +51,16 @@ class Xsd2JmsSerializerYamlConverter extends AbstractXsd2Converter
             return strcmp(key($a), key($b));
         });
 
-        return array_filter($this->classes, function ($php)
-        {
-            return strpos(key($php), '\\') !== false;
-        });
+        $ret = array();
+
+        foreach ($this->classes as $definition) {
+            $classname = key($definition);
+            if (strpos($classname, '\\') !== false) {
+                $ret[$classname] = $definition;
+            }
+        }
+
+        return $ret;
     }
 
     protected function navigate(Schema $schema, array &$visited)
@@ -102,7 +108,7 @@ class Xsd2JmsSerializerYamlConverter extends AbstractXsd2Converter
 
         if ($schema->getTargetNamespace()) {
             $data["xml_root_namespace"] = $schema->getTargetNamespace();
-//            $data["xml_namespaces"][""] = $schema->getTargetNamespace();
+            // $data["xml_namespaces"][""] = $schema->getTargetNamespace();
         }
 
         if (isset($this->classes[$ns])) {
@@ -219,7 +225,7 @@ class Xsd2JmsSerializerYamlConverter extends AbstractXsd2Converter
         }
     }
 
-    protected function &visitGroup(&$data, Schema $schema, Group $group)
+    protected function visitGroup(&$data, Schema $schema, Group $group)
     {
         $groupClass = array();
         $groupData = array();
@@ -293,20 +299,19 @@ class Xsd2JmsSerializerYamlConverter extends AbstractXsd2Converter
 
     protected function typeHasValue(Type $type, &$parentClass, $name)
     {
-
-        do{
-            if ($this->isSimplePHP($type)){
+        do {
+            if ($this->isSimplePHP($type)) {
                 if ($type->getName()) {
                     $class = $this->visitType($type);
-                }else{
+                } else {
                     $class = $this->visitAnonymousType($type->getSchema(), $type, $name, $parentClass);
                 }
                 $props = reset($class);
-                if(isset($props['properties']['__value'])){
+                if (isset($props['properties']['__value'])) {
                     return $props['properties']['__value'];
                 }
             }
-        }while(method_exists($type, 'getRestriction') && $type->getRestriction() && $type = $type->getRestriction()->getBase());
+        } while (method_exists($type, 'getRestriction') && $type->getRestriction() && $type = $type->getRestriction()->getBase());
 
         return false;
     }

@@ -1,5 +1,5 @@
 <?php
-namespace Goetas\Xsd\XsdToPhp\Tests\Converter;
+namespace Goetas\Xsd\XsdToPhp\Tests\Converter\PHP;
 
 use Goetas\Xsd\XsdToPhp\Xsd2PhpConverter;
 use Goetas\XML\XSDReader\SchemaReader;

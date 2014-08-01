@@ -9,6 +9,7 @@ use Goetas\XML\XSDReader\Schema\Schema;
 abstract class AbstractXsd2Converter
 {
 
+
     protected $baseSchemas = array(
         'http://www.w3.org/2001/XMLSchema',
         'http://www.w3.org/XML/1998/namespace'
@@ -35,7 +36,7 @@ abstract class AbstractXsd2Converter
 
     private $aliasCache = array();
 
-    public function addAliasMap($ns, $name, $handler)
+    public function addAliasMap($ns, $name, callable $handler)
     {
         $this->typeAliases[$ns][$name] = $handler;
     }
@@ -148,9 +149,8 @@ abstract class AbstractXsd2Converter
             return "DateInterval";
         });
 
-        $this->arrayCallbacks[] = function (Type $type)
+        $this->addArrayTypeCallback(function (Type $type)
         {
-
             if ($type instanceof ComplexType && ! $type->getParent() && ! $type->getAttributes() && count($type->getElements()) === 1) {
 
                 $elements = $type->getElements();
@@ -161,18 +161,13 @@ abstract class AbstractXsd2Converter
                 }
             }
             return false;
-        };
+        });
     }
 
     public function addNamespace($namesapce, $phpNamespace)
     {
         $this->namespaces[$namesapce] = $phpNamespace;
         return $this;
-    }
-
-    public function addAlias($xsdNs, $xsdType, $xsdType)
-    {
-        // $this->generator->addAlias($xsdNs, $xsdType, $xsdType);
     }
 
     public function addArrayType($xsdNs, $xsdType)
@@ -183,7 +178,7 @@ abstract class AbstractXsd2Converter
         };
     }
 
-    public function addArrayTypeCallback($xsdNs, $callback)
+    public function addArrayTypeCallback(callable $callback)
     {
         $this->arrayCallbacks[] = $callback;
     }

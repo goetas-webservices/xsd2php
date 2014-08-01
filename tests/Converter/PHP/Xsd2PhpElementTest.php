@@ -1,5 +1,5 @@
 <?php
-namespace Goetas\Xsd\XsdToPhp\Tests\Converter;
+namespace Goetas\Xsd\XsdToPhp\Tests\Converter\PHP;
 
 class Xsd2PhpElementTest  extends Xsd2PhpBase
 {
@@ -32,6 +32,7 @@ class Xsd2PhpElementTest  extends Xsd2PhpBase
         $property = $classes['Example\ElementOne']->getProperty('__value');
         $this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Structure\PHPProperty', $property);
 
+        $this->assertEquals('protected', $property->getVisibility());
         $this->assertEquals('', $property->getType()->getNamespace());
         $this->assertEquals($phpName, $property->getType()->getName());
     }

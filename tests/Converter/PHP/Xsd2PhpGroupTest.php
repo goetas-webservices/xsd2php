@@ -1,5 +1,5 @@
 <?php
-namespace Goetas\Xsd\XsdToPhp\Tests\Converter;
+namespace Goetas\Xsd\XsdToPhp\Tests\Converter\PHP;
 
 class Xsd2PhpGroupTest  extends Xsd2PhpBase
 {
