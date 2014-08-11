@@ -1,19 +1,23 @@
 #!/bin/php
 <?php
-foreach (array(
-    __DIR__ . '/../autoload.php',
-    __DIR__ . '/../../autoload.php',
-    __DIR__ . '/../../../autoload.php',
+$paths = [
     __DIR__ . '/../vendor/autoload.php',
-    __DIR__ . '/../../vendor/autoload.php',
-) as $path) {
-    if(is_file($path)){
+    __DIR__ . '/../../../autoload.php'
+];
+foreach ($paths as $path) {
+    if (is_file($path)) {
         include $path;
         break;
     }
 }
 
-use Goetas\Xsd\XsdToPhp\Console\ConsoleRunner;
+use Symfony\Component\Console\Application;
+use Goetas\Xsd\XsdToPhp\Command;
 
-$cli = new ConsoleRunner();
+$cli = new Application('Convert XSD to PHP classes Command Line Interface', "2.0");
+$cli->setCatchExceptions(true);
+$cli->addCommands(array(
+    new Command\ConvertToPHP(),
+    new Command\ConvertToYaml()
+));
 $cli->run();
