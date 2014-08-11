@@ -134,228 +134,272 @@ class ClassGenerator
         }
     }
 
+    protected function addValueMethods(PHPProperty $prop, PHPType $class)
+    {
+
+        $type = $prop->getType();
+
+        $doc = 'Gets or sets the inner value.' . PHP_EOL . PHP_EOL;
+
+        if ($c = $this->getFirstLineComment($prop->getDoc())) {
+            $doc .= $c . PHP_EOL . PHP_EOL;
+        }
+        if ($type && $type instanceof PHPClassOf) {
+            $doc .= "@param \$value " . $this->getPhpType($type->getArg()->getType()) . "[]";
+        } elseif ($type) {
+            $doc .= "@param \$value " . $this->getPhpType($prop->getType());
+        } else {
+            $doc .= "@param \$value mixed";
+        }
+        $doc .= PHP_EOL;
+
+        if ($type && $type instanceof PHPClassOf) {
+            $doc .= "@return " . $this->getPhpType($type->getArg()->getType()) . "[]";
+        } elseif ($type) {
+            $doc .= "@return " . $this->getPhpType($type);
+        } else {
+            $doc .= "@return mixed";
+        }
+        // $str = "";
+        if ($doc) {
+            $str .= $this->writeDocBlock($doc);
+        }
+        $typedeclaration = '';
+        if ($type && $this->hasTypeHint($type)) {
+            $typedeclaration = $this->getPhpType($type) . " ";
+        }
+
+        $str .= "public function value($typedeclaration\$value = null)" . PHP_EOL;
+        $str .= "{" . PHP_EOL;
+
+        $methodBody = "if (\$value !== null) {" . PHP_EOL;
+        $methodBody .= $this->indent("\$this->" . $prop->getName() . " = \$this->_checkValue(\$value);") . PHP_EOL;
+        $methodBody .= "}" . PHP_EOL;
+
+        $methodBody .= "return \$this->" . $prop->getName() . ";" . PHP_EOL;
+
+        $str .= $this->indent($methodBody) . PHP_EOL;
+
+        $str .= "}" . PHP_EOL;
+
+        $str .= PHP_EOL;
+
+        $str .= "public function __toString()" . PHP_EOL;
+        $str .= "{" . PHP_EOL;
+        $methodBody = "return strval(\$this->" . $prop->getName() . ");";
+        $str .= $this->indent($methodBody) . PHP_EOL;
+
+        $str .= "}" . PHP_EOL;
+
+        $str .= PHP_EOL;
+
+        $doc = "";
+        if ($type) {
+            $doc .= "@param \$value " . $this->getPhpType($prop->getType());
+        } else {
+            $doc .= "@param \$value mixed";
+        }
+        // $str = "";
+        if ($doc) {
+            $str .= $this->writeDocBlock($doc);
+        }
+        $str .= "protected function __construct(\$value)" . PHP_EOL;
+        $str .= "{" . PHP_EOL;
+        $methodBody = "\$this->value(\$value);";
+        $str .= $this->indent($methodBody) . PHP_EOL;
+
+        $str .= "}" . PHP_EOL;
+        $str .= PHP_EOL;
+
+        $doc = "";
+        if ($type) {
+            $doc .= "@param \$value " . $this->getPhpType($prop->getType());
+        } else {
+            $doc .= "@param \$value mixed";
+        }
+        $doc .= PHP_EOL;
+        $doc .= "@return " . $class->getName();
+        // $str = "";
+        if ($doc) {
+            $str .= $this->writeDocBlock($doc);
+        }
+        $str .= "public static function create(\$value)" . PHP_EOL;
+        $str .= "{" . PHP_EOL;
+        $methodBody = "return new static(\$value);";
+        $str .= $this->indent($methodBody) . PHP_EOL;
+
+        $str .= "}" . PHP_EOL;
+
+        return $str;
+    }
+    protected function handleSetter(PHPProperty $prop, PHPType $class)
+    {
+        $type = $prop->getType();
+
+        $str = '';
+
+        $doc = '';
+
+        $doc = '';
+
+        if ($c = $this->getFirstLineComment($prop->getDoc())) {
+            $doc .= $c . PHP_EOL . PHP_EOL;
+        }
+        if ($type && $type instanceof PHPClassOf) {
+            $doc .= "@param $" . $prop->getName() . " " . $this->getPhpType($type->getArg()->getType()) . "[]";
+        } elseif ($type) {
+            $doc .= "@param $" . $prop->getName() . " " . $this->getPhpType($prop->getType());
+        } else {
+            $doc .= "@param $" . $prop->getName() . " mixed";
+        }
+        // $str = "";
+        if ($doc) {
+            $str .= $this->writeDocBlock($doc);
+        }
+        $typedeclaration = '';
+        if ($type && $this->hasTypeHint($type)) {
+            $typedeclaration = $this->getPhpType($type) . " ";
+        }
+        $str .= "public function set" . Inflector::classify($prop->getName()) . "($typedeclaration\$" . $prop->getName() . ")" . PHP_EOL;
+        $str .= "{" . PHP_EOL;
+
+        $methodBody = '';
+        if ($type && $type instanceof PHPClassOf) {
+            $methodBody .= "foreach ($" . $prop->getName() . " as \$item) {" . PHP_EOL;
+            $methodBody .= $this->indent("if (!(\$item instanceof " . $this->getPhpType($type->getArg()->getType()) . ") ) {") . PHP_EOL;
+            $methodBody .= $this->indent("throw new \InvalidArgumentException('Argument 1 passed to ' . __METHOD__ . ' be an array of " . $this->getPhpType($type->getArg()->getType()) . "');", 2) .
+            PHP_EOL;
+            $methodBody .= $this->indent("}") . PHP_EOL;
+            $methodBody .= "}" . PHP_EOL;
+        }
+
+        $methodBody .= "\$this->" . $prop->getName() . " = \$" . $prop->getName() . ";" . PHP_EOL;
+        $methodBody .= "return \$this;";
+        $str .= $this->indent($methodBody) . PHP_EOL;
+
+        $str .= "}" . PHP_EOL;
+
+        return $str;
+    }
+    protected function handleGetter(PHPProperty $prop, PHPType $class)
+    {
+        $type = $prop->getType();
+
+        $str = '';
+
+        $doc = '';
+
+        if ($c = $this->getFirstLineComment($prop->getDoc())) {
+            $doc .= $c . PHP_EOL . PHP_EOL;
+        }
+
+        if ($type && $type instanceof PHPClassOf) {
+            $doc .= "@return " . $this->getPhpType($type->getArg()->getType()) . "[]";
+        } elseif ($type) {
+            $doc .= "@return " . $this->getPhpType($type);
+        } else {
+            $doc .= "@return mixed";
+        }
+
+        if ($doc) {
+            $str .= $this->writeDocBlock($doc);
+        }
+        $str .= "public function get" . Inflector::classify($prop->getName()) . "()" . PHP_EOL;
+        $str .= "{" . PHP_EOL;
+        $methodBody = "return \$this->" . $prop->getName() . ";";
+        $str .= $this->indent($methodBody) . PHP_EOL;
+
+        $str .= "}" . PHP_EOL;
+
+        return $str;
+    }
+    protected function handleValueMethods(PHPProperty $prop, PHPType $class){
+        $type = $prop->getType();
+        $doc = '';
+        $str = '';
+        if ($c = $this->getFirstLineComment($prop->getDoc())) {
+            $doc .= $c . PHP_EOL . PHP_EOL;
+        }
+
+        if ($type) {
+            $doc .= "@return " . $this->getPhpType($prop->getType()->getPropertyInHierarchy('__value')->getType());
+        } else {
+            $doc .= "@return mixed";
+        }
+
+        if ($doc) {
+            $str .= $this->writeDocBlock($doc);
+        }
+        $str .= "public function extract" . Inflector::classify($prop->getName()) . "()" . PHP_EOL;
+        $str .= "{" . PHP_EOL;
+        $methodBody = "return \$this->" . $prop->getName() . " ? \$this->" . $prop->getName() . "->value() : null;";
+        $str .= $this->indent($methodBody) . PHP_EOL;
+
+        $str .= "}" . PHP_EOL;
+        return $str;
+    }
+
+    protected function handleAdder(PHPProperty $prop, PHPType $class)
+    {
+        $type = $prop->getType();
+
+        $doc = '';
+        $str = '';
+        if ($c = $type->getArg()->getDoc()) {
+            $doc .= $c . PHP_EOL . PHP_EOL;
+        }
+
+        $propName = $type->getArg()->getName() ?  : $prop->getName();
+
+        $doc .= "@param $" . $propName . " " . $this->getPhpType($type->getArg()->getType());
+        if ($type->getArg()->getType()->getDoc()) {
+            $doc .= " " . $this->getFirstLineComment($type->getArg()->getType()->getDoc());
+        }
+
+        // $str = "";
+        if ($doc) {
+            $str .= $this->writeDocBlock($doc);
+        }
+        $typedeclaration = '';
+        if ($this->hasTypeHint($type->getArg()->getType())) {
+            $typedeclaration = $this->getPhpType($type->getArg()->getType()) . " ";
+        }
+
+        $str .= "public function add" . Inflector::classify($prop->getName()) . "($typedeclaration\$" . $propName . ")" . PHP_EOL;
+        $str .= "{" . PHP_EOL;
+        $methodBody = "\$this->" . $prop->getName() . "[] = \$" . $propName . ";" . PHP_EOL;
+        $methodBody .= "return \$this;";
+        $str .= $this->indent($methodBody) . PHP_EOL;
+
+        $str .= "}" . PHP_EOL;
+
+        return $str;
+    }
+
     protected function handleMethods(PHPProperty $prop, PHPType $class)
     {
         $type = $prop->getType();
 
         $str = '';
 
-        // setter
 
-        if ($type && $type instanceof PHPClassOf) {
-            $str .= PHP_EOL;
-            $doc = '';
-
-            if ($c = $type->getArg()->getDoc()) {
-                $doc .= $c . PHP_EOL . PHP_EOL;
-            }
-
-            $propName = $type->getArg()->getName() ?  : $prop->getName();
-
-            $doc .= "@param $" . $propName . " " . $this->getPhpType($type->getArg()->getType());
-            if ($type->getArg()->getType()->getDoc()) {
-                $doc .= " " . $this->getFirstLineComment($type->getArg()->getType()->getDoc());
-            }
-
-            // $str = "";
-            if ($doc) {
-                $str .= $this->writeDocBlock($doc);
-            }
-            $typedeclaration = '';
-            if ($this->hasTypeHint($type->getArg()->getType())) {
-                $typedeclaration = $this->getPhpType($type->getArg()->getType()) . " ";
-            }
-
-            $str .= "public function add" . Inflector::classify($prop->getName()) . "($typedeclaration\$" . $propName . ")" . PHP_EOL;
-            $str .= "{" . PHP_EOL;
-            $methodBody = "\$this->" . $prop->getName() . "[] = \$" . $propName . ";" . PHP_EOL;
-            $methodBody .= "return \$this;";
-            $str .= $this->indent($methodBody) . PHP_EOL;
-
-            $str .= "}" . PHP_EOL;
-        }
         $str .= PHP_EOL;
 
         if ($prop->getName() == "__value") {
-
-            $doc = 'Gets or sets the inner value.' . PHP_EOL . PHP_EOL;
-
-            if ($c = $this->getFirstLineComment($prop->getDoc())) {
-                $doc .= $c . PHP_EOL . PHP_EOL;
-            }
-            if ($type && $type instanceof PHPClassOf) {
-                $doc .= "@param \$value " . $this->getPhpType($type->getArg()->getType()) . "[]";
-            } elseif ($type) {
-                $doc .= "@param \$value " . $this->getPhpType($prop->getType());
-            } else {
-                $doc .= "@param \$value mixed";
-            }
-            $doc .= PHP_EOL;
-
-            if ($type && $type instanceof PHPClassOf) {
-                $doc .= "@return " . $this->getPhpType($type->getArg()->getType()) . "[]";
-            } elseif ($type) {
-                $doc .= "@return " . $this->getPhpType($type);
-            } else {
-                $doc .= "@return mixed";
-            }
-            // $str = "";
-            if ($doc) {
-                $str .= $this->writeDocBlock($doc);
-            }
-            $typedeclaration = '';
-            if ($type && $this->hasTypeHint($type)) {
-                $typedeclaration = $this->getPhpType($type) . " ";
-            }
-
-            $str .= "public function value($typedeclaration\$value = null)" . PHP_EOL;
-            $str .= "{" . PHP_EOL;
-
-            $methodBody = "if (\$value !== null) {" . PHP_EOL;
-            $methodBody .= $this->indent("\$this->" . $prop->getName() . " = \$this->_checkValue(\$value);") . PHP_EOL;
-            $methodBody .= "}" . PHP_EOL;
-
-            $methodBody .= "return \$this->" . $prop->getName() . ";" . PHP_EOL;
-
-            $str .= $this->indent($methodBody) . PHP_EOL;
-
-            $str .= "}" . PHP_EOL;
-
-            $str .= PHP_EOL;
-
-            $str .= "public function __toString()" . PHP_EOL;
-            $str .= "{" . PHP_EOL;
-            $methodBody = "return strval(\$this->" . $prop->getName() . ");";
-            $str .= $this->indent($methodBody) . PHP_EOL;
-
-            $str .= "}" . PHP_EOL;
-
-            $str .= PHP_EOL;
-
-            $doc = "";
-            if ($type) {
-                $doc .= "@param \$value " . $this->getPhpType($prop->getType());
-            } else {
-                $doc .= "@param \$value mixed";
-            }
-            // $str = "";
-            if ($doc) {
-                $str .= $this->writeDocBlock($doc);
-            }
-            $str .= "protected function __construct(\$value)" . PHP_EOL;
-            $str .= "{" . PHP_EOL;
-            $methodBody = "\$this->value(\$value);";
-            $str .= $this->indent($methodBody) . PHP_EOL;
-
-            $str .= "}" . PHP_EOL;
-            $str .= PHP_EOL;
-
-            $doc = "";
-            if ($type) {
-                $doc .= "@param \$value " . $this->getPhpType($prop->getType());
-            } else {
-                $doc .= "@param \$value mixed";
-            }
-            $doc .= PHP_EOL;
-            $doc .= "@return " . $class->getName();
-            // $str = "";
-            if ($doc) {
-                $str .= $this->writeDocBlock($doc);
-            }
-            $str .= "public static function create(\$value)" . PHP_EOL;
-            $str .= "{" . PHP_EOL;
-            $methodBody = "return new static(\$value);";
-            $str .= $this->indent($methodBody) . PHP_EOL;
-
-            $str .= "}" . PHP_EOL;
+            $str .= $this->addValueMethods($prop);
         } else {
 
             if ($prop->getType() && $prop->getType()->hasPropertyInHierarchy('__value')) {
-                $doc = '';
-
-                if ($c = $this->getFirstLineComment($prop->getDoc())) {
-                    $doc .= $c . PHP_EOL . PHP_EOL;
-                }
-
-                if ($type) {
-                    $doc .= "@return " . $this->getPhpType($prop->getType()->getPropertyInHierarchy('__value')->getType());
-                } else {
-                    $doc .= "@return mixed";
-                }
-
-                if ($doc) {
-                    $str .= $this->writeDocBlock($doc);
-                }
-                $str .= "public function extract" . Inflector::classify($prop->getName()) . "()" . PHP_EOL;
-                $str .= "{" . PHP_EOL;
-                $methodBody = "return \$this->" . $prop->getName() . " ? \$this->" . $prop->getName() . "->value() : null;";
-                $str .= $this->indent($methodBody) . PHP_EOL;
-
-                $str .= "}" . PHP_EOL;
-            }
-
-            $doc = '';
-
-            if ($c = $this->getFirstLineComment($prop->getDoc())) {
-                $doc .= $c . PHP_EOL . PHP_EOL;
-            }
-
-            if ($type && $type instanceof PHPClassOf) {
-                $doc .= "@return " . $this->getPhpType($type->getArg()->getType()) . "[]";
-            } elseif ($type) {
-                $doc .= "@return " . $this->getPhpType($type);
-            } else {
-                $doc .= "@return mixed";
-            }
-
-            if ($doc) {
-                $str .= $this->writeDocBlock($doc);
-            }
-            $str .= "public function get" . Inflector::classify($prop->getName()) . "()" . PHP_EOL;
-            $str .= "{" . PHP_EOL;
-            $methodBody = "return \$this->" . $prop->getName() . ";";
-            $str .= $this->indent($methodBody) . PHP_EOL;
-
-            $str .= "}" . PHP_EOL;
-
-            $doc = '';
-
-            if ($c = $this->getFirstLineComment($prop->getDoc())) {
-                $doc .= $c . PHP_EOL . PHP_EOL;
+                $str .= $this->handleValueMethods($prop, $class);
             }
             if ($type && $type instanceof PHPClassOf) {
-                $doc .= "@param $" . $prop->getName() . " " . $this->getPhpType($type->getArg()->getType()) . "[]";
-            } elseif ($type) {
-                $doc .= "@param $" . $prop->getName() . " " . $this->getPhpType($prop->getType());
-            } else {
-                $doc .= "@param $" . $prop->getName() . " mixed";
-            }
-            // $str = "";
-            if ($doc) {
-                $str .= $this->writeDocBlock($doc);
-            }
-            $typedeclaration = '';
-            if ($type && $this->hasTypeHint($type)) {
-                $typedeclaration = $this->getPhpType($type) . " ";
-            }
-            $str .= "public function set" . Inflector::classify($prop->getName()) . "($typedeclaration\$" . $prop->getName() . ")" . PHP_EOL;
-            $str .= "{" . PHP_EOL;
-
-            $methodBody = '';
-            if ($type && $type instanceof PHPClassOf) {
-                $methodBody .= "foreach ($" . $prop->getName() . " as \$item) {" . PHP_EOL;
-                $methodBody .= $this->indent("if (!(\$item instanceof " . $this->getPhpType($type->getArg()->getType()) . ") ) {") . PHP_EOL;
-                $methodBody .= $this->indent("throw new \InvalidArgumentException('Argument 1 passed to ' . __METHOD__ . ' be an array of " . $this->getPhpType($type->getArg()->getType()) . "');", 2) .
-                     PHP_EOL;
-                $methodBody .= $this->indent("}") . PHP_EOL;
-                $methodBody .= "}" . PHP_EOL;
+                $str .= PHP_EOL;
+                $str .= $this->handleAdder($prop, $class);
             }
 
-            $methodBody .= "\$this->" . $prop->getName() . " = \$" . $prop->getName() . ";" . PHP_EOL;
-            $methodBody .= "return \$this;";
-            $str .= $this->indent($methodBody) . PHP_EOL;
+            $str .= $this->handleGetter($prop, $class);
+            $str .= $this->handleSetter($prop, $class);
 
-            $str .= "}" . PHP_EOL;
         }
         return $str;
     }
