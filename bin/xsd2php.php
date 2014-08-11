@@ -1,4 +1,4 @@
-#!/bin/php
+#!/usr/bin/env php
 <?php
 $paths = [
     __DIR__ . '/../vendor/autoload.php',
