@@ -76,19 +76,18 @@ XSD2PHP can also generate for you [JMS Serializer](http://jmsyst.com/libs/serial
 bin/xsd2php.php  convert:jms-yaml \
 `/home/my/ota/OTA_HotelAvail*.xsd \
 
---ns-dest='src/Metadata/JMS; http://www.opentravel.org/OTA/2003/05' \
+--ns-map='http://www.opentravel.org/OTA/2003/05;Mercurio/OTA/2007B/'  \
+--ns-dest='Mercurio/OTA/2007B/;src/Metadata/JMS;' \
 
---ns-map='Mercurio/OTA/2007B/;http://www.opentravel.org/OTA/2003/05'  \
-
---alias-map='Vendor/Project/CustomDateClass;http://www.opentravel.org/OTA/2003/05#CustomOTADateTimeFormat'
+--alias-map='http://www.opentravel.org/OTA/2003/05#CustomOTADateTimeFormat;Vendor/Project/CustomDateClass'
 
 ```
 
-Where place the files?
-* `http://www.opentravel.org/OTA/2003/05` will be placed into `src/Metadata/JMS` directory
-
 What about namespaces? 
 * `http://www.opentravel.org/OTA/2003/05` will be converted into `Mercurio/OTA/2007B` PHP namespace
+
+Where place the files?
+* `http://www.opentravel.org/OTA/2003/05` will be placed into `src/Metadata/JMS` directory
 
 What about custom types? 
 * `--alias-map='Vendor/Project/CustomDateClass;http://www.opentravel.org/OTA/2003/05#CustomOTADateTimeFormat'` 

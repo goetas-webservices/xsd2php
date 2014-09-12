@@ -3,8 +3,8 @@ namespace Goetas\Xsd\XsdToPhp\Command;
 
 use Goetas\Xsd\XsdToPhp\Xsd2PhpConverter;
 use Goetas\Xsd\XsdToPhp\Generator\ClassGenerator;
-use Goetas\Xsd\XsdToPhp\Writer\Psr0Writer;
-use Goetas\Xsd\XsdToPhp\Writer\Psr4Writer;
+use Goetas\Xsd\XsdToPhp\PhpWriter\Psr0Writer;
+use Goetas\Xsd\XsdToPhp\PhpWriter\Psr4Writer;
 use Goetas\XML\XSDReader\SchemaReader;
 use Goetas\Xsd\XsdToPhp\AbstractXsd2Converter;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -31,7 +31,6 @@ class ConvertToPHP extends AbstractConvert
     protected function convert(AbstractXsd2Converter $converter, array $schemas, array $targets, OutputInterface $output)
     {
         $generator = new ClassGenerator();
-
         $writer = new Psr4Writer($targets);
         $progress = $this->getHelperSet()->get('progress');
 

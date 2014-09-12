@@ -14,7 +14,7 @@ abstract class Psr4Writer
 
         foreach ($this->namespaces as $namespace => $dir) {
             if ($namespace[strlen($namespace) - 1] !== "\\") {
-                throw new WriterException("A non-empty PSR-4 prefix must end with a namespace separator.");
+                throw new WriterException("A non-empty PSR-4 prefix must end with a namespace separator, you entered '$namespace'.");
             }
             if (! is_dir($dir)) {
                 throw new WriterException("The folder '$dir' does not exist.");

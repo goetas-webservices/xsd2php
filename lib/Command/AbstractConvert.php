@@ -34,16 +34,16 @@ abstract class AbstractConvert extends Console\Command\Command
                 'src', InputArgument::REQUIRED|InputArgument::IS_ARRAY, 'Where is located your XSD definitions'
             ),
             new InputOption(
-                'ns-dest', null, InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY,
-                'Where place the outoput files? Syntax: <info>dest-dir;XML-ns</info>'
+                'ns-map', null, InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY,
+                'How to map XML namespaces to PHP namespaces? Syntax: <info>XML-namespace;PHP-namespace</info>'
             ),
             new InputOption(
-                'ns-map', null, InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY,
-                'How to map XML namespaces into PHP namespaces? Syntax: <info>PHP-namespace;XML-namespace</info>'
+                'ns-dest', null, InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY,
+                'Where place the generated files? Syntax: <info>PHP-namespace;destination-directory</info>'
             ),
             new InputOption(
                 'alias-map', null, InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY,
-                'A PHP callback that will detect types that can be considered as php arrays'
+                'How to map XML namespaces into existing PHP classes? Syntax: <info>XML-namespace#XML-type;PHP-type</info>. '
             )
         ))
         ;
@@ -75,36 +75,37 @@ abstract class AbstractConvert extends Console\Command\Command
 
         $converter = $this->getConverterter();
 
-        $targets = array();
-        $output->writeln("Targets:");
-        foreach ($nsTarget as $val) {
-            if (strpos($val, ';')===false){
-            	throw new Exception("Invalid syntax for --ns-dest option");
-            }
-            list($dir,$ns) = explode(";", $val, 2);
-            $ns = strtr($ns, "./", "\\\\");
-            $targets[$ns]=$dir;
-            $output->writeln("\t<comment>".strtr($ns, "\\", "/")."</comment> = <comment>$dir</comment>");
-        }
+
         $nsMapKeyed = array();
         $output->writeln("Namespaces:");
         foreach ($nsMap as $val) {
             if (strpos($val, ';')===false){
                 throw new Exception("Invalid syntax for --ns-map option");
             }
-            list($phpNs,$xmlNs) = explode(";", $val, 2);
+            list($xmlNs, $phpNs) = explode(";", $val, 2);
             $nsMapKeyed[$xmlNs]=$phpNs;
             $converter->addNamespace($xmlNs, strtr($phpNs, "./", "\\\\"));
-            $output->writeln("\t<comment>$xmlNs</comment> = <comment>$phpNs</comment>");
+            $output->writeln("\tXML namepsace: <comment>$xmlNs </comment> => PHP namepsace: <comment>$phpNs </comment>");
         }
+        $targets = array();
+        $output->writeln("Targets:");
+        foreach ($nsTarget as $val) {
+            if (strpos($val, ';')===false){
+                throw new Exception("Invalid syntax for --ns-dest option");
+            }
+            list($phpNs, $dir) = explode(";", $val, 2);
+            $phpNs = strtr($phpNs, "./", "\\\\");
 
+            $targets[$phpNs]=$dir;
+            $output->writeln("\tPHP namepsace: <comment>".strtr($phpNs, "\\", "/")."</comment> => Folder: <comment>$dir </comment>");
+        }
         $arrayMap = $input->getOption('alias-map');
         if ($arrayMap) {
             foreach ($arrayMap as $val) {
                 if (strpos($val, ';')===false){
                     throw new Exception("Invalid syntax for --array-map option");
                 }
-                list($type, $xml) = explode(";", $val, 2);
+                list($xml, $type) = explode(";", $val, 2);
                 list($xmlNs, $name) = explode("#", $xml, 2);
                 $converter->addAliasMap($xmlNs, $name, $type);
                 $output->writeln("Alias <comment>$xmlNs</comment>#<info>$name $type</info> ");
@@ -123,7 +124,7 @@ abstract class AbstractConvert extends Console\Command\Command
 
 
             if (!$xml->documentElement->hasAttribute("targetNamespace") || !isset($nsMapKeyed[$xml->documentElement->getAttribute("targetNamespace")])) {
-                $output->writeln("\t skipping '".$xml->documentElement->getAttribute("targetNamespace"))."', can't fin a valid PHP-equivalent namespace";
+                $output->writeln("\tSkipping <comment>".$xml->documentElement->getAttribute("targetNamespace")."</comment>, can't find a PHP-equivalent namespace. Use --ns-map option?");
                 continue;
             }
 
