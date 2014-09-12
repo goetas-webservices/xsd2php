@@ -47,20 +47,19 @@ Generate PHP classes
 bin/xsd2php.php convert:php \
 `/home/my/ota/OTA_HotelAvail*.xsd \
 
---ns-dest='src/Mercurio/OTA/V2007B;http://www.opentravel.org/OTA/2003/05' \
+--ns-map=';http://www.opentravel.org/OTA/2003/05; Mercurio/OTA/2007B/' \
 
---ns-map='Mercurio/OTA/2007B/;http://www.opentravel.org/OTA/2003/05' \
+--ns-dest='Mercurio/OTA/2007B/; src/Mercurio/OTA/V2007B;' \
 
 --alias-map='Vendor/Project/CustomDateClass;http://www.opentravel.org/OTA/2003/05#CustomOTADateTimeFormat'
 
 ```
-
-
-Where place the files?
-* `http://www.opentravel.org/OTA/2003/05` will be placed into `src/Mercurio/OTA/V2007B` directory
-
 What about namespaces? 
 * `http://www.opentravel.org/OTA/2003/05` will be converted into `Mercurio/OTA/2007B` PHP namespace
+
+Where place the files?
+* `Mercurio/OTA/2007B` classes will be placed into `src/Mercurio/OTA/V2007B` directory
+
 
 What about custom types? 
 * `--alias-map='Vendor/Project/CustomDateClass;http://www.opentravel.org/OTA/2003/05#CustomOTADateTimeFormat'` 
