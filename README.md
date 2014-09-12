@@ -19,7 +19,7 @@ There are two recommended ways to install xsd2php via [Composer](https://getcomp
 * using the ``composer require`` command:
 
 ```bash
-composer require 'goetas/xsd2php:@dev'
+composer require 'goetas/xsd2php:2.*@dev'
 ```
 
 * adding the dependency to your ``composer.json`` file:
@@ -27,7 +27,7 @@ composer require 'goetas/xsd2php:@dev'
 ```js
 "require": {
     ..
-    "goetas/xsd2php":"@dev",
+    "goetas/xsd2php":"2.*@dev",
     ..
 }
 ```
