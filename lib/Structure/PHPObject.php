@@ -62,7 +62,7 @@ trait PHPObject
     /**
      *
      * @param string $name
-     * @return boolean
+     * @return PHPProperty
      */
     public function getPropertyInHierarchy($name)
     {

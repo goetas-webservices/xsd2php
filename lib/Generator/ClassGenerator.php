@@ -306,11 +306,7 @@ class ClassGenerator
             $doc .= $c . PHP_EOL . PHP_EOL;
         }
 
-        if ($type) {
-            $doc .= "@return " . $this->getPhpType($prop->getType()->getPropertyInHierarchy('__value')->getType());
-        } else {
-            $doc .= "@return mixed";
-        }
+        $doc .= "@return " . ($type? $this->getPhpType($type->getPropertyInHierarchy('__value')->getType()):"mixed");
 
         $str .= $this->writeDocBlock($doc);
         $str .= "public function extract" . Inflector::classify($prop->getName()) . "()" . PHP_EOL;
