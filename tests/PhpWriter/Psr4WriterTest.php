@@ -1,7 +1,7 @@
 <?php
-namespace Goetas\Xsd\XsdToPhp\Tests\Writer;
+namespace Goetas\Xsd\XsdToPhp\Tests\PhpWriter;
 
-use Goetas\Xsd\XsdToPhp\Writer\Psr4Writer;
+use Goetas\Xsd\XsdToPhp\PhpWriter\Psr4Writer;
 use Goetas\Xsd\XsdToPhp\Structure\PHPClass;
 
 class Psr4WriterTest extends \PHPUnit_Framework_TestCase

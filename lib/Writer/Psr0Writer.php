@@ -1,34 +1,22 @@
 <?php
 namespace Goetas\Xsd\XsdToPhp\Writer;
 
-use Goetas\Xsd\XsdToPhp\Structure\PHPType;
-use goetas\xml\wsdl\Exception;
-
-class Psr0Writer implements ClassWriter
+abstract class Psr0Writer
 {
 
-    protected $dir;
+    protected $namespaces = array();
 
-    protected $dir;
-
-    public function __construct($dir)
+    public function __construct(array $namespaces)
     {
-        $this->dir = $dir;
-        if (! is_dir($dir)) {
-            throw new Exception("La cartella $dir non esiste");
-        }
-        if (! is_writable($dir)) {
-            throw new Exception("La cartella $dir non è scrivibile");
-        }
-    }
+        $this->namespaces = $namespaces;
 
-    public function write(PHPType $php, $content)
-    {
-        $d = strtr($php->getNamespace(), "\\", "/");
-        $dir = rtrim($this->dir, "/") . "/" . $d;
-        if (! is_dir($dir) && ! mkdir($dir, 0777, true)) {
-            throw new Exception("Non riesco a creare la cartella $dir");
+        foreach ($this->namespaces as $namespace => $dir) {
+            if (! is_dir($dir)) {
+                throw new WriterException("The folder '$dir' does not exist.");
+            }
+            if (! is_writable($dir)) {
+                throw new WriterException("The folder '$dir' is not writable.");
+            }
         }
-        return file_put_contents($dir . "/" . $php->getName() . ".php", $content);
     }
 }

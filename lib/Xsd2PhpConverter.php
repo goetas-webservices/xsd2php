@@ -102,7 +102,7 @@ class Xsd2PhpConverter extends AbstractXsd2Converter
             $trait->setDoc($group->getDoc());
 
             if (! isset($this->namespaces[$schema->getTargetNamespace()])) {
-                throw new Exception(sprintf("Non trovo un namespace php per %s", $schema->getTargetNamespace()));
+                throw new Exception(sprintf("Can't find a PHP equivalent namespace for %s namespace", $schema->getTargetNamespace()));
             }
             $trait->setNamespace($this->namespaces[$schema->getTargetNamespace()]);
 
@@ -126,7 +126,7 @@ class Xsd2PhpConverter extends AbstractXsd2Converter
             $trait->setDoc($att->getDoc());
 
             if (! isset($this->namespaces[$schema->getTargetNamespace()])) {
-                throw new Exception(sprintf("Non trovo un namespace php per %s", $schema->getTargetNamespace()));
+                throw new Exception(sprintf("Can't find a PHP equivalent namespace for %s namespace", $schema->getTargetNamespace()));
             }
             $trait->setNamespace($this->namespaces[$schema->getTargetNamespace()]);
 
@@ -150,7 +150,7 @@ class Xsd2PhpConverter extends AbstractXsd2Converter
         $class->setDoc($element->getDoc());
 
         if (! isset($this->namespaces[$schema->getTargetNamespace()])) {
-            throw new Exception(sprintf("Non trovo un namespace php per %s", $schema->getTargetNamespace()));
+            throw new Exception(sprintf("Can't find a PHP equivalent namespace for %s namespace", $schema->getTargetNamespace()));
         }
         $class->setNamespace($this->namespaces[$schema->getTargetNamespace()]);
 
@@ -200,7 +200,7 @@ class Xsd2PhpConverter extends AbstractXsd2Converter
 
         $name = Inflector::classify($type->getName());
         if (! isset($this->namespaces[$schema->getTargetNamespace()])) {
-            throw new Exception(sprintf("Non trovo un namespace php per %s", $schema->getTargetNamespace()));
+            throw new Exception(sprintf("Can't find a PHP equivalent namespace for %s namespace", $schema->getTargetNamespace()));
         }
         $ns = $this->namespaces[$schema->getTargetNamespace()];
 

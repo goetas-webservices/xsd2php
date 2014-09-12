@@ -2,31 +2,12 @@
 namespace Goetas\Xsd\XsdToPhp\YamlWriter;
 
 use Goetas\Xsd\XsdToPhp\Structure\PHPType;
+use Goetas\Xsd\XsdToPhp\Writer\Psr4Writer as BasePsr4Writer;
+use Goetas\Xsd\XsdToPhp\Writer\WriterException;
 
 
-class Psr4Writer implements ClassWriter
+class Psr4Writer extends BasePsr4Writer implements ClassWriter
 {
-
-    protected $namespaces;
-
-    public function __construct($namespaces)
-    {
-        $this->namespaces = $namespaces;
-
-        foreach ($this->namespaces as $namespace => $dir) {
-
-            if ($namespace[strlen($namespace) - 1] !== "\\") {
-                throw new \Exception("Il namesspace ($namespace) deve terminare con '\\'");
-            }
-            if (! is_dir($dir)) {
-                throw new \Exception("La cartella $dir non esiste");
-            }
-            if (! is_writable($dir)) {
-                throw new \Exception("La cartella $dir non è scrivibile");
-            }
-        }
-    }
-
     public function write($yaml, $content)
     {
         $ns = key($yaml);
@@ -37,13 +18,14 @@ class Psr4Writer implements ClassWriter
 
             if ($pos === 0) {
                 if (! is_dir($dir) && ! mkdir($dir, 0777, true)) {
-                    throw new \Exception("Non riesco a creare la cartella $dir");
+                    throw new WriterException("Can't create the folder '$dir'");
                 }
                 $f = strtr(substr($ns, strlen($namespace)), "\\/", "..");
                 return file_put_contents($dir . "/" . $f . ".yml", $content);
             }
         }
-        throw new \Exception("Non trovo dove salvare $ns $content");
+
+        throw new WriterException("Can't find a defined location where save '$content' YAML");
     }
 }
 

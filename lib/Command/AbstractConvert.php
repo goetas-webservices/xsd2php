@@ -118,12 +118,12 @@ abstract class AbstractConvert extends Console\Command\Command
 
             $xml = new \DOMDocument('1.0', 'UTF-8');
             if (! $xml->load($file)) {
-                throw new \Exception("Non riesco a caricare lo schema {$file}");
+                throw new \Exception("Can't load the schema '{$file}'");
             }
 
 
             if (!$xml->documentElement->hasAttribute("targetNamespace") || !isset($nsMapKeyed[$xml->documentElement->getAttribute("targetNamespace")])) {
-                $output->writeln("\t skip ".$xml->documentElement->getAttribute("targetNamespace"));
+                $output->writeln("\t skipping '".$xml->documentElement->getAttribute("targetNamespace"))."', can't fin a valid PHP-equivalent namespace";
                 continue;
             }
 
