@@ -47,11 +47,11 @@ Generate PHP classes
 bin/xsd2php.php convert:php \
 `/home/my/ota/OTA_HotelAvail*.xsd \
 
---ns-map=';http://www.opentravel.org/OTA/2003/05; Mercurio/OTA/2007B/' \
+--ns-map='http://www.opentravel.org/OTA/2003/05; Mercurio/OTA/2007B/' \
 
 --ns-dest='Mercurio/OTA/2007B/; src/Mercurio/OTA/V2007B;' \
 
---alias-map='Vendor/Project/CustomDateClass;http://www.opentravel.org/OTA/2003/05#CustomOTADateTimeFormat'
+--alias-map='Vendor/Project/CustomDateClass; http://www.opentravel.org/OTA/2003/05#CustomOTADateTimeFormat'
 
 ```
 What about namespaces? 
