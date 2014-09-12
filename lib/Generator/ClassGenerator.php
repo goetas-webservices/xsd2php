@@ -160,10 +160,9 @@ class ClassGenerator
         } else {
             $doc .= "@return mixed";
         }
-        // $str = "";
-        if ($doc) {
-            $str .= $this->writeDocBlock($doc);
-        }
+
+        $str .= $this->writeDocBlock($doc);
+
         $typedeclaration = '';
         if ($type && $this->hasTypeHint($type)) {
             $typedeclaration = $this->getPhpType($type) . " ";
@@ -194,15 +193,10 @@ class ClassGenerator
         $str .= PHP_EOL;
 
         $doc = "";
-        if ($type) {
-            $doc .= "@param \$value " . $this->getPhpType($prop->getType());
-        } else {
-            $doc .= "@param \$value mixed";
-        }
-        // $str = "";
-        if ($doc) {
-            $str .= $this->writeDocBlock($doc);
-        }
+        $doc .= "@param \$value " . ($type ? $this->getPhpType($type) : "mixed");
+
+        $str .= $this->writeDocBlock($doc);
+
         $str .= "protected function __construct(\$value)" . PHP_EOL;
         $str .= "{" . PHP_EOL;
         $methodBody = "\$this->value(\$value);";
@@ -212,17 +206,11 @@ class ClassGenerator
         $str .= PHP_EOL;
 
         $doc = "";
-        if ($type) {
-            $doc .= "@param \$value " . $this->getPhpType($prop->getType());
-        } else {
-            $doc .= "@param \$value mixed";
-        }
-        $doc .= PHP_EOL;
+        $doc .= "@param \$value " . ($type ? $this->getPhpType($type) : "mixed").PHP_EOL;
         $doc .= "@return " . $class->getName();
-        // $str = "";
-        if ($doc) {
-            $str .= $this->writeDocBlock($doc);
-        }
+
+        $str .= $this->writeDocBlock($doc);
+
         $str .= "public static function create(\$value)" . PHP_EOL;
         $str .= "{" . PHP_EOL;
         $methodBody = "return new static(\$value);";
@@ -232,14 +220,14 @@ class ClassGenerator
 
         return $str;
     }
+
+
+
     protected function handleSetter(PHPProperty $prop, PHPType $class)
     {
         $type = $prop->getType();
 
         $str = '';
-
-        $doc = '';
-
         $doc = '';
 
         if ($c = $this->getFirstLineComment($prop->getDoc())) {
@@ -252,10 +240,9 @@ class ClassGenerator
         } else {
             $doc .= "@param $" . $prop->getName() . " mixed";
         }
-        // $str = "";
-        if ($doc) {
-            $str .= $this->writeDocBlock($doc);
-        }
+
+        $str .= $this->writeDocBlock($doc);
+
         $typedeclaration = '';
         if ($type && $this->hasTypeHint($type)) {
             $typedeclaration = $this->getPhpType($type) . " ";
@@ -286,7 +273,6 @@ class ClassGenerator
         $type = $prop->getType();
 
         $str = '';
-
         $doc = '';
 
         if ($c = $this->getFirstLineComment($prop->getDoc())) {
@@ -301,9 +287,8 @@ class ClassGenerator
             $doc .= "@return mixed";
         }
 
-        if ($doc) {
-            $str .= $this->writeDocBlock($doc);
-        }
+        $str .= $this->writeDocBlock($doc);
+
         $str .= "public function get" . Inflector::classify($prop->getName()) . "()" . PHP_EOL;
         $str .= "{" . PHP_EOL;
         $methodBody = "return \$this->" . $prop->getName() . ";";
@@ -327,9 +312,7 @@ class ClassGenerator
             $doc .= "@return mixed";
         }
 
-        if ($doc) {
-            $str .= $this->writeDocBlock($doc);
-        }
+        $str .= $this->writeDocBlock($doc);
         $str .= "public function extract" . Inflector::classify($prop->getName()) . "()" . PHP_EOL;
         $str .= "{" . PHP_EOL;
         $methodBody = "return \$this->" . $prop->getName() . " ? \$this->" . $prop->getName() . "->value() : null;";
@@ -381,8 +364,6 @@ class ClassGenerator
         $type = $prop->getType();
 
         $str = '';
-
-
         $str .= PHP_EOL;
 
         if ($prop->getName() == "__value") {
