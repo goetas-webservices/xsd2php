@@ -92,6 +92,10 @@ abstract class AbstractXsd2Converter
         {
             return "float";
         });
+        $this->addAliasMap("http://www.w3.org/2001/XMLSchema", "double", function (Type $type)
+        {
+            return "float";
+        });
         $this->addAliasMap("http://www.w3.org/2001/XMLSchema", "string", function (Type $type)
         {
             return "string";
@@ -149,6 +153,28 @@ abstract class AbstractXsd2Converter
             return "DateInterval";
         });
 
+        $this->addAliasMap("http://www.w3.org/2001/XMLSchema", "ID", function (Type $type)
+        {
+            return "string";
+        });
+        $this->addAliasMap("http://www.w3.org/2001/XMLSchema", "IDREF", function (Type $type)
+        {
+            return "string";
+        });
+        $this->addAliasMap("http://www.w3.org/2001/XMLSchema", "IDREFS", function (Type $type)
+        {
+            return "string";
+        });
+        $this->addAliasMap("http://www.w3.org/2001/XMLSchema", "Name", function (Type $type)
+        {
+            return "string";
+        });
+
+        $this->addAliasMap("http://www.w3.org/2001/XMLSchema", "NCName", function (Type $type)
+        {
+            return "string";
+        });
+
         $this->addArrayTypeCallback(function (Type $type)
         {
             if ($type instanceof ComplexType && ! $type->getParent() && ! $type->getAttributes() && count($type->getElements()) === 1) {
@@ -162,6 +188,12 @@ abstract class AbstractXsd2Converter
             }
             return false;
         });
+    }
+
+    protected function isSimplePHP(Type $type)
+    {
+        list ($name, $ns) = $this->findPHPName($type, $type);
+        return ! $ns && (!$name || in_array($name, $this->baseTypes));
     }
 
     public function addNamespace($namesapce, $phpNamespace)
