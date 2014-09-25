@@ -13,7 +13,7 @@ foreach ($paths as $path) {
 
 use Symfony\Component\Console\Application;
 use Goetas\Xsd\XsdToPhp\Command;
-
+error_reporting(error_reporting() &~E_NOTICE);
 $cli = new Application('Convert XSD to PHP classes Command Line Interface', "2.0");
 $cli->setCatchExceptions(true);
 $cli->addCommands(array(
