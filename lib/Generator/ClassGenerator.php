@@ -350,8 +350,13 @@ class ClassGenerator
         if ($this->hasTypeHint($type->getArg()->getType())) {
             $typedeclaration = $this->getPhpType($type->getArg()->getType()) . " ";
         }
+        $r = array(
+            'arrayof',
+            'setof',
+            'listof',
+        );
 
-        $str .= "public function add" . Inflector::classify($prop->getName()) . "($typedeclaration\$" . $propName . ")" . PHP_EOL;
+        $str .= "public function add" . str_ireplace($r, "", Inflector::classify($prop->getName())) . "($typedeclaration\$" . $propName . ")" . PHP_EOL;
         $str .= "{" . PHP_EOL;
         $methodBody = "\$this->" . $prop->getName() . "[] = \$" . $propName . ";" . PHP_EOL;
         $methodBody .= "return \$this;";

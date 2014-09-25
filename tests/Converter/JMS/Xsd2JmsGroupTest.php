@@ -23,6 +23,7 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
 
     public function testSomeAnonymous()
     {
+        error_reporting(error_reporting() &~E_NOTICE);
         $content = '
              <xs:schema targetNamespace="http://www.example.com" xmlns:xs="http://www.w3.org/2001/XMLSchema"  xmlns:ex="http://www.example.com">
                     <xs:complexType name="complexType-1">

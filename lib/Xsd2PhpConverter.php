@@ -24,6 +24,9 @@ use Goetas\Xsd\XsdToPhp\Generator\ClassGenerator;
 use Goetas\Xsd\XsdToPhp\Structure\PHPClassOf;
 use Goetas\Xsd\XsdToPhp\Structure\PHPConstant;
 use Goetas\Xsd\XsdToPhp\Structure\PHPArg;
+use Goetas\XML\XSDReader\Schema\Element\ElementItem;
+use Goetas\XML\XSDReader\Schema\Attribute\AttributeItem;
+use Goetas\XML\XSDReader\Schema\Element\ElementRef;
 
 class Xsd2PhpConverter extends AbstractXsd2Converter
 {
@@ -192,6 +195,10 @@ class Xsd2PhpConverter extends AbstractXsd2Converter
         }
 
         $name = Inflector::classify($type->getName());
+        if ($name && substr($name, -4)!=='Type') {
+            $name.= "Type";
+        }
+
         if (! isset($this->namespaces[$schema->getTargetNamespace()])) {
             throw new Exception(sprintf("Can't find a PHP equivalent namespace for %s namespace", $schema->getTargetNamespace()));
         }
@@ -207,7 +214,7 @@ class Xsd2PhpConverter extends AbstractXsd2Converter
         list ($name, $ns) = $this->findPHPName($type);
         return ! $ns && (!$name || in_array($name, $this->baseTypes));
     }
-    
+
     protected function visitType(Type $type)
     {
         if (! isset($this->classes[spl_object_hash($type)])) {
@@ -233,14 +240,15 @@ class Xsd2PhpConverter extends AbstractXsd2Converter
 
     protected function visitAnonymousType(Schema $schema, Type $type, $name, PHPType $parentClass)
     {
-        $this->classes[spl_object_hash($type)]["class"] = $class = new PHPClass();
-        $class->setName(Inflector::classify($name) . "Type");
+        if (! isset($this->classes[spl_object_hash($type)])) {
+            $this->classes[spl_object_hash($type)]["class"] = $class = new PHPClass();
+            $class->setName(Inflector::classify($name) . "AType");
 
-        $class->setNamespace($parentClass->getNamespace() . "\\" . $parentClass->getName());
-        $class->setDoc($type->getDoc());
-        $this->visitTypeBase($class, $type);
-
-        return $class;
+            $class->setNamespace($parentClass->getNamespace() . "\\" . $parentClass->getName());
+            $class->setDoc($type->getDoc());
+            $this->visitTypeBase($class, $type);
+        }
+        return $this->classes[spl_object_hash($type)]["class"];
     }
 
     protected function visitComplexType(PHPClass $class, ComplexType $type)
@@ -335,7 +343,7 @@ class Xsd2PhpConverter extends AbstractXsd2Converter
         }
     }
 
-    protected function visitAttributeReal(PHPType $class, Schema $schema, AttributeReal $attribute)
+    protected function visitAttributeReal(PHPType $class, Schema $schema, AttributeItem $attribute)
     {
         $property = new PHPProperty();
         $property->setName(Inflector::camelize($attribute->getName()));
@@ -360,7 +368,7 @@ class Xsd2PhpConverter extends AbstractXsd2Converter
         if (($t = $element->getType()) && ($itemOfArray = $this->isArray($t))) {
             $property->setType(new PHPClassOf($this->visitElementReal($class, $schema, $itemOfArray, false)));
         } else {
-            if ($arrayize && $element instanceof ElementReal && ($element->getMax() > 1 || $element->getMax() === - 1)) {
+            if ($arrayize && $element instanceof ElementItem && ($element->getMax() > 1 || $element->getMax() === - 1)) {
 
                 $arg = new PHPArg();
                 $arg->setType($this->findPHPType($class, $schema, $element));

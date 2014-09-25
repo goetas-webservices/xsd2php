@@ -24,6 +24,8 @@ use Goetas\Xsd\XsdToPhp\Generator\ClassGenerator;
 use Goetas\Xsd\XsdToPhp\Structure\PHPClassOf;
 use Goetas\Xsd\XsdToPhp\Structure\PHPConstant;
 use ArrayObject;
+use Goetas\XML\XSDReader\Schema\Attribute\AttributeItem;
+use Goetas\XML\XSDReader\Schema\Element\ElementItem;
 
 class Xsd2JmsSerializerYamlConverter extends AbstractXsd2Converter
 {
@@ -277,7 +279,7 @@ class Xsd2JmsSerializerYamlConverter extends AbstractXsd2Converter
         }
     }
 
-    protected function visitAttributeReal(&$class, Schema $schema, AttributeReal $attribute)
+    protected function visitAttributeReal(&$class, Schema $schema, AttributeItem $attribute)
     {
         $property = array();
         $property["expose"] = true;
@@ -326,7 +328,7 @@ class Xsd2JmsSerializerYamlConverter extends AbstractXsd2Converter
      * @param boolean $arrayize
      * @return \Goetas\Xsd\XsdToPhp\Structure\PHPProperty
      */
-    protected function visitElementReal(&$class, Schema $schema, Element $element, $arrayize = true)
+    protected function visitElementReal(&$class, Schema $schema, ElementItem $element, $arrayize = true)
     {
         $property = array();
         $property["expose"] = true;
