@@ -190,12 +190,6 @@ abstract class AbstractXsd2Converter
         });
     }
 
-    protected function isSimplePHP(Type $type)
-    {
-        list ($name, $ns) = $this->findPHPName($type, $type);
-        return ! $ns && (!$name || in_array($name, $this->baseTypes));
-    }
-
     public function addNamespace($namesapce, $phpNamespace)
     {
         $this->namespaces[$namesapce] = $phpNamespace;

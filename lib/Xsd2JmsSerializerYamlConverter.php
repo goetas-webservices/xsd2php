@@ -54,9 +54,9 @@ class Xsd2JmsSerializerYamlConverter extends AbstractXsd2Converter
         $ret = array();
 
         foreach ($this->classes as $definition) {
-            $classname = key($definition);
-            if (strpos($classname, '\\') !== false) {
-                $ret[$classname] = $definition;
+            $classname = key($definition["class"]);
+            if (strpos($classname, '\\') !== false && (!isset($definition["skip"]) || !$definition["skip"])) {
+                $ret[$classname] = $definition["class"];
             }
         }
 
@@ -112,9 +112,9 @@ class Xsd2JmsSerializerYamlConverter extends AbstractXsd2Converter
         }
 
         if (isset($this->classes[$ns])) {
-            return $this->classes[$ns];
+            return $this->classes[$ns]["class"];
         }
-        $this->classes[$ns] = &$class;
+        $this->classes[$ns]["class"] = &$class;
 
         if ($element->isAnonymousType()) {
             $this->visitTypeBase($class, $data, $element->getType());
@@ -141,6 +141,12 @@ class Xsd2JmsSerializerYamlConverter extends AbstractXsd2Converter
         return $ns . "\\" . $name;
     }
 
+    protected function isSimplePHP(Type $type)
+    {
+        $className = $this->findPHPName($type);
+        return in_array(trim($className, "\\"), $this->baseTypes);
+    }
+
     protected function &visitType(Type $type)
     {
         if (! isset($this->classes[spl_object_hash($type)])) {
@@ -151,15 +157,16 @@ class Xsd2JmsSerializerYamlConverter extends AbstractXsd2Converter
             $data = array();
             $class[$className] = &$data;
 
-            $this->classes[spl_object_hash($type)] = &$class;
+            $this->classes[spl_object_hash($type)]["class"] = &$class;
 
             $this->visitTypeBase($class, $data, $type);
 
             if ($this->isArray($type) || $this->getTypeAlias($type)) {
+                $this->classes[spl_object_hash($type)]["skip"] = true;
                 return $class;
             }
         }
-        return $this->classes[spl_object_hash($type)];
+        return $this->classes[spl_object_hash($type)]["class"];
     }
 
     protected function &visitAnonymousType(Schema $schema, Type $type, $name, &$parentClass)
@@ -171,7 +178,7 @@ class Xsd2JmsSerializerYamlConverter extends AbstractXsd2Converter
 
         $this->visitTypeBase($class, $data, $type);
 
-        $this->classes[spl_object_hash($type)] = &$class;
+        $this->classes[spl_object_hash($type)]["class"] = &$class;
 
         return $class;
     }

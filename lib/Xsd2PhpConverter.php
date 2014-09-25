@@ -202,13 +202,19 @@ class Xsd2PhpConverter extends AbstractXsd2Converter
         ];
     }
 
+    protected function isSimplePHP(Type $type)
+    {
+        list ($name, $ns) = $this->findPHPName($type);
+        return ! $ns && (!$name || in_array($name, $this->baseTypes));
+    }
+    
     protected function visitType(Type $type)
     {
         if (! isset($this->classes[spl_object_hash($type)])) {
 
             $this->classes[spl_object_hash($type)]["class"] = $class = new PHPClass();
 
-            list ($name, $ns) = $this->findPHPName($type, $type);
+            list ($name, $ns) = $this->findPHPName($type);
             $class->setName($name);
             $class->setNamespace($ns);
             $class->setDoc($type->getDoc() . PHP_EOL . "XSD Type: " . ($type->getName() ?  : 'anonymous'));
