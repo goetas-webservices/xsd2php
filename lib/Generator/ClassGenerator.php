@@ -241,6 +241,8 @@ class ClassGenerator
             $doc .= "@param $" . $prop->getName() . " mixed";
         }
 
+        $doc .= PHP_EOL."@return \\" . $class->getFullName().PHP_EOL;
+
         $str .= $this->writeDocBlock($doc);
 
         $typedeclaration = '';
