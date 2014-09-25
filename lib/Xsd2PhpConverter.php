@@ -167,13 +167,6 @@ class Xsd2PhpConverter extends AbstractXsd2Converter
 
         return $class;
     }
-
-    protected function isSimplePHP(Type $type)
-    {
-        list ($name, $ns) = $this->findPHPName($type, $type);
-        return ! $ns && in_array($name, $this->baseTypes);
-    }
-
     protected function findPHPName(Type $type)
     {
         $schema = $type->getSchema();
@@ -203,7 +196,6 @@ class Xsd2PhpConverter extends AbstractXsd2Converter
             throw new Exception(sprintf("Can't find a PHP equivalent namespace for %s namespace", $schema->getTargetNamespace()));
         }
         $ns = $this->namespaces[$schema->getTargetNamespace()];
-
         return [
             $name,
             $ns
@@ -214,7 +206,7 @@ class Xsd2PhpConverter extends AbstractXsd2Converter
     {
         if (! isset($this->classes[spl_object_hash($type)])) {
 
-            $class = new PHPClass();
+            $this->classes[spl_object_hash($type)]["class"] = $class = new PHPClass();
 
             list ($name, $ns) = $this->findPHPName($type, $type);
             $class->setName($name);
@@ -224,9 +216,10 @@ class Xsd2PhpConverter extends AbstractXsd2Converter
             $this->visitTypeBase($class, $type);
 
             if ($this->isArray($type) || $this->isSimplePHP($type)) {
+                $this->classes[spl_object_hash($type)]["skip"] = true;
                 return $class;
             }
-            $this->classes[spl_object_hash($type)]["class"] = $class;
+
             $this->classes[spl_object_hash($type)]["skip"] = !!$this->getTypeAlias($type);
         }
         return $this->classes[spl_object_hash($type)]["class"];
@@ -286,7 +279,8 @@ class Xsd2PhpConverter extends AbstractXsd2Converter
             $types = array();
             foreach ($unions as $unon) {
                 if ($this->isSimplePHP($unon)) {
-                    $types[$this->findPHPName($unon)] = $unon;
+                    list ($name) = $this->findPHPName($unon);
+                    $types[$name] = $unon;
                 } elseif ($unon->getRestriction() && $unon->getRestriction()->getBase() && $this->isSimplePHP($unon->getRestriction()->getBase())) {
                     list ($name) = $this->findPHPName($unon->getRestriction()->getBase());
                     $types[$name] = $unon->getRestriction()->getBase();
@@ -378,6 +372,7 @@ class Xsd2PhpConverter extends AbstractXsd2Converter
 
     protected function findPHPType(PHPType $class, Schema $schema, TypeNodeChild $node)
     {
+
         if ($node->isAnonymousType()) {
             return $this->visitAnonymousType($schema, $node->getType(), $node->getName(), $class);
         } else {

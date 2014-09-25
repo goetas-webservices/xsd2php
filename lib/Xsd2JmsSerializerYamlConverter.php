@@ -125,12 +125,6 @@ class Xsd2JmsSerializerYamlConverter extends AbstractXsd2Converter
         return $class;
     }
 
-    protected function isSimplePHP(Type $type)
-    {
-        $className = $this->findPHPName($type);
-        return in_array($className, $this->baseTypes);
-    }
-
     protected function findPHPName($type, Schema $schemapos = null)
     {
         $schema = $schemapos ?  : $type->getSchema();
@@ -156,13 +150,14 @@ class Xsd2JmsSerializerYamlConverter extends AbstractXsd2Converter
             $class = array();
             $data = array();
             $class[$className] = &$data;
+
+            $this->classes[spl_object_hash($type)] = &$class;
+
             $this->visitTypeBase($class, $data, $type);
 
             if ($this->isArray($type) || $this->getTypeAlias($type)) {
                 return $class;
             }
-
-            $this->classes[spl_object_hash($type)] = &$class;
         }
         return $this->classes[spl_object_hash($type)];
     }
