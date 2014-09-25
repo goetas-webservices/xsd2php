@@ -161,7 +161,7 @@ class ClassGenerator
             $doc .= "@return mixed";
         }
 
-        $str .= $this->writeDocBlock($doc);
+        $str = $this->writeDocBlock($doc);
 
         $typedeclaration = '';
         if ($type && $this->hasTypeHint($type)) {
@@ -306,7 +306,12 @@ class ClassGenerator
             $doc .= $c . PHP_EOL . PHP_EOL;
         }
 
-        $doc .= "@return " . ($type? $this->getPhpType($type->getPropertyInHierarchy('__value')->getType()):"mixed");
+        if ($type){
+            $doc .= "@return " . ($type->getPropertyInHierarchy('__value')->getType()?$this->getPhpType($type->getPropertyInHierarchy('__value')->getType()):"mixed");
+        } else {
+            $doc .= "@return mixed";
+        }
+
 
         $str .= $this->writeDocBlock($doc);
         $str .= "public function extract" . Inflector::classify($prop->getName()) . "()" . PHP_EOL;
@@ -363,7 +368,7 @@ class ClassGenerator
         $str .= PHP_EOL;
 
         if ($prop->getName() == "__value") {
-            $str .= $this->addValueMethods($prop);
+            $str .= $this->addValueMethods($prop, $class);
         } else {
 
             if ($prop->getType() && $prop->getType()->hasPropertyInHierarchy('__value')) {
