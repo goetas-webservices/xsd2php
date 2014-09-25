@@ -84,7 +84,7 @@ abstract class AbstractConvert extends Console\Command\Command
             }
             list($xmlNs, $phpNs) = explode(";", $val, 2);
             $nsMapKeyed[$xmlNs]=$phpNs;
-            $converter->addNamespace($xmlNs, strtr($phpNs, "./", "\\\\"));
+            $converter->addNamespace($xmlNs, trim(strtr($phpNs, "./", "\\\\"), "\\"));
             $output->writeln("\tXML namepsace: <comment>$xmlNs </comment> => PHP namepsace: <comment>$phpNs </comment>");
         }
         $targets = array();
