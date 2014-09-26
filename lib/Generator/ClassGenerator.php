@@ -19,6 +19,7 @@ class ClassGenerator
     protected function handleChecks(PHPType $type)
     {
         $str = '';
+
         if (($type instanceof PHPClass) && ($type->getChecks('__value') || $type->hasProperty('__value'))) {
 
             $str .= "protected function _checkValue(\$value)" . PHP_EOL;
@@ -41,20 +42,20 @@ class ClassGenerator
                     $methodBody .= '}' . PHP_EOL;
                 } elseif ($checkType == "pattern") {
                     foreach ($checks as $check) {
-                        $methodBody .= 'if (!preg_match(' . var_export("/" . $check["value"] . "/", 1) . ', $value)) {' . PHP_EOL;
-                        $methodBody .= $this->indent("throw new \InvalidArgumentException('The restriction $checkType with value \'" . $check["value"] . "\' is not true');") . PHP_EOL;
+                        $methodBody .= 'if (!preg_match(' . var_export("/" . $check["value"] . "/", true) . ', $value)) {' . PHP_EOL;
+                        $methodBody .= $this->indent("throw new \\InvalidArgumentException('The restriction $checkType with value \\'" . $check["value"] . "\\' is not true');") . PHP_EOL;
                         $methodBody .= '}' . PHP_EOL;
                     }
                 } elseif ($checkType == "minLength") {
                     foreach ($checks as $check) {
-                        $methodBody .= 'if (strlen($value) < ' . $check['value'] . ' ) {' . PHP_EOL;
-                        $methodBody .= $this->indent("throw new \InvalidArgumentException('The restriction $checkType with value \'" . $check["value"] . "\' is not true');") . PHP_EOL;
+                        $methodBody .= 'if (strlen($value) < ' . $check['value'] . ') {' . PHP_EOL;
+                        $methodBody .= $this->indent("throw new \\InvalidArgumentException('The restriction $checkType with value \\'" . $check["value"] . "\\' is not true');") . PHP_EOL;
                         $methodBody .= '}' . PHP_EOL;
                     }
                 } elseif ($checkType == "maxLength") {
                     foreach ($checks as $check) {
-                        $methodBody .= 'if (strlen($value) > ' . $check['value'] . ' ) {' . PHP_EOL;
-                        $methodBody .= $this->indent("throw new \InvalidArgumentException('The restriction $checkType with value \'" . $check["value"] . "\' is not true');") . PHP_EOL;
+                        $methodBody .= 'if (strlen($value) > ' . $check['value'] . ') {' . PHP_EOL;
+                        $methodBody .= $this->indent("throw new \\InvalidArgumentException('The restriction $checkType with value \\'" . $check["value"] . "\\' is not true');") . PHP_EOL;
                         $methodBody .= '}' . PHP_EOL;
                     }
                 }
@@ -126,12 +127,10 @@ class ClassGenerator
         if (! $class->getNamespace()) {
             if ($this->isNativeType($class)) {
                 return $class->getName();
-            } else {
-                return "\\" . $class->getName();
             }
-        } else {
-            return "\\" . $class->getFullName();
+            return "\\" . $class->getName();
         }
+        return "\\" . $class->getFullName();
     }
 
     protected function addValueMethods(PHPProperty $prop, PHPType $class)
@@ -256,7 +255,7 @@ class ClassGenerator
         if ($type && $type instanceof PHPClassOf) {
             $methodBody .= "foreach ($" . $prop->getName() . " as \$item) {" . PHP_EOL;
             $methodBody .= $this->indent("if (!(\$item instanceof " . $this->getPhpType($type->getArg()->getType()) . ") ) {") . PHP_EOL;
-            $methodBody .= $this->indent("throw new \InvalidArgumentException('Argument 1 passed to ' . __METHOD__ . ' be an array of " . $this->getPhpType($type->getArg()->getType()) . "');", 2) .
+            $methodBody .= $this->indent("throw new \\InvalidArgumentException('Argument 1 passed to ' . __METHOD__ . ' be an array of " . $this->getPhpType($type->getArg()->getType()) . "');", 2) .
             PHP_EOL;
             $methodBody .= $this->indent("}") . PHP_EOL;
             $methodBody .= "}" . PHP_EOL;
@@ -308,7 +307,7 @@ class ClassGenerator
             $doc .= $c . PHP_EOL . PHP_EOL;
         }
 
-        if ($type){
+        if ($type) {
             $doc .= "@return " . ($type->getPropertyInHierarchy('__value')->getType()?$this->getPhpType($type->getPropertyInHierarchy('__value')->getType()):"mixed");
         } else {
             $doc .= "@return mixed";
@@ -342,14 +341,15 @@ class ClassGenerator
             $doc .= " " . $this->getFirstLineComment($type->getArg()->getType()->getDoc());
         }
 
-        // $str = "";
         if ($doc) {
             $str .= $this->writeDocBlock($doc);
         }
+
         $typedeclaration = '';
         if ($this->hasTypeHint($type->getArg()->getType())) {
             $typedeclaration = $this->getPhpType($type->getArg()->getType()) . " ";
         }
+
         $r = array(
             'arrayof',
             'setof',
@@ -411,6 +411,7 @@ class ClassGenerator
         $doc .= PHP_EOL;
         $doc .= "@return " . $type->getName();
 
+        $str = '';
         if ($doc) {
             $str .= $this->writeDocBlock($doc);
         }
@@ -434,8 +435,9 @@ class ClassGenerator
         if ($doc) {
             $str .= $this->writeDocBlock($doc);
         }
+
         $str .= "const " . $const->getName() . " = ";
-        $str .= var_export($const->getValue(), 1);
+        $str .= var_export($const->getValue(), true);
         $str .= ";";
         return $str;
     }
@@ -453,6 +455,7 @@ class ClassGenerator
         } else {
             $doc .= "@var mixed";
         }
+
         $str = "";
         if ($doc) {
             $str .= $this->writeDocBlock($doc);
@@ -527,8 +530,7 @@ class ClassGenerator
 
     protected function writeDocBlock($str)
     {
-        $content = '';
-        $content .= '/**' . PHP_EOL;
+        $content = '/**' . PHP_EOL;
 
         $lines = array();
 

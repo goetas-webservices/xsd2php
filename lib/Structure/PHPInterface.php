@@ -11,7 +11,6 @@ class PHPInterface
     protected $doc;
 
     /**
-     *
      * @var PHPInterface[]
      */
     protected $extends;

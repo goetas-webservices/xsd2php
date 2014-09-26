@@ -29,7 +29,6 @@ class PHPArg
     }
 
     /**
-     *
      * @return PHPClass
      */
     public function getType()
