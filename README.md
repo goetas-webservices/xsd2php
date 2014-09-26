@@ -22,7 +22,6 @@ There are two recommended ways to install xsd2php via [Composer](https://getcomp
 ```js
 "require": {
     ..
-    "goetas/xsd2php":"~2.*@dev",
     "goetas/xsd-reader":"2.*@dev",
     ..
 }
