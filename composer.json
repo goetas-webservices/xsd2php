@@ -20,7 +20,7 @@
         "php": "~5.4",
         "symfony/console": "~2.1",
         "symfony/yaml": "~2.1",
-        "goetas/xsd-reader": ">=1.0.1,<2.0",
+        "goetas/xsd-reader": "~2.0",
         "doctrine/inflector": "~1.0"
     },
     "require-dev": {
