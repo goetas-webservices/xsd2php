@@ -163,6 +163,12 @@ class Xsd2JmsSerializerYamlConverter extends AbstractXsd2Converter
         }
         $ns = $this->namespaces[$schema->getTargetNamespace()];
         $name = Inflector::classify($type->getName());
+
+
+        if ($name && substr($name, -4)!=='Type') {
+            $name .= "Type";
+        }
+
         return $ns . "\\" . $name;
     }
 
@@ -199,7 +205,7 @@ class Xsd2JmsSerializerYamlConverter extends AbstractXsd2Converter
         $class = array();
         $data = array();
 
-        $class[key($parentClass) . "\\" . Inflector::classify($name) . "Type"] = &$data;
+        $class[key($parentClass) . "\\" . Inflector::classify($name) . "AType"] = &$data;
 
         $this->visitTypeBase($class, $data, $type);
 
@@ -281,7 +287,7 @@ class Xsd2JmsSerializerYamlConverter extends AbstractXsd2Converter
 
         if (! $this->isSimplePHP($attribute->getType()) && ! $this->getTypeAlias($attribute->getType())) {
             if ($valueProp = $this->typeHasValue($attribute->getType(), $class, $attribute->getName())) {
-                $property["type"] = $this->nestType($property["type"], $valueProp['type'], 'Goetas\Xsd\XsdToPhp\BaseTypeValue');
+                $property["type"] = $this->nestType($property["type"], $valueProp['type'], 'Goetas\Xsd\XsdToPhp\Jms\BaseTypeValue');
             }
         }
 
@@ -347,7 +353,7 @@ class Xsd2JmsSerializerYamlConverter extends AbstractXsd2Converter
 
                 if (! $this->isSimplePHP($element->getType()) && ! $this->getTypeAlias($element->getType())) {
                     if ($valueProp = $this->typeHasValue($element->getType(), $class, $element->getName())) {
-                        $property["type"] = $this->nestType($property["type"], $valueProp['type'], 'Goetas\Xsd\XsdToPhp\BaseTypeValue');
+                        $property["type"] = $this->nestType($property["type"], $valueProp['type'], 'Goetas\Xsd\XsdToPhp\Jms\BaseTypeValue');
                     }
                 }
             }
