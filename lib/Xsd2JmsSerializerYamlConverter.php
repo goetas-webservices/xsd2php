@@ -125,7 +125,7 @@ class Xsd2JmsSerializerYamlConverter extends AbstractXsd2Converter
 
     private function &visitElementDef(Schema $schema, ElementDef $element)
     {
-        $className = $this->findPHPName($element, $schema);
+        $className = $this->findPHPName($element, $schema, false);
         $class = array();
         $data = array();
         $ns = $className;
@@ -150,7 +150,7 @@ class Xsd2JmsSerializerYamlConverter extends AbstractXsd2Converter
         return $class;
     }
 
-    private function findPHPName($type, Schema $schemapos = null)
+    private function findPHPName($type, Schema $schemapos = null, $isType = true)
     {
         $schema = $schemapos ?  : $type->getSchema();
 
@@ -165,7 +165,7 @@ class Xsd2JmsSerializerYamlConverter extends AbstractXsd2Converter
         $name = Inflector::classify($type->getName());
 
 
-        if ($name && substr($name, -4)!=='Type') {
+        if ($isType && $name && substr($name, -4)!=='Type') {
             $name .= "Type";
         }
 

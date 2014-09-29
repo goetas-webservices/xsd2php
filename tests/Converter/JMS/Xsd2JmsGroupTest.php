@@ -54,7 +54,7 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
 
         $this->assertEquals(
             array(
-                'Example\\ComplexType1' => array(
+                'Example\\ComplexType1Type' => array(
                     'properties' => array(
                         'att' => array(
                             'expose' => true,
@@ -65,7 +65,7 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
                                 'setter' => 'setAtt'
                             ),
                             'xml_attribute' => true,
-                            'type' => 'Goetas\\Xsd\\XsdToPhp\\BaseTypeValue<\'Example\\ComplexType1\\AttType\', \'string\'>'
+                            'type' => 'Goetas\\Xsd\\XsdToPhp\\Jms\\BaseTypeValue<\'Example\\ComplexType1Type\\AttAType\', \'string\'>'
                         ),
                         'string1' => array(
                             'expose' => true,
@@ -78,7 +78,7 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
                                 'getter' => 'getString1',
                                 'setter' => 'setString1'
                             ),
-                            'type' => 'Goetas\\Xsd\\XsdToPhp\\BaseTypeValue<\'Example\\ComplexType1\\String1Type\', \'string\'>'
+                            'type' => 'Goetas\\Xsd\\XsdToPhp\\Jms\\BaseTypeValue<\'Example\\ComplexType1Type\\String1AType\', \'string\'>'
                         ),
                         'string2' => array(
                             'expose' => true,
@@ -91,15 +91,15 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
                                 'getter' => 'getString2',
                                 'setter' => 'setString2'
                             ),
-                            'type' => 'Example\\ComplexType1\\String2Type'
+                            'type' => 'Example\\ComplexType1Type\\String2AType'
                         )
                     )
                 )
-            ), $classes['Example\\ComplexType1']);
+            ), $classes['Example\\ComplexType1Type']);
 
         $this->assertEquals(
             array(
-                'Example\\ComplexType1\\AttType' => array(
+                'Example\\ComplexType1Type\\AttAType' => array(
                     'properties' => array(
                         '__value' => array(
                             'expose' => true,
@@ -113,10 +113,10 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
                         )
                     )
                 )
-            ), $classes['Example\\ComplexType1\\AttType']);
+            ), $classes['Example\\ComplexType1Type\\AttAType']);
         $this->assertEquals(
             array(
-                'Example\\ComplexType1\\String1Type' => array(
+                'Example\\ComplexType1Type\\String1AType' => array(
                     'properties' => array(
                         '__value' => array(
                             'expose' => true,
@@ -130,10 +130,10 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
                         )
                     )
                 )
-            ), $classes['Example\\ComplexType1\\String1Type']);
+            ), $classes['Example\\ComplexType1Type\\String1AType']);
         $this->assertEquals(
             array(
-                'Example\\ComplexType1\\String2Type' => array(
+                'Example\\ComplexType1Type\\String2AType' => array(
                     'properties' => array(
                         'string3' => array(
                             'expose' => true,
@@ -150,7 +150,7 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
                         )
                     )
                 )
-            ), $classes['Example\\ComplexType1\\String2Type']);
+            ), $classes['Example\\ComplexType1Type\\String2AType']);
     }
 
     public function testSomeInheritance()
@@ -180,7 +180,7 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
 
         $this->assertEquals(
             array(
-                'Example\\ComplexType1' => array(
+                'Example\\ComplexType1Type' => array(
                     'properties' => array(
                         'attribute2' => array(
                             'expose' => true,
@@ -208,11 +208,11 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
                         )
                     )
                 )
-            ), $classes['Example\\ComplexType1']);
+            ), $classes['Example\\ComplexType1Type']);
 
         $this->assertEquals(
             array(
-                'Example\\ComplexType2' => array(
+                'Example\\ComplexType2Type' => array(
                     'properties' => array(
                         'complexType2Att1' => array(
                             'expose' => true,
@@ -240,7 +240,7 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
                         )
                     )
                 )
-            ), $classes['Example\\ComplexType2']);
+            ), $classes['Example\\ComplexType2Type']);
     }
 
     public function getMaxOccurs()
@@ -285,7 +285,7 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
 
         $this->assertEquals(
             array(
-                'Example\\ComplexType1' => array(
+                'Example\\ComplexType1Type' => array(
                     'properties' => array(
                         'strings' => array(
                             'expose' => true,
@@ -307,7 +307,7 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
                         )
                     )
                 )
-            ), $classes['Example\\ComplexType1']);
+            ), $classes['Example\\ComplexType1Type']);
     }
 
     /**
@@ -329,7 +329,7 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
 
         $this->assertEquals(
             array(
-                'Example\\ComplexType1' => array(
+                'Example\\ComplexType1Type' => array(
                     'properties' => array(
                         'complexType1El1' => array(
                             'expose' => true,
@@ -346,7 +346,7 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
                         )
                     )
                 )
-            ), $classes['Example\\ComplexType1']);
+            ), $classes['Example\\ComplexType1Type']);
     }
 
     public function testGeneralParts()
@@ -399,7 +399,7 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
 
         $this->assertEquals(
             array(
-                'Example\\ComplexType1' => array(
+                'Example\\ComplexType1Type' => array(
                     'properties' => array(
                         'attribute1' => array(
                             'expose' => true,
@@ -499,7 +499,7 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
                         )
                     )
                 )
-            ), $classes['Example\\ComplexType1']);
+            ), $classes['Example\\ComplexType1Type']);
         $this->assertEquals(
             array(
                 'Example\\Element1' => array(
