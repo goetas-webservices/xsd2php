@@ -21,6 +21,16 @@ class ClassGenerator
         $str = '';
 
         if (($type instanceof PHPClass) && ($type->getChecks('__value') || $type->hasProperty('__value'))) {
+            $doc = 'Get a list of allowed values for this type.'.PHP_EOL;
+            $doc .= '@return array';
+
+            $str .= $this->writeDocBlock($doc);
+            $str .= "protected function values()" . PHP_EOL;
+            $str .= "{" . PHP_EOL;
+            $str .= $this->indent('return static::$allowedValues;').PHP_EOL;
+            $str .= "}" . PHP_EOL.PHP_EOL;
+
+
 
             $str .= "protected function _checkValue(\$value)" . PHP_EOL;
             $str .= "{" . PHP_EOL;
@@ -33,11 +43,8 @@ class ClassGenerator
 
             foreach ($type->getChecks('__value') as $checkType => $checks) {
                 if ($checkType == "enumeration") {
-                    $vs = array_map(function ($v) {
-                        return var_export($v["value"], true);
-                    }, $checks);
-                    $methodBody .= 'if (!in_array($value, [' . implode(", ", $vs) . '])) {' . PHP_EOL;
-                    $methodBody .= $this->indent("throw new \InvalidArgumentException('The restriction $checkType with ' . " . var_export(implode(", ", $vs), true) . " . ' is not true');") . PHP_EOL;
+                    $methodBody .= 'if (!in_array($value, $this->values())) {' . PHP_EOL;
+                    $methodBody .= $this->indent("throw new \InvalidArgumentException('The restriction $checkType with ' . implode(', ', \$this->values()) . ' is not true');") . PHP_EOL;
                     $methodBody .= '}' . PHP_EOL;
                 } elseif ($checkType == "pattern") {
                     foreach ($checks as $check) {
@@ -70,6 +77,16 @@ class ClassGenerator
         return $str;
     }
 
+    private function handleStaticCheckProperty(PHPType $type, array $checkValues)
+    {
+        $vs = array_map(function ($v) {
+            return var_export($v["value"], true);
+        }, $checkValues);
+
+        $str = "private static \$allowedValues = [".implode(", ", $vs)."];";
+        return $str;
+    }
+
     private function handleBody(PHPType $type)
     {
         $str = '';
@@ -84,12 +101,18 @@ class ClassGenerator
                 $str .= $this->handleConstant($const) . PHP_EOL . PHP_EOL;
             }
 
+            foreach ($type->getChecks('__value') as $checkType => $checkValues) {
+                if ($checkType=="enumeration") {
+                    $str .= $this->handleStaticCheckProperty($type, $checkValues) . PHP_EOL . PHP_EOL;
+                }
+            }
+
             foreach ($type->getProperties() as $prop) {
                 $str .= $this->handleProperty($prop) . PHP_EOL . PHP_EOL;
             }
-            foreach ($type->getChecks('__value') as $checkType => $values) {
+            foreach ($type->getChecks('__value') as $checkType => $checkValues) {
                 if ($checkType=="enumeration") {
-                    foreach ($values as $enumeration) {
+                    foreach ($checkValues as $enumeration) {
                         $str .= $this->handleStaticCheckMethods($type, $enumeration) . PHP_EOL . PHP_EOL;
                     }
                 }
@@ -427,7 +450,7 @@ class ClassGenerator
         $str .= "{" . PHP_EOL;
         $str .= $this->indent("return new static(" . var_export($enumeration['value'], 1) . ");") . PHP_EOL;
 
-        $str .= "}" . PHP_EOL;
+        $str .= "}";
         return $str;
     }
 
