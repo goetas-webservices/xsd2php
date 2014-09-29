@@ -198,7 +198,7 @@ class Xsd2PhpConverter extends AbstractXsd2Converter
 
         $name = Inflector::classify($type->getName());
         if ($name && substr($name, -4)!=='Type') {
-            $name.= "Type";
+            $name .= "Type";
         }
 
         if (! isset($this->namespaces[$schema->getTargetNamespace()])) {
