@@ -111,7 +111,6 @@ abstract class AbstractConvert extends Console\Command\Command
                 $output->writeln("Alias <comment>$xmlNs</comment>#<info>$name $type</info> ");
             }
         }
-
         $reader = new SchemaReader();
         $schemas = array();
         foreach($src as $file){
@@ -123,7 +122,7 @@ abstract class AbstractConvert extends Console\Command\Command
             }
 
 
-            if (!$xml->documentElement->hasAttribute("targetNamespace") || !isset($nsMapKeyed[$xml->documentElement->getAttribute("targetNamespace")])) {
+            if (!isset($nsMapKeyed[$xml->documentElement->getAttribute("targetNamespace")])) {
                 $output->writeln("\tSkipping <comment>".$xml->documentElement->getAttribute("targetNamespace")."</comment>, can't find a PHP-equivalent namespace. Use --ns-map option?");
                 continue;
             }
