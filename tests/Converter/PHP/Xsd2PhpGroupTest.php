@@ -17,8 +17,30 @@ class Xsd2PhpGroupTest  extends Xsd2PhpBase
                </xs:schema>
             ';
         $classes = $this->getClasses($content);
-
         $this->assertCount(0, $classes);
+    }
+
+    public function testGroupArray()
+    {
+        $content = '
+             <xs:schema targetNamespace="http://www.example.com" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+               <xs:group name="EG_ExtensionList">
+                    <xs:sequence>
+                      <xs:element name="ext" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:group>
+                <xs:complexType name="complexType-1">
+                    <xs:sequence>
+                        <xs:group ref="EG_ExtensionList"/>
+                    </xs:sequence>
+                </xs:complexType>
+               </xs:schema>
+            ';
+        $classes = $this->getClasses($content);
+
+        $this->assertCount(2, $classes);
+        $this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Structure\PHPClass', $classes['Example\ComplexType1Type']);
+        $this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Structure\PHPTrait', $classes['Example\EGExtensionList']);
     }
 
     public function testSomeAnonymous()

@@ -8,6 +8,7 @@ use Goetas\XML\XSDReader\Schema\Schema;
 use Goetas\XML\XSDReader\Schema\Element\ElementNode;
 use Goetas\XML\XSDReader\Schema\Element\ElementRef;
 use Goetas\XML\XSDReader\Schema\Element\ElementItem;
+use Goetas\XML\XSDReader\Schema\Element\ElementSingle;
 
 abstract class AbstractXsd2Converter
 {
@@ -185,7 +186,7 @@ abstract class AbstractXsd2Converter
                 $elements = $type->getElements();
                 $element = reset($elements);
 
-                if ($element instanceof ElementItem && ($element->getMax() > 1 || $element->getMax() === - 1)) {
+                if ($element instanceof ElementSingle && ($element->getMax() > 1 || $element->getMax() === - 1)) {
                     return $element;
                 }
             }
