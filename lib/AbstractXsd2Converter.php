@@ -13,7 +13,6 @@ use Goetas\XML\XSDReader\Schema\Element\ElementSingle;
 abstract class AbstractXsd2Converter
 {
 
-
     protected $baseSchemas = array(
         'http://www.w3.org/2001/XMLSchema',
         'http://www.w3.org/XML/1998/namespace'

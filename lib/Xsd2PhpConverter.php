@@ -337,7 +337,7 @@ class Xsd2PhpConverter extends AbstractXsd2Converter
         }
     }
 
-    private function visitAttribute(PHPType $class, Schema $schema, AttributeSingle $attribute)
+    private function visitAttribute(PHPType $class, Schema $schema, AttributeItem $attribute)
     {
         $property = new PHPProperty();
         $property->setName(Inflector::camelize($attribute->getName()));
