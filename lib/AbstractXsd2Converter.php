@@ -115,7 +115,15 @@ abstract class AbstractXsd2Converter
         {
             return "integer";
         });
+        $this->addAliasMap("http://www.w3.org/2001/XMLSchema", "unsignedInt", function (Type $type)
+        {
+            return "integer";
+        });
         $this->addAliasMap("http://www.w3.org/2001/XMLSchema", "long", function (Type $type)
+        {
+            return "integer";
+        });
+        $this->addAliasMap("http://www.w3.org/2001/XMLSchema", "unsignedLong", function (Type $type)
         {
             return "integer";
         });
