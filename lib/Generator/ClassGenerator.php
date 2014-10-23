@@ -13,6 +13,14 @@ use Doctrine\Common\Inflector\Inflector;
 use Goetas\Xsd\XsdToPhp\Structure\PHPClassOf;
 use Goetas\Xsd\XsdToPhp\Structure\PHPConstant;
 
+use Zend\Code\Generator;
+use Zend\Code\Generator\PropertyGenerator;
+use Zend\Code\Generator\DocBlockGenerator;
+use Zend\Code\Generator\DocBlock\Tag\ParamTag;
+use Zend\Code\Generator\DocBlock\Tag\ReturnTag;
+use Zend\Code\Generator\MethodGenerator;
+use Zend\Code\Generator\ParameterGenerator;
+
 class ClassGenerator
 {
 
@@ -77,56 +85,55 @@ class ClassGenerator
         return $str;
     }
 
-    private function handleStaticCheckProperty(PHPType $type, array $checkValues)
+    private function handleStaticCheckProperty(Generator\ClassGenerator $class, PHPType $type, array $checkValues)
     {
         $vs = array_map(function ($v) {
-            return var_export($v["value"], true);
+            return $v["value"];
         }, $checkValues);
 
-        $str = "private static \$allowedValues = [".implode(", ", $vs)."];";
-        return $str;
+        $generatedProp = new PropertyGenerator('allowedValues', $vs, PropertyGenerator::FLAG_PRIVATE);
+        $class->addPropertyFromGenerator($generatedProp);
+
+        $docBlock = new DocBlockGenerator();
+        $tag = new ParamTag('allowedValues');
+        $tag->setTypes(array('array'));
+        $docBlock->setTag($tag);
+
     }
 
-    private function handleBody(PHPType $type)
+    private function handleBody(Generator\ClassGenerator $class, PHPType $type)
     {
-        $str = '';
-
-        if ($type instanceof PHPTrait || $type instanceof PHPClass) {
-
-            foreach ($type->getTraits() as $ext) {
-                $str .= 'use \\' . $ext->getFullName() . ";" . PHP_EOL;
+        /*
+        foreach ($type->getConstants() as $const) {
+            $str .= $this->handleConstant($const) . PHP_EOL . PHP_EOL;
+        }
+        */
+        foreach ($type->getChecks('__value') as $checkType => $checkValues) {
+            if ($checkType=="enumeration") {
+                $this->handleStaticCheckProperty($class, $type, $checkValues) . PHP_EOL . PHP_EOL;
             }
-
-            foreach ($type->getConstants() as $const) {
-                $str .= $this->handleConstant($const) . PHP_EOL . PHP_EOL;
-            }
-
-            foreach ($type->getChecks('__value') as $checkType => $checkValues) {
-                if ($checkType=="enumeration") {
-                    $str .= $this->handleStaticCheckProperty($type, $checkValues) . PHP_EOL . PHP_EOL;
-                }
-            }
-
-            foreach ($type->getProperties() as $prop) {
-                $str .= $this->handleProperty($prop) . PHP_EOL . PHP_EOL;
-            }
-            foreach ($type->getChecks('__value') as $checkType => $checkValues) {
-                if ($checkType=="enumeration") {
-                    foreach ($checkValues as $enumeration) {
-                        $str .= $this->handleStaticCheckMethods($type, $enumeration) . PHP_EOL . PHP_EOL;
-                    }
-                }
-            }
-
-            $str .= $this->handleChecks($type);
-
-            foreach ($type->getProperties() as $prop) {
-                $str .= $this->handleMethods($prop, $type) . PHP_EOL;
-            }
-            $str = substr($str, 0, - strlen(PHP_EOL));
         }
 
-        return $str;
+
+        foreach ($type->getProperties() as $prop) {
+            $this->handleProperty($class, $prop);
+        }
+        /*
+        foreach ($type->getChecks('__value') as $checkType => $checkValues) {
+            if ($checkType=="enumeration") {
+                foreach ($checkValues as $enumeration) {
+                    $str .= $this->handleStaticCheckMethods($type, $enumeration) . PHP_EOL . PHP_EOL;
+                }
+            }
+        }
+
+
+        $str .= $this->handleChecks($type);
+        */
+
+        foreach ($type->getProperties() as $prop) {
+            $this->handleMethods($class, $prop, $type);
+        }
     }
 
     private function isNativeType(PHPClass $class)
@@ -248,34 +255,38 @@ class ClassGenerator
 
 
 
-    private function handleSetter(PHPProperty $prop, PHPType $class)
+    private function handleSetter(Generator\ClassGenerator $generator, PHPProperty $prop, PHPType $class)
     {
+
+        $docblock = new DocBlockGenerator();
+        if ($c = $this->getFirstLineComment($prop->getDoc())) {
+            $docblock->setLongDescription($c);
+        }
+        if ($prop->getDoc()) {
+            $docblock->setLongDescription($prop->getDoc());
+        }
+
+        $return = new ReturnTag();
+        $return->setTypes("\\".$class->getFullName());
+        $docblock->setTag($return);
+
+        $patramTag = new ParamTag($prop->getName());
+        $docblock->setTag($patramTag);
+
         $type = $prop->getType();
 
-        $str = '';
-        $doc = '';
+        $method = new MethodGenerator("set" . Inflector::classify($prop->getName()));
 
-        if ($c = $this->getFirstLineComment($prop->getDoc())) {
-            $doc .= $c . PHP_EOL . PHP_EOL;
-        }
+        $parameter = new ParameterGenerator($prop->getName());
         if ($type && $type instanceof PHPClassOf) {
-            $doc .= "@param $" . $prop->getName() . " " . $this->getPhpType($type->getArg()->getType()) . "[]";
+            $patramTag->setTypes($this->getPhpType($type->getArg()->getType()) . "[]");
+            $parameter->setType("array");
         } elseif ($type) {
-            $doc .= "@param $" . $prop->getName() . " " . $this->getPhpType($prop->getType());
+            $patramTag->setTypes($this->getPhpType($prop->getType()));
+            $parameter->setType($this->getPhpType($prop->getType()));
         } else {
-            $doc .= "@param $" . $prop->getName() . " mixed";
+            $patramTag->setTypes("mixed");
         }
-
-        $doc .= PHP_EOL."@return \\" . $class->getFullName().PHP_EOL;
-
-        $str .= $this->writeDocBlock($doc);
-
-        $typedeclaration = '';
-        if ($type && $this->hasTypeHint($type)) {
-            $typedeclaration = $this->getPhpType($type) . " ";
-        }
-        $str .= "public function set" . Inflector::classify($prop->getName()) . "($typedeclaration\$" . $prop->getName() . ")" . PHP_EOL;
-        $str .= "{" . PHP_EOL;
 
         $methodBody = '';
         if ($type && $type instanceof PHPClassOf) {
@@ -289,41 +300,39 @@ class ClassGenerator
 
         $methodBody .= "\$this->" . $prop->getName() . " = \$" . $prop->getName() . ";" . PHP_EOL;
         $methodBody .= "return \$this;";
-        $str .= $this->indent($methodBody) . PHP_EOL;
+        $method->setBody($methodBody);
+        $method->setDocBlock($docblock);
+        $method->setParameter($parameter);
 
-        $str .= "}" . PHP_EOL;
+        $generator->addMethodFromGenerator($method);
 
-        return $str;
     }
-    private function handleGetter(PHPProperty $prop, PHPType $class)
+    private function handleGetter(Generator\ClassGenerator $generator, PHPProperty $prop, PHPType $class)
     {
-        $type = $prop->getType();
-
-        $str = '';
-        $doc = '';
-
+        $docblock = new DocBlockGenerator();
         if ($c = $this->getFirstLineComment($prop->getDoc())) {
-            $doc .= $c . PHP_EOL . PHP_EOL;
+             $docblock->setLongDescription($c);
+        }
+        if ($prop->getDoc()) {
+            $docblock->setLongDescription($prop->getDoc());
         }
 
+        $tag = new ReturnTag();
+        $type = $prop->getType();
         if ($type && $type instanceof PHPClassOf) {
-            $doc .= "@return " . $this->getPhpType($type->getArg()->getType()) . "[]";
+            $tag->setTypes(array($this->getPhpType($type->getArg()->getType())));
         } elseif ($type) {
-            $doc .= "@return " . $this->getPhpType($type);
+            $tag->setTypes(array($this->getPhpType($type)));
         } else {
-            $doc .= "@return mixed";
+            $tag->setTypes(array('mixed'));
         }
+        $docblock->setTag($tag);
 
-        $str .= $this->writeDocBlock($doc);
+        $method = new MethodGenerator("get".Inflector::classify($prop->getName()));
+        $method->setDocBlock($docblock);
+        $method->setBody("return \$this->" . $prop->getName() . ";");
 
-        $str .= "public function get" . Inflector::classify($prop->getName()) . "()" . PHP_EOL;
-        $str .= "{" . PHP_EOL;
-        $methodBody = "return \$this->" . $prop->getName() . ";";
-        $str .= $this->indent($methodBody) . PHP_EOL;
-
-        $str .= "}" . PHP_EOL;
-
-        return $str;
+        $generator->addMethodFromGenerator($method);
     }
     private function handleValueMethods(PHPProperty $prop, PHPType $class){
         $type = $prop->getType();
@@ -393,30 +402,24 @@ class ClassGenerator
         return $str;
     }
 
-    private function handleMethods(PHPProperty $prop, PHPType $class)
+    private function handleMethods(Generator\ClassGenerator $generator, PHPProperty $prop, PHPType $class)
     {
-        $type = $prop->getType();
-
-        $str = '';
-        $str .= PHP_EOL;
 
         if ($prop->getName() == "__value") {
-            $str .= $this->addValueMethods($prop, $class);
+            $this->addValueMethods($prop, $class);
         } else {
-
+            $type = $prop->getType();
             if ($prop->getType() && $prop->getType()->hasPropertyInHierarchy('__value')) {
-                $str .= $this->handleValueMethods($prop, $class);
+                $this->handleValueMethods($prop, $class);
             }
             if ($type && $type instanceof PHPClassOf) {
-                $str .= PHP_EOL;
-                $str .= $this->handleAdder($prop, $class);
+                //$str .= $this->handleAdder($prop, $class);
             }
 
-            $str .= $this->handleGetter($prop, $class);
-            $str .= $this->handleSetter($prop, $class);
+            $this->handleGetter($generator, $prop, $class);
+            $this->handleSetter($generator, $prop, $class);
 
         }
-        return $str;
     }
 
     private function getFirstLineComment($str)
@@ -472,90 +475,60 @@ class ClassGenerator
         return $str;
     }
 
-    private function handleProperty(PHPProperty $prop)
+    private function handleProperty(Generator\ClassGenerator $class, PHPProperty $prop)
     {
-        $doc = '';
-
-        if ($prop->getDoc()) {
-            $doc .= $prop->getDoc() . PHP_EOL . PHP_EOL;
-        }
-
-        if ($prop->getType()) {
-            $doc .= "@var " . $this->getPhpType($prop->getType());
-        } else {
-            $doc .= "@var mixed";
-        }
-
-        $str = "";
-        if ($doc) {
-            $str .= $this->writeDocBlock($doc);
-        }
-        $str .= $prop->getVisibility() . " \$" . $prop->getName();
+        $generatedProp = new PropertyGenerator($prop->getName());
+        $class->addPropertyFromGenerator($generatedProp);
 
         if ($prop->getType() && (! $prop->getType()->getNamespace() && $prop->getType()->getName() == "array")) {
-            $str .= " = array()";
+            $generatedProp->setDefaultValue(array());
         }
-        $str .= ";";
 
-        return $str;
-    }
+        $docBlock = new DocBlockGenerator();
+        $generatedProp->setDocBlock($docBlock);
 
-    private function handleMainDecl(PHPType $type, $aliasExtensioin = null)
-    {
-        $str = '';
-        if ($type instanceof PHPTrait) {
-            $str .= 'trait ';
-            $str .= $type->getName();
+        if ($prop->getDoc()) {
+            $docBlock->setLongDescription($prop->getDoc());
+        }
+        $tag = new ParamTag($prop->getName());
+        if ($prop->getType()) {
+            $tag->setTypes(array($this->getPhpType($prop->getType())));
         } else {
-            $str .= 'class ';
-            $str .= $type->getName();
-
-            if ($type->getExtends()) {
-                $str .= ' extends ';
-                $str .= $aliasExtensioin ?  : $type->getExtends()->getName();
-            }
+            $tag->setTypes(array('mixed'));
         }
-        return $str;
+        $docBlock->setTag($tag);
+
     }
 
     public function generate(PHPType $type)
     {
-        $str = '<?php' . PHP_EOL;
 
-        $str .= "namespace " . $type->getNamespace() . ";" . PHP_EOL;
+        $class      = new Generator\ClassGenerator();
+        $docblock = Generator\DocBlockGenerator::fromArray(array(
+            'shortDescription' => 'Sample generated class',
+            'longDescription'  => $type->getDoc(),
+        ));
+        $class->setNamespaceName($type->getNamespace());
+        $class->setName($type->getName());
+        $class->setDocblock($docblock);
 
-        $base = null;
-        if ($type instanceof PHPClass) {
-            if ($type->getExtends() && $type->getExtends()->getNamespace() != $type->getNamespace()) {
-                $str .= PHP_EOL . "use " . $type->getExtends()->getNamespace() . "\\" . $type->getExtends()->getName();
+        if ($extends = $type->getExtends()) {
+            $class->setExtendedClass($extends->getName());
 
-                if ($type->getExtends()->getName() == $type->getName()) {
-                    $base = $type->getExtends()->getName() . "Base";
-                    $str .= " as " . $base;
+            if ($extends->getNamespace() != $type->getNamespace()) {
+                if ($extends->getName() == $type->getName()) {
+                    $class->addUse($type->getExtends()->getFullName(), $extends->getName()."Base");
+                    $class->setExtendedClass($extends->getName()."Base");
+                }else{
+                    $class->addUse($extends->getFullName());
                 }
-                $str .= ";" . PHP_EOL;
             }
         }
 
-        $str .= PHP_EOL;
+        $this->handleBody($class, $type);
 
-        $doc = '';
-        if ($type->getDoc()) {
-            $doc .= $type->getDoc() . PHP_EOL . PHP_EOL;
-        }
-        if ($doc) {
-            $str .= $this->writeDocBlock($doc);
-        }
+        return $class->generate();
 
-        $str .= $this->handleMainDecl($type, $base);
-
-        $str .= PHP_EOL . "{" . PHP_EOL . PHP_EOL;
-
-        $str .= $this->indent($this->handleBody($type));
-
-        $str .= PHP_EOL . "}" . PHP_EOL;
-
-        return $str;
     }
 
     private function writeDocBlock($str)
