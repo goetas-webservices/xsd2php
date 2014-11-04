@@ -94,7 +94,6 @@ class Xsd2PhpElementTest extends Xsd2JmsBase
 
         $classes = $this->getClasses($xml);
         $this->assertCount(1, $classes);
-
         $this->assertEquals(array(
             'Example\\ElementOne' => array(
                 'xml_root_name' => 'element-one',

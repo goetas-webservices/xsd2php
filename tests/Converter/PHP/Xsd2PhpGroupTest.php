@@ -39,8 +39,8 @@ class Xsd2PhpGroupTest  extends Xsd2PhpBase
         $classes = $this->getClasses($content);
 
         $this->assertCount(2, $classes);
-        $this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Structure\PHPClass', $classes['Example\ComplexType1Type']);
-        $this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Structure\PHPTrait', $classes['Example\EGExtensionList']);
+        $this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Php\Structure\PHPClass', $classes['Example\ComplexType1Type']);
+        //$this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Php\Structure\PHPTrait', $classes['Example\EGExtensionList']);
     }
 
     public function testSomeAnonymous()
@@ -73,10 +73,10 @@ class Xsd2PhpGroupTest  extends Xsd2PhpBase
         $classes = $this->getClasses($content);
         $this->assertCount(4, $classes);
 
-        $this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Structure\PHPClass', $complexType1 = $classes['Example\ComplexType1Type']);
-        $this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Structure\PHPClass', $s1 = $classes['Example\ComplexType1Type\String1AType']);
-        $this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Structure\PHPClass', $s2 = $classes['Example\ComplexType1Type\String2AType']);
-        $this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Structure\PHPClass', $a1 = $classes['Example\ComplexType1Type\AttAType']);
+        $this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Php\Structure\PHPClass', $complexType1 = $classes['Example\ComplexType1Type']);
+        $this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Php\Structure\PHPClass', $s1 = $classes['Example\ComplexType1Type\String1AType']);
+        $this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Php\Structure\PHPClass', $s2 = $classes['Example\ComplexType1Type\String2AType']);
+        $this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Php\Structure\PHPClass', $a1 = $classes['Example\ComplexType1Type\AttAType']);
 
         $s1Prop = $complexType1->getProperty('string1');
         $this->assertSame($s1, $s1Prop->getType());
@@ -114,8 +114,8 @@ class Xsd2PhpGroupTest  extends Xsd2PhpBase
         $classes = $this->getClasses($content);
         $this->assertCount(2, $classes);
 
-        $this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Structure\PHPClass', $complexType1 = $classes['Example\ComplexType1Type']);
-        $this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Structure\PHPClass', $complexType2 = $classes['Example\ComplexType2Type']);
+        $this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Php\Structure\PHPClass', $complexType1 = $classes['Example\ComplexType1Type']);
+        $this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Php\Structure\PHPClass', $complexType2 = $classes['Example\ComplexType2Type']);
 
         $this->assertSame($complexType1, $complexType2->getExtends());
 
@@ -163,13 +163,13 @@ class Xsd2PhpGroupTest  extends Xsd2PhpBase
             ';
         $classes = $this->getClasses($content);
         $this->assertCount(1, $classes);
-        $this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Structure\PHPClass', $complexType1 = $classes['Example\ComplexType1Type']);
+        $this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Php\Structure\PHPClass', $complexType1 = $classes['Example\ComplexType1Type']);
 
         $property = $complexType1->getProperty('strings');
 
-        $this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Structure\PHPClassOf', $typeOf = $property->getType());
-        $this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Structure\PHPProperty', $typeProp = $typeOf->getArg());
-        $this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Structure\PHPClass', $typePropType = $typeProp->getType());
+        $this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Php\Structure\PHPClassOf', $typeOf = $property->getType());
+        $this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Php\Structure\PHPProperty', $typeProp = $typeOf->getArg());
+        $this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Php\Structure\PHPClass', $typePropType = $typeProp->getType());
 
         $this->assertEquals('', $typePropType->getNamespace());
         $this->assertEquals('string', $typePropType->getName());
@@ -192,7 +192,7 @@ class Xsd2PhpGroupTest  extends Xsd2PhpBase
             ';
         $classes = $this->getClasses($content);
         $this->assertCount(1, $classes);
-        $this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Structure\PHPClass', $complexType1 = $classes['Example\ComplexType1Type']);
+        $this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Php\Structure\PHPClass', $complexType1 = $classes['Example\ComplexType1Type']);
 
     }
 
@@ -245,13 +245,13 @@ class Xsd2PhpGroupTest  extends Xsd2PhpBase
 
         $this->assertCount(6, $classes);
 
-        $this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Structure\PHPTrait', $attGroup1 = $classes['Example\AttributeGroup1']);
-        $this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Structure\PHPTrait', $attGroup2 = $classes['Example\AttributeGroup2']);
-        $this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Structure\PHPTrait', $group1 = $classes['Example\Group1']);
-        $this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Structure\PHPTrait', $group2 = $classes['Example\Group2']);
+        //$this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Php\Structure\PHPTrait', $attGroup1 = $classes['Example\AttributeGroup1']);
+        //$this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Php\Structure\PHPTrait', $attGroup2 = $classes['Example\AttributeGroup2']);
+        //$this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Php\Structure\PHPTrait', $group1 = $classes['Example\Group1']);
+        //$this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Php\Structure\PHPTrait', $group2 = $classes['Example\Group2']);
 
-        $this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Structure\PHPClass', $complexType1 = $classes['Example\ComplexType1Type']);
-        $this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Structure\PHPClass', $element1 = $classes['Example\Element1']);
+        $this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Php\Structure\PHPClass', $complexType1 = $classes['Example\ComplexType1Type']);
+        $this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Php\Structure\PHPClass', $element1 = $classes['Example\Element1']);
 
         $this->assertContains($attGroup2, $attGroup1->getTraits());
         $this->assertContains($group2, $group1->getTraits());

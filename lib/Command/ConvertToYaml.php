@@ -1,15 +1,14 @@
 <?php
 namespace Goetas\Xsd\XsdToPhp\Command;
 
-use Goetas\Xsd\XsdToPhp\Xsd2PhpConverter;
 use Exception;
 use Goetas\Xsd\XsdToPhp\Generator\ClassGenerator;
-use Goetas\Xsd\XsdToPhp\YamlWriter\Psr4Writer;
+use Goetas\Xsd\XsdToPhp\Jms\PathGenerator\Psr4PathGenerator;
 use Goetas\XML\XSDReader\SchemaReader;
-use Goetas\Xsd\XsdToPhp\Xsd2JmsSerializerYamlConverter;
+use Goetas\Xsd\XsdToPhp\Jms\YamlConverter;
 use Symfony\Component\Yaml\Dumper;
-use Goetas\Xsd\XsdToPhp\AbstractXsd2Converter;
 use Symfony\Component\Console\Output\OutputInterface;
+use Goetas\Xsd\XsdToPhp\AbstractConverter;
 
 class ConvertToYaml extends AbstractConvert
 {
@@ -27,16 +26,16 @@ class ConvertToYaml extends AbstractConvert
 
     protected function getConverterter()
     {
-        return new Xsd2JmsSerializerYamlConverter();
+        return new YamlConverter();
     }
 
-    protected function convert(AbstractXsd2Converter $converter, array $schemas, array $targets, OutputInterface $output)
+    protected function convert(AbstractConverter $converter, array $schemas, array $targets, OutputInterface $output)
     {
         $items = $converter->convert($schemas);
 
         $dumper = new Dumper();
 
-        $writer = new Psr4Writer($targets);
+        $pathGenerator = new Psr4PathGenerator($targets);
         $progress = $this->getHelperSet()->get('progress');
 
         $progress->start($output, count($items));
@@ -48,7 +47,8 @@ class ConvertToYaml extends AbstractConvert
             $source = $dumper->dump($item, 10000);
             $output->write("created source... ");
 
-            $bytes = $writer->write($item, $source);
+            $path = $pathGenerator->getPath($item);
+            $bytes = file_put_contents($path, $source);
             $output->writeln("saved source <comment>$bytes bytes</comment>.");
         }
         $progress->finish();

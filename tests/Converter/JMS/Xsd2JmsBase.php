@@ -1,14 +1,14 @@
 <?php
 namespace Goetas\Xsd\XsdToPhp\Tests\Converter\JMS;
 
-use Goetas\Xsd\XsdToPhp\Xsd2JmsSerializerYamlConverter;
+use Goetas\Xsd\XsdToPhp\Jms\YamlConverter;
 use Goetas\XML\XSDReader\SchemaReader;
 
 abstract class Xsd2JmsBase extends \PHPUnit_Framework_TestCase
 {
     /**
      *
-     * @var Xsd2JmsSerializerYamlConverter
+     * @var YamlConverter
      */
     protected $converter;
 
@@ -20,7 +20,7 @@ abstract class Xsd2JmsBase extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->converter = new Xsd2JmsSerializerYamlConverter();
+        $this->converter = new YamlConverter();
         $this->converter->addNamespace('http://www.example.com', "Example");
 
         $this->reader = new SchemaReader();

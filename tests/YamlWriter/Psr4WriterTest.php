@@ -1,16 +1,16 @@
 <?php
-namespace Goetas\Xsd\XsdToPhp\Tests\YamlWriter;
+namespace Goetas\Xsd\XsdToPhp\Tests\Jms\PathGenerator;
 
-use Goetas\Xsd\XsdToPhp\YamlWriter\Psr4Writer;
+use Goetas\Xsd\XsdToPhp\Jms\PathGenerator\Psr4PathGenerator;
 
-class Psr4WriterTest extends \PHPUnit_Framework_TestCase
+class Psr4PathGeneratorTest extends \PHPUnit_Framework_TestCase
 {
 
     protected $cacheDir = null;
 
     public function setUp()
     {
-        $this->cacheDir = sys_get_temp_dir() . "/Psr4WriterTest";
+        $this->cacheDir = sys_get_temp_dir() . "/Psr4PathGeneratorTest";
 
         $this->tearDown();
 
@@ -40,7 +40,7 @@ class Psr4WriterTest extends \PHPUnit_Framework_TestCase
 
     public function testWriter()
     {
-        $writer = new Psr4Writer(array(
+        $writer = new Psr4PathGenerator(array(
             'myns\\' => $this->cacheDir
         ));
         ;
@@ -57,7 +57,7 @@ class Psr4WriterTest extends \PHPUnit_Framework_TestCase
 
     public function testWriterLong()
     {
-        $writer = new Psr4Writer(array(
+        $writer = new Psr4PathGenerator(array(
             'myns\\' => $this->cacheDir
         ));
         ;
@@ -75,7 +75,7 @@ class Psr4WriterTest extends \PHPUnit_Framework_TestCase
     public function testNonExistingDir()
     {
         $this->setExpectedException('Exception');
-        new Psr4Writer(array(
+        new Psr4PathGenerator(array(
             'myns\\' => "aaaa"
         ));
     }
@@ -83,7 +83,7 @@ class Psr4WriterTest extends \PHPUnit_Framework_TestCase
     public function testNoNs()
     {
         $this->setExpectedException('Exception');
-        $writer = new Psr4Writer(array(
+        $writer = new Psr4PathGenerator(array(
             'myns\\' => $this->cacheDir
         ));
         $writer->write([
@@ -94,7 +94,7 @@ class Psr4WriterTest extends \PHPUnit_Framework_TestCase
     public function testInvalidNs()
     {
         $this->setExpectedException('Exception');
-        new Psr4Writer(array(
+        new Psr4PathGenerator(array(
             'myns' => "aaaa"
         ));
     }

@@ -19,13 +19,15 @@
          
     <testsuites>
         <testsuite name="Goetas XSD to PHP Test Suite">
-            <directory>./tests/</directory>
+            <directory>./tests/JmsSerializer</directory>
         </testsuite>
     </testsuites>
     
     <filter>
   <blacklist>
     <directory>vendor</directory>
+    <directory>/tmp</directory>
+    <directory>/dev</directory>
   </blacklist>
   </filter>    
 

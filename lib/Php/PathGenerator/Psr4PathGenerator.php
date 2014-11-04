@@ -1,0 +1,28 @@
+<?php
+namespace Goetas\Xsd\XsdToPhp\Php\PathGenerator;
+
+use Goetas\Xsd\XsdToPhp\Php\Structure\PHPClass;
+use Goetas\Xsd\XsdToPhp\PathGenerator\Psr4PathGenerator as Psr4PathGeneratorBase;
+use Goetas\Xsd\XsdToPhp\PathGenerator\PathGeneratorException;
+
+class Psr4PathGenerator extends Psr4PathGeneratorBase implements PathGenerator
+{
+
+    public function getPath(PHPClass $php)
+    {
+        foreach ($this->namespaces as $namespace => $dir) {
+            if (strpos(trim($php->getNamespace()) . "\\", $namespace) === 0) {
+                $d = strtr(substr($php->getNamespace(), strlen($namespace)), "\\", "/");
+                $dir = rtrim($dir, "/") . "/" . $d;
+                if (! is_dir($dir) && ! mkdir($dir, 0777, true)) {
+                    throw new PathGeneratorException("Can't create the '$dir' directory");
+                }
+
+                return rtrim($dir, "/") . "/" . $php->getName() . ".php";
+            }
+        }
+
+        throw new WriterException("Can't find a defined location where save '$php' object");
+    }
+}
+
