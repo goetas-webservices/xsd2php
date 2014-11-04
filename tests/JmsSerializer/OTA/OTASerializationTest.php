@@ -19,25 +19,16 @@ use Composer\Autoload\ClassLoader;
 class OTASerializationTest extends \PHPUnit_Framework_TestCase
 {
 
-    protected $serializer;
+    protected static $serializer;
 
-    protected $namespace = 'OTA';
+    protected static $namespace = 'OTA';
 
-    protected $phpDir = '/tmp';
+    protected static $phpDir = '/tmp';
 
-    protected $jmsDir = '/tmp';
+    protected static $jmsDir = '/tmp';
 
-    protected $regen = false;
-
-    private $reader;
-
-    protected function getReader()
-    {
-        if (! $this->reader) {
-            $this->reader = new SchemaReader();
-        }
-        return $this->reader;
-    }
+    protected static $differ;
+    protected static $loader;
 
     private static function delTree($dir) {
         $files = array_diff(scandir($dir), array('.','..'));
@@ -47,23 +38,84 @@ class OTASerializationTest extends \PHPUnit_Framework_TestCase
         return rmdir($dir);
     }
 
-    protected function generatePHPFiles($xsd)
+    public static function setUpBeforeClass()
+    {
+
+        $tmp = sys_get_temp_dir();
+
+        if (is_writable("/dev/shm")) {
+            $tmp = "/dev/shm";
+        }
+
+        self::$phpDir = "$tmp/OTASerializationTestPHP";
+        self::$jmsDir = "$tmp/OTASerializationTestJMS";
+
+        self::$loader = new ClassLoader();
+        self::$loader->addPsr4(self::$namespace . "\\", self::$phpDir);
+        self::$loader->register();
+
+        if (! is_dir(self::$phpDir)) {
+            mkdir(self::$phpDir);
+        }
+        if (! is_dir(self::$jmsDir)) {
+            mkdir(self::$jmsDir);
+        }
+
+
+        $reader = new SchemaReader();
+        $schemas = array();
+        foreach (self::getXmlFiles() as $d){
+            if (!isset($schemas[$d[1]])){
+                $schemas[$d[1]]=$reader->readFile($d[1]);
+            }
+        }
+        self::generatePHPFiles($schemas);
+        self::generateJMSFiles($schemas);
+
+
+        $serializerBuiler = \JMS\Serializer\SerializerBuilder::create();
+        $serializerBuiler->configureHandlers(function (HandlerRegistryInterface $h) use($serializerBuiler)
+        {
+            $serializerBuiler->addDefaultHandlers();
+            $h->registerSubscribingHandler(new BaseTypesHandler());
+            $h->registerSubscribingHandler(new XmlSchemaDateHandler());
+            $h->registerSubscribingHandler(new OTASchemaDateHandler());
+        });
+
+        $serializerBuiler->addMetadataDir(self::$jmsDir, self::$namespace);
+
+        self::$serializer = $serializerBuiler->build();
+    }
+
+    public static function tearDownAfterClass()
+    {
+         if (is_dir(self::$phpDir)) {
+            self::delTree(self::$phpDir);
+        }
+        if (is_dir(self::$jmsDir)) {
+            self::delTree(self::$jmsDir);
+        }
+
+        if (self::$loader) {
+            self::$loader->unregister();
+        }
+    }
+
+
+    protected static function generatePHPFiles(array $schemas)
     {
         $phpcreator = new PhpConverter();
-        $phpcreator->addNamespace('http://www.opentravel.org/OTA/2003/05', $this->namespace);
+        $phpcreator->addNamespace('http://www.opentravel.org/OTA/2003/05', self::$namespace);
 
         $phpcreator->addAliasMapType('http://www.opentravel.org/OTA/2003/05', 'DateOrTimeOrDateTimeType', 'Goetas\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime');
         $phpcreator->addAliasMapType('http://www.opentravel.org/OTA/2003/05', 'DateOrDateTimeType', 'Goetas\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime');
         $phpcreator->addAliasMapType('http://www.opentravel.org/OTA/2003/05', 'TimeOrDateTimeType', 'Goetas\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime');
 
-        $schema = $this->getReader()->readFile($xsd);
-        $items = $phpcreator->convert(array(
-            $schema
-        ));
+        $items = $phpcreator->convert($schemas);
 
         $generator = new ClassGenerator();
         $pathGenerator = new Psr4PathGenerator(array(
-            $this->namespace . "\\" => $this->phpDir
+            self::$namespace . "\\" => self::$phpDir
         ));
         foreach ($items as $item) {
             $path = $pathGenerator->getPath($item);
@@ -85,23 +137,21 @@ class OTASerializationTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    protected function generateJMSFiles($xsd)
+    protected static function generateJMSFiles(array $schemas)
     {
         $yamlcreator = new YamlConverter();
-        $yamlcreator->addNamespace('http://www.opentravel.org/OTA/2003/05', $this->namespace);
+        $yamlcreator->addNamespace('http://www.opentravel.org/OTA/2003/05', self::$namespace);
 
         $yamlcreator->addAliasMapType('http://www.opentravel.org/OTA/2003/05', 'DateOrTimeOrDateTimeType', 'Goetas\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime');
         $yamlcreator->addAliasMapType('http://www.opentravel.org/OTA/2003/05', 'DateOrDateTimeType', 'Goetas\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime');
         $yamlcreator->addAliasMapType('http://www.opentravel.org/OTA/2003/05', 'TimeOrDateTimeType', 'Goetas\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime');
-        $schema = $this->getReader()->readFile($xsd);
-        $items = $yamlcreator->convert(array(
-            $schema
-        ));
+
+        $items = $yamlcreator->convert($schemas);
 
         $dumper = new Dumper();
 
         $pathGenerator = new JmsPsr4PathGenerator(array(
-            $this->namespace . "\\" => $this->jmsDir
+            self::$namespace . "\\" => self::$jmsDir
         ));
 
         foreach ($items as $item) {
@@ -113,50 +163,10 @@ class OTASerializationTest extends \PHPUnit_Framework_TestCase
             }
             file_put_contents($path, $dumper->dump($item, 10000));
         }
-    }
 
-    protected $loader;
 
-    public function tearDown()
-    {
-        if ($this->loader) {
-            $this->loader->unregister();
-        }
-    }
-
-    protected $differ;
-
-    public function setUp()
-    {
-        if (! $this->differ) {
-            $this->differ = new \XMLDiff\Memory();
-        }
-
-        $tmp = sys_get_temp_dir();
-
-        if (is_writable("/dev/shm")) {
-            $tmp = "/dev/shm";
-        }
-
-        $this->phpDir = "$tmp/OTASerializationTestPHP";
-        $this->jmsDir = "$tmp/OTASerializationTestJMS";
-
-        $this->loader = new ClassLoader();
-        $this->loader->addPsr4($this->namespace . "\\", $this->phpDir);
-        $this->loader->register();
-
-        if (is_dir($this->phpDir)) {
-            //self::delTree($this->phpDir);
-        }
-        if (is_dir($this->jmsDir)) {
-            //self::delTree($this->jmsDir);
-        }
-
-        if (! is_dir($this->phpDir)) {
-            mkdir($this->phpDir);
-        }
-        if (! is_dir($this->jmsDir)) {
-            mkdir($this->jmsDir);
+        if (! self::$differ) {
+            self::$differ = new \XMLDiff\Memory();
         }
 
         $serializerBuiler = \JMS\Serializer\SerializerBuilder::create();
@@ -169,9 +179,9 @@ class OTASerializationTest extends \PHPUnit_Framework_TestCase
             $h->registerSubscribingHandler(new OTASchemaDateHandler());
         });
 
-        $serializerBuiler->addMetadataDir($this->jmsDir, $this->namespace);
+        $serializerBuiler->addMetadataDir(self::$jmsDir, self::$namespace);
 
-        $this->serializer = $serializerBuiler->build();
+        self::$serializer = $serializerBuiler->build();
     }
 
     protected function clearXML($xml)
@@ -256,21 +266,15 @@ class OTASerializationTest extends \PHPUnit_Framework_TestCase
      */
     public function testConversion($xml, $xsd, $class)
     {
-        if (strpos($xml, 'OTA_VehLocDetailRS')===false){
-           // return;
-        }
-
-        $this->generatePHPFiles($xsd);
-        $this->generateJMSFiles($xsd);
 
         $original = $this->clearXML(file_get_contents($xml));
-        $object = $this->serializer->deserialize($original, $class, 'xml');
+        $object = self::$serializer->deserialize($original, $class, 'xml');
 
-        $new = $this->serializer->serialize($object, 'xml');
+        $new = self::$serializer->serialize($object, 'xml');
 
         $new = $this->clearXML($new);
 
-        $diff = $this->differ->diff($original, $new);
+        $diff = self::$differ->diff($original, $new);
 
         if (strpos($diff, '<dm:copy count="1"/>') === false || strlen($diff) > 110) {
             file_put_contents("a.xml", $original);
@@ -281,8 +285,7 @@ class OTASerializationTest extends \PHPUnit_Framework_TestCase
             $this->assertFalse(true);
         }
     }
-
-    public function getTestFiles()
+    public static function getXmlFiles()
     {
         $files = glob(__DIR__ . "/otaxml/*.xml");
 
@@ -296,9 +299,14 @@ class OTASerializationTest extends \PHPUnit_Framework_TestCase
             if (is_file($dir . "/" . $name)) {
                 $tests[$n][0] = $file;
                 $tests[$n][1] = $dir . "/" . $name;
-                $tests[$n][2] = $this->namespace . "\\" . Inflector::classify(str_replace(".xsd", "", $name));
+                $tests[$n][2] = self::$namespace . "\\" . Inflector::classify(str_replace(".xsd", "", $name));
             }
         }
         return $tests;
+    }
+
+    public function getTestFiles()
+    {
+        return self::getXmlFiles();
     }
 }
