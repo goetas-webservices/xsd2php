@@ -1,14 +1,14 @@
 <?php
 namespace Goetas\Xsd\XsdToPhp\Tests\Converter\PHP;
 
-use Goetas\Xsd\XsdToPhp\Xsd2PhpConverter;
+use Goetas\Xsd\XsdToPhp\Php\PhpConverter;
 use Goetas\XML\XSDReader\SchemaReader;
 
 abstract class Xsd2PhpBase extends \PHPUnit_Framework_TestCase
 {
     /**
      *
-     * @var Xsd2PhpConverter
+     * @var PhpConverter
      */
     protected $converter;
 
@@ -20,7 +20,7 @@ abstract class Xsd2PhpBase extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->converter = new Xsd2PhpConverter();
+        $this->converter = new PhpConverter();
         $this->converter->addNamespace('http://www.example.com', "Example");
 
         $this->reader = new SchemaReader();

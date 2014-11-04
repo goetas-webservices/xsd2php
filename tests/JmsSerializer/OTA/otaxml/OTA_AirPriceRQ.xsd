@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.opentravel.org/OTA/2003/05" targetNamespace="http://www.opentravel.org/OTA/2003/05" elementFormDefault="qualified" version="3.004" id="OTA2007B">
+	<xs:include schemaLocation="OTA_AirCommonTypes.xsd"/>
+	<xs:annotation>
+		<xs:documentation xml:lang="en">All Schema files in the OTA specification are made available according to the terms defined by the OTA License Agreement at http://www.opentravel.org/ota_downloads_form.cfm</xs:documentation>
+	</xs:annotation>
+	<xs:element name="OTA_AirPriceRQ">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+The Price Request message requests pricing information for specific flights on specific dates for a specific number and type of passengers. Optional information in the message allows fare restriction preferences and negotiated fare contract codes to be included in the message.
+The pricing request contains the information necessary to perform an availability / sell from availability / price series of entries on an airline CRS or GDS.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="POS" type="POS_Type">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Point of sale object. </xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="AirItinerary" type="AirItineraryType">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">The Air Itineraries to be priced</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="TravelerInfoSummary" type="TravelerInfoSummaryType">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Specify passenger numbers and types</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+			<xs:attributeGroup ref="OTA_PayloadStdAttributes"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

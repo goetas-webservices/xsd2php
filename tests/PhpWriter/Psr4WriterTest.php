@@ -1,17 +1,17 @@
 <?php
-namespace Goetas\Xsd\XsdToPhp\Tests\PhpWriter;
+namespace Goetas\Xsd\XsdToPhp\Tests\Php\PathGenerator;
 
-use Goetas\Xsd\XsdToPhp\PhpWriter\Psr4Writer;
-use Goetas\Xsd\XsdToPhp\Structure\PHPClass;
+use Goetas\Xsd\XsdToPhp\Php\PathGenerator\Psr4PathGenerator;
+use Goetas\Xsd\XsdToPhp\Php\Structure\PHPClass;
 
-class Psr4WriterTest extends \PHPUnit_Framework_TestCase
+class Psr4PathGeneratorTest extends \PHPUnit_Framework_TestCase
 {
 
     protected $cacheDir = null;
 
     public function setUp()
     {
-        $this->cacheDir = sys_get_temp_dir() . "/Psr4WriterTest";
+        $this->cacheDir = sys_get_temp_dir() . "/Psr4PathGeneratorTest";
 
         $this->tearDown();
 
@@ -42,7 +42,7 @@ class Psr4WriterTest extends \PHPUnit_Framework_TestCase
     public function testNoNs()
     {
         $this->setExpectedException('Exception');
-        $writer = new Psr4Writer(array(
+        $writer = new Psr4PathGenerator(array(
             'myns\\' => $this->cacheDir
         ));
         $writer->write(new PHPClass('Bar', 'myns2'), '.');
@@ -50,7 +50,7 @@ class Psr4WriterTest extends \PHPUnit_Framework_TestCase
 
     public function testWriterLong()
     {
-        $writer = new Psr4Writer(array(
+        $writer = new Psr4PathGenerator(array(
             'myns\\' => $this->cacheDir
         ));
 
@@ -64,7 +64,7 @@ class Psr4WriterTest extends \PHPUnit_Framework_TestCase
 
     public function testWriter()
     {
-        $writer = new Psr4Writer(array(
+        $writer = new Psr4PathGenerator(array(
             'myns\\' => $this->cacheDir
         ));
 
@@ -79,7 +79,7 @@ class Psr4WriterTest extends \PHPUnit_Framework_TestCase
     public function testNonExistingDir()
     {
         $this->setExpectedException('Exception');
-        new Psr4Writer(array(
+        new Psr4PathGenerator(array(
             'myns\\' => "aaaa"
         ));
     }
@@ -87,7 +87,7 @@ class Psr4WriterTest extends \PHPUnit_Framework_TestCase
     public function testInvalidNs()
     {
         $this->setExpectedException('Exception');
-        new Psr4Writer(array(
+        new Psr4PathGenerator(array(
             'myns' => "aaaa"
         ));
     }

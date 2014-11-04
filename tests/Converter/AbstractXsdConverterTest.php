@@ -1,20 +1,18 @@
 <?php
 namespace Goetas\Xsd\XsdToPhp\Tests\Converter;
 
-use Goetas\Xsd\XsdToPhp\AbstractXsd2Converter;
-
 class AbstractXsdConverterTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
      *
-     * @var AbstractXsd2Converter
+     * @var AbstractConverter
      */
     protected $converter;
 
     public function setUp()
     {
-        $this->converter = $this->getMockForAbstractClass('Goetas\Xsd\XsdToPhp\AbstractXsd2Converter');
+        $this->converter = $this->getMockForAbstractClass('Goetas\Xsd\XsdToPhp\AbstractConverter');
     }
 
     public function testAliases()
@@ -41,8 +39,6 @@ class AbstractXsdConverterTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('int', $defaultHandlers);
         $this->assertArrayHasKey('integer', $defaultHandlers);
         $this->assertArrayHasKey('string', $defaultHandlers);
-        $this->assertArrayHasKey('date', $defaultHandlers);
-        $this->assertArrayHasKey('dateTime', $defaultHandlers);
     }
 
     public function testNamespaces()

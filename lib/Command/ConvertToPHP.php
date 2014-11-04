@@ -1,13 +1,13 @@
 <?php
 namespace Goetas\Xsd\XsdToPhp\Command;
 
-use Goetas\Xsd\XsdToPhp\Xsd2PhpConverter;
-use Goetas\Xsd\XsdToPhp\Generator\ClassGenerator;
-use Goetas\Xsd\XsdToPhp\PhpWriter\Psr0Writer;
-use Goetas\Xsd\XsdToPhp\PhpWriter\Psr4Writer;
+use Goetas\Xsd\XsdToPhp\Php\PhpConverter;
+use Goetas\Xsd\XsdToPhp\Php\ClassGenerator;
+use Goetas\Xsd\XsdToPhp\Php\PathGenerator\Psr4PathGenerator;
 use Goetas\XML\XSDReader\SchemaReader;
-use Goetas\Xsd\XsdToPhp\AbstractXsd2Converter;
+use Goetas\Xsd\XsdToPhp\AbstractConverter;
 use Symfony\Component\Console\Output\OutputInterface;
+use Zend\Code\Generator\FileGenerator;
 
 class ConvertToPHP extends AbstractConvert
 {
@@ -25,13 +25,13 @@ class ConvertToPHP extends AbstractConvert
 
     protected function getConverterter()
     {
-        return new Xsd2PhpConverter();
+        return new PhpConverter();
     }
 
-    protected function convert(AbstractXsd2Converter $converter, array $schemas, array $targets, OutputInterface $output)
+    protected function convert(AbstractConverter $converter, array $schemas, array $targets, OutputInterface $output)
     {
         $generator = new ClassGenerator();
-        $writer = new Psr4Writer($targets);
+        $pathGenerator = new Psr4PathGenerator($targets);
         $progress = $this->getHelperSet()->get('progress');
 
         $items = $converter->convert($schemas);
@@ -39,14 +39,24 @@ class ConvertToPHP extends AbstractConvert
 
         foreach ($items as $item) {
             $progress->advance(1, true);
+            $output->write(" Creating <info>" . $output->getFormatter()->escape($item->getFullName()) . "</info>... ");
+            $path = $pathGenerator->getPath($item);
 
-            $output->write(" Item <info>" . $item->getFullName() . "</info>... ");
 
-            $source = $generator->generate($item);
-            $output->write("created source... ");
+            $fileGen = new FileGenerator();
+            $fileGen->setFilename($path);
+            $classGen = new \Zend\Code\Generator\ClassGenerator();
 
-            $bytes = $writer->write($item, $source);
-            $output->writeln("saved source <comment>$bytes bytes</comment>.");
+            if ($generator->generate($classGen, $item)) {
+
+                $fileGen->setClass($classGen);
+
+                $fileGen->write();
+                $output->writeln("done.");
+            }else{
+                $output->write("skip.");
+
+            }
         }
         $progress->finish();
     }

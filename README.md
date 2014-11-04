@@ -24,10 +24,19 @@ There are two recommended ways to install xsd2php via [Composer](https://getcomp
     ..
     "goetas/xsd2php":"2.*@dev",
     "goetas/xsd-reader":"2.*@dev",
+    "jms/serializer": "xsd2php-dev as 0.18.0",
     ..
+    "repositories": [{
+        "type": "vcs",
+        "url": "https://github.com/goetas/serializer.git"
+    }],    
 }
 ```
 
+
+This package requires a patched version of JMS Serializer.
+In the last year the activity of JMS serializer was very low and some features 
+required by this project was rejected or not yet reviewed ( [#301](https://github.com/schmittjoh/serializer/pull/301), [#222](https://github.com/schmittjoh/serializer/pull/222) )
 
 Usage
 -----
@@ -90,4 +99,31 @@ will instcut XSD2PHP to do not generate any metadata infmation for `CustomOTADat
 All reference to this type are replaced with the `Vendor/Project/CustomDateClass` class. You have to provide a [custom serializer](http://jmsyst.com/libs/serializer/master/handlers#subscribing-handlers) for this type
 
 
+```php
+use JMS\Serializer\SerializerBuilder;
+use JMS\Serializer\Handler\HandlerRegistryInterface;
+
+use Goetas\Xsd\XsdToPhp\Jms\Handler\BaseTypesHandler;
+use Goetas\Xsd\XsdToPhp\Jms\Handler\XmlSchemaDateHandler;
+
+$serializerBuiler = SerializerBuilder::create();
+$serializerBuiler->addMetadataDir('metadata dir', 'DemoNs');
+$serializerBuiler->configureHandlers(function (HandlerRegistryInterface $h) use($serializerBuiler)
+{
+    $serializerBuiler->addDefaultHandlers();
+    $h->registerSubscribingHandler(new BaseTypesHandler()); // XMLSchema List handling
+    $h->registerSubscribingHandler(new XmlSchemaDateHandler()); // XMLSchema date handling
+});
+
+$serializer = $serializerBuiler->build();
+
+// unserialize the XML into Demo\MyObject object
+$object = $serializer->deserialize('<some xml/>', 'DemoNs\MyObject', 'xml');
+
+// some code ....
+
+// serialize bck the Demo\MyObject into XML
+$newXml = $serializer->serialize($object, 'xml');
+
+```
 
