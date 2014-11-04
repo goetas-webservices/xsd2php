@@ -26,8 +26,6 @@
     <filter>
   <blacklist>
     <directory>vendor</directory>
-    <directory>/tmp</directory>
-    <directory>/dev</directory>
   </blacklist>
   </filter>    
 
