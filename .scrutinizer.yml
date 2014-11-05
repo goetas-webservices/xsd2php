@@ -36,6 +36,7 @@ tools:
     php_loc: true
     php_pdepend: true
     external_code_coverage: true
+        timeout: 1500
 filter:
     paths:
         - lib/*
