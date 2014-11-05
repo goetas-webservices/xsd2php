@@ -120,10 +120,6 @@ class OTASerializationTest extends \PHPUnit_Framework_TestCase
         foreach ($items as $item) {
             $path = $pathGenerator->getPath($item);
 
-            if (is_file($path)) {
-                continue;
-            }
-
             $fileGen = new FileGenerator();
             $fileGen->setFilename($path);
             $classGen = new \Zend\Code\Generator\ClassGenerator();
@@ -155,12 +151,7 @@ class OTASerializationTest extends \PHPUnit_Framework_TestCase
         ));
 
         foreach ($items as $item) {
-
             $path = $pathGenerator->getPath($item);
-
-            if (is_file($path)) {
-                continue;
-            }
             file_put_contents($path, $dumper->dump($item, 10000));
         }
 
