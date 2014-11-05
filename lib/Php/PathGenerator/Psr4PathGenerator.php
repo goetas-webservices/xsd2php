@@ -22,7 +22,7 @@ class Psr4PathGenerator extends Psr4PathGeneratorBase implements PathGenerator
             }
         }
 
-        throw new WriterException("Can't find a defined location where save '$php' object");
+        throw new PathGeneratorException("Can't find a defined location where save '$php' object");
     }
 }
 
