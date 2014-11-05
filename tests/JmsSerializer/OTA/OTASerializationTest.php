@@ -276,11 +276,11 @@ class OTASerializationTest extends \PHPUnit_Framework_TestCase
         $diff = self::$differ->diff($original, $new);
 
         if (strpos($diff, '<dm:copy count="1"/>') === false || strlen($diff) > 110) {
+            /*
             file_put_contents("a.xml", $original);
             file_put_contents("b.xml", $new);
             file_put_contents("c.xml", $diff);
-            print_r($object);
-
+            */
             $this->assertFalse(true);
         }
     }

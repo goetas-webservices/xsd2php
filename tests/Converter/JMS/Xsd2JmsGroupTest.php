@@ -50,8 +50,7 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
             </xs:schema>
             ';
         $classes = $this->getClasses($content);
-        $this->assertCount(4, $classes);
-
+        $this->assertCount(3, $classes);
         $this->assertEquals(
             array(
                 'Example\\ComplexType1Type' => array(
@@ -65,7 +64,7 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
                                 'setter' => 'setAtt'
                             ),
                             'xml_attribute' => true,
-                            'type' => 'Goetas\\Xsd\\XsdToPhp\\Jms\\BaseTypeValue<\'Example\\ComplexType1Type\\AttAType\', \'string\'>'
+                            'type' => 'string'
                         ),
                         'string1' => array(
                             'expose' => true,
@@ -78,7 +77,7 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
                                 'getter' => 'getString1',
                                 'setter' => 'setString1'
                             ),
-                            'type' => 'Goetas\\Xsd\\XsdToPhp\\Jms\\BaseTypeValue<\'Example\\ComplexType1Type\\String1AType\', \'string\'>'
+                            'type' => 'string'
                         ),
                         'string2' => array(
                             'expose' => true,
@@ -97,40 +96,8 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
                 )
             ), $classes['Example\\ComplexType1Type']);
 
-        $this->assertEquals(
-            array(
-                'Example\\ComplexType1Type\\AttAType' => array(
-                    'properties' => array(
-                        '__value' => array(
-                            'expose' => true,
-                            'xml_value' => true,
-                            'access_type' => 'public_method',
-                            'accessor' => array(
-                                'getter' => 'value',
-                                'setter' => 'value'
-                            ),
-                            'type' => 'string'
-                        )
-                    )
-                )
-            ), $classes['Example\\ComplexType1Type\\AttAType']);
-        $this->assertEquals(
-            array(
-                'Example\\ComplexType1Type\\String1AType' => array(
-                    'properties' => array(
-                        '__value' => array(
-                            'expose' => true,
-                            'xml_value' => true,
-                            'access_type' => 'public_method',
-                            'accessor' => array(
-                                'getter' => 'value',
-                                'setter' => 'value'
-                            ),
-                            'type' => 'string'
-                        )
-                    )
-                )
-            ), $classes['Example\\ComplexType1Type\\String1AType']);
+
+
         $this->assertEquals(
             array(
                 'Example\\ComplexType1Type\\String2AType' => array(
@@ -302,7 +269,7 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
                             'xml_list' => array(
                                 'inline' => false,
                                 'entry_name' => 'string',
-                                'entry_namespace' => 'http://www.example.com'
+                                'namespace' => 'http://www.example.com'
                             )
                         )
                     )

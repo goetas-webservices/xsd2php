@@ -23,17 +23,17 @@ class Xsd2PhpElementTest  extends Xsd2PhpBase
         $this->assertEquals('Example', $classes['Example\ElementOne']->getNamespace());
         $this->assertEquals('ElementOne', $classes['Example\ElementOne']->getName());
 
-        $this->assertNull($classes['Example\ElementOne']->getExtends());
+        $this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Php\Structure\PHPClass', $classes['Example\ElementOne']->getExtends());
 
-        $this->assertCount(1, $classes['Example\ElementOne']->getProperties());
-        $this->assertArrayHasKey("__value", $classes['Example\ElementOne']->getProperties());
+        $this->assertCount(0, $classes['Example\ElementOne']->getProperties());
+        //$this->assertArrayHasKey("__value", $classes['Example\ElementOne']->getProperties());
 
-        $property = $classes['Example\ElementOne']->getProperty('__value');
-        $this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Php\Structure\PHPProperty', $property);
+        //$property = $classes['Example\ElementOne']->getProperty('__value');
+        //$this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Php\Structure\PHPProperty', $property);
 
-        $this->assertEquals('protected', $property->getVisibility());
-        $this->assertEquals('', $property->getType()->getNamespace());
-        $this->assertEquals($phpName, $property->getType()->getName());
+        //$this->assertEquals('protected', $property->getVisibility());
+        //$this->assertEquals('', $property->getType()->getNamespace());
+        //$this->assertEquals($phpName, $property->getType()->getName());
     }
 
     /**
@@ -58,9 +58,11 @@ class Xsd2PhpElementTest  extends Xsd2PhpBase
         $this->assertEquals('Example', $classes['Example\ElementOne']->getNamespace());
         $this->assertEquals('ElementOne', $classes['Example\ElementOne']->getName());
 
-        $this->assertNull($classes['Example\ElementOne']->getExtends());
+        $this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Php\Structure\PHPClass', $classes['Example\ElementOne']->getExtends());
 
-        $this->assertCount(1, $classes['Example\ElementOne']->getProperties());
+        $this->assertCount(0, $classes['Example\ElementOne']->getProperties());
+
+        /*
         $this->assertArrayHasKey("__value", $classes['Example\ElementOne']->getProperties());
 
         $property = $classes['Example\ElementOne']->getProperty('__value');
@@ -68,6 +70,7 @@ class Xsd2PhpElementTest  extends Xsd2PhpBase
 
         $this->assertEquals('', $property->getType()->getNamespace());
         $this->assertEquals($phpName, $property->getType()->getName());
+        */
     }
 
     /**

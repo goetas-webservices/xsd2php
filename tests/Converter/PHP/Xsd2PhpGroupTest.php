@@ -38,7 +38,7 @@ class Xsd2PhpGroupTest  extends Xsd2PhpBase
             ';
         $classes = $this->getClasses($content);
 
-        $this->assertCount(2, $classes);
+        $this->assertCount(1, $classes);
         $this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Php\Structure\PHPClass', $classes['Example\ComplexType1Type']);
         //$this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Php\Structure\PHPTrait', $classes['Example\EGExtensionList']);
     }
@@ -243,50 +243,10 @@ class Xsd2PhpGroupTest  extends Xsd2PhpBase
             ';
         $classes = $this->getClasses($content);
 
-        $this->assertCount(6, $classes);
-
-        //$this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Php\Structure\PHPTrait', $attGroup1 = $classes['Example\AttributeGroup1']);
-        //$this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Php\Structure\PHPTrait', $attGroup2 = $classes['Example\AttributeGroup2']);
-        //$this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Php\Structure\PHPTrait', $group1 = $classes['Example\Group1']);
-        //$this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Php\Structure\PHPTrait', $group2 = $classes['Example\Group2']);
+        $this->assertCount(2, $classes);
 
         $this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Php\Structure\PHPClass', $complexType1 = $classes['Example\ComplexType1Type']);
         $this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Php\Structure\PHPClass', $element1 = $classes['Example\Element1']);
-
-        $this->assertContains($attGroup2, $attGroup1->getTraits());
-        $this->assertContains($group2, $group1->getTraits());
-
-        $this->assertContains($attGroup1, $complexType1->getTraits());
-        $this->assertContains($group1, $complexType1->getTraits());
-
-        //$attGroup1
-        $property = $attGroup1->getProperty('attributeGroup1Att1');
-        $this->assertEquals('attributeGroup1Att1', $property->getName());
-        $this->assertEquals('', $property->getType()->getNamespace());
-        $this->assertEquals('string', $property->getType()->getName());
-
-        $property = $attGroup1->getProperty('attribute1');
-        $this->assertEquals('attribute1', $property->getName());
-        $this->assertEquals('', $property->getType()->getNamespace());
-        $this->assertEquals('string', $property->getType()->getName());
-
-        //$attGroup2
-        $property = $attGroup2->getProperty('attributeGroup2Att2');
-        $this->assertEquals('attributeGroup2Att2', $property->getName());
-        $this->assertEquals('', $property->getType()->getNamespace());
-        $this->assertEquals('string', $property->getType()->getName());
-
-        //$group1
-        $property = $group1->getProperty('group1El1');
-        $this->assertEquals('group1El1', $property->getName());
-        $this->assertEquals('', $property->getType()->getNamespace());
-        $this->assertEquals('string', $property->getType()->getName());
-
-        //$group2
-        $property = $group2->getProperty('group2El1');
-        $this->assertEquals('group2El1', $property->getName());
-        $this->assertEquals('', $property->getType()->getNamespace());
-        $this->assertEquals('string', $property->getType()->getName());
 
 
         //$complexType1
