@@ -80,6 +80,10 @@ abstract class AbstractConverter
         {
             return "integer";
         });
+        $this->addAliasMap("http://www.w3.org/2001/XMLSchema", "gMonth", function (Type $type)
+        {
+            return "integer";
+        });
         $this->addAliasMap("http://www.w3.org/2001/XMLSchema", "gYear", function (Type $type)
         {
             return "integer";
@@ -129,6 +133,22 @@ abstract class AbstractConverter
             return "integer";
         });
         $this->addAliasMap("http://www.w3.org/2001/XMLSchema", "unsignedInt", function (Type $type)
+        {
+            return "integer";
+        });
+        $this->addAliasMap("http://www.w3.org/2001/XMLSchema", "negativeInteger", function (Type $type)
+        {
+            return "integer";
+        });
+        $this->addAliasMap("http://www.w3.org/2001/XMLSchema", "positiveInteger", function (Type $type)
+        {
+            return "integer";
+        });
+        $this->addAliasMap("http://www.w3.org/2001/XMLSchema", "nonNegativeInteger", function (Type $type)
+        {
+            return "integer";
+        });
+        $this->addAliasMap("http://www.w3.org/2001/XMLSchema", "nonPositiveInteger", function (Type $type)
         {
             return "integer";
         });
