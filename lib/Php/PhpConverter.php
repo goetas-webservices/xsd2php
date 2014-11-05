@@ -201,6 +201,12 @@ class PhpConverter extends AbstractConverter
         ];
     }
 
+    /**
+     *
+     * @param Type $type
+     * @param boolean $force
+     * @return \Goetas\Xsd\XsdToPhp\Php\Structure\PHPClass
+     */
     private function visitType(Type $type, $force = false)
     {
         if (! isset($this->classes[spl_object_hash($type)])) {
@@ -234,6 +240,12 @@ class PhpConverter extends AbstractConverter
         return $this->classes[spl_object_hash($type)]["class"];
     }
 
+    /**
+     * @param Type $type
+     * @param string $name
+     * @param PHPClass $parentClass
+     * @return \Goetas\Xsd\XsdToPhp\Php\Structure\PHPClass
+     */
     private function visitAnonymousType(Type $type, $name, PHPClass $parentClass)
     {
         if (! isset($this->classes[spl_object_hash($type)])) {
@@ -365,15 +377,24 @@ class PhpConverter extends AbstractConverter
 
         if ($arrayize && ($t = $element->getType()) && ($itemOfArray = $this->isArray($t))) {
 
-            if(!$t->getName()){
-                $classType = $this->visitAnonymousType($t, $element->getName(), $class);
+            if($itemOfArray instanceof Type){
+                if(!$itemOfArray->getName()){
+                    $classType = $this->visitAnonymousType($itemOfArray, $element->getName(), $class);
+                }else{
+                    $classType = $this->visitType($itemOfArray);
+                }
+                $elementProp = new PHPProperty();
+                $elementProp->setName(Inflector::camelize($element->getName()));
+                $elementProp->setType($classType);
             }else{
-                $classType = $this->visitType($t);
+                if(!$t->getName()){
+                    $classType = $this->visitAnonymousType($t, $element->getName(), $class);
+                }else{
+                    $classType = $this->visitType($t);
+                }
+                $elementProp = $this->visitElement($classType, $schema, $itemOfArray, false);
             }
-
-            $elementType = $this->visitElement($classType, $schema, $itemOfArray, false);
-
-            $property->setType(new PHPClassOf($elementType));
+            $property->setType(new PHPClassOf($elementProp));
         } else {
             if ($arrayize && $element instanceof ElementItem && ($element->getMax() > 1 || $element->getMax() === - 1)) {
 
