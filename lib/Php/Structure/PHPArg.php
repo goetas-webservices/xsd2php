@@ -36,7 +36,7 @@ class PHPArg
         return $this->type;
     }
 
-    public function setType($type)
+    public function setType(PHPClass $type)
     {
         $this->type = $type;
         return $this;
