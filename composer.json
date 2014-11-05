@@ -1,13 +1,13 @@
 {
-    "name": "goetas/xsd2php",
-    "description": "Convert XSD  (XML Schema) definitions into PHP classes",
-    "type": "library",
-    "authors": [
+    "name":"goetas/xsd2php",
+    "description":"Convert XSD  (XML Schema) definitions into PHP classes",
+    "type":"library",
+    "authors":[
         {
-            "name": "Asmir Mustafic"
+            "name":"Asmir Mustafic"
         }
     ],
-    "keywords": [
+    "keywords":[
         "converter",
         "xml",
         "xsd",
@@ -15,36 +15,38 @@
         "jms",
         "serializer"
     ],
-    "license": "LGPL",
-    "require": {
-        "php": "~5.4",
-        "symfony/console": "~2.1",
-        "symfony/yaml": "~2.1",
-        "goetas/xsd-reader": "~2.0@dev",
-        "doctrine/inflector": "~1.0",
-        "zendframework/zend-code": "~2.2"
+    "license":"LGPL",
+    "require":{
+        "php":"~5.4",
+        "symfony/console":"~2.1",
+        "symfony/yaml":"~2.1",
+        "goetas/xsd-reader":"~2.0@dev",
+        "doctrine/inflector":"~1.0",
+        "zendframework/zend-code":"~2.2"
     },
-    "require-dev": {
-        "phpunit/phpunit": "~4.0",
-        "jms/serializer": "xsd2php-dev as 0.18.0"
+    "require-dev":{
+        "phpunit/phpunit":"~4.0",
+        "jms/serializer":"xsd2php-dev as 0.18.0"
     },
-    "repositories": [{
-	    "type": "vcs",
-	    "url": "https://github.com/goetas/serializer.git"
-	}],
-    "autoload": {
-        "psr-4": {
+    "repositories":[
+        {
+            "type":"vcs",
+            "url":"https://github.com/goetas/serializer.git"
+        }
+    ],
+    "autoload":{
+        "psr-4":{
             "Goetas\\Xsd\\XsdToPhp\\": "lib/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Goetas\\Xsd\\XsdToPhp\\Tests\\": "tests/"
+            "Goetas\\Xsd\\XsdToPhp\\Tests\\":"tests/"
         }
     },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "2.0-dev"
+    "extra":{
+        "branch-alias":{
+            "dev-master":"2.0-dev"
         }
     }
 }
