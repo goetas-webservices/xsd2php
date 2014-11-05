@@ -54,6 +54,14 @@ class OTASerializationTest extends \PHPUnit_Framework_TestCase
         self::$loader->addPsr4(self::$namespace . "\\", self::$phpDir);
         self::$loader->register();
 
+
+        if (is_dir(self::$phpDir)) {
+            self::delTree(self::$phpDir);
+        }
+        if (is_dir(self::$jmsDir)) {
+            self::delTree(self::$jmsDir);
+        }
+
         if (! is_dir(self::$phpDir)) {
             mkdir(self::$phpDir);
         }
@@ -89,7 +97,7 @@ class OTASerializationTest extends \PHPUnit_Framework_TestCase
 
     public static function tearDownAfterClass()
     {
-         if (is_dir(self::$phpDir)) {
+        if (is_dir(self::$phpDir)) {
             self::delTree(self::$phpDir);
         }
         if (is_dir(self::$jmsDir)) {
