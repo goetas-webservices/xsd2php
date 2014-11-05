@@ -35,8 +35,8 @@ tools:
     php_cpd: true
     php_loc: true
     php_pdepend: true
-    external_code_coverage: true
-        timeout: 1500
+    external_code_coverage:
+        timeout: 1500 #15 min
 filter:
     paths:
         - lib/*
