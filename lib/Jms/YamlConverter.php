@@ -193,7 +193,6 @@ class YamlConverter extends AbstractConverter
                 return $class;
             }
 
-
             $className = $this->findPHPName($type);
 
             $class = array();
@@ -203,11 +202,14 @@ class YamlConverter extends AbstractConverter
 
             $this->classes[spl_object_hash($type)]["class"] = &$class;
 
-
             $this->visitTypeBase($class, $data, $type, $type->getName());
 
+            if (!$force && $this->typeHasValue($type, $class, $type->getName()) && $type instanceof SimpleType){
+                $this->classes[spl_object_hash($type)]["skip"] = true;
+                return $class;
+            }
 
-            if ($this->isArray($type) && !$force) {
+            if (!$force &&  $this->isArray($type)) {
                 $this->classes[spl_object_hash($type)]["skip"] = true;
                 return $class;
             }

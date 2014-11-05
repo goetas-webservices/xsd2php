@@ -227,6 +227,11 @@ class PhpConverter extends AbstractConverter
 
             $this->visitTypeBase($class, $type);
 
+            $hasEnum = $class->getChecks('__value');
+            if (!$force && !isset($hasEnum['enumeration']) &&  $class->hasPropertyInHierarchy('__value') && $type instanceof SimpleType){
+                $this->classes[spl_object_hash($type)]["skip"] = true;
+                return $class;
+            }
 
             if ($this->isArray($type) && !$force) {
                 $this->classes[spl_object_hash($type)]["skip"] = true;
