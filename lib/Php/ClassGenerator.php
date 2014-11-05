@@ -215,7 +215,7 @@ class ClassGenerator
 
         $docblock->setTag(new ReturnTag("boolean"));
 
-        $paramIndex = new ParameterGenerator($prop->getName(), "mixed");
+        $paramIndex = new ParameterGenerator("index", "mixed");
 
         $method = new MethodGenerator("isset" . Inflector::classify($prop->getName()), [$paramIndex]);
         $method->setDocBlock($docblock);
@@ -230,7 +230,7 @@ class ClassGenerator
 
         $patramTag = new ParamTag("index", "scalar");
         $docblock->setTag($patramTag);
-        $paramIndex = new ParameterGenerator($prop->getName(), "mixed");
+        $paramIndex = new ParameterGenerator("index", "mixed");
 
         $docblock->setTag(new ReturnTag("void"));
 
