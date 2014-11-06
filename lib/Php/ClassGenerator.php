@@ -204,43 +204,45 @@ class ClassGenerator
 
     private function handleGetter(Generator\ClassGenerator $generator, PHPProperty $prop, PHPClass $class)
     {
-        $docblock = new DocBlockGenerator();
-        $docblock->setShortDescription("isset " . $prop->getName());
-        if ($prop->getDoc()) {
-            $docblock->setLongDescription($prop->getDoc());
+
+        if ($prop->getType() instanceof PHPClassOf){
+            $docblock = new DocBlockGenerator();
+            $docblock->setShortDescription("isset " . $prop->getName());
+            if ($prop->getDoc()) {
+                $docblock->setLongDescription($prop->getDoc());
+            }
+
+            $patramTag = new ParamTag("index", "scalar");
+            $docblock->setTag($patramTag);
+
+            $docblock->setTag(new ReturnTag("boolean"));
+
+            $paramIndex = new ParameterGenerator("index", "mixed");
+
+            $method = new MethodGenerator("isset" . Inflector::classify($prop->getName()), [$paramIndex]);
+            $method->setDocBlock($docblock);
+            $method->setBody("return isset(\$this->" . $prop->getName() . "[\$index]);");
+            $generator->addMethodFromGenerator($method);
+
+            $docblock = new DocBlockGenerator();
+            $docblock->setShortDescription("unset " . $prop->getName());
+            if ($prop->getDoc()) {
+                $docblock->setLongDescription($prop->getDoc());
+            }
+
+            $patramTag = new ParamTag("index", "scalar");
+            $docblock->setTag($patramTag);
+            $paramIndex = new ParameterGenerator("index", "mixed");
+
+            $docblock->setTag(new ReturnTag("void"));
+
+
+
+            $method = new MethodGenerator("unset" . Inflector::classify($prop->getName()), [$paramIndex]);
+            $method->setDocBlock($docblock);
+            $method->setBody("unset(\$this->" . $prop->getName() . "[\$index]);");
+            $generator->addMethodFromGenerator($method);
         }
-
-        $patramTag = new ParamTag("index", "scalar");
-        $docblock->setTag($patramTag);
-
-        $docblock->setTag(new ReturnTag("boolean"));
-
-        $paramIndex = new ParameterGenerator("index", "mixed");
-
-        $method = new MethodGenerator("isset" . Inflector::classify($prop->getName()), [$paramIndex]);
-        $method->setDocBlock($docblock);
-        $method->setBody("return isset(\$this->" . $prop->getName() . "[\$index]);");
-        $generator->addMethodFromGenerator($method);
-
-        $docblock = new DocBlockGenerator();
-        $docblock->setShortDescription("unset " . $prop->getName());
-        if ($prop->getDoc()) {
-            $docblock->setLongDescription($prop->getDoc());
-        }
-
-        $patramTag = new ParamTag("index", "scalar");
-        $docblock->setTag($patramTag);
-        $paramIndex = new ParameterGenerator("index", "mixed");
-
-        $docblock->setTag(new ReturnTag("void"));
-
-
-
-        $method = new MethodGenerator("unset" . Inflector::classify($prop->getName()), [$paramIndex]);
-        $method->setDocBlock($docblock);
-        $method->setBody("unset(\$this->" . $prop->getName() . "[\$index]);");
-        $generator->addMethodFromGenerator($method);
-
         // ////
 
         $docblock = new DocBlockGenerator();
