@@ -363,20 +363,37 @@ class ClassGenerator
         $this->handleSetter($generator, $prop, $class);
     }
 
+
+
     private function handleConstantValues(Generator\ClassGenerator $generator, PHPClass $type, array $enumeration)
     {
+        if (preg_match("/[\r\n\t]/", $enumeration['value'])) {
+            return;
+        }
+
         $docblock = new DocBlockGenerator("Constant for " . var_export($enumeration['value'], 1) . " value.");
 
         if (trim($enumeration['doc'])) {
             $docblock->setLongDescription(trim($enumeration['doc']));
         }
 
-        $prop = new PropertyGenerator("VAL_" . strtoupper(str_replace(array(
-            "-",
-            " "
-        ), "_", Inflector::tableize($enumeration['value']))), $enumeration['value'], PropertyGenerator::FLAG_CONSTANT);
+        $constantNameFixer = function($s){
+            if (function_exists('iconv')) {
+                $s = iconv("UTF-8", "ASCII//TRANSLIT", $s);
+            }
+
+            if (is_numeric($s) && $s<0) {
+                $s = str_replace('-', "MINUS_", $s);
+            }
+
+            return strtoupper(preg_replace("/[^a-z0-9_]+/i", "_", $s));
+        };
+
+        $prop = new PropertyGenerator("VAL_" . $constantNameFixer($enumeration['value']), $enumeration['value'], PropertyGenerator::FLAG_CONSTANT);
         $prop->setDocBlock($docblock);
+
         $generator->addPropertyFromGenerator($prop);
+
         return $prop->getDefaultValue()->getValue();
     }
 
@@ -424,7 +441,7 @@ class ClassGenerator
 
     public function generate(Generator\ClassGenerator $class, PHPClass $type)
     {
-        $docblock = new DocBlockGenerator("Class reppresneting " . $type->getName());
+        $docblock = new DocBlockGenerator("Class representing " . $type->getName());
         if ($type->getDoc()) {
             $docblock->setLongDescription($type->getDoc());
         }
