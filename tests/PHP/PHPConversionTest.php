@@ -71,5 +71,8 @@ class PHPConversionTest extends \PHPUnit_Framework_TestCase
         $codegen = $items['Example\SingleType'];
         $this->assertFalse($codegen->hasMethod('issetId'));
         $this->assertFalse($codegen->hasMethod('unsetId'));
+
+        $this->assertTrue($codegen->hasMethod('getId'));
+        $this->assertTrue($codegen->hasMethod('setId'));
     }
 }
