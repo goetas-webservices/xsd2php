@@ -204,7 +204,7 @@ class YamlConverter extends AbstractConverter
 
             $this->visitTypeBase($class, $data, $type, $type->getName());
 
-            if (!$force && $this->typeHasValue($type, $class, $type->getName()) && $type instanceof SimpleType){
+            if ($type instanceof SimpleType){
                 $this->classes[spl_object_hash($type)]["skip"] = true;
                 return $class;
             }
@@ -214,12 +214,14 @@ class YamlConverter extends AbstractConverter
                 return $class;
             }
         }elseif ($force) {
-            $this->classes[spl_object_hash($type)]["skip"] = false;
+            if (!($type instanceof SimpleType) && !$this->getTypeAlias($type)){
+                $this->classes[spl_object_hash($type)]["skip"] = false;
+            }
         }
         return $this->classes[spl_object_hash($type)]["class"];
     }
 
-    private function &visitAnonymousType(Type $type, $name, &$parentClass)
+    private function &visitTypeAnonymous(Type $type, $name, &$parentClass)
     {
         $class = array();
         $data = array();
@@ -230,6 +232,9 @@ class YamlConverter extends AbstractConverter
 
         $this->classes[spl_object_hash($type)]["class"] = &$class;
 
+        if ($type instanceof SimpleType){
+            $this->classes[spl_object_hash($type)]["skip"] = true;
+        }
         return $class;
     }
 
@@ -361,7 +366,7 @@ class YamlConverter extends AbstractConverter
                 if ($type->getName()) {
                     $class = $this->visitType($type);
                 } else {
-                    $class = $this->visitAnonymousType($type, $name, $parentClass);
+                    $class = $this->visitTypeAnonymous($type, $name, $parentClass);
                 }
                 $props = reset($class);
                 if (isset($props['properties']['__value']) && count($props['properties']) === 1) {
@@ -400,7 +405,7 @@ class YamlConverter extends AbstractConverter
             if($itemOfArray instanceof Type){
 
                 if(!$t->getName()){
-                    $visitedType = $this->visitAnonymousType($itemOfArray, $element->getName(), $class);
+                    $visitedType = $this->visitTypeAnonymous($itemOfArray, $element->getName(), $class);
 
                     if($prop = $this->typeHasValue($itemOfArray, $class, 'xx')){
                         $property["type"] = "array<" .$prop . ">";
@@ -418,7 +423,7 @@ class YamlConverter extends AbstractConverter
 
             }else{
                 if(!$t->getName()){
-                    $classType = $this->visitAnonymousType($t, $element->getName(), $class);
+                    $classType = $this->visitTypeAnonymous($t, $element->getName(), $class);
                 }else{
                     $classType = $this->visitType($t);
                 }
@@ -464,7 +469,7 @@ class YamlConverter extends AbstractConverter
         }
 
         if (! $node->getType()->getName()) {
-            $visited = $this->visitAnonymousType($node->getType(), $node->getName(), $class);
+            $visited = $this->visitTypeAnonymous($node->getType(), $node->getName(), $class);
         } else {
             $visited = $this->visitType($node->getType());
         }

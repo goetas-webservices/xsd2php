@@ -71,21 +71,19 @@ class Xsd2PhpGroupTest  extends Xsd2PhpBase
             </xs:schema>
             ';
         $classes = $this->getClasses($content);
-        $this->assertCount(4, $classes);
+        $this->assertCount(2, $classes);
 
         $this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Php\Structure\PHPClass', $complexType1 = $classes['Example\ComplexType1Type']);
-        $this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Php\Structure\PHPClass', $s1 = $classes['Example\ComplexType1Type\String1AType']);
         $this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Php\Structure\PHPClass', $s2 = $classes['Example\ComplexType1Type\String2AType']);
-        $this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Php\Structure\PHPClass', $a1 = $classes['Example\ComplexType1Type\AttAType']);
 
         $s1Prop = $complexType1->getProperty('string1');
-        $this->assertSame($s1, $s1Prop->getType());
+        $this->assertSame('Example\ComplexType1Type\String1AType', $s1Prop->getType()->getFullName());
 
         $s2Prop = $complexType1->getProperty('string2');
         $this->assertSame($s2, $s2Prop->getType());
 
         $a1Prop = $complexType1->getProperty('att');
-        $this->assertSame($a1, $a1Prop->getType());
+        $this->assertSame('Example\ComplexType1Type\AttAType', $a1Prop->getType()->getFullName());
 
     }
 

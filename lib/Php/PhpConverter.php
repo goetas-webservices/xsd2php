@@ -227,20 +227,20 @@ class PhpConverter extends AbstractConverter
 
             $this->visitTypeBase($class, $type);
 
-            $hasEnum = $class->getChecks('__value');
-            if (!$force && !isset($hasEnum['enumeration']) &&  $class->hasPropertyInHierarchy('__value') && $type instanceof SimpleType){
+            if ($type instanceof SimpleType){
                 $this->classes[spl_object_hash($type)]["skip"] = true;
                 return $class;
             }
-
             if ($this->isArray($type) && !$force) {
                 $this->classes[spl_object_hash($type)]["skip"] = true;
                 return $class;
             }
 
-            $this->classes[spl_object_hash($type)]["skip"] = ! ! $this->getTypeAlias($type);
+            $this->classes[spl_object_hash($type)]["skip"] = !!$this->getTypeAlias($type);
         }elseif ($force) {
-            $this->classes[spl_object_hash($type)]["skip"] = false;
+            if (!($type instanceof SimpleType) && !$this->getTypeAlias($type)){
+                $this->classes[spl_object_hash($type)]["skip"] = false;
+            }
         }
         return $this->classes[spl_object_hash($type)]["class"];
     }
@@ -251,7 +251,7 @@ class PhpConverter extends AbstractConverter
      * @param PHPClass $parentClass
      * @return \Goetas\Xsd\XsdToPhp\Php\Structure\PHPClass
      */
-    private function visitAnonymousType(Type $type, $name, PHPClass $parentClass)
+    private function visitTypeAnonymous(Type $type, $name, PHPClass $parentClass)
     {
         if (! isset($this->classes[spl_object_hash($type)])) {
             $this->classes[spl_object_hash($type)]["class"] = $class = new PHPClass();
@@ -262,6 +262,9 @@ class PhpConverter extends AbstractConverter
 
             $this->visitTypeBase($class, $type);
 
+            if ($type instanceof SimpleType){
+                $this->classes[spl_object_hash($type)]["skip"] = true;
+            }
         }
         return $this->classes[spl_object_hash($type)]["class"];
     }
@@ -297,7 +300,7 @@ class PhpConverter extends AbstractConverter
             $types = array();
             foreach ($unions as $i => $unon) {
                 if (! $unon->getName()) {
-                    $types[] = $this->visitAnonymousType($unon, $type->getName() . $i, $class);
+                    $types[] = $this->visitTypeAnonymous($unon, $type->getName() . $i, $class);
                 } else {
                     $types[] = $this->visitType($unon);
                 }
@@ -357,7 +360,7 @@ class PhpConverter extends AbstractConverter
                 $arg->setType($this->visitType($itemOfArray));
                 $property->setType(new PHPClassOf($arg));
             } else {
-                $property->setType($this->visitAnonymousType($attribute->getType(), $attribute->getName(), $class));
+                $property->setType($this->visitTypeAnonymous($attribute->getType(), $attribute->getName(), $class));
             }
         } else {
             $property->setType($this->findPHPClass($class, $schema, $attribute));
@@ -384,7 +387,7 @@ class PhpConverter extends AbstractConverter
 
             if($itemOfArray instanceof Type){
                 if(!$itemOfArray->getName()){
-                    $classType = $this->visitAnonymousType($itemOfArray, $element->getName(), $class);
+                    $classType = $this->visitTypeAnonymous($itemOfArray, $element->getName(), $class);
                 }else{
                     $classType = $this->visitType($itemOfArray);
                 }
@@ -393,7 +396,7 @@ class PhpConverter extends AbstractConverter
                 $elementProp->setType($classType);
             }else{
                 if(!$t->getName()){
-                    $classType = $this->visitAnonymousType($t, $element->getName(), $class);
+                    $classType = $this->visitTypeAnonymous($t, $element->getName(), $class);
                 }else{
                     $classType = $this->visitType($t);
                 }
@@ -420,7 +423,7 @@ class PhpConverter extends AbstractConverter
     private function findPHPClass(PHPClass $class, Schema $schema, Item $node)
     {
         if (! $node->getType()->getName()) {
-            return $this->visitAnonymousType($node->getType(), $node->getName(), $class);
+            return $this->visitTypeAnonymous($node->getType(), $node->getName(), $class);
         } else {
             return $this->visitType($node->getType());
         }

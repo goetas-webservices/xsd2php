@@ -50,7 +50,7 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
             </xs:schema>
             ';
         $classes = $this->getClasses($content);
-        $this->assertCount(3, $classes);
+        $this->assertCount(2, $classes);
         $this->assertEquals(
             array(
                 'Example\\ComplexType1Type' => array(
