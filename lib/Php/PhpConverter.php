@@ -209,6 +209,11 @@ class PhpConverter extends AbstractConverter
      */
     private function visitType(Type $type, $force = false)
     {
+        /*
+        var_dump($type->getName());
+        var_dump($force);
+        echo "\n\n";
+        */
         if (! isset($this->classes[spl_object_hash($type)])) {
 
             $this->classes[spl_object_hash($type)]["class"] = $class = new PHPClass();
@@ -348,22 +353,22 @@ class PhpConverter extends AbstractConverter
         }
     }
 
-    private function visitAttribute(PHPClass $class, Schema $schema, AttributeItem $attribute)
+    private function visitAttribute(PHPClass $class, Schema $schema, AttributeItem $attribute, $arrayize = true)
     {
         $property = new PHPProperty();
         $property->setName(Inflector::camelize($attribute->getName()));
 
-        if ($attribute->getType() && $itemOfArray = $this->isArray($attribute->getType())) {
-
+        if ($arrayize && $itemOfArray = $this->isArray($attribute->getType())) {
             if ($attribute->getType()->getName()) {
                 $arg = new PHPArg($attribute->getName());
+
                 $arg->setType($this->visitType($itemOfArray));
                 $property->setType(new PHPClassOf($arg));
             } else {
                 $property->setType($this->visitTypeAnonymous($attribute->getType(), $attribute->getName(), $class));
             }
         } else {
-            $property->setType($this->findPHPClass($class, $schema, $attribute));
+            $property->setType($this->findPHPClass($class, $schema, $attribute, true));
         }
 
         $property->setDoc($attribute->getDoc());
@@ -405,14 +410,13 @@ class PhpConverter extends AbstractConverter
             $property->setType(new PHPClassOf($elementProp));
         } else {
             if ($arrayize && $element instanceof ElementItem && ($element->getMax() > 1 || $element->getMax() === - 1)) {
-
                 $arg = new PHPArg();
                 $arg->setType($this->findPHPClass($class, $schema, $element));
                 $arg->setDefault('array()');
                 $arg->setName($element->getName());
                 $property->setType(new PHPClassOf($arg));
             } else {
-                $property->setType($this->findPHPClass($class, $schema, $element));
+                $property->setType($this->findPHPClass($class, $schema, $element, true));
             }
             $property->setDoc($element->getDoc());
         }
@@ -420,12 +424,12 @@ class PhpConverter extends AbstractConverter
         return $property;
     }
 
-    private function findPHPClass(PHPClass $class, Schema $schema, Item $node)
+    private function findPHPClass(PHPClass $class, Schema $schema, Item $node, $force = false)
     {
         if (! $node->getType()->getName()) {
             return $this->visitTypeAnonymous($node->getType(), $node->getName(), $class);
         } else {
-            return $this->visitType($node->getType());
+            return $this->visitType($node->getType(), $force);
         }
     }
 }

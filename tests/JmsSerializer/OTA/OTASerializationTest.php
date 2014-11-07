@@ -26,8 +26,6 @@ class OTASerializationTest extends \PHPUnit_Framework_TestCase
     protected static $phpDir = '/tmp';
 
     protected static $jmsDir = '/tmp';
-
-    protected static $differ;
     protected static $loader;
 
     private static function delTree($dir) {
@@ -163,11 +161,6 @@ class OTASerializationTest extends \PHPUnit_Framework_TestCase
             file_put_contents($path, $dumper->dump($item, 10000));
         }
 
-
-        if (! self::$differ) {
-            self::$differ = new \XMLDiff\Memory();
-        }
-
         $serializerBuiler = \JMS\Serializer\SerializerBuilder::create();
         $serializerBuiler->configureHandlers(function (HandlerRegistryInterface $h) use($serializerBuiler)
         {
@@ -261,6 +254,7 @@ class OTASerializationTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @group long
      * @dataProvider getTestFiles
      */
     public function testConversion($xml, $xsd, $class)
@@ -272,17 +266,11 @@ class OTASerializationTest extends \PHPUnit_Framework_TestCase
         $new = self::$serializer->serialize($object, 'xml');
 
         $new = $this->clearXML($new);
+        $differ = new \XMLDiff\Memory();
+        $diff = $differ->diff($original, $new);
 
-        $diff = self::$differ->diff($original, $new);
+        $this->assertFalse(strpos($diff, '<dm:copy count="1"/>') === false || strlen($diff) > 110);
 
-        if (strpos($diff, '<dm:copy count="1"/>') === false || strlen($diff) > 110) {
-            /*
-            file_put_contents("a.xml", $original);
-            file_put_contents("b.xml", $new);
-            file_put_contents("c.xml", $diff);
-            */
-            $this->assertFalse(true);
-        }
     }
     public static function getXmlFiles()
     {

@@ -26,6 +26,7 @@
     <filter>
   <blacklist>
     <directory>vendor</directory>
+    <directory>tests</directory>
   </blacklist>
   </filter>    
 
