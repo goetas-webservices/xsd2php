@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" version="3.0">
+    <xs:element name="additionalIdentifiers">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="additionalIdentifier" minOccurs="0" maxOccurs="unbounded" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="additionalIdentifier">
+        <xs:complexType>
+            <xs:all>
+                <xs:element ref="additionalIdentifierType" />
+            </xs:all>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="additionalIdentifierTypes">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="additionalIdentifierType" minOccurs="0" maxOccurs="unbounded" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="additionalIdentifierType">
+        <xs:complexType>
+            <xs:attribute name="id" type="xs:long" />
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

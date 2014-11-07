@@ -143,28 +143,26 @@ class PhpConverter extends AbstractConverter
 
     private function visitElementDef(Schema $schema, ElementDef $element)
     {
-        $class = new PHPClass();
-        $class->setDoc($element->getDoc());
-        $class->setName(Inflector::classify($element->getName()));
-        $class->setDoc($element->getDoc());
+        if (! isset($this->classes[spl_object_hash($element)])) {
+            $class = new PHPClass();
+            $class->setDoc($element->getDoc());
+            $class->setName(Inflector::classify($element->getName()));
+            $class->setDoc($element->getDoc());
 
-        if (! isset($this->namespaces[$schema->getTargetNamespace()])) {
-            throw new Exception(sprintf("Can't find a PHP equivalent namespace for %s namespace", $schema->getTargetNamespace()));
+            if (! isset($this->namespaces[$schema->getTargetNamespace()])) {
+                throw new Exception(sprintf("Can't find a PHP equivalent namespace for %s namespace", $schema->getTargetNamespace()));
+            }
+            $class->setNamespace($this->namespaces[$schema->getTargetNamespace()]);
+
+            $this->classes[spl_object_hash($element)]["class"] = $class;
+
+            if (! $element->getType()->getName()) {
+                $this->visitTypeBase($class, $element->getType());
+            } else {
+                $this->handleClassExtension($class, $element->getType());
+            }
         }
-        $class->setNamespace($this->namespaces[$schema->getTargetNamespace()]);
-
-        if (isset($this->classes[$class->getFullName()])) {
-            return $this->classes[$class->getFullName()]["class"];
-        }
-        $this->classes[$class->getFullName()]["class"] = $class;
-
-        if (! $element->getType()->getName()) {
-            $this->visitTypeBase($class, $element->getType());
-        } else {
-            $this->handleClassExtension($class, $element->getType());
-        }
-
-        return $class;
+        return $this->classes[spl_object_hash($element)]["class"];
     }
 
     private function findPHPName(Type $type)
@@ -409,7 +407,9 @@ class PhpConverter extends AbstractConverter
             }
             $property->setType(new PHPClassOf($elementProp));
         } else {
+
             if ($arrayize && $element instanceof ElementItem && ($element->getMax() > 1 || $element->getMax() === - 1)) {
+
                 $arg = new PHPArg();
                 $arg->setType($this->findPHPClass($class, $schema, $element));
                 $arg->setDefault('array()');
@@ -426,6 +426,11 @@ class PhpConverter extends AbstractConverter
 
     private function findPHPClass(PHPClass $class, Schema $schema, Item $node, $force = false)
     {
+
+        if ($node instanceof ElementRef && $node->getReferencedElement() instanceof ElementDef && !($node->getReferencedElement() instanceof Element)) {
+            return $this->visitElementDef($schema, $node->getReferencedElement());
+        }
+
         if (! $node->getType()->getName()) {
             return $this->visitTypeAnonymous($node->getType(), $node->getName(), $class);
         } else {

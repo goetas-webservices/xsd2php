@@ -24,7 +24,7 @@ class Xsd2PhpGroupTest  extends Xsd2PhpBase
     {
         $content = '
              <xs:schema targetNamespace="http://www.example.com" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-               <xs:group name="EG_ExtensionList">
+                <xs:group name="EG_ExtensionList">
                     <xs:sequence>
                       <xs:element name="ext" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
                     </xs:sequence>
@@ -40,7 +40,6 @@ class Xsd2PhpGroupTest  extends Xsd2PhpBase
 
         $this->assertCount(1, $classes);
         $this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Php\Structure\PHPClass', $classes['Example\ComplexType1Type']);
-        //$this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Php\Structure\PHPTrait', $classes['Example\EGExtensionList']);
     }
 
     public function testSomeAnonymous()

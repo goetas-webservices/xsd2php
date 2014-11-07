@@ -20,6 +20,7 @@ use Goetas\XML\XSDReader\Schema\Element\ElementContainer;
 use Goetas\XML\XSDReader\Schema\Element\ElementSingle;
 use Goetas\XML\XSDReader\Schema\Element\ElementDef;
 use Goetas\Xsd\XsdToPhp\AbstractConverter;
+use Goetas\XML\XSDReader\Schema\Element\ElementRef;
 
 class YamlConverter extends AbstractConverter
 {
@@ -133,29 +134,26 @@ class YamlConverter extends AbstractConverter
 
     private function &visitElementDef(Schema $schema, ElementDef $element)
     {
-        $className = $this->findPHPName($element, false);
-        $class = array();
-        $data = array();
-        $ns = $className;
-        $class[$ns] = &$data;
-        $data["xml_root_name"] = $element->getName();
+        if (! isset($this->classes[spl_object_hash($element)])) {
+            $className = $this->findPHPName($element, false);
+            $class = array();
+            $data = array();
+            $ns = $className;
+            $class[$ns] = &$data;
+            $data["xml_root_name"] = $element->getName();
 
-        if ($schema->getTargetNamespace()) {
-            $data["xml_root_namespace"] = $schema->getTargetNamespace();
+            if ($schema->getTargetNamespace()) {
+                $data["xml_root_namespace"] = $schema->getTargetNamespace();
+            }
+            $this->classes[spl_object_hash($element)]["class"] = &$class;
+
+            if (! $element->getType()->getName()) {
+                $this->visitTypeBase($class, $data, $element->getType(), $element->getName());
+            } else {
+                $this->handleClassExtension($class, $data, $element->getType(), $element->getName());
+            }
         }
-
-        if (isset($this->classes[$ns])) {
-            return $this->classes[$ns]["class"];
-        }
-        $this->classes[$ns]["class"] = &$class;
-
-        if (! $element->getType()->getName()) {
-            $this->visitTypeBase($class, $data, $element->getType(), $element->getName());
-        } else {
-            $this->handleClassExtension($class, $data, $element->getType(), $element->getName());
-        }
-
-        return $class;
+        return $this->classes[spl_object_hash($element)]["class"];
     }
 
     private function findPHPName($type, $isType = true)
@@ -464,10 +462,12 @@ class YamlConverter extends AbstractConverter
         if ($alias = $this->getTypeAlias($type))  {
             return $alias;
         }
+        if ($node instanceof ElementRef && $node->getReferencedElement() instanceof ElementDef && !($node->getReferencedElement() instanceof Element)) {
+            return key($this->visitElementDef($node->getSchema(), $node->getReferencedElement()));
+        }
         if($valueProp = $this->typeHasValue($type, $class, 'xx')){
             return $valueProp;
         }
-
         if (! $node->getType()->getName()) {
             $visited = $this->visitTypeAnonymous($node->getType(), $node->getName(), $class);
         } else {
