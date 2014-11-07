@@ -68,10 +68,10 @@ Where place the files?
 
 What about custom types? 
 * `--alias-map='Vendor/Project/CustomDateClass;http://www.opentravel.org/OTA/2003/05#CustomOTADateTimeFormat'` 
-will instcut XSD2PHP to do not generate any class for `CustomOTADateTimeFormat` type inside `http://www.opentravel.org/OTA/2003/05` namesapce.
+will instcut XSD2PHP to do not generate any class for `CustomOTADateTimeFormat` type inside `http://www.opentravel.org/OTA/2003/05` namespace.
 All reference to this type are replaced with the `Vendor/Project/CustomDateClass` class.
 
-Serilize / Unserialize
+Serialize / Unserialize
 ----------------------
 
 XSD2PHP can also generate for you [JMS Serializer](http://jmsyst.com/libs/serializer) metadata that you can use to serialize/unserialize the generated PHP class instances.
@@ -95,7 +95,7 @@ Where place the files?
 
 What about custom types? 
 * `--alias-map='Vendor/Project/CustomDateClass;http://www.opentravel.org/OTA/2003/05#CustomOTADateTimeFormat'` 
-will instcut XSD2PHP to do not generate any metadata infmation for `CustomOTADateTimeFormat` type inside `http://www.opentravel.org/OTA/2003/05` namesapce.
+will instcut XSD2PHP to do not generate any metadata information for `CustomOTADateTimeFormat` type inside `http://www.opentravel.org/OTA/2003/05` namespace.
 All reference to this type are replaced with the `Vendor/Project/CustomDateClass` class. You have to provide a [custom serializer](http://jmsyst.com/libs/serializer/master/handlers#subscribing-handlers) for this type
 
 
