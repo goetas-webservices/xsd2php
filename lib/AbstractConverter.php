@@ -20,8 +20,6 @@ abstract class AbstractConverter
         'http://www.w3.org/XML/1998/namespace' => ''
     );
 
-    protected $arrayCallbacks = array();
-
     protected $baseTypes = [
         'string',
         'float',
@@ -67,10 +65,6 @@ abstract class AbstractConverter
         $this->addAliasMap("http://www.w3.org/2001/XMLSchema", "anySimpleType", function (Type $type)
         {
             return "string";
-        });
-        $this->addAliasMap("http://www.w3.org/2001/XMLSchema", "date", function (Type $type)
-        {
-            return "DateTime<'Y-m-d'>";
         });
         $this->addAliasMap("http://www.w3.org/2001/XMLSchema", "gYearMonth", function (Type $type)
         {
@@ -218,28 +212,6 @@ abstract class AbstractConverter
         {
             return "string";
         });
-
-        $this->addArrayTypeCallback(function (Type $type)
-        {
-            if ($type instanceof ComplexType && ! $type->getParent() && ! $type->getAttributes() && count($type->getElements()) === 1) {
-
-                $elements = $type->getElements();
-                $element = reset($elements);
-
-                if ($element instanceof ElementSingle && ($element->getMax() > 1 || $element->getMax() === - 1)) {
-                    return $element;
-                }
-            }
-            return false;
-        });
-
-        $this->addArrayTypeCallback(function (Type $type)
-        {
-            if ($type instanceof SimpleType) {
-                return $type->getList();
-            }
-            return false;
-        });
     }
 
     public function addNamespace($namesapce, $phpNamespace)
@@ -253,27 +225,37 @@ abstract class AbstractConverter
         return preg_replace("/<.*>/", "", $name);
     }
 
-    public function addArrayType($xsdNs, $xsdType)
+    /**
+     * @param Type $type
+     * @return \Goetas\XML\XSDReader\Schema\Type\Type|null
+     */
+    protected function isArrayType(Type $type)
     {
-        $this->arrayCallbacks[$xsdNs . "|" . $xsdType] = function (Type $type) use($xsdNs, $xsdType)
-        {
-            return $type->getName() == $xsdNs && $type->getSchema()->getTargetNamespace() == $xsdNs;
-        };
-    }
-
-    public function addArrayTypeCallback(callable $callback)
-    {
-        $this->arrayCallbacks[] = $callback;
-    }
-
-    protected function isArray(Type $type)
-    {
-        $rest = array_filter(array_map(function ($f) use($type)
-        {
-            return call_user_func($f, $type);
-        }, $this->arrayCallbacks));
-        if ($rest) {
-            return reset($rest);
+        if ($type instanceof SimpleType) {
+            return $type->getList();
         }
     }
+
+    /**
+     * @param Type $type
+     * @return \Goetas\XML\XSDReader\Schema\Element\ElementSingle|null
+     */
+    protected function isArrayNestedElement(Type $type)
+    {
+        if ($type instanceof ComplexType && ! $type->getParent() && ! $type->getAttributes() && count($type->getElements()) === 1) {
+            $elements = $type->getElements();
+            return $this->isArrayElement(reset($elements));
+        }
+    }
+    /**
+     * @param ElementSingle $type
+     * @return \Goetas\XML\XSDReader\Schema\Element\ElementSingle|null
+     */
+    protected function isArrayElement($element)
+    {
+        if ($element instanceof ElementSingle && ($element->getMax() > 1 || $element->getMax() === - 1)) {
+            return $element;
+        }
+    }
+
 }

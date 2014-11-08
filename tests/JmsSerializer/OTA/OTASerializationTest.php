@@ -75,9 +75,9 @@ class OTASerializationTest extends \PHPUnit_Framework_TestCase
                 $schemas[$d[1]]=$reader->readFile($d[1]);
             }
         }
-        self::generatePHPFiles($schemas);
-        self::generateJMSFiles($schemas);
 
+        self::generateJMSFiles($schemas);
+        self::generatePHPFiles($schemas);
 
         $serializerBuiler = \JMS\Serializer\SerializerBuilder::create();
         $serializerBuiler->configureHandlers(function (HandlerRegistryInterface $h) use($serializerBuiler)
@@ -95,6 +95,7 @@ class OTASerializationTest extends \PHPUnit_Framework_TestCase
 
     public static function tearDownAfterClass()
     {
+        return;
         if (is_dir(self::$phpDir)) {
             self::delTree(self::$phpDir);
         }
@@ -269,7 +270,16 @@ class OTASerializationTest extends \PHPUnit_Framework_TestCase
         $differ = new \XMLDiff\Memory();
         $diff = $differ->diff($original, $new);
 
-        $this->assertFalse(strpos($diff, '<dm:copy count="1"/>') === false || strlen($diff) > 110);
+        $notEqual = strpos($diff, '<dm:copy count="1"/>') === false || strlen($diff) > 110;
+
+        if(0 && $notEqual){
+            file_put_contents("a.xml", $original);
+            file_put_contents("b.xml", $new);
+            file_put_contents("c.xml", $diff);
+            exit;
+        }
+
+        $this->assertFalse($notEqual);
 
     }
     public static function getXmlFiles()

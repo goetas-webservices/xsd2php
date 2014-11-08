@@ -149,8 +149,7 @@ class PHPConversionTest extends \PHPUnit_Framework_TestCase
     public function testNestedMulteplicity()
     {
         $xml = '
-            <xs:schema targetNamespace="http://www.example.com"
-            xmlns:xs="http://www.w3.org/2001/XMLSchema">
+            <xs:schema targetNamespace="http://www.example.com" xmlns:xs="http://www.w3.org/2001/XMLSchema">
                 <xs:complexType name="single">
                     <xs:all>
                         <xs:element name="id" type="ary" minOccurs="0"/>
