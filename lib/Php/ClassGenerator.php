@@ -372,7 +372,7 @@ class ClassGenerator
             return;
         }
 
-        $docblock = new DocBlockGenerator("Constant for " . var_export($enumeration['value'], 1) . " value.");
+        $docblock = new DocBlockGenerator("Constant for " . var_export($enumeration['value'], true) . " value.");
 
         if (trim($enumeration['doc'])) {
             $docblock->setLongDescription(trim($enumeration['doc']));
