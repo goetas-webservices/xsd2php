@@ -7,7 +7,9 @@ use Goetas\Xsd\XsdToPhp\Php\Structure\PHPClass;
 use Goetas\Xsd\XsdToPhp\Php\Structure\PHPProperty;
 
 class I43Test extends \PHPUnit_Framework_TestCase{
-
+    /**
+     * @group long
+     */
     public function testOpcGeneration()
     {
 

@@ -129,7 +129,7 @@ class YamlConverter extends AbstractConverter
             $this->visitBaseComplexType($class, $data, $type, $name);
         }
         if ($type instanceof ComplexType) {
-            $this->visitComplexType($class, $data, $type, $name);
+            $this->visitComplexType($class, $data, $type);
         }
         if ($type instanceof SimpleType) {
             $this->visitSimpleType($class, $data, $type, $name);

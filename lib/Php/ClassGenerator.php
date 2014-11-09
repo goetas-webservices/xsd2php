@@ -289,7 +289,6 @@ class ClassGenerator
             $e = $type->getExtends();
             if ($e) {
                 if ($e->hasProperty('__value')) {
-                    var_dump(count($e->getPropertiesInHierarchy()));
                     return $e->getProperty('__value');
                 }
             }
