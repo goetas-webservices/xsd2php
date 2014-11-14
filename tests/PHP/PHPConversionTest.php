@@ -186,6 +186,37 @@ class PHPConversionTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($ary->hasMethod('setIdB'));
     }
 
+    public function testMultipleArrayTypes()
+    {
+        $xml = '
+            <xs:schema targetNamespace="http://www.example.com"
+            xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+                <xs:complexType name="ArrayOfStrings">
+                    <xs:all>
+                        <xs:element name="string" type="xs:string" maxOccurs="unbounded"/>
+                    </xs:all>
+                </xs:complexType>
+
+                <xs:complexType name="Single">
+                    <xs:all>
+                        <xs:element name="a" type="ArrayOfStrings"/>
+                        <xs:element name="b" type="ArrayOfStrings"/>
+                    </xs:all>
+                </xs:complexType>
+
+            </xs:schema>';
+
+        $items = $this->getClasses($xml);
+
+        $this->assertCount(1, $items);
+
+        $single = $items['Example\SingleType'];
+        $this->assertTrue($single->hasMethod('addStringToA'));
+        $this->assertTrue($single->hasMethod('addStringToB'));
+
+    }
+
     public function testSimpleMulteplicity()
     {
         $xml = '

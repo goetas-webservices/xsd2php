@@ -302,7 +302,7 @@ class ClassGenerator
     private function handleAdder(Generator\ClassGenerator $generator, PHPProperty $prop, PHPClass $class)
     {
         $type = $prop->getType();
-        $propName = $type->getArg()->getName() ?  : $prop->getName();
+        $propName = $type->getArg()->getName();
 
         $docblock = new DocBlockGenerator();
         $docblock->setShortDescription("Adds as $propName");
@@ -325,7 +325,7 @@ class ClassGenerator
             'listof'
         );
 
-        $method = new MethodGenerator("add" . str_ireplace($r, "", Inflector::classify($propName)));
+        $method = new MethodGenerator("add" . str_ireplace($r, "", Inflector::classify($propName))."To".Inflector::classify($prop->getName()));
 
         $parameter = new ParameterGenerator($propName);
         $tt = $type->getArg()->getType();
