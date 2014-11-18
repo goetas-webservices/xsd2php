@@ -21,6 +21,11 @@ class I43Test extends \PHPUnit_Framework_TestCase{
         );
 
         $reader = new SchemaReader();
+        $reader->addKnownSchemaLocation('http://dublincore.org/schemas/xmls/qdc/2003/04/02/dc.xsd', __DIR__.'/opc/dc.xsd');
+        $reader->addKnownSchemaLocation('http://dublincore.org/schemas/xmls/qdc/2003/04/02/dcterms.xsd', __DIR__.'/opc/dcterms.xsd');
+        $reader->addKnownSchemaLocation('http://dublincore.org/schemas/xmls/qdc/2003/04/02/dcterms.xsd', __DIR__.'/opc/dcterms.xsd');
+        $reader->addKnownSchemaLocation('http://dublincore.org/schemas/xmls/qdc/2003/04/02/dcmitype.xsd', __DIR__.'/opc/dcmitype.xsd');
+
         $schema = $reader->readFile(__DIR__.'/opc/opc-coreProperties.xsd');
 
         $yamlConv = new YamlConverter();
