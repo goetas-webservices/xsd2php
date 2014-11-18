@@ -52,9 +52,9 @@ Generate PHP classes
 bin/xsd2php.php convert:php \
 `/home/my/ota/OTA_HotelAvail*.xsd \
 
---ns-map='http://www.opentravel.org/OTA/2003/05; Mercurio/OTA/2007B/' \
+--ns-map='http://www.opentravel.org/OTA/2003/05;Mercurio/OTA/2007B/' \
 
---ns-dest='Mercurio/OTA/2007B/; src/Mercurio/OTA/V2007B;' \
+--ns-dest='Mercurio/OTA/2007B/;src/Mercurio/OTA/V2007B' \
 
 --alias-map='http://www.opentravel.org/OTA/2003/05;CustomOTADateTimeFormat;Vendor/Project/CustomDateClass'
 
@@ -108,11 +108,12 @@ use Goetas\Xsd\XsdToPhp\Jms\Handler\XmlSchemaDateHandler;
 
 $serializerBuiler = SerializerBuilder::create();
 $serializerBuiler->addMetadataDir('metadata dir', 'DemoNs');
-$serializerBuiler->configureHandlers(function (HandlerRegistryInterface $h) use($serializerBuiler)
-{
+$serializerBuiler->configureHandlers(function (HandlerRegistryInterface $h) use ($serializerBuiler) {
     $serializerBuiler->addDefaultHandlers();
     $h->registerSubscribingHandler(new BaseTypesHandler()); // XMLSchema List handling
     $h->registerSubscribingHandler(new XmlSchemaDateHandler()); // XMLSchema date handling
+    
+    // $h->registerSubscribingHandler(new YourhandlerHere());
 });
 
 $serializer = $serializerBuiler->build();
