@@ -22,7 +22,7 @@ abstract class AbstractConvert extends Console\Command\Command
             new InputArgument('src', InputArgument::REQUIRED | InputArgument::IS_ARRAY, 'Where is located your XSD definitions'),
             new InputOption('ns-map', null, InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'How to map XML namespaces to PHP namespaces? Syntax: <info>XML-namespace;PHP-namespace</info>'),
             new InputOption('ns-dest', null, InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'Where place the generated files? Syntax: <info>PHP-namespace;destination-directory</info>'),
-            new InputOption('alias-map', null, InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'How to map XML namespaces into existing PHP classes? Syntax: <info>XML-namespace#XML-type;PHP-type</info>. ')
+            new InputOption('alias-map', null, InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'How to map XML namespaces into existing PHP classes? Syntax: <info>XML-namespace;XML-type;PHP-type</info>. ')
         ));
     }
 
@@ -53,39 +53,36 @@ abstract class AbstractConvert extends Console\Command\Command
         $nsMapKeyed = array();
         $output->writeln("Namespaces:");
         foreach ($nsMap as $val) {
-            if (strpos($val, ';') === false) {
-                throw new Exception("Invalid syntax for --ns-map option");
+            if (substr_count($val, ';') !== 1) {
+                throw new Exception("Invalid syntax for --ns-map");
             }
             list ($xmlNs, $phpNs) = explode(";", $val, 2);
             $nsMapKeyed[$xmlNs] = $phpNs;
             $converter->addNamespace($xmlNs, trim(strtr($phpNs, "./", "\\\\"), "\\"));
-            $output->writeln("\tXML namepsace: <comment>$xmlNs </comment> => PHP namepsace: <comment>$phpNs </comment>");
+            $output->writeln("\tXML namepsace: <comment>$xmlNs</comment> => PHP namepsace: <info>$phpNs</info>");
         }
         $targets = array();
-        $output->writeln("Targets:");
+        $output->writeln("Target directories:");
         foreach ($nsTarget as $val) {
-            if (strpos($val, ';') === false) {
-                throw new Exception("Invalid syntax for --ns-dest option");
+            if (substr_count($val, ';') !== 1) {
+                throw new Exception("Invalid syntax for --ns-dest");
             }
             list ($phpNs, $dir) = explode(";", $val, 2);
             $phpNs = strtr($phpNs, "./", "\\\\");
 
             $targets[$phpNs] = $dir;
-            $output->writeln("\tPHP namepsace: <comment>" . strtr($phpNs, "\\", "/") . "</comment> => Folder: <comment>$dir </comment>");
+            $output->writeln("\tPHP namepsace: <comment>" . strtr($phpNs, "\\", "/") . "</comment> => Destination directory: <info>$dir</info>");
         }
         $arrayMap = $input->getOption('alias-map');
         if ($arrayMap) {
+            $output->writeln("Aliases:");
             foreach ($arrayMap as $val) {
-                if (strpos($val, ';') === false) {
-                    throw new Exception("Invalid syntax for --array-map option");
+                if (substr_count($val, ';') !== 2) {
+                    throw new Exception("Invalid syntax for --alias-map");
                 }
-                list ($xml, $type) = explode(";", $val, 2);
-                list ($xmlNs, $name) = explode("#", $xml, 2);
-                $converter->addAliasMap($xmlNs, $name, function () use($type)
-                {
-                    return $type;
-                });
-                $output->writeln("Alias <comment>$xmlNs</comment>#<comment>$name</comment>  => <info>$type</info> ");
+                list ($xml, $name, $type) = explode(";", $val, 3);
+                $converter->addAliasMapType($xmlNs, $name, $type);
+                $output->writeln("\tXML Type: <comment>$xmlNs</comment>#<comment>$name</comment>  => PHP Class: <info>$type</info> ");
             }
         }
         $reader = new SchemaReader();
