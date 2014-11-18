@@ -58,7 +58,9 @@ class ClassGenerator
             'float',
             'integer',
             'boolean',
-            'array'
+            'array',
+            'mixed',
+            'callable'
         ]);
     }
 

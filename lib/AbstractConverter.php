@@ -25,7 +25,8 @@ abstract class AbstractConverter
         'float',
         'boolean',
         'date',
-        'integer'
+        'integer',
+        'mixed'
     ];
 
     public abstract function convert(array $schemas);
@@ -62,10 +63,6 @@ abstract class AbstractConverter
 
     public function __construct()
     {
-        $this->addAliasMap("http://www.w3.org/2001/XMLSchema", "anySimpleType", function (Type $type)
-        {
-            return "string";
-        });
         $this->addAliasMap("http://www.w3.org/2001/XMLSchema", "gYearMonth", function (Type $type)
         {
             return "integer";

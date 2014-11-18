@@ -43,6 +43,14 @@ class PhpConverter extends AbstractConverter
         {
             return "DateTime";
         });
+        $this->addAliasMap("http://www.w3.org/2001/XMLSchema", "anySimpleType", function (Type $type)
+        {
+            return "mixed";
+        });
+        $this->addAliasMap("http://www.w3.org/2001/XMLSchema", "anyType", function (Type $type)
+        {
+            return "mixed";
+        });
     }
     public function getTypeAlias($type, Schema $schemapos = null)
     {
