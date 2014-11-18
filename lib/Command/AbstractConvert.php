@@ -80,7 +80,7 @@ abstract class AbstractConvert extends Console\Command\Command
                 if (substr_count($val, ';') !== 2) {
                     throw new Exception("Invalid syntax for --alias-map");
                 }
-                list ($xml, $name, $type) = explode(";", $val, 3);
+                list ($xmlNs, $name, $type) = explode(";", $val, 3);
                 $converter->addAliasMapType($xmlNs, $name, $type);
                 $output->writeln("\tXML Type: <comment>$xmlNs</comment>#<comment>$name</comment>  => PHP Class: <info>$type</info> ");
             }
