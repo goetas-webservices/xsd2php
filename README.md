@@ -56,7 +56,7 @@ bin/xsd2php.php convert:php \
 
 --ns-dest='Mercurio/OTA/2007B/; src/Mercurio/OTA/V2007B;' \
 
---alias-map='Vendor/Project/CustomDateClass; http://www.opentravel.org/OTA/2003/05#CustomOTADateTimeFormat'
+--alias-map='http://www.opentravel.org/OTA/2003/05;CustomOTADateTimeFormat;Vendor/Project/CustomDateClass'
 
 ```
 What about namespaces? 
@@ -67,7 +67,7 @@ Where place the files?
 
 
 What about custom types? 
-* `--alias-map='Vendor/Project/CustomDateClass;http://www.opentravel.org/OTA/2003/05#CustomOTADateTimeFormat'` 
+* `--alias-map='http://www.opentravel.org/OTA/2003/05;CustomOTADateTimeFormat;Vendor/Project/CustomDateClass'` 
 will instcut XSD2PHP to do not generate any class for `CustomOTADateTimeFormat` type inside `http://www.opentravel.org/OTA/2003/05` namespace.
 All reference to this type are replaced with the `Vendor/Project/CustomDateClass` class.
 
@@ -83,7 +83,7 @@ bin/xsd2php.php  convert:jms-yaml \
 --ns-map='http://www.opentravel.org/OTA/2003/05;Mercurio/OTA/2007B/'  \
 --ns-dest='Mercurio/OTA/2007B/;src/Metadata/JMS;' \
 
---alias-map='http://www.opentravel.org/OTA/2003/05#CustomOTADateTimeFormat;Vendor/Project/CustomDateClass'
+--alias-map='http://www.opentravel.org/OTA/2003/05;CustomOTADateTimeFormat;Vendor/Project/CustomDateClass'
 
 ```
 
@@ -94,7 +94,7 @@ Where place the files?
 * `http://www.opentravel.org/OTA/2003/05` will be placed into `src/Metadata/JMS` directory
 
 What about custom types? 
-* `--alias-map='Vendor/Project/CustomDateClass;http://www.opentravel.org/OTA/2003/05#CustomOTADateTimeFormat'` 
+* `--alias-map='http://www.opentravel.org/OTA/2003/05;CustomOTADateTimeFormat;Vendor/Project/CustomDateClass'` 
 will instcut XSD2PHP to do not generate any metadata information for `CustomOTADateTimeFormat` type inside `http://www.opentravel.org/OTA/2003/05` namespace.
 All reference to this type are replaced with the `Vendor/Project/CustomDateClass` class. You have to provide a [custom serializer](http://jmsyst.com/libs/serializer/master/handlers#subscribing-handlers) for this type
 
