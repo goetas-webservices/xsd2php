@@ -128,6 +128,66 @@ $newXml = $serializer->serialize($object, 'xml');
 
 ```
 
+Dealing with `xsd:anyType` or `xsd:anySimpleType`
+-------------------------------------------------
+
+If your XSD contains `xsd:anyType` or `xsd:anySimpleType` types you have to specify a handler for this.
+
+When you generate the JMS metadata you have to specify a custom handler:
+
+```sh
+bin/xsd2php.php convert:jms-yaml \
+
+ ... various params ... \
+
+--alias-map='http://www.w3.org/2001/XMLSchema;anyType;MyCustomAnyTypeHandler' \
+--alias-map='http://www.w3.org/2001/XMLSchema;anyType;MyCustomAnySimpleTypeHandler' \
+
+```
+
+Now you have to create a custom serialization handler:
+
+```php
+use JMS\Serializer\XmlSerializationVisitor;
+use JMS\Serializer\XmlDeserializationVisitor;
+
+use JMS\Serializer\Handler\SubscribingHandlerInterface;
+use JMS\Serializer\GraphNavigator;
+use JMS\Serializer\VisitorInterface;
+use JMS\Serializer\Context;
+
+class MyHandler implements SubscribingHandlerInterface
+{
+    public static function getSubscribingMethods()
+    {
+        return array(
+            array(
+                'direction' => GraphNavigator::DIRECTION_DESERIALIZATION,
+                'format' => 'xml',
+                'type' => 'MyCustomAnyTypeHandler',
+                'method' => 'deserializeAnyType'
+            ),
+            array(
+                'direction' => GraphNavigator::DIRECTION_SERIALIZATION,
+                'format' => 'xml',
+                'type' => 'MyCustomAnyTypeHandler',
+                'method' => 'serializeAnyType'
+            )
+        );
+    }
+    
+    public function serializeAnyType(XmlSerializationVisitor $visitor, $data, array $type, Context $context)
+    {
+        // serialize your object here
+    }
+    
+    public function deserializeAnyType(XmlDeserializationVisitor $visitor, $data, array $type)
+    {
+        // deserialize your object here
+    }
+}
+```
+
 Naming Strategy 
 ---------------
 
