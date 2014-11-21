@@ -50,15 +50,7 @@ class PhpConverter extends AbstractConverter
             return "mixed";
         });
     }
-    public function getTypeAlias($type, Schema $schemapos = null)
-    {
-        if ($alias = parent::getTypeAlias($type, $schemapos)){
-            if (($pos = strpos($alias, '<')) !== false) {
-                $alias = substr($alias, 0, $pos);
-            }
-            return $alias;
-        }
-    }
+
     private $classes = [];
 
     public function convert(array $schemas)

@@ -19,18 +19,6 @@ class ClassGenerator
 
     private function handleBody(Generator\ClassGenerator $class, PHPClass $type)
     {
-        $constants = array();
-        foreach ($type->getChecks('__value') as $checkType => $checkValues) {
-            if ($checkType == "enumeration") {
-                foreach ($checkValues as $enumeration) {
-                    $constants[] = $this->handleConstantValues($class, $type, $enumeration);
-                }
-            }
-        }
-        if ($constants) {
-            // $this->handleStaticCheckProperty($class, $constants);
-            return true;
-        }
         foreach ($type->getProperties() as $prop) {
             if ($prop->getName() !== '__value') {
                 $this->handleProperty($class, $prop);
@@ -363,40 +351,6 @@ class ClassGenerator
 
         $this->handleGetter($generator, $prop, $class);
         $this->handleSetter($generator, $prop, $class);
-    }
-
-
-
-    private function handleConstantValues(Generator\ClassGenerator $generator, PHPClass $type, array $enumeration)
-    {
-        if (preg_match("/[\r\n\t]/", $enumeration['value'])) {
-            return;
-        }
-
-        $docblock = new DocBlockGenerator("Constant for " . var_export($enumeration['value'], true) . " value.");
-
-        if (trim($enumeration['doc'])) {
-            $docblock->setLongDescription(trim($enumeration['doc']));
-        }
-
-        $constantNameFixer = function($s){
-            if (function_exists('iconv')) {
-                $s = iconv("UTF-8", "ASCII//TRANSLIT", $s);
-            }
-
-            if (is_numeric($s) && $s<0) {
-                $s = str_replace('-', "MINUS_", $s);
-            }
-
-            return strtoupper(preg_replace("/[^a-z0-9_]+/i", "_", $s));
-        };
-
-        $prop = new PropertyGenerator("VAL_" . $constantNameFixer($enumeration['value']), $enumeration['value'], PropertyGenerator::FLAG_CONSTANT);
-        $prop->setDocBlock($docblock);
-
-        $generator->addPropertyFromGenerator($prop);
-
-        return $prop->getDefaultValue()->getValue();
     }
 
     private function handleProperty(Generator\ClassGenerator $class, PHPProperty $prop)
