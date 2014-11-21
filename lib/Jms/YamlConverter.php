@@ -21,12 +21,16 @@ use Goetas\XML\XSDReader\Schema\Element\ElementSingle;
 use Goetas\XML\XSDReader\Schema\Element\ElementDef;
 use Goetas\Xsd\XsdToPhp\AbstractConverter;
 use Goetas\XML\XSDReader\Schema\Element\ElementRef;
+use Goetas\XML\XSDReader\Schema\SchemaItem;
+use Goetas\Xsd\XsdToPhp\Naming\NamingStrategy;
 
 class YamlConverter extends AbstractConverter
 {
 
-    public function __construct(){
-        parent::__construct();
+    public function __construct(NamingStrategy $namingStrategy){
+
+        parent::__construct($namingStrategy);
+
         $this->addAliasMap("http://www.w3.org/2001/XMLSchema", "dateTime", function (Type $type)
         {
             return "Goetas\Xsd\XsdToPhp\XMLSchema\DateTime";
@@ -139,7 +143,7 @@ class YamlConverter extends AbstractConverter
     private function &visitElementDef(Schema $schema, ElementDef $element)
     {
         if (! isset($this->classes[spl_object_hash($element)])) {
-            $className = $this->findPHPName($element, false);
+            $className = $this->findPHPNamespace($element)."\\".$this->getNamingStrategy()->getItemName($element);
             $class = array();
             $data = array();
             $ns = $className;
@@ -160,7 +164,18 @@ class YamlConverter extends AbstractConverter
         return $this->classes[spl_object_hash($element)]["class"];
     }
 
-    private function findPHPName($type, $isType = true)
+    private function findPHPNamespace(SchemaItem $item)
+    {
+        $schema = $item->getSchema();
+
+        if (! isset($this->namespaces[$schema->getTargetNamespace()])) {
+            throw new Exception(sprintf("Non trovo un namespace php per %s, nel file %s", $schema->getTargetNamespace(), $schema->getFile()));
+        }
+        return $this->namespaces[$schema->getTargetNamespace()];
+    }
+
+
+    private function findPHPName(Type $type)
     {
         $schema = $type->getSchema();
 
@@ -168,18 +183,12 @@ class YamlConverter extends AbstractConverter
             return $alias;
         }
 
-        if (! isset($this->namespaces[$schema->getTargetNamespace()])) {
-            throw new Exception(sprintf("Non trovo un namespace php per %s, nel file %s", $schema->getTargetNamespace(), $schema->getFile()));
-        }
-        $ns = $this->namespaces[$schema->getTargetNamespace()];
-        $name = Inflector::classify($type->getName());
-
-        if ($isType && $name && substr($name, - 4) !== 'Type') {
-            $name .= "Type";
-        }
+        $ns = $this->findPHPNamespace($type);
+        $name = $this->getNamingStrategy()->getTypeName($type);
 
         return $ns . "\\" . $name;
     }
+
 
     private function &visitType(Type $type, $force = false)
     {
@@ -223,14 +232,16 @@ class YamlConverter extends AbstractConverter
         return $this->classes[spl_object_hash($type)]["class"];
     }
 
-    private function &visitTypeAnonymous(Type $type, $name, &$parentClass)
+    private function &visitTypeAnonymous(Type $type, $parentName, &$parentClass)
     {
         $class = array();
         $data = array();
 
-        $class[key($parentClass) . "\\" . Inflector::classify($name) . "AType"] = &$data;
+        $name = $this->getNamingStrategy()->getAnonymousTypeName($type, $parentName);
 
-        $this->visitTypeBase($class, $data, $type, $name);
+        $class[key($parentClass) . "\\" . $name] = &$data;
+
+        $this->visitTypeBase($class, $data, $type, $parentName);
 
         $this->classes[spl_object_hash($type)]["class"] = &$class;
 

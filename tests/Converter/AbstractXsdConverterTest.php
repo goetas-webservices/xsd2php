@@ -1,6 +1,7 @@
 <?php
 namespace Goetas\Xsd\XsdToPhp\Tests\Converter;
 
+use Goetas\Xsd\XsdToPhp\Naming\ShortNamingStrategy;
 class AbstractXsdConverterTest extends \PHPUnit_Framework_TestCase
 {
 
@@ -12,7 +13,7 @@ class AbstractXsdConverterTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->converter = $this->getMockForAbstractClass('Goetas\Xsd\XsdToPhp\AbstractConverter');
+        $this->converter = $this->getMockForAbstractClass('Goetas\Xsd\XsdToPhp\AbstractConverter', [new ShortNamingStrategy()]);
     }
 
     public function testAliases()

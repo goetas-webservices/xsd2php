@@ -72,7 +72,7 @@ will instcut XSD2PHP to do not generate any class for `CustomOTADateTimeFormat` 
 All reference to this type are replaced with the `Vendor/Project/CustomDateClass` class.
 
 Serialize / Unserialize
-----------------------
+-----------------------
 
 XSD2PHP can also generate for you [JMS Serializer](http://jmsyst.com/libs/serializer) metadata that you can use to serialize/unserialize the generated PHP class instances.
 
@@ -127,4 +127,25 @@ $object = $serializer->deserialize('<some xml/>', 'DemoNs\MyObject', 'xml');
 $newXml = $serializer->serialize($object, 'xml');
 
 ```
+
+Naming Strategy 
+---------------
+
+Sometimes happen that you want not to have long class names but at the same time you want not too have namaing conflicts.
+(example: `MyNamesapce\UserElement` instead of `MyNamesapce\User` or  `MyNamesapce\UserTypeType` instead of `MyNamesapce\UserType`).
+
+When you have an XSD with a type named `User`, a type named `UserType` and a root element named `User` and `UserElement`,
+creating the right PHP classes names will be problemeatic. To solve this you have to choose the right naming strategy.
+
+* If you don't not have naming conflicts and you want to have short and descriptive class names, use `--naming-strategy=short` option when you generate classes and metadata
+* If you have naming conflicts (or just you want to be stay safe) use `--naming-strategy=long` option when you generate classes and metadata.
+This will generate PHP classes with the `Element` or `Type` suffix.
+ 
+
+
+Note
+----
+
+I'm sorry for the terrible english fluency used inside the documentation, I'm trying to improve it.
+Pull Requests are welcome.
 

@@ -25,12 +25,14 @@ use Goetas\XML\XSDReader\Schema\Attribute\AttributeSingle;
 use Goetas\XML\XSDReader\Schema\Attribute\AttributeContainer;
 use Goetas\XML\XSDReader\Schema\Element\ElementSingle;
 use Goetas\Xsd\XsdToPhp\AbstractConverter;
+use Goetas\Xsd\XsdToPhp\Naming\NamingStrategy;
 
 class PhpConverter extends AbstractConverter
 {
 
-    public function __construct(){
-        parent::__construct();
+    public function __construct(NamingStrategy $namingStrategy){
+        parent::__construct($namingStrategy);
+
         $this->addAliasMap("http://www.w3.org/2001/XMLSchema", "dateTime", function (Type $type)
         {
             return "DateTime";
@@ -160,7 +162,7 @@ class PhpConverter extends AbstractConverter
 
             $class = new PHPClass();
             $class->setDoc($element->getDoc());
-            $class->setName(Inflector::classify($element->getName()));
+            $class->setName($this->getNamingStrategy()->getItemName($element));
             $class->setDoc($element->getDoc());
 
             if (! isset($this->namespaces[$schema->getTargetNamespace()])) {
@@ -198,10 +200,7 @@ class PhpConverter extends AbstractConverter
             }
         }
 
-        $name = Inflector::classify($type->getName());
-        if ($name && substr($name, - 4) !== 'Type') {
-            $name .= "Type";
-        }
+        $name = $this->getNamingStrategy()->getTypeName($type);
 
         if (! isset($this->namespaces[$schema->getTargetNamespace()])) {
             throw new Exception(sprintf("Can't find a PHP equivalent namespace for %s namespace", $schema->getTargetNamespace()));
@@ -267,7 +266,7 @@ class PhpConverter extends AbstractConverter
     {
         if (! isset($this->classes[spl_object_hash($type)])) {
             $this->classes[spl_object_hash($type)]["class"] = $class = new PHPClass();
-            $class->setName(Inflector::classify($name) . "AType");
+            $class->setName($this->getNamingStrategy()->getAnonymousTypeName($type, $name));
 
             $class->setNamespace($parentClass->getNamespace() . "\\" . $parentClass->getName());
             $class->setDoc($type->getDoc());

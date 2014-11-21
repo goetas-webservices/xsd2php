@@ -9,6 +9,7 @@ use Goetas\Xsd\XsdToPhp\Jms\YamlConverter;
 use Symfony\Component\Yaml\Dumper;
 use Symfony\Component\Console\Output\OutputInterface;
 use Goetas\Xsd\XsdToPhp\AbstractConverter;
+use Goetas\Xsd\XsdToPhp\Naming\NamingStrategy;
 
 class ConvertToYaml extends AbstractConvert
 {
@@ -24,9 +25,9 @@ class ConvertToYaml extends AbstractConvert
         $this->setDescription('Convert XSD definitions into YAML metadata for JMS Serializer');
     }
 
-    protected function getConverterter()
+    protected function getConverterter(NamingStrategy $naming)
     {
-        return new YamlConverter();
+        return new YamlConverter($naming);
     }
 
     protected function convert(AbstractConverter $converter, array $schemas, array $targets, OutputInterface $output)

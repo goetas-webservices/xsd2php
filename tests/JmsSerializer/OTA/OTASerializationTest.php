@@ -15,6 +15,7 @@ use Goetas\Xsd\XsdToPhp\Jms\Handler\BaseTypesHandler;
 use Goetas\Xsd\XsdToPhp\Jms\Handler\XmlSchemaDateHandler;
 use Goetas\Xsd\XsdToPhp\Jms\Handler\OTA\SchemaDateHandler;
 use Composer\Autoload\ClassLoader;
+use Goetas\Xsd\XsdToPhp\Naming\ShortNamingStrategy;
 
 class OTASerializationTest extends \PHPUnit_Framework_TestCase
 {
@@ -111,7 +112,7 @@ class OTASerializationTest extends \PHPUnit_Framework_TestCase
 
     protected static function generatePHPFiles(array $schemas)
     {
-        $phpcreator = new PhpConverter();
+        $phpcreator = new PhpConverter(new ShortNamingStrategy());
         $phpcreator->addNamespace('http://www.opentravel.org/OTA/2003/05', self::$namespace);
 
         $phpcreator->addAliasMapType('http://www.opentravel.org/OTA/2003/05', 'DateOrTimeOrDateTimeType', 'Goetas\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime');
@@ -142,7 +143,7 @@ class OTASerializationTest extends \PHPUnit_Framework_TestCase
 
     protected static function generateJMSFiles(array $schemas)
     {
-        $yamlcreator = new YamlConverter();
+        $yamlcreator = new YamlConverter(new ShortNamingStrategy());
         $yamlcreator->addNamespace('http://www.opentravel.org/OTA/2003/05', self::$namespace);
 
         $yamlcreator->addAliasMapType('http://www.opentravel.org/OTA/2003/05', 'DateOrTimeOrDateTimeType', 'Goetas\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime');

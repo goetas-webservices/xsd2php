@@ -5,6 +5,7 @@ use Goetas\Xsd\XsdToPhp\Jms\YamlConverter;
 use Goetas\Xsd\XsdToPhp\Php\PhpConverter;
 use Goetas\Xsd\XsdToPhp\Php\Structure\PHPClass;
 use Goetas\Xsd\XsdToPhp\Php\Structure\PHPProperty;
+use Goetas\Xsd\XsdToPhp\Naming\ShortNamingStrategy;
 
 class I40Test extends \PHPUnit_Framework_TestCase{
 
@@ -22,14 +23,14 @@ class I40Test extends \PHPUnit_Framework_TestCase{
         $reader = new SchemaReader();
         $schema = $reader->readFile(__DIR__.'/data.xsd');
 
-        $yamlConv = new YamlConverter();
+        $yamlConv = new YamlConverter(new ShortNamingStrategy());
         $yamlConv->addNamespace('', 'Epa\\Schema');
 
         $yamlItems = $yamlConv->convert([$schema]);
         $this->assertCount(count($expectedItems), $yamlItems);
         $this->assertEmpty(array_diff_key($expectedItems, $yamlItems));
 
-        $phpConv = new PhpConverter();
+        $phpConv = new PhpConverter(new ShortNamingStrategy());
         $phpConv->addNamespace('', 'Epa\\Schema');
 
         $phpClasses = $phpConv->convert([$schema]);

@@ -3,6 +3,7 @@ namespace Goetas\Xsd\XsdToPhp\Tests\Converter\JMS;
 
 use Goetas\Xsd\XsdToPhp\Jms\YamlConverter;
 use Goetas\XML\XSDReader\SchemaReader;
+use Goetas\Xsd\XsdToPhp\Naming\ShortNamingStrategy;
 
 abstract class Xsd2JmsBase extends \PHPUnit_Framework_TestCase
 {
@@ -20,7 +21,7 @@ abstract class Xsd2JmsBase extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->converter = new YamlConverter();
+        $this->converter = new YamlConverter(new ShortNamingStrategy());
         $this->converter->addNamespace('http://www.example.com', "Example");
 
         $this->reader = new SchemaReader();

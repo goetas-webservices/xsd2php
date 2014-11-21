@@ -8,6 +8,7 @@ use Goetas\XML\XSDReader\SchemaReader;
 use Goetas\Xsd\XsdToPhp\AbstractConverter;
 use Symfony\Component\Console\Output\OutputInterface;
 use Zend\Code\Generator\FileGenerator;
+use Goetas\Xsd\XsdToPhp\Naming\NamingStrategy;
 
 class ConvertToPHP extends AbstractConvert
 {
@@ -23,9 +24,9 @@ class ConvertToPHP extends AbstractConvert
         $this->setDescription('Convert XSD definitions into PHP classes');
     }
 
-    protected function getConverterter()
+    protected function getConverterter(NamingStrategy $naming)
     {
-        return new PhpConverter();
+        return new PhpConverter($naming);
     }
 
     protected function convert(AbstractConverter $converter, array $schemas, array $targets, OutputInterface $output)

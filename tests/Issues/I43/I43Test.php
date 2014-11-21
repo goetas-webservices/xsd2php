@@ -5,6 +5,7 @@ use Goetas\Xsd\XsdToPhp\Jms\YamlConverter;
 use Goetas\Xsd\XsdToPhp\Php\PhpConverter;
 use Goetas\Xsd\XsdToPhp\Php\Structure\PHPClass;
 use Goetas\Xsd\XsdToPhp\Php\Structure\PHPProperty;
+use Goetas\Xsd\XsdToPhp\Naming\ShortNamingStrategy;
 
 class I43Test extends \PHPUnit_Framework_TestCase{
     /**
@@ -28,8 +29,8 @@ class I43Test extends \PHPUnit_Framework_TestCase{
 
         $schema = $reader->readFile(__DIR__.'/opc/opc-coreProperties.xsd');
 
-        $yamlConv = new YamlConverter();
-        $phpConv = new PhpConverter();
+        $yamlConv = new YamlConverter(new ShortNamingStrategy());
+        $phpConv = new PhpConverter(new ShortNamingStrategy());
 
         foreach ($nss as $ns => $php) {
             $yamlConv->addNamespace($ns, $php);

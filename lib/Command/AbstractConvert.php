@@ -8,6 +8,9 @@ use Symfony\Component\Console;
 use Goetas\XML\XSDReader\SchemaReader;
 use Goetas\Xsd\XsdToPhp\AbstractConverter;
 use Symfony\Component\Console\Output\OutputInterface;
+use Goetas\Xsd\XsdToPhp\Naming\ShortNamingStrategy;
+use Goetas\Xsd\XsdToPhp\Naming\LongNamingStrategy;
+use Goetas\Xsd\XsdToPhp\Naming\NamingStrategy;
 
 abstract class AbstractConvert extends Console\Command\Command
 {
@@ -22,13 +25,14 @@ abstract class AbstractConvert extends Console\Command\Command
             new InputArgument('src', InputArgument::REQUIRED | InputArgument::IS_ARRAY, 'Where is located your XSD definitions'),
             new InputOption('ns-map', null, InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'How to map XML namespaces to PHP namespaces? Syntax: <info>XML-namespace;PHP-namespace</info>'),
             new InputOption('ns-dest', null, InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'Where place the generated files? Syntax: <info>PHP-namespace;destination-directory</info>'),
-            new InputOption('alias-map', null, InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'How to map XML namespaces into existing PHP classes? Syntax: <info>XML-namespace;XML-type;PHP-type</info>. ')
+            new InputOption('alias-map', null, InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'How to map XML namespaces into existing PHP classes? Syntax: <info>XML-namespace;XML-type;PHP-type</info>. '),
+            new InputOption('naming-strategy', null, InputOption::VALUE_REQUIRED, 'The naming strategy for classes. short|long', 'short')
         ));
     }
 
     /**
      */
-    protected abstract function getConverterter();
+    protected abstract function getConverterter(NamingStrategy $naming);
 
     /**
      *
@@ -48,7 +52,15 @@ abstract class AbstractConvert extends Console\Command\Command
             throw new \RuntimeException(__CLASS__ . " requires at least one ns-target.");
         }
 
-        $converter = $this->getConverterter();
+        if($input->getOption('naming-strategy')=='short'){
+            $naming = new ShortNamingStrategy();
+        }elseif($input->getOption('naming-strategy')=='long'){
+            $naming = new LongNamingStrategy();
+        }else{
+            throw new \InvalidArgumentException("Unsupported naming strategy");
+        }
+
+        $converter = $this->getConverterter($naming);
 
         $nsMapKeyed = array();
         $output->writeln("Namespaces:");
@@ -104,6 +116,7 @@ abstract class AbstractConvert extends Console\Command\Command
 
             $schemas[spl_object_hash($schema)] = $schema;
         }
+
         $this->convert($converter, $schemas, $targets, $output);
 
         return 1;

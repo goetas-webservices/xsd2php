@@ -6,6 +6,7 @@ use Goetas\XML\XSDReader\Schema\Type\Type;
 use Goetas\XML\XSDReader\Schema\Type\ComplexType;
 use Goetas\XML\XSDReader\Schema\Type\SimpleType;
 use Goetas\XML\XSDReader\Schema\Element\ElementSingle;
+use Goetas\Xsd\XsdToPhp\Naming\NamingStrategy;
 
 abstract class AbstractConverter
 {
@@ -28,6 +29,10 @@ abstract class AbstractConverter
         'integer',
         'mixed'
     ];
+    /**
+     * @var \Goetas\Xsd\XsdToPhp\Naming\NamingStrategy
+     */
+    private $namingStrategy;
 
     public abstract function convert(array $schemas);
 
@@ -61,8 +66,10 @@ abstract class AbstractConverter
         }
     }
 
-    public function __construct()
+    public function __construct(NamingStrategy $namingStrategy)
     {
+        $this->namingStrategy = $namingStrategy;
+
         $this->addAliasMap("http://www.w3.org/2001/XMLSchema", "gYearMonth", function (Type $type)
         {
             return "integer";
@@ -209,6 +216,14 @@ abstract class AbstractConverter
         {
             return "string";
         });
+    }
+
+    /**
+     * @return \Goetas\Xsd\XsdToPhp\Naming\NamingStrategy
+     */
+    protected function getNamingStrategy()
+    {
+        return $this->namingStrategy;
     }
 
     public function addNamespace($namesapce, $phpNamespace)

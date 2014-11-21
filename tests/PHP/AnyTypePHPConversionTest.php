@@ -5,6 +5,7 @@ use Goetas\Xsd\XsdToPhp\Php\PhpConverter;
 use Goetas\XML\XSDReader\SchemaReader;
 use Goetas\Xsd\XsdToPhp\Php\ClassGenerator;
 use Goetas\Xsd\XsdToPhp\Jms\YamlConverter;
+use Goetas\Xsd\XsdToPhp\Naming\ShortNamingStrategy;
 
 class AnyTypePHPConversionTest extends \PHPUnit_Framework_TestCase
 {
@@ -16,7 +17,7 @@ class AnyTypePHPConversionTest extends \PHPUnit_Framework_TestCase
      */
     protected function getYamlFiles($xml, array $types = array())
     {
-        $creator = new YamlConverter();
+        $creator = new YamlConverter(new ShortNamingStrategy());
         $creator->addNamespace('', 'Example');
 
         foreach ($types as $typeData) {
@@ -46,7 +47,7 @@ class AnyTypePHPConversionTest extends \PHPUnit_Framework_TestCase
      */
     protected function getPhpClasses($xml, array $types = array())
     {
-        $creator = new PhpConverter();
+        $creator = new PhpConverter(new ShortNamingStrategy());
         $creator->addNamespace('', 'Example');
 
         foreach ($types as $typeData) {

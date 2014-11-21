@@ -4,6 +4,7 @@ namespace Goetas\Xsd\XsdToPhp\Tests\JmsSerializer\OTA;
 use Goetas\Xsd\XsdToPhp\Php\PhpConverter;
 use Goetas\XML\XSDReader\SchemaReader;
 use Goetas\Xsd\XsdToPhp\Php\ClassGenerator;
+use Goetas\Xsd\XsdToPhp\Naming\ShortNamingStrategy;
 
 class PHPConversionTest extends \PHPUnit_Framework_TestCase
 {
@@ -15,7 +16,7 @@ class PHPConversionTest extends \PHPUnit_Framework_TestCase
      */
     protected function getClasses($xml)
     {
-        $phpcreator = new PhpConverter();
+        $phpcreator = new PhpConverter(new ShortNamingStrategy());
         $phpcreator->addNamespace('http://www.example.com', 'Example');
 
         $generator = new ClassGenerator();
