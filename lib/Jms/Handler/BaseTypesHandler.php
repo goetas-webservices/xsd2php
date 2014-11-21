@@ -3,7 +3,6 @@ namespace Goetas\Xsd\XsdToPhp\Jms\Handler;
 
 use JMS\Serializer\Handler\SubscribingHandlerInterface;
 use JMS\Serializer\GraphNavigator;
-use JMS\Serializer\JsonSerializationVisitor;
 use JMS\Serializer\Context;
 use JMS\Serializer\XmlSerializationVisitor;
 use JMS\Serializer\XmlDeserializationVisitor;

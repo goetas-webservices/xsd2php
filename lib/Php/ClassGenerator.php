@@ -13,7 +13,6 @@ use Zend\Code\Generator\DocBlock\Tag\ReturnTag;
 use Zend\Code\Generator\MethodGenerator;
 use Zend\Code\Generator\ParameterGenerator;
 use Zend\Code\Generator\DocBlock\Tag\PropertyTag;
-use Zend\Code\Generator\PropertyValueGenerator;
 
 class ClassGenerator
 {

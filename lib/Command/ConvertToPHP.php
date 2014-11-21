@@ -4,7 +4,6 @@ namespace Goetas\Xsd\XsdToPhp\Command;
 use Goetas\Xsd\XsdToPhp\Php\PhpConverter;
 use Goetas\Xsd\XsdToPhp\Php\ClassGenerator;
 use Goetas\Xsd\XsdToPhp\Php\PathGenerator\Psr4PathGenerator;
-use Goetas\XML\XSDReader\SchemaReader;
 use Goetas\Xsd\XsdToPhp\AbstractConverter;
 use Symfony\Component\Console\Output\OutputInterface;
 use Zend\Code\Generator\FileGenerator;

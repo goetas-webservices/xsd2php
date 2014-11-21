@@ -2,7 +2,6 @@
 namespace Goetas\Xsd\XsdToPhp\Jms;
 
 use Exception;
-use Goetas\XML\XSDReader\SchemaReader;
 use Goetas\XML\XSDReader\Schema\Schema;
 use Goetas\XML\XSDReader\Schema\Type\Type;
 use Doctrine\Common\Inflector\Inflector;
@@ -10,14 +9,11 @@ use Goetas\XML\XSDReader\Schema\Type\BaseComplexType;
 use Goetas\XML\XSDReader\Schema\Type\ComplexType;
 use Goetas\XML\XSDReader\Schema\Element\Element;
 use Goetas\XML\XSDReader\Schema\Item;
-use Goetas\XML\XSDReader\Schema\Attribute\Group as AttributeGroup;
-use Goetas\XML\XSDReader\Schema\Element\Group;
 use Goetas\XML\XSDReader\Schema\Type\SimpleType;
 use Goetas\XML\XSDReader\Schema\Attribute\AttributeItem;
 use Goetas\XML\XSDReader\Schema\Element\ElementItem;
 use Goetas\XML\XSDReader\Schema\Attribute\AttributeContainer;
 use Goetas\XML\XSDReader\Schema\Element\ElementContainer;
-use Goetas\XML\XSDReader\Schema\Element\ElementSingle;
 use Goetas\XML\XSDReader\Schema\Element\ElementDef;
 use Goetas\Xsd\XsdToPhp\AbstractConverter;
 use Goetas\XML\XSDReader\Schema\Element\ElementRef;
@@ -169,7 +165,7 @@ class YamlConverter extends AbstractConverter
         $schema = $item->getSchema();
 
         if (! isset($this->namespaces[$schema->getTargetNamespace()])) {
-            throw new Exception(sprintf("Non trovo un namespace php per %s, nel file %s", $schema->getTargetNamespace(), $schema->getFile()));
+            throw new Exception(sprintf("Can't find a PHP namespace to '%s' namespace", $schema->getTargetNamespace()));
         }
         return $this->namespaces[$schema->getTargetNamespace()];
     }

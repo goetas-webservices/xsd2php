@@ -1,10 +1,7 @@
 <?php
 namespace Goetas\Xsd\XsdToPhp\Command;
 
-use Exception;
-use Goetas\Xsd\XsdToPhp\Generator\ClassGenerator;
 use Goetas\Xsd\XsdToPhp\Jms\PathGenerator\Psr4PathGenerator;
-use Goetas\XML\XSDReader\SchemaReader;
 use Goetas\Xsd\XsdToPhp\Jms\YamlConverter;
 use Symfony\Component\Yaml\Dumper;
 use Symfony\Component\Console\Output\OutputInterface;

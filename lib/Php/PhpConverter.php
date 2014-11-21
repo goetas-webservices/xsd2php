@@ -7,7 +7,6 @@ use Goetas\Xsd\XsdToPhp\Php\Structure\PHPClassOf;
 use Goetas\Xsd\XsdToPhp\Php\Structure\PHPArg;
 use Goetas\Xsd\XsdToPhp\Php\Structure\PHPClass;
 use Goetas\Xsd\XsdToPhp\Php\Structure\PHPProperty;
-use Goetas\XML\XSDReader\SchemaReader;
 use Goetas\XML\XSDReader\Schema\Schema;
 use Goetas\XML\XSDReader\Schema\Type\Type;
 use Goetas\XML\XSDReader\Schema\Type\BaseComplexType;
@@ -17,12 +16,9 @@ use Goetas\XML\XSDReader\Schema\Item;
 use Goetas\XML\XSDReader\Schema\Attribute\Group as AttributeGroup;
 use Goetas\XML\XSDReader\Schema\Element\Group;
 use Goetas\XML\XSDReader\Schema\Type\SimpleType;
-use Goetas\XML\XSDReader\Schema\Element\ElementItem;
 use Goetas\XML\XSDReader\Schema\Attribute\AttributeItem;
 use Goetas\XML\XSDReader\Schema\Element\ElementRef;
 use Goetas\XML\XSDReader\Schema\Element\ElementDef;
-use Goetas\XML\XSDReader\Schema\Attribute\AttributeSingle;
-use Goetas\XML\XSDReader\Schema\Attribute\AttributeContainer;
 use Goetas\XML\XSDReader\Schema\Element\ElementSingle;
 use Goetas\Xsd\XsdToPhp\AbstractConverter;
 use Goetas\Xsd\XsdToPhp\Naming\NamingStrategy;
@@ -166,7 +162,7 @@ class PhpConverter extends AbstractConverter
             $class->setDoc($element->getDoc());
 
             if (! isset($this->namespaces[$schema->getTargetNamespace()])) {
-                throw new Exception(sprintf("Can't find a PHP equivalent namespace for %s namespace", $schema->getTargetNamespace()));
+                throw new Exception(sprintf("Can't find a PHP namespace to '%s' namespace", $schema->getTargetNamespace()));
             }
             $class->setNamespace($this->namespaces[$schema->getTargetNamespace()]);
 
@@ -203,7 +199,7 @@ class PhpConverter extends AbstractConverter
         $name = $this->getNamingStrategy()->getTypeName($type);
 
         if (! isset($this->namespaces[$schema->getTargetNamespace()])) {
-            throw new Exception(sprintf("Can't find a PHP equivalent namespace for %s namespace", $schema->getTargetNamespace()));
+            throw new Exception(sprintf("Can't find a PHP namespace to '%s' namespace", $schema->getTargetNamespace()));
         }
         $ns = $this->namespaces[$schema->getTargetNamespace()];
         return [

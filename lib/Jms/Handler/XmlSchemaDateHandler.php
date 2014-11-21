@@ -2,12 +2,9 @@
 namespace Goetas\Xsd\XsdToPhp\Jms\Handler;
 
 use RuntimeException;
-use JMS\Serializer\Handler\DateHandler as JMSDateHandler;
 use JMS\Serializer\XmlDeserializationVisitor;
-use JMS\Serializer\Handler\DateHandler;
 use JMS\Serializer\Handler\SubscribingHandlerInterface;
 use JMS\Serializer\GraphNavigator;
-use JMS\Serializer\VisitorInterface;
 use JMS\Serializer\XmlSerializationVisitor;
 use JMS\Serializer\Context;
 
