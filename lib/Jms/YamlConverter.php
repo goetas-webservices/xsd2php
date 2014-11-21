@@ -354,17 +354,19 @@ class YamlConverter extends AbstractConverter
         if ($alias = $this->getTypeAlias($attribute))  {
             $property["type"] = $alias;
 
-        }else if ($itemOfArray = $this->isArrayType($attribute->getType())) {
+        }elseif ($itemOfArray = $this->isArrayType($attribute->getType())) {
 
             if ($valueProp = $this->typeHasValue($itemOfArray, $class, 'xx')) {
                 $property["type"] = "Goetas\Xsd\XsdToPhp\Jms\SimpleListOf<" . $valueProp . ">";
-            }else{
+            } else {
                 $property["type"] = "Goetas\Xsd\XsdToPhp\Jms\SimpleListOf<" . $this->findPHPName($itemOfArray) . ">";
             }
 
             $property["xml_list"]["inline"] = false;
             $property["xml_list"]["entry_name"] = $itemOfArray->getName();
-            $property["xml_list"]["entry_namespace"] = $schema->getTargetNamespace();
+            if ($schema->getTargetNamespace()) {
+                $property["xml_list"]["entry_namespace"] = $schema->getTargetNamespace();
+            }
         } else {
             $property["type"] = $this->findPHPClass($class, $attribute);
         }
@@ -430,7 +432,9 @@ class YamlConverter extends AbstractConverter
                 $property["type"] = "array<" . $visited["type"] . ">";
                 $property["xml_list"]["inline"] = false;
                 $property["xml_list"]["entry_name"] = $itemOfArray->getName();
-                $property["xml_list"]["namespace"] = $schema->getTargetNamespace();
+                if ($schema->getTargetNamespace()) {
+                    $property["xml_list"]["namespace"] = $schema->getTargetNamespace();
+                }
                 return $property;
             } elseif ($itemOfArray = $this->isArrayType($t)) {
 
@@ -449,12 +453,16 @@ class YamlConverter extends AbstractConverter
 
                 $property["xml_list"]["inline"] = false;
                 $property["xml_list"]["entry_name"] = $itemOfArray->getName();
-                $property["xml_list"]["namespace"] = $schema->getTargetNamespace();
+                if ($schema->getTargetNamespace()) {
+                    $property["xml_list"]["namespace"] = $schema->getTargetNamespace();
+                }
                 return $property;
             } elseif ($this->isArrayElement($element)) {
                 $property["xml_list"]["inline"] = true;
                 $property["xml_list"]["entry_name"] = $element->getName();
-                $property["xml_list"]["namespace"] = $schema->getTargetNamespace();
+                if ($schema->getTargetNamespace()) {
+                    $property["xml_list"]["namespace"] = $schema->getTargetNamespace();
+                }
 
                 $property["type"] = "array<" . $this->findPHPClass($class, $element) . ">";
                 return $property;
