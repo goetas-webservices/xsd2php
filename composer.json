@@ -48,5 +48,8 @@
         "branch-alias":{
             "dev-master":"2.0-dev"
         }
-    }
+    },
+    "bin": [
+        "bin/xsd2php"
+    ]
 }
