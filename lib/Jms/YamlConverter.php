@@ -238,11 +238,12 @@ class YamlConverter extends AbstractConverter
         $class[key($parentClass) . "\\" . $name] = &$data;
 
         $this->visitTypeBase($class, $data, $type, $parentName);
+        if ($parentName) {
+            $this->classes[spl_object_hash($type)]["class"] = &$class;
 
-        $this->classes[spl_object_hash($type)]["class"] = &$class;
-
-        if ($type instanceof SimpleType){
-            $this->classes[spl_object_hash($type)]["skip"] = true;
+            if ($type instanceof SimpleType){
+                $this->classes[spl_object_hash($type)]["skip"] = true;
+            }
         }
         return $class;
     }
@@ -371,6 +372,7 @@ class YamlConverter extends AbstractConverter
 
     private function typeHasValue(Type $type, &$parentClass, $name)
     {
+    	$collected = array();
         do {
             if ($alias = $this->getTypeAlias($type)) {
                 return $alias;
@@ -476,11 +478,14 @@ class YamlConverter extends AbstractConverter
         if ($alias = $this->getTypeAlias($node->getType())) {
             return $alias;
         }
-
         if ($node instanceof ElementRef) {
-            return key($this->visitElementDef($node->getSchema(), $node->getReferencedElement()));
+            $elementRef = $this->visitElementDef($node->getSchema(), $node->getReferencedElement());
+            if ($valueProp = $this->typeHasValue($node->getType(), $class, '' )) {
+                return $valueProp;
+            }
+            return key($elementRef);
         }
-        if($valueProp = $this->typeHasValue($type, $class, 'xx')){
+        if($valueProp = $this->typeHasValue($type, $class, '')){
             return $valueProp;
         }
         if (! $node->getType()->getName()) {
