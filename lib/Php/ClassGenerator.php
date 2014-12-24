@@ -308,13 +308,7 @@ class ClassGenerator
             ->getType()));
         $docblock->setTag($patramTag);
 
-        $r = array(
-            'arrayof',
-            'setof',
-            'listof'
-        );
-
-        $method = new MethodGenerator("add" . str_ireplace($r, "", Inflector::classify($propName))."To".Inflector::classify($prop->getName()));
+        $method = new MethodGenerator("addTo".Inflector::classify($prop->getName()));
 
         $parameter = new ParameterGenerator($propName);
         $tt = $type->getArg()->getType();

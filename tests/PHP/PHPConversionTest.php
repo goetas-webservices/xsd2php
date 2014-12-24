@@ -213,8 +213,8 @@ class PHPConversionTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(1, $items);
 
         $single = $items['Example\SingleType'];
-        $this->assertTrue($single->hasMethod('addStringToA'));
-        $this->assertTrue($single->hasMethod('addStringToB'));
+        $this->assertTrue($single->hasMethod('addToA'));
+        $this->assertTrue($single->hasMethod('addToB'));
 
     }
 
