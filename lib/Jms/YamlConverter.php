@@ -228,7 +228,7 @@ class YamlConverter extends AbstractConverter
         return $this->classes[spl_object_hash($type)]["class"];
     }
 
-    private function &visitTypeAnonymous(Type $type, $parentName, &$parentClass)
+    private function &visitTypeAnonymous(Type $type, $parentName, $parentClass)
     {
         $class = array();
         $data = array();
@@ -370,7 +370,7 @@ class YamlConverter extends AbstractConverter
         return $property;
     }
 
-    private function typeHasValue(Type $type, &$parentClass, $name)
+    private function typeHasValue(Type $type, $parentClass, $name)
     {
     	$collected = array();
         do {
@@ -379,11 +379,11 @@ class YamlConverter extends AbstractConverter
             } else {
 
                 if ($type->getName()) {
-                    $class = $this->visitType($type);
+                    $parentClass = $this->visitType($type);
                 } else {
-                    $class = $this->visitTypeAnonymous($type, $name, $parentClass);
+                    $parentClass = $this->visitTypeAnonymous($type, $name, $parentClass);
                 }
-                $props = reset($class);
+                $props = reset($parentClass);
                 if (isset($props['properties']['__value']) && count($props['properties']) === 1) {
                     return $props['properties']['__value']['type'];
                 }
@@ -480,9 +480,6 @@ class YamlConverter extends AbstractConverter
         }
         if ($node instanceof ElementRef) {
             $elementRef = $this->visitElementDef($node->getSchema(), $node->getReferencedElement());
-            if ($valueProp = $this->typeHasValue($node->getType(), $class, '' )) {
-                return $valueProp;
-            }
             return key($elementRef);
         }
         if($valueProp = $this->typeHasValue($type, $class, '')){
