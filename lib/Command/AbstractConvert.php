@@ -44,7 +44,7 @@ abstract class AbstractConvert extends Console\Command\Command
 
         $nsMap = $input->getOption('ns-map');
         if (! $nsMap) {
-            throw new \RuntimeException(__CLASS__ . " requires at least one ns-map (for {$destinationNs} namespace).");
+            throw new \RuntimeException(__CLASS__ . " requires at least one ns-map.");
         }
 
         $nsTarget = $input->getOption('ns-dest');
