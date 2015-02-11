@@ -119,7 +119,7 @@ abstract class AbstractConvert extends Console\Command\Command
 
         $this->convert($converter, $schemas, $targets, $output);
 
-        return 1;
+        return 0;
     }
 
     protected abstract function convert(AbstractConverter $converter, array $schemas, array $targets, OutputInterface $output);
