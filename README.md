@@ -116,24 +116,24 @@ use JMS\Serializer\Handler\HandlerRegistryInterface;
 use Goetas\Xsd\XsdToPhp\Jms\Handler\BaseTypesHandler;
 use Goetas\Xsd\XsdToPhp\Jms\Handler\XmlSchemaDateHandler;
 
-$serializerBuiler = SerializerBuilder::create();
-$serializerBuiler->addMetadataDir('metadata dir', 'DemoNs');
-$serializerBuiler->configureHandlers(function (HandlerRegistryInterface $h) use ($serializerBuiler) {
-    $serializerBuiler->addDefaultHandlers();
-    $h->registerSubscribingHandler(new BaseTypesHandler()); // XMLSchema List handling
-    $h->registerSubscribingHandler(new XmlSchemaDateHandler()); // XMLSchema date handling
+$serializerBuilder = SerializerBuilder::create();
+$serializerBuilder->addMetadataDir('metadata dir', 'DemoNs');
+$serializerBuilder->configureHandlers(function (HandlerRegistryInterface $handler) use ($serializerBuilder) {
+    $serializerBuilder->addDefaultHandlers();
+    $handler->registerSubscribingHandler(new BaseTypesHandler()); // XMLSchema List handling
+    $handler->registerSubscribingHandler(new XmlSchemaDateHandler()); // XMLSchema date handling
 
-    // $h->registerSubscribingHandler(new YourhandlerHere());
+    // $handler->registerSubscribingHandler(new YourhandlerHere());
 });
 
-$serializer = $serializerBuiler->build();
+$serializer = $serializerBuilder->build();
 
-// unserialize the XML into Demo\MyObject object
+// deserialize the XML into Demo\MyObject object
 $object = $serializer->deserialize('<some xml/>', 'DemoNs\MyObject', 'xml');
 
 // some code ....
 
-// serialize bck the Demo\MyObject into XML
+// serialize the Demo\MyObject back into XML
 $newXml = $serializer->serialize($object, 'xml');
 
 ```
