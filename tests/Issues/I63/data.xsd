@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:job="http://www.example.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.com/" elementFormDefault="qualified">
+    <xs:element name="convert-to-reseller" type="xs:string">
+    </xs:element>
+    <xs:element name="two">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="job:convert-to-reseller" minOccurs="0" maxOccurs="unbounded" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

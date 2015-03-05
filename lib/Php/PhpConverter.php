@@ -354,7 +354,7 @@ class PhpConverter extends AbstractConverter
 
         if ($arrayize && $itemOfArray = $this->isArrayType($attribute->getType())) {
             if ($attribute->getType()->getName()) {
-                $arg = new PHPArg($attribute->getName());
+                $arg = new PHPArg(Inflector::camelize($attribute->getName()));
                 $arg->setType($this->visitType($itemOfArray));
                 $property->setType(new PHPClassOf($arg));
             } else {
@@ -406,7 +406,7 @@ class PhpConverter extends AbstractConverter
                 $property->setType(new PHPClassOf($elementProp));
                 return $property;
             } elseif ($this->isArrayElement($element)) {
-                $arg = new PHPArg($element->getName());
+                $arg = new PHPArg(Inflector::camelize($element->getName()));
                 $arg->setType($this->findPHPClass($class, $element));
                 $arg->setDefault('array()');
                 $property->setType(new PHPClassOf($arg));
