@@ -68,7 +68,7 @@ Where place the files?
 
 What about custom types?
 * `--alias-map='http://www.opentravel.org/OTA/2003/05;CustomOTADateTimeFormat;Vendor/Project/CustomDateClass'`
-will instcut XSD2PHP to do not generate any class for `CustomOTADateTimeFormat` type inside `http://www.opentravel.org/OTA/2003/05` namespace.
+will instruct XSD2PHP to not generate any class for `CustomOTADateTimeFormat` type inside the `http://www.opentravel.org/OTA/2003/05` namespace.
 All reference to this type are replaced with the `Vendor/Project/CustomDateClass` class.
 
 
@@ -105,7 +105,7 @@ Where place the files?
 
 What about custom types?
 * `--alias-map='http://www.opentravel.org/OTA/2003/05;CustomOTADateTimeFormat;Vendor/Project/CustomDateClass'`
-will instcut XSD2PHP to do not generate any metadata information for `CustomOTADateTimeFormat` type inside `http://www.opentravel.org/OTA/2003/05` namespace.
+will instruct XSD2PHP to not generate any metadata information for `CustomOTADateTimeFormat` type inside the `http://www.opentravel.org/OTA/2003/05` namespace.
 All reference to this type are replaced with the `Vendor/Project/CustomDateClass` class. You have to provide a [custom serializer](http://jmsyst.com/libs/serializer/master/handlers#subscribing-handlers) for this type
 
 
@@ -201,21 +201,24 @@ class MyHandler implements SubscribingHandlerInterface
 Naming Strategy
 ---------------
 
-Sometimes happen that you want not to have long class names but at the same time you want not too have namaing conflicts.
-(example: `MyNamesapce\UserElement` instead of `MyNamesapce\User` or  `MyNamesapce\UserTypeType` instead of `MyNamesapce\UserType`).
+There are two types of naming strategies: `short` and `long`. The default is `short`, this naming strategy can however generate naming conflicts.
 
-When you have an XSD with a type named `User`, a type named `UserType` and a root element named `User` and `UserElement`,
-creating the right PHP classes names will be problemeatic. To solve this you have to choose the right naming strategy.
+The `long` naming strategy will suffix elements with `Element` and types with `Type`.
 
-* If you don't not have naming conflicts and you want to have short and descriptive class names, use `--naming-strategy=short` option when you generate classes and metadata
-* If you have naming conflicts (or just you want to be stay safe) use `--naming-strategy=long` option when you generate classes and metadata.
-This will generate PHP classes with the `Element` or `Type` suffix.
+* `MyNamesapce\User` will become `MyNamesapce\UserElement`
+* `MyNamesapce\UserType` will become `MyNamesapce\UserTypeType`
+
+An XSD for instance with a type named `User`, a type named `UserType`, a root element named `User` and `UserElement`, will only work when using the `long` naming strategy.
+
+* If you don't have naming conflicts and you want to have short and descriptive class names, use the `--naming-strategy=short` option.
+* If you have naming conflicts use the `--naming-strategy=long` option.
+* If you want to be safe, use the `--naming-strategy=long` option.
 
 
 
 Note
 ----
 
-I'm sorry for the terrible english fluency used inside the documentation, I'm trying to improve it.
+I'm sorry for the terrible written english within the documentation, I'm trying to improve it.
 Pull Requests are welcome.
 
