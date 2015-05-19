@@ -72,7 +72,7 @@ class XmlSchemaDateHandler implements SubscribingHandlerInterface
 
     public function serializeTime(XmlSerializationVisitor $visitor, \DateTime $date, array $type, Context $context)
     {
-        $v = $date->format('H:i:sP');
+        $v = $date->format('H:i:s');
         if ($date->getTimezone()->getOffset($date)!==$this->defaultTimezone->getOffset($date)){
             $v.= $date->format('P');
         }
