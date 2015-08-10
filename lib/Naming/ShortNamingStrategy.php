@@ -10,7 +10,7 @@ class ShortNamingStrategy implements NamingStrategy
 
     public function getTypeName(Type $type)
     {
-        $name = Inflector::classify($type->getName());
+        $name = $this->classify($type->getName());
         if ($name && substr($name, - 4) !== 'Type') {
             $name .= "Type";
         }
@@ -19,11 +19,16 @@ class ShortNamingStrategy implements NamingStrategy
 
     public function getAnonymousTypeName(Type $type, $parentName)
     {
-        return Inflector::classify($parentName) . "AType";
+        return $this->classify($parentName) . "AType";
     }
 
     public function getItemName(Item $item)
     {
-        return Inflector::classify($item->getName());
+        return $this->classify($item->getName());
+    }
+
+    private function classify($name)
+    {
+    	return Inflector::classify(str_replace(".", " ", $name));
     }
 }
