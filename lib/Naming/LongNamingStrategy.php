@@ -10,16 +10,21 @@ class LongNamingStrategy implements NamingStrategy
 
     public function getTypeName(Type $type)
     {
-        return Inflector::classify($type->getName()) . "Type";
+        return $this->classify($type->getName()) . "Type";
     }
 
     public function getAnonymousTypeName(Type $type, $parentName)
     {
-        return Inflector::classify($parentName) . "AnonymousType";
+        return $this->classify($parentName) . "AnonymousType";
     }
 
     public function getItemName(Item $item)
     {
-        return Inflector::classify($item->getName());
+        return $this->classify($item->getName());
+    }
+
+    private function classify($name)
+    {
+    	return Inflector::classify(str_replace(".", " ", $name));
     }
 }
