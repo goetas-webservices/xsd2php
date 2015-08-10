@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:job="http://www.example.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.com/" elementFormDefault="qualified">
+    <xs:complexType name="a.b">
+        <xs:attribute name="a"/>
+    </xs:complexType>
+</xs:schema>
