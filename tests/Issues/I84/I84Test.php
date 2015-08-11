@@ -17,5 +17,8 @@ class I84Test extends \PHPUnit_Framework_TestCase{
 
         $phpClasses = $phpConv->convert([$schema]);
         $this->assertArrayHasKey('Epa\ABType', $phpClasses);
+        $class = $phpClasses['Epa\ABType'];
+        $this->assertArrayHasKey('cDe', $class->getProperties());
+        $this->assertArrayHasKey('fGh', $class->getProperties());
     }
 }

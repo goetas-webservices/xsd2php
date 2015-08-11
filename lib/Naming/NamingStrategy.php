@@ -12,4 +12,7 @@ interface NamingStrategy
     public function getAnonymousTypeName(Type $type, $parentName);
 
     public function getItemName(Item $item);
+
+    //@todo introduce common type for attributes and elements
+    public function getPropertyName($item);
 }

@@ -350,11 +350,11 @@ class PhpConverter extends AbstractConverter
     private function visitAttribute(PHPClass $class, Schema $schema, AttributeItem $attribute, $arrayize = true)
     {
         $property = new PHPProperty();
-        $property->setName(Inflector::camelize($attribute->getName()));
+        $property->setName($this->getNamingStrategy()->getPropertyName($attribute));
 
         if ($arrayize && $itemOfArray = $this->isArrayType($attribute->getType())) {
             if ($attribute->getType()->getName()) {
-                $arg = new PHPArg(Inflector::camelize($attribute->getName()));
+                $arg = new PHPArg($this->getNamingStrategy()->getPropertyName($attribute));
                 $arg->setType($this->visitType($itemOfArray));
                 $property->setType(new PHPClassOf($arg));
             } else {
@@ -379,7 +379,7 @@ class PhpConverter extends AbstractConverter
     private function visitElement(PHPClass $class, Schema $schema, ElementSingle $element, $arrayize = true)
     {
         $property = new PHPProperty();
-        $property->setName(Inflector::camelize($element->getName()));
+        $property->setName($this->getNamingStrategy()->getPropertyName($element));
         $property->setDoc($element->getDoc());
 
         $t = $element->getType();
@@ -392,7 +392,7 @@ class PhpConverter extends AbstractConverter
                     $classType = $this->visitType($itemOfArray);
                 }
 
-                $arg = new PHPArg(Inflector::camelize($element->getName()));
+                $arg = new PHPArg($this->getNamingStrategy()->getPropertyName($element));
                 $arg->setType($classType);
                 $property->setType(new PHPClassOf($arg));
                 return $property;
@@ -406,7 +406,7 @@ class PhpConverter extends AbstractConverter
                 $property->setType(new PHPClassOf($elementProp));
                 return $property;
             } elseif ($this->isArrayElement($element)) {
-                $arg = new PHPArg(Inflector::camelize($element->getName()));
+                $arg = new PHPArg($this->getNamingStrategy()->getPropertyName($element));
                 $arg->setType($this->findPHPClass($class, $element));
                 $arg->setDefault('array()');
                 $property->setType(new PHPClassOf($arg));

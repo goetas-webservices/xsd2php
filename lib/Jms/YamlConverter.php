@@ -255,7 +255,7 @@ class YamlConverter extends AbstractConverter
             $data["properties"] = array();
         }
         foreach ($this->flattElements($type) as $element) {
-            $data["properties"][Inflector::camelize($element->getName())] = $this->visitElement($class, $schema, $element);
+            $data["properties"][$this->getNamingStrategy()->getPropertyName($element)] = $this->visitElement($class, $schema, $element);
         }
     }
 
@@ -289,7 +289,7 @@ class YamlConverter extends AbstractConverter
             $data["properties"] = array();
         }
         foreach ($this->flattAttributes($type) as $attr) {
-            $data["properties"][Inflector::camelize($attr->getName())] = $this->visitAttribute($class, $schema, $attr);
+            $data["properties"][$this->getNamingStrategy()->getPropertyName($attr)] = $this->visitAttribute($class, $schema, $attr);
         }
     }
 

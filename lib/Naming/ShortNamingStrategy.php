@@ -22,6 +22,11 @@ class ShortNamingStrategy implements NamingStrategy
         return $this->classify($parentName) . "AType";
     }
 
+    public function getPropertyName($item)
+    {
+    	return Inflector::camelize(str_replace(".", " ", $item->getName()));
+    }
+
     public function getItemName(Item $item)
     {
         return $this->classify($item->getName());

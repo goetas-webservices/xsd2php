@@ -23,6 +23,11 @@ class LongNamingStrategy implements NamingStrategy
         return $this->classify($item->getName());
     }
 
+    public function getPropertyName($item)
+    {
+    	return Inflector::camelize(str_replace(".", " ", $item->getName()));
+    }
+
     private function classify($name)
     {
     	return Inflector::classify(str_replace(".", " ", $name));
