@@ -26,7 +26,7 @@ There is one recommended way to install xsd2php via [Composer](https://getcompos
       "goetas/xsd-reader":"2.*@dev",
       "jms/serializer": "xsd2php-dev as 0.18.0",
       ..
-  }
+  },
   "repositories": [{
       "type": "vcs",
       "url": "https://github.com/goetas/serializer.git"
