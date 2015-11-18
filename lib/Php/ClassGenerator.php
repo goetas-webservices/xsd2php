@@ -395,7 +395,7 @@ class ClassGenerator
         if ($type->getDoc()) {
             $docblock->setLongDescription($type->getDoc());
         }
-        $class->setNamespaceName($type->getNamespace());
+        $class->setNamespaceName($type->getNamespace() ?: NULL);
         $class->setName($type->getName());
         $class->setDocblock($docblock);
 
