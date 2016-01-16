@@ -22,12 +22,11 @@
         </testsuite>
     </testsuites>
     
-    <filter>
-  <blacklist>
-    <directory>vendor</directory>
-    <directory>tests</directory>
-  </blacklist>
-  </filter>    
+<filter>
+  <whitelist>
+    <directory>lib</directory>
+  </whitelist>
+  </filter>  
 
 </phpunit>
 
