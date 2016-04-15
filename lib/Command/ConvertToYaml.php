@@ -7,6 +7,7 @@ use Symfony\Component\Yaml\Dumper;
 use Symfony\Component\Console\Output\OutputInterface;
 use Goetas\Xsd\XsdToPhp\AbstractConverter;
 use Goetas\Xsd\XsdToPhp\Naming\NamingStrategy;
+use Symfony\Component\Console\Helper\ProgressBar;
 
 class ConvertToYaml extends AbstractConvert
 {
@@ -34,12 +35,12 @@ class ConvertToYaml extends AbstractConvert
         $dumper = new Dumper();
 
         $pathGenerator = new Psr4PathGenerator($targets);
-        $progress = $this->getHelperSet()->get('progress');
 
-        $progress->start($output, count($items));
+        $progress = new ProgressBar($output, count($items));
+        $progress->start();
 
         foreach ($items as $item) {
-            $progress->advance(1, true);
+            $progress->advance();
             $output->write(" Item <info>" . key($item) . "</info>... ");
 
             $source = $dumper->dump($item, 10000);
@@ -49,6 +50,5 @@ class ConvertToYaml extends AbstractConvert
             $bytes = file_put_contents($path, $source);
             $output->writeln("saved source <comment>$bytes bytes</comment>.");
         }
-        $progress->finish();
     }
 }

@@ -8,6 +8,7 @@ use Goetas\Xsd\XsdToPhp\AbstractConverter;
 use Symfony\Component\Console\Output\OutputInterface;
 use Zend\Code\Generator\FileGenerator;
 use Goetas\Xsd\XsdToPhp\Naming\NamingStrategy;
+use Symfony\Component\Console\Helper\ProgressBar;
 
 class ConvertToPHP extends AbstractConvert
 {
@@ -32,13 +33,13 @@ class ConvertToPHP extends AbstractConvert
     {
         $generator = new ClassGenerator();
         $pathGenerator = new Psr4PathGenerator($targets);
-        $progress = $this->getHelperSet()->get('progress');
-
         $items = $converter->convert($schemas);
-        $progress->start($output, count($items));
+
+        $progress = new ProgressBar($output, count($items));
+        $progress->start();
 
         foreach ($items as $item) {
-            $progress->advance(1, true);
+            $progress->advance();
             $output->write(" Creating <info>" . $output->getFormatter()->escape($item->getFullName()) . "</info>... ");
             $path = $pathGenerator->getPath($item);
 
@@ -58,6 +59,5 @@ class ConvertToPHP extends AbstractConvert
 
             }
         }
-        $progress->finish();
     }
 }
