@@ -15,7 +15,7 @@ before_script:
   - echo "xdebug.max_nesting_level=1000" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
   - if [[ $TRAVIS_PHP_VERSION = '5.6' ]]; then PHPUNIT_FLAGS="--coverage-clover=coverage.clover"; else PHPUNIT_FLAGS=""; fi
   - if [[ $TRAVIS_PHP_VERSION != '5.6' ]]; then phpenv config-rm xdebug.ini; fi  
-  - composer install --prefer-dist --dev
+  - composer install
 
 script: vendor/phpunit/phpunit/phpunit $PHPUNIT_FLAGS
 
