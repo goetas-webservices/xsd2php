@@ -1,7 +1,7 @@
 /.buildpath
 /.project
 /.settings
-./lib/Symfony
+/.idea
 composer.lock
 vendor/
 
