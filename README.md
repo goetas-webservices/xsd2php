@@ -113,8 +113,8 @@ All reference to this type are replaced with the `Vendor/Project/CustomDateClass
 use JMS\Serializer\SerializerBuilder;
 use JMS\Serializer\Handler\HandlerRegistryInterface;
 
-use Goetas\Xsd\XsdToPhp\Jms\Handler\BaseTypesHandler;
-use Goetas\Xsd\XsdToPhp\Jms\Handler\XmlSchemaDateHandler;
+use Goetas\Xsd\XsdToPhpRuntime\Jms\Handler\BaseTypesHandler;
+use Goetas\Xsd\XsdToPhpRuntime\Jms\Handler\XmlSchemaDateHandler;
 
 $serializerBuilder = SerializerBuilder::create();
 $serializerBuilder->addMetadataDir('metadata dir', 'DemoNs');
