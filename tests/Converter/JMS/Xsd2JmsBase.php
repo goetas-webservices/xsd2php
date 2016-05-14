@@ -2,7 +2,7 @@
 namespace Goetas\Xsd\XsdToPhp\Tests\Converter\JMS;
 
 use Goetas\Xsd\XsdToPhp\Jms\YamlConverter;
-use Goetas\XML\XSDReader\SchemaReader;
+use GoetasWebservices\XML\XSDReader\SchemaReader;
 use Goetas\Xsd\XsdToPhp\Naming\ShortNamingStrategy;
 
 abstract class Xsd2JmsBase extends \PHPUnit_Framework_TestCase

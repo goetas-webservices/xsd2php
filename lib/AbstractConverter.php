@@ -1,11 +1,11 @@
 <?php
 namespace Goetas\Xsd\XsdToPhp;
 
-use Goetas\XML\XSDReader\Schema\Schema;
-use Goetas\XML\XSDReader\Schema\Type\Type;
-use Goetas\XML\XSDReader\Schema\Type\ComplexType;
-use Goetas\XML\XSDReader\Schema\Type\SimpleType;
-use Goetas\XML\XSDReader\Schema\Element\ElementSingle;
+use GoetasWebservices\XML\XSDReader\Schema\Schema;
+use GoetasWebservices\XML\XSDReader\Schema\Type\Type;
+use GoetasWebservices\XML\XSDReader\Schema\Type\ComplexType;
+use GoetasWebservices\XML\XSDReader\Schema\Type\SimpleType;
+use GoetasWebservices\XML\XSDReader\Schema\Element\ElementSingle;
 use Goetas\Xsd\XsdToPhp\Naming\NamingStrategy;
 
 abstract class AbstractConverter
@@ -239,7 +239,7 @@ abstract class AbstractConverter
 
     /**
      * @param Type $type
-     * @return \Goetas\XML\XSDReader\Schema\Type\Type|null
+     * @return \GoetasWebservices\XML\XSDReader\Schema\Type\Type|null
      */
     protected function isArrayType(Type $type)
     {
@@ -250,7 +250,7 @@ abstract class AbstractConverter
 
     /**
      * @param Type $type
-     * @return \Goetas\XML\XSDReader\Schema\Element\ElementSingle|null
+     * @return \GoetasWebservices\XML\XSDReader\Schema\Element\ElementSingle|null
      */
     protected function isArrayNestedElement(Type $type)
     {
@@ -261,7 +261,7 @@ abstract class AbstractConverter
     }
     /**
      * @param ElementSingle $type
-     * @return \Goetas\XML\XSDReader\Schema\Element\ElementSingle|null
+     * @return \GoetasWebservices\XML\XSDReader\Schema\Element\ElementSingle|null
      */
     protected function isArrayElement($element)
     {

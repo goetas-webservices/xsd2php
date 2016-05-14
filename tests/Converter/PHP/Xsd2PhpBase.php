@@ -2,7 +2,7 @@
 namespace Goetas\Xsd\XsdToPhp\Tests\Converter\PHP;
 
 use Goetas\Xsd\XsdToPhp\Php\PhpConverter;
-use Goetas\XML\XSDReader\SchemaReader;
+use GoetasWebservices\XML\XSDReader\SchemaReader;
 use Goetas\Xsd\XsdToPhp\Naming\ShortNamingStrategy;
 
 abstract class Xsd2PhpBase extends \PHPUnit_Framework_TestCase

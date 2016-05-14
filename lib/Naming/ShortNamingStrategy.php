@@ -2,8 +2,8 @@
 namespace Goetas\Xsd\XsdToPhp\Naming;
 
 use Doctrine\Common\Inflector\Inflector;
-use Goetas\XML\XSDReader\Schema\Type\Type;
-use Goetas\XML\XSDReader\Schema\Item;
+use GoetasWebservices\XML\XSDReader\Schema\Type\Type;
+use GoetasWebservices\XML\XSDReader\Schema\Item;
 
 class ShortNamingStrategy implements NamingStrategy
 {

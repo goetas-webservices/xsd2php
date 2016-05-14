@@ -2,22 +2,22 @@
 namespace Goetas\Xsd\XsdToPhp\Jms;
 
 use Exception;
-use Goetas\XML\XSDReader\Schema\Schema;
-use Goetas\XML\XSDReader\Schema\Type\Type;
+use GoetasWebservices\XML\XSDReader\Schema\Schema;
+use GoetasWebservices\XML\XSDReader\Schema\Type\Type;
 use Doctrine\Common\Inflector\Inflector;
-use Goetas\XML\XSDReader\Schema\Type\BaseComplexType;
-use Goetas\XML\XSDReader\Schema\Type\ComplexType;
-use Goetas\XML\XSDReader\Schema\Element\Element;
-use Goetas\XML\XSDReader\Schema\Item;
-use Goetas\XML\XSDReader\Schema\Type\SimpleType;
-use Goetas\XML\XSDReader\Schema\Attribute\AttributeItem;
-use Goetas\XML\XSDReader\Schema\Element\ElementItem;
-use Goetas\XML\XSDReader\Schema\Attribute\AttributeContainer;
-use Goetas\XML\XSDReader\Schema\Element\ElementContainer;
-use Goetas\XML\XSDReader\Schema\Element\ElementDef;
+use GoetasWebservices\XML\XSDReader\Schema\Type\BaseComplexType;
+use GoetasWebservices\XML\XSDReader\Schema\Type\ComplexType;
+use GoetasWebservices\XML\XSDReader\Schema\Element\Element;
+use GoetasWebservices\XML\XSDReader\Schema\Item;
+use GoetasWebservices\XML\XSDReader\Schema\Type\SimpleType;
+use GoetasWebservices\XML\XSDReader\Schema\Attribute\AttributeItem;
+use GoetasWebservices\XML\XSDReader\Schema\Element\ElementItem;
+use GoetasWebservices\XML\XSDReader\Schema\Attribute\AttributeContainer;
+use GoetasWebservices\XML\XSDReader\Schema\Element\ElementContainer;
+use GoetasWebservices\XML\XSDReader\Schema\Element\ElementDef;
 use Goetas\Xsd\XsdToPhp\AbstractConverter;
-use Goetas\XML\XSDReader\Schema\Element\ElementRef;
-use Goetas\XML\XSDReader\Schema\SchemaItem;
+use GoetasWebservices\XML\XSDReader\Schema\Element\ElementRef;
+use GoetasWebservices\XML\XSDReader\Schema\SchemaItem;
 use Goetas\Xsd\XsdToPhp\Naming\NamingStrategy;
 
 class YamlConverter extends AbstractConverter

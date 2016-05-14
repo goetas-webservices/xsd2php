@@ -5,7 +5,7 @@ use Exception;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console;
-use Goetas\XML\XSDReader\SchemaReader;
+use GoetasWebservices\XML\XSDReader\SchemaReader;
 use Goetas\Xsd\XsdToPhp\AbstractConverter;
 use Symfony\Component\Console\Output\OutputInterface;
 use Goetas\Xsd\XsdToPhp\Naming\ShortNamingStrategy;

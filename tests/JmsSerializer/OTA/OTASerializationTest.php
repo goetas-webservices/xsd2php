@@ -3,7 +3,7 @@ namespace Goetas\Xsd\XsdToPhp\Tests\JmsSerializer\OTA;
 
 use Doctrine\Common\Inflector\Inflector;
 use Goetas\Xsd\XsdToPhp\Php\PhpConverter;
-use Goetas\XML\XSDReader\SchemaReader;
+use GoetasWebservices\XML\XSDReader\SchemaReader;
 use Goetas\Xsd\XsdToPhp\Php\ClassGenerator;
 use Zend\Code\Generator\FileGenerator;
 use Goetas\Xsd\XsdToPhp\Php\PathGenerator\Psr4PathGenerator;
