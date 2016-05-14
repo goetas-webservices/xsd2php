@@ -11,8 +11,8 @@ use \Goetas\Xsd\XsdToPhp\Jms\PathGenerator\Psr4PathGenerator as JmsPsr4PathGener
 use Goetas\Xsd\XsdToPhp\Jms\YamlConverter;
 use Symfony\Component\Yaml\Dumper;
 use JMS\Serializer\Handler\HandlerRegistryInterface;
-use Goetas\Xsd\XsdToPhpRuntime\Jms\Handler\BaseTypesHandler;
-use Goetas\Xsd\XsdToPhpRuntime\Jms\Handler\XmlSchemaDateHandler;
+use GoetasWebservices\Xsd\XsdToPhpRuntime\Jms\Handler\BaseTypesHandler;
+use GoetasWebservices\Xsd\XsdToPhpRuntime\Jms\Handler\XmlSchemaDateHandler;
 use Goetas\Xsd\XsdToPhp\Jms\Handler\OTA\SchemaDateHandler;
 use Composer\Autoload\ClassLoader;
 use Goetas\Xsd\XsdToPhp\Naming\ShortNamingStrategy;
