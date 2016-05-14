@@ -3,16 +3,16 @@ namespace Goetas\Xsd\XsdToPhp\Php;
 
 use Doctrine\Common\Inflector\Inflector;
 use Goetas\Xsd\XsdToPhp\Php\Structure\PHPClass;
-use Goetas\Xsd\XsdToPhp\Php\Structure\PHPProperty;
 use Goetas\Xsd\XsdToPhp\Php\Structure\PHPClassOf;
+use Goetas\Xsd\XsdToPhp\Php\Structure\PHPProperty;
 use Zend\Code\Generator;
-use Zend\Code\Generator\PropertyGenerator;
-use Zend\Code\Generator\DocBlockGenerator;
 use Zend\Code\Generator\DocBlock\Tag\ParamTag;
+use Zend\Code\Generator\DocBlock\Tag\PropertyTag;
 use Zend\Code\Generator\DocBlock\Tag\ReturnTag;
+use Zend\Code\Generator\DocBlockGenerator;
 use Zend\Code\Generator\MethodGenerator;
 use Zend\Code\Generator\ParameterGenerator;
-use Zend\Code\Generator\DocBlock\Tag\PropertyTag;
+use Zend\Code\Generator\PropertyGenerator;
 
 class ClassGenerator
 {
@@ -39,7 +39,7 @@ class ClassGenerator
 
     private function isNativeType(PHPClass $class)
     {
-        return ! $class->getNamespace() && in_array($class->getName(), [
+        return !$class->getNamespace() && in_array($class->getName(), [
             'string',
             'int',
             'float',
@@ -53,7 +53,7 @@ class ClassGenerator
 
     private function getPhpType(PHPClass $class)
     {
-        if (! $class->getNamespace()) {
+        if (!$class->getNamespace()) {
             if ($this->isNativeType($class)) {
                 return $class->getName();
             }
@@ -73,7 +73,7 @@ class ClassGenerator
         $docblock->setTag($paramTag);
 
         $param = new ParameterGenerator("value");
-        if ($type && ! $this->isNativeType($type)) {
+        if ($type && !$this->isNativeType($type)) {
             $param->setType($this->getPhpType($type));
         }
         $method = new MethodGenerator("__construct", [
@@ -88,7 +88,7 @@ class ClassGenerator
         $paramTag = new ParamTag("value", "mixed");
         if ($type && $type instanceof PHPClassOf) {
             $paramTag->setTypes($this->getPhpType($type->getArg()
-                ->getType()) . "[]");
+                    ->getType()) . "[]");
         } elseif ($type) {
             $paramTag->setTypes($this->getPhpType($prop->getType()));
         }
@@ -98,7 +98,7 @@ class ClassGenerator
 
         if ($type && $type instanceof PHPClassOf) {
             $returnTag->setTypes($this->getPhpType($type->getArg()
-                ->getType()) . "[]");
+                    ->getType()) . "[]");
         } elseif ($type) {
             $returnTag->setTypes($this->getPhpType($type));
         }
@@ -107,7 +107,7 @@ class ClassGenerator
         $param = new ParameterGenerator("value");
         $param->setDefaultValue(null);
 
-        if ($type && ! $this->isNativeType($type)) {
+        if ($type && !$this->isNativeType($type)) {
             $param->setType($this->getPhpType($type));
         }
         $method = new MethodGenerator("value", []);
@@ -154,11 +154,12 @@ class ClassGenerator
 
         if ($type && $type instanceof PHPClassOf) {
             $patramTag->setTypes($this->getPhpType($type->getArg()
-                ->getType()) . "[]");
+                    ->getType()) . "[]");
             $parameter->setType("array");
 
             if ($p = $this->isOneType($type->getArg()
-                ->getType())) {
+                ->getType())
+            ) {
                 if (($t = $p->getType())) {
                     $patramTag->setTypes($this->getPhpType($t));
                 }
@@ -167,10 +168,10 @@ class ClassGenerator
             if ($this->isNativeType($type)) {
                 $patramTag->setTypes($this->getPhpType($type));
             } elseif ($p = $this->isOneType($type)) {
-                if (($t = $p->getType()) && ! $this->isNativeType($t)) {
+                if (($t = $p->getType()) && !$this->isNativeType($t)) {
                     $patramTag->setTypes($this->getPhpType($t));
                     $parameter->setType($this->getPhpType($t));
-                } elseif ($t && ! $this->isNativeType($t)) {
+                } elseif ($t && !$this->isNativeType($t)) {
                     $patramTag->setTypes($this->getPhpType($t));
                     $parameter->setType($this->getPhpType($t));
                 } elseif ($t) {
@@ -194,7 +195,7 @@ class ClassGenerator
     private function handleGetter(Generator\ClassGenerator $generator, PHPProperty $prop, PHPClass $class)
     {
 
-        if ($prop->getType() instanceof PHPClassOf){
+        if ($prop->getType() instanceof PHPClassOf) {
             $docblock = new DocBlockGenerator();
             $docblock->setShortDescription("isset " . $prop->getName());
             if ($prop->getDoc()) {
@@ -224,7 +225,6 @@ class ClassGenerator
             $paramIndex = new ParameterGenerator("index", "mixed");
 
             $docblock->setTag(new ReturnTag("void"));
-
 
 
             $method = new MethodGenerator("unset" . Inflector::classify($prop->getName()), [$paramIndex]);
@@ -308,22 +308,22 @@ class ClassGenerator
             ->getType()));
         $docblock->setTag($patramTag);
 
-        $method = new MethodGenerator("addTo".Inflector::classify($prop->getName()));
+        $method = new MethodGenerator("addTo" . Inflector::classify($prop->getName()));
 
         $parameter = new ParameterGenerator($propName);
         $tt = $type->getArg()->getType();
 
-        if (! $this->isNativeType($tt)) {
+        if (!$this->isNativeType($tt)) {
 
             if ($p = $this->isOneType($tt)) {
                 if (($t = $p->getType())) {
                     $patramTag->setTypes($this->getPhpType($t));
 
-                    if (! $this->isNativeType($t)) {
+                    if (!$this->isNativeType($t)) {
                         $parameter->setType($this->getPhpType($t));
                     }
                 }
-            } elseif (! $this->isNativeType($tt)) {
+            } elseif (!$this->isNativeType($tt)) {
                 $parameter->setType($this->getPhpType($tt));
             }
         }
@@ -354,7 +354,7 @@ class ClassGenerator
 
         $class->addPropertyFromGenerator($generatedProp);
 
-        if ($prop->getType() && (! $prop->getType()->getNamespace() && $prop->getType()->getName() == "array")) {
+        if ($prop->getType() && (!$prop->getType()->getNamespace() && $prop->getType()->getName() == "array")) {
             // $generatedProp->setDefaultValue(array(), PropertyValueGenerator::TYPE_AUTO, PropertyValueGenerator::OUTPUT_SINGLE_LINE);
         }
 

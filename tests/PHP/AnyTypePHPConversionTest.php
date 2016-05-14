@@ -1,11 +1,11 @@
 <?php
 namespace Goetas\Xsd\XsdToPhp\Tests\JmsSerializer\OTA;
 
-use Goetas\Xsd\XsdToPhp\Php\PhpConverter;
-use GoetasWebservices\XML\XSDReader\SchemaReader;
-use Goetas\Xsd\XsdToPhp\Php\ClassGenerator;
 use Goetas\Xsd\XsdToPhp\Jms\YamlConverter;
 use Goetas\Xsd\XsdToPhp\Naming\ShortNamingStrategy;
+use Goetas\Xsd\XsdToPhp\Php\ClassGenerator;
+use Goetas\Xsd\XsdToPhp\Php\PhpConverter;
+use GoetasWebservices\XML\XSDReader\SchemaReader;
 
 class AnyTypePHPConversionTest extends \PHPUnit_Framework_TestCase
 {
@@ -27,7 +27,7 @@ class AnyTypePHPConversionTest extends \PHPUnit_Framework_TestCase
 
         $reader = new SchemaReader();
 
-        if (! is_array($xml)) {
+        if (!is_array($xml)) {
             $xml = [
                 'schema.xsd' => $xml
             ];
@@ -40,6 +40,7 @@ class AnyTypePHPConversionTest extends \PHPUnit_Framework_TestCase
 
         return $items;
     }
+
     /**
      *
      * @param mixed $xml
@@ -58,7 +59,7 @@ class AnyTypePHPConversionTest extends \PHPUnit_Framework_TestCase
         $generator = new ClassGenerator();
         $reader = new SchemaReader();
 
-        if (! is_array($xml)) {
+        if (!is_array($xml)) {
             $xml = [
                 'schema.xsd' => $xml
             ];

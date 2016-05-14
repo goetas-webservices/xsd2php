@@ -1,8 +1,8 @@
 <?php
 namespace Goetas\Xsd\XsdToPhp\Naming;
 
-use GoetasWebservices\XML\XSDReader\Schema\Type\Type;
 use GoetasWebservices\XML\XSDReader\Schema\Item;
+use GoetasWebservices\XML\XSDReader\Schema\Type\Type;
 
 interface NamingStrategy
 {

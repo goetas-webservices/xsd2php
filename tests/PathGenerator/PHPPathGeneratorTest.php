@@ -7,7 +7,9 @@ use Goetas\Xsd\XsdToPhp\Php\Structure\PHPClass;
 class PHPPathGeneratorTest extends \PHPUnit_Framework_TestCase
 {
     protected $tmpdir;
-    public function setUp(){
+
+    public function setUp()
+    {
         $tmp = sys_get_temp_dir();
 
         if (is_writable("/dev/shm")) {
@@ -15,8 +17,8 @@ class PHPPathGeneratorTest extends \PHPUnit_Framework_TestCase
         }
 
         $this->tmpdir = "$tmp/PathGeneratorTest";
-        if(!is_dir($this->tmpdir )){
-            mkdir($this->tmpdir );
+        if (!is_dir($this->tmpdir)) {
+            mkdir($this->tmpdir);
         }
     }
 
@@ -24,7 +26,7 @@ class PHPPathGeneratorTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('Goetas\Xsd\XsdToPhp\PathGenerator\PathGeneratorException');
         $generator = new Psr4PathGenerator(array(
-            'myns\\' =>$this->tmpdir
+            'myns\\' => $this->tmpdir
         ));
         $generator->getPath(new PHPClass('Bar', 'myns2'));
     }
@@ -37,7 +39,7 @@ class PHPPathGeneratorTest extends \PHPUnit_Framework_TestCase
 
         $path = $generator->getPath(new PHPClass('Bar', 'myns\foo'));
 
-        $this->assertEquals( $path, $this->tmpdir."/foo/Bar.php");
+        $this->assertEquals($path, $this->tmpdir . "/foo/Bar.php");
     }
 
     public function testWriter()
@@ -48,7 +50,7 @@ class PHPPathGeneratorTest extends \PHPUnit_Framework_TestCase
 
         $path = $generator->getPath(new PHPClass('Bar', 'myns'));
 
-        $this->assertEquals( $path, $this->tmpdir."/Bar.php");
+        $this->assertEquals($path, $this->tmpdir . "/Bar.php");
     }
 
     public function testNonExistingDir()

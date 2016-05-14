@@ -1,10 +1,10 @@
 <?php
 namespace Goetas\Xsd\XsdToPhp\Tests\JmsSerializer\OTA;
 
+use Goetas\Xsd\XsdToPhp\Naming\ShortNamingStrategy;
+use Goetas\Xsd\XsdToPhp\Php\ClassGenerator;
 use Goetas\Xsd\XsdToPhp\Php\PhpConverter;
 use GoetasWebservices\XML\XSDReader\SchemaReader;
-use Goetas\Xsd\XsdToPhp\Php\ClassGenerator;
-use Goetas\Xsd\XsdToPhp\Naming\ShortNamingStrategy;
 
 class PHPConversionTest extends \PHPUnit_Framework_TestCase
 {
@@ -22,7 +22,7 @@ class PHPConversionTest extends \PHPUnit_Framework_TestCase
         $generator = new ClassGenerator();
         $reader = new SchemaReader();
 
-        if (! is_array($xml)) {
+        if (!is_array($xml)) {
             $xml = [
                 'schema.xsd' => $xml
             ];
@@ -147,6 +147,7 @@ class PHPConversionTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($codegen->hasMethod('getId'));
         $this->assertTrue($codegen->hasMethod('setId'));
     }
+
     public function testNestedMulteplicity()
     {
         $xml = '

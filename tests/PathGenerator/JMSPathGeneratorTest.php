@@ -6,7 +6,9 @@ use Goetas\Xsd\XsdToPhp\Jms\PathGenerator\Psr4PathGenerator;
 class JMSPathGeneratorTest extends \PHPUnit_Framework_TestCase
 {
     protected $tmpdir;
-    public function setUp(){
+
+    public function setUp()
+    {
         $tmp = sys_get_temp_dir();
 
         if (is_writable("/dev/shm")) {
@@ -14,10 +16,11 @@ class JMSPathGeneratorTest extends \PHPUnit_Framework_TestCase
         }
 
         $this->tmpdir = "$tmp/PathGeneratorTest";
-        if(!is_dir($this->tmpdir )){
-            mkdir($this->tmpdir );
+        if (!is_dir($this->tmpdir)) {
+            mkdir($this->tmpdir);
         }
     }
+
     public function testNoNs()
     {
         $this->setExpectedException('Goetas\Xsd\XsdToPhp\PathGenerator\PathGeneratorException');
@@ -34,7 +37,7 @@ class JMSPathGeneratorTest extends \PHPUnit_Framework_TestCase
         ));
 
         $path = $generator->getPath(array('myns\foo\Bar' => true));
-        $this->assertEquals( $path, $this->tmpdir."/foo.Bar.yml");
+        $this->assertEquals($path, $this->tmpdir . "/foo.Bar.yml");
     }
 
     public function testWriter()
@@ -45,7 +48,7 @@ class JMSPathGeneratorTest extends \PHPUnit_Framework_TestCase
 
         $path = $generator->getPath(array('myns\Bar' => true));
 
-        $this->assertEquals( $path, $this->tmpdir."/Bar.yml");
+        $this->assertEquals($path, $this->tmpdir . "/Bar.yml");
     }
 
     public function testNonExistingDir()

@@ -1,13 +1,13 @@
 <?php
 namespace Goetas\Xsd\XsdToPhp\Command;
 
+use Goetas\Xsd\XsdToPhp\AbstractConverter;
 use Goetas\Xsd\XsdToPhp\Jms\PathGenerator\Psr4PathGenerator;
 use Goetas\Xsd\XsdToPhp\Jms\YamlConverter;
-use Symfony\Component\Yaml\Dumper;
-use Symfony\Component\Console\Output\OutputInterface;
-use Goetas\Xsd\XsdToPhp\AbstractConverter;
 use Goetas\Xsd\XsdToPhp\Naming\NamingStrategy;
 use Symfony\Component\Console\Helper\ProgressBar;
+use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Yaml\Dumper;
 
 class ConvertToYaml extends AbstractConvert
 {

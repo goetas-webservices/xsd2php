@@ -2,8 +2,8 @@
 namespace Goetas\Xsd\XsdToPhp\Tests\Converter\JMS;
 
 use Goetas\Xsd\XsdToPhp\Jms\YamlConverter;
-use GoetasWebservices\XML\XSDReader\SchemaReader;
 use Goetas\Xsd\XsdToPhp\Naming\ShortNamingStrategy;
+use GoetasWebservices\XML\XSDReader\SchemaReader;
 
 abstract class Xsd2JmsBase extends \PHPUnit_Framework_TestCase
 {
@@ -39,7 +39,7 @@ abstract class Xsd2JmsBase extends \PHPUnit_Framework_TestCase
     {
         return [
             ['xs:dateTime', 'DateTime'],
-            ];
+        ];
     }
 
 
@@ -50,6 +50,6 @@ abstract class Xsd2JmsBase extends \PHPUnit_Framework_TestCase
             ['xs:decimal', 'float'],
             ['xs:int', 'integer'],
             ['xs:integer', 'integer'],
-            ];
+        ];
     }
 }

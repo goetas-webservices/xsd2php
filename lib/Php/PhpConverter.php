@@ -2,51 +2,46 @@
 namespace Goetas\Xsd\XsdToPhp\Php;
 
 use Exception;
-use Doctrine\Common\Inflector\Inflector;
-use Goetas\Xsd\XsdToPhp\Php\Structure\PHPClassOf;
-use Goetas\Xsd\XsdToPhp\Php\Structure\PHPArg;
-use Goetas\Xsd\XsdToPhp\Php\Structure\PHPClass;
-use Goetas\Xsd\XsdToPhp\Php\Structure\PHPProperty;
-use GoetasWebservices\XML\XSDReader\Schema\Schema;
-use GoetasWebservices\XML\XSDReader\Schema\Type\Type;
-use GoetasWebservices\XML\XSDReader\Schema\Type\BaseComplexType;
-use GoetasWebservices\XML\XSDReader\Schema\Type\ComplexType;
-use GoetasWebservices\XML\XSDReader\Schema\Element\Element;
-use GoetasWebservices\XML\XSDReader\Schema\Item;
-use GoetasWebservices\XML\XSDReader\Schema\Attribute\Group as AttributeGroup;
-use GoetasWebservices\XML\XSDReader\Schema\Element\Group;
-use GoetasWebservices\XML\XSDReader\Schema\Type\SimpleType;
-use GoetasWebservices\XML\XSDReader\Schema\Attribute\AttributeItem;
-use GoetasWebservices\XML\XSDReader\Schema\Element\ElementRef;
-use GoetasWebservices\XML\XSDReader\Schema\Element\ElementDef;
-use GoetasWebservices\XML\XSDReader\Schema\Element\ElementSingle;
 use Goetas\Xsd\XsdToPhp\AbstractConverter;
 use Goetas\Xsd\XsdToPhp\Naming\NamingStrategy;
+use Goetas\Xsd\XsdToPhp\Php\Structure\PHPArg;
+use Goetas\Xsd\XsdToPhp\Php\Structure\PHPClass;
+use Goetas\Xsd\XsdToPhp\Php\Structure\PHPClassOf;
+use Goetas\Xsd\XsdToPhp\Php\Structure\PHPProperty;
+use GoetasWebservices\XML\XSDReader\Schema\Attribute\AttributeItem;
+use GoetasWebservices\XML\XSDReader\Schema\Attribute\Group as AttributeGroup;
+use GoetasWebservices\XML\XSDReader\Schema\Element\Element;
+use GoetasWebservices\XML\XSDReader\Schema\Element\ElementDef;
+use GoetasWebservices\XML\XSDReader\Schema\Element\ElementRef;
+use GoetasWebservices\XML\XSDReader\Schema\Element\ElementSingle;
+use GoetasWebservices\XML\XSDReader\Schema\Element\Group;
+use GoetasWebservices\XML\XSDReader\Schema\Item;
+use GoetasWebservices\XML\XSDReader\Schema\Schema;
+use GoetasWebservices\XML\XSDReader\Schema\Type\BaseComplexType;
+use GoetasWebservices\XML\XSDReader\Schema\Type\ComplexType;
+use GoetasWebservices\XML\XSDReader\Schema\Type\SimpleType;
+use GoetasWebservices\XML\XSDReader\Schema\Type\Type;
 
 class PhpConverter extends AbstractConverter
 {
 
-    public function __construct(NamingStrategy $namingStrategy){
+    public function __construct(NamingStrategy $namingStrategy)
+    {
         parent::__construct($namingStrategy);
 
-        $this->addAliasMap("http://www.w3.org/2001/XMLSchema", "dateTime", function (Type $type)
-        {
+        $this->addAliasMap("http://www.w3.org/2001/XMLSchema", "dateTime", function (Type $type) {
             return "DateTime";
         });
-        $this->addAliasMap("http://www.w3.org/2001/XMLSchema", "time", function (Type $type)
-        {
+        $this->addAliasMap("http://www.w3.org/2001/XMLSchema", "time", function (Type $type) {
             return "DateTime";
         });
-        $this->addAliasMap("http://www.w3.org/2001/XMLSchema", "date", function (Type $type)
-        {
+        $this->addAliasMap("http://www.w3.org/2001/XMLSchema", "date", function (Type $type) {
             return "DateTime";
         });
-        $this->addAliasMap("http://www.w3.org/2001/XMLSchema", "anySimpleType", function (Type $type)
-        {
+        $this->addAliasMap("http://www.w3.org/2001/XMLSchema", "anySimpleType", function (Type $type) {
             return "mixed";
         });
-        $this->addAliasMap("http://www.w3.org/2001/XMLSchema", "anyType", function (Type $type)
-        {
+        $this->addAliasMap("http://www.w3.org/2001/XMLSchema", "anyType", function (Type $type) {
             return "mixed";
         });
     }
@@ -69,13 +64,12 @@ class PhpConverter extends AbstractConverter
      */
     private function getTypes()
     {
-        uasort($this->classes, function ($a, $b)
-        {
+        uasort($this->classes, function ($a, $b) {
             return strcmp($a["class"]->getFullName(), $b["class"]->getFullName());
         });
         $ret = array();
         foreach ($this->classes as $classData) {
-            if (! isset($classData["skip"]) || ! $classData["skip"]) {
+            if (!isset($classData["skip"]) || !$classData["skip"]) {
                 $ret[$classData["class"]->getFullName()] = $classData["class"];
             }
         }
@@ -98,7 +92,7 @@ class PhpConverter extends AbstractConverter
         }
 
         foreach ($schema->getSchemas() as $schildSchema) {
-            if (! in_array($schildSchema->getTargetNamespace(), $this->baseSchemas, true)) {
+            if (!in_array($schildSchema->getTargetNamespace(), $this->baseSchemas, true)) {
                 $this->navigate($schildSchema, $visited);
             }
         }
@@ -145,7 +139,7 @@ class PhpConverter extends AbstractConverter
 
     private function visitElementDef(ElementDef $element)
     {
-        if (! isset($this->classes[spl_object_hash($element)])) {
+        if (!isset($this->classes[spl_object_hash($element)])) {
             $schema = $element->getSchema();
 
             $class = new PHPClass();
@@ -153,14 +147,14 @@ class PhpConverter extends AbstractConverter
             $class->setName($this->getNamingStrategy()->getItemName($element));
             $class->setDoc($element->getDoc());
 
-            if (! isset($this->namespaces[$schema->getTargetNamespace()])) {
+            if (!isset($this->namespaces[$schema->getTargetNamespace()])) {
                 throw new Exception(sprintf("Can't find a PHP namespace to '%s' namespace", $schema->getTargetNamespace()));
             }
             $class->setNamespace($this->namespaces[$schema->getTargetNamespace()]);
 
             $this->classes[spl_object_hash($element)]["class"] = $class;
 
-            if (! $element->getType()->getName()) {
+            if (!$element->getType()->getName()) {
                 $this->visitTypeBase($class, $element->getType());
             } else {
                 $this->handleClassExtension($class, $element->getType());
@@ -190,7 +184,7 @@ class PhpConverter extends AbstractConverter
 
         $name = $this->getNamingStrategy()->getTypeName($type);
 
-        if (! isset($this->namespaces[$schema->getTargetNamespace()])) {
+        if (!isset($this->namespaces[$schema->getTargetNamespace()])) {
             throw new Exception(sprintf("Can't find a PHP namespace to '%s' namespace", $schema->getTargetNamespace()));
         }
         $ns = $this->namespaces[$schema->getTargetNamespace()];
@@ -208,7 +202,7 @@ class PhpConverter extends AbstractConverter
      */
     private function visitType(Type $type, $force = false)
     {
-        if (! isset($this->classes[spl_object_hash($type)])) {
+        if (!isset($this->classes[spl_object_hash($type)])) {
 
             $this->classes[spl_object_hash($type)]["class"] = $class = new PHPClass();
 
@@ -222,11 +216,11 @@ class PhpConverter extends AbstractConverter
             $class->setName($name);
             $class->setNamespace($ns);
 
-            $class->setDoc($type->getDoc() . PHP_EOL . "XSD Type: " . ($type->getName() ?  : 'anonymous'));
+            $class->setDoc($type->getDoc() . PHP_EOL . "XSD Type: " . ($type->getName() ?: 'anonymous'));
 
             $this->visitTypeBase($class, $type);
 
-            if ($type instanceof SimpleType){
+            if ($type instanceof SimpleType) {
                 $this->classes[spl_object_hash($type)]["skip"] = true;
                 return $class;
             }
@@ -236,8 +230,8 @@ class PhpConverter extends AbstractConverter
             }
 
             $this->classes[spl_object_hash($type)]["skip"] = !!$this->getTypeAlias($type);
-        }elseif ($force) {
-            if (!($type instanceof SimpleType) && !$this->getTypeAlias($type)){
+        } elseif ($force) {
+            if (!($type instanceof SimpleType) && !$this->getTypeAlias($type)) {
                 $this->classes[spl_object_hash($type)]["skip"] = false;
             }
         }
@@ -252,7 +246,7 @@ class PhpConverter extends AbstractConverter
      */
     private function visitTypeAnonymous(Type $type, $name, PHPClass $parentClass)
     {
-        if (! isset($this->classes[spl_object_hash($type)])) {
+        if (!isset($this->classes[spl_object_hash($type)])) {
             $this->classes[spl_object_hash($type)]["class"] = $class = new PHPClass();
             $class->setName($this->getNamingStrategy()->getAnonymousTypeName($type, $name));
 
@@ -261,7 +255,7 @@ class PhpConverter extends AbstractConverter
 
             $this->visitTypeBase($class, $type);
 
-            if ($type instanceof SimpleType){
+            if ($type instanceof SimpleType) {
                 $this->classes[spl_object_hash($type)]["skip"] = true;
             }
         }
@@ -298,7 +292,7 @@ class PhpConverter extends AbstractConverter
         } elseif ($unions = $type->getUnions()) {
             $types = array();
             foreach ($unions as $i => $unon) {
-                if (! $unon->getName()) {
+                if (!$unon->getName()) {
                     $types[] = $this->visitTypeAnonymous($unon, $type->getName() . $i, $class);
                 } else {
                     $types[] = $this->visitType($unon);
@@ -386,9 +380,9 @@ class PhpConverter extends AbstractConverter
 
         if ($arrayize) {
             if ($itemOfArray = $this->isArrayType($t)) {
-                if(!$itemOfArray->getName()){
+                if (!$itemOfArray->getName()) {
                     $classType = $this->visitTypeAnonymous($itemOfArray, $element->getName(), $class);
-                }else{
+                } else {
                     $classType = $this->visitType($itemOfArray);
                 }
 
@@ -396,10 +390,10 @@ class PhpConverter extends AbstractConverter
                 $arg->setType($classType);
                 $property->setType(new PHPClassOf($arg));
                 return $property;
-            }elseif ($itemOfArray = $this->isArrayNestedElement($t)) {
-                if(!$t->getName()){
+            } elseif ($itemOfArray = $this->isArrayNestedElement($t)) {
+                if (!$t->getName()) {
                     $classType = $this->visitTypeAnonymous($t, $element->getName(), $class);
-                }else{
+                } else {
                     $classType = $this->visitType($t);
                 }
                 $elementProp = $this->visitElement($classType, $schema, $itemOfArray, false);
@@ -425,7 +419,7 @@ class PhpConverter extends AbstractConverter
             return $this->visitElementDef($node->getReferencedElement());
         }
 
-        if (! $node->getType()->getName()) {
+        if (!$node->getType()->getName()) {
             return $this->visitTypeAnonymous($node->getType(), $node->getName(), $class);
         } else {
             return $this->visitType($node->getType(), $force);

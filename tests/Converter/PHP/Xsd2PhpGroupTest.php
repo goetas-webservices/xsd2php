@@ -1,7 +1,7 @@
 <?php
 namespace Goetas\Xsd\XsdToPhp\Tests\Converter\PHP;
 
-class Xsd2PhpGroupTest  extends Xsd2PhpBase
+class Xsd2PhpGroupTest extends Xsd2PhpBase
 {
 
     public function testAutoDiscoveryTraits()
@@ -127,6 +127,7 @@ class Xsd2PhpGroupTest  extends Xsd2PhpBase
         $this->assertEquals('string', $property->getType()->getName());
 
     }
+
     public function getMaxOccurs()
     {
         return [
@@ -182,7 +183,7 @@ class Xsd2PhpGroupTest  extends Xsd2PhpBase
              <xs:schema targetNamespace="http://www.example.com" xmlns:xs="http://www.w3.org/2001/XMLSchema">
                 <xs:complexType name="complexType-1">
                      <xs:sequence>
-                            <xs:element '.($max!==null?(' maxOccurs="'.$max.'"'):"").' name="complexType-1-el-1" type="xs:string"/>
+                            <xs:element ' . ($max !== null ? (' maxOccurs="' . $max . '"') : "") . ' name="complexType-1-el-1" type="xs:string"/>
                      </xs:sequence>
                 </xs:complexType>
             </xs:schema>

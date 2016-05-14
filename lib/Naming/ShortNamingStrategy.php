@@ -2,8 +2,8 @@
 namespace Goetas\Xsd\XsdToPhp\Naming;
 
 use Doctrine\Common\Inflector\Inflector;
-use GoetasWebservices\XML\XSDReader\Schema\Type\Type;
 use GoetasWebservices\XML\XSDReader\Schema\Item;
+use GoetasWebservices\XML\XSDReader\Schema\Type\Type;
 
 class ShortNamingStrategy implements NamingStrategy
 {
@@ -11,7 +11,7 @@ class ShortNamingStrategy implements NamingStrategy
     public function getTypeName(Type $type)
     {
         $name = $this->classify($type->getName());
-        if ($name && substr($name, - 4) !== 'Type') {
+        if ($name && substr($name, -4) !== 'Type') {
             $name .= "Type";
         }
         return $name;
@@ -24,7 +24,7 @@ class ShortNamingStrategy implements NamingStrategy
 
     public function getPropertyName($item)
     {
-    	return Inflector::camelize(str_replace(".", " ", $item->getName()));
+        return Inflector::camelize(str_replace(".", " ", $item->getName()));
     }
 
     public function getItemName(Item $item)
@@ -34,6 +34,6 @@ class ShortNamingStrategy implements NamingStrategy
 
     private function classify($name)
     {
-    	return Inflector::classify(str_replace(".", " ", $name));
+        return Inflector::classify(str_replace(".", " ", $name));
     }
 }

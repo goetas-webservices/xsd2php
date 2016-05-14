@@ -10,13 +10,15 @@ class PHPClass
 
     protected $doc;
 
-    public static function createFromFQCN($className){
+    public static function createFromFQCN($className)
+    {
         if (($pos = strrpos($className, '\\')) !== false) {
             return new self(substr($className, $pos + 1), substr($className, 0, $pos));
         } else {
             return new self($className);
         }
     }
+
     public function __construct($name = null, $namespace = null)
     {
         $this->name = $name;
@@ -234,7 +236,7 @@ class PHPClass
 
     public function setAbstract($abstract)
     {
-        $this->abstract = (boolean) $abstract;
+        $this->abstract = (boolean)$abstract;
         return $this;
     }
 }

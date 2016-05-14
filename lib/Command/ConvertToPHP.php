@@ -1,14 +1,14 @@
 <?php
 namespace Goetas\Xsd\XsdToPhp\Command;
 
-use Goetas\Xsd\XsdToPhp\Php\PhpConverter;
+use Goetas\Xsd\XsdToPhp\AbstractConverter;
+use Goetas\Xsd\XsdToPhp\Naming\NamingStrategy;
 use Goetas\Xsd\XsdToPhp\Php\ClassGenerator;
 use Goetas\Xsd\XsdToPhp\Php\PathGenerator\Psr4PathGenerator;
-use Goetas\Xsd\XsdToPhp\AbstractConverter;
+use Goetas\Xsd\XsdToPhp\Php\PhpConverter;
+use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Output\OutputInterface;
 use Zend\Code\Generator\FileGenerator;
-use Goetas\Xsd\XsdToPhp\Naming\NamingStrategy;
-use Symfony\Component\Console\Helper\ProgressBar;
 
 class ConvertToPHP extends AbstractConvert
 {
@@ -54,7 +54,7 @@ class ConvertToPHP extends AbstractConvert
 
                 $fileGen->write();
                 $output->writeln("done.");
-            }else{
+            } else {
                 $output->write("skip.");
 
             }

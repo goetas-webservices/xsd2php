@@ -100,20 +100,20 @@ class Xsd2PhpElementTest extends Xsd2JmsBase
                 'xml_root_name' => 'element-one',
                 'xml_root_namespace' => 'http://www.example.com',
                 'properties' =>
-                      array (
+                    array(
                         '__value' =>
-                        array (
-                          'expose' => true,
-                          'xml_value' => true,
-                          'access_type' => 'public_method',
-                          'accessor' =>
-                          array (
-                            'getter' => 'value',
-                            'setter' => 'value',
-                          ),
-                          'type' => 'Goetas\\Xsd\\XsdToPhp\\XMLSchema\\DateTime',
-                        ),
-                ))
+                            array(
+                                'expose' => true,
+                                'xml_value' => true,
+                                'access_type' => 'public_method',
+                                'accessor' =>
+                                    array(
+                                        'getter' => 'value',
+                                        'setter' => 'value',
+                                    ),
+                                'type' => 'Goetas\\Xsd\\XsdToPhp\\XMLSchema\\DateTime',
+                            ),
+                    ))
         ), $classes['Example\ElementOne']);
     }
 
@@ -140,20 +140,20 @@ class Xsd2PhpElementTest extends Xsd2JmsBase
                 'xml_root_name' => 'element-one',
                 'xml_root_namespace' => 'http://www.example.com',
                 'properties' =>
-                  array (
-                    '__value' =>
-                    array (
-                      'expose' => true,
-                      'xml_value' => true,
-                      'access_type' => 'public_method',
-                      'accessor' =>
-                      array (
-                        'getter' => 'value',
-                        'setter' => 'value',
-                      ),
-                      'type' => 'Goetas\\Xsd\\XsdToPhp\\XMLSchema\\DateTime',
+                    array(
+                        '__value' =>
+                            array(
+                                'expose' => true,
+                                'xml_value' => true,
+                                'access_type' => 'public_method',
+                                'accessor' =>
+                                    array(
+                                        'getter' => 'value',
+                                        'setter' => 'value',
+                                    ),
+                                'type' => 'Goetas\\Xsd\\XsdToPhp\\XMLSchema\\DateTime',
+                            ),
                     ),
-                  ),
 
             )
         ), $classes['Example\ElementOne']);

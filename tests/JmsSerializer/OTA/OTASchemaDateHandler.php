@@ -1,15 +1,12 @@
 <?php
 namespace Goetas\Xsd\XsdToPhp\Tests\JmsSerializer\OTA;
 
-use RuntimeException;
-use JMS\Serializer\Handler\DateHandler as JMSDateHandler;
-use JMS\Serializer\XmlDeserializationVisitor;
-use JMS\Serializer\Handler\DateHandler;
-use JMS\Serializer\Handler\SubscribingHandlerInterface;
-use JMS\Serializer\GraphNavigator;
-use JMS\Serializer\VisitorInterface;
-use JMS\Serializer\XmlSerializationVisitor;
 use JMS\Serializer\Context;
+use JMS\Serializer\GraphNavigator;
+use JMS\Serializer\Handler\SubscribingHandlerInterface;
+use JMS\Serializer\XmlDeserializationVisitor;
+use JMS\Serializer\XmlSerializationVisitor;
+use RuntimeException;
 
 class OTASchemaDateHandler implements SubscribingHandlerInterface
 {
@@ -58,7 +55,7 @@ class OTASchemaDateHandler implements SubscribingHandlerInterface
     public function deserializeDateTime(XmlDeserializationVisitor $visitor, $data, array $type)
     {
         $attributes = $data->attributes('xsi', true);
-        if (isset($attributes['nil'][0]) && (string) $attributes['nil'][0] === 'true') {
+        if (isset($attributes['nil'][0]) && (string)$attributes['nil'][0] === 'true') {
             return null;
         }
 
@@ -73,9 +70,9 @@ class OTASchemaDateHandler implements SubscribingHandlerInterface
 
         $type = OTADateTime::TYPE_DATE | OTADateTime::TYPE_TIME;
         if (preg_match('/^\d{4}\-\d{2}\-\d{2}$/', $data)) {
-            $type = OTADateTime::TYPE_DATE ;
+            $type = OTADateTime::TYPE_DATE;
         } elseif (preg_match('/^\d{2}\:\d{2}\:\d{2}/', $data)) {
-            $type = OTADateTime::TYPE_TIME ;
+            $type = OTADateTime::TYPE_TIME;
         }
 
         $datetime = new OTADateTime($data, $timezone, $type);

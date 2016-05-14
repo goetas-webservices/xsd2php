@@ -1,9 +1,9 @@
 <?php
 namespace Goetas\Xsd\XsdToPhp\Php\PathGenerator;
 
-use Goetas\Xsd\XsdToPhp\Php\Structure\PHPClass;
-use Goetas\Xsd\XsdToPhp\PathGenerator\Psr4PathGenerator as Psr4PathGeneratorBase;
 use Goetas\Xsd\XsdToPhp\PathGenerator\PathGeneratorException;
+use Goetas\Xsd\XsdToPhp\PathGenerator\Psr4PathGenerator as Psr4PathGeneratorBase;
+use Goetas\Xsd\XsdToPhp\Php\Structure\PHPClass;
 
 class Psr4PathGenerator extends Psr4PathGeneratorBase implements PathGenerator
 {
@@ -14,7 +14,7 @@ class Psr4PathGenerator extends Psr4PathGeneratorBase implements PathGenerator
             if (strpos(trim($php->getNamespace()) . "\\", $namespace) === 0) {
                 $d = strtr(substr($php->getNamespace(), strlen($namespace)), "\\", "/");
                 $dir = rtrim($dir, "/") . "/" . $d;
-                if (! is_dir($dir) && ! mkdir($dir, 0777, true)) {
+                if (!is_dir($dir) && !mkdir($dir, 0777, true)) {
                     throw new PathGeneratorException("Can't create the '$dir' directory");
                 }
 

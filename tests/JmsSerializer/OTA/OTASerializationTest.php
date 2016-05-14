@@ -1,21 +1,21 @@
 <?php
 namespace Goetas\Xsd\XsdToPhp\Tests\JmsSerializer\OTA;
 
+use Composer\Autoload\ClassLoader;
 use Doctrine\Common\Inflector\Inflector;
+use Goetas\Xsd\XsdToPhp\Jms\Handler\OTA\SchemaDateHandler;
+use Goetas\Xsd\XsdToPhp\Jms\PathGenerator\Psr4PathGenerator as JmsPsr4PathGenerator;
+use Goetas\Xsd\XsdToPhp\Jms\YamlConverter;
+use Goetas\Xsd\XsdToPhp\Naming\ShortNamingStrategy;
+use Goetas\Xsd\XsdToPhp\Php\ClassGenerator;
+use Goetas\Xsd\XsdToPhp\Php\PathGenerator\Psr4PathGenerator;
 use Goetas\Xsd\XsdToPhp\Php\PhpConverter;
 use GoetasWebservices\XML\XSDReader\SchemaReader;
-use Goetas\Xsd\XsdToPhp\Php\ClassGenerator;
-use Zend\Code\Generator\FileGenerator;
-use Goetas\Xsd\XsdToPhp\Php\PathGenerator\Psr4PathGenerator;
-use \Goetas\Xsd\XsdToPhp\Jms\PathGenerator\Psr4PathGenerator as JmsPsr4PathGenerator;
-use Goetas\Xsd\XsdToPhp\Jms\YamlConverter;
-use Symfony\Component\Yaml\Dumper;
-use JMS\Serializer\Handler\HandlerRegistryInterface;
 use GoetasWebservices\Xsd\XsdToPhpRuntime\Jms\Handler\BaseTypesHandler;
 use GoetasWebservices\Xsd\XsdToPhpRuntime\Jms\Handler\XmlSchemaDateHandler;
-use Goetas\Xsd\XsdToPhp\Jms\Handler\OTA\SchemaDateHandler;
-use Composer\Autoload\ClassLoader;
-use Goetas\Xsd\XsdToPhp\Naming\ShortNamingStrategy;
+use JMS\Serializer\Handler\HandlerRegistryInterface;
+use Symfony\Component\Yaml\Dumper;
+use Zend\Code\Generator\FileGenerator;
 
 class OTASerializationTest extends \PHPUnit_Framework_TestCase
 {
@@ -29,8 +29,9 @@ class OTASerializationTest extends \PHPUnit_Framework_TestCase
     protected static $jmsDir = '/tmp';
     protected static $loader;
 
-    private static function delTree($dir) {
-        $files = array_diff(scandir($dir), array('.','..'));
+    private static function delTree($dir)
+    {
+        $files = array_diff(scandir($dir), array('.', '..'));
         foreach ($files as $file) {
             (is_dir("$dir/$file")) ? self::delTree("$dir/$file") : unlink("$dir/$file");
         }
@@ -61,19 +62,19 @@ class OTASerializationTest extends \PHPUnit_Framework_TestCase
             self::delTree(self::$jmsDir);
         }
 
-        if (! is_dir(self::$phpDir)) {
+        if (!is_dir(self::$phpDir)) {
             mkdir(self::$phpDir);
         }
-        if (! is_dir(self::$jmsDir)) {
+        if (!is_dir(self::$jmsDir)) {
             mkdir(self::$jmsDir);
         }
 
 
         $reader = new SchemaReader();
         $schemas = array();
-        foreach (self::getXmlFiles() as $d){
-            if (!isset($schemas[$d[1]])){
-                $schemas[$d[1]]=$reader->readFile($d[1]);
+        foreach (self::getXmlFiles() as $d) {
+            if (!isset($schemas[$d[1]])) {
+                $schemas[$d[1]] = $reader->readFile($d[1]);
             }
         }
 
@@ -81,8 +82,7 @@ class OTASerializationTest extends \PHPUnit_Framework_TestCase
         self::generatePHPFiles($schemas);
 
         $serializerBuiler = \JMS\Serializer\SerializerBuilder::create();
-        $serializerBuiler->configureHandlers(function (HandlerRegistryInterface $h) use($serializerBuiler)
-        {
+        $serializerBuiler->configureHandlers(function (HandlerRegistryInterface $h) use ($serializerBuiler) {
             $serializerBuiler->addDefaultHandlers();
             $h->registerSubscribingHandler(new BaseTypesHandler());
             $h->registerSubscribingHandler(new XmlSchemaDateHandler());
@@ -164,8 +164,7 @@ class OTASerializationTest extends \PHPUnit_Framework_TestCase
         }
 
         $serializerBuiler = \JMS\Serializer\SerializerBuilder::create();
-        $serializerBuiler->configureHandlers(function (HandlerRegistryInterface $h) use($serializerBuiler)
-        {
+        $serializerBuiler->configureHandlers(function (HandlerRegistryInterface $h) use ($serializerBuiler) {
             $serializerBuiler->addDefaultHandlers();
             $h->registerSubscribingHandler(new BaseTypesHandler());
 
@@ -191,28 +190,28 @@ class OTASerializationTest extends \PHPUnit_Framework_TestCase
         $xml = str_replace('&', '', $xml);
 
         $dom = new \DOMDocument();
-        if(!$dom->loadXML($xml)){
+        if (!$dom->loadXML($xml)) {
             file_put_contents("d.xml", $xml);
         }
 
-        $fix = function($str){
+        $fix = function ($str) {
             $str = trim($str);
             // period
             if (preg_match("/^P([0-9]+[A-Z])+/", $str) || preg_match("/^PT([0-9]+[A-Z])+$/", $str)) {
                 $str = str_replace("N", "D", $str);
-                while (preg_match("/P0+[A-Z]/", $str)){
+                while (preg_match("/P0+[A-Z]/", $str)) {
                     $str = preg_replace("/P0+[A-Z]/", "P", $str); //P0D => P
                 }
-                while (preg_match("/T0+[A-Z]/", $str)){
+                while (preg_match("/T0+[A-Z]/", $str)) {
                     $str = preg_replace("/T0+[A-Z]/", "T", $str); //T0H => T
                 }
-                if ($str[strlen($str)-1]=="T"){
+                if ($str[strlen($str) - 1] == "T") {
                     $str = substr($str, 0, -1);
                 }
             }
 
             // boolean
-            $str = str_replace(['true','false'], ['1','0'], $str); // 'true' => '1'
+            $str = str_replace(['true', 'false'], ['1', '0'], $str); // 'true' => '1'
 
             // datetime
             $str = str_replace(array(
@@ -223,11 +222,11 @@ class OTASerializationTest extends \PHPUnit_Framework_TestCase
             $str = preg_replace('/Z$/', '', $str);
 
             // number
-            if (is_numeric($str) && strpos($str, '.')!==false){
+            if (is_numeric($str) && strpos($str, '.') !== false) {
                 $str = floatval($str);
-            }elseif (is_numeric($str)){
+            } elseif (is_numeric($str)) {
                 $str = intval($str);
-            }else{
+            } else {
                 $str = preg_replace('/\.0+$/', '', $str); // 1.0000 => 1, .0 => ''
             }
             return $str;
@@ -273,7 +272,7 @@ class OTASerializationTest extends \PHPUnit_Framework_TestCase
 
         $notEqual = strpos($diff, '<dm:copy count="1"/>') === false || strlen($diff) > 110;
 
-        if(0 && $notEqual){
+        if (0 && $notEqual) {
             file_put_contents("a.xml", $original);
             file_put_contents("b.xml", $new);
             file_put_contents("c.xml", $diff);
@@ -283,6 +282,7 @@ class OTASerializationTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($notEqual);
 
     }
+
     public static function getXmlFiles()
     {
         $files = glob(__DIR__ . "/otaxml/*.xml");

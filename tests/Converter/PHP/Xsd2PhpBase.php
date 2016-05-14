@@ -1,9 +1,9 @@
 <?php
 namespace Goetas\Xsd\XsdToPhp\Tests\Converter\PHP;
 
+use Goetas\Xsd\XsdToPhp\Naming\ShortNamingStrategy;
 use Goetas\Xsd\XsdToPhp\Php\PhpConverter;
 use GoetasWebservices\XML\XSDReader\SchemaReader;
-use Goetas\Xsd\XsdToPhp\Naming\ShortNamingStrategy;
 
 abstract class Xsd2PhpBase extends \PHPUnit_Framework_TestCase
 {
@@ -39,7 +39,7 @@ abstract class Xsd2PhpBase extends \PHPUnit_Framework_TestCase
     {
         return [
             ['xs:dateTime', 'DateTime'],
-            ];
+        ];
     }
 
 
@@ -50,6 +50,6 @@ abstract class Xsd2PhpBase extends \PHPUnit_Framework_TestCase
             ['xs:decimal', 'float'],
             ['xs:int', 'integer'],
             ['xs:integer', 'integer'],
-            ];
+        ];
     }
 }
