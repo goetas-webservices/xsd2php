@@ -23,7 +23,6 @@ There is one recommended way to install xsd2php via [Composer](https://getcompos
   "require": {
       ..
       "goetas/xsd2php":"2.*@dev",
-      "goetas/xsd-reader":"2.*@dev",
       "jms/serializer": "serializer-master-dev as 1.0",
       ..
   },
