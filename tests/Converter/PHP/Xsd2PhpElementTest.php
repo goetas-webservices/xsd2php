@@ -1,5 +1,5 @@
 <?php
-namespace Goetas\Xsd\XsdToPhp\Tests\Converter\PHP;
+namespace GoetasWebservices\Xsd\XsdToPhp\Tests\Converter\PHP;
 
 class Xsd2PhpElementTest extends Xsd2PhpBase
 {
@@ -16,20 +16,21 @@ class Xsd2PhpElementTest extends Xsd2PhpBase
                 </xs:element>
                </xs:schema>
             ';
+
         $classes = $this->converter->convert(array($this->reader->readString($content)));
 
         $this->assertCount(1, $classes);
-        $this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Php\Structure\PHPClass', $classes['Example\ElementOne']);
+        $this->assertInstanceOf('GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPClass', $classes['Example\ElementOne']);
         $this->assertEquals('Example', $classes['Example\ElementOne']->getNamespace());
         $this->assertEquals('ElementOne', $classes['Example\ElementOne']->getName());
 
-        $this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Php\Structure\PHPClass', $classes['Example\ElementOne']->getExtends());
+        $this->assertInstanceOf('GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPClass', $classes['Example\ElementOne']->getExtends());
 
         $this->assertCount(0, $classes['Example\ElementOne']->getProperties());
         //$this->assertArrayHasKey("__value", $classes['Example\ElementOne']->getProperties());
 
         //$property = $classes['Example\ElementOne']->getProperty('__value');
-        //$this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Php\Structure\PHPProperty', $property);
+        //$this->assertInstanceOf('GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPProperty', $property);
 
         //$this->assertEquals('protected', $property->getVisibility());
         //$this->assertEquals('', $property->getType()->getNamespace());
@@ -54,11 +55,11 @@ class Xsd2PhpElementTest extends Xsd2PhpBase
         $classes = $this->converter->convert(array($this->reader->readString($content)));
 
         $this->assertCount(1, $classes);
-        $this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Php\Structure\PHPClass', $classes['Example\ElementOne']);
+        $this->assertInstanceOf('GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPClass', $classes['Example\ElementOne']);
         $this->assertEquals('Example', $classes['Example\ElementOne']->getNamespace());
         $this->assertEquals('ElementOne', $classes['Example\ElementOne']->getName());
 
-        $this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Php\Structure\PHPClass', $classes['Example\ElementOne']->getExtends());
+        $this->assertInstanceOf('GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPClass', $classes['Example\ElementOne']->getExtends());
 
         $this->assertCount(0, $classes['Example\ElementOne']->getProperties());
 
@@ -66,7 +67,7 @@ class Xsd2PhpElementTest extends Xsd2PhpBase
         $this->assertArrayHasKey("__value", $classes['Example\ElementOne']->getProperties());
 
         $property = $classes['Example\ElementOne']->getProperty('__value');
-        $this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Php\Structure\PHPProperty', $property);
+        $this->assertInstanceOf('GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPProperty', $property);
 
         $this->assertEquals('', $property->getType()->getNamespace());
         $this->assertEquals($phpName, $property->getType()->getName());
@@ -87,14 +88,14 @@ class Xsd2PhpElementTest extends Xsd2PhpBase
         $classes = $this->converter->convert(array($this->reader->readString($content)));
 
         $this->assertCount(1, $classes);
-        $this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Php\Structure\PHPClass', $classes['Example\ElementOne']);
+        $this->assertInstanceOf('GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPClass', $classes['Example\ElementOne']);
         $this->assertEquals('Example', $classes['Example\ElementOne']->getNamespace());
         $this->assertEquals('ElementOne', $classes['Example\ElementOne']->getName());
 
         $this->assertCount(0, $classes['Example\ElementOne']->getProperties());
 
         $extension = $classes['Example\ElementOne']->getExtends();
-        $this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Php\Structure\PHPClass', $extension);
+        $this->assertInstanceOf('GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPClass', $extension);
 
         $this->assertEquals('', $extension->getNamespace());
         $this->assertEquals($phpName, $extension->getName());
@@ -118,14 +119,14 @@ class Xsd2PhpElementTest extends Xsd2PhpBase
         $classes = $this->converter->convert(array($this->reader->readString($content)));
 
         $this->assertCount(1, $classes);
-        $this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Php\Structure\PHPClass', $classes['Example\ElementOne']);
+        $this->assertInstanceOf('GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPClass', $classes['Example\ElementOne']);
         $this->assertEquals('Example', $classes['Example\ElementOne']->getNamespace());
         $this->assertEquals('ElementOne', $classes['Example\ElementOne']->getName());
 
         $this->assertCount(0, $classes['Example\ElementOne']->getProperties());
 
         $extension = $classes['Example\ElementOne']->getExtends();
-        $this->assertInstanceOf('Goetas\Xsd\XsdToPhp\Php\Structure\PHPClass', $extension);
+        $this->assertInstanceOf('GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPClass', $extension);
 
         $this->assertEquals('', $extension->getNamespace());
         $this->assertEquals($phpName, $extension->getName());

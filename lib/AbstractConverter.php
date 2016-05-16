@@ -1,7 +1,7 @@
 <?php
-namespace Goetas\Xsd\XsdToPhp;
+namespace GoetasWebservices\Xsd\XsdToPhp;
 
-use Goetas\Xsd\XsdToPhp\Naming\NamingStrategy;
+use GoetasWebservices\Xsd\XsdToPhp\Naming\NamingStrategy;
 use GoetasWebservices\XML\WSDLReader\DefinitionsReader;
 use GoetasWebservices\XML\XSDReader\Schema\Element\ElementSingle;
 use GoetasWebservices\XML\XSDReader\Schema\Schema;
@@ -36,15 +36,14 @@ abstract class AbstractConverter
         'mixed'
     ];
     /**
-     * @var \Goetas\Xsd\XsdToPhp\Naming\NamingStrategy
+     * @var \GoetasWebservices\Xsd\XsdToPhp\Naming\NamingStrategy
      */
     private $namingStrategy;
 
-    protected abstract function convert(array $schemas);
+    public abstract function convert(array $schemas);
 
     public function run(array $src)
     {
-
         $schemas = [];
 
         $reader = new SchemaReader();
@@ -209,7 +208,7 @@ abstract class AbstractConverter
     }
 
     /**
-     * @return \Goetas\Xsd\XsdToPhp\Naming\NamingStrategy
+     * @return \GoetasWebservices\Xsd\XsdToPhp\Naming\NamingStrategy
      */
     protected function getNamingStrategy()
     {

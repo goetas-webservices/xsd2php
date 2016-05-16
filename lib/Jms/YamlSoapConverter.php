@@ -1,5 +1,5 @@
 <?php
-namespace Goetas\Xsd\XsdToPhp\Jms;
+namespace GoetasWebservices\Xsd\XsdToPhp\Jms;
 
 use Doctrine\Common\Inflector\Inflector;
 use GoetasWebservices\XML\SOAPReader\Soap\OperationMessage;

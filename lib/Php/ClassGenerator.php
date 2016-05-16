@@ -1,10 +1,10 @@
 <?php
-namespace Goetas\Xsd\XsdToPhp\Php;
+namespace GoetasWebservices\Xsd\XsdToPhp\Php;
 
 use Doctrine\Common\Inflector\Inflector;
-use Goetas\Xsd\XsdToPhp\Php\Structure\PHPClass;
-use Goetas\Xsd\XsdToPhp\Php\Structure\PHPClassOf;
-use Goetas\Xsd\XsdToPhp\Php\Structure\PHPProperty;
+use GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPClass;
+use GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPClassOf;
+use GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPProperty;
 use Zend\Code\Generator;
 use Zend\Code\Generator\DocBlock\Tag\ParamTag;
 use Zend\Code\Generator\DocBlock\Tag\PropertyTag;

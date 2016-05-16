@@ -1,9 +1,9 @@
 <?php
-namespace Goetas\Xsd\XsdToPhp\Tests\JmsSerializer\OTA;
+namespace GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA;
 
-use Goetas\Xsd\XsdToPhp\Naming\ShortNamingStrategy;
-use Goetas\Xsd\XsdToPhp\Php\ClassGenerator;
-use Goetas\Xsd\XsdToPhp\Php\PhpConverter;
+use GoetasWebservices\Xsd\XsdToPhp\Naming\ShortNamingStrategy;
+use GoetasWebservices\Xsd\XsdToPhp\Php\ClassGenerator;
+use GoetasWebservices\Xsd\XsdToPhp\Php\PhpConverter;
 use GoetasWebservices\XML\XSDReader\SchemaReader;
 
 class PHPConversionTest extends \PHPUnit_Framework_TestCase

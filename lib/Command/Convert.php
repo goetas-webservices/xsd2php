@@ -1,9 +1,9 @@
 <?php
-namespace Goetas\Xsd\XsdToPhp\Command;
+namespace GoetasWebservices\Xsd\XsdToPhp\Command;
 
 use Exception;
-use Goetas\Xsd\XsdToPhp\Php\ClassWriter;
-use Goetas\Xsd\XsdToPhp\Php\PathGenerator\Psr4PathGenerator;
+use GoetasWebservices\Xsd\XsdToPhp\Php\ClassWriter;
+use GoetasWebservices\Xsd\XsdToPhp\Php\PathGenerator\Psr4PathGenerator;
 use Symfony\Component\Console;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
@@ -30,7 +30,7 @@ class Convert extends Console\Command\Command
 
         $this->setDefinition(array(
             new InputArgument('src', InputArgument::REQUIRED | InputArgument::IS_ARRAY, 'Where is located your XSD definitions'),
-            new InputOption('format', null, InputOption::VALUE_REQUIRED, 'Format', 'php'),
+            new InputArgument('format', InputOption::REQUIRED, 'Format'),
             new InputOption('ns-map', null, InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'How to map XML namespaces to PHP namespaces? Syntax: <info>XML-namespace;PHP-namespace</info>'),
             new InputOption('ns-dest', null, InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'Where place the generated files? Syntax: <info>PHP-namespace;destination-directory</info>'),
             new InputOption('alias-map', null, InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'How to map XML namespaces into existing PHP classes? Syntax: <info>XML-namespace;XML-type;PHP-type</info>. '),
@@ -103,7 +103,7 @@ class Convert extends Console\Command\Command
         } else {
             $dumper = new Dumper();
 
-            $pathGenerator = new \Goetas\Xsd\XsdToPhp\Jms\PathGenerator\Psr4PathGenerator($targets);
+            $pathGenerator = new \GoetasWebservices\Xsd\XsdToPhp\Jms\PathGenerator\Psr4PathGenerator($targets);
             foreach ($items as $item) {
                 $source = $dumper->dump($item, 10000);
 

@@ -1,13 +1,13 @@
 <?php
-namespace Goetas\Xsd\XsdToPhp\Php;
+namespace GoetasWebservices\Xsd\XsdToPhp\Php;
 
 use Exception;
-use Goetas\Xsd\XsdToPhp\AbstractConverter;
-use Goetas\Xsd\XsdToPhp\Naming\NamingStrategy;
-use Goetas\Xsd\XsdToPhp\Php\Structure\PHPArg;
-use Goetas\Xsd\XsdToPhp\Php\Structure\PHPClass;
-use Goetas\Xsd\XsdToPhp\Php\Structure\PHPClassOf;
-use Goetas\Xsd\XsdToPhp\Php\Structure\PHPProperty;
+use GoetasWebservices\Xsd\XsdToPhp\AbstractConverter;
+use GoetasWebservices\Xsd\XsdToPhp\Naming\NamingStrategy;
+use GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPArg;
+use GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPClass;
+use GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPClassOf;
+use GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPProperty;
 use GoetasWebservices\XML\WSDLReader\DefinitionsReader;
 use GoetasWebservices\XML\XSDReader\Schema\Attribute\AttributeItem;
 use GoetasWebservices\XML\XSDReader\Schema\Attribute\Group as AttributeGroup;
@@ -53,7 +53,7 @@ class PhpConverter extends AbstractConverter
 
     private $classes = [];
 
-    protected function convert(array $schemas)
+    public function convert(array $schemas)
     {
         $visited = array();
         $this->classes = array();
@@ -204,7 +204,7 @@ class PhpConverter extends AbstractConverter
      *
      * @param Type $type
      * @param boolean $force
-     * @return \Goetas\Xsd\XsdToPhp\Php\Structure\PHPClass
+     * @return \GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPClass
      */
     public function visitType(Type $type, $force = false, $skip = false)
     {
@@ -248,7 +248,7 @@ class PhpConverter extends AbstractConverter
      * @param Type $type
      * @param string $name
      * @param PHPClass $parentClass
-     * @return \Goetas\Xsd\XsdToPhp\Php\Structure\PHPClass
+     * @return \GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPClass
      */
     private function visitTypeAnonymous(Type $type, $name, PHPClass $parentClass)
     {
@@ -374,7 +374,7 @@ class PhpConverter extends AbstractConverter
      * @param Schema $schema
      * @param Element $element
      * @param boolean $arrayize
-     * @return \Goetas\Xsd\XsdToPhp\Structure\PHPProperty
+     * @return \GoetasWebservices\Xsd\XsdToPhp\Structure\PHPProperty
      */
     private function visitElement(PHPClass $class, Schema $schema, ElementSingle $element, $arrayize = true)
     {

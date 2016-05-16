@@ -1,5 +1,5 @@
 <?php
-namespace Goetas\Xsd\XsdToPhp\Tests\JmsSerializer\OTA;
+namespace GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA;
 
 class OTADateTime extends \DateTime
 {

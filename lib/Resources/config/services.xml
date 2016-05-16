@@ -4,24 +4,24 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="goetas.xsd2php.naming_convention.short" class="Goetas\Xsd\XsdToPhp\Naming\ShortNamingStrategy"/>
-        <service id="goetas.xsd2php.naming_convention.long" class="Goetas\Xsd\XsdToPhp\Naming\LongNamingStrategy"/>
+        <service id="goetas.xsd2php.naming_convention.short" class="GoetasWebservices\Xsd\XsdToPhp\Naming\ShortNamingStrategy"/>
+        <service id="goetas.xsd2php.naming_convention.long" class="GoetasWebservices\Xsd\XsdToPhp\Naming\LongNamingStrategy"/>
 
         <service abstract="true" id="goetas.xsd2php.naming_convention"/>
 
-        <service id="goetas.xsd2php.converter.php" class="Goetas\Xsd\XsdToPhp\Php\PhpConverter">
+        <service id="goetas.xsd2php.converter.php" class="GoetasWebservices\Xsd\XsdToPhp\Php\PhpConverter">
             <argument id="goetas.xsd2php.naming_convention" type="service"/>
         </service>
 
-        <service id="goetas.xsd2php.converter.jms_yaml" class="Goetas\Xsd\XsdToPhp\Jms\YamlConverter">
+        <service id="goetas.xsd2php.converter.jms_yaml" class="GoetasWebservices\Xsd\XsdToPhp\Jms\YamlConverter">
             <argument id="goetas.xsd2php.naming_convention" type="service"/>
         </service>
 
-        <service id="goetas.xsd2php.converter.extend.php.soap" class="Goetas\Xsd\XsdToPhp\Php\PhpWsdlConverter">
+        <service id="goetas.xsd2php.converter.extend.php.soap" class="GoetasWebservices\Xsd\XsdToPhp\Php\PhpWsdlConverter">
             <argument id="goetas.xsd2php.converter.php" type="service"/>
         </service>
 
-        <service id="goetas.xsd2php.converter.extend.jms_yaml.soap" class="Goetas\Xsd\XsdToPhp\Jms\YamlSoapConverter">
+        <service id="goetas.xsd2php.converter.extend.jms_yaml.soap" class="GoetasWebservices\Xsd\XsdToPhp\Jms\YamlSoapConverter">
             <argument id="goetas.xsd2php.converter.jms_yaml" type="service"/>
         </service>
 

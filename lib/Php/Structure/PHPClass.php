@@ -1,5 +1,5 @@
 <?php
-namespace Goetas\Xsd\XsdToPhp\Php\Structure;
+namespace GoetasWebservices\Xsd\XsdToPhp\Php\Structure;
 
 class PHPClass
 {

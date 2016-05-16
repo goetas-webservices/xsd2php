@@ -1,9 +1,9 @@
 <?php
-namespace Goetas\Xsd\XsdToPhp\Tests\Issues\I40;
+namespace GoetasWebservices\Xsd\XsdToPhp\Tests\Issues\I40;
 
-use Goetas\Xsd\XsdToPhp\Jms\YamlConverter;
-use Goetas\Xsd\XsdToPhp\Naming\ShortNamingStrategy;
-use Goetas\Xsd\XsdToPhp\Php\PhpConverter;
+use GoetasWebservices\Xsd\XsdToPhp\Jms\YamlConverter;
+use GoetasWebservices\Xsd\XsdToPhp\Naming\ShortNamingStrategy;
+use GoetasWebservices\Xsd\XsdToPhp\Php\PhpConverter;
 use GoetasWebservices\XML\XSDReader\SchemaReader;
 
 class I43Test extends \PHPUnit_Framework_TestCase
@@ -37,8 +37,8 @@ class I43Test extends \PHPUnit_Framework_TestCase
             $phpConv->addNamespace($ns, $php);
         }
 
-        $yamlItems = $yamlConv->convert([$schema]);
-        $phpClasses = $phpConv->convert([$schema]);
+        $yamlItems = $yamlConv->run([__DIR__ . '/opc/opc-coreProperties.xsd']);
+        $phpClasses = $phpConv->run([__DIR__ . '/opc/opc-coreProperties.xsd']);
 
         $this->assertEquals(count($phpClasses), count($yamlItems));
     }

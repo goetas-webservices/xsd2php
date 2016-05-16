@@ -1,5 +1,5 @@
 <?php
-namespace Goetas\Xsd\XsdToPhp\PathGenerator;
+namespace GoetasWebservices\Xsd\XsdToPhp\PathGenerator;
 
 abstract class Psr4PathGenerator
 {

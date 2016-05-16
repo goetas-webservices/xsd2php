@@ -1,5 +1,5 @@
 <?php
-namespace Goetas\Xsd\XsdToPhp\Naming;
+namespace GoetasWebservices\Xsd\XsdToPhp\Naming;
 
 use Doctrine\Common\Inflector\Inflector;
 use GoetasWebservices\XML\XSDReader\Schema\Item;

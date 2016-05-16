@@ -1,8 +1,8 @@
 <?php
-namespace Goetas\Xsd\XsdToPhp\Tests\Php\PathGenerator;
+namespace GoetasWebservices\Xsd\XsdToPhp\Tests\Php\PathGenerator;
 
-use Goetas\Xsd\XsdToPhp\Php\PathGenerator\Psr4PathGenerator;
-use Goetas\Xsd\XsdToPhp\Php\Structure\PHPClass;
+use GoetasWebservices\Xsd\XsdToPhp\Php\PathGenerator\Psr4PathGenerator;
+use GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPClass;
 
 class PHPPathGeneratorTest extends \PHPUnit_Framework_TestCase
 {
@@ -24,7 +24,7 @@ class PHPPathGeneratorTest extends \PHPUnit_Framework_TestCase
 
     public function testNoNs()
     {
-        $this->setExpectedException('Goetas\Xsd\XsdToPhp\PathGenerator\PathGeneratorException');
+        $this->setExpectedException('GoetasWebservices\Xsd\XsdToPhp\PathGenerator\PathGeneratorException');
         $generator = new Psr4PathGenerator(array(
             'myns\\' => $this->tmpdir
         ));
@@ -55,7 +55,7 @@ class PHPPathGeneratorTest extends \PHPUnit_Framework_TestCase
 
     public function testNonExistingDir()
     {
-        $this->setExpectedException('Goetas\Xsd\XsdToPhp\PathGenerator\PathGeneratorException');
+        $this->setExpectedException('GoetasWebservices\Xsd\XsdToPhp\PathGenerator\PathGeneratorException');
         new Psr4PathGenerator(array(
             'myns\\' => "aaaa"
         ));
@@ -63,7 +63,7 @@ class PHPPathGeneratorTest extends \PHPUnit_Framework_TestCase
 
     public function testInvalidNs()
     {
-        $this->setExpectedException('Goetas\Xsd\XsdToPhp\PathGenerator\PathGeneratorException');
+        $this->setExpectedException('GoetasWebservices\Xsd\XsdToPhp\PathGenerator\PathGeneratorException');
         new Psr4PathGenerator(array(
             'myns' => "aaaa"
         ));

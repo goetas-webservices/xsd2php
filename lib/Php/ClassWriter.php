@@ -1,7 +1,7 @@
 <?php
-namespace Goetas\Xsd\XsdToPhp\Php;
+namespace GoetasWebservices\Xsd\XsdToPhp\Php;
 
-use Goetas\Xsd\XsdToPhp\Php\PathGenerator\PathGenerator;
+use GoetasWebservices\Xsd\XsdToPhp\Php\PathGenerator\PathGenerator;
 use Zend\Code\Generator\FileGenerator;
 
 class ClassWriter

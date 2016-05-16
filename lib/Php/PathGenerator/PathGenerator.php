@@ -1,8 +1,8 @@
 <?php
-namespace Goetas\Xsd\XsdToPhp\Php\PathGenerator;
+namespace GoetasWebservices\Xsd\XsdToPhp\Php\PathGenerator;
 
-use Goetas\Xsd\XsdToPhp\PathGenerator\PathGenerator as PathGeneratorBase;
-use Goetas\Xsd\XsdToPhp\Php\Structure\PHPClass;
+use GoetasWebservices\Xsd\XsdToPhp\PathGenerator\PathGenerator as PathGeneratorBase;
+use GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPClass;
 
 interface PathGenerator
 {

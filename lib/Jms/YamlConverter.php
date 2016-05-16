@@ -1,10 +1,10 @@
 <?php
-namespace Goetas\Xsd\XsdToPhp\Jms;
+namespace GoetasWebservices\Xsd\XsdToPhp\Jms;
 
 use Doctrine\Common\Inflector\Inflector;
 use Exception;
-use Goetas\Xsd\XsdToPhp\AbstractConverter;
-use Goetas\Xsd\XsdToPhp\Naming\NamingStrategy;
+use GoetasWebservices\Xsd\XsdToPhp\AbstractConverter;
+use GoetasWebservices\Xsd\XsdToPhp\Naming\NamingStrategy;
 use GoetasWebservices\XML\XSDReader\Schema\Attribute\AttributeContainer;
 use GoetasWebservices\XML\XSDReader\Schema\Attribute\AttributeItem;
 use GoetasWebservices\XML\XSDReader\Schema\Element\Element;
@@ -29,10 +29,10 @@ class YamlConverter extends AbstractConverter
         parent::__construct($namingStrategy);
 
         $this->addAliasMap("http://www.w3.org/2001/XMLSchema", "dateTime", function (Type $type) {
-            return "Goetas\Xsd\XsdToPhp\XMLSchema\DateTime";
+            return "GoetasWebservices\Xsd\XsdToPhp\XMLSchema\DateTime";
         });
         $this->addAliasMap("http://www.w3.org/2001/XMLSchema", "time", function (Type $type) {
-            return "Goetas\Xsd\XsdToPhp\XMLSchema\Time";
+            return "GoetasWebservices\Xsd\XsdToPhp\XMLSchema\Time";
         });
         $this->addAliasMap("http://www.w3.org/2001/XMLSchema", "date", function (Type $type) {
             return "DateTime<'Y-m-d'>";
@@ -41,7 +41,7 @@ class YamlConverter extends AbstractConverter
 
     private $classes = [];
 
-    protected function convert(array $schemas)
+    public function convert(array $schemas)
     {
         $visited = array();
         $this->classes = array();
@@ -351,9 +351,9 @@ class YamlConverter extends AbstractConverter
         } elseif ($itemOfArray = $this->isArrayType($attribute->getType())) {
 
             if ($valueProp = $this->typeHasValue($itemOfArray, $class, 'xx')) {
-                $property["type"] = "Goetas\Xsd\XsdToPhp\Jms\SimpleListOf<" . $valueProp . ">";
+                $property["type"] = "GoetasWebservices\Xsd\XsdToPhp\Jms\SimpleListOf<" . $valueProp . ">";
             } else {
-                $property["type"] = "Goetas\Xsd\XsdToPhp\Jms\SimpleListOf<" . $this->findPHPName($itemOfArray) . ">";
+                $property["type"] = "GoetasWebservices\Xsd\XsdToPhp\Jms\SimpleListOf<" . $this->findPHPName($itemOfArray) . ">";
             }
 
             $property["xml_list"]["inline"] = false;
@@ -396,7 +396,7 @@ class YamlConverter extends AbstractConverter
      * @param Schema $schema
      * @param Element $element
      * @param boolean $arrayize
-     * @return \Goetas\Xsd\XsdToPhp\Structure\PHPProperty
+     * @return \GoetasWebservices\Xsd\XsdToPhp\Structure\PHPProperty
      */
     private function visitElement(&$class, Schema $schema, ElementItem $element, $arrayize = true)
     {

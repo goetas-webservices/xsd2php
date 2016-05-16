@@ -1,5 +1,5 @@
 <?php
-namespace Goetas\Xsd\XsdToPhp\Tests\Converter\JMS;
+namespace GoetasWebservices\Xsd\XsdToPhp\Tests\Converter\JMS;
 
 class Xsd2PhpElementTest extends Xsd2JmsBase
 {
@@ -111,7 +111,7 @@ class Xsd2PhpElementTest extends Xsd2JmsBase
                                         'getter' => 'value',
                                         'setter' => 'value',
                                     ),
-                                'type' => 'Goetas\\Xsd\\XsdToPhp\\XMLSchema\\DateTime',
+                                'type' => 'GoetasWebservices\\Xsd\\XsdToPhp\\XMLSchema\\DateTime',
                             ),
                     ))
         ), $classes['Example\ElementOne']);
@@ -151,7 +151,7 @@ class Xsd2PhpElementTest extends Xsd2JmsBase
                                         'getter' => 'value',
                                         'setter' => 'value',
                                     ),
-                                'type' => 'Goetas\\Xsd\\XsdToPhp\\XMLSchema\\DateTime',
+                                'type' => 'GoetasWebservices\\Xsd\\XsdToPhp\\XMLSchema\\DateTime',
                             ),
                     ),
 

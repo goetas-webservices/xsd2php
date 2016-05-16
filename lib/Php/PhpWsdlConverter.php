@@ -1,10 +1,10 @@
 <?php
-namespace Goetas\Xsd\XsdToPhp\Php;
+namespace GoetasWebservices\Xsd\XsdToPhp\Php;
 
 use Doctrine\Common\Inflector\Inflector;
 use Exception;
-use Goetas\Xsd\XsdToPhp\Php\Structure\PHPClass;
-use Goetas\Xsd\XsdToPhp\Php\Structure\PHPProperty;
+use GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPClass;
+use GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPProperty;
 use GoetasWebservices\XML\SOAPReader\Soap\OperationMessage;
 use GoetasWebservices\XML\SOAPReader\SoapReader;
 use GoetasWebservices\XML\WSDLReader\DefinitionsReader;

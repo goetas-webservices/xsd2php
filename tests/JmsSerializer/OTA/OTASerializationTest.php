@@ -1,15 +1,15 @@
 <?php
-namespace Goetas\Xsd\XsdToPhp\Tests\JmsSerializer\OTA;
+namespace GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA;
 
 use Composer\Autoload\ClassLoader;
 use Doctrine\Common\Inflector\Inflector;
-use Goetas\Xsd\XsdToPhp\Jms\Handler\OTA\SchemaDateHandler;
-use Goetas\Xsd\XsdToPhp\Jms\PathGenerator\Psr4PathGenerator as JmsPsr4PathGenerator;
-use Goetas\Xsd\XsdToPhp\Jms\YamlConverter;
-use Goetas\Xsd\XsdToPhp\Naming\ShortNamingStrategy;
-use Goetas\Xsd\XsdToPhp\Php\ClassGenerator;
-use Goetas\Xsd\XsdToPhp\Php\PathGenerator\Psr4PathGenerator;
-use Goetas\Xsd\XsdToPhp\Php\PhpConverter;
+use GoetasWebservices\Xsd\XsdToPhp\Jms\Handler\OTA\SchemaDateHandler;
+use GoetasWebservices\Xsd\XsdToPhp\Jms\PathGenerator\Psr4PathGenerator as JmsPsr4PathGenerator;
+use GoetasWebservices\Xsd\XsdToPhp\Jms\YamlConverter;
+use GoetasWebservices\Xsd\XsdToPhp\Naming\ShortNamingStrategy;
+use GoetasWebservices\Xsd\XsdToPhp\Php\ClassGenerator;
+use GoetasWebservices\Xsd\XsdToPhp\Php\PathGenerator\Psr4PathGenerator;
+use GoetasWebservices\Xsd\XsdToPhp\Php\PhpConverter;
 use GoetasWebservices\XML\XSDReader\SchemaReader;
 use GoetasWebservices\Xsd\XsdToPhpRuntime\Jms\Handler\BaseTypesHandler;
 use GoetasWebservices\Xsd\XsdToPhpRuntime\Jms\Handler\XmlSchemaDateHandler;
@@ -115,9 +115,9 @@ class OTASerializationTest extends \PHPUnit_Framework_TestCase
         $phpcreator = new PhpConverter(new ShortNamingStrategy());
         $phpcreator->addNamespace('http://www.opentravel.org/OTA/2003/05', self::$namespace);
 
-        $phpcreator->addAliasMapType('http://www.opentravel.org/OTA/2003/05', 'DateOrTimeOrDateTimeType', 'Goetas\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime');
-        $phpcreator->addAliasMapType('http://www.opentravel.org/OTA/2003/05', 'DateOrDateTimeType', 'Goetas\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime');
-        $phpcreator->addAliasMapType('http://www.opentravel.org/OTA/2003/05', 'TimeOrDateTimeType', 'Goetas\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime');
+        $phpcreator->addAliasMapType('http://www.opentravel.org/OTA/2003/05', 'DateOrTimeOrDateTimeType', 'GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime');
+        $phpcreator->addAliasMapType('http://www.opentravel.org/OTA/2003/05', 'DateOrDateTimeType', 'GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime');
+        $phpcreator->addAliasMapType('http://www.opentravel.org/OTA/2003/05', 'TimeOrDateTimeType', 'GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime');
 
         $items = $phpcreator->convert($schemas);
 
@@ -146,9 +146,9 @@ class OTASerializationTest extends \PHPUnit_Framework_TestCase
         $yamlcreator = new YamlConverter(new ShortNamingStrategy());
         $yamlcreator->addNamespace('http://www.opentravel.org/OTA/2003/05', self::$namespace);
 
-        $yamlcreator->addAliasMapType('http://www.opentravel.org/OTA/2003/05', 'DateOrTimeOrDateTimeType', 'Goetas\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime');
-        $yamlcreator->addAliasMapType('http://www.opentravel.org/OTA/2003/05', 'DateOrDateTimeType', 'Goetas\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime');
-        $yamlcreator->addAliasMapType('http://www.opentravel.org/OTA/2003/05', 'TimeOrDateTimeType', 'Goetas\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime');
+        $yamlcreator->addAliasMapType('http://www.opentravel.org/OTA/2003/05', 'DateOrTimeOrDateTimeType', 'GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime');
+        $yamlcreator->addAliasMapType('http://www.opentravel.org/OTA/2003/05', 'DateOrDateTimeType', 'GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime');
+        $yamlcreator->addAliasMapType('http://www.opentravel.org/OTA/2003/05', 'TimeOrDateTimeType', 'GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime');
 
         $items = $yamlcreator->convert($schemas);
 

@@ -11,7 +11,7 @@ foreach ($paths as $path) {
     }
 }
 
-use Goetas\Xsd\XsdToPhp\Command;
+use GoetasWebservices\Xsd\XsdToPhp\Command;
 use Symfony\Component\Console\Application;
 
 $container = new \Symfony\Component\DependencyInjection\ContainerBuilder();

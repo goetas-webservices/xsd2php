@@ -1,9 +1,9 @@
 <?php
-namespace Goetas\Xsd\XsdToPhp\Php\PathGenerator;
+namespace GoetasWebservices\Xsd\XsdToPhp\Php\PathGenerator;
 
-use Goetas\Xsd\XsdToPhp\PathGenerator\PathGeneratorException;
-use Goetas\Xsd\XsdToPhp\PathGenerator\Psr4PathGenerator as Psr4PathGeneratorBase;
-use Goetas\Xsd\XsdToPhp\Php\Structure\PHPClass;
+use GoetasWebservices\Xsd\XsdToPhp\PathGenerator\PathGeneratorException;
+use GoetasWebservices\Xsd\XsdToPhp\PathGenerator\Psr4PathGenerator as Psr4PathGeneratorBase;
+use GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPClass;
 
 class Psr4PathGenerator extends Psr4PathGeneratorBase implements PathGenerator
 {

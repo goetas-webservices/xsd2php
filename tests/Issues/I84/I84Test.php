@@ -1,8 +1,8 @@
 <?php
-namespace Goetas\Xsd\XsdToPhp\Tests\Issues\I63;
+namespace GoetasWebservices\Xsd\XsdToPhp\Tests\Issues\I63;
 
-use Goetas\Xsd\XsdToPhp\Naming\ShortNamingStrategy;
-use Goetas\Xsd\XsdToPhp\Php\PhpConverter;
+use GoetasWebservices\Xsd\XsdToPhp\Naming\ShortNamingStrategy;
+use GoetasWebservices\Xsd\XsdToPhp\Php\PhpConverter;
 use GoetasWebservices\XML\XSDReader\SchemaReader;
 
 class I84Test extends \PHPUnit_Framework_TestCase

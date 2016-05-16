@@ -1,13 +1,13 @@
 xsd2php
 =======
 
-[![Build Status](https://travis-ci.org/goetas/xsd2php.svg?branch=master)](https://travis-ci.org/goetas/xsd2php)
-[![Code Coverage](https://scrutinizer-ci.com/g/goetas/xsd2php/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/goetas/xsd2php/?branch=master)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/goetas/xsd2php/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/goetas/xsd2php/?branch=master)
+[![Build Status](https://travis-ci.org/goetas-webservices/xsd2php.svg?branch=master)](https://travis-ci.org/goetas-webservices/xsd2php)
+[![Code Coverage](https://scrutinizer-ci.com/g/goetas-webservices/xsd2php/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/goetas-webservices/xsd2php/?branch=master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/goetas-webservices/xsd2php/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/goetas-webservices/xsd2php/?branch=master)
 
 Convert XSD into PHP classes.
 
-With `goetas/xsd2php` you can convert any XSD/WSDL definition into PHP classes.
+With `goetas-webservices/xsd2php` you can convert any XSD/WSDL definition into PHP classes.
 
 XSD2PHP can also generate [JMS Serializer](http://jmsyst.com/libs/serializer) compatible metadata that can be used to serialize/unserialize the object instances.
 
@@ -22,7 +22,7 @@ There is one recommended way to install xsd2php via [Composer](https://getcompos
 ```js
   "require": {
       ..
-      "goetas/xsd2php":"2.*@dev",
+      "goetas-webservices/xsd2php":"^0.1",
       "jms/serializer": "serializer-master-dev as 1.0",
       ..
   },
@@ -87,11 +87,11 @@ XSD2PHP can also generate for you [JMS Serializer](http://jmsyst.com/libs/serial
 
 ```sh
 vendor/bin/xsd2php  convert:jms-yaml \
-`/home/my/ota/OTA_HotelAvail*.xsd \
+/home/my/ota/OTA_HotelAvail*.xsd \
 
 --ns-map='http://www.opentravel.org/OTA/2003/05;Mercurio/OTA/2007B/'  \
 --ns-dest='Mercurio/OTA/2007B/;src/Metadata/JMS;' \
-
+--soap-messages \
 --alias-map='http://www.opentravel.org/OTA/2003/05;CustomOTADateTimeFormat;Vendor/Project/CustomDateClass'
 
 ```

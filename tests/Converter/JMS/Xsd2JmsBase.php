@@ -1,8 +1,8 @@
 <?php
-namespace Goetas\Xsd\XsdToPhp\Tests\Converter\JMS;
+namespace GoetasWebservices\Xsd\XsdToPhp\Tests\Converter\JMS;
 
-use Goetas\Xsd\XsdToPhp\Jms\YamlConverter;
-use Goetas\Xsd\XsdToPhp\Naming\ShortNamingStrategy;
+use GoetasWebservices\Xsd\XsdToPhp\Jms\YamlConverter;
+use GoetasWebservices\Xsd\XsdToPhp\Naming\ShortNamingStrategy;
 use GoetasWebservices\XML\XSDReader\SchemaReader;
 
 abstract class Xsd2JmsBase extends \PHPUnit_Framework_TestCase
