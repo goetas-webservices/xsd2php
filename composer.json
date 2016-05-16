@@ -53,6 +53,7 @@
       "dev-master": "2.0-dev"
     }
   },
+  "minimum-stability":"dev",
   "bin": [
     "bin/xsd2php"
   ]
