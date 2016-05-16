@@ -10,7 +10,7 @@
         <service abstract="true" id="goetas.xsd2php.naming_convention"/>
 
         <service id="goetas.xsd2php.converter.php" class="Goetas\Xsd\XsdToPhp\Php\PhpConverter">
-            <argument id="goetas.xsd2php.naming_convention"  type="service"/>
+            <argument id="goetas.xsd2php.naming_convention" type="service"/>
         </service>
 
         <service id="goetas.xsd2php.converter.jms_yaml" class="Goetas\Xsd\XsdToPhp\Jms\YamlConverter">

@@ -261,7 +261,7 @@ abstract class AbstractConverter
             return $element;
         }
     }
-    
+
     public function getNamespaces()
     {
         return $this->namespaces;

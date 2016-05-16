@@ -2,12 +2,8 @@
 namespace Goetas\Xsd\XsdToPhp\Command;
 
 use Exception;
-use Goetas\Xsd\XsdToPhp\Naming\LongNamingStrategy;
-use Goetas\Xsd\XsdToPhp\Naming\ShortNamingStrategy;
 use Goetas\Xsd\XsdToPhp\Php\ClassWriter;
 use Goetas\Xsd\XsdToPhp\Php\PathGenerator\Psr4PathGenerator;
-use Goetas\Xsd\XsdToPhp\Php\PhpConverter;
-use Goetas\Xsd\XsdToPhp\Php\PhpWsdlConverter;
 use Symfony\Component\Console;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
@@ -17,11 +13,13 @@ use Symfony\Component\Yaml\Dumper;
 class Convert extends Console\Command\Command
 {
     protected $container;
+
     public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
         parent::__construct();
     }
+
     /**
      *
      * @see Console\Command\Command
@@ -47,7 +45,7 @@ class Convert extends Console\Command\Command
      */
     protected function execute(Console\Input\InputInterface $input, Console\Output\OutputInterface $output)
     {
-        $naming =  $this->container->get('goetas.xsd2php.naming_convention.'.$input->getOption('naming-strategy'));
+        $naming = $this->container->get('goetas.xsd2php.naming_convention.' . $input->getOption('naming-strategy'));
         $this->container->set('goetas.xsd2php.naming_convention', $naming);
 
         $nsMap = $input->getOption('ns-map');
@@ -61,7 +59,7 @@ class Convert extends Console\Command\Command
         }
 
         $format = strtr($input->getOption('format'), '-', '_');
-        $converter = $this->container->get('goetas.xsd2php.converter.'.$format);
+        $converter = $this->container->get('goetas.xsd2php.converter.' . $format);
 
         foreach ($nsMap as $val) {
             if (substr_count($val, ';') !== 1) {
@@ -95,14 +93,14 @@ class Convert extends Console\Command\Command
         $items = $converter->run($src);
 
         if ($input->getOption('soap-messages')) {
-            $wsdlConverter =  $this->container->get('goetas.xsd2php.converter.extend.'.$format.'.soap');
+            $wsdlConverter = $this->container->get('goetas.xsd2php.converter.extend.' . $format . '.soap');
             $items = array_merge($items, $wsdlConverter->run($src));
         }
         if ($format == 'php') {
             $path = new Psr4PathGenerator($targets);
             $writer = new ClassWriter($path);
             $writer->write($items);
-        }else{
+        } else {
             $dumper = new Dumper();
 
             $pathGenerator = new \Goetas\Xsd\XsdToPhp\Jms\PathGenerator\Psr4PathGenerator($targets);

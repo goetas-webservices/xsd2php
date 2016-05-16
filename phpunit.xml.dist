@@ -13,20 +13,18 @@
          stopOnFailure="false"
          stopOnIncomplete="false"
          stopOnSkipped="false"
-         
          verbose="false">
-         
     <testsuites>
         <testsuite name="Goetas XSD to PHP Test Suite">
             <directory>./tests</directory>
         </testsuite>
     </testsuites>
-    
-<filter>
-  <whitelist>
-    <directory>lib</directory>
-  </whitelist>
-  </filter>  
+
+    <filter>
+        <whitelist>
+            <directory>lib</directory>
+        </whitelist>
+    </filter>
 
 </phpunit>
 

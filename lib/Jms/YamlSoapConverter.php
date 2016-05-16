@@ -71,7 +71,7 @@ class YamlSoapConverter
         }
         $visited[spl_object_hash($service)] = true;
 
-        foreach ($service->getOperations() as $operation){
+        foreach ($service->getOperations() as $operation) {
             $this->visitOperation($operation, $service);
         }
     }
@@ -104,14 +104,14 @@ class YamlSoapConverter
             $envelopeClass[$messageClassName] = &$envelopeData;
             $envelopeData["xml_root_name"] = 'SOAP:Envelope';
             $envelopeData["xml_root_namespace"] = 'http://schemas.xmlsoap.org/soap/envelope/';
-            $envelopeData["xml_namespaces"] = ['SOAP' => 'http://schemas.xmlsoap.org/soap/envelope/' ];
+            $envelopeData["xml_namespaces"] = ['SOAP' => 'http://schemas.xmlsoap.org/soap/envelope/'];
 
             $property = [];
             $property["expose"] = true;
             $property["access_type"] = "public_method";
             $property["type"] = $className;
             $property["serialized_name"] = 'Body';
-            $property["xml_element"]["namespace"] =  'http://schemas.xmlsoap.org/soap/envelope/';
+            $property["xml_element"]["namespace"] = 'http://schemas.xmlsoap.org/soap/envelope/';
 
             $property["accessor"]["getter"] = "getBody";
             $property["accessor"]["setter"] = "setBody";
@@ -120,14 +120,13 @@ class YamlSoapConverter
             $this->classes[] = &$envelopeClass;
 
 
-
             if (count($message->getHeaders())) {
                 $headersClass = array();
                 $headersData = array();
 
                 $headersData["xml_namespaces"] = ['SOAP' => 'http://schemas.xmlsoap.org/soap/envelope/'];
 
-                $className = $this->findPHPName($message, Inflector::classify($hint),'\\Envelope\\Headers');
+                $className = $this->findPHPName($message, Inflector::classify($hint), '\\Envelope\\Headers');
 
                 $headersClass[$className] = &$headersData;
                 $this->classes[] = &$headersClass;
@@ -137,14 +136,14 @@ class YamlSoapConverter
                 $property["access_type"] = "public_method";
                 $property["type"] = $className;
                 $property["serialized_name"] = 'Header';
-                $property["xml_element"]["namespace"] =  'http://schemas.xmlsoap.org/soap/envelope/';
+                $property["xml_element"]["namespace"] = 'http://schemas.xmlsoap.org/soap/envelope/';
 
                 $property["accessor"]["getter"] = "getHeader";
                 $property["accessor"]["setter"] = "setHeader";
 
                 $envelopeData["properties"]['header'] = $property;
 
-                foreach ($message->getHeaders() as $k =>  $header) {
+                foreach ($message->getHeaders() as $k => $header) {
                     $this->visitMessageParts($headersData, [$header->getPart()]);
                 }
             }
@@ -155,45 +154,45 @@ class YamlSoapConverter
 
     private function visitMessageParts(&$data, array $parts)
     {
-     /**
-      * @var $part \GoetasWebservices\XML\WSDLReader\Wsdl\Message\Part
-      */
-     foreach ($parts as $part){
-         $property = [];
-         $property["expose"] = true;
-         $property["access_type"] = "public_method";
+        /**
+         * @var $part \GoetasWebservices\XML\WSDLReader\Wsdl\Message\Part
+         */
+        foreach ($parts as $part) {
+            $property = [];
+            $property["expose"] = true;
+            $property["access_type"] = "public_method";
 
 
-         $property["accessor"]["getter"] = "get" . Inflector::classify($part->getName());
-         $property["accessor"]["setter"] = "set" . Inflector::classify($part->getName());
+            $property["accessor"]["getter"] = "get" . Inflector::classify($part->getName());
+            $property["accessor"]["setter"] = "set" . Inflector::classify($part->getName());
 
 
-         if ($part->getElement()) {
-             $property["xml_element"]["namespace"] = $part->getElement()->getSchema()->getTargetNamespace();
-             $property["serialized_name"] = $part->getElement()->getName();
-             $c = $this->converter->visitElementDef($part->getElement()->getSchema(), $part->getElement());
-             $property["type"] = key($c);
-         }else{
-             $property["serialized_name"] = $part->getName();
-             $property["xml_element"]["namespace"] = $part->getType()->getSchema()->getTargetNamespace();
+            if ($part->getElement()) {
+                $property["xml_element"]["namespace"] = $part->getElement()->getSchema()->getTargetNamespace();
+                $property["serialized_name"] = $part->getElement()->getName();
+                $c = $this->converter->visitElementDef($part->getElement()->getSchema(), $part->getElement());
+                $property["type"] = key($c);
+            } else {
+                $property["serialized_name"] = $part->getName();
+                $property["xml_element"]["namespace"] = $part->getType()->getSchema()->getTargetNamespace();
 
-             $c = $this->visitType($part->getType());
-             $property["type"] = key($c);
-         }
+                $c = $this->visitType($part->getType());
+                $property["type"] = key($c);
+            }
 
-         $data['properties'][Inflector::camelize($part->getName())] = $property;
-     }
- }
+            $data['properties'][Inflector::camelize($part->getName())] = $property;
+        }
+    }
 
     private function findPHPName(OperationMessage $message, $hint = '', $nsadd = '')
     {
-        $name = $message->getMessage()->getOperation()->getName().$hint;
+        $name = $message->getMessage()->getOperation()->getName() . $hint;
         $targetNs = $message->getMessage()->getDefinition()->getTargetNamespace();
         $namespaces = $this->converter->getNamespaces();
         if (!isset($namespaces[$targetNs])) {
             throw new Exception(sprintf("Can't find a PHP namespace to '%s' namespace", $targetNs));
         }
         $ns = $namespaces[$targetNs];
-        return $ns.$nsadd."\\".$name;
+        return $ns . $nsadd . "\\" . $name;
     }
 }

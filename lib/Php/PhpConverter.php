@@ -4,7 +4,6 @@ namespace Goetas\Xsd\XsdToPhp\Php;
 use Exception;
 use Goetas\Xsd\XsdToPhp\AbstractConverter;
 use Goetas\Xsd\XsdToPhp\Naming\NamingStrategy;
-use Goetas\Xsd\XsdToPhp\Php\PathGenerator\Psr4PathGenerator;
 use Goetas\Xsd\XsdToPhp\Php\Structure\PHPArg;
 use Goetas\Xsd\XsdToPhp\Php\Structure\PHPClass;
 use Goetas\Xsd\XsdToPhp\Php\Structure\PHPClassOf;
