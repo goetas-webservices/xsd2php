@@ -12,9 +12,10 @@ class PHPArg
 
     protected $default;
 
-    public function __construct($name = null)
+    public function __construct($name = null, $type = null)
     {
         $this->name = $name;
+        $this->type = $type;
     }
 
     public function getDoc()

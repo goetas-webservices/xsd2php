@@ -41,7 +41,7 @@ class YamlConverter extends AbstractConverter
 
     private $classes = [];
 
-    public function convert(array $schemas)
+    protected function convert(array $schemas)
     {
         $visited = array();
         $this->classes = array();
@@ -133,7 +133,7 @@ class YamlConverter extends AbstractConverter
         }
     }
 
-    private function &visitElementDef(Schema $schema, ElementDef $element)
+    public function &visitElementDef(Schema $schema, ElementDef $element)
     {
         if (!isset($this->classes[spl_object_hash($element)])) {
             $className = $this->findPHPNamespace($element) . "\\" . $this->getNamingStrategy()->getItemName($element);

@@ -2,14 +2,20 @@
 namespace Goetas\Xsd\XsdToPhp;
 
 use Goetas\Xsd\XsdToPhp\Naming\NamingStrategy;
+use GoetasWebservices\XML\WSDLReader\DefinitionsReader;
 use GoetasWebservices\XML\XSDReader\Schema\Element\ElementSingle;
 use GoetasWebservices\XML\XSDReader\Schema\Schema;
 use GoetasWebservices\XML\XSDReader\Schema\Type\ComplexType;
 use GoetasWebservices\XML\XSDReader\Schema\Type\SimpleType;
 use GoetasWebservices\XML\XSDReader\Schema\Type\Type;
+use GoetasWebservices\XML\XSDReader\SchemaReader;
+use Psr\Log\LoggerAwareTrait;
+use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 
 abstract class AbstractConverter
 {
+    use LoggerAwareTrait;
 
     protected $baseSchemas = array(
         'http://www.w3.org/2001/XMLSchema',
@@ -34,7 +40,26 @@ abstract class AbstractConverter
      */
     private $namingStrategy;
 
-    public abstract function convert(array $schemas);
+    protected abstract function convert(array $schemas);
+
+    public function run(array $src)
+    {
+
+        $schemas = [];
+
+        $reader = new SchemaReader();
+        $wsdlReader = new DefinitionsReader($reader);
+        foreach ($src as $file) {
+            if (pathinfo($file, PATHINFO_EXTENSION) === "xsd") {
+                $schemas[] = $reader->readFile($file);
+            } elseif (pathinfo($file, PATHINFO_EXTENSION) === "wsdl") {
+                $definitions = $wsdlReader->readFile($file);
+                $schemas[] = $definitions->getSchema();
+            }
+        }
+
+        return $this->convert($schemas);
+    }
 
     protected $typeAliases = array();
 
@@ -42,6 +67,7 @@ abstract class AbstractConverter
 
     public function addAliasMap($ns, $name, callable $handler)
     {
+        $this->logger->debug("Added map $ns $name");
         $this->typeAliases[$ns][$name] = $handler;
     }
 
@@ -65,9 +91,10 @@ abstract class AbstractConverter
         }
     }
 
-    public function __construct(NamingStrategy $namingStrategy)
+    public function __construct(NamingStrategy $namingStrategy, LoggerInterface $logger = null)
     {
         $this->namingStrategy = $namingStrategy;
+        $this->logger = $logger ?: new NullLogger();
 
         $this->addAliasMap("http://www.w3.org/2001/XMLSchema", "gYearMonth", function (Type $type) {
             return "integer";
@@ -189,9 +216,10 @@ abstract class AbstractConverter
         return $this->namingStrategy;
     }
 
-    public function addNamespace($namesapce, $phpNamespace)
+    public function addNamespace($ns, $phpNamespace)
     {
-        $this->namespaces[$namesapce] = $phpNamespace;
+        $this->logger->debug("Added ns mapping $ns, $phpNamespace");
+        $this->namespaces[$ns] = $phpNamespace;
         return $this;
     }
 
@@ -232,6 +260,11 @@ abstract class AbstractConverter
         if ($element instanceof ElementSingle && ($element->getMax() > 1 || $element->getMax() === -1)) {
             return $element;
         }
+    }
+    
+    public function getNamespaces()
+    {
+        return $this->namespaces;
     }
 
 }

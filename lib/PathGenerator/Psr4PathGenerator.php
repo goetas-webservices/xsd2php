@@ -1,7 +1,7 @@
 <?php
 namespace Goetas\Xsd\XsdToPhp\PathGenerator;
 
-abstract class Psr4PathGenerator implements PathGenerator
+abstract class Psr4PathGenerator
 {
 
     protected $namespaces = array();

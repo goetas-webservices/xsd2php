@@ -4,10 +4,12 @@ namespace Goetas\Xsd\XsdToPhp\Php;
 use Exception;
 use Goetas\Xsd\XsdToPhp\AbstractConverter;
 use Goetas\Xsd\XsdToPhp\Naming\NamingStrategy;
+use Goetas\Xsd\XsdToPhp\Php\PathGenerator\Psr4PathGenerator;
 use Goetas\Xsd\XsdToPhp\Php\Structure\PHPArg;
 use Goetas\Xsd\XsdToPhp\Php\Structure\PHPClass;
 use Goetas\Xsd\XsdToPhp\Php\Structure\PHPClassOf;
 use Goetas\Xsd\XsdToPhp\Php\Structure\PHPProperty;
+use GoetasWebservices\XML\WSDLReader\DefinitionsReader;
 use GoetasWebservices\XML\XSDReader\Schema\Attribute\AttributeItem;
 use GoetasWebservices\XML\XSDReader\Schema\Attribute\Group as AttributeGroup;
 use GoetasWebservices\XML\XSDReader\Schema\Element\Element;
@@ -21,13 +23,17 @@ use GoetasWebservices\XML\XSDReader\Schema\Type\BaseComplexType;
 use GoetasWebservices\XML\XSDReader\Schema\Type\ComplexType;
 use GoetasWebservices\XML\XSDReader\Schema\Type\SimpleType;
 use GoetasWebservices\XML\XSDReader\Schema\Type\Type;
+use GoetasWebservices\XML\XSDReader\SchemaReader;
+use Psr\Log\LoggerInterface;
+use Zend\Code\Generator\ClassGenerator;
+use Zend\Code\Generator\FileGenerator;
 
 class PhpConverter extends AbstractConverter
 {
 
-    public function __construct(NamingStrategy $namingStrategy)
+    public function __construct(NamingStrategy $namingStrategy, LoggerInterface $loggerInterface = null)
     {
-        parent::__construct($namingStrategy);
+        parent::__construct($namingStrategy, $loggerInterface);
 
         $this->addAliasMap("http://www.w3.org/2001/XMLSchema", "dateTime", function (Type $type) {
             return "DateTime";
@@ -48,7 +54,7 @@ class PhpConverter extends AbstractConverter
 
     private $classes = [];
 
-    public function convert(array $schemas)
+    protected function convert(array $schemas)
     {
         $visited = array();
         $this->classes = array();
@@ -69,7 +75,7 @@ class PhpConverter extends AbstractConverter
         });
         $ret = array();
         foreach ($this->classes as $classData) {
-            if (!isset($classData["skip"]) || !$classData["skip"]) {
+            if (empty($classData["skip"])) {
                 $ret[$classData["class"]->getFullName()] = $classData["class"];
             }
         }
@@ -137,7 +143,7 @@ class PhpConverter extends AbstractConverter
         }
     }
 
-    private function visitElementDef(ElementDef $element)
+    public function visitElementDef(ElementDef $element, $skip = false)
     {
         if (!isset($this->classes[spl_object_hash($element)])) {
             $schema = $element->getSchema();
@@ -153,6 +159,7 @@ class PhpConverter extends AbstractConverter
             $class->setNamespace($this->namespaces[$schema->getTargetNamespace()]);
 
             $this->classes[spl_object_hash($element)]["class"] = $class;
+            $this->classes[spl_object_hash($element)]["skip"] = $skip;
 
             if (!$element->getType()->getName()) {
                 $this->visitTypeBase($class, $element->getType());
@@ -200,7 +207,7 @@ class PhpConverter extends AbstractConverter
      * @param boolean $force
      * @return \Goetas\Xsd\XsdToPhp\Php\Structure\PHPClass
      */
-    private function visitType(Type $type, $force = false)
+    public function visitType(Type $type, $force = false, $skip = false)
     {
         if (!isset($this->classes[spl_object_hash($type)])) {
 
@@ -229,7 +236,7 @@ class PhpConverter extends AbstractConverter
                 return $class;
             }
 
-            $this->classes[spl_object_hash($type)]["skip"] = !!$this->getTypeAlias($type);
+            $this->classes[spl_object_hash($type)]["skip"] = $skip || !!$this->getTypeAlias($type);
         } elseif ($force) {
             if (!($type instanceof SimpleType) && !$this->getTypeAlias($type)) {
                 $this->classes[spl_object_hash($type)]["skip"] = false;

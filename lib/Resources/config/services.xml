@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="goetas.xsd2php.naming_convention.short" class="Goetas\Xsd\XsdToPhp\Naming\ShortNamingStrategy"/>
+        <service id="goetas.xsd2php.naming_convention.long" class="Goetas\Xsd\XsdToPhp\Naming\LongNamingStrategy"/>
+
+        <service abstract="true" id="goetas.xsd2php.naming_convention"/>
+
+        <service id="goetas.xsd2php.converter.php" class="Goetas\Xsd\XsdToPhp\Php\PhpConverter">
+            <argument id="goetas.xsd2php.naming_convention"  type="service"/>
+        </service>
+
+        <service id="goetas.xsd2php.converter.jms_yaml" class="Goetas\Xsd\XsdToPhp\Jms\YamlConverter">
+            <argument id="goetas.xsd2php.naming_convention" type="service"/>
+        </service>
+
+        <service id="goetas.xsd2php.converter.extend.php.soap" class="Goetas\Xsd\XsdToPhp\Php\PhpWsdlConverter">
+            <argument id="goetas.xsd2php.converter.php" type="service"/>
+        </service>
+
+        <service id="goetas.xsd2php.converter.extend.jms_yaml.soap" class="Goetas\Xsd\XsdToPhp\Jms\YamlSoapConverter">
+            <argument id="goetas.xsd2php.converter.jms_yaml" type="service"/>
+        </service>
+
+    </services>
+</container>

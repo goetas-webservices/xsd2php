@@ -13,11 +13,15 @@ foreach ($paths as $path) {
 
 use Symfony\Component\Console\Application;
 use Goetas\Xsd\XsdToPhp\Command;
+
+$container = new \Symfony\Component\DependencyInjection\ContainerBuilder();
+$loader = new \Symfony\Component\DependencyInjection\Loader\XmlFileLoader($container, new \Symfony\Component\Config\FileLocator(__DIR__ . '/../lib/Resources/config'));
+$loader->load('services.xml');
+
 error_reporting(error_reporting() &~E_NOTICE);
 $cli = new Application('Convert XSD to PHP classes Command Line Interface', "2.0");
 $cli->setCatchExceptions(true);
 $cli->addCommands(array(
-    new Command\ConvertToPHP(),
-    new Command\ConvertToYaml()
+    new Command\Convert($container)
 ));
 $cli->run();

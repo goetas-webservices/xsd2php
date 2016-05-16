@@ -7,7 +7,6 @@ use Goetas\Xsd\XsdToPhp\Php\Structure\PHPClass;
 
 class Psr4PathGenerator extends Psr4PathGeneratorBase implements PathGenerator
 {
-
     public function getPath(PHPClass $php)
     {
         foreach ($this->namespaces as $namespace => $dir) {
