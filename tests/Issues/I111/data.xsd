@@ -1,0 +1,21 @@
+<xs:schema elementFormDefault="qualified" targetNamespace="http://www.example.com" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ex="http://www.example2.com">
+
+    <xs:import namespace="http://www.example2.com" schemaLocation="data2.xsd"/>
+
+    <xs:element name="element1">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="string2" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="complexType1">
+        <xs:sequence>
+            <xs:element ref="ex:element2"/>
+            <xs:element name="string1" type="xs:string"/>
+            <xs:element ref="element1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+</xs:schema>
