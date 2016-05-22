@@ -58,7 +58,7 @@ class Convert extends Console\Command\Command
             throw new \RuntimeException(__CLASS__ . ' requires at least one ns-target.');
         }
 
-        $format = strtr($input->getOption('format'), '-', '_');
+        $format = strtr($input->getArgument('format'), '-', '_');
         $converter = $this->container->get('goetas.xsd2php.converter.' . $format);
 
         foreach ($nsMap as $val) {
