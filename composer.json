@@ -41,7 +41,7 @@
   ],
   "autoload": {
     "psr-4": {
-      "GoetasWebservices\\Xsd\\XsdToPhp\\": "lib/"
+      "GoetasWebservices\\Xsd\\XsdToPhp\\": "src/"
     }
   },
   "autoload-dev": {
