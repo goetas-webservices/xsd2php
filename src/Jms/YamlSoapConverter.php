@@ -60,7 +60,7 @@ class YamlSoapConverter
                 $wsdlReader->readFile($file);
             }
         }
-        return $this->convert($soapReader->getSoapServices());
+        return $this->convert($soapReader->getServices());
     }
 
 
@@ -174,9 +174,9 @@ class YamlSoapConverter
                 $property["type"] = key($c);
             } else {
                 $property["serialized_name"] = $part->getName();
-                $property["xml_element"]["namespace"] = $part->getType()->getSchema()->getTargetNamespace();
+                $property["xml_element"]["namespace"] = null;
 
-                $c = $this->visitType($part->getType());
+                $c = $this->converter->visitType($part->getType());
                 $property["type"] = key($c);
             }
 
@@ -186,7 +186,7 @@ class YamlSoapConverter
 
     private function findPHPName(OperationMessage $message, $hint = '', $nsadd = '')
     {
-        $name = $message->getMessage()->getOperation()->getName() . $hint;
+        $name = Inflector::classify($message->getMessage()->getOperation()->getName()) . $hint;
         $targetNs = $message->getMessage()->getDefinition()->getTargetNamespace();
         $namespaces = $this->converter->getNamespaces();
         if (!isset($namespaces[$targetNs])) {

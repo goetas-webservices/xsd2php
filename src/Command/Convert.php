@@ -102,13 +102,11 @@ class Convert extends Console\Command\Command
             $writer->write($items);
         } else {
             $dumper = new Dumper();
-
             $pathGenerator = new \GoetasWebservices\Xsd\XsdToPhp\Jms\PathGenerator\Psr4PathGenerator($targets);
             foreach ($items as $item) {
                 $source = $dumper->dump($item, 10000);
-
                 $path = $pathGenerator->getPath($item);
-                $bytes = file_put_contents($path, $source);
+                file_put_contents($path, $source);
             }
         }
         return 0;

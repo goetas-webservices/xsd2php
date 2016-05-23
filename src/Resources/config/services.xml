@@ -17,7 +17,7 @@
             <argument id="goetas.xsd2php.naming_convention" type="service"/>
         </service>
 
-        <service id="goetas.xsd2php.converter.extend.php.soap" class="GoetasWebservices\Xsd\XsdToPhp\Php\PhpWsdlConverter">
+        <service id="goetas.xsd2php.converter.extend.php.soap" class="GoetasWebservices\Xsd\XsdToPhp\Php\PhpSoapConverter">
             <argument id="goetas.xsd2php.converter.php" type="service"/>
         </service>
 

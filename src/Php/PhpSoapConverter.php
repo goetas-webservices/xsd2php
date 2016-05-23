@@ -26,7 +26,7 @@ use GoetasWebservices\XML\XSDReader\Schema\Type\SimpleType;
 use GoetasWebservices\XML\XSDReader\Schema\Type\Type;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
-class PhpWsdlConverter
+class PhpSoapConverter
 {
     private $classes = [];
 
@@ -58,7 +58,7 @@ class PhpWsdlConverter
                 $wsdlReader->readFile($file);
             }
         }
-        return $this->convert($soapReader->getSoapServices());
+        return $this->convert($soapReader->getServices());
     }
 
     private function visitService(\GoetasWebservices\XML\SOAPReader\Soap\Service $service, array &$visited)
@@ -97,10 +97,8 @@ class PhpWsdlConverter
             $property = new PHPProperty('body', $bodyClass);
             $envelopeClass->addProperty($property);
 
-            $property = new PHPProperty('header');
-            $envelopeClass->addProperty($property);
             if (count($message->getHeaders())) {
-
+                $property = new PHPProperty('header');
                 $this->classes[] = $headerClass = new PHPClass();
                 $headerClass->setName(Inflector::classify($name));
                 $headerClass->setNamespace($ns . '\\Envelope\\Headers');
@@ -109,6 +107,7 @@ class PhpWsdlConverter
                 foreach ($message->getHeaders() as $k => $header) {
                     $this->visitMessageParts($headerClass, [$header->getPart()]);
                 }
+                $envelopeClass->addProperty($property);
             }
         }
         return $this->classes[spl_object_hash($message)];

@@ -183,7 +183,7 @@ class YamlConverter extends AbstractConverter
     }
 
 
-    private function &visitType(Type $type, $force = false)
+    public function &visitType(Type $type, $force = false)
     {
 
         if (!isset($this->classes[spl_object_hash($type)])) {
