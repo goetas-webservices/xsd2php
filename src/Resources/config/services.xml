@@ -25,5 +25,19 @@
             <argument id="goetas.xsd2php.converter.jms_yaml" type="service"/>
         </service>
 
+        <service abstract="true" id="goetas.xsd2php.path_generator.php"/>
+        <service abstract="true" id="goetas.xsd2php.path_generator.jms_yaml"/>
+        <service id="goetas.xsd2php.path_generator.php.psr4" class="GoetasWebservices\Xsd\XsdToPhp\Php\PathGenerator\Psr4PathGenerator">
+        </service>
+        <service id="goetas.xsd2php.path_generator.jms_yaml.psr4" class="GoetasWebservices\Xsd\XsdToPhp\Jms\PathGenerator\Psr4PathGenerator">
+        </service>
+
+        <service id="goetas.xsd2php.writer.php" class="GoetasWebservices\Xsd\XsdToPhp\Writer\PHPWriter">
+            <argument id="goetas.xsd2php.path_generator.php" type="service"/>
+        </service>
+        <service id="goetas.xsd2php.writer.jms_yaml" class="GoetasWebservices\Xsd\XsdToPhp\Writer\JMSWriter">
+            <argument id="goetas.xsd2php.path_generator.jms_yaml" type="service"/>
+        </service>
+
     </services>
 </container>

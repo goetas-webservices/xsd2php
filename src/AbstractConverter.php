@@ -42,16 +42,16 @@ abstract class AbstractConverter
 
     public abstract function convert(array $schemas);
 
+    /*
     public function run(array $src)
     {
         $schemas = [];
-
         $reader = new SchemaReader();
         $wsdlReader = new DefinitionsReader($reader);
         foreach ($src as $file) {
             if (pathinfo($file, PATHINFO_EXTENSION) === "xsd") {
                 $schemas[] = $reader->readFile($file);
-            } elseif (pathinfo($file, PATHINFO_EXTENSION) === "wsdl") {
+            } elseif (pathinfo($file, PATHINFO_EXTENSION) === "wsdl" || stripos($file, "wsdl")!==false) {
                 $definitions = $wsdlReader->readFile($file);
                 $schemas[] = $definitions->getSchema();
             }
@@ -59,6 +59,7 @@ abstract class AbstractConverter
 
         return $this->convert($schemas);
     }
+    */
 
     protected $typeAliases = array();
 

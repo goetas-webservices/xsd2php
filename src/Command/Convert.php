@@ -48,19 +48,19 @@ class Convert extends Console\Command\Command
         $naming = $this->container->get('goetas.xsd2php.naming_convention.' . $input->getOption('naming-strategy'));
         $this->container->set('goetas.xsd2php.naming_convention', $naming);
 
-        $nsMap = $input->getOption('ns-map');
-        if (!$nsMap) {
-            throw new \RuntimeException(__CLASS__ . ' requires at least one ns-map.');
-        }
+        $pathGenerator = $this->container->get('goetas.xsd2php.path_generator.jms_yaml.psr4');
+        $this->container->set('goetas.xsd2php.path_generator.jms_yaml', $pathGenerator);
 
-        $nsTarget = $input->getOption('ns-dest');
-        if (!$nsTarget) {
-            throw new \RuntimeException(__CLASS__ . ' requires at least one ns-target.');
-        }
+        $pathGenerator = $this->container->get('goetas.xsd2php.path_generator.php.psr4');
+        $this->container->set('goetas.xsd2php.path_generator.php', $pathGenerator);
 
         $format = strtr($input->getArgument('format'), '-', '_');
         $converter = $this->container->get('goetas.xsd2php.converter.' . $format);
 
+        $nsMap = $input->getOption('ns-map');
+        if (!$nsMap) {
+            throw new \RuntimeException(__CLASS__ . ' requires at least one ns-map.');
+        }
         foreach ($nsMap as $val) {
             if (substr_count($val, ';') !== 1) {
                 throw new Exception('Invalid syntax for --ns-map');
@@ -69,6 +69,10 @@ class Convert extends Console\Command\Command
             $converter->addNamespace($xmlNs, trim(strtr($phpNs, './', '\\\\'), '\\'));
         }
 
+        $nsTarget = $input->getOption('ns-dest');
+        if (!$nsTarget) {
+            throw new \RuntimeException(__CLASS__ . ' requires at least one ns-target.');
+        }
         $targets = array();
         foreach ($nsTarget as $val) {
             if (substr_count($val, ';') !== 1) {
@@ -80,15 +84,14 @@ class Convert extends Console\Command\Command
             $targets[$phpNs] = $dir;
         }
         $arrayMap = $input->getOption('alias-map');
-        if ($arrayMap) {
-            foreach ($arrayMap as $val) {
-                if (substr_count($val, ';') !== 2) {
-                    throw new Exception('Invalid syntax for --alias-map');
-                }
-                list ($xmlNs, $name, $type) = explode(';', $val, 3);
-                $converter->addAliasMapType($xmlNs, $name, $type);
+        foreach ($arrayMap as $val) {
+            if (substr_count($val, ';') !== 2) {
+                throw new Exception('Invalid syntax for --alias-map');
             }
+            list ($xmlNs, $name, $type) = explode(';', $val, 3);
+            $converter->addAliasMapType($xmlNs, $name, $type);
         }
+
         $src = $input->getArgument('src');
         $items = $converter->run($src);
 
@@ -96,19 +99,13 @@ class Convert extends Console\Command\Command
             $wsdlConverter = $this->container->get('goetas.xsd2php.converter.extend.' . $format . '.soap');
             $items = array_merge($items, $wsdlConverter->run($src));
         }
-        if ($format == 'php') {
-            $path = new Psr4PathGenerator($targets);
-            $writer = new ClassWriter($path);
-            $writer->write($items);
-        } else {
-            $dumper = new Dumper();
-            $pathGenerator = new \GoetasWebservices\Xsd\XsdToPhp\Jms\PathGenerator\Psr4PathGenerator($targets);
-            foreach ($items as $item) {
-                $source = $dumper->dump($item, 10000);
-                $path = $pathGenerator->getPath($item);
-                file_put_contents($path, $source);
-            }
-        }
+
+        $pathGenerator = $this->container->get('goetas.xsd2php.path_generator.' . $format . '.psr4');
+        $pathGenerator->setTargets($targets);
+
+        $writer = $this->container->get('goetas.xsd2php.writer.' . $format);
+        $writer->write($items);
+
         return 0;
     }
 }

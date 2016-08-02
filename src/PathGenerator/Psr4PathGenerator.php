@@ -6,7 +6,7 @@ abstract class Psr4PathGenerator
 
     protected $namespaces = array();
 
-    public function __construct(array $namespaces)
+    public function setTargets($namespaces)
     {
         $this->namespaces = $namespaces;
 

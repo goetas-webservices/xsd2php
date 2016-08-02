@@ -3,6 +3,7 @@ namespace GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA;
 
 use Composer\Autoload\ClassLoader;
 use Doctrine\Common\Inflector\Inflector;
+use GoetasWebservices\Xsd\XsdToPhp\AbstractConverter;
 use GoetasWebservices\Xsd\XsdToPhp\Jms\Handler\OTA\SchemaDateHandler;
 use GoetasWebservices\Xsd\XsdToPhp\Jms\PathGenerator\Psr4PathGenerator as JmsPsr4PathGenerator;
 use GoetasWebservices\Xsd\XsdToPhp\Jms\YamlConverter;
@@ -11,6 +12,9 @@ use GoetasWebservices\Xsd\XsdToPhp\Php\ClassGenerator;
 use GoetasWebservices\Xsd\XsdToPhp\Php\PathGenerator\Psr4PathGenerator;
 use GoetasWebservices\Xsd\XsdToPhp\Php\PhpConverter;
 use GoetasWebservices\XML\XSDReader\SchemaReader;
+use GoetasWebservices\Xsd\XsdToPhp\Tests\Generator;
+use GoetasWebservices\Xsd\XsdToPhp\Writer\JMSWriter;
+use GoetasWebservices\Xsd\XsdToPhp\Writer\PHPWriter;
 use GoetasWebservices\Xsd\XsdToPhpRuntime\Jms\Handler\BaseTypesHandler;
 use GoetasWebservices\Xsd\XsdToPhpRuntime\Jms\Handler\XmlSchemaDateHandler;
 use JMS\Serializer\Handler\HandlerRegistryInterface;
@@ -19,163 +23,44 @@ use Zend\Code\Generator\FileGenerator;
 
 class OTASerializationTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var Generator
+     */
+    protected static $generator;
 
-    protected static $serializer;
-
-    protected static $namespace = 'OTA';
-
-    protected static $phpDir = '/tmp';
-
-    protected static $jmsDir = '/tmp';
-    protected static $loader;
-
-    private static function delTree($dir)
-    {
-        $files = array_diff(scandir($dir), array('.', '..'));
-        foreach ($files as $file) {
-            (is_dir("$dir/$file")) ? self::delTree("$dir/$file") : unlink("$dir/$file");
-        }
-        return rmdir($dir);
-    }
+    private static $namespace = 'OTA';
+    private static $files = [];
 
     public static function setUpBeforeClass()
     {
+        self::$files = self::getXmlFiles();
 
-        $tmp = sys_get_temp_dir();
-
-        if (is_writable("/dev/shm")) {
-            $tmp = "/dev/shm";
-        }
-
-        self::$phpDir = "$tmp/OTASerializationTestPHP";
-        self::$jmsDir = "$tmp/OTASerializationTestJMS";
-
-        self::$loader = new ClassLoader();
-        self::$loader->addPsr4(self::$namespace . "\\", self::$phpDir);
-        self::$loader->register();
-
-
-        if (is_dir(self::$phpDir)) {
-            self::delTree(self::$phpDir);
-        }
-        if (is_dir(self::$jmsDir)) {
-            self::delTree(self::$jmsDir);
-        }
-
-        if (!is_dir(self::$phpDir)) {
-            mkdir(self::$phpDir);
-        }
-        if (!is_dir(self::$jmsDir)) {
-            mkdir(self::$jmsDir);
-        }
-
+        self::$generator = new Generator([
+            'http://www.opentravel.org/OTA/2003/05' => self::$namespace
+        ], [
+            ['http://www.opentravel.org/OTA/2003/05', 'DateOrTimeOrDateTimeType', 'GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime'],
+            ['http://www.opentravel.org/OTA/2003/05', 'DateOrDateTimeType', 'GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime'],
+            ['http://www.opentravel.org/OTA/2003/05', 'TimeOrDateTimeType', 'GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime']
+        ]);
 
         $reader = new SchemaReader();
         $schemas = array();
-        foreach (self::getXmlFiles() as $d) {
+        foreach (self::$files as $d) {
             if (!isset($schemas[$d[1]])) {
                 $schemas[$d[1]] = $reader->readFile($d[1]);
             }
         }
-
-        self::generateJMSFiles($schemas);
-        self::generatePHPFiles($schemas);
-
-        $serializerBuiler = \JMS\Serializer\SerializerBuilder::create();
-        $serializerBuiler->configureHandlers(function (HandlerRegistryInterface $h) use ($serializerBuiler) {
-            $serializerBuiler->addDefaultHandlers();
-            $h->registerSubscribingHandler(new BaseTypesHandler());
-            $h->registerSubscribingHandler(new XmlSchemaDateHandler());
-            $h->registerSubscribingHandler(new OTASchemaDateHandler());
-        });
-
-        $serializerBuiler->addMetadataDir(self::$jmsDir, self::$namespace);
-
-        self::$serializer = $serializerBuiler->build();
+        self::$generator->generate($schemas);
     }
 
     public static function tearDownAfterClass()
     {
+        self::$generator->unRegisterAutoloader();
         return;
-        if (is_dir(self::$phpDir)) {
-            self::delTree(self::$phpDir);
-        }
-        if (is_dir(self::$jmsDir)) {
-            self::delTree(self::$jmsDir);
-        }
+        self::$generator->cleanDirectories();
 
-        if (self::$loader) {
-            self::$loader->unregister();
-        }
     }
 
-
-    protected static function generatePHPFiles(array $schemas)
-    {
-        $phpcreator = new PhpConverter(new ShortNamingStrategy());
-        $phpcreator->addNamespace('http://www.opentravel.org/OTA/2003/05', self::$namespace);
-
-        $phpcreator->addAliasMapType('http://www.opentravel.org/OTA/2003/05', 'DateOrTimeOrDateTimeType', 'GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime');
-        $phpcreator->addAliasMapType('http://www.opentravel.org/OTA/2003/05', 'DateOrDateTimeType', 'GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime');
-        $phpcreator->addAliasMapType('http://www.opentravel.org/OTA/2003/05', 'TimeOrDateTimeType', 'GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime');
-
-        $items = $phpcreator->convert($schemas);
-
-        $generator = new ClassGenerator();
-        $pathGenerator = new Psr4PathGenerator(array(
-            self::$namespace . "\\" => self::$phpDir
-        ));
-        foreach ($items as $item) {
-            $path = $pathGenerator->getPath($item);
-
-            $fileGen = new FileGenerator();
-            $fileGen->setFilename($path);
-            $classGen = new \Zend\Code\Generator\ClassGenerator();
-
-            if ($generator->generate($classGen, $item)) {
-
-                $fileGen->setClass($classGen);
-
-                $fileGen->write();
-            }
-        }
-    }
-
-    protected static function generateJMSFiles(array $schemas)
-    {
-        $yamlcreator = new YamlConverter(new ShortNamingStrategy());
-        $yamlcreator->addNamespace('http://www.opentravel.org/OTA/2003/05', self::$namespace);
-
-        $yamlcreator->addAliasMapType('http://www.opentravel.org/OTA/2003/05', 'DateOrTimeOrDateTimeType', 'GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime');
-        $yamlcreator->addAliasMapType('http://www.opentravel.org/OTA/2003/05', 'DateOrDateTimeType', 'GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime');
-        $yamlcreator->addAliasMapType('http://www.opentravel.org/OTA/2003/05', 'TimeOrDateTimeType', 'GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime');
-
-        $items = $yamlcreator->convert($schemas);
-
-        $dumper = new Dumper();
-
-        $pathGenerator = new JmsPsr4PathGenerator(array(
-            self::$namespace . "\\" => self::$jmsDir
-        ));
-
-        foreach ($items as $item) {
-            $path = $pathGenerator->getPath($item);
-            file_put_contents($path, $dumper->dump($item, 10000));
-        }
-
-        $serializerBuiler = \JMS\Serializer\SerializerBuilder::create();
-        $serializerBuiler->configureHandlers(function (HandlerRegistryInterface $h) use ($serializerBuiler) {
-            $serializerBuiler->addDefaultHandlers();
-            $h->registerSubscribingHandler(new BaseTypesHandler());
-
-            $h->registerSubscribingHandler(new XmlSchemaDateHandler());
-            $h->registerSubscribingHandler(new OTASchemaDateHandler());
-        });
-
-        $serializerBuiler->addMetadataDir(self::$jmsDir, self::$namespace);
-
-        self::$serializer = $serializerBuiler->build();
-    }
 
     protected function clearXML($xml)
     {
@@ -261,10 +146,16 @@ class OTASerializationTest extends \PHPUnit_Framework_TestCase
     public function testConversion($xml, $xsd, $class)
     {
 
-        $original = $this->clearXML(file_get_contents($xml));
-        $object = self::$serializer->deserialize($original, $class, 'xml');
+        $serializer = self::$generator->buildSerializer(function(HandlerRegistryInterface $h){
+            $h->registerSubscribingHandler(new XmlSchemaDateHandler());
+            $h->registerSubscribingHandler(new OTASchemaDateHandler());
+            $h->registerSubscribingHandler(new BaseTypesHandler());
+        });
 
-        $new = self::$serializer->serialize($object, 'xml');
+        $original = $this->clearXML(file_get_contents($xml));
+        $object = $serializer->deserialize($original, $class, 'xml');
+
+        $new = $serializer->serialize($object, 'xml');
 
         $new = $this->clearXML($new);
         $differ = new \XMLDiff\Memory();
@@ -280,10 +171,9 @@ class OTASerializationTest extends \PHPUnit_Framework_TestCase
         }
 
         $this->assertFalse($notEqual);
-
     }
 
-    public static function getXmlFiles()
+    private static function getXmlFiles()
     {
         $files = glob(__DIR__ . "/otaxml/*.xml");
 
@@ -305,6 +195,6 @@ class OTASerializationTest extends \PHPUnit_Framework_TestCase
 
     public function getTestFiles()
     {
-        return self::getXmlFiles();
+        return self::$files;
     }
 }
