@@ -48,7 +48,7 @@ Generate PHP classes
 --------------------
 
 ```sh
-vendor/bin/xsd2php convert:php \
+vendor/bin/xsd2php xsd2php:convert:php \
 `/home/my/ota/OTA_HotelAvail*.xsd \
 
 --ns-map='http://www.opentravel.org/OTA/2003/05;Mercurio/OTA/2007B/' \
@@ -86,7 +86,7 @@ Serialize / Unserialize
 XSD2PHP can also generate for you [JMS Serializer](http://jmsyst.com/libs/serializer) metadata that you can use to serialize/unserialize the generated PHP class instances.
 
 ```sh
-vendor/bin/xsd2php  convert:jms-yaml \
+vendor/bin/xsd2php  xsd2php:convert:jms \
 /home/my/ota/OTA_HotelAvail*.xsd \
 
 --ns-map='http://www.opentravel.org/OTA/2003/05;Mercurio/OTA/2007B/'  \
@@ -144,7 +144,7 @@ If your XSD contains `xsd:anyType` or `xsd:anySimpleType` types you have to spec
 When you generate the JMS metadata you have to specify a custom handler:
 
 ```sh
-bin/xsd2php.php convert:jms-yaml \
+bin/xsd2php.php xsd2php:convert:jms \
 
  ... various params ... \
 
