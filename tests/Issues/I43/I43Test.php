@@ -5,6 +5,7 @@ use GoetasWebservices\Xsd\XsdToPhp\Jms\YamlConverter;
 use GoetasWebservices\Xsd\XsdToPhp\Naming\ShortNamingStrategy;
 use GoetasWebservices\Xsd\XsdToPhp\Php\PhpConverter;
 use GoetasWebservices\XML\XSDReader\SchemaReader;
+use GoetasWebservices\Xsd\XsdToPhp\Tests\Generator;
 
 class I43Test extends \PHPUnit_Framework_TestCase
 {
@@ -29,17 +30,11 @@ class I43Test extends \PHPUnit_Framework_TestCase
 
         $schema = $reader->readFile(__DIR__ . '/opc/opc-coreProperties.xsd');
 
-        $yamlConv = new YamlConverter(new ShortNamingStrategy());
-        $phpConv = new PhpConverter(new ShortNamingStrategy());
+        $generator = new Generator($nss);
 
-        foreach ($nss as $ns => $php) {
-            $yamlConv->addNamespace($ns, $php);
-            $phpConv->addNamespace($ns, $php);
-        }
-
-        $yamlItems = $yamlConv->run([__DIR__ . '/opc/opc-coreProperties.xsd']);
-        $phpClasses = $phpConv->run([__DIR__ . '/opc/opc-coreProperties.xsd']);
+        list($phpClasses, $yamlItems) = $generator->getData([$schema]);
 
         $this->assertEquals(count($phpClasses), count($yamlItems));
+        $this->assertGreaterThan(0, count($phpClasses));
     }
 }

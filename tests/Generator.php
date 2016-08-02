@@ -1,23 +1,30 @@
 <?php
 namespace GoetasWebservices\Xsd\XsdToPhp\Tests;
 
+use Composer\Autoload\ClassLoader;
 use GoetasWebservices\Xsd\XsdToPhp\AbstractConverter;
+use GoetasWebservices\Xsd\XsdToPhp\Jms\YamlConverter;
 use GoetasWebservices\Xsd\XsdToPhp\Naming\ShortNamingStrategy;
+use GoetasWebservices\Xsd\XsdToPhp\Php\PhpConverter;
+use GoetasWebservices\Xsd\XsdToPhp\Writer\JMSWriter;
+use GoetasWebservices\Xsd\XsdToPhp\Jms\PathGenerator\Psr4PathGenerator as JmsPsr4PathGenerator;
+use GoetasWebservices\Xsd\XsdToPhp\Php\PathGenerator\Psr4PathGenerator as PhpPsr4PathGenerator;
+use GoetasWebservices\Xsd\XsdToPhp\Writer\PHPWriter;
+use JMS\Serializer\Handler\HandlerRegistryInterface;
 
 class Generator
 {
-    protected static $serializer;
-
     protected $targetNs = array();
+    protected $aliases = array();
 
     protected $phpDir;
     protected $jmsDir;
 
-    protected $loader;
-
     private $namingStrategy;
 
-    public function __construct(array $targetNs, array $aliases)
+    private $loader;
+
+    public function __construct(array $targetNs, array $aliases = array())
     {
         $tmp = sys_get_temp_dir();
 
@@ -28,6 +35,11 @@ class Generator
         $this->jmsDir = "$tmp/jms";
         
         $this->namingStrategy = new ShortNamingStrategy();
+
+        $this->loader = new ClassLoader();
+        foreach ($this->targetNs as $phpNs) {
+            $this->loader->addPsr4($phpNs . "\\", $this->phpDir . "/" . $this->slug($phpNs));
+        }
     }
 
     private static function delTree($dir)
@@ -65,7 +77,7 @@ class Generator
                     self::delTree($dir);
                 }
                 if (!is_dir($dir)) {
-                    mkdir($dir);
+                    mkdir($dir, 0777, true);
                 }
             }
         }
@@ -74,41 +86,54 @@ class Generator
     public function generate(array $schemas)
     {
         $this->cleanDirectories();
-        $this->generatePHPFiles($schemas);
-        $this->generateJMSFiles($schemas);
+        $this->generatePHPFiles($schemas, true);
+        $this->generateJMSFiles($schemas, true);
     }
-    protected function generatePHPFiles(array $schemas)
+
+    public function getData(array $schemas)
     {
-        $phpcreator = new PhpConverter();
+        $php = $this->generatePHPFiles($schemas, false);
+        $jms = $this->generateJMSFiles($schemas, false);
+
+        return [$php, $jms];
+    }
+
+    protected function generatePHPFiles(array $schemas, $write)
+    {
+        $phpcreator = new PhpConverter($this->namingStrategy);
         $this->setNamespaces($phpcreator);
         $items = $phpcreator->convert($schemas);
+        if ($write) {
+            $paths = array();
+            foreach ($this->targetNs as $phpNs) {
+                $paths[$phpNs . "\\"] = $this->phpDir . "/" . $this->slug($phpNs);
+            }
 
-        $paths = array();
-        foreach ($this->targetNs as $phpNs) {
-            $paths[$phpNs . "\\"] = $this->phpDir . "/" . $this->slug($phpNs);
+            $pathGenerator = new PhpPsr4PathGenerator($paths);
+
+            $writer = new PHPWriter($pathGenerator);
+            $writer->write($items);
         }
-
-        $pathGenerator = new Psr4PathGenerator($paths);
-
-        $writer = new PHPWriter($pathGenerator);
-        $writer->write($items);
+        return $items;
     }
 
-    protected function generateJMSFiles(array $schemas)
+    protected function generateJMSFiles(array $schemas, $write)
     {
-        $yamlcreator = new YamlConverter(new ShortNamingStrategy());
+        $yamlcreator = new YamlConverter($this->namingStrategy);
         $this->setNamespaces($yamlcreator);
         $items = $yamlcreator->convert($schemas);
+        if ($write) {
+            $paths = array();
+            foreach ($this->targetNs as $phpNs) {
+                $paths[$phpNs . "\\"] = $this->jmsDir . "/" . $this->slug($phpNs);
+            }
 
-        $paths = array();
-        foreach ($this->targetNs as $phpNs) {
-            $paths[$phpNs . "\\"] = $this->jmsDir . "/" . $this->slug($phpNs);
+            $pathGenerator = new JmsPsr4PathGenerator($paths);
+
+            $writer = new JMSWriter($pathGenerator);
+            $writer->write($items);
         }
-
-        $pathGenerator = new JmsPsr4PathGenerator($paths);
-
-        $writer = new JMSWriter($pathGenerator);
-        $writer->write($items);
+        return $items;
     }
 
     public function buildSerializer($callback)
@@ -128,18 +153,12 @@ class Generator
 
     public function registerAutoloader()
     {
-        $loader = new ClassLoader();
-        foreach ($this->targetNs as $phpNs) {
-            $loader->addPsr4($phpNs . "\\", $this->phpDir . "/" . $this->slug($phpNs));
-        }
-        $loader->register();
-        return $loader;
+        $this->loader->register();
+        return $this->loader;
     }
 
     public function unRegisterAutoloader()
     {
-        $loader = new ClassLoader();
-        $loader->unload();
-        return $loader;
+        $this->loader->unregister();
     }
 }

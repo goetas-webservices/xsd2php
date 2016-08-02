@@ -1,25 +1,13 @@
 <?php
 namespace GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA;
 
-use Composer\Autoload\ClassLoader;
 use Doctrine\Common\Inflector\Inflector;
-use GoetasWebservices\Xsd\XsdToPhp\AbstractConverter;
-use GoetasWebservices\Xsd\XsdToPhp\Jms\Handler\OTA\SchemaDateHandler;
-use GoetasWebservices\Xsd\XsdToPhp\Jms\PathGenerator\Psr4PathGenerator as JmsPsr4PathGenerator;
-use GoetasWebservices\Xsd\XsdToPhp\Jms\YamlConverter;
-use GoetasWebservices\Xsd\XsdToPhp\Naming\ShortNamingStrategy;
-use GoetasWebservices\Xsd\XsdToPhp\Php\ClassGenerator;
-use GoetasWebservices\Xsd\XsdToPhp\Php\PathGenerator\Psr4PathGenerator;
-use GoetasWebservices\Xsd\XsdToPhp\Php\PhpConverter;
 use GoetasWebservices\XML\XSDReader\SchemaReader;
+use GoetasWebservices\Xsd\XsdToPhp\Jms\Handler\OTA\SchemaDateHandler;
 use GoetasWebservices\Xsd\XsdToPhp\Tests\Generator;
-use GoetasWebservices\Xsd\XsdToPhp\Writer\JMSWriter;
-use GoetasWebservices\Xsd\XsdToPhp\Writer\PHPWriter;
 use GoetasWebservices\Xsd\XsdToPhpRuntime\Jms\Handler\BaseTypesHandler;
 use GoetasWebservices\Xsd\XsdToPhpRuntime\Jms\Handler\XmlSchemaDateHandler;
 use JMS\Serializer\Handler\HandlerRegistryInterface;
-use Symfony\Component\Yaml\Dumper;
-use Zend\Code\Generator\FileGenerator;
 
 class OTASerializationTest extends \PHPUnit_Framework_TestCase
 {
@@ -33,7 +21,9 @@ class OTASerializationTest extends \PHPUnit_Framework_TestCase
 
     public static function setUpBeforeClass()
     {
-        self::$files = self::getXmlFiles();
+        if (!self::$files){
+            self::$files = self::getXmlFiles();
+        }
 
         self::$generator = new Generator([
             'http://www.opentravel.org/OTA/2003/05' => self::$namespace
@@ -51,16 +41,14 @@ class OTASerializationTest extends \PHPUnit_Framework_TestCase
             }
         }
         self::$generator->generate($schemas);
+        self::$generator->registerAutoloader();
     }
 
     public static function tearDownAfterClass()
     {
         self::$generator->unRegisterAutoloader();
-        return;
         self::$generator->cleanDirectories();
-
     }
-
 
     protected function clearXML($xml)
     {
@@ -140,13 +128,13 @@ class OTASerializationTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @group long
+     * @group slow
      * @dataProvider getTestFiles
      */
     public function testConversion($xml, $xsd, $class)
     {
 
-        $serializer = self::$generator->buildSerializer(function(HandlerRegistryInterface $h){
+        $serializer = self::$generator->buildSerializer(function (HandlerRegistryInterface $h) {
             $h->registerSubscribingHandler(new XmlSchemaDateHandler());
             $h->registerSubscribingHandler(new OTASchemaDateHandler());
             $h->registerSubscribingHandler(new BaseTypesHandler());
@@ -195,6 +183,9 @@ class OTASerializationTest extends \PHPUnit_Framework_TestCase
 
     public function getTestFiles()
     {
+        if (!self::$files){
+            self::$files = self::getXmlFiles();
+        }
         return self::$files;
     }
 }

@@ -9,7 +9,7 @@ class Psr4PathGenerator extends Psr4PathGeneratorBase implements PathGenerator
 {
     public function getPath(PHPClass $php)
     {
-        foreach ($this->namespaces as $namespace => $dir) {
+        foreach ($this->namespaces as $namespace => $dir) {;
             if (strpos(trim($php->getNamespace()) . "\\", $namespace) === 0) {
                 $d = strtr(substr($php->getNamespace(), strlen($namespace)), "\\", "/");
                 $dir = rtrim($dir, "/") . "/" . $d;
