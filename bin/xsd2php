@@ -11,7 +11,7 @@ foreach ($paths as $path) {
     }
 }
 
-use GoetasWebservices\Xsd\XsdToPhp\Command;
+use GoetasWebservices\Xsd\XsdToPhp\Command\Convert;
 use Symfony\Component\Console\Application;
 
 $container = new \Symfony\Component\DependencyInjection\ContainerBuilder();
@@ -22,6 +22,6 @@ error_reporting(error_reporting() & ~E_NOTICE);
 $cli = new Application('Convert XSD to PHP classes Command Line Interface', "2.0");
 $cli->setCatchExceptions(true);
 $cli->addCommands(array(
-    new Command\Convert($container)
+    new Convert($container)
 ));
 $cli->run();

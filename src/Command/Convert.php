@@ -35,7 +35,6 @@ class Convert extends Console\Command\Command
             new InputOption('ns-dest', null, InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'Where place the generated files? Syntax: <info>PHP-namespace;destination-directory</info>'),
             new InputOption('alias-map', null, InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'How to map XML namespaces into existing PHP classes? Syntax: <info>XML-namespace;XML-type;PHP-type</info>. '),
             new InputOption('naming-strategy', null, InputOption::VALUE_REQUIRED, 'The naming strategy for classes. short|long', 'short'),
-            new InputOption('soap-messages', null, InputOption::VALUE_NONE),
         ));
     }
 
@@ -45,11 +44,12 @@ class Convert extends Console\Command\Command
      */
     protected function execute(Console\Input\InputInterface $input, Console\Output\OutputInterface $output)
     {
+        $this->container->set('logger', new \Symfony\Component\Console\Logger\ConsoleLogger($output));
         $naming = $this->container->get('goetas.xsd2php.naming_convention.' . $input->getOption('naming-strategy'));
         $this->container->set('goetas.xsd2php.naming_convention', $naming);
-
-        $pathGenerator = $this->container->get('goetas.xsd2php.path_generator.jms_yaml.psr4');
-        $this->container->set('goetas.xsd2php.path_generator.jms_yaml', $pathGenerator);
+        $logger = $this->container->get('logger');
+        $pathGenerator = $this->container->get('goetas.xsd2php.path_generator.jms.psr4');
+        $this->container->set('goetas.xsd2php.path_generator.jms', $pathGenerator);
 
         $pathGenerator = $this->container->get('goetas.xsd2php.path_generator.php.psr4');
         $this->container->set('goetas.xsd2php.path_generator.php', $pathGenerator);
@@ -71,7 +71,7 @@ class Convert extends Console\Command\Command
 
         $nsTarget = $input->getOption('ns-dest');
         if (!$nsTarget) {
-            throw new \RuntimeException(__CLASS__ . ' requires at least one ns-target.');
+            throw new \RuntimeException(__CLASS__ . ' requires at least one ns-dest.');
         }
         $targets = array();
         foreach ($nsTarget as $val) {
@@ -93,18 +93,21 @@ class Convert extends Console\Command\Command
         }
 
         $src = $input->getArgument('src');
-        $items = $converter->run($src);
 
-        if ($input->getOption('soap-messages')) {
-            $wsdlConverter = $this->container->get('goetas.xsd2php.converter.extend.' . $format . '.soap');
-            $items = array_merge($items, $wsdlConverter->run($src));
+        $schemas = [];
+        $reader = $this->container->get('goetas.xsd2php.schema_reader');
+        foreach ($src as $file) {
+            $schemas[] = $reader->readFile($file);
+            $logger->info(sprintf('Reading %s', $file));
         }
+        $items = $converter->convert($schemas);
 
         $pathGenerator = $this->container->get('goetas.xsd2php.path_generator.' . $format . '.psr4');
         $pathGenerator->setTargets($targets);
 
         $writer = $this->container->get('goetas.xsd2php.writer.' . $format);
         $writer->write($items);
+        $logger->info(sprintf('Writing %s items', count($items)));
 
         return 0;
     }

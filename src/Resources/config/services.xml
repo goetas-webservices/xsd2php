@@ -6,37 +6,36 @@
     <services>
         <service id="goetas.xsd2php.naming_convention.short" class="GoetasWebservices\Xsd\XsdToPhp\Naming\ShortNamingStrategy"/>
         <service id="goetas.xsd2php.naming_convention.long" class="GoetasWebservices\Xsd\XsdToPhp\Naming\LongNamingStrategy"/>
+        <service id="goetas.xsd2php.schema_reader" class="GoetasWebservices\XML\XSDReader\SchemaReader"/>
 
         <service abstract="true" id="goetas.xsd2php.naming_convention"/>
+        <service abstract="true" id="logger"/>
 
         <service id="goetas.xsd2php.converter.php" class="GoetasWebservices\Xsd\XsdToPhp\Php\PhpConverter">
             <argument id="goetas.xsd2php.naming_convention" type="service"/>
+            <call method="setLogger"><argument type="service" id="logger"></argument></call>
         </service>
 
-        <service id="goetas.xsd2php.converter.jms_yaml" class="GoetasWebservices\Xsd\XsdToPhp\Jms\YamlConverter">
+        <service id="goetas.xsd2php.converter.jms" class="GoetasWebservices\Xsd\XsdToPhp\Jms\YamlConverter">
             <argument id="goetas.xsd2php.naming_convention" type="service"/>
-        </service>
-
-        <service id="goetas.xsd2php.converter.extend.php.soap" class="GoetasWebservices\Xsd\XsdToPhp\Php\PhpSoapConverter">
-            <argument id="goetas.xsd2php.converter.php" type="service"/>
-        </service>
-
-        <service id="goetas.xsd2php.converter.extend.jms_yaml.soap" class="GoetasWebservices\Xsd\XsdToPhp\Jms\YamlSoapConverter">
-            <argument id="goetas.xsd2php.converter.jms_yaml" type="service"/>
+            <call method="setLogger"><argument type="service" id="logger"></argument></call>
         </service>
 
         <service abstract="true" id="goetas.xsd2php.path_generator.php"/>
-        <service abstract="true" id="goetas.xsd2php.path_generator.jms_yaml"/>
+        <service abstract="true" id="goetas.xsd2php.path_generator.jms"/>
+
         <service id="goetas.xsd2php.path_generator.php.psr4" class="GoetasWebservices\Xsd\XsdToPhp\Php\PathGenerator\Psr4PathGenerator">
         </service>
-        <service id="goetas.xsd2php.path_generator.jms_yaml.psr4" class="GoetasWebservices\Xsd\XsdToPhp\Jms\PathGenerator\Psr4PathGenerator">
+        <service id="goetas.xsd2php.path_generator.jms.psr4" class="GoetasWebservices\Xsd\XsdToPhp\Jms\PathGenerator\Psr4PathGenerator">
         </service>
 
         <service id="goetas.xsd2php.writer.php" class="GoetasWebservices\Xsd\XsdToPhp\Writer\PHPWriter">
             <argument id="goetas.xsd2php.path_generator.php" type="service"/>
+            <argument id="logger" type="service"/>
         </service>
-        <service id="goetas.xsd2php.writer.jms_yaml" class="GoetasWebservices\Xsd\XsdToPhp\Writer\JMSWriter">
-            <argument id="goetas.xsd2php.path_generator.jms_yaml" type="service"/>
+        <service id="goetas.xsd2php.writer.jms" class="GoetasWebservices\Xsd\XsdToPhp\Writer\JMSWriter">
+            <argument id="goetas.xsd2php.path_generator.jms" type="service"/>
+            <argument id="logger" type="service"/>
         </service>
 
     </services>

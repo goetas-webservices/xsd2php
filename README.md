@@ -91,7 +91,6 @@ vendor/bin/xsd2php  convert:jms-yaml \
 
 --ns-map='http://www.opentravel.org/OTA/2003/05;Mercurio/OTA/2007B/'  \
 --ns-dest='Mercurio/OTA/2007B/;src/Metadata/JMS;' \
---soap-messages \
 --alias-map='http://www.opentravel.org/OTA/2003/05;CustomOTADateTimeFormat;Vendor/Project/CustomDateClass'
 
 ```
