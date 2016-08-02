@@ -24,8 +24,9 @@ before_script:
 
 script:
   - vendor/phpunit/phpunit/phpunit $PHPUNIT_FLAGS
-  - bin/xsd2php xsd2php:convert:jms tests/JmsSerializer/OTA/otaxml/OTA_AirAvailRQ.xsd --ns-map='http://www.opentravel.org/OTA/2003/05;OTA/' --ns-dest='OTA/;pay' --alias-map='http://www.opentravel.org/OTA/2003/05;CustomOTADateTimeFormat;CustomDateClass' -vv
-  - bin/xsd2php xsd2php:convert:php tests/JmsSerializer/OTA/otaxml/OTA_AirAvailRQ.xsd --ns-map='http://www.opentravel.org/OTA/2003/05;OTA/' --ns-dest='OTA/;pay' --alias-map='http://www.opentravel.org/OTA/2003/05;CustomOTADateTimeFormat;CustomDateClass' -vv
+  - mkdir ota
+  - bin/xsd2php xsd2php:convert:jms tests/JmsSerializer/OTA/otaxml/OTA_AirAvailRQ.xsd --ns-map='http://www.opentravel.org/OTA/2003/05;OTA/' --ns-dest='OTA/;ota' --alias-map='http://www.opentravel.org/OTA/2003/05;CustomOTADateTimeFormat;CustomDateClass' -vv
+  - bin/xsd2php xsd2php:convert:php tests/JmsSerializer/OTA/otaxml/OTA_AirAvailRQ.xsd --ns-map='http://www.opentravel.org/OTA/2003/05;OTA/' --ns-dest='OTA/;ota' --alias-map='http://www.opentravel.org/OTA/2003/05;CustomOTADateTimeFormat;CustomDateClass' -vv
 
 after_script:
   - wget https://scrutinizer-ci.com/ocular.phar
