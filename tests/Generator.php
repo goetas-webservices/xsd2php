@@ -32,7 +32,7 @@ class Generator extends AbstractGenerator
         return $items;
     }
 
-    protected function generateJMSFiles(array $schemas, $write)
+    protected function generateJMSFiles(array $schemas)
     {
         $converter = new YamlConverter($this->namingStrategy);
         $this->setNamespaces($converter);

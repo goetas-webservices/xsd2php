@@ -18,27 +18,21 @@
   "license": "LGPL",
   "require": {
     "php": "^5.5||7.0",
-    "symfony/console": "^2.1@stable|^3.0@stable",
-    "symfony/dependency-injection": "^2.1@stable|^3.0@stable",
-    "symfony/config": "^2.1@stable|^3.0@stable",
-    "symfony/yaml": "^2.1@stable|^3.0@stable",
+    "symfony/console": "^2.1|^3.0",
+    "symfony/dependency-injection": "^2.1|^3.0",
+    "symfony/config": "^2.1|^3.0",
+    "symfony/yaml": "^2.1|^3.0",
     "goetas-webservices/xsd-reader": "^0.1.0",
     "goetas-webservices/soap-reader": "^0.1.0",
-    "doctrine/inflector": "^1.0@stable",
-    "zendframework/zend-code": "~2.3@stable",
-    "psr/log": "^1.0@stable"
+    "doctrine/inflector": "^1.0",
+    "zendframework/zend-code": "~2.3",
+    "psr/log": "^1.0"
   },
   "require-dev": {
-    "phpunit/phpunit": "^4.8@stable|^5.0@stable",
-    "jms/serializer": "serializer-master-dev as 1.0",
-    "goetas-webservices/xsd2php-runtime": "^0.2.0"
+    "phpunit/phpunit": "^4.8|^5.0",
+    "jms/serializer": "^1.3",
+    "goetas-webservices/xsd2php-runtime": "^0.2.2"
   },
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "https://github.com/goetas/serializer.git"
-    }
-  ],
   "autoload": {
     "psr-4": {
       "GoetasWebservices\\Xsd\\XsdToPhp\\": "src/"
