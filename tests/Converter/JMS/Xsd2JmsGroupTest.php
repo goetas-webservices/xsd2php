@@ -92,22 +92,26 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
                             'expose' => true,
                             'access_type' => 'public_method',
                             'serialized_name' => 'string1',
-                            'xml_element' => array(
-                                'namespace' => 'http://www.example.com'
-                            ),
-                            'accessor' => array(
-                                'getter' => 'getString1',
-                                'setter' => 'setString1'
-                            ),
-                            'type' => 'string'
-                        ),
-                        'string2' => array(
-                            'expose' => true,
-                            'access_type' => 'public_method',
-                            'serialized_name' => 'string2',
-                            'xml_element' => array(
-                                'namespace' => 'http://www.example.com'
-                            ),
+                            /*
+                           'xml_element' => array(
+                               'namespace' => 'http://www.example.com'
+                           ),
+                            */
+                           'accessor' => array(
+                               'getter' => 'getString1',
+                               'setter' => 'setString1'
+                           ),
+                           'type' => 'string'
+                       ),
+                       'string2' => array(
+                           'expose' => true,
+                           'access_type' => 'public_method',
+                           'serialized_name' => 'string2',
+                           /*
+                           'xml_element' => array(
+                               'namespace' => 'http://www.example.com'
+                           ),
+                           */
                             'accessor' => array(
                                 'getter' => 'getString2',
                                 'setter' => 'setString2'
@@ -127,9 +131,11 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
                             'expose' => true,
                             'access_type' => 'public_method',
                             'serialized_name' => 'string3',
+                             /*
                             'xml_element' => array(
                                 'namespace' => 'http://www.example.com'
                             ),
+                             */
                             'accessor' => array(
                                 'getter' => 'getString3',
                                 'setter' => 'setString3'
@@ -185,9 +191,11 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
                             'expose' => true,
                             'access_type' => 'public_method',
                             'serialized_name' => 'complexType-1-el-1',
+                             /*
                             'xml_element' => array(
                                 'namespace' => 'http://www.example.com'
                             ),
+                             */
                             'accessor' => array(
                                 'getter' => 'getComplexType1El1',
                                 'setter' => 'setComplexType1El1'
@@ -217,9 +225,11 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
                             'expose' => true,
                             'access_type' => 'public_method',
                             'serialized_name' => 'complexType-2-el1',
+                             /*
                             'xml_element' => array(
                                 'namespace' => 'http://www.example.com'
                             ),
+                             */
                             'accessor' => array(
                                 'getter' => 'getComplexType2El1',
                                 'setter' => 'setComplexType2El1'
@@ -279,9 +289,11 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
                             'expose' => true,
                             'access_type' => 'public_method',
                             'serialized_name' => 'strings',
+                             /*
                             'xml_element' => array(
                                 'namespace' => 'http://www.example.com'
                             ),
+                             */
                             'accessor' => array(
                                 'getter' => 'getStrings',
                                 'setter' => 'setStrings'
@@ -323,9 +335,11 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
                             'expose' => true,
                             'access_type' => 'public_method',
                             'serialized_name' => 'complexType-1-el-1',
+                             /*
                             'xml_element' => array(
                                 'namespace' => 'http://www.example.com'
                             ),
+                             */
                             'accessor' => array(
                                 'getter' => 'getComplexType1El1',
                                 'setter' => 'setComplexType1El1'
@@ -437,9 +451,9 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
                             'expose' => true,
                             'access_type' => 'public_method',
                             'serialized_name' => 'group-1-el-1',
-                            'xml_element' => array(
-                                'namespace' => 'http://www.example.com'
-                            ),
+//                            'xml_element' => array(
+//                                'namespace' => 'http://www.example.com'
+//                            ),
                             'accessor' => array(
                                 'getter' => 'getGroup1El1',
                                 'setter' => 'setGroup1El1'
@@ -450,9 +464,9 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
                             'expose' => true,
                             'access_type' => 'public_method',
                             'serialized_name' => 'group-2-el-1',
-                            'xml_element' => array(
-                                'namespace' => 'http://www.example.com'
-                            ),
+//                            'xml_element' => array(
+//                                'namespace' => 'http://www.example.com'
+//                            ),
                             'accessor' => array(
                                 'getter' => 'getGroup2El1',
                                 'setter' => 'setGroup2El1'
@@ -463,9 +477,9 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
                             'expose' => true,
                             'access_type' => 'public_method',
                             'serialized_name' => 'element-1',
-                            'xml_element' => array(
-                                'namespace' => 'http://www.example.com'
-                            ),
+//                            'xml_element' => array(
+//                                'namespace' => 'http://www.example.com'
+//                            ),
                             'accessor' => array(
                                 'getter' => 'getElement1',
                                 'setter' => 'setElement1'
@@ -476,9 +490,9 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
                             'expose' => true,
                             'access_type' => 'public_method',
                             'serialized_name' => 'complexType-1-el-1',
-                            'xml_element' => array(
-                                'namespace' => 'http://www.example.com'
-                            ),
+//                            'xml_element' => array(
+//                                'namespace' => 'http://www.example.com'
+//                            ),
                             'accessor' => array(
                                 'getter' => 'getComplexType1El1',
                                 'setter' => 'setComplexType1El1'
