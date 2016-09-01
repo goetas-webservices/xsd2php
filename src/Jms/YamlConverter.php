@@ -405,7 +405,7 @@ class YamlConverter extends AbstractConverter
         $property["access_type"] = "public_method";
         $property["serialized_name"] = $element->getName();
 
-        if ($schema->getTargetNamespace()) {
+        if ($schema->getTargetNamespace() && ($schema->getElementsQualification() || ($element instanceof Element && $element->isQualified()))) {
             $property["xml_element"]["namespace"] = $schema->getTargetNamespace();
         }
 
