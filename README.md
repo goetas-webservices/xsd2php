@@ -23,19 +23,9 @@ There is one recommended way to install xsd2php via [Composer](https://getcompos
   "require": {
       ..
       "goetas-webservices/xsd2php":"^0.1",
-      "jms/serializer": "serializer-master-dev as 1.0",
       ..
   },
-  "repositories": [{
-      "type": "vcs",
-      "url": "https://github.com/goetas/serializer.git"
-  }],
 ```
-
-
-This package requires a patched version of JMS Serializer.
-In the last year the activity of JMS serializer was very low and some features
-required by this project was rejected or not yet reviewed ( [#222](https://github.com/schmittjoh/serializer/pull/222) )
 
 Usage
 -----
