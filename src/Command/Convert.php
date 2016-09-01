@@ -27,7 +27,7 @@ class Convert extends Command
      */
     protected function configure()
     {
-        $this->setName('xsd2php:convert:' . $this->what);
+        $this->setName('convert:' . $this->what);
 
         $this->setDefinition(array(
             new InputArgument('src', InputArgument::REQUIRED | InputArgument::IS_ARRAY, 'Where is located your XSD definitions'),

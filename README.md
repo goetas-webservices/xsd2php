@@ -42,13 +42,13 @@ Usage
 
 With this example we will convert [OTA XSD definitions](http://opentravel.org/Specifications/OnlineXmlSchema.aspx) into PHP classes.
 
-Suppose that you have allo XSD files in `/home/my/ota`.
+Suppose that you have all XSD files in `/home/my/ota`.
 
 Generate PHP classes
 --------------------
 
 ```sh
-vendor/bin/xsd2php xsd2php:convert:php \
+vendor/bin/xsd2php convert:php \
 `/home/my/ota/OTA_HotelAvail*.xsd \
 
 --ns-map='http://www.opentravel.org/OTA/2003/05;Mercurio/OTA/2007B/' \
@@ -86,7 +86,7 @@ Serialize / Unserialize
 XSD2PHP can also generate for you [JMS Serializer](http://jmsyst.com/libs/serializer) metadata that you can use to serialize/unserialize the generated PHP class instances.
 
 ```sh
-vendor/bin/xsd2php  xsd2php:convert:jms \
+vendor/bin/xsd2php  convert:jms \
 /home/my/ota/OTA_HotelAvail*.xsd \
 
 --ns-map='http://www.opentravel.org/OTA/2003/05;Mercurio/OTA/2007B/'  \
@@ -144,7 +144,7 @@ If your XSD contains `xsd:anyType` or `xsd:anySimpleType` types you have to spec
 When you generate the JMS metadata you have to specify a custom handler:
 
 ```sh
-bin/xsd2php.php xsd2php:convert:jms \
+bin/xsd2php.php convert:jms \
 
  ... various params ... \
 
