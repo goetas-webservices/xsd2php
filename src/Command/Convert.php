@@ -29,7 +29,7 @@ class Convert extends Command
     protected function configure()
     {
         $this->setName('convert');
-
+        $this->setDescription("Convert a XSD file into PHP classes and JMS serializer metadata files");
         $this->setDefinition(array(
             new InputArgument('config', InputArgument::REQUIRED, 'Where is located your XSD definitions'),
             new InputArgument('src', InputArgument::REQUIRED | InputArgument::IS_ARRAY, 'Where is located your XSD definitions'),
@@ -42,15 +42,7 @@ class Convert extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $locator = new FileLocator('.');
-        $yaml = new YamlFileLoader($this->container, $locator);
-        $xml = new XmlFileLoader($this->container, $locator);
-
-        $delegatingLoader = new DelegatingLoader(new LoaderResolver(array($yaml, $xml)));
-        $delegatingLoader->load($input->getArgument('config'));
-
-        $this->container->compile();
-
+        $this->loadConfigurations($input->getArgument('config'));
         $src = $input->getArgument('src');
 
         $schemas = [];
@@ -67,5 +59,18 @@ class Convert extends Command
             $writer->write($items);
         }
         return count($items) ? 0 : 255;
+    }
+
+    protected function loadConfigurations($configFile)
+    {
+        $locator = new FileLocator('.');
+        $yaml = new YamlFileLoader($this->container, $locator);
+        $xml = new XmlFileLoader($this->container, $locator);
+
+        $delegatingLoader = new DelegatingLoader(new LoaderResolver(array($yaml, $xml)));
+        $delegatingLoader->load($configFile);
+
+        $this->container->compile();
+
     }
 }

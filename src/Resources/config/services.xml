@@ -7,7 +7,7 @@
         <service id="goetas.xsd2php.naming_convention.short" public="false"  class="GoetasWebservices\Xsd\XsdToPhp\Naming\ShortNamingStrategy"/>
         <service id="goetas.xsd2php.naming_convention.long" public="false"  class="GoetasWebservices\Xsd\XsdToPhp\Naming\LongNamingStrategy"/>
 
-        <service id="goetas.xsd2php.schema_reader" class="GoetasWebservices\XML\XSDReader\SchemaReader">
+        <service id="goetas.xsd2php.schema_reader" public="true" class="GoetasWebservices\XML\XSDReader\SchemaReader">
             <argument type="service" id="logger"/>
         </service>
 
