@@ -31,5 +31,6 @@ class JMSWriter extends Writer implements LoggerAwareInterface
             file_put_contents($path, $source);
             $this->logger->debug(sprintf("Written JMS metadata file %s", $path));
         }
+        $this->logger->info(sprintf("Written %s JMS metadata files ", count($items)));
     }
 }

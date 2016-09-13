@@ -48,7 +48,7 @@ abstract class AbstractConverter
 
     public function addAliasMap($ns, $name, callable $handler)
     {
-        $this->logger->debug("Added map $ns $name");
+        $this->logger->info("Added map $ns $name");
         $this->typeAliases[$ns][$name] = $handler;
     }
 
@@ -199,7 +199,7 @@ abstract class AbstractConverter
 
     public function addNamespace($ns, $phpNamespace)
     {
-        $this->logger->debug("Added ns mapping $ns, $phpNamespace");
+        $this->logger->info("Added ns mapping $ns, $phpNamespace");
         $this->namespaces[$ns] = $phpNamespace;
         return $this;
     }
@@ -233,7 +233,7 @@ abstract class AbstractConverter
     }
 
     /**
-     * @param ElementSingle $type
+     * @param mixed $element
      * @return \GoetasWebservices\XML\XSDReader\Schema\Element\ElementSingle|null
      */
     protected function isArrayElement($element)

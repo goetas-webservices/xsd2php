@@ -15,14 +15,10 @@ use GoetasWebservices\Xsd\XsdToPhp\Command\Convert;
 use Symfony\Component\Console\Application;
 
 $container = new \Symfony\Component\DependencyInjection\ContainerBuilder();
-$loader = new \Symfony\Component\DependencyInjection\Loader\XmlFileLoader($container, new \Symfony\Component\Config\FileLocator(__DIR__ . '/../src/Resources/config'));
-$loader->load('services.xml');
+$container->registerExtension(new \GoetasWebservices\Xsd\XsdToPhp\DependencyInjection\Xsd2PhpExtension());
 
 error_reporting(error_reporting() & ~E_NOTICE);
 $cli = new Application('Convert XSD to PHP classes Command Line Interface', "2.0");
 $cli->setCatchExceptions(true);
-$cli->addCommands(array(
-    new Convert($container, 'php'),
-    new Convert($container, 'jms')
-));
+$cli->add(new Convert($container));
 $cli->run();

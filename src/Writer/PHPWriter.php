@@ -22,5 +22,6 @@ class PHPWriter extends Writer implements LoggerAwareInterface
     {
         $writer = new ClassWriter($this->pathGenerator, $this->logger);
         $writer->write($items);
+        $this->logger->info(sprintf("Written %s PHP classes", count($items)));
     }
 }
