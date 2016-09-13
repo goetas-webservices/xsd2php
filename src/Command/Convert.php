@@ -14,6 +14,9 @@ use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
 class Convert extends Command
 {
+    /**
+     * @var ContainerInterface
+     */
     protected $container;
 
     public function __construct(ContainerInterface $container)

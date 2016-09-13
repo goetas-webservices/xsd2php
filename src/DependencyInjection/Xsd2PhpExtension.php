@@ -23,6 +23,12 @@ class Xsd2PhpExtension extends Extension
         $definition = $container->getDefinition('goetas.xsd2php.naming_convention.' . $config['naming_strategy']);
         $container->setDefinition('goetas.xsd2php.naming_convention', $definition);
 
+
+        $schemaReader = $container->getDefinition('goetas.xsd2php.schema_reader');
+        foreach ($config['known_locations'] as $namespace => $location){
+            $schemaReader->addMethodCall('addKnownSchemaLocation', [$namespace, $location]);
+        }
+
         foreach (['php', 'jms'] as $type) {
             $definition = $container->getDefinition('goetas.xsd2php.path_generator.' . $type . '.' . $config['path_generator']);
             $container->setDefinition('goetas.xsd2php.path_generator.' . $type, $definition);
@@ -40,6 +46,8 @@ class Xsd2PhpExtension extends Extension
                 }
             }
         }
+
+        $container->setParameter('xsd2php.config', $config);
     }
 
     protected static function sanitizePhp($ns)
