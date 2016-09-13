@@ -42,14 +42,12 @@ class Convert extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->container->set('logger', $logger = new \Symfony\Component\Console\Logger\ConsoleLogger($output));
-
-        $locator = new FileLocator(__DIR__ . '/../src/Resources/config');
+        $locator = new FileLocator('.');
         $yaml = new YamlFileLoader($this->container, $locator);
         $xml = new XmlFileLoader($this->container, $locator);
 
         $delegatingLoader = new DelegatingLoader(new LoaderResolver(array($yaml, $xml)));
-        $delegatingLoader->load(realpath($input->getArgument('config')));
+        $delegatingLoader->load($input->getArgument('config'));
 
         $this->container->compile();
 
@@ -60,18 +58,14 @@ class Convert extends Command
         foreach ($src as $file) {
             $schemas[] = $reader->readFile($file);
         }
-        $converter = $this->container->get('goetas.xsd2php.converter.php');
-        $items = $converter->convert($schemas);
 
-        $writer = $this->container->get('goetas.xsd2php.writer.php');
-        $writer->write($items);
+        foreach (['php', 'jms'] as $type) {
+            $converter = $this->container->get('goetas.xsd2php.converter.'.$type);
+            $items = $converter->convert($schemas);
 
-        $converter = $this->container->get('goetas.xsd2php.converter.jms');
-        $items = $converter->convert($schemas);
-
-        $writer = $this->container->get('goetas.xsd2php.writer.jms');
-        $writer->write($items);
-
+            $writer = $this->container->get('goetas.xsd2php.writer.'.$type);
+            $writer->write($items);
+        }
         return count($items) ? 0 : 255;
     }
 }
