@@ -1,10 +1,9 @@
 <?php
 namespace GoetasWebservices\Xsd\XsdToPhp\Php\PathGenerator;
 
-use GoetasWebservices\Xsd\XsdToPhp\PathGenerator\PathGenerator as PathGeneratorBase;
-use GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPClass;
+use Zend\Code\Generator\ClassGenerator;
 
 interface PathGenerator
 {
-    public function getPath(PHPClass $php);
+    public function getPath(ClassGenerator $php);
 }

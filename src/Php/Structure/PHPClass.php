@@ -19,6 +19,52 @@ class PHPClass
         }
     }
 
+    /**
+     * @param bool $onlyParent
+     * @return PHPProperty
+     */
+    public function isSimpleType($onlyParent = false)
+    {
+        if ($onlyParent) {
+            $e = $this->getExtends();
+            if ($e) {
+                if ($e->hasProperty('__value')) {
+                    return $e->getProperty('__value');
+                }
+            }
+        } else {
+            if ($this->hasPropertyInHierarchy('__value') && count($this->getPropertiesInHierarchy()) === 1) {
+                return $this->getPropertyInHierarchy("__value");
+            }
+        }
+    }
+
+    public function getPhpType()
+    {
+        if (!$this->getNamespace()) {
+            if ($this->isNativeType()) {
+                return $this->getName();
+            }
+            return "\\" . $this->getName();
+        }
+        return "\\" . $this->getFullName();
+    }
+
+    public function isNativeType()
+    {
+        return !$this->getNamespace() && in_array($this->getName(), [
+            'string',
+            'int',
+            'float',
+            'integer',
+            'boolean',
+            'array',
+            'mixed',
+            'callable'
+        ]);
+    }
+
+
     public function __construct($name = null, $namespace = null)
     {
         $this->name = $name;

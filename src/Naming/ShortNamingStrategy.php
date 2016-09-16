@@ -7,6 +7,19 @@ use GoetasWebservices\XML\XSDReader\Schema\Type\Type;
 
 class ShortNamingStrategy implements NamingStrategy
 {
+    protected $reservedWords = [
+        'int',
+        'float',
+        'bool',
+        'string',
+        'true',
+        'false',
+        'null',
+        'resource',
+        'object',
+        'mixed',
+        'numeric',
+    ];
 
     public function getTypeName(Type $type)
     {
@@ -29,7 +42,11 @@ class ShortNamingStrategy implements NamingStrategy
 
     public function getItemName(Item $item)
     {
-        return $this->classify($item->getName());
+        $name = $this->classify($item->getName());
+        if (in_array(strtolower($name), $this->reservedWords)) {
+            $name .= 'Xsd';
+        }
+        return $name;
     }
 
     private function classify($name)

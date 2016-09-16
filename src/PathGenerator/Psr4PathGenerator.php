@@ -17,10 +17,7 @@ abstract class Psr4PathGenerator
 
         foreach ($this->namespaces as $namespace => $dir) {
             if (!is_dir($dir)) {
-                throw new PathGeneratorException("The folder '$dir' does not exist.");
-            }
-            if (!is_writable($dir)) {
-                throw new PathGeneratorException("The folder '$dir' is not writable.");
+                mkdir($dir, 0777, true);
             }
         }
     }

@@ -1,14 +1,12 @@
 <?php
 namespace GoetasWebservices\Xsd\XsdToPhp;
 
-use GoetasWebservices\Xsd\XsdToPhp\Naming\NamingStrategy;
-use GoetasWebservices\XML\WSDLReader\DefinitionsReader;
 use GoetasWebservices\XML\XSDReader\Schema\Element\ElementSingle;
 use GoetasWebservices\XML\XSDReader\Schema\Schema;
 use GoetasWebservices\XML\XSDReader\Schema\Type\ComplexType;
 use GoetasWebservices\XML\XSDReader\Schema\Type\SimpleType;
 use GoetasWebservices\XML\XSDReader\Schema\Type\Type;
-use GoetasWebservices\XML\XSDReader\SchemaReader;
+use GoetasWebservices\Xsd\XsdToPhp\Naming\NamingStrategy;
 use Psr\Log\LoggerAwareTrait;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
@@ -27,14 +25,6 @@ abstract class AbstractConverter
         'http://www.w3.org/XML/1998/namespace' => ''
     );
 
-    protected $baseTypes = [
-        'string',
-        'float',
-        'boolean',
-        'date',
-        'integer',
-        'mixed'
-    ];
     /**
      * @var \GoetasWebservices\Xsd\XsdToPhp\Naming\NamingStrategy
      */

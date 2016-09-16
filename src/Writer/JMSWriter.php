@@ -3,8 +3,8 @@ namespace GoetasWebservices\Xsd\XsdToPhp\Writer;
 
 use GoetasWebservices\Xsd\XsdToPhp\Jms\PathGenerator\PathGenerator;
 use Psr\Log\LoggerAwareInterface;
-use Psr\Log\LoggerInterface;
 use Psr\Log\LoggerAwareTrait;
+use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Symfony\Component\Yaml\Dumper;
 
@@ -19,7 +19,7 @@ class JMSWriter extends Writer implements LoggerAwareInterface
     public function __construct(PathGenerator $pathGenerator, LoggerInterface $logger = null)
     {
         $this->pathGenerator = $pathGenerator;
-        $this->logger = $logger?: new NullLogger();
+        $this->logger = $logger ?: new NullLogger();
     }
 
     public function write(array $items)

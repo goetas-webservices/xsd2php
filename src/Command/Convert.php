@@ -55,10 +55,10 @@ class Convert extends Command
         }
 
         foreach (['php', 'jms'] as $type) {
-            $converter = $this->container->get('goetas.xsd2php.converter.'.$type);
+            $converter = $this->container->get('goetas.xsd2php.converter.' . $type);
             $items = $converter->convert($schemas);
 
-            $writer = $this->container->get('goetas.xsd2php.writer.'.$type);
+            $writer = $this->container->get('goetas.xsd2php.writer.' . $type);
             $writer->write($items);
         }
         return count($items) ? 0 : 255;

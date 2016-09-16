@@ -2,13 +2,6 @@
 namespace GoetasWebservices\Xsd\XsdToPhp\Php;
 
 use Exception;
-use GoetasWebservices\Xsd\XsdToPhp\AbstractConverter;
-use GoetasWebservices\Xsd\XsdToPhp\Naming\NamingStrategy;
-use GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPArg;
-use GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPClass;
-use GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPClassOf;
-use GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPProperty;
-use GoetasWebservices\XML\WSDLReader\DefinitionsReader;
 use GoetasWebservices\XML\XSDReader\Schema\Attribute\AttributeItem;
 use GoetasWebservices\XML\XSDReader\Schema\Attribute\Group as AttributeGroup;
 use GoetasWebservices\XML\XSDReader\Schema\Element\Element;
@@ -22,10 +15,13 @@ use GoetasWebservices\XML\XSDReader\Schema\Type\BaseComplexType;
 use GoetasWebservices\XML\XSDReader\Schema\Type\ComplexType;
 use GoetasWebservices\XML\XSDReader\Schema\Type\SimpleType;
 use GoetasWebservices\XML\XSDReader\Schema\Type\Type;
-use GoetasWebservices\XML\XSDReader\SchemaReader;
+use GoetasWebservices\Xsd\XsdToPhp\AbstractConverter;
+use GoetasWebservices\Xsd\XsdToPhp\Naming\NamingStrategy;
+use GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPArg;
+use GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPClass;
+use GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPClassOf;
+use GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPProperty;
 use Psr\Log\LoggerInterface;
-use Zend\Code\Generator\ClassGenerator;
-use Zend\Code\Generator\FileGenerator;
 
 class PhpConverter extends AbstractConverter
 {
@@ -142,6 +138,13 @@ class PhpConverter extends AbstractConverter
         }
     }
 
+    private $skipByType = [];
+
+    /**
+     * @param ElementDef $element
+     * @param bool $skip
+     * @return PHPClass
+     */
     public function visitElementDef(ElementDef $element, $skip = false)
     {
         if (!isset($this->classes[spl_object_hash($element)])) {
@@ -159,6 +162,7 @@ class PhpConverter extends AbstractConverter
 
             $this->classes[spl_object_hash($element)]["class"] = $class;
             $this->classes[spl_object_hash($element)]["skip"] = $skip;
+            $this->skipByType[spl_object_hash($class)] = $skip;
 
             if (!$element->getType()->getName()) {
                 $this->visitTypeBase($class, $element->getType());
@@ -167,6 +171,11 @@ class PhpConverter extends AbstractConverter
             }
         }
         return $this->classes[spl_object_hash($element)]["class"];
+    }
+
+    public function isSkip($class)
+    {
+        return !empty($this->skipByType[spl_object_hash($class)]);
     }
 
     private function findPHPName(Type $type)
@@ -215,6 +224,7 @@ class PhpConverter extends AbstractConverter
             if ($alias = $this->getTypeAlias($type)) {
                 $class->setName($alias);
                 $this->classes[spl_object_hash($type)]["skip"] = true;
+                $this->skipByType[spl_object_hash($class)] = true;
                 return $class;
             }
 
@@ -228,10 +238,12 @@ class PhpConverter extends AbstractConverter
 
             if ($type instanceof SimpleType) {
                 $this->classes[spl_object_hash($type)]["skip"] = true;
+                $this->skipByType[spl_object_hash($class)] = true;
                 return $class;
             }
             if (($this->isArrayType($type) || $this->isArrayNestedElement($type)) && !$force) {
                 $this->classes[spl_object_hash($type)]["skip"] = true;
+                $this->skipByType[spl_object_hash($class)] = true;
                 return $class;
             }
 
@@ -263,6 +275,7 @@ class PhpConverter extends AbstractConverter
 
             if ($type instanceof SimpleType) {
                 $this->classes[spl_object_hash($type)]["skip"] = true;
+                $this->skipByType[spl_object_hash($class)] = true;
             }
         }
         return $this->classes[spl_object_hash($type)]["class"];

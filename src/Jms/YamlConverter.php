@@ -3,8 +3,6 @@ namespace GoetasWebservices\Xsd\XsdToPhp\Jms;
 
 use Doctrine\Common\Inflector\Inflector;
 use Exception;
-use GoetasWebservices\Xsd\XsdToPhp\AbstractConverter;
-use GoetasWebservices\Xsd\XsdToPhp\Naming\NamingStrategy;
 use GoetasWebservices\XML\XSDReader\Schema\Attribute\AttributeContainer;
 use GoetasWebservices\XML\XSDReader\Schema\Attribute\AttributeItem;
 use GoetasWebservices\XML\XSDReader\Schema\Element\Element;
@@ -19,6 +17,8 @@ use GoetasWebservices\XML\XSDReader\Schema\Type\BaseComplexType;
 use GoetasWebservices\XML\XSDReader\Schema\Type\ComplexType;
 use GoetasWebservices\XML\XSDReader\Schema\Type\SimpleType;
 use GoetasWebservices\XML\XSDReader\Schema\Type\Type;
+use GoetasWebservices\Xsd\XsdToPhp\AbstractConverter;
+use GoetasWebservices\Xsd\XsdToPhp\Naming\NamingStrategy;
 
 class YamlConverter extends AbstractConverter
 {

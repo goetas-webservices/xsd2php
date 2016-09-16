@@ -1,8 +1,8 @@
 <?php
 namespace GoetasWebservices\Xsd\XsdToPhp\Writer;
 
-use GoetasWebservices\Xsd\XsdToPhp\Php\ClassWriter;
-use GoetasWebservices\Xsd\XsdToPhp\Php\PathGenerator\PathGenerator;
+use GoetasWebservices\Xsd\XsdToPhp\Php\ClassGenerator;
+use GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPClass;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
 use Psr\Log\LoggerInterface;
@@ -12,16 +12,20 @@ class PHPWriter extends Writer implements LoggerAwareInterface
 {
     use LoggerAwareTrait;
 
-    protected $pathGenerator;
-    public function __construct(PathGenerator $pathGenerator, LoggerInterface $logger = null)
+    protected $classWriter;
+    private $generator;
+
+    public function __construct(PHPClassWriter $classWriter, ClassGenerator $generator, LoggerInterface $logger = null)
     {
-        $this->pathGenerator = $pathGenerator;
-        $this->logger = $logger?: new NullLogger();
+        $this->generator = $generator;
+        $this->classWriter = $classWriter;
+        $this->logger = $logger ?: new NullLogger();
     }
+
     public function write(array $items)
     {
-        $writer = new ClassWriter($this->pathGenerator, $this->logger);
-        $writer->write($items);
-        $this->logger->info(sprintf("Written %s PHP classes", count($items)));
+        return $this->classWriter->write(array_filter(array_map(function (PHPClass $item) {
+            return $this->generator->generate($item);
+        }, $items)));
     }
 }
