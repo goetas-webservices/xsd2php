@@ -5,8 +5,10 @@ use Composer\Autoload\ClassLoader;
 use GoetasWebservices\Xsd\XsdToPhp\AbstractConverter;
 use GoetasWebservices\Xsd\XsdToPhp\Jms\PathGenerator\Psr4PathGenerator as JmsPsr4PathGenerator;
 use GoetasWebservices\Xsd\XsdToPhp\Naming\ShortNamingStrategy;
+use GoetasWebservices\Xsd\XsdToPhp\Php\ClassGenerator;
 use GoetasWebservices\Xsd\XsdToPhp\Php\PathGenerator\Psr4PathGenerator as PhpPsr4PathGenerator;
 use GoetasWebservices\Xsd\XsdToPhp\Writer\JMSWriter;
+use GoetasWebservices\Xsd\XsdToPhp\Writer\PHPClassWriter;
 use GoetasWebservices\Xsd\XsdToPhp\Writer\PHPWriter;
 use JMS\Serializer\Handler\HandlerRegistryInterface;
 
@@ -128,7 +130,8 @@ abstract class AbstractGenerator
 
         $pathGenerator = new PhpPsr4PathGenerator($paths);
 
-        $writer = new PHPWriter($pathGenerator);
+        $classWriter = new PHPClassWriter($pathGenerator);
+        $writer = new PHPWriter($classWriter, new ClassGenerator());
         $writer->write($items);
     }
 

@@ -50,20 +50,4 @@ class JMSPathGeneratorTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($path, $this->tmpdir . "/Bar.yml");
     }
-
-    public function testNonExistingDir()
-    {
-        $this->setExpectedException('GoetasWebservices\Xsd\XsdToPhp\PathGenerator\PathGeneratorException');
-        new Psr4PathGenerator(array(
-            'myns\\' => "aaaa"
-        ));
-    }
-
-    public function testInvalidNs()
-    {
-        $this->setExpectedException('GoetasWebservices\Xsd\XsdToPhp\PathGenerator\PathGeneratorException');
-        new Psr4PathGenerator(array(
-            'myns' => "aaaa"
-        ));
-    }
 }

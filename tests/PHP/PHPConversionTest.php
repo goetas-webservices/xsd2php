@@ -35,8 +35,7 @@ class PHPConversionTest extends \PHPUnit_Framework_TestCase
 
         $classes = array();
         foreach ($items as $k => $item) {
-            $codegen = new \Zend\Code\Generator\ClassGenerator();
-            if ($generator->generate($codegen, $item)) {
+            if ($codegen = $generator->generate($item)) {
                 $classes[$k] = $codegen;
             }
         }

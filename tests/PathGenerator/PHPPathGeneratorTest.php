@@ -3,6 +3,7 @@ namespace GoetasWebservices\Xsd\XsdToPhp\Tests\Php\PathGenerator;
 
 use GoetasWebservices\Xsd\XsdToPhp\Php\PathGenerator\Psr4PathGenerator;
 use GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPClass;
+use Zend\Code\Generator\ClassGenerator;
 
 class PHPPathGeneratorTest extends \PHPUnit_Framework_TestCase
 {
@@ -28,7 +29,8 @@ class PHPPathGeneratorTest extends \PHPUnit_Framework_TestCase
         $generator = new Psr4PathGenerator(array(
             'myns\\' => $this->tmpdir
         ));
-        $generator->getPath(new PHPClass('Bar', 'myns2'));
+        $class = new ClassGenerator('Bar', 'myns2');
+        $generator->getPath($class);
     }
 
     public function testWriterLong()
@@ -37,7 +39,8 @@ class PHPPathGeneratorTest extends \PHPUnit_Framework_TestCase
             'myns\\' => $this->tmpdir
         ));
 
-        $path = $generator->getPath(new PHPClass('Bar', 'myns\foo'));
+        $class = new ClassGenerator('Bar', 'myns\foo');
+        $path = $generator->getPath($class);
 
         $this->assertEquals($path, $this->tmpdir . "/foo/Bar.php");
     }
@@ -47,25 +50,9 @@ class PHPPathGeneratorTest extends \PHPUnit_Framework_TestCase
         $generator = new Psr4PathGenerator(array(
             'myns\\' => $this->tmpdir
         ));
-
-        $path = $generator->getPath(new PHPClass('Bar', 'myns'));
+        $class = new ClassGenerator('Bar', 'myns');
+        $path = $generator->getPath($class);
 
         $this->assertEquals($path, $this->tmpdir . "/Bar.php");
-    }
-
-    public function testNonExistingDir()
-    {
-        $this->setExpectedException('GoetasWebservices\Xsd\XsdToPhp\PathGenerator\PathGeneratorException');
-        new Psr4PathGenerator(array(
-            'myns\\' => "aaaa"
-        ));
-    }
-
-    public function testInvalidNs()
-    {
-        $this->setExpectedException('GoetasWebservices\Xsd\XsdToPhp\PathGenerator\PathGeneratorException');
-        new Psr4PathGenerator(array(
-            'myns' => "aaaa"
-        ));
     }
 }
