@@ -1,6 +1,12 @@
 tools:
     external_code_coverage:
-        timeout: 1500 #15 min
+        timeout: 3600 #60 min
+
+checks:
+    php:
+        code_rating: true
+        duplication: true
+
 filter:
     paths:
-        - lib/*
+        - src/*
