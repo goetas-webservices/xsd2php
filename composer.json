@@ -15,7 +15,7 @@
     "jms",
     "serializer"
   ],
-  "license": "LGPL",
+  "license": "MIT",
   "require": {
     "php": "^5.5|^7.0",
     "symfony/console": "^2.7|^3.0",
