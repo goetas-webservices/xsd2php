@@ -1,6 +1,6 @@
 {
   "name": "goetas-webservices/xsd2php",
-  "description": "Convert XSD  (XML Schema) definitions into PHP classes",
+  "description": "Convert XSD  (XML Schema) definitions into PHP classes and JMS metadata",
   "type": "library",
   "authors": [
     {
@@ -45,7 +45,7 @@
   },
   "extra": {
     "branch-alias": {
-      "dev-master": "0.1-dev"
+      "dev-master": "0.2-dev"
     }
   },
 
