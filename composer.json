@@ -22,10 +22,12 @@
     "symfony/dependency-injection": "^2.2|^3.0",
     "symfony/config": "^2.2|^3.0",
     "symfony/yaml": "^2.1|^3.0",
+
     "goetas-webservices/xsd-reader": "^0.2",
     "goetas-webservices/soap-reader": "^0.3",
     "doctrine/inflector": "^1.0",
     "zendframework/zend-code": "~2.3",
+
     "psr/log": "^1.0"
   },
   "require-dev": {
@@ -48,8 +50,6 @@
       "dev-master": "0.2-dev"
     }
   },
-
-  "prefer-stable": false,
   "bin": [
     "bin/xsd2php"
   ]
