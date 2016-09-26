@@ -20,23 +20,23 @@ class Xsd2PhpExtension extends Extension
             $config = array_merge($config, $subConfig);
         }
 
-        $definition = $container->getDefinition('goetas.xsd2php.naming_convention.' . $config['naming_strategy']);
-        $container->setDefinition('goetas.xsd2php.naming_convention', $definition);
+        $definition = $container->getDefinition('goetas_webservices.xsd2php.naming_convention.' . $config['naming_strategy']);
+        $container->setDefinition('goetas_webservices.xsd2php.naming_convention', $definition);
 
 
-        $schemaReader = $container->getDefinition('goetas.xsd2php.schema_reader');
+        $schemaReader = $container->getDefinition('goetas_webservices.xsd2php.schema_reader');
         foreach ($config['known_locations'] as $namespace => $location) {
             $schemaReader->addMethodCall('addKnownSchemaLocation', [$namespace, $location]);
         }
 
         foreach (['php', 'jms'] as $type) {
-            $definition = $container->getDefinition('goetas.xsd2php.path_generator.' . $type . '.' . $config['path_generator']);
-            $container->setDefinition('goetas.xsd2php.path_generator.' . $type, $definition);
+            $definition = $container->getDefinition('goetas_webservices.xsd2php.path_generator.' . $type . '.' . $config['path_generator']);
+            $container->setDefinition('goetas_webservices.xsd2php.path_generator.' . $type, $definition);
 
-            $pathGenerator = $container->getDefinition('goetas.xsd2php.path_generator.' . $type);
+            $pathGenerator = $container->getDefinition('goetas_webservices.xsd2php.path_generator.' . $type);
             $pathGenerator->addMethodCall('setTargets', [$config['destinations_' . $type]]);
 
-            $converter = $container->getDefinition('goetas.xsd2php.converter.' . $type);
+            $converter = $container->getDefinition('goetas_webservices.xsd2php.converter.' . $type);
             foreach ($config['namespaces'] as $xml => $php) {
                 $converter->addMethodCall('addNamespace', [$xml, self::sanitizePhp($php)]);
             }
@@ -47,7 +47,7 @@ class Xsd2PhpExtension extends Extension
             }
         }
 
-        $container->setParameter('xsd2php.config', $config);
+        $container->setParameter('goetas_webservices.xsd2php.config', $config);
     }
 
     protected static function sanitizePhp($ns)

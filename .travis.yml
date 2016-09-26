@@ -24,7 +24,6 @@ before_script:
 
 script:
   - vendor/phpunit/phpunit/phpunit $PHPUNIT_FLAGS
-  - mkdir ota
   - bin/xsd2php convert tests/config.yml tests/JmsSerializer/OTA/otaxml/OTA_AirAvailRQ.xsd -vv
 
 after_script:

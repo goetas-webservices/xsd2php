@@ -49,16 +49,16 @@ class Convert extends Command
         $src = $input->getArgument('src');
 
         $schemas = [];
-        $reader = $this->container->get('goetas.xsd2php.schema_reader');
+        $reader = $this->container->get('goetas_webservices.xsd2php.schema_reader');
         foreach ($src as $file) {
             $schemas[] = $reader->readFile($file);
         }
 
         foreach (['php', 'jms'] as $type) {
-            $converter = $this->container->get('goetas.xsd2php.converter.' . $type);
+            $converter = $this->container->get('goetas_webservices.xsd2php.converter.' . $type);
             $items = $converter->convert($schemas);
 
-            $writer = $this->container->get('goetas.xsd2php.writer.' . $type);
+            $writer = $this->container->get('goetas_webservices.xsd2php.writer.' . $type);
             $writer->write($items);
         }
         return count($items) ? 0 : 255;
