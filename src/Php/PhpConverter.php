@@ -149,7 +149,7 @@ class PhpConverter extends AbstractConverter
     {
         if (!isset($this->classes[spl_object_hash($element)])) {
             $schema = $element->getSchema();
-
+            $skip = $skip || in_array($element->getSchema()->getTargetNamespace(), $this->baseSchemas, true);
             $class = new PHPClass();
             $class->setDoc($element->getDoc());
             $class->setName($this->getNamingStrategy()->getItemName($element));
@@ -213,11 +213,15 @@ class PhpConverter extends AbstractConverter
      *
      * @param Type $type
      * @param boolean $force
-     * @return \GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPClass
+     * @param bool $skip
+     * @return PHPClass
+     * @throws Exception
      */
     public function visitType(Type $type, $force = false, $skip = false)
     {
         if (!isset($this->classes[spl_object_hash($type)])) {
+
+            $skip = $skip || in_array($type->getSchema()->getTargetNamespace(), $this->baseSchemas, true);
 
             $this->classes[spl_object_hash($type)]["class"] = $class = new PHPClass();
 
@@ -250,7 +254,7 @@ class PhpConverter extends AbstractConverter
             $this->classes[spl_object_hash($type)]["skip"] = $skip || !!$this->getTypeAlias($type);
         } elseif ($force) {
             if (!($type instanceof SimpleType) && !$this->getTypeAlias($type)) {
-                $this->classes[spl_object_hash($type)]["skip"] = false;
+                $this->classes[spl_object_hash($type)]["skip"] = in_array($type->getSchema()->getTargetNamespace(), $this->baseSchemas, true);
             }
         }
         return $this->classes[spl_object_hash($type)]["class"];

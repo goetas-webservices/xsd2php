@@ -154,6 +154,7 @@ class YamlConverter extends AbstractConverter
                 $this->handleClassExtension($class, $data, $element->getType(), $element->getName());
             }
         }
+        $this->classes[spl_object_hash($element)]["skip"] = in_array($element->getSchema()->getTargetNamespace(), $this->baseSchemas, true);
         return $this->classes[spl_object_hash($element)]["class"];
     }
 
@@ -185,9 +186,11 @@ class YamlConverter extends AbstractConverter
 
     public function &visitType(Type $type, $force = false)
     {
+        $skip = in_array($type->getSchema()->getTargetNamespace(), $this->baseSchemas, true);
 
         if (!isset($this->classes[spl_object_hash($type)])) {
 
+            $this->classes[spl_object_hash($type)]["skip"] = $skip;
             if ($alias = $this->getTypeAlias($type)) {
                 $class = array();
                 $class[$alias] = array();
@@ -219,7 +222,7 @@ class YamlConverter extends AbstractConverter
             }
         } elseif ($force) {
             if (!($type instanceof SimpleType) && !$this->getTypeAlias($type)) {
-                $this->classes[spl_object_hash($type)]["skip"] = false;
+                $this->classes[spl_object_hash($type)]["skip"] = $skip;
             }
         }
         return $this->classes[spl_object_hash($type)]["class"];
