@@ -415,6 +415,13 @@ class YamlConverter extends AbstractConverter
         $property["accessor"]["getter"] = "get" . Inflector::classify($element->getName());
         $property["accessor"]["setter"] = "set" . Inflector::classify($element->getName());
         $t = $element->getType();
+        
+//        $property["validator"] = [
+//            ['Length' => ['min' => 0]],
+//            ['Range' => ['min' => 0]],
+//            ['NotBlank' => null],
+//        ];
+        
 
         if ($arrayize) {
 
