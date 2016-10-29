@@ -392,6 +392,173 @@ class YamlConverter extends AbstractConverter
 
         return false;
     }
+    
+    /**
+     *
+     * @param array $property
+     * @param Element $element
+     * @param boolean $arrayize
+     */
+    private function loadValidator(array &$property, ElementItem $element, $arrayize) 
+    {
+        /* @var $element Element */
+        $type = $element->getType();
+        
+        if (($restrictions = $type->getRestriction()) && $checks = $restrictions->getChecks()) {
+            
+            $property["validator"] = [];
+            
+            foreach ($checks as $key => $check) {
+                
+                switch ($key) {
+                    case 'enumeration':
+                        $property["validator"][] = [
+                            'Choice' => [
+                                'choices' => array_map(function($enum){
+                                    return $enum['value'];
+                                }, $check)
+                            ]
+                        ];
+                        break;
+                    case 'fractionDigits':
+                        foreach ($check as $item) {
+                            $property["validator"][] = [
+                                'Regex' => "/^(\\d+\.\\d{1,{$item['value']}})|\\d*$/"
+                            ];
+                        }
+                        $property["validator"][] = [
+                            'Range' => [
+                                'min' => 0
+                            ]
+                        ];
+                        break;
+                    case 'totalDigits':
+                        foreach ($check as $item) {
+                            $property["validator"][] = [
+                                'Regex' => "/^[\\d]{0,{$item['value']}}$/"
+                            ];
+                        }
+                        $property["validator"][] = [
+                            'Range' => [
+                                'min' => 0
+                            ]
+                        ];
+                        break;
+                    case 'length':
+                        foreach ($check as $item) {
+                            $property["validator"][] = [
+                                'Length' => [
+                                    'min' => $item['value'],
+                                    'max' => $item['value']
+                                ]
+                            ];
+                        }
+                        break;
+                    case 'maxLength':
+                        foreach ($check as $item) {
+                            $property["validator"][] = [
+                                'Length' => [
+                                    'max' => $item['value']
+                                ]
+                            ];
+                        }
+                        break;
+                    case 'minLength':
+                        foreach ($check as $item) {
+                            $property["validator"][] = [
+                                'Length' => [
+                                    'min' => $item['value']
+                                ]
+                            ];
+                        }
+                        break;
+                    case 'pattern':
+                        foreach ($check as $item) {
+                            $property["validator"][] = [
+                                'Regex' => "/^{$item['value']}$/"
+                            ];
+                        }
+                        break;
+                    case 'maxExclusive':
+                        foreach ($check as $item) {
+                            $property["validator"][] = [
+                                'LessThan' =>  $item['value']
+                            ];
+                        }
+                        break;
+                    case 'maxInclusive':
+                        foreach ($check as $item) {
+                            $property["validator"][] = [
+                                'LessThanOrEqual' => $item['value']
+                            ];
+                        }
+                        break;
+                    case 'minExclusive':
+                        foreach ($check as $item) {
+                            $property["validator"][] = [
+                                'GreaterThan' => $item['value']
+                            ];
+                        }
+                        break;
+                    case 'minInclusive':
+                        foreach ($check as $item) {
+                            $property["validator"][] = [
+                                'GreaterThanOrEqual' => $item['value']
+                            ];
+                        }
+                        break;
+                }
+            }
+            
+            if (!count($property["validator"])) {
+                unset($property["validator"]);
+            }
+        } else 
+        if ($arrayize) {
+            
+            $attrs = [];
+            if ($itemOfArray = $this->isArrayNestedElement($type)) {
+                $attrs = [
+                    'min' => $itemOfArray->getMin(),
+                    'max' => $itemOfArray->getMax()
+                ];
+            } elseif ($itemOfArray = $this->isArrayType($type)) {
+                $attrs = [
+                    'min' => $itemOfArray->getMin(),
+                    'max' => $itemOfArray->getMax()
+                ];
+            } elseif ($this->isArrayElement($element)) {
+                $attrs = [
+                    'min' => $element->getMin(),
+                    'max' => $element->getMax()
+                ];
+            }
+            
+            if ($attrs['min'] == 0) {
+                unset($attrs['min']);
+            }
+            if ($attrs['max'] == -1) {
+                unset($attrs['max']);
+            }
+            if (!!count($attrs)) {
+                $property["validator"][] = [
+                    'Count' => $attrs
+                ];
+            }
+            
+        } 
+        
+        // Required properties
+        if ($classType = $this->visitType($type)) {
+            if ($element->getMin() != 0) {
+                $property["validator"][] = [
+                    'NotBlank' => null
+                ];
+            }
+            
+        }
+        
+    }
 
     /**
      *
@@ -416,13 +583,8 @@ class YamlConverter extends AbstractConverter
         $property["accessor"]["setter"] = "set" . Inflector::classify($element->getName());
         $t = $element->getType();
         
-//        $property["validator"] = [
-//            ['Length' => ['min' => 0]],
-//            ['Range' => ['min' => 0]],
-//            ['NotBlank' => null],
-//        ];
+        $this->loadValidator($property, $element, $arrayize);
         
-
         if ($arrayize) {
 
             if ($itemOfArray = $this->isArrayNestedElement($t)) {
