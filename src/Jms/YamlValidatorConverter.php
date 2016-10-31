@@ -50,7 +50,7 @@ class YamlValidatorConverter extends YamlConverter
         if (($restrictions = $type->getRestriction()) && $checks = $restrictions->getChecks()) {
 
             $property["validator"] = [];
-
+            $rules = [];
             foreach ($checks as $key => $check) {
                 $rule = null;
                 switch ($key) {
@@ -153,14 +153,18 @@ class YamlValidatorConverter extends YamlConverter
                 }
 
                 if ($rule) {
-
-                    if ($arrayized){
-                        $rule = [
-                            'All' => [$rule]
-                        ];
-                    }
-                    $property["validator"][] = $rule;
+                    $rules[] = $rule;
                 }
+            }
+
+            if ($rules) {
+
+                if ($arrayized){
+                    $rules = [
+                        ['All' => $rules]
+                    ];
+                }
+                $property["validator"] = $rules;
             }
         }
 
