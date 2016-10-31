@@ -29,12 +29,14 @@ class Xsd2PhpExtension extends Extension
             $schemaReader->addMethodCall('addKnownSchemaLocation', [$namespace, $location]);
         }
 
-        foreach (['php', 'jms'] as $type) {
+        foreach (['php', 'jms', 'validation'] as $type) {
             $definition = $container->getDefinition('goetas_webservices.xsd2php.path_generator.' . $type . '.' . $config['path_generator']);
             $container->setDefinition('goetas_webservices.xsd2php.path_generator.' . $type, $definition);
 
             $pathGenerator = $container->getDefinition('goetas_webservices.xsd2php.path_generator.' . $type);
-            $pathGenerator->addMethodCall('setTargets', [$config['destinations_' . $type]]);
+            if (!empty($config['destinations_' . $type])) {
+                $pathGenerator->addMethodCall('setTargets', [$config['destinations_' . $type]]);
+            }
 
             $converter = $container->getDefinition('goetas_webservices.xsd2php.converter.' . $type);
             foreach ($config['namespaces'] as $xml => $php) {

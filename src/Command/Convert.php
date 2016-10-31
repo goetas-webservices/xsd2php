@@ -53,8 +53,13 @@ class Convert extends Command
         foreach ($src as $file) {
             $schemas[] = $reader->readFile($file);
         }
+        $configs = $this->container->getParameter('goetas_webservices.xsd2php.config');
 
-        foreach (['php', 'jms'] as $type) {
+        foreach (['php', 'jms', 'validation'] as $type) {
+
+            if ($type === 'validation' && empty($configs['destinations_' . $type])) {
+                continue;
+            }
             $converter = $this->container->get('goetas_webservices.xsd2php.converter.' . $type);
             $items = $converter->convert($schemas);
 
