@@ -265,6 +265,7 @@ class YamlConverter extends AbstractConverter
             $parent = $restriction->getBase();
             if ($parent instanceof Type) {
                 $this->handleClassExtension($class, $data, $parent, $name);
+                $this->loadValidatorType($data["properties"]['__value'], $type);
             }
         } elseif ($unions = $type->getUnions()) {
             foreach ($unions as $i => $unon) {
@@ -396,14 +397,10 @@ class YamlConverter extends AbstractConverter
     /**
      *
      * @param array $property
-     * @param Element $element
-     * @param boolean $arrayize
+     * @param Type $type
      */
-    private function loadValidator(array &$property, ElementItem $element, $arrayize) 
+    private function loadValidatorType(array &$property, Type $type) 
     {
-        /* @var $element Element */
-        $type = $element->getType();
-        
         if (($restrictions = $type->getRestriction()) && $checks = $restrictions->getChecks()) {
             
             $property["validator"] = [];
@@ -513,7 +510,17 @@ class YamlConverter extends AbstractConverter
             if (!count($property["validator"])) {
                 unset($property["validator"]);
             }
-        } else 
+        }
+        
+    }
+    
+    private function loadValidatorElement(array &$property, ElementItem $element, $arrayize) 
+    {
+        /* @var $element Element */
+        $type = $element->getType();
+        
+        $this->loadValidatorType($property, $type);
+        
         if ($arrayize) {
             
             $attrs = [];
@@ -534,16 +541,18 @@ class YamlConverter extends AbstractConverter
                 ];
             }
             
-            if ($attrs['min'] == 0) {
-                unset($attrs['min']);
-            }
-            if ($attrs['max'] == -1) {
-                unset($attrs['max']);
-            }
-            if (!!count($attrs)) {
-                $property["validator"][] = [
-                    'Count' => $attrs
-                ];
+            if (count($attrs)) {
+                if ($attrs['min'] == 0) {
+                    unset($attrs['min']);
+                }
+                if ($attrs['max'] == -1) {
+                    unset($attrs['max']);
+                }
+                if (!!count($attrs)) {
+                    $property["validator"][] = [
+                        'Count' => $attrs
+                    ];
+                }
             }
             
         } 
@@ -583,7 +592,7 @@ class YamlConverter extends AbstractConverter
         $property["accessor"]["setter"] = "set" . Inflector::classify($element->getName());
         $t = $element->getType();
         
-        $this->loadValidator($property, $element, $arrayize);
+        $this->loadValidatorElement($property, $element, $arrayize);
         
         if ($arrayize) {
 
