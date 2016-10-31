@@ -7,46 +7,42 @@ use Symfony\Component\Yaml\Parser;
 use Symfony\Component\Validator\Validation;
 use Symfony\Component\Validator\Mapping\Loader\YamlFileLoader;
 use JMS\Serializer\Serializer;
+use Metadata\MetadataFactoryInterface;
 
 /**
  * This class inherits from YamlFileLoader because we need to call the
  * parseNodes() protected method.
  */
-class Validator extends YamlFileLoader
+class Validator extends YamlFileLoader 
 {
-
+    
     /* @var \Symfony\Component\Validator\Validator\ValidatorInterface the validator service */
     private $validator;
 
-    /* @var object */
-    private $object;
-
     /* @var array */
-    private $constraintCache;
-    
-    /* @var \JMS\Serializer\Serializer */
-    private $serializer;
+    private $loadedConstraint;
+
+    /* @var \Metadata\MetadataFactoryInterface */
+    private $metadataFactory;
 
     /**
      * 
-     * @param object $object
-     * @param \JMS\Serializer\Serializer $serializer
+     * @param \Metadata\MetadataFactoryInterface $metadataFactory
      * @param \Symfony\Component\Validator\Validator\ValidatorInterface $validator
      */
-    public function __construct($object, Serializer $serializer, ValidatorInterface $validator = null)
-    {
-        $this->object = $object;
-        $this->serializer = $serializer;
+    public function __construct(MetadataFactoryInterface $metadataFactory, ValidatorInterface $validator = null) {
+        $this->metadataFactory = $metadataFactory;
         $this->validator = isset($validator) ? $validator : Validation::createValidator();
-        $this->constraintCache = [];
+        $this->loadedConstraint = [];
     }
-    
-    protected function getMetadataProperties($className) {
-        
-        $metadata = $this->serializer->getMetadataFactory()->getMetadataForClass($className);
-        
+
+    protected function getMetadataProperties($className) 
+    {
+
+        $metadata = $this->metadataFactory->getMetadataForClass($className);
+
         foreach ($metadata->fileResources as $path) {
-            
+
             if (strtolower(pathinfo($path, PATHINFO_EXTENSION)) !== 'yml') {
                 continue;
             }
@@ -67,13 +63,11 @@ class Validator extends YamlFileLoader
                 }
                 break;
             }
-            
         }
-        
+
         return [];
-        
     }
-    
+
     /**
      * Read YML and return all class' constraints
      * 
@@ -82,13 +76,13 @@ class Validator extends YamlFileLoader
      */
     protected function getMetadataConstraints($className) 
     {
-        
-        if (isset($this->constraintCache[$className])) {
-            return $this->constraintCache[$className];
+
+        if (isset($this->loadedConstraint[$className])) {
+            return $this->loadedConstraint[$className];
         }
 
         $properties = $this->getMetadataProperties($className);
-        
+
         $arrayConstraints = [];
         foreach ($properties as $propertyName => $nodes) {
             if (isset($nodes['validator'])) {
@@ -99,11 +93,10 @@ class Validator extends YamlFileLoader
                 ];
             }
         }
-        
-        $this->constraintCache[$className] = $arrayConstraints;
-        
+
+        $this->loadedConstraint[$className] = $arrayConstraints;
+
         return $arrayConstraints;
-        
     }
 
     /**
@@ -115,16 +108,16 @@ class Validator extends YamlFileLoader
     protected function recursiveValidate($data) 
     {
         $errors = [];
-        
+
         if (is_object($data)) {
-            
+
             $arrayConstraints = $this->getMetadataConstraints(get_class($data));
             foreach ($arrayConstraints as $property => $constraints) {
-                
+
                 $value = $data->$constraints['getter']();
-                
+
                 $violationList = $this->validator->validate($value, $constraints['validator']);
-                
+
                 if (count($violationList) > 0) {
                     $valueErrors = [];
                     foreach ($violationList as $violation) {
@@ -134,7 +127,7 @@ class Validator extends YamlFileLoader
                         $errors[$property] = $valueErrors;
                     }
                 }
-                
+
                 if (is_array($value)) {
                     foreach ($value as $index => $item) {
                         $valueErrors = $this->recursiveValidate($item);
@@ -151,22 +144,21 @@ class Validator extends YamlFileLoader
                         $errors[$property] = $valueErrors;
                     }
                 }
-                
             }
-            
-        } 
-        
+        }
+
         return $errors;
     }
-    
+
     /**
      * Return all list erros by yml validator
      * 
+     * @param object $object
      * @return array
      */
-    public function validate()
+    public function validate($object) 
     {
-        return $this->recursiveValidate( $this->object );
+        return $this->recursiveValidate($object);
     }
 
 }
