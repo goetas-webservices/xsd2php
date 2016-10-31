@@ -221,6 +221,11 @@ class YamlValidatorConverter extends YamlConverter
         // Required properties
         if ($classType = $this->visitType($type)) {
             if ($element->getMin() !== 0) {
+                if ($arrayized){
+                    $property["validator"][] = [
+                        'Count' => ['min' => 1]
+                    ];
+                }
                 $property["validator"][] = [
                     'NotNull' => null
                 ];
