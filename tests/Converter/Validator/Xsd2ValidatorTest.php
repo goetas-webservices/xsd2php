@@ -8,17 +8,18 @@ use GoetasWebservices\XML\XSDReader\SchemaReader;
 class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     *
      * @var YamlValidatorConverter
      */
     protected $converter;
 
     /**
-     *
      * @var SchemaReader
      */
     protected $reader;
 
+    /**
+     * Set up converter and reader properties
+     */
     public function setUp()
     {
         $this->converter = new YamlValidatorConverter(new ShortNamingStrategy());
@@ -27,12 +28,16 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
         $this->reader = new SchemaReader();
     }
 
+    /**
+     * Return classes coverted through YamlValidatorConverter
+     * 
+     * @param string $xml
+     * @return array
+     */
     protected function getClasses($xml)
     {
-
         $schema = $this->reader->readString($xml);
         return $this->converter->convert(array($schema));
-
     }
 
     public function getRestrictionsValidations() 
@@ -173,17 +178,17 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testSimpleTypeWithValidations($xsRestrictions, $ymlValidations)
     {
-        $xml = "
-             <xs:schema targetNamespace=\"http://www.example.com\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\">
-                <xs:element name=\"element-one\">
+        $xml = '
+             <xs:schema targetNamespace="http://www.example.com" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+                <xs:element name="element-one">
                     <xs:simpleType>
-                         <xs:restriction base=\"xs:string\">
-                            {$xsRestrictions}
+                         <xs:restriction base="xs:string">
+                            '.$xsRestrictions.'
                          </xs:restriction>
                     </xs:simpleType>
                 </xs:element>
                </xs:schema>
-            ";
+            ';
 
         $classes = $this->getClasses($xml);
         
@@ -200,9 +205,61 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
+     * 
+     */
+    public function testComplexTypeWithRequired()
+    {
+        $content = '
+             <xs:schema targetNamespace="http://www.example.com" xmlns:xs="http://www.w3.org/2001/XMLSchema"  xmlns:ex="http://www.example.com">
+                <xs:complexType name="complexType-1">
+                    <xs:sequence>
+                        <xs:element name="column1" base="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:schema>
+            ';
+        $classes = $this->getClasses($content);
+        
+        $this->assertCount(1, $classes);
+
+        $this->assertEquals(
+            [
+                'Example\\ComplexType1Type' => [
+                    'properties' => [
+                        'column1' => [
+                            [
+                                'NotNull' => null
+                            ]
+                        ]
+                    ]
+                ]
+            ], $classes['Example\\ComplexType1Type']);
+
+    }
+    
+    /**
+     * 
+     */
+    public function testComplexTypeWithNoRequired()
+    {
+        $content = '
+             <xs:schema targetNamespace="http://www.example.com" xmlns:xs="http://www.w3.org/2001/XMLSchema"  xmlns:ex="http://www.example.com">
+                <xs:complexType name="complexType-1">
+                    <xs:sequence>
+                        <xs:element name="column1" base="xs:string" minOccurs="0"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:schema>
+            ';
+        $classes = $this->getClasses($content);
+        
+        $this->assertCount(0, $classes);
+    }    
+    
+    /**
      * @dataProvider getRestrictionsValidations
      */
-    public function testComplexTypeWithValidations($xsRestrictions, $ymlValidations)
+    public function testComplexTypeWithRestrictionRequired($xsRestrictions, $ymlValidations)
     {
         $content = '
              <xs:schema targetNamespace="http://www.example.com" xmlns:xs="http://www.w3.org/2001/XMLSchema"  xmlns:ex="http://www.example.com">
@@ -215,10 +272,6 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                                 </xs:restriction>
                             </xs:simpleType>
                         </xs:element>
-                        <xs:element name="column2" type="xs:string"></xs:element>
-                        <xs:element name="column3" type="xs:string" minOccurs="0"></xs:element>
-                        <xs:element name="column4" type="xs:string" maxOccurs="unbounded"></xs:element>
-                        <xs:element name="column5" type="xs:string" minOccurs="1" maxOccurs="100"></xs:element>
                     </xs:sequence>
                 </xs:complexType>
             </xs:schema>
@@ -238,28 +291,109 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                                     'NotNull' => null
                                 ]
                             ]
-                        ),                        
-                        'column2' => [
-                            [
-                                'NotNull' => null
-                            ]
-                        ],
-                        'column4' => [
+                        )                 
+                    ]
+                ]
+            ], $classes['Example\\ComplexType1Type']);
+
+    }
+    
+    /**
+     * @dataProvider getRestrictionsValidations
+     */
+    public function testComplexTypeWithRestrictionNoRequired($xsRestrictions, $ymlValidations)
+    {
+        $content = '
+             <xs:schema targetNamespace="http://www.example.com" xmlns:xs="http://www.w3.org/2001/XMLSchema"  xmlns:ex="http://www.example.com">
+                <xs:complexType name="complexType-1">
+                    <xs:sequence>
+                        <xs:element name="column1" minOccurs="0">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    '.$xsRestrictions.'
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:schema>
+            ';
+        $classes = $this->getClasses($content);
+        
+        $this->assertCount(1, $classes);
+
+        $this->assertEquals(
+            [
+                'Example\\ComplexType1Type' => [
+                    'properties' => [
+                        'column1' => $ymlValidations              
+                    ]
+                ]
+            ], $classes['Example\\ComplexType1Type']);
+
+    }
+    
+    /**
+     * 
+     */
+    public function testComplexTypeWithArray_1()
+    {
+        $content = '
+             <xs:schema targetNamespace="http://www.example.com" xmlns:xs="http://www.w3.org/2001/XMLSchema"  xmlns:ex="http://www.example.com">
+                <xs:complexType name="complexType-1">
+                    <xs:sequence>
+                        <xs:element name="column1" type="xs:string" maxOccurs="unbounded"></xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:schema>
+            ';
+        $classes = $this->getClasses($content);
+        
+        $this->assertCount(1, $classes);
+
+        $this->assertEquals(
+            [
+                'Example\\ComplexType1Type' => [
+                    'properties' => [
+                        'column1' => [
                             [
                                 'Count' => [
                                     'min' => 1
                                 ]
                             ],
                             [
-                                'Count' => [
-                                    'min' => 1
-                                ]
-                            ],
-                            [
                                 'NotNull' => null
                             ]
-                        ],
-                        'column5' => [
+                        ]                
+                    ]
+                ]
+            ], $classes['Example\\ComplexType1Type']);
+
+    }
+    
+    /**
+     * 
+     */
+    function testComplexTypeWithArray_2()
+    {
+        $content = '
+             <xs:schema targetNamespace="http://www.example.com" xmlns:xs="http://www.w3.org/2001/XMLSchema"  xmlns:ex="http://www.example.com">
+                <xs:complexType name="complexType-1">
+                    <xs:sequence>
+                        <xs:element name="column1" type="xs:string" minOccurs="1" maxOccurs="100"></xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:schema>
+            ';
+        $classes = $this->getClasses($content);
+        
+        $this->assertCount(1, $classes);
+
+        $this->assertEquals(
+            [
+                'Example\\ComplexType1Type' => [
+                    'properties' => [
+                        'column1' => [
                             [
                                 'Count' => [
                                     'min' => 1,
@@ -267,18 +401,587 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                                 ]
                             ],
                             [
+                                'NotNull' => null
+                            ]
+                        ]                
+                    ]
+                ]
+            ], $classes['Example\\ComplexType1Type']);
+        
+    }    
+    
+    /**
+     * 
+     */
+    function testComplexTypeWithArray_3()
+    {
+        $content = '
+             <xs:schema targetNamespace="http://www.example.com" xmlns:xs="http://www.w3.org/2001/XMLSchema"  xmlns:ex="http://www.example.com">
+                <xs:complexType name="complexType-1">
+                    <xs:sequence>
+                        <xs:element name="column1" type="xs:string" minOccurs="0" maxOccurs="unbounded"></xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:schema>
+            ';
+        $classes = $this->getClasses($content);
+        
+        $this->assertCount(0, $classes);
+        
+    }    
+    
+    /**
+     * 
+     */
+    public function testComplexTypeWithElementArrayRestriction()
+    {
+        
+        $content = '
+             <xs:schema targetNamespace="http://www.example.com" xmlns:xs="http://www.w3.org/2001/XMLSchema"  xmlns:ex="http://www.example.com">
+                <xs:complexType name="complexType-2">
+                    <xs:sequence>
+                        <xs:element name="protocols" maxOccurs="10">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:minLength value="1"/>
+                                    <xs:maxLength value="12"/>
+                                </xs:restriction>
+                            </xs:simpleType>          
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:schema>
+            ';
+        
+        $classes = $this->getClasses($content);
+        
+        $this->assertCount(1, $classes);
+
+        $this->assertEquals(
+            [
+                'Example\\ComplexType2Type' => [
+                    'properties' => [
+                        'protocols' => [
+                            [
                                 'Count' => [
-                                    'min' => 1
+                                    'min' => 1,
+                                    'max' => 10
+                                ]
+                            ],
+                            [
+                                'All' => [
+                                    [
+                                        'Length' => [
+                                            'min' => 1
+                                        ]
+
+                                    ],
+                                    [
+                                        'Length' => [
+                                            'max' => 12
+                                        ]
+                                    ]
                                 ]
                             ],
                             [
                                 'NotNull' => null
                             ]
-                        ],                      
+                        ]
+                    ]
+                ]
+            ], $classes['Example\\ComplexType2Type']);
+
+    }   
+    
+    /**
+     * 
+     */
+    public function testComplexTypeWithArrayNestedRestriction()
+    {
+        $content = '
+             <xs:schema targetNamespace="http://www.example.com" xmlns:xs="http://www.w3.org/2001/XMLSchema"  xmlns:ex="http://www.example.com">
+                <xs:complexType name="complexType-1">
+                    <xs:sequence>
+                        <xs:element name="protocols">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="protocolNumber" maxOccurs="30">
+                                        <xs:simpleType>
+                                            <xs:restriction base="xs:string">
+                                                <xs:minLength value="1"/>
+                                                <xs:maxLength value="12"/>
+                                            </xs:restriction>
+                                        </xs:simpleType>
+                                    </xs:element>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:schema>
+            ';
+        
+        $classes = $this->getClasses($content);
+        
+        $this->assertCount(2, $classes);
+
+        $this->assertEquals(
+            [
+                'Example\\ComplexType1Type\\ProtocolsAType' => [
+                    'properties' => [
+                        'protocolNumber' => [
+                            [
+                                'Count' => [
+                                    'min' => 1,
+                                    'max' => 30
+                                ]
+                            ],
+                            [
+                                'All' => [
+                                    [
+                                        'Length' => [
+                                            'min' => 1
+                                        ]
+
+                                    ],
+                                    [
+                                        'Length' => [
+                                            'max' => 12
+                                        ]
+                                    ]
+                                ]
+                            ],
+                            [
+                                'NotNull' => null
+                            ]
+                        ]
+                    ]
+                ]
+            ], $classes['Example\\ComplexType1Type\\ProtocolsAType']);
+        
+        $this->assertEquals(
+            [
+                'Example\\ComplexType1Type' => [
+                    'properties' => [
+                        'protocols' => [
+                            [
+                                'Valid' => null
+                            ],
+                            [
+                                'NotNull' => null
+                            ]
+                        ]
                     ]
                 ]
             ], $classes['Example\\ComplexType1Type']);
 
+    }   
+    
+    /**
+     * 
+     */
+    public function testComplexTypeWithElementArrayRestrictionNoRequired()
+    {
+        
+        $content = '
+             <xs:schema targetNamespace="http://www.example.com" xmlns:xs="http://www.w3.org/2001/XMLSchema"  xmlns:ex="http://www.example.com">
+                <xs:complexType name="complexType-2">
+                    <xs:sequence>
+                        <xs:element name="protocols" minOccurs="0" maxOccurs="10">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:minLength value="1"/>
+                                    <xs:maxLength value="12"/>
+                                </xs:restriction>
+                            </xs:simpleType>          
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:schema>
+            ';
+        
+        $classes = $this->getClasses($content);
+        
+        $this->assertCount(1, $classes);
+
+        $this->assertEquals(
+            [
+                'Example\\ComplexType2Type' => [
+                    'properties' => [
+                        'protocols' => [
+                            [
+                                'Count' => [
+                                    'max' => 10
+                                ]
+                            ],
+                            [
+                                'All' => [
+                                    [
+                                        'Length' => [
+                                            'min' => 1
+                                        ]
+
+                                    ],
+                                    [
+                                        'Length' => [
+                                            'max' => 12
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ], $classes['Example\\ComplexType2Type']);
+
+    }
+    
+    /**
+     * 
+     */
+    public function testComplexTypeWithArrayNestedRestrictionNoRequired_1()
+    {
+        $content = '
+             <xs:schema targetNamespace="http://www.example.com" xmlns:xs="http://www.w3.org/2001/XMLSchema"  xmlns:ex="http://www.example.com">
+                <xs:complexType name="complexType-1">
+                    <xs:sequence>
+                        <xs:element name="protocols">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="protocolNumber" minOccurs="0" maxOccurs="30">
+                                        <xs:simpleType>
+                                            <xs:restriction base="xs:string">
+                                                <xs:minLength value="1"/>
+                                                <xs:maxLength value="12"/>
+                                            </xs:restriction>
+                                        </xs:simpleType>
+                                    </xs:element>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:schema>
+            ';
+        
+        $classes = $this->getClasses($content);
+        
+        $this->assertCount(2, $classes);
+
+        $this->assertEquals(
+            [
+                'Example\\ComplexType1Type\\ProtocolsAType' => [
+                    'properties' => [
+                        'protocolNumber' => [
+                            [
+                                'Count' => [
+                                    'max' => 30
+                                ]
+                            ],
+                            [
+                                'All' => [
+                                    [
+                                        'Length' => [
+                                            'min' => 1
+                                        ]
+
+                                    ],
+                                    [
+                                        'Length' => [
+                                            'max' => 12
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ], $classes['Example\\ComplexType1Type\\ProtocolsAType']);
+        
+        $this->assertEquals(
+            [
+                'Example\\ComplexType1Type' => [
+                    'properties' => [
+                        'protocols' => [
+                            [
+                                'Valid' => null
+                            ],
+                            [
+                                'NotNull' => null
+                            ]
+                        ]
+                    ]
+                ]
+            ], $classes['Example\\ComplexType1Type']);
+
+    }
+    
+    /**
+     * 
+     */
+    public function testComplexTypeWithArrayNestedRestrictionNoRequired_2()
+    {
+        $content = '
+             <xs:schema targetNamespace="http://www.example.com" xmlns:xs="http://www.w3.org/2001/XMLSchema"  xmlns:ex="http://www.example.com">
+                <xs:complexType name="complexType-1">
+                    <xs:sequence>
+                        <xs:element name="protocols" minOccurs="0">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="protocolNumber" minOccurs="0" maxOccurs="30">
+                                        <xs:simpleType>
+                                            <xs:restriction base="xs:string">
+                                                <xs:minLength value="1"/>
+                                                <xs:maxLength value="12"/>
+                                            </xs:restriction>
+                                        </xs:simpleType>
+                                    </xs:element>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:schema>
+            ';
+        
+        $classes = $this->getClasses($content);
+        
+        $this->assertCount(2, $classes);
+
+        $this->assertEquals(
+            [
+                'Example\\ComplexType1Type\\ProtocolsAType' => [
+                    'properties' => [
+                        'protocolNumber' => [
+                            [
+                                'Count' => [
+                                    'max' => 30
+                                ]
+                            ],
+                            [
+                                'All' => [
+                                    [
+                                        'Length' => [
+                                            'min' => 1
+                                        ]
+
+                                    ],
+                                    [
+                                        'Length' => [
+                                            'max' => 12
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ], $classes['Example\\ComplexType1Type\\ProtocolsAType']);
+        
+        $this->assertEquals(
+            [
+                'Example\\ComplexType1Type' => [
+                    'properties' => [
+                        'protocols' => [
+                            [
+                                'Valid' => null
+                            ]
+                        ]
+                    ]
+                ]
+            ], $classes['Example\\ComplexType1Type']);
+        
+    }
+    
+    /**
+     * 
+     */
+    public function testComplexTypeWithNestedComplexRestrictionRequired()
+    {
+        $content = '
+             <xs:schema targetNamespace="http://www.example.com" xmlns:xs="http://www.w3.org/2001/XMLSchema"  xmlns:ex="http://www.example.com">
+                <xs:complexType name="complexType-1">
+                    <xs:sequence>
+                        <xs:element name="diagnostcs">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="table" type="xs:string"/>
+                                    <xs:element name="code">
+                                        <xs:simpleType>
+                                            <xs:restriction base="xs:string">
+                                                <xs:minLength value="1"/>
+                                                <xs:maxLength value="10"/>
+                                            </xs:restriction>
+                                        </xs:simpleType>
+                                    </xs:element>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:schema>
+            ';
+        
+        $classes = $this->getClasses($content);
+        
+        $this->assertCount(2, $classes);
+
+        $this->assertEquals(
+            [
+                'Example\ComplexType1Type' => [
+                    'properties' => [
+                        'diagnostcs' => [
+                            [
+                                'Valid' => null
+                            ],
+                            [
+                                'NotNull' => null
+                            ]
+                        ]
+                    ]
+                ]
+            ], $classes['Example\ComplexType1Type']);
+        
+        $this->assertEquals(
+            [
+                'Example\\ComplexType1Type\\DiagnostcsAType' => [
+                    'properties' => [
+                        'table' => [
+                            [
+                                'NotNull' => null
+                            ]
+                        ],
+                        'code' => [
+                            [
+                                'Length' => [
+                                    'min' => 1
+                                ]
+                            ],
+                            [
+                                'Length' => [
+                                    'max' => 10
+                                ]
+
+                            ],
+                            [
+                                'NotNull' => null
+                            ]
+                        ]
+                    ]
+                ]
+            ], $classes['Example\\ComplexType1Type\\DiagnostcsAType']);
+        
+    }
+    
+    /**
+     * 
+     */
+    public function testComplexTypeWithArrayNestedComplexRestrictionRequired()
+    {
+        $content = '
+             <xs:schema targetNamespace="http://www.example.com" xmlns:xs="http://www.w3.org/2001/XMLSchema"  xmlns:ex="http://www.example.com">
+                <xs:complexType name="complexType-1">
+                    <xs:sequence>
+                        <xs:element name="consult">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="diagnostcs" maxOccurs="unbounded">
+                                        <xs:complexType>
+                                            <xs:sequence>
+                                                <xs:element name="table" type="xs:string"/>
+                                                <xs:element name="code">
+                                                    <xs:simpleType>
+                                                        <xs:restriction base="xs:string">
+                                                            <xs:minLength value="1"/>
+                                                            <xs:maxLength value="10"/>
+                                                        </xs:restriction>
+                                                    </xs:simpleType>
+                                                </xs:element>
+                                            </xs:sequence>
+                                        </xs:complexType>
+                                    </xs:element>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:schema>
+            ';
+        
+        $classes = $this->getClasses($content);
+
+        $this->assertCount(3, $classes);
+
+        $this->assertEquals(
+            [
+                'Example\\ComplexType1Type' => [
+                    'properties' => [
+                        'consult' => [
+                            [
+                                'Valid' => null
+                            ],
+                            [
+                                'NotNull' => null
+                            ]
+                        ]
+                    ]
+                ]
+            ], $classes['Example\\ComplexType1Type']);
+        
+        $this->assertEquals(
+            [
+                'Example\\ComplexType1Type\\ConsultAType\\DiagnostcsAType' => [
+                    'properties' => [
+                        'table' => [
+                            [
+                                'NotNull' => null
+                            ]
+                        ],
+                        'code' => [
+                            [
+                                'Length' => [
+                                    'min' => 1
+                                ]
+                            ],
+                            [
+                                'Length' => [
+                                    'max' => 10
+                                ]
+
+                            ],
+                            [
+                                'NotNull' => null
+                            ]
+                        ]
+                    ]
+                ]
+            ], $classes['Example\\ComplexType1Type\\ConsultAType\\DiagnostcsAType']);
+        
+        $this->assertEquals(
+            [
+                'Example\\ComplexType1Type\\ConsultAType' => [
+                    'properties' => [
+                        'diagnostcs' => [
+                            [
+                                'Count' => [
+                                    'min' => 1
+                                ]
+                            ],
+                            [
+                                'All' => [
+                                    [
+                                        'Valid' => null
+                                    ]
+                                ]
+                            ],
+                            [
+                                'NotNull' => null
+                            ]
+                        ]
+                    ]
+                ]
+            ], $classes['Example\\ComplexType1Type\\ConsultAType']);
+        
     }
     
 }
