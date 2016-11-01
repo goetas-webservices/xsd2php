@@ -52,10 +52,9 @@ class YamlValidatorConverter extends YamlConverter
             $property["validator"] = [];
             $rules = [];
             foreach ($checks as $key => $check) {
-                $rule = null;
-                switch ($key) {
+                    switch ($key) {
                     case 'enumeration':
-                        $rule = [
+                        $rules[] = [
                             'Choice' => [
                                 'choices' => array_map(function ($enum) {
                                     return $enum['value'];
@@ -65,11 +64,11 @@ class YamlValidatorConverter extends YamlConverter
                         break;
                     case 'fractionDigits':
                         foreach ($check as $item) {
-                            $rule = [
+                            $rules[] = [
                                 'Regex' => "/^(\\d+\.\\d{1,{$item['value']}})|\\d*$/"
                             ];
                         }
-                        $rule = [
+                        $rules[] = [
                             'Range' => [
                                 'min' => 0
                             ]
@@ -77,11 +76,11 @@ class YamlValidatorConverter extends YamlConverter
                         break;
                     case 'totalDigits':
                         foreach ($check as $item) {
-                            $rule = [
+                            $rules[] = [
                                 'Regex' => "/^[\\d]{0,{$item['value']}}$/"
                             ];
                         }
-                        $rule = [
+                        $rules[] = [
                             'Range' => [
                                 'min' => 0
                             ]
@@ -89,7 +88,7 @@ class YamlValidatorConverter extends YamlConverter
                         break;
                     case 'length':
                         foreach ($check as $item) {
-                            $rule = [
+                            $rules[] = [
                                 'Length' => [
                                     'min' => $item['value'],
                                     'max' => $item['value']
@@ -99,7 +98,7 @@ class YamlValidatorConverter extends YamlConverter
                         break;
                     case 'maxLength':
                         foreach ($check as $item) {
-                            $rule = [
+                            $rules[] = [
                                 'Length' => [
                                     'max' => $item['value']
                                 ]
@@ -108,7 +107,7 @@ class YamlValidatorConverter extends YamlConverter
                         break;
                     case 'minLength':
                         foreach ($check as $item) {
-                            $rule = [
+                            $rules[] = [
                                 'Length' => [
                                     'min' => $item['value']
                                 ]
@@ -117,47 +116,43 @@ class YamlValidatorConverter extends YamlConverter
                         break;
                     case 'pattern':
                         foreach ($check as $item) {
-                            $rule = [
+                            $rules[] = [
                                 'Regex' => "/^{$item['value']}$/"
                             ];
                         }
                         break;
                     case 'maxExclusive':
                         foreach ($check as $item) {
-                            $rule = [
+                            $rules[] = [
                                 'LessThan' => $item['value']
                             ];
                         }
                         break;
                     case 'maxInclusive':
                         foreach ($check as $item) {
-                            $rule = [
+                            $rules[] = [
                                 'LessThanOrEqual' => $item['value']
                             ];
                         }
                         break;
                     case 'minExclusive':
                         foreach ($check as $item) {
-                            $rule = [
+                            $rules[] = [
                                 'GreaterThan' => $item['value']
                             ];
                         }
                         break;
                     case 'minInclusive':
                         foreach ($check as $item) {
-                            $rule = [
+                            $rules[] = [
                                 'GreaterThanOrEqual' => $item['value']
                             ];
                         }
                         break;
                 }
-
-                if ($rule) {
-                    $rules[] = $rule;
-                }
             }
 
-            if ($rules) {
+            if (!!count($rules)) {
 
                 if ($arrayized){
                     $rules = [
