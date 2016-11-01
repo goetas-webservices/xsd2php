@@ -4,6 +4,7 @@ namespace GoetasWebservices\Xsd\XsdToPhp\Jms;
 use GoetasWebservices\XML\XSDReader\Schema\Element\Element;
 use GoetasWebservices\XML\XSDReader\Schema\Element\ElementItem;
 use GoetasWebservices\XML\XSDReader\Schema\Schema;
+use GoetasWebservices\XML\XSDReader\Schema\Type\ComplexType;
 use GoetasWebservices\XML\XSDReader\Schema\Type\SimpleType;
 use GoetasWebservices\XML\XSDReader\Schema\Type\Type;
 
@@ -47,12 +48,13 @@ class YamlValidatorConverter extends YamlConverter
      */
     private function loadValidatorType(array &$property, Type $type, $arrayized = false)
     {
+        if (!isset($property["validator"])) {
+            $property["validator"] = [];
+        }
+        $rules = [];
+        
         if (($restrictions = $type->getRestriction()) && $checks = $restrictions->getChecks()) {
 
-            if (!isset($property["validator"])) {
-                $property["validator"] = [];
-            }
-            $rules = [];
             foreach ($checks as $key => $check) {
                     switch ($key) {
                     case 'enumeration':
@@ -153,16 +155,21 @@ class YamlValidatorConverter extends YamlConverter
                         break;
                 }
             }
-
-            if (count($rules) !== 0) {
-                if ($arrayized){
-                    $rules = [
-                        ['All' => $rules]
-                    ];
-                }
-                // Merge validator items implemented before
-                $property["validator"] = array_merge($property["validator"], $rules);
+        } else 
+        if ($type instanceof ComplexType) {
+            $rules[] = [
+                'Valid' => null
+            ];
+        }
+        
+        if (count($rules) !== 0) {
+            if ($arrayized){
+                $rules = [
+                    ['All' => $rules]
+                ];
             }
+            // Merge validator items implemented before
+            $property["validator"] = array_merge($property["validator"], $rules);
         }
 
     }
@@ -171,25 +178,27 @@ class YamlValidatorConverter extends YamlConverter
     {
         /* @var $element Element */
         $type = $element->getType();
-
+        
+        $attrs = [];
 
         $arrayized = false;
         if ($arrayize) {
 
-            $attrs = [];
-            if ($itemOfArray = $this->isArrayNestedElement($type)) {
+//            if ($itemOfArray = $this->isArrayNestedElement($type)) {
+//                $attrs = [
+//                    'min' => $itemOfArray->getMin(),
+//                    'max' => $itemOfArray->getMax()
+//                ];
+//                $arrayized = true;
+//            } else
+            if ($itemOfArray = $this->isArrayType($type)) {
                 $attrs = [
                     'min' => $itemOfArray->getMin(),
                     'max' => $itemOfArray->getMax()
                 ];
                 $arrayized = true;
-            } elseif ($itemOfArray = $this->isArrayType($type)) {
-                $attrs = [
-                    'min' => $itemOfArray->getMin(),
-                    'max' => $itemOfArray->getMax()
-                ];
-                $arrayized = true;
-            } elseif ($this->isArrayElement($element)) {
+            } else
+            if ($this->isArrayElement($element)) {
                 $attrs = [
                     'min' => $element->getMin(),
                     'max' => $element->getMax()
@@ -218,7 +227,7 @@ class YamlValidatorConverter extends YamlConverter
         // Required properties
         if ($classType = $this->visitType($type)) {
             if ($element->getMin() !== 0) {
-                if ($arrayized){
+                if ($arrayized && count($attrs) === 0){
                     $property["validator"][] = [
                         'Count' => ['min' => 1]
                     ];
@@ -227,8 +236,7 @@ class YamlValidatorConverter extends YamlConverter
                     'NotNull' => null
                 ];
             }
-
-        }
+        } 
     }
 
     protected function visitSimpleType(&$class, &$data, SimpleType $type, $name)
@@ -256,6 +264,10 @@ class YamlValidatorConverter extends YamlConverter
         $property = parent::visitElement($class, $schema, $element, $arrayize);
         $this->loadValidatorElement($property, $element, $arrayize);
         return $property;
+    }
+    
+    public function visitType(Type $type, $force = true) {
+        return parent::visitType($type, $force);
     }
     
 }
