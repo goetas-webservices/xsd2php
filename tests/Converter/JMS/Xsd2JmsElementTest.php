@@ -111,7 +111,7 @@ class Xsd2PhpElementTest extends Xsd2JmsBase
                                         'getter' => 'value',
                                         'setter' => 'value',
                                     ),
-                                'type' => 'GoetasWebservices\\Xsd\\XsdToPhp\\XMLSchema\\DateTime',
+                                'type' => $phpName,
                             ),
                     ))
         ), $classes['Example\ElementOne']);
@@ -151,7 +151,7 @@ class Xsd2PhpElementTest extends Xsd2JmsBase
                                         'getter' => 'value',
                                         'setter' => 'value',
                                     ),
-                                'type' => 'GoetasWebservices\\Xsd\\XsdToPhp\\XMLSchema\\DateTime',
+                                'type' => $phpName,
                             ),
                     ),
 
