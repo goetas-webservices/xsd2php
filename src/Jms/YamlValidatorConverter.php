@@ -49,7 +49,9 @@ class YamlValidatorConverter extends YamlConverter
     {
         if (($restrictions = $type->getRestriction()) && $checks = $restrictions->getChecks()) {
 
-            $property["validator"] = [];
+            if (!isset($property["validator"])) {
+                $property["validator"] = [];
+            }
             $rules = [];
             foreach ($checks as $key => $check) {
                     switch ($key) {
@@ -152,14 +154,14 @@ class YamlValidatorConverter extends YamlConverter
                 }
             }
 
-            if (!!count($rules)) {
-
+            if (count($rules) !== 0) {
                 if ($arrayized){
                     $rules = [
                         ['All' => $rules]
                     ];
                 }
-                $property["validator"] = $rules;
+                // Merge validator items implemented before
+                $property["validator"] = array_merge($property["validator"], $rules);
             }
         }
 
@@ -195,7 +197,7 @@ class YamlValidatorConverter extends YamlConverter
                 $arrayized = true;
             }
 
-            if (count($attrs)) {
+            if (count($attrs) !== 0) {
                 if ($attrs['min'] === 0) {
                     unset($attrs['min']);
                 }
@@ -255,4 +257,5 @@ class YamlValidatorConverter extends YamlConverter
         $this->loadValidatorElement($property, $element, $arrayize);
         return $property;
     }
+    
 }
