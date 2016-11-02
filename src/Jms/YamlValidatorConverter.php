@@ -266,7 +266,13 @@ class YamlValidatorConverter extends YamlConverter
         return $property;
     }
     
-    public function visitType(Type $type, $force = true) {
+    /**
+     * 
+     * @param Type $type
+     * @param boolean $force
+     * @return array
+     */
+    public function &visitType(Type $type, $force = true) {
         return parent::visitType($type, $force);
     }
     
