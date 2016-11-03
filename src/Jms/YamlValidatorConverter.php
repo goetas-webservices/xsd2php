@@ -7,11 +7,15 @@ use GoetasWebservices\XML\XSDReader\Schema\Schema;
 use GoetasWebservices\XML\XSDReader\Schema\Type\ComplexType;
 use GoetasWebservices\XML\XSDReader\Schema\Type\SimpleType;
 use GoetasWebservices\XML\XSDReader\Schema\Type\Type;
+use GoetasWebservices\XML\XSDReader\Schema\Attribute\AttributeItem;
+use GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPClass;
+use GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPProperty;
 
 class YamlValidatorConverter extends YamlConverter
 {
     /**
-     *
+     * Clean the properties for only remaining valid rules for Symfony Validation Constraints
+     * 
      * @return PHPClass[]
      */
     public function getTypes()
@@ -26,7 +30,8 @@ class YamlValidatorConverter extends YamlConverter
             }
 
             $properties = array_filter(array_map(function ($property) {
-                return !empty($property['validator']) ? $property['validator'] : null;
+                unset($property['type']);
+                return !empty($property) ? $property : null;
             }, $definition[$k]['properties']));
 
             if (empty($properties)) {
@@ -43,20 +48,22 @@ class YamlValidatorConverter extends YamlConverter
     }
 
     /**
+     * Load and convert XSD' restrictions to Symfony Validation Constraints 
+     * from a schema type
+     * 
      * @param array $property
      * @param Type $type
+     * @param boolean $arrayized
      */
     private function loadValidatorType(array &$property, Type $type, $arrayized = false)
     {
-        if (!isset($property["validator"])) {
-            $property["validator"] = [];
-        }
         $rules = [];
         
         if (($restrictions = $type->getRestriction()) && $checks = $restrictions->getChecks()) {
-
+            
+            $isNumeric = false;
             foreach ($checks as $key => $check) {
-                    switch ($key) {
+                switch ($key) {
                     case 'enumeration':
                         $rules[] = [
                             'Choice' => [
@@ -69,14 +76,10 @@ class YamlValidatorConverter extends YamlConverter
                     case 'fractionDigits':
                         foreach ($check as $item) {
                             $rules[] = [
-                                'Regex' => "/^(\\d+\.\\d{1,{$item['value']}})|\\d*$/"
+                                'Regex' => "/^(\\d+\\.\\d{1,{$item['value']}})|\\d*$/"
                             ];
                         }
-                        $rules[] = [
-                            'Range' => [
-                                'min' => 0
-                            ]
-                        ];
+                        $isNumeric = true;
                         break;
                     case 'totalDigits':
                         foreach ($check as $item) {
@@ -84,11 +87,7 @@ class YamlValidatorConverter extends YamlConverter
                                 'Regex' => "/^[\\d]{0,{$item['value']}}$/"
                             ];
                         }
-                        $rules[] = [
-                            'Range' => [
-                                'min' => 0
-                            ]
-                        ];
+                        $isNumeric = true;
                         break;
                     case 'length':
                         foreach ($check as $item) {
@@ -155,6 +154,13 @@ class YamlValidatorConverter extends YamlConverter
                         break;
                 }
             }
+            if ($isNumeric) {
+                $rules[] = [
+                    'Range' => [
+                        'min' => 0
+                    ]
+                ];
+            }
         } else 
         if ($type instanceof ComplexType) {
             $rules[] = [
@@ -169,11 +175,19 @@ class YamlValidatorConverter extends YamlConverter
                 ];
             }
             // Merge validator items implemented before
-            $property["validator"] = array_merge($property["validator"], $rules);
+            $property = array_merge($property, $rules);
         }
 
     }
 
+    /**
+     * Load and convert XSD' restrictions to Symfony Validation Constraints 
+     * from a schema element including required rule
+     * 
+     * @param array $property
+     * @param ElementItem $element
+     * @param boolean $arrayize
+     */
     private function loadValidatorElement(array &$property, ElementItem $element, $arrayize)
     {
         /* @var $element Element */
@@ -183,14 +197,6 @@ class YamlValidatorConverter extends YamlConverter
 
         $arrayized = false;
         if ($arrayize) {
-
-//            if ($itemOfArray = $this->isArrayNestedElement($type)) {
-//                $attrs = [
-//                    'min' => $itemOfArray->getMin(),
-//                    'max' => $itemOfArray->getMax()
-//                ];
-//                $arrayized = true;
-//            } else
             if ($itemOfArray = $this->isArrayType($type)) {
                 $attrs = [
                     'min' => $itemOfArray->getMin(),
@@ -214,12 +220,11 @@ class YamlValidatorConverter extends YamlConverter
                     unset($attrs['max']);
                 }
                 if (count($attrs) !== 0) {
-                    $property["validator"][] = [
+                    $property[] = [
                         'Count' => $attrs
                     ];
                 }
             }
-
         }
 
         $this->loadValidatorType($property, $type, $arrayized);
@@ -228,17 +233,48 @@ class YamlValidatorConverter extends YamlConverter
         if ($classType = $this->visitType($type)) {
             if ($element->getMin() !== 0) {
                 if ($arrayized && count($attrs) === 0){
-                    $property["validator"][] = [
+                    $property[] = [
                         'Count' => ['min' => 1]
                     ];
                 }
-                $property["validator"][] = [
+                $property[] = [
                     'NotNull' => null
                 ];
             }
         } 
     }
+    
+    /**
+     * Load and convert XSD' restrictions to Symfony Validation Constraints 
+     * from a schema attribute including required rule
+     * 
+     * @param array $property
+     * @param AttributeItem $element
+     * @param boolean $arrayize
+     */
+    private function loadValidatorAttribute(array &$property, AttributeItem $attribute)
+    {
+        /* @var $element Element */
+        $type = $attribute->getType();
 
+        $this->loadValidatorType($property, $type, false);
+        
+        // Required properties
+        if ($attribute->getUse() === 'required') {
+            $property[] = [
+                'NotNull' => null
+            ];
+        } 
+    }
+
+    /**
+     * Override necessary to improve method to load validations from schema type
+     * 
+     * @param PHPClass $class
+     * @param array $data
+     * @param SimpleType $type
+     * @param string $name
+     */
     protected function visitSimpleType(&$class, &$data, SimpleType $type, $name)
     {
         parent::visitSimpleType($class, $data, $type, $name);
@@ -246,28 +282,107 @@ class YamlValidatorConverter extends YamlConverter
         if ($restriction = $type->getRestriction()) {
             $parent = $restriction->getBase();
             if ($parent instanceof Type) {
+                if (!isset($data["properties"]['__value'])) {
+                    $data["properties"]['__value'] = [];
+                }                
                 $this->loadValidatorType($data["properties"]['__value'], $type);
             }
         }
     }
 
     /**
-     *
+     * Override necessary to improve method to load validations from schema element
+     * 
      * @param PHPClass $class
      * @param Schema $schema
      * @param ElementItem $element
      * @param boolean $arrayize
-     * @return \GoetasWebservices\Xsd\XsdToPhp\Structure\PHPProperty
+     * @return PHPProperty
      */
     protected function visitElement(&$class, Schema $schema, ElementItem $element, $arrayize = true)
     {
-        $property = parent::visitElement($class, $schema, $element, $arrayize);
+        $property = array();
+
+        $this->findPHPClass($class, $element);
+
         $this->loadValidatorElement($property, $element, $arrayize);
+        
         return $property;
     }
     
-    public function visitType(Type $type, $force = true) {
+    /**
+     * Override necessary to improve method to load validations from schema attribute
+     * 
+     * @param PHPClass $class
+     * @param Schema $schema
+     * @param AttributeItem $attribute
+     * @return array
+     */
+    protected function visitAttribute(&$class, Schema $schema, AttributeItem $attribute)
+    {
+        $property = array();
+
+        $this->loadValidatorAttribute($property, $attribute);
+        
+        return $property;
+    }
+    
+    /**
+     * Override necessary to improve method to don't skip array type, array 
+     * nested element and simple type
+     * 
+     * @param Type $type
+     * @param boolean $force
+     * @return PHPClass
+     */
+    public function visitType(Type $type, $force = true) 
+    {
         return parent::visitType($type, $force);
     }
     
+    /**
+     * Responsible for handler all properties from extension types
+     * 
+     * @param PHPClass $class
+     * @param array $data
+     * @param Type $type
+     * @param string $parentName
+     */
+    protected function handleClassExtension(&$class, &$data, Type $type, $parentName)
+    {
+        if (!isset($data["properties"])) {
+            $data["properties"] = [];
+        }
+        
+        if ($alias = $this->getTypeAlias($type)) {
+            $property["type"] = $alias;
+            $data["properties"]["__value"] = $property;
+        } else {
+            $extension = $this->visitType($type, true);
+            $extension = reset($extension);
+            
+            if (isset($extension['properties']['__value']) && count($extension['properties']) === 1) {
+                $data["properties"]["__value"] = $extension['properties']['__value'];
+            } else 
+            if ($type instanceof SimpleType) { // @todo ?? basta come controllo?
+                $property = array();
+                if ($valueProp = $this->typeHasValue($type, $class, $parentName)) {
+                    $property["type"] = $valueProp;
+                } else {
+                    $property["type"] = key($extension);
+                }
+                $data["properties"]["__value"] = $property;
+            } else
+            if ($type instanceof ComplexType) {
+                if ($properties = $extension['properties']) {
+                    foreach ($properties as $propertyName => $property) {
+                        if (isset($property) && count($property) !== 0) {
+                            $data['properties'][$propertyName] = $property;
+                        }
+                    }
+                }
+            }
+        }
+    }    
+        
 }
