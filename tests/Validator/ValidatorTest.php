@@ -2,10 +2,11 @@
 namespace GoetasWebservices\Xsd\XsdToPhp\Tests\Php\PathGenerator;
 
 use Composer\Autoload\ClassLoader;
-use OTA\AirTravelerType\FlightSegmentRPHsAType;
-use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Validation;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Component\Validator\Constraints\NotNull;
+
+use ota\TestNotNullType;
 
 class ValidatorTest extends \PHPUnit_Framework_TestCase
 {
@@ -17,43 +18,35 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $loader = new ClassLoader();
-        $loader->addPsr4("OTA\\", "/home/goetas/projects/goetas-webservices-xsd2php/ota/php");
+        $loader->addPsr4("ota\\", __DIR__."/ota/php");
         $loader->register();
 
         $builder = Validation::createValidatorBuilder();
 
-        foreach (glob('/home/goetas/projects/goetas-webservices-xsd2php/ota/validator/*.yml') as $file) {
+        foreach (glob(__DIR__.'/ota/validator/*.yml') as $file) {
             $builder->addYamlMapping($file);
         }
 
         $this->validator = $builder->getValidator();
     }
 
-    public function testValidator()
+    public function testNotNullViolations()
     {
-
-        $object = new FlightSegmentRPHsAType();
-        /**
-         * @var $violations ConstraintViolationListInterface
-         */
+        
+        $object = new TestNotNullType();
         $violations = $this->validator->validate($object);
-        $this->assertGreaterThan(0, count($violations));
-
-        $object = new FlightSegmentRPHsAType();
-        $object->addToFlightSegmentRPH("---");
-        /**
-         * @var $violations ConstraintViolationListInterface
-         */
+        
+        $this->assertEquals(1, count($violations));
+        
+        $this->assertEquals(NotNull::IS_NULL_ERROR, $violations[0]->getCode());
+        
+        $object->setValue('My value');
         $violations = $this->validator->validate($object);
-        $this->assertGreaterThan(0, count($violations));
-
-        $object = new FlightSegmentRPHsAType();
-        $object->addToFlightSegmentRPH("12345678");
-        /**
-         * @var $violations ConstraintViolationListInterface
-         */
-        $violations = $this->validator->validate($object);
+        
         $this->assertEquals(0, count($violations));
+        
     }
+
+    
 
 }
