@@ -984,4 +984,95 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
         
     }
     
+    
+    /**
+     * 
+     */
+    public function testComplexTypeWithExtension_1()
+    {
+        $content = '
+            <xs:schema targetNamespace="http://www.example.com" xmlns:xs="http://www.w3.org/2001/XMLSchema"  xmlns:ex="http://www.example.com">
+                <xs:complexType name="personinfo">
+                    <xs:sequence>
+                        <xs:element name="firstname" type="xs:string"/>
+                        <xs:element name="lastname" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+                <xs:complexType name="fullpersoninfo">
+                    <xs:complexContent>
+                        <xs:extension base="personinfo">
+                            <xs:attribute name="lang" type="xs:string" use="required" /> 
+                            <xs:sequence>
+                                <xs:element name="address" type="xs:string"/>
+                                <xs:element name="city" type="xs:string"/>
+                                <xs:element name="country" type="xs:string"/>
+                            </xs:sequence>
+                        </xs:extension>
+                    </xs:complexContent>
+                </xs:complexType>
+            </xs:schema>
+            ';
+        
+        $classes = $this->getClasses($content);
+      
+        $this->assertCount(2, $classes);
+
+        $this->assertEquals(
+            [
+                'Example\\FullpersoninfoType' => [
+                    'properties' => [
+                        'firstname' => [
+                            [
+                                'NotNull' => null
+                            ]
+                        ],
+                        'lastname' => [
+                            [
+                                'NotNull' => null
+                            ]
+                        ],
+                        'lang' => [
+                            [
+                                'NotNull' => null
+                            ]
+                        ],
+                        'address' => [
+                            [
+                                'NotNull' => null
+                            ]
+                        ],
+                        'city' => [
+                            [
+                                'NotNull' => null
+                            ]
+                        ],
+                        'country' => [
+                            [
+                                'NotNull' => null
+                            ]
+                        ]
+                    ]
+                ]
+            ], $classes['Example\\FullpersoninfoType']);
+        
+        $this->assertEquals(
+            [
+                'Example\\PersoninfoType' => [
+                    'properties' => [
+                        'firstname' => [
+                            [
+                                'NotNull' => null
+                            ]
+                        ],
+                        'lastname' => [
+                            [
+                                'NotNull' => null
+                            ]
+                        ]
+                    ]
+                ]
+            ], $classes['Example\\PersoninfoType']);
+        
+    }
+    
 }
