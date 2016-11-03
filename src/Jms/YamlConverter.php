@@ -293,7 +293,7 @@ class YamlConverter extends AbstractConverter
         }
     }
 
-    private function handleClassExtension(&$class, &$data, Type $type, $parentName)
+    protected function handleClassExtension(&$class, &$data, Type $type, $parentName)
     {
         if ($alias = $this->getTypeAlias($type)) {
 
@@ -334,7 +334,7 @@ class YamlConverter extends AbstractConverter
         }
     }
 
-    private function visitAttribute(&$class, Schema $schema, AttributeItem $attribute)
+    protected function visitAttribute(&$class, Schema $schema, AttributeItem $attribute)
     {
         $property = array();
         $property["expose"] = true;
@@ -368,7 +368,7 @@ class YamlConverter extends AbstractConverter
         return $property;
     }
 
-    private function typeHasValue(Type $type, $parentClass, $name)
+    protected function typeHasValue(Type $type, $parentClass, $name)
     {
         do {
             if ($alias = $this->getTypeAlias($type)) {
@@ -468,7 +468,7 @@ class YamlConverter extends AbstractConverter
         return $property;
     }
 
-    private function findPHPClass(&$class, Item $node)
+    protected function findPHPClass(&$class, Item $node)
     {
         $type = $node->getType();
 
