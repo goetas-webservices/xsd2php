@@ -162,7 +162,7 @@ class YamlValidatorConverter extends YamlConverter
                 ];
             }
         } else 
-        if ($type instanceof ComplexType) {
+        if ($type instanceof ComplexType && !$arrayized) {
             $rules[] = [
                 'Valid' => null
             ];
