@@ -19,7 +19,7 @@ class Psr4PathGenerator extends Psr4PathGeneratorBase implements PathGenerator
                     throw new PathGeneratorException("Can't create the folder '$dir'");
                 }
                 $f = trim(strtr(substr($ns, strlen($namespace)), "\\/", ".."), ".");
-                return $dir . "/" . $f . ".yml";
+                return sprintf('%s/%s.%s.yml', $dir, str_replace('\\', '.', $namespace), $f);
             }
         }
         throw new PathGeneratorException("Can't find a defined location where save '$ns' metadata");
