@@ -335,7 +335,7 @@ class YamlValidatorConverter extends YamlConverter
      * @param boolean $force
      * @return PHPClass
      */
-    public function visitType(Type $type, $force = true) 
+    public function &visitType(Type $type, $force = true) 
     {
         return parent::visitType($type, $force);
     }
