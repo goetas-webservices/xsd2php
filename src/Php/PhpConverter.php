@@ -441,11 +441,42 @@ class PhpConverter extends AbstractConverter
         if ($node instanceof ElementRef) {
             return $this->visitElementDef($node->getReferencedElement());
         }
-
+        if ($valueProp = $this->typeHasValue($node->getType(), $class, '')) {
+            return $valueProp;
+        }
         if (!$node->getType()->getName()) {
             return $this->visitTypeAnonymous($node->getType(), $node->getName(), $class);
         } else {
             return $this->visitType($node->getType(), $force);
         }
+    }
+
+    private function typeHasValue(Type $type, PHPClass $parentClass, $name)
+    {
+        do {
+            if (!($type instanceof SimpleType)) {
+                return false;
+            }
+
+            if ($alias = $this->getTypeAlias($type)) {
+                return PHPClass::createFromFQCN($alias);
+            }
+
+            if ($type->getName()) {
+                $parentClass = $this->visitType($type);
+            } else {
+                $parentClass = $this->visitTypeAnonymous($type, $name, $parentClass);
+            }
+
+            if ($prop = $parentClass->getPropertyInHierarchy('__value')) {
+                return $prop->getType();
+            }
+        } while (
+            (method_exists($type, 'getRestriction') && $type->getRestriction() && $type = $type->getRestriction()->getBase())
+            ||
+            (method_exists($type, 'getUnions') && $type->getUnions() && $type = reset($type->getUnions()))
+        );
+
+        return false;
     }
 }
