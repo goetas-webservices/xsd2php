@@ -472,9 +472,9 @@ class PhpConverter extends AbstractConverter
                 return $prop->getType();
             }
         } while (
-            (method_exists($type, 'getRestriction') && $type->getRestriction() && $type = $type->getRestriction()->getBase())
+            (method_exists($type, 'getRestriction') && ($rest = $type->getRestriction()) && $type = $rest->getBase())
             ||
-            (method_exists($type, 'getUnions') && $type->getUnions() && $type = reset($type->getUnions()))
+            (method_exists($type, 'getUnions') && ($unions = $type->getUnions()) && $type = reset($unions))
         );
 
         return false;
