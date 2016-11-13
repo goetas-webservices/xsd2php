@@ -35,6 +35,9 @@
     "jms/serializer": "^1.3",
     "goetas-webservices/xsd2php-runtime": "^0.2.2"
   },
+  "conflicts": {
+    "jms/serializer": "1.4.1"
+  },
   "autoload": {
     "psr-4": {
       "GoetasWebservices\\Xsd\\XsdToPhp\\": "src/"
