@@ -62,6 +62,21 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
                                     </xs:sequence>
                                 </xs:complexType>
                             </xs:element>
+                            <xs:element name="string3">
+                                <xs:simpleType>
+                                    <xs:union memberTypes="xs:string xs:int"></xs:union>
+                                </xs:simpleType>
+                            </xs:element>  
+                            <xs:element name="string4">
+                                <xs:simpleType>
+                                    <xs:restriction base="ex:foo"></xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>   
+                            <xs:element name="string5">
+                                <xs:simpleType>
+                                    <xs:union memberTypes="ex:foo"></xs:union>
+                                </xs:simpleType>
+                            </xs:element>                                
                         </xs:sequence>
                         <xs:attribute name="att">
                             <xs:simpleType>
@@ -69,6 +84,9 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
                             </xs:simpleType>
                         </xs:attribute>
                     </xs:complexType>
+                    <xs:simpleType name="foo">
+                        <xs:restriction base="xs:string"></xs:restriction>
+                    </xs:simpleType>                    
             </xs:schema>
             ';
         $classes = $this->getClasses($content);
@@ -117,7 +135,52 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
                                 'setter' => 'setString2'
                             ),
                             'type' => 'Example\\ComplexType1Type\\String2AType'
-                        )
+                        ),
+                        'string3' => array(
+                            'expose' => true,
+                            'access_type' => 'public_method',
+                            'serialized_name' => 'string3',
+                            /*
+                            'xml_element' => array(
+                                'namespace' => 'http://www.example.com'
+                            ),
+                            */
+                            'accessor' => array(
+                                'getter' => 'getString3',
+                                'setter' => 'setString3'
+                            ),
+                            'type' => 'string'
+                        ),
+                        'string4' => array(
+                            'expose' => true,
+                            'access_type' => 'public_method',
+                            'serialized_name' => 'string4',
+                            /*
+                            'xml_element' => array(
+                                'namespace' => 'http://www.example.com'
+                            ),
+                            */
+                            'accessor' => array(
+                                'getter' => 'getString4',
+                                'setter' => 'setString4'
+                            ),
+                            'type' => 'string'
+                        ),
+                        'string5' => array(
+                            'expose' => true,
+                            'access_type' => 'public_method',
+                            'serialized_name' => 'string5',
+                            /*
+                            'xml_element' => array(
+                                'namespace' => 'http://www.example.com'
+                            ),
+                            */
+                            'accessor' => array(
+                                'getter' => 'getString5',
+                                'setter' => 'setString5'
+                            ),
+                            'type' => 'string'
+                        ),
                     )
                 )
             ), $classes['Example\\ComplexType1Type']);

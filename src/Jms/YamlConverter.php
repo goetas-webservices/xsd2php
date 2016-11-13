@@ -372,21 +372,23 @@ class YamlConverter extends AbstractConverter
 
     private function typeHasValue(Type $type, $parentClass, $name)
     {
-        $collected = array();
         do {
+            if (!($type instanceof SimpleType)) {
+                return false;
+            }
+
             if ($alias = $this->getTypeAlias($type)) {
                 return $alias;
-            } else {
+            }
 
-                if ($type->getName()) {
-                    $parentClass = $this->visitType($type);
-                } else {
-                    $parentClass = $this->visitTypeAnonymous($type, $name, $parentClass);
-                }
-                $props = reset($parentClass);
-                if (isset($props['properties']['__value']) && count($props['properties']) === 1) {
-                    return $props['properties']['__value']['type'];
-                }
+            if ($type->getName()) {
+                $parentClass = $this->visitType($type);
+            } else {
+                $parentClass = $this->visitTypeAnonymous($type, $name, $parentClass);
+            }
+            $props = reset($parentClass);
+            if (isset($props['properties']['__value']) && count($props['properties']) === 1) {
+                return $props['properties']['__value']['type'];
             }
         } while (method_exists($type, 'getRestriction') && $type->getRestriction() && $type = $type->getRestriction()->getBase());
 
