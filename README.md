@@ -65,12 +65,12 @@ Here is an explanation on the meaning of each parameter:
 
 
 * `xsd2php.destinations_php` (required) specifies the directory where to save the PHP classes that belongs to 
- `TestNs\MyApp` PHP namespace. (in this example `TestNs\MyApp` classes will ne saved into `soap/src` directory.
+ `TestNs\MyApp` PHP namespace. (in this example `TestNs\MyApp` classes will be saved into `soap/src` directory.
  
 
 * `xsd2php.destinations_jms` (required) specifies the directory where to save JMS Serializer metadata files 
  that belongs to `TestNs\MyApp` PHP namespace. 
- (in this example `TestNs\MyApp` metadata will ne saved into `soap/metadata` directory.
+ (in this example `TestNs\MyApp` metadata will be saved into `soap/metadata` directory.
  
  
 * `xsd2php.aliases` (optional) specifies some mappings that are handled by custom JMS serializer handlers.
