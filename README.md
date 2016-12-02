@@ -87,7 +87,7 @@ Here is an explanation on the meaning of each parameter:
 ## Generate PHP classes and JMS metadata info
 
 ```sh
-bin/xsd2php convert config.yml /home/my/ota/OTA_Air*.xsd
+vendor/bin/xsd2php convert config.yml /home/my/ota/OTA_Air*.xsd
 
 ```
 
