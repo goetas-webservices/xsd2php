@@ -22,7 +22,7 @@ class Psr4PathGenerator extends Psr4PathGeneratorBase implements PathGenerator
             }
         }
 
-        throw new PathGeneratorException("Can't find a defined location where save '{$php->getNamespaceName()}\\{$php->getName()}' object");
+        throw new PathGeneratorException("Unable to determine location to save PHP class '{$php->getNamespaceName()}\\{$php->getName()}'");
     }
 }
 
