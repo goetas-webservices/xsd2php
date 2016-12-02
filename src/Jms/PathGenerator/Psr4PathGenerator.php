@@ -22,7 +22,7 @@ class Psr4PathGenerator extends Psr4PathGeneratorBase implements PathGenerator
                 return $dir . "/" . $f . ".yml";
             }
         }
-        throw new PathGeneratorException("Can't find a defined location where save '$ns' metadata");
+        throw new PathGeneratorException("Unable to determine location to save JMS metadata for class '$ns'");
     }
 }
 
