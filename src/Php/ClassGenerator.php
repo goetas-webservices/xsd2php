@@ -345,6 +345,7 @@ class ClassGenerator
                     $tag->setTypes($t->getPhpType() . "[]");
                 }
             }
+            $generatedProp->setDefaultValue($type->getArg()->getDefault());
         } elseif ($type) {
 
             if ($type->isNativeType()) {
