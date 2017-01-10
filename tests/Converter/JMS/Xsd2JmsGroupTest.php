@@ -327,16 +327,19 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
     public function testArray()
     {
         $content = '
-             <xs:schema targetNamespace="http://www.example.com" xmlns:xs="http://www.w3.org/2001/XMLSchema"  xmlns:ex="http://www.example.com">
+             <xs:schema 
+                targetNamespace="http://www.example.com" 
+                xmlns:xs="http://www.w3.org/2001/XMLSchema"  
+                xmlns:ex="http://www.example.com">
                    <xs:complexType name="complexType-1">
                         <xs:sequence>
-                            <xs:element name="strings" type="ex:ArrayOfStrings"></xs:element>
+                            <xs:element name="strings" type="ex:ArrayOfStrings"/>
                         </xs:sequence>
                     </xs:complexType>
 
                     <xs:complexType name="ArrayOfStrings">
                         <xs:sequence>
-                            <xs:element name="string" type="xs:string" maxOccurs="unbounded" minOccurs="1"></xs:element>
+                            <xs:element name="string" type="xs:string" maxOccurs="unbounded" minOccurs="1"/>
                         </xs:sequence>
                     </xs:complexType>
             </xs:schema>
@@ -365,7 +368,6 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
                             'xml_list' => array(
                                 'inline' => false,
                                 'entry_name' => 'string',
-                                'namespace' => 'http://www.example.com'
                             )
                         )
                     )
@@ -568,7 +570,7 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
         $this->assertEquals(
             array(
                 'Example\\Element1' => array(
-                    'xml_root_name' => 'element-1',
+                    'xml_root_name' => 'ns-8ece61d2:element-1',
                     'xml_root_namespace' => 'http://www.example.com',
                     'properties' => array(
                         '__value' => array(
