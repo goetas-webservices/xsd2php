@@ -145,6 +145,10 @@ class YamlConverter extends AbstractConverter
 
             if ($schema->getTargetNamespace()) {
                 $data["xml_root_namespace"] = $schema->getTargetNamespace();
+
+                if (!$schema->getElementsQualification() && !($element instanceof Element && $element->isQualified())) {
+                    $data["xml_root_name"] = "ns-" . substr(sha1($data["xml_root_namespace"]), 0, 8) . ":" . $data["xml_root_name"];
+                }
             }
             $this->classes[spl_object_hash($element)]["class"] = &$class;
 
@@ -361,7 +365,7 @@ class YamlConverter extends AbstractConverter
 
             $property["xml_list"]["inline"] = false;
             $property["xml_list"]["entry_name"] = $itemOfArray->getName();
-            if ($schema->getTargetNamespace()) {
+            if ($schema->getTargetNamespace() && ($schema->getElementsQualification() || ($itemOfArray instanceof Element && $itemOfArray->isQualified()))) {
                 $property["xml_list"]["entry_namespace"] = $schema->getTargetNamespace();
             }
         } else {
@@ -432,7 +436,8 @@ class YamlConverter extends AbstractConverter
                 $property["type"] = "array<" . $visited["type"] . ">";
                 $property["xml_list"]["inline"] = false;
                 $property["xml_list"]["entry_name"] = $itemOfArray->getName();
-                if ($schema->getTargetNamespace()) {
+
+                if ($schema->getTargetNamespace() && ($schema->getElementsQualification() || ($element instanceof Element && $element->isQualified()))) {
                     $property["xml_list"]["namespace"] = $schema->getTargetNamespace();
                 }
                 return $property;
@@ -453,14 +458,14 @@ class YamlConverter extends AbstractConverter
 
                 $property["xml_list"]["inline"] = false;
                 $property["xml_list"]["entry_name"] = $itemOfArray->getName();
-                if ($schema->getTargetNamespace()) {
+                if ($schema->getTargetNamespace() && ($schema->getElementsQualification() || ($element instanceof Element && $element->isQualified()))) {
                     $property["xml_list"]["namespace"] = $schema->getTargetNamespace();
                 }
                 return $property;
             } elseif ($this->isArrayElement($element)) {
                 $property["xml_list"]["inline"] = true;
                 $property["xml_list"]["entry_name"] = $element->getName();
-                if ($schema->getTargetNamespace()) {
+                if ($schema->getTargetNamespace() && ($schema->getElementsQualification() || ($element instanceof Element && $element->isQualified()))) {
                     $property["xml_list"]["namespace"] = $schema->getTargetNamespace();
                 }
 
