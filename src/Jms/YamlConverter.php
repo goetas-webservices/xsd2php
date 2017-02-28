@@ -347,8 +347,8 @@ class YamlConverter extends AbstractConverter
         $property["access_type"] = "public_method";
         $property["serialized_name"] = $attribute->getName();
 
-        $property["accessor"]["getter"] = "get" . Inflector::classify($attribute->getName());
-        $property["accessor"]["setter"] = "set" . Inflector::classify($attribute->getName());
+        $property["accessor"]["getter"] = "get" . Inflector::classify($this->getNamingStrategy()->getPropertyName($attribute));
+        $property["accessor"]["setter"] = "set" . Inflector::classify($this->getNamingStrategy()->getPropertyName($attribute));
 
         $property["xml_attribute"] = true;
 
@@ -418,8 +418,8 @@ class YamlConverter extends AbstractConverter
             $property["xml_element"]["namespace"] = $element->getSchema()->getTargetNamespace();
         }
 
-        $property["accessor"]["getter"] = "get" . Inflector::classify($element->getName());
-        $property["accessor"]["setter"] = "set" . Inflector::classify($element->getName());
+        $property["accessor"]["getter"] = "get" . Inflector::classify($this->getNamingStrategy()->getPropertyName($element));
+        $property["accessor"]["setter"] = "set" . Inflector::classify($this->getNamingStrategy()->getPropertyName($element));
         $t = $element->getType();
 
         if ($arrayize) {
