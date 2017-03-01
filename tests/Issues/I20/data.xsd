@@ -1,0 +1,8 @@
+<xs:schema elementFormDefault="qualified" targetNamespace="http://www.example.com" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://www.example2.com">
+    <xs:import namespace="http://www.example2.com" schemaLocation="data2.xsd"/>
+    <xs:complexType name="complexType1">
+        <xs:sequence>
+            <xs:element name="ElementList" type="ns2:ElementList"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
