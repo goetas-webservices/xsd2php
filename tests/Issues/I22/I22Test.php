@@ -1,11 +1,11 @@
 <?php
-namespace GoetasWebservices\Xsd\XsdToPhp\Tests\Issues\I20;
+namespace GoetasWebservices\Xsd\XsdToPhp\Tests\Issues\I22;
 
 use GoetasWebservices\XML\XSDReader\SchemaReader;
 use GoetasWebservices\Xsd\XsdToPhp\Jms\YamlConverter;
 use GoetasWebservices\Xsd\XsdToPhp\Naming\ShortNamingStrategy;
 
-class I20Test extends \PHPUnit_Framework_TestCase{
+class I22Test extends \PHPUnit_Framework_TestCase{
 
     public function testNamespace()
     {
