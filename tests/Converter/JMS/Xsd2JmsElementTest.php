@@ -83,7 +83,7 @@ class Xsd2PhpElementTest extends Xsd2JmsBase
     /**
      * @dataProvider getBaseTypeConversions
      */
-    public function testElementOfBaseType($xsType, $phpName)
+    public function testElementOfBaseType($xsType, $phpName, $jmsType)
     {
         $xml = '
              <xs:schema targetNamespace="http://www.example.com" xmlns:xs="http://www.w3.org/2001/XMLSchema">
@@ -108,7 +108,7 @@ class Xsd2PhpElementTest extends Xsd2JmsBase
                             'getter' => 'value',
                             'setter' => 'value',
                         ),
-                        'type' => 'GoetasWebservices\\Xsd\\XsdToPhp\\XMLSchema\\DateTime',
+                        'type' => $jmsType,
                     ),
                 ))
         ), $classes['Example\ElementOne']);
@@ -117,7 +117,7 @@ class Xsd2PhpElementTest extends Xsd2JmsBase
     /**
      * @dataProvider getBaseTypeConversions
      */
-    public function testElementOfBaseTypeAnon($xsType, $phpName)
+    public function testElementOfBaseTypeAnon($xsType, $phpName, $jmsType)
     {
         $xml = '
              <xs:schema targetNamespace="http://www.example.com" xmlns:xs="http://www.w3.org/2001/XMLSchema">
@@ -145,7 +145,7 @@ class Xsd2PhpElementTest extends Xsd2JmsBase
                             'getter' => 'value',
                             'setter' => 'value',
                         ),
-                        'type' => 'GoetasWebservices\\Xsd\\XsdToPhp\\XMLSchema\\DateTime',
+                        'type' => $jmsType,
                     ),
                 ),
 

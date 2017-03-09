@@ -35,7 +35,7 @@ class YamlConverter extends AbstractConverter
             return "GoetasWebservices\Xsd\XsdToPhp\XMLSchema\Time";
         });
         $this->addAliasMap("http://www.w3.org/2001/XMLSchema", "date", function (Type $type) {
-            return "DateTime<'Y-m-d'>";
+            return "GoetasWebservices\Xsd\XsdToPhp\XMLSchema\Date";
         });
     }
 
