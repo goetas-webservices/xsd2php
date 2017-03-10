@@ -38,7 +38,8 @@ abstract class Xsd2JmsBase extends \PHPUnit_Framework_TestCase
     public function getBaseTypeConversions()
     {
         return [
-            ['xs:dateTime', 'DateTime'],
+            ['xs:dateTime', 'DateTime', 'GoetasWebservices\\Xsd\\XsdToPhp\\XMLSchema\\DateTime'],
+            ['xs:date', 'DateTime', 'GoetasWebservices\\Xsd\\XsdToPhp\\XMLSchema\\Date'],
         ];
     }
 
