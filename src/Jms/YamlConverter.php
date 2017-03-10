@@ -437,8 +437,8 @@ class YamlConverter extends AbstractConverter
                 $property["xml_list"]["inline"] = false;
                 $property["xml_list"]["entry_name"] = $itemOfArray->getName();
 
-                if ($schema->getTargetNamespace() && ($schema->getElementsQualification() || ($element instanceof Element && $element->isQualified()))) {
-                    $property["xml_list"]["namespace"] = $schema->getTargetNamespace();
+                if ($itemOfArray->getSchema()->getTargetNamespace() && ($itemOfArray->getSchema()->getElementsQualification())) {
+                    $property["xml_list"]["namespace"] = $itemOfArray->getSchema()->getTargetNamespace();
                 }
                 return $property;
             } elseif ($itemOfArray = $this->isArrayType($t)) {
