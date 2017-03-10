@@ -318,4 +318,46 @@ class Xsd2PhpElementTest extends Xsd2JmsBase
 
         $this->assertEquals($expected, $classes);
     }
+
+    public function testSetterNamingStrategy()
+    {
+        $xsd = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+            <xs:schema version="1.0"
+                targetNamespace="http://www.example.com"
+                xmlns:tns="http://www.example.com"
+                xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                elementFormDefault="unqualified">
+
+                <xs:complexType name="childType">
+                    <xs:sequence>
+                        <xs:element name="ns.value" type="xs:string" />
+                    </xs:sequence>
+                </xs:complexType>
+
+            </xs:schema>
+            ';
+        $classes = $this->getClasses($xsd);
+
+        $this->assertCount(1, $classes);
+
+        $this->assertEquals(
+            array(
+                'Example\\ChildType' => array(
+                    'Example\\ChildType' => array(
+                        'properties' => array(
+                            'nsValue' => array(
+                                'expose' => true,
+                                'access_type' => 'public_method',
+                                'serialized_name' => 'ns.value',
+                                'accessor' => array(
+                                    'getter' => 'getNsValue',
+                                    'setter' => 'setNsValue'
+                                ),
+                                'type' => 'string'
+                            )
+                        )
+                    )
+                )
+            ), $classes);
+    }
 }
