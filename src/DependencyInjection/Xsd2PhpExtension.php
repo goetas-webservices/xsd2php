@@ -45,6 +45,8 @@ class Xsd2PhpExtension extends Extension
                     $converter->addMethodCall('addAliasMapType', [$xml, $type, self::sanitizePhp($php)]);
                 }
             }
+
+            $converter->addMethodCall('setSimplifyNestedArrays', [$config['simplify_nested_arrays']]);
         }
 
         $container->setParameter('goetas_webservices.xsd2php.config', $config);
