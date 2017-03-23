@@ -422,7 +422,7 @@ class PhpConverter extends AbstractConverter
                 $arg->setType($classType);
                 $property->setType(new PHPClassOf($arg));
                 return $property;
-            } elseif ($itemOfArray = $this->isArrayNestedElement($t)) {
+            } elseif ($this->shouldSimplifyNestedArrays() && ($itemOfArray = $this->isArrayNestedElement($t))) {
                 if (!$t->getName()) {
                     $classType = $this->visitTypeAnonymous($t, $element->getName(), $class);
                 } else {
