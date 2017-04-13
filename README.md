@@ -42,11 +42,13 @@ Suppose that you have all XSD files in `/home/my/ota`, first of all we need a co
 
 ```yml
 # config.yml
+# Linux Users: PHP Namespaces use back slash \ rather than a forward slash /
+# So for destinations_php, the namespace would be TestNs\MyApp
 
 xsd2php:
   namespaces:
     'http://www.example.org/test/': 'TestNs/MyApp'
-  destinations_php:
+  destinations_php: 
     'TestNs/MyApp': soap/src
   destinations_jms:
     'TestNs/MyApp': soap/metadata
