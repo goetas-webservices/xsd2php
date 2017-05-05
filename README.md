@@ -42,11 +42,13 @@ Suppose that you have all XSD files in `/home/my/ota`, first of all we need a co
 
 ```yml
 # config.yml
+# Linux Users: PHP Namespaces use back slash \ rather than a forward slash /
+# So for destinations_php, the namespace would be TestNs\MyApp
 
 xsd2php:
   namespaces:
     'http://www.example.org/test/': 'TestNs/MyApp'
-  destinations_php:
+  destinations_php: 
     'TestNs/MyApp': soap/src
   destinations_jms:
     'TestNs/MyApp': soap/metadata
@@ -119,7 +121,7 @@ use GoetasWebservices\Xsd\XsdToPhpRuntime\Jms\Handler\BaseTypesHandler;
 use GoetasWebservices\Xsd\XsdToPhpRuntime\Jms\Handler\XmlSchemaDateHandler;
 
 $serializerBuilder = SerializerBuilder::create();
-$serializerBuilder->addMetadataDir('metadata dir', 'DemoNs');
+$serializerBuilder->addMetadataDir('metadata dir', 'TestNs');
 $serializerBuilder->configureHandlers(function (HandlerRegistryInterface $handler) use ($serializerBuilder) {
     $serializerBuilder->addDefaultHandlers();
     $handler->registerSubscribingHandler(new BaseTypesHandler()); // XMLSchema List handling
@@ -131,7 +133,7 @@ $serializerBuilder->configureHandlers(function (HandlerRegistryInterface $handle
 $serializer = $serializerBuilder->build();
 
 // deserialize the XML into Demo\MyObject object
-$object = $serializer->deserialize('<some xml/>', 'DemoNs\MyObject', 'xml');
+$object = $serializer->deserialize('<some xml/>', 'TestNs\MyObject', 'xml');
 
 // some code ....
 
