@@ -47,11 +47,11 @@ Suppose that you have all XSD files in `/home/my/ota`, first of all we need a co
 
 xsd2php:
   namespaces:
-    'http://www.example.org/test/': 'TestNs/MyApp'
+    'http://www.example.org/test/': 'TestNs\MyApp'
   destinations_php: 
-    'TestNs/MyApp': soap/src
+    'TestNs\MyApp': soap/src
   destinations_jms:
-    'TestNs/MyApp': soap/metadata
+    'TestNs\MyApp': soap/metadata
   aliases: # optional
     'http://www.example.org/test/':
       MyCustomXSDType:  'MyCustomMappedPHPType'
