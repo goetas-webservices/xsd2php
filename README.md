@@ -50,8 +50,10 @@ xsd2php:
     'http://www.example.org/test/': 'TestNs\MyApp'
   destinations_php: 
     'TestNs\MyApp': soap/src
+#    'TestNs\MyApp': soap\src  #  on Windows
   destinations_jms:
     'TestNs\MyApp': soap/metadata
+#    'TestNs\MyApp': soap\metadata  #  on Windows    
   aliases: # optional
     'http://www.example.org/test/':
       MyCustomXSDType:  'MyCustomMappedPHPType'
