@@ -26,6 +26,11 @@ abstract class AbstractConverter
     );
 
     /**
+     * @var bool
+     */
+    protected $simplifyNestedArrays = true;
+
+    /**
      * @var \GoetasWebservices\Xsd\XsdToPhp\Naming\NamingStrategy
      */
     private $namingStrategy;
@@ -238,4 +243,19 @@ abstract class AbstractConverter
         return $this->namespaces;
     }
 
+    /**
+     * @param bool $simplify
+     */
+    public function setSimplifyNestedArrays($simplify = true)
+    {
+        $this->simplifyNestedArrays = $simplify;
+    }
+
+    /**
+     * @return bool
+     */
+    public function shouldSimplifyNestedArrays()
+    {
+        return $this->simplifyNestedArrays;
+    }
 }

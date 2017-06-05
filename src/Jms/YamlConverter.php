@@ -424,7 +424,7 @@ class YamlConverter extends AbstractConverter
 
         if ($arrayize) {
 
-            if ($itemOfArray = $this->isArrayNestedElement($t)) {
+            if ($this->shouldSimplifyNestedArrays() && ($itemOfArray = $this->isArrayNestedElement($t))) {
                 if (!$t->getName()) {
                     $classType = $this->visitTypeAnonymous($t, $element->getName(), $class);
                 } else {
