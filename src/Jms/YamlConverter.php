@@ -234,22 +234,25 @@ class YamlConverter extends AbstractConverter
 
     private function &visitTypeAnonymous(Type $type, $parentName, $parentClass)
     {
-        $class = array();
-        $data = array();
+        if (!isset($this->classes[spl_object_hash($type)])) {
+            $class = array();
+            $data = array();
 
-        $name = $this->getNamingStrategy()->getAnonymousTypeName($type, $parentName);
+            $name = $this->getNamingStrategy()->getAnonymousTypeName($type, $parentName);
 
-        $class[key($parentClass) . "\\" . $name] = &$data;
+            $class[key($parentClass) . "\\" . $name] = &$data;
 
-        $this->visitTypeBase($class, $data, $type, $parentName);
-        if ($parentName) {
-            $this->classes[spl_object_hash($type)]["class"] = &$class;
+            $this->visitTypeBase($class, $data, $type, $parentName);
+            if ($parentName) {
+                $this->classes[spl_object_hash($type)]["class"] = &$class;
 
-            if ($type instanceof SimpleType) {
-                $this->classes[spl_object_hash($type)]["skip"] = true;
+                if ($type instanceof SimpleType) {
+                    $this->classes[spl_object_hash($type)]["skip"] = true;
+                }
             }
+            $this->classes[spl_object_hash($type)]["class"] = &$class;
         }
-        return $class;
+        return $this->classes[spl_object_hash($type)]["class"];
     }
 
     private function visitComplexType(&$class, &$data, ComplexType $type)
