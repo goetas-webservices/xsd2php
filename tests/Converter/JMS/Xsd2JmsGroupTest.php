@@ -210,6 +210,45 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
             ), $classes['Example\\ComplexType1Type\\String2AType']);
     }
 
+    public function testSomeAnonymousWithRefs()
+    {
+        error_reporting(error_reporting() & ~E_NOTICE);
+        $content = '
+             <xs:schema targetNamespace="http://www.example.com" xmlns:xs="http://www.w3.org/2001/XMLSchema"  xmlns:ex="http://www.example.com">
+                    <xs:complexType name="AddressBook">
+                        <xs:sequence>
+                            <xs:element ref="Contacts" minOccurs="0"/>                                                            
+                        </xs:sequence>
+                    </xs:complexType>    
+                    <xs:element name="Contacts">
+                        <xs:complexType>
+                             <xs:sequence>
+                                <xs:element name="Contact" maxOccurs="unbounded">
+                                    <xs:complexType>
+                                        <xs:sequence>
+                                             <xs:element name="Phone" type="xs:string"/>        
+                                        </xs:sequence>
+                                    </xs:complexType>
+                                </xs:element>                                                                         
+                            </xs:sequence>
+                        </xs:complexType>
+                    
+                    </xs:element>
+            </xs:schema>
+            ';
+        $classes = $this->getClasses($content);
+        $this->assertCount(4, $classes);
+
+        $this->assertArrayHasKey('Example\AddressBookType', $classes);
+        $this->assertArrayHasKey('Example\Contacts', $classes);
+        $this->assertArrayHasKey('Example\Contacts\ContactAType', $classes);
+        $this->assertArrayHasKey('Example\Contacts\ContactsAType', $classes);
+        $this->assertArrayHasKey('Example\AddressBookType', $classes);
+
+        $book = $classes['Example\AddressBookType']['Example\AddressBookType'];
+        $this->assertSame('array<Example\Contacts\ContactAType>', $book['properties']['contacts']['type']);
+    }
+
     public function testSomeInheritance()
     {
         $content = '

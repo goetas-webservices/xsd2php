@@ -249,14 +249,10 @@ class YamlConverter extends AbstractConverter
             $class[$parentClass . "\\" . $name] = &$data;
 
             $this->visitTypeBase($class, $data, $type, $parentName);
-            if ($parentName) {
-                $this->classes[spl_object_hash($type)]["class"] = &$class;
-
-                if ($type instanceof SimpleType) {
-                    $this->classes[spl_object_hash($type)]["skip"] = true;
-                }
-            }
             $this->classes[spl_object_hash($type)]["class"] = &$class;
+            if ($type instanceof SimpleType) {
+                $this->classes[spl_object_hash($type)]["skip"] = true;
+            }
         }
         return $this->classes[spl_object_hash($type)]["class"];
     }
