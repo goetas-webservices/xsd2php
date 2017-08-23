@@ -113,6 +113,43 @@ class Xsd2PhpGroupTest extends Xsd2PhpBase
 
     }
 
+    public function testSomeAnonymousWithRefs()
+    {
+        $content = '
+             <xs:schema targetNamespace="http://www.example.com" xmlns:xs="http://www.w3.org/2001/XMLSchema"  xmlns:ex="http://www.example.com">
+                    <xs:complexType name="AddressBook">
+                        <xs:sequence>
+                            <xs:element ref="Contacts" minOccurs="0"/>                                                            
+                        </xs:sequence>
+                    </xs:complexType>    
+                    <xs:element name="Contacts">
+                        <xs:complexType>
+                             <xs:sequence>
+                                <xs:element name="Contact" maxOccurs="unbounded">
+                                    <xs:complexType>
+                                        <xs:sequence>
+                                             <xs:element name="Phone" type="xs:string"/>        
+                                        </xs:sequence>
+                                    </xs:complexType>
+                                </xs:element>                                                                         
+                            </xs:sequence>
+                        </xs:complexType>
+                    
+                    </xs:element>
+            </xs:schema>
+            ';
+        $classes = $this->getClasses($content);
+
+        $this->assertCount(4, $classes);
+
+
+        $this->assertInstanceOf('GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPClass', $book = $classes['Example\AddressBookType']);
+        $this->assertInstanceOf('GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPClass', $contacts = $classes['Example\Contacts']);
+        $this->assertInstanceOf('GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPClass', $contactsContact = $classes['Example\Contacts\ContactAType']);
+        $this->assertInstanceOf('GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPClass', $contactsType = $classes['Example\Contacts\ContactsAType']);
+        $this->assertSame($book->getProperty('contacts')->getType()->getArg()->getType()->getFullName(), $contactsContact->getFullName());
+    }
+
     public function testSomeInheritance()
     {
         $content = '

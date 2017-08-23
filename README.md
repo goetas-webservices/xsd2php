@@ -26,7 +26,7 @@ There is one recommended way to install xsd2php via [Composer](https://getcompos
   },
   "require-dev": {
       ..
-      "goetas-webservices/xsd2php":"^0.2",
+      "goetas-webservices/xsd2php":"^0.3",
       ..
   },
 ```
@@ -159,8 +159,8 @@ xsd2php:
   ...
   aliases: 
     'http://www.w3.org/2001/XMLSchema':
-      anyType:'MyCustomAnyTypeHandler'
-      anySimpleType:'MyCustomAnySimpleTypeHandler'
+      anyType: 'MyCustomAnyTypeHandler'
+      anySimpleType: 'MyCustomAnySimpleTypeHandler'
 ```
 
 Now you have to create a custom serialization handler:
