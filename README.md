@@ -26,7 +26,7 @@ There is one recommended way to install xsd2php via [Composer](https://getcompos
   },
   "require-dev": {
       ..
-      "goetas-webservices/xsd2php":"^0.2",
+      "goetas-webservices/xsd2php":"^0.3",
       ..
   },
 ```
