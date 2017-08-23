@@ -155,8 +155,8 @@ xsd2php:
   ...
   aliases: 
     'http://www.w3.org/2001/XMLSchema':
-      anyType:'MyCustomAnyTypeHandler'
-      anySimpleType:'MyCustomAnySimpleTypeHandler'
+      anyType: 'MyCustomAnyTypeHandler'
+      anySimpleType: 'MyCustomAnySimpleTypeHandler'
 ```
 
 Now you have to create a custom serialization handler:
