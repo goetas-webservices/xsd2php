@@ -232,6 +232,12 @@ class YamlConverter extends AbstractConverter
         return $this->classes[spl_object_hash($type)]["class"];
     }
 
+    /**
+     * @param Type $type
+     * @param string $parentName
+     * @param string $parentClass
+     * @return array
+     */
     private function &visitTypeAnonymous(Type $type, $parentName, $parentClass)
     {
         if (!isset($this->classes[spl_object_hash($type)])) {
@@ -240,7 +246,7 @@ class YamlConverter extends AbstractConverter
 
             $name = $this->getNamingStrategy()->getAnonymousTypeName($type, $parentName);
 
-            $class[key($parentClass) . "\\" . $name] = &$data;
+            $class[$parentClass . "\\" . $name] = &$data;
 
             $this->visitTypeBase($class, $data, $type, $parentName);
             if ($parentName) {
@@ -391,7 +397,7 @@ class YamlConverter extends AbstractConverter
             if ($type->getName()) {
                 $parentClass = $this->visitType($type);
             } else {
-                $parentClass = $this->visitTypeAnonymous($type, $name, $parentClass);
+                $parentClass = $this->visitTypeAnonymous($type, $name, key($parentClass));
             }
             $props = reset($parentClass);
             if (isset($props['properties']['__value']) && count($props['properties']) === 1) {
@@ -408,7 +414,7 @@ class YamlConverter extends AbstractConverter
      * @param Schema $schema
      * @param Element $element
      * @param boolean $arrayize
-     * @return \GoetasWebservices\Xsd\XsdToPhp\Structure\PHPProperty
+     * @return \GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPProperty
      */
     private function visitElement(&$class, Schema $schema, ElementItem $element, $arrayize = true)
     {
@@ -429,7 +435,14 @@ class YamlConverter extends AbstractConverter
 
             if ($itemOfArray = $this->isArrayNestedElement($t)) {
                 if (!$t->getName()) {
-                    $classType = $this->visitTypeAnonymous($t, $element->getName(), $class);
+
+                    if ($element instanceof ElementRef) {
+                        $itemClass = $this->findPHPClass($class, $element);
+                    } else {
+                        $itemClass = key($class);
+                    }
+
+                    $classType = $this->visitTypeAnonymous($t, $element->getName(), $itemClass);
                 } else {
                     $classType = $this->visitType($t);
                 }
@@ -448,7 +461,13 @@ class YamlConverter extends AbstractConverter
             } elseif ($itemOfArray = $this->isArrayType($t)) {
 
                 if (!$t->getName()) {
-                    $visitedType = $this->visitTypeAnonymous($itemOfArray, $element->getName(), $class);
+                    if ($element instanceof ElementRef) {
+                        $itemClass = $this->findPHPClass($class, $element);
+                    } else {
+                        $itemClass = key($class);
+                    }
+
+                    $visitedType = $this->visitTypeAnonymous($itemOfArray, $element->getName(), $itemClass);
 
                     if ($prop = $this->typeHasValue($itemOfArray, $class, 'xx')) {
                         $property["type"] = "array<" . $prop . ">";
@@ -499,7 +518,7 @@ class YamlConverter extends AbstractConverter
             return $valueProp;
         }
         if (!$node->getType()->getName()) {
-            $visited = $this->visitTypeAnonymous($node->getType(), $node->getName(), $class);
+            $visited = $this->visitTypeAnonymous($node->getType(), $node->getName(), key($class));
         } else {
             $visited = $this->visitType($node->getType());
         }

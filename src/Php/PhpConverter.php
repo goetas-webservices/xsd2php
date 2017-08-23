@@ -400,7 +400,7 @@ class PhpConverter extends AbstractConverter
      * @param Schema $schema
      * @param Element $element
      * @param boolean $arrayize
-     * @return \GoetasWebservices\Xsd\XsdToPhp\Structure\PHPProperty
+     * @return \GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPProperty
      */
     private function visitElement(PHPClass $class, Schema $schema, ElementSingle $element, $arrayize = true)
     {
@@ -412,8 +412,15 @@ class PhpConverter extends AbstractConverter
 
         if ($arrayize) {
             if ($itemOfArray = $this->isArrayType($t)) {
+
                 if (!$itemOfArray->getName()) {
-                    $classType = $this->visitTypeAnonymous($itemOfArray, $element->getName(), $class);
+                    if ($element instanceof ElementRef) {
+                        $itemClass = $this->findPHPClass($class, $element);
+                    } else {
+                        $itemClass = $class;
+                    }
+
+                    $classType = $this->visitTypeAnonymous($itemOfArray, $element->getName(), $itemClass);
                 } else {
                     $classType = $this->visitType($itemOfArray);
                 }
@@ -424,7 +431,13 @@ class PhpConverter extends AbstractConverter
                 return $property;
             } elseif ($itemOfArray = $this->isArrayNestedElement($t)) {
                 if (!$t->getName()) {
-                    $classType = $this->visitTypeAnonymous($t, $element->getName(), $class);
+                    if ($element instanceof ElementRef) {
+                        $itemClass = $this->findPHPClass($class, $element);
+                    } else {
+                        $itemClass = $class;
+                    }
+
+                    $classType = $this->visitTypeAnonymous($t, $element->getName(), $itemClass);
                 } else {
                     $classType = $this->visitType($t);
                 }
@@ -433,6 +446,7 @@ class PhpConverter extends AbstractConverter
                 return $property;
             } elseif ($this->isArrayElement($element)) {
                 $arg = new PHPArg($this->getNamingStrategy()->getPropertyName($element));
+
                 $arg->setType($this->findPHPClass($class, $element));
                 $arg->setDefault(array());
                 $property->setType(new PHPClassOf($arg));
