@@ -147,7 +147,7 @@ class YamlConverter extends AbstractConverter
                 $data["xml_root_namespace"] = $schema->getTargetNamespace();
 
                 if (!$schema->getElementsQualification() && !($element instanceof Element && $element->isQualified())) {
-                    $data["xml_root_name"] = "ns-" . substr(sha1($data["xml_root_namespace"]), 0, 8) . ":" . $data["xml_root_name"];
+                    $data["xml_root_name"] = $this->getNsPrefix($data["xml_root_namespace"]) . ":" . $data["xml_root_name"];
                 }
             }
             $this->classes[spl_object_hash($element)]["class"] = &$class;
@@ -158,8 +158,14 @@ class YamlConverter extends AbstractConverter
                 $this->handleClassExtension($class, $data, $element->getType(), $element->getName());
             }
         }
-        $this->classes[spl_object_hash($element)]["skip"] = in_array($element->getSchema()->getTargetNamespace(), $this->baseSchemas, true);
+        $this->classes[spl_object_hash($element)]["skip"] = $this->classes[spl_object_hash($element)]["skip"] || in_array($element->getSchema()->getTargetNamespace(), $this->baseSchemas, true);
+
         return $this->classes[spl_object_hash($element)]["class"];
+    }
+
+    private function getNsPrefix($ns)
+    {
+        return "ns-" . substr(sha1($ns), 0, 8);
     }
 
     private function findPHPNamespace(SchemaItem $item)
