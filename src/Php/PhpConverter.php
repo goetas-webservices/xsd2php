@@ -155,6 +155,15 @@ class PhpConverter extends AbstractConverter
             $class->setName($this->getNamingStrategy()->getItemName($element));
             $class->setDoc($element->getDoc());
 
+            if ($alias = $this->getTypeAlias($element)) {
+                $class->setName($alias);
+                $class->setNamespace(null);
+                $this->classes[spl_object_hash($element)]["class"] = $class;
+                $this->classes[spl_object_hash($element)]["skip"] = true;
+                $this->skipByType[spl_object_hash($element)] = true;
+                return $class;
+            }
+
             if (!isset($this->namespaces[$schema->getTargetNamespace()])) {
                 throw new Exception(sprintf("Can't find a PHP namespace to '%s' namespace", $schema->getTargetNamespace()));
             }
@@ -167,15 +176,6 @@ class PhpConverter extends AbstractConverter
             if (!$element->getType()->getName()) {
                 $this->visitTypeBase($class, $element->getType());
             } else {
-
-                if ($alias = $this->getTypeAlias($element)) {
-                    $class->setName($alias);
-                    $class->setNamespace(null);
-                    $this->classes[spl_object_hash($element)]["skip"] = true;
-                    $this->skipByType[spl_object_hash($element)] = true;
-                    return $class;
-                }
-
                 $this->handleClassExtension($class, $element->getType());
             }
         }

@@ -136,9 +136,17 @@ class YamlConverter extends AbstractConverter
     public function &visitElementDef(Schema $schema, ElementDef $element)
     {
         if (!isset($this->classes[spl_object_hash($element)])) {
-            $className = $this->findPHPNamespace($element) . "\\" . $this->getNamingStrategy()->getItemName($element);
+
             $class = array();
             $data = array();
+
+            if (($alias = $this->getTypeAlias($element))) {
+                $className = $alias;
+                $this->classes[spl_object_hash($element)]["skip"] = true;
+            }else{
+                $className = $this->findPHPNamespace($element) . "\\" . $this->getNamingStrategy()->getItemName($element);
+            }
+
             $ns = $className;
             $class[$ns] = &$data;
             $data["xml_root_name"] = $element->getName();
