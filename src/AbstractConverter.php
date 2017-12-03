@@ -60,6 +60,14 @@ abstract class AbstractConverter
         if (isset($this->typeAliases[$schema->getTargetNamespace()][$type->getName()])) {
             return $this->aliasCache[$cid] = call_user_func($this->typeAliases[$schema->getTargetNamespace()][$type->getName()], $type);
         }
+
+        if (!empty($this->typeAliases[$schema->getTargetNamespace()])) {
+            foreach ($this->typeAliases[$schema->getTargetNamespace()] as $k => $f){
+                if (strpos($k, '*')!== false && preg_match("/^".str_replace("\*", ".*", preg_quote($k, "/"))."$/", $type->getName())) {
+                    return $this->aliasCache[$cid] = call_user_func($f, $type);
+                }
+            }
+        }
     }
 
     public function __construct(NamingStrategy $namingStrategy, LoggerInterface $logger = null)
