@@ -3,6 +3,7 @@ namespace GoetasWebservices\Xsd\XsdToPhp\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
@@ -20,7 +21,12 @@ class Xsd2PhpExtension extends Extension
             $config = array_merge($config, $subConfig);
         }
 
-        $definition = $container->getDefinition('goetas_webservices.xsd2php.naming_convention.' . $config['naming_strategy']);
+        $namingStrategy = $config['naming_strategy'];
+        if (in_array($namingStrategy, ['short', 'long'], true)) {
+            $definition = $container->getDefinition('goetas_webservices.xsd2php.naming_convention.' . $namingStrategy);
+        } else {
+            $definition = new Definition($namingStrategy);
+        }
         $container->setDefinition('goetas_webservices.xsd2php.naming_convention', $definition);
 
 
