@@ -56,6 +56,7 @@ class ClassGenerator
         $type = $prop->getType();
 
         $docblock = new DocBlockGenerator('Construct');
+        $docblock->setWordWrap(false);
         $paramTag = new ParamTag("value", "mixed");
         $paramTag->setTypes(($type ? $type->getPhpType() : "mixed"));
 
@@ -74,6 +75,7 @@ class ClassGenerator
         $generator->addMethodFromGenerator($method);
 
         $docblock = new DocBlockGenerator('Gets or sets the inner value');
+        $docblock->setWordWrap(false);
         $paramTag = new ParamTag("value", "mixed");
         if ($type && $type instanceof PHPClassOf) {
             $paramTag->setTypes($type->getArg()->getType()->getPhpType() . "[]");
@@ -109,6 +111,7 @@ class ClassGenerator
         $generator->addMethodFromGenerator($method);
 
         $docblock = new DocBlockGenerator('Gets a string value');
+        $docblock->setWordWrap(false);
         $docblock->setTag(new ReturnTag("string"));
         $method = new MethodGenerator("__toString");
         $method->setDocBlock($docblock);
@@ -120,6 +123,7 @@ class ClassGenerator
     {
         $methodBody = '';
         $docblock = new DocBlockGenerator();
+        $docblock->setWordWrap(false);
 
         $docblock->setShortDescription("Sets a new " . $prop->getName());
 
@@ -183,6 +187,7 @@ class ClassGenerator
 
         if ($prop->getType() instanceof PHPClassOf) {
             $docblock = new DocBlockGenerator();
+            $docblock->setWordWrap(false);
             $docblock->setShortDescription("isset " . $prop->getName());
             if ($prop->getDoc()) {
                 $docblock->setLongDescription($prop->getDoc());
@@ -201,6 +206,7 @@ class ClassGenerator
             $generator->addMethodFromGenerator($method);
 
             $docblock = new DocBlockGenerator();
+            $docblock->setWordWrap(false);
             $docblock->setShortDescription("unset " . $prop->getName());
             if ($prop->getDoc()) {
                 $docblock->setLongDescription($prop->getDoc());
@@ -221,6 +227,7 @@ class ClassGenerator
         // ////
 
         $docblock = new DocBlockGenerator();
+        $docblock->setWordWrap(false);
 
         $docblock->setShortDescription("Gets as " . $prop->getName());
 
@@ -264,6 +271,7 @@ class ClassGenerator
         $propName = $type->getArg()->getName();
 
         $docblock = new DocBlockGenerator();
+        $docblock->setWordWrap(false);
         $docblock->setShortDescription("Adds as $propName");
 
         if ($prop->getDoc()) {
@@ -328,6 +336,7 @@ class ClassGenerator
         }
 
         $docBlock = new DocBlockGenerator();
+        $docBlock->setWordWrap(false);
         $generatedProp->setDocBlock($docBlock);
 
         if ($prop->getDoc()) {
@@ -363,6 +372,7 @@ class ClassGenerator
     {
         $class = new \Zend\Code\Generator\ClassGenerator();
         $docblock = new DocBlockGenerator("Class representing " . $type->getName());
+        $docblock->setWordWrap(false);
         if ($type->getDoc()) {
             $docblock->setLongDescription($type->getDoc());
         }
@@ -381,8 +391,7 @@ class ClassGenerator
 
                 if ($extends->getNamespace() != $type->getNamespace()) {
                     if ($extends->getName() == $type->getName()) {
-                        $class->addUse($type->getExtends()
-                            ->getFullName(), $extends->getName() . "Base");
+                        $class->addUse($type->getExtends()->getFullName(), $extends->getName() . "Base");
                         $class->setExtendedClass($extends->getName() . "Base");
                     } else {
                         $class->addUse($extends->getFullName());
