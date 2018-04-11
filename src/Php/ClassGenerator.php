@@ -36,19 +36,7 @@ class ClassGenerator
 
         return true;
     }
-/*
-    private function isNativeType(PHPClass $class)
-    {
-        return !$class->getNamespace() && in_array($class->getName(), [
-            'string',
-            'int',
-            'float',
-            'bool',
-            'array',
-            'callable'
-        ]);
-    }
-*/
+
     private function handleValueMethod(Generator\ClassGenerator $generator, PHPProperty $prop, PHPClass $class, $all = true)
     {
         $type = $prop->getType();
