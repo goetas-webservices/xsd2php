@@ -46,7 +46,6 @@ class ClassGenerator
             'integer',
             'boolean',
             'array',
-            'mixed',
             'callable'
         ]);
     }
@@ -141,7 +140,7 @@ class ClassGenerator
 
         $method = new MethodGenerator("set" . Inflector::classify($prop->getName()));
 
-        $parameter = new ParameterGenerator($prop->getName(), "mixed");
+        $parameter = new ParameterGenerator($prop->getName());
 
         if ($type && $type instanceof PHPClassOf) {
             $patramTag->setTypes($type->getArg()
@@ -387,7 +386,7 @@ class ClassGenerator
                 $this->handleValueMethod($class, $p, $extends);
             } else {
 
-                $class->setExtendedClass($extends->getName());
+                $class->setExtendedClass($extends->getFullName());
 
                 if ($extends->getNamespace() != $type->getNamespace()) {
                     if ($extends->getName() == $type->getName()) {

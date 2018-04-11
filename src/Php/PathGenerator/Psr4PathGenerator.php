@@ -14,8 +14,9 @@ class Psr4PathGenerator extends Psr4PathGeneratorBase implements PathGenerator
             if (strpos(trim($php->getNamespaceName()) . "\\", $namespace) === 0) {
                 $d = strtr(substr($php->getNamespaceName(), strlen($namespace)), "\\", "/");
                 $dir = rtrim($dir, "/") . "/" . $d;
-                if (!is_dir($dir) && !mkdir($dir, 0777, true)) {
-                    throw new PathGeneratorException("Can't create the '$dir' directory");
+                if (!is_dir($dir) && !@mkdir($dir, 0777, true)) {
+                    $error = error_get_last();
+                    throw new PathGeneratorException("Can't create the '$dir' directory: '{$error['message']}'");
                 }
 
                 return rtrim($dir, "/") . "/" . $php->getName() . ".php";
