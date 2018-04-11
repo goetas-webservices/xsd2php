@@ -221,7 +221,7 @@ class PhpConverter extends AbstractConverter
     /**
      *
      * @param Type $type
-     * @param boolean $force
+     * @param bool $force
      * @param bool $skip
      * @return PHPClass
      * @throws Exception
@@ -399,7 +399,7 @@ class PhpConverter extends AbstractConverter
      * @param PHPClass $class
      * @param Schema $schema
      * @param Element $element
-     * @param boolean $arrayize
+     * @param bool $arrayize
      * @return \GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPProperty
      */
     private function visitElement(PHPClass $class, Schema $schema, ElementSingle $element, $arrayize = true)

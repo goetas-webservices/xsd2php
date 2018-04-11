@@ -36,27 +36,26 @@ class ClassGenerator
 
         return true;
     }
-
+/*
     private function isNativeType(PHPClass $class)
     {
         return !$class->getNamespace() && in_array($class->getName(), [
             'string',
             'int',
             'float',
-            'integer',
-            'boolean',
+            'bool',
             'array',
             'callable'
         ]);
     }
-
+*/
     private function handleValueMethod(Generator\ClassGenerator $generator, PHPProperty $prop, PHPClass $class, $all = true)
     {
         $type = $prop->getType();
 
         $docblock = new DocBlockGenerator('Construct');
         $docblock->setWordWrap(false);
-        $paramTag = new ParamTag("value", "mixed");
+        $paramTag = new ParamTag("value");
         $paramTag->setTypes(($type ? $type->getPhpType() : "mixed"));
 
         $docblock->setTag($paramTag);
@@ -75,7 +74,7 @@ class ClassGenerator
 
         $docblock = new DocBlockGenerator('Gets or sets the inner value');
         $docblock->setWordWrap(false);
-        $paramTag = new ParamTag("value", "mixed");
+        $paramTag = new ParamTag("value");
         if ($type && $type instanceof PHPClassOf) {
             $paramTag->setTypes($type->getArg()->getType()->getPhpType() . "[]");
         } elseif ($type) {
@@ -192,12 +191,12 @@ class ClassGenerator
                 $docblock->setLongDescription($prop->getDoc());
             }
 
-            $patramTag = new ParamTag("index", "scalar");
+            $patramTag = new ParamTag("index", "int|string");
             $docblock->setTag($patramTag);
 
-            $docblock->setTag(new ReturnTag("boolean"));
+            $docblock->setTag(new ReturnTag("bool"));
 
-            $paramIndex = new ParameterGenerator("index", "mixed");
+            $paramIndex = new ParameterGenerator("index");
 
             $method = new MethodGenerator("isset" . Inflector::classify($prop->getName()), [$paramIndex]);
             $method->setDocBlock($docblock);
@@ -211,9 +210,9 @@ class ClassGenerator
                 $docblock->setLongDescription($prop->getDoc());
             }
 
-            $patramTag = new ParamTag("index", "scalar");
+            $patramTag = new ParamTag("index", "int|string");
             $docblock->setTag($patramTag);
-            $paramIndex = new ParameterGenerator("index", "mixed");
+            $paramIndex = new ParameterGenerator("index");
 
             $docblock->setTag(new ReturnTag("void"));
 

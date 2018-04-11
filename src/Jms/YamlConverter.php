@@ -19,6 +19,7 @@ use GoetasWebservices\XML\XSDReader\Schema\Type\SimpleType;
 use GoetasWebservices\XML\XSDReader\Schema\Type\Type;
 use GoetasWebservices\Xsd\XsdToPhp\AbstractConverter;
 use GoetasWebservices\Xsd\XsdToPhp\Naming\NamingStrategy;
+use GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPClass;
 
 class YamlConverter extends AbstractConverter
 {
@@ -409,7 +410,7 @@ class YamlConverter extends AbstractConverter
      * @param PHPClass $class
      * @param Schema $schema
      * @param Element $element
-     * @param boolean $arrayize
+     * @param bool $arrayize
      * @return \GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPProperty
      */
     private function visitElement(&$class, Schema $schema, ElementItem $element, $arrayize = true)
