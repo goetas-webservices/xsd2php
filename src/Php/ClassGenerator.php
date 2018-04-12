@@ -373,7 +373,15 @@ class ClassGenerator
                 $this->handleValueMethod($class, $p, $extends);
             } else {
 
-                $class->setExtendedClass($extends->getFullName());
+                //zend code ^3.0.3 wants FQCNs and resolves the short name based on provided use statements
+                //https://github.com/zendframework/zend-code/commit/4a6f4ab33480923ac6553ded903c97de168f37fe
+                //TypeGenerator is new to v3
+                if(class_exists('\Zend\Code\Generator\TypeGenerator')) {
+                    $class->setExtendedClass($extends->getFullName());
+                } else {
+                    //v2 simply used the string that was passed directly
+                    $class->setExtendedClass($extends->getName());
+                }
 
                 if ($extends->getNamespace() != $type->getNamespace()) {
                     if ($extends->getName() == $type->getName()) {
