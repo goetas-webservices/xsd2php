@@ -34,7 +34,7 @@ abstract class AbstractGenerator
         $this->phpDir = "$tmp/php";
         $this->jmsDir = "$tmp/jms";
 
-        $this->namingStrategy = new VeryShortNamingStrategy();
+        $this->namingStrategy = defined('PHP_WINDOWS_VERSION_BUILD') ? new VeryShortNamingStrategy() : new ShortNamingStrategy();
 
         $this->loader = new ClassLoader();
         foreach ($this->targetNs as $phpNs) {
