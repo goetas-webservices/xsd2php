@@ -9,11 +9,9 @@ class Generator extends AbstractGenerator
     public function generate(array $schemas)
     {
         $this->cleanDirectories();
-
-        list($php, $jms) = $this->getData($schemas);
-
-        $this->writeJMS($jms);
-        $this->writePHP($php);
+        
+        $this->writeJMS($this->generateJMSFiles($schemas));
+        $this->writePHP($this->generatePHPFiles($schemas));
     }
 
     public function getData(array $schemas)
