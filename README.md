@@ -209,7 +209,7 @@ class MyHandler implements SubscribingHandlerInterface
 Naming Strategy
 ---------------
 
-There are two types of naming strategies: `short` and `long`. The default is `short`, this naming strategy can however generate naming conflicts.
+There are two predefined types of naming strategies: `short` and `long`. The default is `short`, this naming strategy can however generate naming conflicts.
 
 The `long` naming strategy will suffix elements with `Element` and types with `Type`.
 
@@ -221,3 +221,5 @@ An XSD for instance with a type named `User`, a type named `UserType`, a root el
 * If you don't have naming conflicts and you want to have short and descriptive class names, use the `short` option.
 * If you have naming conflicts use the `long` option.
 * If you want to be safe, use the `long` option.
+
+If you want to use custom naming strategy, specify as `naming_strategy` FQN of class implementing `GoetasWebservices\Xsd\XsdToPhp\Naming\NamingStrategy` interface.
