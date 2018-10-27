@@ -13,9 +13,13 @@ use Zend\Code\Generator\DocBlockGenerator;
 use Zend\Code\Generator\MethodGenerator;
 use Zend\Code\Generator\ParameterGenerator;
 use Zend\Code\Generator\PropertyGenerator;
+use Doctrine\Common\Annotations\Annotation\Enum;
+use Doctrine\Common\Annotations\Annotation\Required;
 
 class ClassGenerator
 {
+    protected $hasEnumAttributes = false;
+    protected $hasRequiredAttributes = false;
 
     private function handleBody(Generator\ClassGenerator $class, PHPClass $type)
     {
@@ -328,6 +332,24 @@ class ClassGenerator
         if ($prop->getDoc()) {
             $docBlock->setLongDescription($prop->getDoc());
         }
+        if ($prop->isRequired()) {
+            $this->hasRequiredAttributes = true;
+            $attributeDescription = '';
+
+            if ($docBlock->getLongDescription()) {
+                $attributeDescription = $docBlock->getLongDescription() . "\n";
+            }
+
+            $docBlock->setLongDescription($attributeDescription . '@Required');
+        }
+
+        if ($prop->hasEnum()) {
+            $this->hasEnumAttributes = true;
+            $docBlock->setLongDescription(
+                $this->appendEnumAnnotation($docBlock->getLongDescription(), $prop->getEnum())
+            );
+        }
+
         $tag = new PropertyTag($prop->getName(), 'mixed');
 
         $type = $prop->getType();
@@ -366,6 +388,9 @@ class ClassGenerator
         $class->setName($type->getName());
         $class->setDocblock($docblock);
 
+        $this->hasEnumAttributes = false;
+        $this->hasRequiredAttributes = false;
+
         if ($extends = $type->getExtends()) {
 
             if ($p = $extends->isSimpleType()) {
@@ -386,7 +411,23 @@ class ClassGenerator
         }
 
         if ($this->handleBody($class, $type)) {
+            if ($this->hasEnumAttributes) {
+                $class->addUse(Enum::class);
+            }
+            if ($this->hasRequiredAttributes) {
+                $class->addUse(Required::class);
+            }
+
             return $class;
         }
+    }
+
+    protected function appendEnumAnnotation($description, array $enumList)
+    {
+        $availableEnums = [];
+        foreach ($enumList as $enum) {
+            $availableEnums[] = '"' . $enum['value'] . '"';
+        }
+        return $description . "\n" . '@Enum({' . implode(',', $availableEnums) . '})';
     }
 }

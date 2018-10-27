@@ -408,6 +408,10 @@ class PhpConverter extends AbstractConverter
         $property->setName($this->getNamingStrategy()->getPropertyName($element));
         $property->setDoc($element->getDoc());
 
+        if ($element->getMin() > 0) {
+            $property->setRequired(true);
+        }
+
         $t = $element->getType();
 
         if ($arrayize) {
@@ -451,6 +455,17 @@ class PhpConverter extends AbstractConverter
                 $arg->setDefault(array());
                 $property->setType(new PHPClassOf($arg));
                 return $property;
+            }
+        }
+
+        if ($t->getRestriction()) {
+            $restrictionChecks = $t->getRestriction()->getChecks();
+            if (!empty($restrictionChecks)) {
+                foreach ($restrictionChecks as $restrictionType => $values) {
+                    if ($restrictionType === 'enumeration' && count($values) > 0) {
+                        $property->setEnum($values);
+                    }
+                }
             }
         }
 

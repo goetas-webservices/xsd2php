@@ -248,4 +248,53 @@ class PHPConversionTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($single->hasMethod('getId'));
         $this->assertTrue($single->hasMethod('setId'));
     }
+
+    public function testSimpleRestriction()
+    {
+        $xml = '
+            <xs:schema targetNamespace="http://www.example.com"
+            xmlns:xs="http://www.w3.org/2001/XMLSchema">
+                <xs:element name = "Tshirt">
+                   <xs:complexType>
+                      <xs:sequence>
+                         <xs:element name = "Color" type = "clothesColorType" minOccurs="0"/>
+                         <xs:element name = "Size" type = "clothesSizeType"  minOccurs="1"/>
+                      </xs:sequence>
+                   </xs:complexType>
+                </xs:element>
+                   
+                <xs:simpleType name="clothesSizeType">
+                   <xs:restriction base="xs:string">
+                      <xs:enumeration value="S" />
+                      <xs:enumeration value="M" />
+                      <xs:enumeration value="L" />
+                      <xs:enumeration value="XL" />
+                   </xs:restriction>
+                </xs:simpleType>
+                   
+                <xs:simpleType name="clothesColorType">
+                   <xs:restriction base="xs:string">
+                      <xs:enumeration value="Black" />
+                      <xs:enumeration value="White" />
+                      <xs:enumeration value="Green" />
+                      <xs:enumeration value="Blue" />
+                   </xs:restriction>
+                </xs:simpleType>
+            </xs:schema>';
+
+        $items = $this->getClasses($xml);
+        $this->assertCount(1, $items);
+
+        $single = $items['Example\Tshirt'];
+
+        $this->assertTrue($single->hasProperty('color'));
+        $longDescription = $single->getProperty('color')->getDocBlock()->getLongDescription();
+        $this->assertNotFalse(strpos($longDescription, '@Enum({"Black","White","Green","Blue"})'));
+        $this->assertFalse(strpos($longDescription, '@Required'));
+
+        $this->assertTrue($single->hasProperty('size'));
+        $longDescription = $single->getProperty('size')->getDocBlock()->getLongDescription();
+        $this->assertNotFalse(strpos($longDescription, '@Enum({"S","M","L","XL"})'));
+        $this->assertNotFalse(strpos($longDescription, '@Required'));
+    }
 }
