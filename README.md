@@ -221,3 +221,11 @@ An XSD for instance with a type named `User`, a type named `UserType`, a root el
 * If you don't have naming conflicts and you want to have short and descriptive class names, use the `short` option.
 * If you have naming conflicts use the `long` option.
 * If you want to be safe, use the `long` option.
+
+## Note 
+
+The code in this project is provided under the 
+[MIT](https://opensource.org/licenses/MIT) license. 
+For professional support 
+contact [goetas@gmail.com](mailto:goetas@gmail.com) 
+or visit [https://www.goetas.com](https://www.goetas.com)
