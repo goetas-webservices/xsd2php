@@ -31,8 +31,8 @@
   },
   "require-dev": {
     "phpunit/phpunit": "^4.8|^5.0",
-    "jms/serializer": "^1.9",
-    "goetas-webservices/xsd2php-runtime": "^0.2.7",
+    "jms/serializer": "^1.9|^2.0",
+    "goetas-webservices/xsd2php-runtime": "^0.2.8@dev",
     "ext-xmldiff": "*"
   },
   "autoload": {
