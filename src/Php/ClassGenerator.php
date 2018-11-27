@@ -56,7 +56,7 @@ class ClassGenerator
             $param
         ]);
         $method->setDocBlock($docblock);
-        $method->setBody("\$this->value(\$value);");
+        $method->setBody("\$this->" . $prop->getName() . " = \$value;");
 
         $generator->addMethodFromGenerator($method);
 
