@@ -31,7 +31,7 @@ class Xsd2PhpElementTest extends Xsd2JmsBase
                             'access_type' => 'public_method',
                             'accessor' => array(
                                 'getter' => 'value',
-                                'setter' => 'value'
+                                'setter' => '__construct'
                             ),
                             'type' => $phpName
                         )
@@ -71,7 +71,7 @@ class Xsd2PhpElementTest extends Xsd2JmsBase
                             'access_type' => 'public_method',
                             'accessor' => array(
                                 'getter' => 'value',
-                                'setter' => 'value'
+                                'setter' => '__construct'
                             ),
                             'type' => $phpName
                         )
@@ -106,7 +106,7 @@ class Xsd2PhpElementTest extends Xsd2JmsBase
                         'access_type' => 'public_method',
                         'accessor' => array(
                             'getter' => 'value',
-                            'setter' => 'value',
+                            'setter' => '__construct',
                         ),
                         'type' => $jmsType,
                     ),
@@ -143,7 +143,7 @@ class Xsd2PhpElementTest extends Xsd2JmsBase
                         'access_type' => 'public_method',
                         'accessor' => array(
                             'getter' => 'value',
-                            'setter' => 'value',
+                            'setter' => '__construct',
                         ),
                         'type' => $jmsType,
                     ),
