@@ -311,6 +311,9 @@ class YamlConverter extends AbstractConverter
             $property = array();
             $property["expose"] = true;
             $property["xml_value"] = true;
+            if (!$this->getCdata()) {
+                $property["xml_element"]["cdata"] = false;
+            }
             $property["access_type"] = "public_method";
             $property["accessor"]["getter"] = "value";
             $property["accessor"]["setter"] = "value";
@@ -329,6 +332,9 @@ class YamlConverter extends AbstractConverter
                     $property = array();
                     $property["expose"] = true;
                     $property["xml_value"] = true;
+                    if (!$this->getCdata()) {
+                        $property["xml_element"]["cdata"] = false;
+                    }
                     $property["access_type"] = "public_method";
                     $property["accessor"]["getter"] = "value";
                     $property["accessor"]["setter"] = "value";

@@ -26,6 +26,11 @@ abstract class AbstractConverter
     );
 
     /**
+     * @var bool
+     */
+    private $cdata = true;
+
+    /**
      * @var \GoetasWebservices\Xsd\XsdToPhp\Naming\NamingStrategy
      */
     private $namingStrategy;
@@ -191,6 +196,18 @@ abstract class AbstractConverter
     {
         $this->logger->info("Added ns mapping $ns, $phpNamespace");
         $this->namespaces[$ns] = $phpNamespace;
+        return $this;
+    }
+
+    protected function getCdata()
+    {
+        return $this->cdata;
+    }
+
+    public function setCdata($cdata)
+    {
+        $this->logger->info("Set cdata equals $cdata");
+        $this->cdata = $cdata;
         return $this;
     }
 
