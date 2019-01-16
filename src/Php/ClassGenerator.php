@@ -144,12 +144,15 @@ class ClassGenerator
         } elseif ($type) {
             if ($type->isNativeType()) {
                 $patramTag->setTypes($type->getPhpType());
+                $parameter->setType($type->getPhpType()); // Added by rvdb
             } elseif ($p = $type->isSimpleType()) {
                 if (($t = $p->getType()) && !$t->isNativeType()) {
                     $patramTag->setTypes($t->getPhpType());
                     $parameter->setType($t->getPhpType());
                 } elseif ($t) {
                     $patramTag->setTypes($t->getPhpType());
+                    $parameter->setType($t->getPhpType()); // Added by rvdb
+
                 }
             } else {
                 $patramTag->setTypes($type->getPhpType());
