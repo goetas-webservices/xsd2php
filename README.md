@@ -144,6 +144,13 @@ $newXml = $serializer->serialize($object, 'xml');
 
 ```
 
+Add xsd2php dependency to satisfy BaseTypesHandler and XmlSchemaDateHandler.
+```json
+"require" : {
+    "goetas-webservices/xsd2php-runtime":"^0.2.9",
+}
+```
+
 Dealing with `xsd:anyType` or `xsd:anySimpleType`
 -------------------------------------------------
 
