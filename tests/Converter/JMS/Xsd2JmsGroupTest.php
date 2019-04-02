@@ -619,7 +619,7 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
                             'access_type' => 'public_method',
                             'accessor' => array(
                                 'getter' => 'value',
-                                'setter' => 'value'
+                                'setter' => '__construct'
                             ),
                             'type' => 'string'
                         )

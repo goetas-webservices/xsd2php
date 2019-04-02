@@ -306,19 +306,15 @@ class YamlConverter extends AbstractConverter
     private function handleClassExtension(&$class, &$data, Type $type, $parentName)
     {
         if ($alias = $this->getTypeAlias($type)) {
-
-
             $property = array();
             $property["expose"] = true;
             $property["xml_value"] = true;
             $property["access_type"] = "public_method";
             $property["accessor"]["getter"] = "value";
-            $property["accessor"]["setter"] = "value";
+            $property["accessor"]["setter"] = "__construct";
             $property["type"] = $alias;
 
             $data["properties"]["__value"] = $property;
-
-
         } else {
             $extension = $this->visitType($type, true);
 
@@ -331,7 +327,7 @@ class YamlConverter extends AbstractConverter
                     $property["xml_value"] = true;
                     $property["access_type"] = "public_method";
                     $property["accessor"]["getter"] = "value";
-                    $property["accessor"]["setter"] = "value";
+                    $property["accessor"]["setter"] = "__construct";
 
                     if ($valueProp = $this->typeHasValue($type, $class, $parentName)) {
                         $property["type"] = $valueProp;

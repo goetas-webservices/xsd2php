@@ -56,19 +56,12 @@ class ClassGenerator
             $param
         ]);
         $method->setDocBlock($docblock);
-        $method->setBody("\$this->value(\$value);");
+        $method->setBody("\$this->" . $prop->getName() . " = \$value;");
 
         $generator->addMethodFromGenerator($method);
 
         $docblock = new DocBlockGenerator('Gets or sets the inner value');
         $docblock->setWordWrap(false);
-        $paramTag = new ParamTag("value");
-        if ($type && $type instanceof PHPClassOf) {
-            $paramTag->setTypes($type->getArg()->getType()->getPhpType() . "[]");
-        } elseif ($type) {
-            $paramTag->setTypes($prop->getType()->getPhpType());
-        }
-        $docblock->setTag($paramTag);
 
         $returnTag = new ReturnTag("mixed");
 
@@ -88,10 +81,7 @@ class ClassGenerator
         $method = new MethodGenerator("value", []);
         $method->setDocBlock($docblock);
 
-        $methodBody = "if (\$args = func_get_args()) {" . PHP_EOL;
-        $methodBody .= "    \$this->" . $prop->getName() . " = \$args[0];" . PHP_EOL;
-        $methodBody .= "}" . PHP_EOL;
-        $methodBody .= "return \$this->" . $prop->getName() . ";" . PHP_EOL;
+        $methodBody = "return \$this->" . $prop->getName() . ";" . PHP_EOL;
         $method->setBody($methodBody);
 
         $generator->addMethodFromGenerator($method);
