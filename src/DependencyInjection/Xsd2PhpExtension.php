@@ -25,8 +25,11 @@ class Xsd2PhpExtension extends Extension
 
 
         $schemaReader = $container->getDefinition('goetas_webservices.xsd2php.schema_reader');
-        foreach ($config['known_locations'] as $namespace => $location) {
-            $schemaReader->addMethodCall('addKnownSchemaLocation', [$namespace, $location]);
+        foreach ($config['known_locations'] as $remote => $local) {
+            $schemaReader->addMethodCall('addKnownSchemaLocation', [$remote, $local]);
+        }
+        foreach ($config['known_namespace_locations'] as $namespace => $location) {
+            $schemaReader->addMethodCall('addKnownNamespaceSchemaLocation', [$namespace, $location]);
         }
 
         foreach (['php', 'jms'] as $type) {
