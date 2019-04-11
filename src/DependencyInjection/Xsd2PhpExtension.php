@@ -40,9 +40,6 @@ class Xsd2PhpExtension extends Extension
             $pathGenerator->addMethodCall('setTargets', [$config['destinations_' . $type]]);
 
             $converter = $container->getDefinition('goetas_webservices.xsd2php.converter.' . $type);
-            foreach ($config['configs_' . $type] as $xml => $php) {
-                $converter->addMethodCall('addConfig', [$xml, $php]);
-            }
             foreach ($config['namespaces'] as $xml => $php) {
                 $converter->addMethodCall('addNamespace', [$xml, self::sanitizePhp($php)]);
             }
@@ -51,6 +48,11 @@ class Xsd2PhpExtension extends Extension
                     $converter->addMethodCall('addAliasMapType', [$xml, $type, self::sanitizePhp($php)]);
                 }
             }
+        }
+
+        if ($config['configs_jms']) {
+            $converter = $container->getDefinition('goetas_webservices.xsd2php.converter.jms');
+            $converter->addMethodCall('setUseCdata', ['xml_cdata', $config['configs_jms']['xml_cdata']]);
         }
 
         $container->setParameter('goetas_webservices.xsd2php.config', $config);

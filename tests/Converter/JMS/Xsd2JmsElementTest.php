@@ -17,7 +17,7 @@ class Xsd2PhpElementTest extends Xsd2JmsBase
                </xs:schema>
             ';
 
-        $this->converter->addConfig('xml_cdata', true);
+        $this->converter->setUseCdata(true);
         $classes = $this->getClasses($xml);
         $this->assertCount(1, $classes);
 
@@ -55,7 +55,7 @@ class Xsd2PhpElementTest extends Xsd2JmsBase
                </xs:schema>
             ';
 
-        $this->converter->addConfig('xml_cdata', false);
+        $this->converter->setUseCdata(false);
         $classes = $this->getClasses($xml);
         $this->assertCount(1, $classes);
 

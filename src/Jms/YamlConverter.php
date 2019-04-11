@@ -24,9 +24,7 @@ use GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPClass;
 class YamlConverter extends AbstractConverter
 {
 
-    protected $configs = array(
-        'xml_cdata' => true
-    );
+    protected $useCdata = true;
 
     public function __construct(NamingStrategy $namingStrategy)
     {
@@ -42,6 +40,13 @@ class YamlConverter extends AbstractConverter
         $this->addAliasMap("http://www.w3.org/2001/XMLSchema", "date", function (Type $type) {
             return "GoetasWebservices\Xsd\XsdToPhp\XMLSchema\Date";
         });
+    }
+
+    public function setUseCdata($value)
+    {
+        $this->logger->info("Set useCdata $value");
+        $this->useCdata = $value;
+        return $this;
     }
 
     private $classes = [];
@@ -319,8 +324,8 @@ class YamlConverter extends AbstractConverter
             $property["accessor"]["getter"] = "value";
             $property["accessor"]["setter"] = "value";
             $property["type"] = $alias;
-            if (!$this->configs['xml_cdata']){
-                $property["xml_element"]["cdata"] = $this->configs['xml_cdata'];
+            if (!$this->useCdata) {
+                $property["xml_element"]["cdata"] = $this->useCdata;
             }
 
             $data["properties"]["__value"] = $property;
@@ -339,8 +344,8 @@ class YamlConverter extends AbstractConverter
                     $property["access_type"] = "public_method";
                     $property["accessor"]["getter"] = "value";
                     $property["accessor"]["setter"] = "value";
-                    if (!$this->configs['xml_cdata']){
-                        $property["xml_element"]["cdata"] = $this->configs['xml_cdata'];
+                    if (!$this->useCdata) {
+                        $property["xml_element"]["cdata"] = $this->useCdata;
                     }
 
                     if ($valueProp = $this->typeHasValue($type, $class, $parentName)) {
@@ -430,8 +435,8 @@ class YamlConverter extends AbstractConverter
         $property["access_type"] = "public_method";
         $property["serialized_name"] = $element->getName();
 
-        if (!$this->configs['xml_cdata']){
-            $property["xml_element"]["cdata"] = $this->configs['xml_cdata'];
+        if (!$this->useCdata) {
+            $property["xml_element"]["cdata"] = $this->useCdata;
         }
         if ($element->getSchema()->getTargetNamespace() && ($schema->getElementsQualification() || ($element instanceof Element && $element->isQualified()))) {
             $property["xml_element"]["namespace"] = $element->getSchema()->getTargetNamespace();
