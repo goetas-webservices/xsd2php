@@ -56,11 +56,11 @@ class PHPClass
             'string',
             'int',
             'float',
-            'integer',
-            'boolean',
+            'bool',
             'array',
-            'mixed',
-            'callable'
+            'callable',
+
+            'mixed' //todo this is not a php type but it's needed for now to allow mixed return tags
         ]);
     }
 
@@ -167,7 +167,7 @@ class PHPClass
     /**
      *
      * @param string $name
-     * @return boolean
+     * @return bool
      */
     public function hasProperty($name)
     {
@@ -245,7 +245,7 @@ class PHPClass
 
     /**
      *
-     * @var boolean
+     * @var bool
      */
     protected $abstract;
 
@@ -282,7 +282,7 @@ class PHPClass
 
     public function setAbstract($abstract)
     {
-        $this->abstract = (boolean)$abstract;
+        $this->abstract = (bool)$abstract;
         return $this;
     }
 }

@@ -25,8 +25,11 @@ class Xsd2PhpExtension extends Extension
 
 
         $schemaReader = $container->getDefinition('goetas_webservices.xsd2php.schema_reader');
-        foreach ($config['known_locations'] as $namespace => $location) {
-            $schemaReader->addMethodCall('addKnownSchemaLocation', [$namespace, $location]);
+        foreach ($config['known_locations'] as $remote => $local) {
+            $schemaReader->addMethodCall('addKnownSchemaLocation', [$remote, $local]);
+        }
+        foreach ($config['known_namespace_locations'] as $namespace => $location) {
+            $schemaReader->addMethodCall('addKnownNamespaceSchemaLocation', [$namespace, $location]);
         }
 
         foreach (['php', 'jms'] as $type) {
@@ -37,6 +40,9 @@ class Xsd2PhpExtension extends Extension
             $pathGenerator->addMethodCall('setTargets', [$config['destinations_' . $type]]);
 
             $converter = $container->getDefinition('goetas_webservices.xsd2php.converter.' . $type);
+            foreach ($config['configs_' . $type] as $xml => $php) {
+                $converter->addMethodCall('addConfig', [$xml, $php]);
+            }
             foreach ($config['namespaces'] as $xml => $php) {
                 $converter->addMethodCall('addNamespace', [$xml, self::sanitizePhp($php)]);
             }

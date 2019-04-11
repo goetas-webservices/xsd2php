@@ -22,10 +22,15 @@ class PHPWriter extends Writer implements LoggerAwareInterface
         $this->logger = $logger ?: new NullLogger();
     }
 
+    /**
+     * @param PHPClass[] $items
+     */
     public function write(array $items)
     {
-        return $this->classWriter->write(array_filter(array_map(function (PHPClass $item) {
-            return $this->generator->generate($item);
-        }, $items)));
+        while($item = array_pop($items)) {
+            if($generator = $this->generator->generate($item)) {
+                $this->classWriter->write([$generator]);
+            }
+        }
     }
 }

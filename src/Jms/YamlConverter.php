@@ -19,9 +19,14 @@ use GoetasWebservices\XML\XSDReader\Schema\Type\SimpleType;
 use GoetasWebservices\XML\XSDReader\Schema\Type\Type;
 use GoetasWebservices\Xsd\XsdToPhp\AbstractConverter;
 use GoetasWebservices\Xsd\XsdToPhp\Naming\NamingStrategy;
+use GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPClass;
 
 class YamlConverter extends AbstractConverter
 {
+
+    protected $configs = array(
+        'xml_cdata' => true
+    );
 
     public function __construct(NamingStrategy $namingStrategy)
     {
@@ -314,6 +319,9 @@ class YamlConverter extends AbstractConverter
             $property["accessor"]["getter"] = "value";
             $property["accessor"]["setter"] = "value";
             $property["type"] = $alias;
+            if (!$this->configs['xml_cdata']){
+                $property["xml_element"]["cdata"] = $this->configs['xml_cdata'];
+            }
 
             $data["properties"]["__value"] = $property;
 
@@ -331,6 +339,9 @@ class YamlConverter extends AbstractConverter
                     $property["access_type"] = "public_method";
                     $property["accessor"]["getter"] = "value";
                     $property["accessor"]["setter"] = "value";
+                    if (!$this->configs['xml_cdata']){
+                        $property["xml_element"]["cdata"] = $this->configs['xml_cdata'];
+                    }
 
                     if ($valueProp = $this->typeHasValue($type, $class, $parentName)) {
                         $property["type"] = $valueProp;
@@ -409,7 +420,7 @@ class YamlConverter extends AbstractConverter
      * @param PHPClass $class
      * @param Schema $schema
      * @param Element $element
-     * @param boolean $arrayize
+     * @param bool $arrayize
      * @return \GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPProperty
      */
     private function visitElement(&$class, Schema $schema, ElementItem $element, $arrayize = true)
@@ -419,6 +430,9 @@ class YamlConverter extends AbstractConverter
         $property["access_type"] = "public_method";
         $property["serialized_name"] = $element->getName();
 
+        if (!$this->configs['xml_cdata']){
+            $property["xml_element"]["cdata"] = $this->configs['xml_cdata'];
+        }
         if ($element->getSchema()->getTargetNamespace() && ($schema->getElementsQualification() || ($element instanceof Element && $element->isQualified()))) {
             $property["xml_element"]["namespace"] = $element->getSchema()->getTargetNamespace();
         }

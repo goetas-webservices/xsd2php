@@ -37,27 +37,13 @@ class ClassGenerator
         return true;
     }
 
-    private function isNativeType(PHPClass $class)
-    {
-        return !$class->getNamespace() && in_array($class->getName(), [
-            'string',
-            'int',
-            'float',
-            'integer',
-            'boolean',
-            'array',
-            'mixed',
-            'callable'
-        ]);
-    }
-
     private function handleValueMethod(Generator\ClassGenerator $generator, PHPProperty $prop, PHPClass $class, $all = true)
     {
         $type = $prop->getType();
 
         $docblock = new DocBlockGenerator('Construct');
         $docblock->setWordWrap(false);
-        $paramTag = new ParamTag("value", "mixed");
+        $paramTag = new ParamTag("value");
         $paramTag->setTypes(($type ? $type->getPhpType() : "mixed"));
 
         $docblock->setTag($paramTag);
@@ -76,7 +62,7 @@ class ClassGenerator
 
         $docblock = new DocBlockGenerator('Gets or sets the inner value');
         $docblock->setWordWrap(false);
-        $paramTag = new ParamTag("value", "mixed");
+        $paramTag = new ParamTag("value");
         if ($type && $type instanceof PHPClassOf) {
             $paramTag->setTypes($type->getArg()->getType()->getPhpType() . "[]");
         } elseif ($type) {
@@ -141,7 +127,7 @@ class ClassGenerator
 
         $method = new MethodGenerator("set" . Inflector::classify($prop->getName()));
 
-        $parameter = new ParameterGenerator($prop->getName(), "mixed");
+        $parameter = new ParameterGenerator($prop->getName());
 
         if ($type && $type instanceof PHPClassOf) {
             $patramTag->setTypes($type->getArg()
@@ -193,12 +179,12 @@ class ClassGenerator
                 $docblock->setLongDescription($prop->getDoc());
             }
 
-            $patramTag = new ParamTag("index", "scalar");
+            $patramTag = new ParamTag("index", "int|string");
             $docblock->setTag($patramTag);
 
-            $docblock->setTag(new ReturnTag("boolean"));
+            $docblock->setTag(new ReturnTag("bool"));
 
-            $paramIndex = new ParameterGenerator("index", "mixed");
+            $paramIndex = new ParameterGenerator("index");
 
             $method = new MethodGenerator("isset" . Inflector::classify($prop->getName()), [$paramIndex]);
             $method->setDocBlock($docblock);
@@ -212,9 +198,9 @@ class ClassGenerator
                 $docblock->setLongDescription($prop->getDoc());
             }
 
-            $patramTag = new ParamTag("index", "scalar");
+            $patramTag = new ParamTag("index", "int|string");
             $docblock->setTag($patramTag);
-            $paramIndex = new ParameterGenerator("index", "mixed");
+            $paramIndex = new ParameterGenerator("index");
 
             $docblock->setTag(new ReturnTag("void"));
 
@@ -387,12 +373,11 @@ class ClassGenerator
                 $this->handleValueMethod($class, $p, $extends);
             } else {
 
-                $class->setExtendedClass($extends->getName());
+                $class->setExtendedClass($extends->getFullName());
 
                 if ($extends->getNamespace() != $type->getNamespace()) {
                     if ($extends->getName() == $type->getName()) {
                         $class->addUse($type->getExtends()->getFullName(), $extends->getName() . "Base");
-                        $class->setExtendedClass($extends->getName() . "Base");
                     } else {
                         $class->addUse($extends->getFullName());
                     }
