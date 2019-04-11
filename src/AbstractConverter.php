@@ -15,6 +15,8 @@ abstract class AbstractConverter
 {
     use LoggerAwareTrait;
 
+    protected $configs = array();
+
     protected $baseSchemas = array(
         'http://www.w3.org/2001/XMLSchema',
         'http://www.w3.org/XML/1998/namespace'
@@ -187,6 +189,13 @@ abstract class AbstractConverter
         return $this->namingStrategy;
     }
 
+    public function addConfig($param, $value)
+    {
+        $this->logger->info("Added config $param");
+        $this->configs[$param] = $value;
+        return $this;
+    }
+
     public function addNamespace($ns, $phpNamespace)
     {
         $this->logger->info("Added ns mapping $ns, $phpNamespace");
@@ -231,6 +240,11 @@ abstract class AbstractConverter
         if ($element instanceof ElementSingle && ($element->getMax() > 1 || $element->getMax() === -1)) {
             return $element;
         }
+    }
+
+    public function getConfigs()
+    {
+        return $this->configs;
     }
 
     public function getNamespaces()
