@@ -1,4 +1,5 @@
 <?php
+
 namespace GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA;
 
 use Doctrine\Common\Inflector\Inflector;
@@ -8,6 +9,7 @@ use GoetasWebservices\Xsd\XsdToPhp\Tests\Generator;
 use GoetasWebservices\Xsd\XsdToPhpRuntime\Jms\Handler\BaseTypesHandler;
 use GoetasWebservices\Xsd\XsdToPhpRuntime\Jms\Handler\XmlSchemaDateHandler;
 use JMS\Serializer\Handler\HandlerRegistryInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class OTASerializationTest extends \PHPUnit_Framework_TestCase
 {
@@ -16,12 +18,17 @@ class OTASerializationTest extends \PHPUnit_Framework_TestCase
      */
     protected static $generator;
 
+    /**
+     * @var ValidatorInterface
+     */
+    protected static $validator;
+
     private static $namespace = 'OTA';
     private static $files = [];
 
     public static function setUpBeforeClass()
     {
-        if (!self::$files){
+        if (!self::$files) {
             self::$files = self::getXmlFiles();
         }
 
@@ -42,6 +49,7 @@ class OTASerializationTest extends \PHPUnit_Framework_TestCase
         }
         self::$generator->generate($schemas);
         self::$generator->registerAutoloader();
+        self::$validator = self::$generator->getValidator($schemas);
     }
 
     public static function tearDownAfterClass()
@@ -61,6 +69,9 @@ class OTASerializationTest extends \PHPUnit_Framework_TestCase
         $xml = preg_replace("/" . preg_quote('<![CDATA[', '/') . "(.*?)" . preg_quote(']]>', '/') . "/mis", "\\1", $xml);
 
         $xml = str_replace('&', '', $xml);
+        $xml = preg_replace_callback('/ItinSeqNumber="(\d+)"/', function ($mch){
+            return 'ItinSeqNumber="'.intval($mch[1]).'"';
+        }, $xml);
 
         $dom = new \DOMDocument();
         if (!$dom->loadXML($xml)) {
@@ -97,8 +108,6 @@ class OTASerializationTest extends \PHPUnit_Framework_TestCase
             // number
             if (is_numeric($str) && strpos($str, '.') !== false) {
                 $str = floatval($str);
-            } elseif (is_numeric($str)) {
-                $str = intval($str);
             } else {
                 $str = preg_replace('/\.0+$/', '', $str); // 1.0000 => 1, .0 => ''
             }
@@ -143,6 +152,14 @@ class OTASerializationTest extends \PHPUnit_Framework_TestCase
         $original = $this->clearXML(file_get_contents($xml));
         $object = $serializer->deserialize($original, $class, 'xml');
 
+        $violations = self::$validator->validate($object);
+
+        $xmlDom = new \DOMDocument();
+
+        if (@$xmlDom->load($xml) && @$xmlDom->schemaValidate($xsd)) {
+            $this->assertCount(0, $violations, $xml . print_r($violations, 1).$xmlDom->saveXML());
+        }
+
         $new = $serializer->serialize($object, 'xml');
 
         $new = $this->clearXML($new);
@@ -183,7 +200,7 @@ class OTASerializationTest extends \PHPUnit_Framework_TestCase
 
     public function getTestFiles()
     {
-        if (!self::$files){
+        if (!self::$files) {
             self::$files = self::getXmlFiles();
         }
         return self::$files;

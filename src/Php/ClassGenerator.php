@@ -313,7 +313,7 @@ class ClassGenerator
     private function handleProperty(Generator\ClassGenerator $class, PHPProperty $prop)
     {
         $generatedProp = new PropertyGenerator($prop->getName());
-        $generatedProp->setVisibility(PropertyGenerator::VISIBILITY_PROTECTED);
+        $generatedProp->setVisibility(PropertyGenerator::VISIBILITY_PRIVATE);
 
         $class->addPropertyFromGenerator($generatedProp);
 

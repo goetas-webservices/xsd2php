@@ -27,7 +27,7 @@
             </call>
         </service>
 
-        <service id="goetas_webservices.xsd2php.converter.validation" class="GoetasWebservices\Xsd\XsdToPhp\Jms\YamlValidatorConverter">
+        <service id="goetas_webservices.xsd2php.converter.validation" class="GoetasWebservices\Xsd\XsdToPhp\Jms\YamlValidatorConverter" public="true">
             <argument id="goetas_webservices.xsd2php.naming_convention" type="service"/>
             <call method="setLogger">
                 <argument type="service" id="logger"></argument>
@@ -64,7 +64,7 @@
             <argument id="logger" type="service"/>
         </service>
 
-        <service id="goetas_webservices.xsd2php.writer.validation" class="GoetasWebservices\Xsd\XsdToPhp\Writer\JMSWriter">
+        <service id="goetas_webservices.xsd2php.writer.validation" class="GoetasWebservices\Xsd\XsdToPhp\Writer\JMSWriter" public="true">
             <argument id="goetas_webservices.xsd2php.path_generator.validation" type="service"/>
             <argument id="logger" type="service"/>
         </service>

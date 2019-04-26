@@ -53,5 +53,4 @@ abstract class Xsd2JmsBase extends \PHPUnit_Framework_TestCase
             ['xs:integer', 'int'],
         ];
     }
-
 }
