@@ -68,11 +68,7 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                 '<xs:fractionDigits value="2"/>',
                 [
                     [
-                        'Regex' => '/^(\\d+\.\\d{1,2})|\\d*$/',
-                    ], [
-                        'Range' => [
-                            'min' => 0
-                        ]
+                        'Regex' => '/^\-?(\\d+\.\\d{1,2})|\\d*$/',
                     ]
                 ]
             ],
@@ -82,12 +78,8 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                 '<xs:totalDigits value="4"/>',
                 [
                     [
-                        'Regex' => '/^[\\d]{0,4}$/',
-                    ], [
-                        'Range' => [
-                            'min' => 0
-                        ]
-                    ]
+                        'Regex' => '/^\-?[\\d]{0,4}$/',
+                    ],
                 ]
             ],
             // length / Length(min/max)
@@ -129,7 +121,7 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                 '<xs:pattern value="\\([0-9]{2}\\)\\s[0-9]{4}-[0-9]{4,5}"/>',
                 [
                     [
-                        'Regex' => '/^\\([0-9]{2}\\)\\s[0-9]{4}-[0-9]{4,5}$/'
+                        'Regex' => '\\([0-9]{2}\\)\\s[0-9]{4}-[0-9]{4,5}/'
                     ]
                 ]
             ],
