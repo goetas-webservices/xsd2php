@@ -60,6 +60,21 @@ class Xsd2PhpGroupTest extends Xsd2PhpBase
                                     </xs:sequence>
                                 </xs:complexType>
                             </xs:element>
+                            <xs:element name="string3">
+                                <xs:simpleType>
+                                    <xs:union memberTypes="xs:string xs:int"></xs:union>
+                                </xs:simpleType>
+                            </xs:element>  
+                            <xs:element name="string4">
+                                <xs:simpleType>
+                                    <xs:restriction base="ex:foo"></xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>   
+                            <xs:element name="string5">
+                                <xs:simpleType>
+                                    <xs:union memberTypes="ex:foo"></xs:union>
+                                </xs:simpleType>
+                            </xs:element>                                                                                         
                         </xs:sequence>
                         <xs:attribute name="att">
                             <xs:simpleType>
@@ -67,6 +82,9 @@ class Xsd2PhpGroupTest extends Xsd2PhpBase
                             </xs:simpleType>
                         </xs:attribute>
                     </xs:complexType>
+                    <xs:simpleType name="foo">
+                        <xs:restriction base="xs:string"></xs:restriction>
+                    </xs:simpleType>
             </xs:schema>
             ';
         $classes = $this->getClasses($content);
@@ -76,14 +94,60 @@ class Xsd2PhpGroupTest extends Xsd2PhpBase
         $this->assertInstanceOf('GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPClass', $s2 = $classes['Example\ComplexType1Type\String2AType']);
 
         $s1Prop = $complexType1->getProperty('string1');
-        $this->assertSame('Example\ComplexType1Type\String1AType', $s1Prop->getType()->getFullName());
+        $this->assertSame('\string', $s1Prop->getType()->getFullName());
 
         $s2Prop = $complexType1->getProperty('string2');
         $this->assertSame($s2, $s2Prop->getType());
 
-        $a1Prop = $complexType1->getProperty('att');
-        $this->assertSame('Example\ComplexType1Type\AttAType', $a1Prop->getType()->getFullName());
+        $s3Prop = $complexType1->getProperty('string3');
+        $this->assertSame('\string', $s3Prop->getType()->getFullName());
 
+        $s4Prop = $complexType1->getProperty('string4');
+        $this->assertSame('\string', $s4Prop->getType()->getFullName());
+
+        $s5Prop = $complexType1->getProperty('string5');
+        $this->assertSame('\string', $s5Prop->getType()->getFullName());
+
+        $a1Prop = $complexType1->getProperty('att');
+        $this->assertSame('\string', $a1Prop->getType()->getFullName());
+
+    }
+
+    public function testSomeAnonymousWithRefs()
+    {
+        $content = '
+             <xs:schema targetNamespace="http://www.example.com" xmlns:xs="http://www.w3.org/2001/XMLSchema"  xmlns:ex="http://www.example.com">
+                    <xs:complexType name="AddressBook">
+                        <xs:sequence>
+                            <xs:element ref="Contacts" minOccurs="0"/>                                                            
+                        </xs:sequence>
+                    </xs:complexType>    
+                    <xs:element name="Contacts">
+                        <xs:complexType>
+                             <xs:sequence>
+                                <xs:element name="Contact" maxOccurs="unbounded">
+                                    <xs:complexType>
+                                        <xs:sequence>
+                                             <xs:element name="Phone" type="xs:string"/>        
+                                        </xs:sequence>
+                                    </xs:complexType>
+                                </xs:element>                                                                         
+                            </xs:sequence>
+                        </xs:complexType>
+                    
+                    </xs:element>
+            </xs:schema>
+            ';
+        $classes = $this->getClasses($content);
+
+        $this->assertCount(4, $classes);
+
+
+        $this->assertInstanceOf('GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPClass', $book = $classes['Example\AddressBookType']);
+        $this->assertInstanceOf('GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPClass', $contacts = $classes['Example\Contacts']);
+        $this->assertInstanceOf('GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPClass', $contactsContact = $classes['Example\Contacts\ContactAType']);
+        $this->assertInstanceOf('GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPClass', $contactsType = $classes['Example\Contacts\ContactsAType']);
+        $this->assertSame($book->getProperty('contacts')->getType()->getArg()->getType()->getFullName(), $contactsContact->getFullName());
     }
 
     public function testSomeInheritance()

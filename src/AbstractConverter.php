@@ -68,16 +68,16 @@ abstract class AbstractConverter
         $this->logger = $logger ?: new NullLogger();
 
         $this->addAliasMap("http://www.w3.org/2001/XMLSchema", "gYearMonth", function (Type $type) {
-            return "integer";
+            return "int";
         });
         $this->addAliasMap("http://www.w3.org/2001/XMLSchema", "gMonthDay", function (Type $type) {
-            return "integer";
+            return "int";
         });
         $this->addAliasMap("http://www.w3.org/2001/XMLSchema", "gMonth", function (Type $type) {
-            return "integer";
+            return "int";
         });
         $this->addAliasMap("http://www.w3.org/2001/XMLSchema", "gYear", function (Type $type) {
-            return "integer";
+            return "int";
         });
         $this->addAliasMap("http://www.w3.org/2001/XMLSchema", "NMTOKEN", function (Type $type) {
             return "string";
@@ -107,43 +107,43 @@ abstract class AbstractConverter
             return "string";
         });
         $this->addAliasMap("http://www.w3.org/2001/XMLSchema", "integer", function (Type $type) {
-            return "integer";
+            return "int";
         });
         $this->addAliasMap("http://www.w3.org/2001/XMLSchema", "int", function (Type $type) {
-            return "integer";
+            return "int";
         });
         $this->addAliasMap("http://www.w3.org/2001/XMLSchema", "unsignedInt", function (Type $type) {
-            return "integer";
+            return "int";
         });
         $this->addAliasMap("http://www.w3.org/2001/XMLSchema", "negativeInteger", function (Type $type) {
-            return "integer";
+            return "int";
         });
         $this->addAliasMap("http://www.w3.org/2001/XMLSchema", "positiveInteger", function (Type $type) {
-            return "integer";
+            return "int";
         });
         $this->addAliasMap("http://www.w3.org/2001/XMLSchema", "nonNegativeInteger", function (Type $type) {
-            return "integer";
+            return "int";
         });
         $this->addAliasMap("http://www.w3.org/2001/XMLSchema", "nonPositiveInteger", function (Type $type) {
-            return "integer";
+            return "int";
         });
         $this->addAliasMap("http://www.w3.org/2001/XMLSchema", "long", function (Type $type) {
-            return "integer";
+            return "int";
         });
         $this->addAliasMap("http://www.w3.org/2001/XMLSchema", "unsignedLong", function (Type $type) {
-            return "integer";
+            return "int";
         });
         $this->addAliasMap("http://www.w3.org/2001/XMLSchema", "short", function (Type $type) {
-            return "integer";
+            return "int";
         });
         $this->addAliasMap("http://www.w3.org/2001/XMLSchema", "boolean", function (Type $type) {
-            return "boolean";
+            return "bool";
         });
         $this->addAliasMap("http://www.w3.org/2001/XMLSchema", "nonNegativeInteger", function (Type $type) {
-            return "integer";
+            return "int";
         });
         $this->addAliasMap("http://www.w3.org/2001/XMLSchema", "positiveInteger", function (Type $type) {
-            return "integer";
+            return "int";
         });
         $this->addAliasMap("http://www.w3.org/2001/XMLSchema", "language", function (Type $type) {
             return "string";

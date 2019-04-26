@@ -167,6 +167,15 @@ class PhpConverter extends AbstractConverter
             if (!$element->getType()->getName()) {
                 $this->visitTypeBase($class, $element->getType());
             } else {
+
+                if ($alias = $this->getTypeAlias($element)) {
+                    $class->setName($alias);
+                    $class->setNamespace(null);
+                    $this->classes[spl_object_hash($element)]["skip"] = true;
+                    $this->skipByType[spl_object_hash($element)] = true;
+                    return $class;
+                }
+
                 $this->handleClassExtension($class, $element->getType());
             }
         }
@@ -212,7 +221,7 @@ class PhpConverter extends AbstractConverter
     /**
      *
      * @param Type $type
-     * @param boolean $force
+     * @param bool $force
      * @param bool $skip
      * @return PHPClass
      * @throws Exception
@@ -390,8 +399,8 @@ class PhpConverter extends AbstractConverter
      * @param PHPClass $class
      * @param Schema $schema
      * @param Element $element
-     * @param boolean $arrayize
-     * @return \GoetasWebservices\Xsd\XsdToPhp\Structure\PHPProperty
+     * @param bool $arrayize
+     * @return \GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPProperty
      */
     private function visitElement(PHPClass $class, Schema $schema, ElementSingle $element, $arrayize = true)
     {
@@ -403,8 +412,15 @@ class PhpConverter extends AbstractConverter
 
         if ($arrayize) {
             if ($itemOfArray = $this->isArrayType($t)) {
+
                 if (!$itemOfArray->getName()) {
-                    $classType = $this->visitTypeAnonymous($itemOfArray, $element->getName(), $class);
+                    if ($element instanceof ElementRef) {
+                        $itemClass = $this->findPHPClass($class, $element);
+                    } else {
+                        $itemClass = $class;
+                    }
+
+                    $classType = $this->visitTypeAnonymous($itemOfArray, $element->getName(), $itemClass);
                 } else {
                     $classType = $this->visitType($itemOfArray);
                 }
@@ -415,7 +431,13 @@ class PhpConverter extends AbstractConverter
                 return $property;
             } elseif ($itemOfArray = $this->isArrayNestedElement($t)) {
                 if (!$t->getName()) {
-                    $classType = $this->visitTypeAnonymous($t, $element->getName(), $class);
+                    if ($element instanceof ElementRef) {
+                        $itemClass = $this->findPHPClass($class, $element);
+                    } else {
+                        $itemClass = $class;
+                    }
+
+                    $classType = $this->visitTypeAnonymous($t, $element->getName(), $itemClass);
                 } else {
                     $classType = $this->visitType($t);
                 }
@@ -424,8 +446,9 @@ class PhpConverter extends AbstractConverter
                 return $property;
             } elseif ($this->isArrayElement($element)) {
                 $arg = new PHPArg($this->getNamingStrategy()->getPropertyName($element));
+
                 $arg->setType($this->findPHPClass($class, $element));
-                $arg->setDefault('array()');
+                $arg->setDefault(array());
                 $property->setType(new PHPClassOf($arg));
                 return $property;
             }
@@ -441,11 +464,42 @@ class PhpConverter extends AbstractConverter
         if ($node instanceof ElementRef) {
             return $this->visitElementDef($node->getReferencedElement());
         }
-
+        if ($valueProp = $this->typeHasValue($node->getType(), $class, '')) {
+            return $valueProp;
+        }
         if (!$node->getType()->getName()) {
             return $this->visitTypeAnonymous($node->getType(), $node->getName(), $class);
         } else {
             return $this->visitType($node->getType(), $force);
         }
+    }
+
+    private function typeHasValue(Type $type, PHPClass $parentClass, $name)
+    {
+        do {
+            if (!($type instanceof SimpleType)) {
+                return false;
+            }
+
+            if ($alias = $this->getTypeAlias($type)) {
+                return PHPClass::createFromFQCN($alias);
+            }
+
+            if ($type->getName()) {
+                $parentClass = $this->visitType($type);
+            } else {
+                $parentClass = $this->visitTypeAnonymous($type, $name, $parentClass);
+            }
+
+            if ($prop = $parentClass->getPropertyInHierarchy('__value')) {
+                return $prop->getType();
+            }
+        } while (
+            (method_exists($type, 'getRestriction') && ($rest = $type->getRestriction()) && $type = $rest->getBase())
+            ||
+            (method_exists($type, 'getUnions') && ($unions = $type->getUnions()) && $type = reset($unions))
+        );
+
+        return false;
     }
 }

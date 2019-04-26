@@ -26,7 +26,7 @@ There is one recommended way to install xsd2php via [Composer](https://getcompos
   },
   "require-dev": {
       ..
-      "goetas-webservices/xsd2php":"^0.2",
+      "goetas-webservices/xsd2php":"^0.3",
       ..
   },
 ```
@@ -42,19 +42,27 @@ Suppose that you have all XSD files in `/home/my/ota`, first of all we need a co
 
 ```yml
 # config.yml
+# Linux Users: PHP Namespaces use back slash \ rather than a forward slash /
+# So for destinations_php, the namespace would be TestNs\MyApp
 
 xsd2php:
   namespaces:
-    'http://www.example.org/test/': 'TestNs/MyApp'
-  destinations_php:
-    'TestNs/MyApp': soap/src
+    'http://www.example.org/test/': 'TestNs\MyApp'
+  destinations_php: 
+    'TestNs\MyApp': soap/src
+#    'TestNs\MyApp': soap\src  #  on Windows
   destinations_jms:
-    'TestNs/MyApp': soap/metadata
+    'TestNs\MyApp': soap/metadata
+#    'TestNs\MyApp': soap\metadata  #  on Windows    
   aliases: # optional
     'http://www.example.org/test/':
       MyCustomXSDType:  'MyCustomMappedPHPType'
   naming_strategy: short # optional and default
   path_generator: psr4 # optional and default
+#  known_locations: # optional
+#    "http://www.example.org/test/somefile.xsd": somefile.xsd
+#  known_namespace_locations: # optional
+#    "urn:veloconnect:catalog-1.1": xsd/catalog-1.1.xsd
 ```
 
 Here is an explanation on the meaning of each parameter:
@@ -65,29 +73,33 @@ Here is an explanation on the meaning of each parameter:
 
 
 * `xsd2php.destinations_php` (required) specifies the directory where to save the PHP classes that belongs to 
- `TestNs\MyApp` PHP namespace. (in this example `TestNs\MyApp` classes will ne saved into `soap/src` directory.
- 
+ `TestNs\MyApp` PHP namespace. (in this example `TestNs\MyApp` classes will be saved into `soap/src` directory.
+
 
 * `xsd2php.destinations_jms` (required) specifies the directory where to save JMS Serializer metadata files 
  that belongs to `TestNs\MyApp` PHP namespace. 
- (in this example `TestNs\MyApp` metadata will ne saved into `soap/metadata` directory.
- 
- 
+ (in this example `TestNs\MyApp` metadata will be saved into `soap/metadata` directory.
+
+
 * `xsd2php.aliases` (optional) specifies some mappings that are handled by custom JMS serializer handlers.
  Allows to specify to do not generate metadata for some XML types, and assign them directly a PHP class.
  For that PHP class is necessary to create a custom JMS serialize/deserialize handler.
- 
- 
+
+
 * `xsd2php.naming_strategy` (optional) specifies the naming strategy to use when converting XML names PHP classes.
 
 * `xsd2php.path_generator` (optional) specifies the strategy to use for path generation and file saving
- 
- 
+
+* `xsd2php.known_locations` (optional) override remote location with a local file.
+
+* `xsd2php.known_namespace_locations` (optional) Specify schema location by namespace.
+  This can be used to read schemas which import namespaces but do not specify schemaLocation attributes.
+
 
 ## Generate PHP classes and JMS metadata info
 
 ```sh
-bin/xsd2php convert config.yml /home/my/ota/OTA_Air*.xsd
+vendor/bin/xsd2php convert config.yml /home/my/ota/OTA_Air*.xsd
 
 ```
 
@@ -119,7 +131,7 @@ use GoetasWebservices\Xsd\XsdToPhpRuntime\Jms\Handler\BaseTypesHandler;
 use GoetasWebservices\Xsd\XsdToPhpRuntime\Jms\Handler\XmlSchemaDateHandler;
 
 $serializerBuilder = SerializerBuilder::create();
-$serializerBuilder->addMetadataDir('metadata dir', 'DemoNs');
+$serializerBuilder->addMetadataDir('metadata dir', 'TestNs');
 $serializerBuilder->configureHandlers(function (HandlerRegistryInterface $handler) use ($serializerBuilder) {
     $serializerBuilder->addDefaultHandlers();
     $handler->registerSubscribingHandler(new BaseTypesHandler()); // XMLSchema List handling
@@ -131,7 +143,7 @@ $serializerBuilder->configureHandlers(function (HandlerRegistryInterface $handle
 $serializer = $serializerBuilder->build();
 
 // deserialize the XML into Demo\MyObject object
-$object = $serializer->deserialize('<some xml/>', 'DemoNs\MyObject', 'xml');
+$object = $serializer->deserialize('<some xml/>', 'TestNs\MyObject', 'xml');
 
 // some code ....
 
@@ -155,8 +167,8 @@ xsd2php:
   ...
   aliases: 
     'http://www.w3.org/2001/XMLSchema':
-      anyType:'MyCustomAnyTypeHandler'
-      anySimpleType:'MyCustomAnySimpleTypeHandler'
+      anyType: 'MyCustomAnyTypeHandler'
+      anySimpleType: 'MyCustomAnySimpleTypeHandler'
 ```
 
 Now you have to create a custom serialization handler:
@@ -217,3 +229,11 @@ An XSD for instance with a type named `User`, a type named `UserType`, a root el
 * If you don't have naming conflicts and you want to have short and descriptive class names, use the `short` option.
 * If you have naming conflicts use the `long` option.
 * If you want to be safe, use the `long` option.
+
+## Note 
+
+The code in this project is provided under the 
+[MIT](https://opensource.org/licenses/MIT) license. 
+For professional support 
+contact [goetas@gmail.com](mailto:goetas@gmail.com) 
+or visit [https://www.goetas.com](https://www.goetas.com)

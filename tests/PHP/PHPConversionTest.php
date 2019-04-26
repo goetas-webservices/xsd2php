@@ -145,6 +145,10 @@ class PHPConversionTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($codegen->hasMethod('getId'));
         $this->assertTrue($codegen->hasMethod('setId'));
+
+        $this->assertNull($codegen->getMethod('issetId')->getParameters()['index']->getType());
+        $this->assertNull($codegen->getMethod('issetId')->getParameters()['index']->getType());
+
     }
 
     public function testNestedMulteplicity()

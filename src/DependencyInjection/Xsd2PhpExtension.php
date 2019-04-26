@@ -25,8 +25,11 @@ class Xsd2PhpExtension extends Extension
 
 
         $schemaReader = $container->getDefinition('goetas_webservices.xsd2php.schema_reader');
-        foreach ($config['known_locations'] as $namespace => $location) {
-            $schemaReader->addMethodCall('addKnownSchemaLocation', [$namespace, $location]);
+        foreach ($config['known_locations'] as $remote => $local) {
+            $schemaReader->addMethodCall('addKnownSchemaLocation', [$remote, $local]);
+        }
+        foreach ($config['known_namespace_locations'] as $namespace => $location) {
+            $schemaReader->addMethodCall('addKnownNamespaceSchemaLocation', [$namespace, $location]);
         }
 
         foreach (['php', 'jms', 'validation'] as $type) {
@@ -47,6 +50,11 @@ class Xsd2PhpExtension extends Extension
                     $converter->addMethodCall('addAliasMapType', [$xml, $type, self::sanitizePhp($php)]);
                 }
             }
+        }
+
+        if ($config['configs_jms']) {
+            $converter = $container->getDefinition('goetas_webservices.xsd2php.converter.jms');
+            $converter->addMethodCall('setUseCdata', [$config['configs_jms']['xml_cdata']]);
         }
 
         $container->setParameter('goetas_webservices.xsd2php.config', $config);

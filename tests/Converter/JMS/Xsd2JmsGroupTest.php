@@ -62,6 +62,21 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
                                     </xs:sequence>
                                 </xs:complexType>
                             </xs:element>
+                            <xs:element name="string3">
+                                <xs:simpleType>
+                                    <xs:union memberTypes="xs:string xs:int"></xs:union>
+                                </xs:simpleType>
+                            </xs:element>  
+                            <xs:element name="string4">
+                                <xs:simpleType>
+                                    <xs:restriction base="ex:foo"></xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>   
+                            <xs:element name="string5">
+                                <xs:simpleType>
+                                    <xs:union memberTypes="ex:foo"></xs:union>
+                                </xs:simpleType>
+                            </xs:element>                                
                         </xs:sequence>
                         <xs:attribute name="att">
                             <xs:simpleType>
@@ -69,6 +84,9 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
                             </xs:simpleType>
                         </xs:attribute>
                     </xs:complexType>
+                    <xs:simpleType name="foo">
+                        <xs:restriction base="xs:string"></xs:restriction>
+                    </xs:simpleType>                    
             </xs:schema>
             ';
         $classes = $this->getClasses($content);
@@ -117,7 +135,52 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
                                 'setter' => 'setString2'
                             ),
                             'type' => 'Example\\ComplexType1Type\\String2AType'
-                        )
+                        ),
+                        'string3' => array(
+                            'expose' => true,
+                            'access_type' => 'public_method',
+                            'serialized_name' => 'string3',
+                            /*
+                            'xml_element' => array(
+                                'namespace' => 'http://www.example.com'
+                            ),
+                            */
+                            'accessor' => array(
+                                'getter' => 'getString3',
+                                'setter' => 'setString3'
+                            ),
+                            'type' => 'string'
+                        ),
+                        'string4' => array(
+                            'expose' => true,
+                            'access_type' => 'public_method',
+                            'serialized_name' => 'string4',
+                            /*
+                            'xml_element' => array(
+                                'namespace' => 'http://www.example.com'
+                            ),
+                            */
+                            'accessor' => array(
+                                'getter' => 'getString4',
+                                'setter' => 'setString4'
+                            ),
+                            'type' => 'string'
+                        ),
+                        'string5' => array(
+                            'expose' => true,
+                            'access_type' => 'public_method',
+                            'serialized_name' => 'string5',
+                            /*
+                            'xml_element' => array(
+                                'namespace' => 'http://www.example.com'
+                            ),
+                            */
+                            'accessor' => array(
+                                'getter' => 'getString5',
+                                'setter' => 'setString5'
+                            ),
+                            'type' => 'string'
+                        ),
                     )
                 )
             ), $classes['Example\\ComplexType1Type']);
@@ -145,6 +208,45 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
                     )
                 )
             ), $classes['Example\\ComplexType1Type\\String2AType']);
+    }
+
+    public function testSomeAnonymousWithRefs()
+    {
+        error_reporting(error_reporting() & ~E_NOTICE);
+        $content = '
+             <xs:schema targetNamespace="http://www.example.com" xmlns:xs="http://www.w3.org/2001/XMLSchema"  xmlns:ex="http://www.example.com">
+                    <xs:complexType name="AddressBook">
+                        <xs:sequence>
+                            <xs:element ref="Contacts" minOccurs="0"/>                                                            
+                        </xs:sequence>
+                    </xs:complexType>    
+                    <xs:element name="Contacts">
+                        <xs:complexType>
+                             <xs:sequence>
+                                <xs:element name="Contact" maxOccurs="unbounded">
+                                    <xs:complexType>
+                                        <xs:sequence>
+                                             <xs:element name="Phone" type="xs:string"/>        
+                                        </xs:sequence>
+                                    </xs:complexType>
+                                </xs:element>                                                                         
+                            </xs:sequence>
+                        </xs:complexType>
+                    
+                    </xs:element>
+            </xs:schema>
+            ';
+        $classes = $this->getClasses($content);
+        $this->assertCount(4, $classes);
+
+        $this->assertArrayHasKey('Example\AddressBookType', $classes);
+        $this->assertArrayHasKey('Example\Contacts', $classes);
+        $this->assertArrayHasKey('Example\Contacts\ContactAType', $classes);
+        $this->assertArrayHasKey('Example\Contacts\ContactsAType', $classes);
+        $this->assertArrayHasKey('Example\AddressBookType', $classes);
+
+        $book = $classes['Example\AddressBookType']['Example\AddressBookType'];
+        $this->assertSame('array<Example\Contacts\ContactAType>', $book['properties']['contacts']['type']);
     }
 
     public function testSomeInheritance()
@@ -264,16 +366,19 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
     public function testArray()
     {
         $content = '
-             <xs:schema targetNamespace="http://www.example.com" xmlns:xs="http://www.w3.org/2001/XMLSchema"  xmlns:ex="http://www.example.com">
+             <xs:schema 
+                targetNamespace="http://www.example.com" 
+                xmlns:xs="http://www.w3.org/2001/XMLSchema"  
+                xmlns:ex="http://www.example.com">
                    <xs:complexType name="complexType-1">
                         <xs:sequence>
-                            <xs:element name="strings" type="ex:ArrayOfStrings"></xs:element>
+                            <xs:element name="strings" type="ex:ArrayOfStrings"/>
                         </xs:sequence>
                     </xs:complexType>
 
                     <xs:complexType name="ArrayOfStrings">
                         <xs:sequence>
-                            <xs:element name="string" type="xs:string" maxOccurs="unbounded" minOccurs="1"></xs:element>
+                            <xs:element name="string" type="xs:string" maxOccurs="unbounded" minOccurs="1"/>
                         </xs:sequence>
                     </xs:complexType>
             </xs:schema>
@@ -302,7 +407,7 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
                             'xml_list' => array(
                                 'inline' => false,
                                 'entry_name' => 'string',
-                                'namespace' => 'http://www.example.com'
+                                'skip_when_empty' => false
                             )
                         )
                     )
@@ -505,7 +610,7 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
         $this->assertEquals(
             array(
                 'Example\\Element1' => array(
-                    'xml_root_name' => 'element-1',
+                    'xml_root_name' => 'ns-8ece61d2:element-1',
                     'xml_root_namespace' => 'http://www.example.com',
                     'properties' => array(
                         '__value' => array(

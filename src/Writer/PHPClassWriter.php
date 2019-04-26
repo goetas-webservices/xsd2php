@@ -1,6 +1,7 @@
 <?php
 namespace GoetasWebservices\Xsd\XsdToPhp\Writer;
 
+use GoetasWebservices\Xsd\XsdToPhp\Php\ClassGenerator;
 use GoetasWebservices\Xsd\XsdToPhp\Php\PathGenerator\PathGenerator;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
@@ -20,6 +21,9 @@ class PHPClassWriter implements LoggerAwareInterface
         $this->logger = $logger ?: new NullLogger();
     }
 
+    /**
+     * @param ClassGenerator[] $items
+     */
     public function write(array $items)
     {
         foreach ($items as $item) {
