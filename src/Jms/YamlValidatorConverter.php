@@ -32,7 +32,26 @@ class YamlValidatorConverter extends YamlConverter
             }
 
             $properties = array_filter(array_map(function ($property) {
-                return !empty($property['validation']) ? $property['validation'] : null;
+
+                if (!empty($property['validation'])) {
+
+
+                    foreach ($property['validation'] as &$rule){
+                        foreach ($rule as &$item){
+                            if (!is_array($item)){
+                                $item = [];
+                            }
+                            $item['groups'] = ['xsd_rules'];
+                        }
+                        unset($item);
+                    }
+                    unset($rule);
+
+                    return $property['validation'];
+                }
+
+
+                return null;
             }, $definition[$k]['properties']));
 
             if (empty($properties)) {
@@ -122,35 +141,35 @@ class YamlValidatorConverter extends YamlConverter
                     case 'pattern':
                         foreach ($check as $item) {
                             $rules[] = [
-                                'Regex' => "/{$item['value']}/"
+                                'Regex' => ['pattern' => "/{$item['value']}/"]
                             ];
                         }
                         break;
                     case 'maxExclusive':
                         foreach ($check as $item) {
                             $rules[] = [
-                                'LessThan' => $item['value']
+                                'LessThan' => ['value' => $item['value']]
                             ];
                         }
                         break;
                     case 'maxInclusive':
                         foreach ($check as $item) {
                             $rules[] = [
-                                'LessThanOrEqual' => $item['value']
+                                'LessThanOrEqual' => ['value' => $item['value']]
                             ];
                         }
                         break;
                     case 'minExclusive':
                         foreach ($check as $item) {
                             $rules[] = [
-                                'GreaterThan' => $item['value']
+                                'GreaterThan' => ['value' => $item['value']]
                             ];
                         }
                         break;
                     case 'minInclusive':
                         foreach ($check as $item) {
                             $rules[] = [
-                                'GreaterThanOrEqual' => $item['value']
+                                'GreaterThanOrEqual' => ['value' => $item['value']]
                             ];
                         }
                         break;
@@ -224,7 +243,7 @@ class YamlValidatorConverter extends YamlConverter
         if ($arrayized && count($rules) > 0) {
 //            $rules[] = ['Valid' => null];
             $property['validation'][] = [
-                'All' => $rules
+                'All' => ['constraints' => $rules]
             ];
         } elseif ($type instanceof ComplexType) {
             $property['validation'][] = [

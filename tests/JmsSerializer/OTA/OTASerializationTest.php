@@ -192,7 +192,7 @@ class OTASerializationTest extends \PHPUnit_Framework_TestCase
         $original = $this->clearXML(file_get_contents($xml));
         $object = $serializer->deserialize($original, $class, 'xml');
 
-        $violations = self::$validator->validate($object);
+        $violations = self::$validator->validate($object, null, ['xsd_rules']);
 
         $xmlDom = new \DOMDocument();
 
