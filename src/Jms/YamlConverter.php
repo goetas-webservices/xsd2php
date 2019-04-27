@@ -117,7 +117,7 @@ class YamlConverter extends AbstractConverter
         $visited[spl_object_hash($schema)] = true;
 
         foreach ($schema->getTypes() as $type) {
-            $this->visitType($type);
+            $this->visitType($type, true);
         }
         foreach ($schema->getElements() as $element) {
             $this->visitElementDef($schema, $element);
@@ -312,8 +312,9 @@ class YamlConverter extends AbstractConverter
         }
     }
 
-    protected function handleClassExtension(&$class, &$data, Type $type, $parentName)
+    protected function &handleClassExtension(&$class, &$data, Type $type, $parentName)
     {
+        $property = array();
         if ($alias = $this->getTypeAlias($type)) {
 
             $property = array();
@@ -328,12 +329,15 @@ class YamlConverter extends AbstractConverter
             }
 
             $data["properties"]["__value"] = $property;
+            return $property;
 
         } else {
             $extension = $this->visitType($type, true);
 
             if (isset($extension['properties']['__value']) && count($extension['properties']) === 1) {
-                $data["properties"]["__value"] = $extension['properties']['__value'];
+                $property = &$extension['properties']['__value'];
+                $data["properties"]["__value"] = $property;
+                return $property;
             } else {
                 if ($type instanceof SimpleType) { // @todo ?? basta come controllo?
                     $property = array();
@@ -353,13 +357,15 @@ class YamlConverter extends AbstractConverter
                     }
 
                     $data["properties"]["__value"] = $property;
-
+                    return $property;
                 }
             }
         }
+
+        return $property;
     }
 
-    protected function visitAttribute(&$class, Schema $schema, AttributeItem $attribute)
+    protected function &visitAttribute(&$class, Schema $schema, AttributeItem $attribute)
     {
         $property = array();
         $property["expose"] = true;
@@ -426,7 +432,7 @@ class YamlConverter extends AbstractConverter
      * @param bool $arrayize
      * @return \GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPProperty
      */
-    protected function visitElement(&$class, Schema $schema, ElementItem $element, $arrayize = true)
+    protected function &visitElement(&$class, Schema $schema, ElementItem $element, $arrayize = true)
     {
         $property = array();
         $property["expose"] = true;

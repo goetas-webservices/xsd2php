@@ -1,4 +1,5 @@
 <?php
+
 namespace GoetasWebservices\Xsd\XsdToPhp\Tests\Converter\Validator;
 
 use GoetasWebservices\Xsd\XsdToPhp\Jms\YamlValidatorConverter;
@@ -30,7 +31,7 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Return classes coverted through YamlValidatorConverter
-     * 
+     *
      * @param string $xml
      * @return array
      */
@@ -40,7 +41,7 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
         return $this->converter->convert(array($schema));
     }
 
-    public function getRestrictionsValidations() 
+    public function getRestrictionsValidations()
     {
         return [
             // enumeration / Choice->choices
@@ -53,35 +54,35 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                     [
                         'Choice' => [
                             'choices' => [
-                                '201115', 
-                                '203015', 
-                                '213150', 
+                                '201115',
+                                '203015',
+                                '213150',
                                 '225105'
-                            ]                           
+                            ]
                         ]
                     ]
                 ]
             ],
-            // fractionDigits / Regex
-            //                / Range
-            [
-                '<xs:fractionDigits value="2"/>',
-                [
-                    [
-                        'Regex' => '/^\-?(\\d+\.\\d{1,2})|\\d*$/',
-                    ]
-                ]
-            ],
-            // fractionDigits / Regex
-            //                / Range
-            [
-                '<xs:totalDigits value="4"/>',
-                [
-                    [
-                        'Regex' => '/^\-?[\\d]{0,4}$/',
-                    ],
-                ]
-            ],
+//            // fractionDigits / Regex
+//            //                / Range
+//            [
+//                '<xs:fractionDigits value="2"/>',
+//                [
+//                    [
+//                        'Regex' => '/^\-?(\\d+\.\\d{2})|\\d*$/',
+//                    ]
+//                ]
+//            ],
+//            // fractionDigits / Regex
+//            //                / Range
+//            [
+//                '<xs:totalDigits value="4"/>',
+//                [
+//                    [
+//                        'Regex' => '/^\-?[\\d]{0,4}$/',
+//                    ],
+//                ]
+//            ],
             // length / Length(min/max)
             [
                 '<xs:length value="12"/>',
@@ -121,7 +122,7 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                 '<xs:pattern value="\\([0-9]{2}\\)\\s[0-9]{4}-[0-9]{4,5}"/>',
                 [
                     [
-                        'Regex' => '\\([0-9]{2}\\)\\s[0-9]{4}-[0-9]{4,5}/'
+                        'Regex' => '/\\([0-9]{2}\\)\\s[0-9]{4}-[0-9]{4,5}/'
                     ]
                 ]
             ],
@@ -162,9 +163,8 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                 ]
             ]
         ];
-                
     }
-    
+
     /**
      * @dataProvider getRestrictionsValidations
      */
@@ -175,7 +175,7 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                 <xs:element name="element-one">
                     <xs:simpleType>
                          <xs:restriction base="xs:string">
-                            '.$xsRestrictions.'
+                            ' . $xsRestrictions . '
                          </xs:restriction>
                     </xs:simpleType>
                 </xs:element>
@@ -183,7 +183,7 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
             ';
 
         $classes = $this->getClasses($xml);
-        
+
         $this->assertCount(1, $classes);
 
         $this->assertEquals(
@@ -195,9 +195,9 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                 ]
             ], $classes['Example\ElementOne']);
     }
-    
+
     /**
-     * 
+     *
      */
     public function testComplexTypeWithRequired()
     {
@@ -211,7 +211,7 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
             </xs:schema>
             ';
         $classes = $this->getClasses($content);
-        
+
         $this->assertCount(1, $classes);
 
         $this->assertEquals(
@@ -226,11 +226,10 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                     ]
                 ]
             ], $classes['Example\\ComplexType1Type']);
-
     }
-    
+
     /**
-     * 
+     *
      */
     public function testComplexTypeWithNoRequired()
     {
@@ -244,10 +243,10 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
             </xs:schema>
             ';
         $classes = $this->getClasses($content);
-        
+
         $this->assertCount(0, $classes);
-    }    
-    
+    }
+
     /**
      * @dataProvider getRestrictionsValidations
      */
@@ -260,7 +259,7 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                         <xs:element name="column1">
                             <xs:simpleType>
                                 <xs:restriction base="xs:string">
-                                    '.$xsRestrictions.'
+                                    ' . $xsRestrictions . '
                                 </xs:restriction>
                             </xs:simpleType>
                         </xs:element>
@@ -269,7 +268,7 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
             </xs:schema>
             ';
         $classes = $this->getClasses($content);
-        
+
         $this->assertCount(1, $classes);
 
         $this->assertEquals(
@@ -283,13 +282,12 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                                     'NotNull' => null
                                 ]
                             ]
-                        )                 
+                        )
                     ]
                 ]
             ], $classes['Example\\ComplexType1Type']);
-
     }
-    
+
     /**
      * @dataProvider getRestrictionsValidations
      */
@@ -302,7 +300,7 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                         <xs:element name="column1" minOccurs="0">
                             <xs:simpleType>
                                 <xs:restriction base="xs:string">
-                                    '.$xsRestrictions.'
+                                    ' . $xsRestrictions . '
                                 </xs:restriction>
                             </xs:simpleType>
                         </xs:element>
@@ -311,22 +309,21 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
             </xs:schema>
             ';
         $classes = $this->getClasses($content);
-        
+
         $this->assertCount(1, $classes);
 
         $this->assertEquals(
             [
                 'Example\\ComplexType1Type' => [
                     'properties' => [
-                        'column1' => $ymlValidations              
+                        'column1' => $ymlValidations
                     ]
                 ]
             ], $classes['Example\\ComplexType1Type']);
-
     }
-    
+
     /**
-     * 
+     *
      */
     public function testComplexTypeWithArray_1()
     {
@@ -340,7 +337,7 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
             </xs:schema>
             ';
         $classes = $this->getClasses($content);
-        
+
         $this->assertCount(1, $classes);
 
         $this->assertEquals(
@@ -349,22 +346,16 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                     'properties' => [
                         'column1' => [
                             [
-                                'Count' => [
-                                    'min' => 1
-                                ]
-                            ],
-                            [
                                 'NotNull' => null
-                            ]
-                        ]                
+                            ],
+                        ]
                     ]
                 ]
-            ], $classes['Example\\ComplexType1Type']);
-
+            ], $classes['Example\\ComplexType1Type'], print_r($classes['Example\\ComplexType1Type'], 1));
     }
-    
+
     /**
-     * 
+     *
      */
     function testComplexTypeWithArray_2()
     {
@@ -378,7 +369,7 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
             </xs:schema>
             ';
         $classes = $this->getClasses($content);
-        
+
         $this->assertCount(1, $classes);
 
         $this->assertEquals(
@@ -387,23 +378,16 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                     'properties' => [
                         'column1' => [
                             [
-                                'Count' => [
-                                    'min' => 1,
-                                    'max' => 100
-                                ]
-                            ],
-                            [
                                 'NotNull' => null
-                            ]
-                        ]                
+                            ],
+                        ]
                     ]
                 ]
             ], $classes['Example\\ComplexType1Type']);
-        
-    }    
-    
+    }
+
     /**
-     * 
+     *
      */
     function testComplexTypeWithArray_3()
     {
@@ -417,17 +401,16 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
             </xs:schema>
             ';
         $classes = $this->getClasses($content);
-        
+
         $this->assertCount(0, $classes);
-        
-    }    
-    
+    }
+
     /**
-     * 
+     *
      */
     public function testComplexTypeWithElementArrayRestriction()
     {
-        
+
         $content = '
              <xs:schema targetNamespace="http://www.example.com" xmlns:xs="http://www.w3.org/2001/XMLSchema"  xmlns:ex="http://www.example.com">
                 <xs:complexType name="complexType-2">
@@ -444,9 +427,9 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                 </xs:complexType>
             </xs:schema>
             ';
-        
+
         $classes = $this->getClasses($content);
-        
+
         $this->assertCount(1, $classes);
 
         $this->assertEquals(
@@ -455,10 +438,7 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                     'properties' => [
                         'protocols' => [
                             [
-                                'Count' => [
-                                    'min' => 1,
-                                    'max' => 10
-                                ]
+                                'NotNull' => null
                             ],
                             [
                                 'All' => [
@@ -472,21 +452,18 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                                         'Length' => [
                                             'max' => 12
                                         ]
-                                    ]
+                                    ],
                                 ]
                             ],
-                            [
-                                'NotNull' => null
-                            ]
+
                         ]
                     ]
                 ]
-            ], $classes['Example\\ComplexType2Type']);
+            ], $classes['Example\\ComplexType2Type'], print_r($classes['Example\\ComplexType2Type'], 1));
+    }
 
-    }   
-    
     /**
-     * 
+     *
      */
     public function testComplexTypeWithArrayNestedRestriction()
     {
@@ -512,9 +489,9 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                 </xs:complexType>
             </xs:schema>
             ';
-        
+
         $classes = $this->getClasses($content);
-        
+
         $this->assertCount(2, $classes);
 
         $this->assertEquals(
@@ -523,10 +500,7 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                     'properties' => [
                         'protocolNumber' => [
                             [
-                                'Count' => [
-                                    'min' => 1,
-                                    'max' => 30
-                                ]
+                                'NotNull' => null
                             ],
                             [
                                 'All' => [
@@ -543,38 +517,41 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                                     ]
                                 ]
                             ],
-                            [
-                                'NotNull' => null
-                            ]
+
                         ]
                     ]
                 ]
-            ], $classes['Example\\ComplexType1Type\\ProtocolsAType']);
-        
+            ], $classes['Example\\ComplexType1Type\\ProtocolsAType'], print_r($classes['Example\\ComplexType1Type\\ProtocolsAType'], 1));
+
         $this->assertEquals(
             [
                 'Example\\ComplexType1Type' => [
                     'properties' => [
                         'protocols' => [
+
+                            [
+                                'NotNull' => null
+                            ],
+                            [
+                                'Count' => [
+                                    'min' => 1,
+                                    'max' => 30
+                                ]
+                            ],
                             [
                                 'Valid' => null
                             ],
-                            [
-                                'NotNull' => null
-                            ]
                         ]
                     ]
                 ]
-            ], $classes['Example\\ComplexType1Type']);
+            ], $classes['Example\\ComplexType1Type'], print_r($classes['Example\\ComplexType1Type'], 1));
+    }
 
-    }   
-    
     /**
-     * 
+     *
      */
     public function testComplexTypeWithElementArrayRestrictionNoRequired()
     {
-        
         $content = '
              <xs:schema targetNamespace="http://www.example.com" xmlns:xs="http://www.w3.org/2001/XMLSchema"  xmlns:ex="http://www.example.com">
                 <xs:complexType name="complexType-2">
@@ -591,9 +568,9 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                 </xs:complexType>
             </xs:schema>
             ';
-        
+
         $classes = $this->getClasses($content);
-        
+
         $this->assertCount(1, $classes);
 
         $this->assertEquals(
@@ -601,11 +578,11 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                 'Example\\ComplexType2Type' => [
                     'properties' => [
                         'protocols' => [
-                            [
-                                'Count' => [
-                                    'max' => 10
-                                ]
-                            ],
+//                            [
+//                                'Count' => [
+//                                    'max' => 10
+//                                ]
+//                            ],
                             [
                                 'All' => [
                                     [
@@ -625,11 +602,10 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                     ]
                 ]
             ], $classes['Example\\ComplexType2Type']);
-
     }
-    
+
     /**
-     * 
+     *
      */
     public function testComplexTypeWithArrayNestedRestrictionNoRequired_1()
     {
@@ -655,9 +631,9 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                 </xs:complexType>
             </xs:schema>
             ';
-        
+
         $classes = $this->getClasses($content);
-        
+
         $this->assertCount(2, $classes);
 
         $this->assertEquals(
@@ -665,11 +641,6 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                 'Example\\ComplexType1Type\\ProtocolsAType' => [
                     'properties' => [
                         'protocolNumber' => [
-                            [
-                                'Count' => [
-                                    'max' => 30
-                                ]
-                            ],
                             [
                                 'All' => [
                                     [
@@ -689,27 +660,32 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                     ]
                 ]
             ], $classes['Example\\ComplexType1Type\\ProtocolsAType']);
-        
+
         $this->assertEquals(
             [
                 'Example\\ComplexType1Type' => [
                     'properties' => [
                         'protocols' => [
-                            [
-                                'Valid' => null
-                            ],
+
                             [
                                 'NotNull' => null
+                            ],
+                                                        [
+                                'Count' => [
+                                    'max' => 30
+                                ]
+                            ],
+                            [
+                                'Valid' => null
                             ]
                         ]
                     ]
                 ]
             ], $classes['Example\\ComplexType1Type']);
-
     }
-    
+
     /**
-     * 
+     *
      */
     public function testComplexTypeWithArrayNestedRestrictionNoRequired_2()
     {
@@ -735,9 +711,9 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                 </xs:complexType>
             </xs:schema>
             ';
-        
+
         $classes = $this->getClasses($content);
-        
+
         $this->assertCount(2, $classes);
 
         $this->assertEquals(
@@ -745,11 +721,7 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                 'Example\\ComplexType1Type\\ProtocolsAType' => [
                     'properties' => [
                         'protocolNumber' => [
-                            [
-                                'Count' => [
-                                    'max' => 30
-                                ]
-                            ],
+
                             [
                                 'All' => [
                                     [
@@ -769,12 +741,17 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                     ]
                 ]
             ], $classes['Example\\ComplexType1Type\\ProtocolsAType']);
-        
+
         $this->assertEquals(
             [
                 'Example\\ComplexType1Type' => [
                     'properties' => [
                         'protocols' => [
+                            [
+                                'Count' => [
+                                    'max' => 30
+                                ]
+                            ],
                             [
                                 'Valid' => null
                             ]
@@ -782,11 +759,10 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                     ]
                 ]
             ], $classes['Example\\ComplexType1Type']);
-        
     }
-    
+
     /**
-     * 
+     *
      */
     public function testComplexTypeWithNestedComplexRestrictionRequired()
     {
@@ -813,9 +789,9 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                 </xs:complexType>
             </xs:schema>
             ';
-        
+
         $classes = $this->getClasses($content);
-        
+
         $this->assertCount(2, $classes);
 
         $this->assertEquals(
@@ -824,16 +800,16 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                     'properties' => [
                         'diagnostcs' => [
                             [
-                                'Valid' => null
+                                'NotNull' => null
                             ],
                             [
-                                'NotNull' => null
+                                'Valid' => null
                             ]
                         ]
                     ]
                 ]
             ], $classes['Example\ComplexType1Type']);
-        
+
         $this->assertEquals(
             [
                 'Example\\ComplexType1Type\\DiagnostcsAType' => [
@@ -862,11 +838,10 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                     ]
                 ]
             ], $classes['Example\\ComplexType1Type\\DiagnostcsAType']);
-        
     }
-    
+
     /**
-     * 
+     *
      */
     public function testComplexTypeWithArrayNestedComplexRestrictionRequired()
     {
@@ -899,7 +874,7 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                 </xs:complexType>
             </xs:schema>
             ';
-        
+
         $classes = $this->getClasses($content);
 
         $this->assertCount(3, $classes);
@@ -910,16 +885,19 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                     'properties' => [
                         'consult' => [
                             [
-                                'Valid' => null
+                                'NotNull' => null
                             ],
                             [
-                                'NotNull' => null
-                            ]
+                                'Count' => ['min' => 1]
+                            ],
+                            [
+                                'Valid' => null
+                            ],
                         ]
                     ]
                 ]
             ], $classes['Example\\ComplexType1Type']);
-        
+
         $this->assertEquals(
             [
                 'Example\\ComplexType1Type\\ConsultAType\\DiagnostcsAType' => [
@@ -943,42 +921,37 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                             ],
                             [
                                 'NotNull' => null
-                            ]
+                            ],
                         ]
                     ]
                 ]
             ], $classes['Example\\ComplexType1Type\\ConsultAType\\DiagnostcsAType']);
-        
+
         $this->assertEquals(
             [
                 'Example\\ComplexType1Type\\ConsultAType' => [
                     'properties' => [
                         'diagnostcs' => [
                             [
-                                'Count' => [
-                                    'min' => 1
-                                ]
-                            ],
-                            [
-                                'All' => [
-                                    [
-                                        'Valid' => null
-                                    ]
-                                ]
-                            ],
-                            [
                                 'NotNull' => null
-                            ]
+                            ],
+//                            [
+//                                'Count' => [
+//                                    'min' => 1
+//                                ]
+//                            ],
+                            [
+                                'Valid' => null
+                            ],
+
                         ]
                     ]
                 ]
             ], $classes['Example\\ComplexType1Type\\ConsultAType']);
-        
     }
-    
-    
+
     /**
-     * 
+     *
      */
     public function testComplexTypeWithExtension_1()
     {
@@ -1004,25 +977,15 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                 </xs:complexType>
             </xs:schema>
             ';
-        
+
         $classes = $this->getClasses($content);
-      
+
         $this->assertCount(2, $classes);
 
         $this->assertEquals(
             [
                 'Example\\FullpersoninfoType' => [
                     'properties' => [
-                        'firstname' => [
-                            [
-                                'NotNull' => null
-                            ]
-                        ],
-                        'lastname' => [
-                            [
-                                'NotNull' => null
-                            ]
-                        ],
                         'lang' => [
                             [
                                 'NotNull' => null
@@ -1046,7 +1009,7 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                     ]
                 ]
             ], $classes['Example\\FullpersoninfoType']);
-        
+
         $this->assertEquals(
             [
                 'Example\\PersoninfoType' => [
@@ -1064,7 +1027,5 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                     ]
                 ]
             ], $classes['Example\\PersoninfoType']);
-        
     }
-    
 }

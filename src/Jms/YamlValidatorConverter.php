@@ -32,8 +32,7 @@ class YamlValidatorConverter extends YamlConverter
             }
 
             $properties = array_filter(array_map(function ($property) {
-                unset($property['type']);
-                return !empty($property) ? $property : null;
+                return !empty($property['validation']) ? $property['validation'] : null;
             }, $definition[$k]['properties']));
 
             if (empty($properties)) {
@@ -63,7 +62,6 @@ class YamlValidatorConverter extends YamlConverter
 
         if (($restrictions = $type->getRestriction()) && $checks = $restrictions->getChecks()) {
 
-            $isNumeric = false;
             foreach ($checks as $key => $check) {
                 switch ($key) {
                     case 'enumeration':
@@ -75,22 +73,24 @@ class YamlValidatorConverter extends YamlConverter
                             ]
                         ];
                         break;
-                    case 'fractionDigits':
-                        foreach ($check as $item) {
-                            if ($item['value']>0) {
-                                $rules[] = [
-                                    'Regex' => "/^\-?(\\d+\\.\\d{0,{$item['value']}})|\\d*$/"
-                                ];
-                            }
-                        }
-                        break;
-                    case 'totalDigits':
-                        foreach ($check as $item) {
-                            $rules[] = [
-                                'Regex' => "/^\-?[\\d]{0,{$item['value']}}$/"
-                            ];
-                        }
-                        break;
+//                    fractionDigits totalDigits validation makes no sense in object validation
+//                    mainly because they are represented as floats
+//                    case 'fractionDigits':
+//                        foreach ($check as $item) {
+//                            if ($item['value']>0) {
+//                                $rules[] = [
+//                                    'Regex' => "/^\-?(\\d+\\.\\d{{$item['value']}})|\\d*$/"
+//                                ];
+//                            }
+//                        }
+//                        break;
+//                    case 'totalDigits':
+//                        foreach ($check as $item) {
+//                            $rules[] = [
+//                                'Regex' => "/^([^\d]*\d){{$item['value']}}[^\d]*$/"
+//                            ];
+//                        }
+//                        break;
                     case 'length':
                         foreach ($check as $item) {
                             $rules[] = [
@@ -157,8 +157,9 @@ class YamlValidatorConverter extends YamlConverter
                 }
             }
         }
+
         if (!$arrayized) {
-            $property = array_merge($property, $rules);
+            $property['validation'] = array_merge(!empty($property['validation']) ? $property['validation'] : [], $rules);
         }
 
         return $rules;
@@ -172,78 +173,61 @@ class YamlValidatorConverter extends YamlConverter
      * @param ElementItem $element
      * @param boolean $arrayize
      */
-    private function loadValidatorElement(array &$property, ElementItem $element, $arrayize)
+    private function loadValidatorElement(array &$property, ElementItem $element)
     {
         /* @var $element Element */
         $type = $element->getType();
 
         $attrs = [];
+        $arrayized = strpos($property['type'], 'array<') === 0;
 
-        $arrayized = false;
-        $typeToVisit = $type;
-        if ($arrayize) {
-
-//            if ($itemOfArray = $this->isArrayNestedElement($type)) {
-//                $attrs = [
-//                    'min' => $itemOfArray->getMin(),
-//                    'max' => $itemOfArray->getMax()
-//                ];
-//                $arrayized = true;
-//                $typeToVisit = $itemOfArray->getType();
-//             } else
-
-                 if ($itemOfArray = $this->isArrayType($type)) {
+        if ($arrayized) {
+            if ($itemOfArray = $this->isArrayNestedElement($type)) {
                 $attrs = [
-                    'min' => $itemOfArray->getMin(),
+                    'min' => min($element->getMin(), $itemOfArray->getMin()),
                     'max' => $itemOfArray->getMax()
                 ];
-                $arrayized = true;
-                $typeToVisit = $itemOfArray->getType();
-            } elseif ($this->isArrayElement($element)) {
+            }  elseif ($itemOfArray = $this->isArrayType($type)) {
                 $attrs = [
-                    'min' => $element->getMin(),
-                    'max' => $element->getMax()
+                    'min' => min($element->getMin(), $itemOfArray->getMin()),
+                    'max' => $itemOfArray->getMax()
                 ];
-                $arrayized = true;
-            }
-
-            if (count($attrs) !== 0) {
-                if ($attrs['min'] === 0) {
-                    unset($attrs['min']);
-                }
-                if ($attrs['max'] === -1) {
-                    unset($attrs['max']);
-                }
+            } elseif ($this->isArrayElement($element)) {
+//                $attrs = [
+//                    'min' => $element->getMin(),
+//                    'max' => $element->getMax()
+//                ];
             }
         }
 
-        $rules = $this->loadValidatorType($property, $arrayized ? $typeToVisit : $type, $arrayized );
+        if (isset($attrs['min']) && $attrs['min'] === 0) {
+            unset($attrs['min']);
+        }
+        if (isset($attrs['max']) && $attrs['max'] === -1) {
+            unset($attrs['max']);
+        }
 
-        // Required properties
-        if ($this->visitType($type)) {
-            if ($element->getMin() !== 0) {
-                if ($arrayized && count($attrs) === 0) {
-                    $property[] = [
-                        'Count' => ['min' => 1]
-                    ];
-                }
-                $property[] = [
-                    'NotNull' => null
-                ];
-            }
+        $rules = $this->loadValidatorType($property, $type, $arrayized );
+
+
+        if ($element->getMin() > 0) {
+            $property['validation'][] = [
+                'NotNull' => null
+            ];
         }
 
         if ($arrayized && count($attrs) > 0) {
-            $property[] = [
+            $property['validation'][] = [
                  'Count' => $attrs
             ];
         }
-        if ($arrayized && count($rules) > 0 && $attrs) {
-            $property[] = [
+        if ($arrayized && count($rules) > 0) {
+//            $rules[] = ['Valid' => null];
+            $property['validation'][] = [
                 'All' => $rules
             ];
         } elseif ($type instanceof ComplexType) {
-            $property[] = [
+            $property['validation'][] = [
                 'Valid' => null
             ];
         }
@@ -267,7 +251,7 @@ class YamlValidatorConverter extends YamlConverter
         // Required properties
         if ($attribute instanceof Attribute) {
             if ($attribute->getUse() === Attribute::USE_REQUIRED) {
-                $property[] = [
+                $property['validation'][] = [
                     'NotNull' => null
                 ];
             }
@@ -306,16 +290,15 @@ class YamlValidatorConverter extends YamlConverter
      * @param boolean $arrayize
      * @return PHPProperty
      */
-    protected function visitElement(&$class, Schema $schema, ElementItem $element, $arrayize = true)
+    protected function &visitElement(&$class, Schema $schema, ElementItem $element, $arrayize = true)
     {
-        $property = array();
+        $property = parent::visitElement($class, $schema, $element, $arrayize);
 
-        $this->findPHPClass($class, $element);
-
-        $this->loadValidatorElement($property, $element, $arrayize);
-
+        $this->loadValidatorElement($property, $element);
         return $property;
     }
+
+
 
     /**
      * Override necessary to improve method to load validations from schema attribute
@@ -325,9 +308,9 @@ class YamlValidatorConverter extends YamlConverter
      * @param AttributeItem $attribute
      * @return array
      */
-    protected function visitAttribute(&$class, Schema $schema, AttributeItem $attribute)
+    protected function &visitAttribute(&$class, Schema $schema, AttributeItem $attribute)
     {
-        $property = array();
+        $property = parent::visitAttribute($class, $schema, $attribute);
 
         $this->loadValidatorAttribute($property, $attribute);
 
@@ -342,30 +325,13 @@ class YamlValidatorConverter extends YamlConverter
      * @param Type $type
      * @param string $parentName
      */
-    protected function handleClassExtension(&$class, &$data, Type $type, $parentName)
+    protected function &handleClassExtension(&$class, &$data, Type $type, $parentName)
     {
-        if (!isset($data["properties"])) {
-            $data["properties"] = [];
-        }
+        $property = parent::handleClassExtension($class, $data, $type, $parentName);
 
-        if ($alias = $this->getTypeAlias($type)) {
-            $property["type"] = $alias;
-            $data["properties"]["__value"] = $property;
-        } else {
-            $extension = $this->visitType($type, true);
-            $extension = reset($extension);
+        $rules = $this->loadValidatorType($property, $type, false );
 
-            if (isset($extension['properties']['__value']) && count($extension['properties']) === 1) {
-                $data["properties"]["__value"] = $extension['properties']['__value'];
-            } elseif ($type instanceof SimpleType) { // @todo ?? basta come controllo?
-                $property = array();
-                if ($valueProp = $this->typeHasValue($type, $class, $parentName)) {
-                    $property["type"] = $valueProp;
-                } else {
-                    $property["type"] = key($extension);
-                }
-                $data["properties"]["__value"] = $property;
-            }
-        }
+        $property['validation'] = array_merge(!empty($property['validation']) ? $property['validation'] : [], $rules);
+        return $property;
     }
 }

@@ -69,8 +69,8 @@ class OTASerializationTest extends \PHPUnit_Framework_TestCase
         $xml = preg_replace("/" . preg_quote('<![CDATA[', '/') . "(.*?)" . preg_quote(']]>', '/') . "/mis", "\\1", $xml);
 
         $xml = str_replace('&', '', $xml);
-        $xml = preg_replace_callback('/ItinSeqNumber="(\d+)"/', function ($mch){
-            return 'ItinSeqNumber="'.intval($mch[1]).'"';
+        $xml = preg_replace_callback('/(ItinSeqNumber|UnitOfMeasureQuantity)="(\d+)"/', function ($mch){
+            return $mch[1].'="'.intval($mch[2]).'"';
         }, $xml);
 
         $dom = new \DOMDocument();
@@ -152,14 +152,6 @@ class OTASerializationTest extends \PHPUnit_Framework_TestCase
         $original = $this->clearXML(file_get_contents($xml));
         $object = $serializer->deserialize($original, $class, 'xml');
 
-        $violations = self::$validator->validate($object);
-
-        $xmlDom = new \DOMDocument();
-
-        if (@$xmlDom->load($xml) && @$xmlDom->schemaValidate($xsd)) {
-            $this->assertCount(0, $violations, $xml . print_r($violations, 1).$xmlDom->saveXML());
-        }
-
         $new = $serializer->serialize($object, 'xml');
 
         $new = $this->clearXML($new);
@@ -176,6 +168,35 @@ class OTASerializationTest extends \PHPUnit_Framework_TestCase
         }
 
         $this->assertFalse($notEqual);
+    }
+
+    /**
+     * @group slow
+     * @dataProvider getTestFiles
+     */
+    public function testValidation($xml, $xsd, $class)
+    {
+        $serializer = self::$generator->buildSerializer(function (HandlerRegistryInterface $h) {
+            $h->registerSubscribingHandler(new XmlSchemaDateHandler());
+            $h->registerSubscribingHandler(new OTASchemaDateHandler());
+            $h->registerSubscribingHandler(new BaseTypesHandler());
+        });
+
+        $original = $this->clearXML(file_get_contents($xml));
+        $object = $serializer->deserialize($original, $class, 'xml');
+
+        $violations = self::$validator->validate($object);
+
+        $xmlDom = new \DOMDocument();
+
+        if (!@$xmlDom->load($xml)){
+            $this->markTestSkipped();
+            return;
+        }
+
+        if (@$xmlDom->schemaValidate($xsd)) {
+            $this->assertCount(0, $violations, 'Validation errors in '.$xml.print_r($violations,1));
+        }
     }
 
     private static function getXmlFiles()
