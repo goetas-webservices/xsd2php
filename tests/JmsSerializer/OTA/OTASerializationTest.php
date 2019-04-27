@@ -69,7 +69,7 @@ class OTASerializationTest extends \PHPUnit_Framework_TestCase
         $xml = preg_replace("/" . preg_quote('<![CDATA[', '/') . "(.*?)" . preg_quote(']]>', '/') . "/mis", "\\1", $xml);
 
         $xml = str_replace('&', '', $xml);
-        $xml = preg_replace_callback('/(ItinSeqNumber|UnitOfMeasureQuantity)="(\d+)"/', function ($mch){
+        $xml = preg_replace_callback('/(ItinSeqNumber|UnitOfMeasureQuantity|Quantity)="(\d+)"/', function ($mch){
             return $mch[1].'="'.intval($mch[2]).'"';
         }, $xml);
 
