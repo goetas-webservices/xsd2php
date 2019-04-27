@@ -9,6 +9,7 @@ use GoetasWebservices\Xsd\XsdToPhp\Tests\Generator;
 use GoetasWebservices\Xsd\XsdToPhpRuntime\Jms\Handler\BaseTypesHandler;
 use GoetasWebservices\Xsd\XsdToPhpRuntime\Jms\Handler\XmlSchemaDateHandler;
 use JMS\Serializer\Handler\HandlerRegistryInterface;
+use PackageVersions\Versions;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class OTASerializationTest extends \PHPUnit_Framework_TestCase
@@ -176,6 +177,12 @@ class OTASerializationTest extends \PHPUnit_Framework_TestCase
      */
     public function testValidation($xml, $xsd, $class)
     {
+        if (strpos($xml, 'OTA_UpdateRQ.xml')!==false) {
+            if (!class_exists(Versions::class) || version_compare(Versions::getVersion('goetas-webservices/xsd-reader'), '0.3.6', '<')) {
+                $this->markTestSkipped();
+            }
+        }
+
         $serializer = self::$generator->buildSerializer(function (HandlerRegistryInterface $h) {
             $h->registerSubscribingHandler(new XmlSchemaDateHandler());
             $h->registerSubscribingHandler(new OTASchemaDateHandler());
