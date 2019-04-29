@@ -58,7 +58,8 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                                 '203015',
                                 '213150',
                                 '225105'
-                            ]
+                            ],
+                            'groups' => ['xsd_rules']
                         ]
                     ]
                 ]
@@ -90,7 +91,8 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                     [
                         'Length' => [
                             'min' => 12,
-                            'max' => 12
+                            'max' => 12,
+                            'groups' => ['xsd_rules']
                         ]
                     ]
                 ]
@@ -101,7 +103,8 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                 [
                     [
                         'Length' => [
-                            'max' => 100
+                            'max' => 100,
+                            'groups' => ['xsd_rules']
                         ]
                     ]
                 ]
@@ -112,7 +115,8 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                 [
                     [
                         'Length' => [
-                            'min' => 3
+                            'min' => 3,
+                            'groups' => ['xsd_rules']
                         ]
                     ]
                 ]
@@ -122,7 +126,10 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                 '<xs:pattern value="\\([0-9]{2}\\)\\s[0-9]{4}-[0-9]{4,5}"/>',
                 [
                     [
-                        'Regex' => '/\\([0-9]{2}\\)\\s[0-9]{4}-[0-9]{4,5}/'
+                        'Regex' => [
+                            'pattern' => '/\\([0-9]{2}\\)\\s[0-9]{4}-[0-9]{4,5}/',
+                            'groups' => ['xsd_rules']
+                        ]
                     ]
                 ]
             ],
@@ -131,7 +138,10 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                 '<xs:maxExclusive value="50"/>',
                 [
                     [
-                        'LessThan' => 50
+                        'LessThan' => [
+                            'value' => 50,
+                            'groups' => ['xsd_rules']
+                        ]
                     ]
                 ]
             ],
@@ -140,7 +150,10 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                 '<xs:maxInclusive value="60"/>',
                 [
                     [
-                        'LessThanOrEqual' => 60
+                        'LessThanOrEqual' => [
+                            'value' => 60,
+                            'groups' => ['xsd_rules']
+                        ]
                     ]
                 ]
             ],
@@ -149,7 +162,10 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                 '<xs:minExclusive value="10"/>',
                 [
                     [
-                        'GreaterThan' => 10
+                        'GreaterThan' => [
+                            'value' => 10,
+                            'groups' => ['xsd_rules']
+                        ]
                     ]
                 ]
             ],
@@ -158,7 +174,10 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                 '<xs:minInclusive value="10"/>',
                 [
                     [
-                        'GreaterThanOrEqual' => 10
+                        'GreaterThanOrEqual' => [
+                            'value' => 10,
+                            'groups' => ['xsd_rules']
+                        ]
                     ]
                 ]
             ]
@@ -220,7 +239,9 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                     'properties' => [
                         'column1' => [
                             [
-                                'NotNull' => null
+                                'NotNull' => [
+                                    'groups' => ['xsd_rules']
+                                ]
                             ]
                         ]
                     ]
@@ -279,13 +300,24 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                             $ymlValidations,
                             [
                                 [
-                                    'NotNull' => null
+                                    'NotNull' => [
+                                        'groups' => ['xsd_rules']
+                                    ]
                                 ]
                             ]
                         )
                     ]
                 ]
-            ], $classes['Example\\ComplexType1Type']);
+            ], $classes['Example\\ComplexType1Type'], print_r([array_merge(
+            $ymlValidations,
+            [
+                [
+                    'NotNull' => [
+                        'groups' => ['xsd_rules']
+                    ]
+                ]
+            ]
+        ), $classes['Example\\ComplexType1Type']], 1));
     }
 
     /**
@@ -346,7 +378,9 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                     'properties' => [
                         'column1' => [
                             [
-                                'NotNull' => null
+                                'NotNull' => [
+                                    'groups' => ['xsd_rules']
+                                ]
                             ],
                         ]
                     ]
@@ -378,7 +412,9 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                     'properties' => [
                         'column1' => [
                             [
-                                'NotNull' => null
+                                'NotNull' => [
+                                    'groups' => ['xsd_rules']
+                                ]
                             ],
                         ]
                     ]
@@ -438,21 +474,26 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                     'properties' => [
                         'protocols' => [
                             [
-                                'NotNull' => null
+                                'NotNull' => [
+                                    'groups' => ['xsd_rules']
+                                ]
                             ],
                             [
                                 'All' => [
-                                    [
-                                        'Length' => [
-                                            'min' => 1
-                                        ]
+                                    'groups' => ['xsd_rules'],
+                                    'constraints' => [
+                                        [
+                                            'Length' => [
+                                                'min' => 1,
+                                            ]
 
-                                    ],
-                                    [
-                                        'Length' => [
-                                            'max' => 12
-                                        ]
-                                    ],
+                                        ],
+                                        [
+                                            'Length' => [
+                                                'max' => 12,
+                                            ]
+                                        ],
+                                    ]
                                 ]
                             ],
 
@@ -500,19 +541,24 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                     'properties' => [
                         'protocolNumber' => [
                             [
-                                'NotNull' => null
+                                'NotNull' => [
+                                    'groups' => ['xsd_rules']
+                                ]
                             ],
                             [
                                 'All' => [
-                                    [
-                                        'Length' => [
-                                            'min' => 1
-                                        ]
+                                    'groups' => ['xsd_rules'],
+                                    'constraints' => [
+                                        [
+                                            'Length' => [
+                                                'min' => 1,
+                                            ]
 
-                                    ],
-                                    [
-                                        'Length' => [
-                                            'max' => 12
+                                        ],
+                                        [
+                                            'Length' => [
+                                                'max' => 12,
+                                            ]
                                         ]
                                     ]
                                 ]
@@ -530,16 +576,21 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                         'protocols' => [
 
                             [
-                                'NotNull' => null
+                                'NotNull' => [
+                                    'groups' => ['xsd_rules']
+                                ]
                             ],
                             [
                                 'Count' => [
                                     'min' => 1,
-                                    'max' => 30
+                                    'max' => 30,
+                                    'groups' => ['xsd_rules']
                                 ]
                             ],
                             [
-                                'Valid' => null
+                                'Valid' => [
+                                    'groups' => ['xsd_rules']
+                                ]
                             ],
                         ]
                     ]
@@ -585,15 +636,18 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
 //                            ],
                             [
                                 'All' => [
-                                    [
-                                        'Length' => [
-                                            'min' => 1
-                                        ]
+                                    'groups' => ['xsd_rules'],
+                                    'constraints' => [
+                                        [
+                                            'Length' => [
+                                                'min' => 1,
+                                            ]
 
-                                    ],
-                                    [
-                                        'Length' => [
-                                            'max' => 12
+                                        ],
+                                        [
+                                            'Length' => [
+                                                'max' => 12,
+                                            ]
                                         ]
                                     ]
                                 ]
@@ -643,15 +697,18 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                         'protocolNumber' => [
                             [
                                 'All' => [
-                                    [
-                                        'Length' => [
-                                            'min' => 1
-                                        ]
+                                    'groups' => ['xsd_rules'],
+                                    'constraints' => [
+                                        [
+                                            'Length' => [
+                                                'min' => 1,
+                                            ]
 
-                                    ],
-                                    [
-                                        'Length' => [
-                                            'max' => 12
+                                        ],
+                                        [
+                                            'Length' => [
+                                                'max' => 12,
+                                            ]
                                         ]
                                     ]
                                 ]
@@ -668,15 +725,20 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                         'protocols' => [
 
                             [
-                                'NotNull' => null
-                            ],
-                                                        [
-                                'Count' => [
-                                    'max' => 30
+                                'NotNull' => [
+                                    'groups' => ['xsd_rules']
                                 ]
                             ],
                             [
-                                'Valid' => null
+                                'Count' => [
+                                    'max' => 30,
+                                    'groups' => ['xsd_rules']
+                                ]
+                            ],
+                            [
+                                'Valid' => [
+                                    'groups' => ['xsd_rules']
+                                ]
                             ]
                         ]
                     ]
@@ -724,15 +786,18 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
 
                             [
                                 'All' => [
-                                    [
-                                        'Length' => [
-                                            'min' => 1
-                                        ]
+                                    'groups' => ['xsd_rules'],
+                                    'constraints' => [
+                                        [
+                                            'Length' => [
+                                                'min' => 1,
+                                            ]
 
-                                    ],
-                                    [
-                                        'Length' => [
-                                            'max' => 12
+                                        ],
+                                        [
+                                            'Length' => [
+                                                'max' => 12,
+                                            ]
                                         ]
                                     ]
                                 ]
@@ -749,11 +814,14 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                         'protocols' => [
                             [
                                 'Count' => [
-                                    'max' => 30
+                                    'max' => 30,
+                                    'groups' => ['xsd_rules']
                                 ]
                             ],
                             [
-                                'Valid' => null
+                                'Valid' => [
+                                    'groups' => ['xsd_rules']
+                                ]
                             ]
                         ]
                     ]
@@ -800,10 +868,14 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                     'properties' => [
                         'diagnostcs' => [
                             [
-                                'NotNull' => null
+                                'NotNull' => [
+                                    'groups' => ['xsd_rules']
+                                ]
                             ],
                             [
-                                'Valid' => null
+                                'Valid' => [
+                                    'groups' => ['xsd_rules']
+                                ]
                             ]
                         ]
                     ]
@@ -816,23 +888,30 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                     'properties' => [
                         'table' => [
                             [
-                                'NotNull' => null
+                                'NotNull' => [
+                                    'groups' => ['xsd_rules']
+                                ]
                             ]
                         ],
                         'code' => [
                             [
                                 'Length' => [
-                                    'min' => 1
+                                    'min' => 1,
+                                    'groups' => ['xsd_rules']
                                 ]
                             ],
                             [
                                 'Length' => [
-                                    'max' => 10
+                                    'max' => 10,
+                                    'groups' => ['xsd_rules']
                                 ]
 
                             ],
                             [
-                                'NotNull' => null
+                                'NotNull' => [
+                                    'groups' => ['xsd_rules']
+                                ]
+
                             ]
                         ]
                     ]
@@ -885,13 +964,20 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                     'properties' => [
                         'consult' => [
                             [
-                                'NotNull' => null
+                                'NotNull' => [
+                                    'groups' => ['xsd_rules']
+                                ]
                             ],
                             [
-                                'Count' => ['min' => 1]
+                                'Count' => [
+                                    'min' => 1,
+                                    'groups' => ['xsd_rules']
+                                ]
                             ],
                             [
-                                'Valid' => null
+                                'Valid' => [
+                                    'groups' => ['xsd_rules']
+                                ]
                             ],
                         ]
                     ]
@@ -904,23 +990,29 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                     'properties' => [
                         'table' => [
                             [
-                                'NotNull' => null
+                                'NotNull' => [
+                                    'groups' => ['xsd_rules']
+                                ]
                             ]
                         ],
                         'code' => [
                             [
                                 'Length' => [
-                                    'min' => 1
+                                    'min' => 1,
+                                    'groups' => ['xsd_rules']
                                 ]
                             ],
                             [
                                 'Length' => [
-                                    'max' => 10
+                                    'max' => 10,
+                                    'groups' => ['xsd_rules']
                                 ]
 
                             ],
                             [
-                                'NotNull' => null
+                                'NotNull' => [
+                                    'groups' => ['xsd_rules']
+                                ]
                             ],
                         ]
                     ]
@@ -933,7 +1025,9 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                     'properties' => [
                         'diagnostcs' => [
                             [
-                                'NotNull' => null
+                                'NotNull' => [
+                                    'groups' => ['xsd_rules']
+                                ]
                             ],
 //                            [
 //                                'Count' => [
@@ -941,7 +1035,9 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
 //                                ]
 //                            ],
                             [
-                                'Valid' => null
+                                'Valid' => [
+                                    'groups' => ['xsd_rules']
+                                ]
                             ],
 
                         ]
@@ -988,22 +1084,30 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                     'properties' => [
                         'lang' => [
                             [
-                                'NotNull' => null
+                                'NotNull' => [
+                                    'groups' => ['xsd_rules']
+                                ]
                             ]
                         ],
                         'address' => [
                             [
-                                'NotNull' => null
+                                'NotNull' => [
+                                    'groups' => ['xsd_rules']
+                                ]
                             ]
                         ],
                         'city' => [
                             [
-                                'NotNull' => null
+                                'NotNull' => [
+                                    'groups' => ['xsd_rules']
+                                ]
                             ]
                         ],
                         'country' => [
                             [
-                                'NotNull' => null
+                                'NotNull' => [
+                                    'groups' => ['xsd_rules']
+                                ]
                             ]
                         ]
                     ]
@@ -1016,12 +1120,16 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                     'properties' => [
                         'firstname' => [
                             [
-                                'NotNull' => null
+                                'NotNull' => [
+                                    'groups' => ['xsd_rules']
+                                ]
                             ]
                         ],
                         'lastname' => [
                             [
-                                'NotNull' => null
+                                'NotNull' => [
+                                    'groups' => ['xsd_rules']
+                                ]
                             ]
                         ]
                     ]
