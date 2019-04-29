@@ -37,11 +37,17 @@ class YamlValidatorConverter extends YamlConverter
 
 
                     foreach ($property['validation'] as &$rule){
-                        foreach ($rule as &$item){
-                            if (!is_array($item)){
-                                $item = [];
+                        foreach ($rule as $type => &$item) {
+
+                            if ($type === 'Valid') {
+                                continue;
+                            } else {
+                                if (!is_array($item)){
+                                    $item = [];
+                                }
+                                $item['groups'] = ['xsd_rules'];
                             }
-                            $item['groups'] = ['xsd_rules'];
+
                         }
                         unset($item);
                     }
