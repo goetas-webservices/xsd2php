@@ -202,7 +202,7 @@ class OTASerializationTest extends \PHPUnit_Framework_TestCase
         }
 
         if (@$xmlDom->schemaValidate($xsd)) {
-            $this->assertCount(0, $violations, 'Validation errors in '.$xml.print_r($violations,1));
+            $this->assertCount(0, $violations, 'Validation errors in '.$xml);
         }
     }
 
