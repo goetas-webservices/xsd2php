@@ -4,7 +4,6 @@ namespace GoetasWebservices\Xsd\XsdToPhp\Tests\Php\PathGenerator;
 use Composer\Autoload\ClassLoader;
 use Symfony\Component\Validator\Validation;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
-use Symfony\Component\Validator\Constraints\NotNull;
 
 use ota\TestNotNullType;
 
@@ -37,8 +36,6 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
         $violations = $this->validator->validate($object);
         
         $this->assertEquals(1, count($violations));
-        
-        $this->assertEquals(NotNull::IS_NULL_ERROR, $violations[0]->getCode());
         
         $object->setValue('My value');
         $violations = $this->validator->validate($object);
