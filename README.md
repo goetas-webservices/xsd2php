@@ -51,9 +51,16 @@ xsd2php:
   destinations_php: 
     'TestNs\MyApp': soap/src
 #    'TestNs\MyApp': soap\src  #  on Windows
+
   destinations_jms:
     'TestNs\MyApp': soap/metadata
-#    'TestNs\MyApp': soap\metadata  #  on Windows    
+#    'TestNs\MyApp': soap\metadata  #  on Windows
+ 
+#  Uncomment this section if you want to have also symfony/validator metadata to be generated from XSD    
+#  destinations_validation:
+#    'TestNs\MyApp': soap/validation
+#    'TestNs\MyApp': soap\validation  #  on Windows
+    
   aliases: # optional
     'http://www.example.org/test/':
       MyCustomXSDType:  'MyCustomMappedPHPType'
@@ -124,6 +131,8 @@ for this type/alis.
 Here is an example on how to configure JMS serializer to handle custom types
 
 ```php
+<?php
+
 use JMS\Serializer\SerializerBuilder;
 use JMS\Serializer\Handler\HandlerRegistryInterface;
 
@@ -149,6 +158,26 @@ $object = $serializer->deserialize('<some xml/>', 'TestNs\MyObject', 'xml');
 
 // serialize the Demo\MyObject back into XML
 $newXml = $serializer->serialize($object, 'xml');
+
+```
+
+Validation
+----------
+
+```php
+<?php
+
+use Symfony\Component\Validator\Validation;
+
+// get the validator
+$builder = Validation::createValidatorBuilder();
+foreach (glob('soap/validation/*.yml') as $file) {
+    $builder->addYamlMapping($file);
+}
+$validator =  $builder->getValidator();
+
+// validate $object
+$violations = $validator->validate($object, null, ['xsd_rules']);
 
 ```
 

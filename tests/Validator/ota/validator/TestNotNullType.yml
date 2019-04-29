@@ -1,0 +1,5 @@
+ota\TestNotNullType:
+    properties:
+        value:
+            -
+                NotNull: null

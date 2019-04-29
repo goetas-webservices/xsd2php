@@ -19,6 +19,7 @@ abstract class AbstractGenerator
 
     protected $phpDir;
     protected $jmsDir;
+    protected $validationDir;
 
     protected $namingStrategy;
 
@@ -33,6 +34,7 @@ abstract class AbstractGenerator
 
         $this->phpDir = "$tmp/php";
         $this->jmsDir = "$tmp/jms";
+        $this->validationDir = "$tmp/validation";
 
         $this->namingStrategy = defined('PHP_WINDOWS_VERSION_BUILD') ? new VeryShortNamingStrategy() : new ShortNamingStrategy();
 
@@ -71,8 +73,9 @@ abstract class AbstractGenerator
         foreach ($this->targetNs as $phpNs) {
             $phpDir = $this->phpDir . "/" . $this->slug($phpNs);
             $jmsDir = $this->jmsDir . "/" . $this->slug($phpNs);
+            $validationDir = $this->validationDir . "/" . $this->slug($phpNs);
 
-            foreach ([$phpDir, $jmsDir] as $dir) {
+            foreach ([$phpDir, $jmsDir, $validationDir] as $dir) {
                 if (is_dir($dir)) {
                     self::delTree($dir);
                 }
@@ -143,6 +146,22 @@ abstract class AbstractGenerator
         $paths = array();
         foreach ($this->targetNs as $phpNs) {
             $paths[$phpNs . "\\"] = $this->jmsDir . "/" . $this->slug($phpNs);
+        }
+
+        $pathGenerator = new JmsPsr4PathGenerator($paths);
+
+        $writer = new JMSWriter($pathGenerator);
+        $writer->write($items);
+    }
+
+    /**
+     * @param $items
+     */
+    protected function writeValidation(array $items)
+    {
+        $paths = array();
+        foreach ($this->targetNs as $phpNs) {
+            $paths[$phpNs . "\\"] = $this->validationDir;
         }
 
         $pathGenerator = new JmsPsr4PathGenerator($paths);

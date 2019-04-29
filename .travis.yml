@@ -21,7 +21,8 @@ before_script:
   - echo "xdebug.max_nesting_level=1000" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
   - if [[ $TRAVIS_PHP_VERSION = '7.0' ]]; then PHPUNIT_FLAGS="--coverage-clover=coverage.clover"; else PHPUNIT_FLAGS=""; fi
   - if [[ $TRAVIS_PHP_VERSION != '7.0' ]]; then phpenv config-rm xdebug.ini; fi
-  - composer self-update
+  - if [[ $TRAVIS_PHP_VERSION == '7.'* ]]; then composer --dev require ocramius/package-versions:^1.0 --no-update; fi
+
   - composer update $COMPOSER_FLAGS
 
 script:

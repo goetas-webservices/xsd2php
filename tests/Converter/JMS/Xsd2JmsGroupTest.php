@@ -384,7 +384,7 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
             </xs:schema>
             ';
         $classes = $this->getClasses($content);
-        $this->assertCount(1, $classes);
+        $this->assertCount(2, $classes);
 
         $this->assertEquals(
             array(

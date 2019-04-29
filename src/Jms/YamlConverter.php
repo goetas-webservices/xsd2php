@@ -117,7 +117,7 @@ class YamlConverter extends AbstractConverter
         $visited[spl_object_hash($schema)] = true;
 
         foreach ($schema->getTypes() as $type) {
-            $this->visitType($type);
+            $this->visitType($type, true);
         }
         foreach ($schema->getElements() as $element) {
             $this->visitElementDef($schema, $element);
@@ -278,7 +278,7 @@ class YamlConverter extends AbstractConverter
         }
     }
 
-    private function visitSimpleType(&$class, &$data, SimpleType $type, $name)
+    protected function visitSimpleType(&$class, &$data, SimpleType $type, $name)
     {
         if ($restriction = $type->getRestriction()) {
             $parent = $restriction->getBase();
@@ -312,10 +312,10 @@ class YamlConverter extends AbstractConverter
         }
     }
 
-    private function handleClassExtension(&$class, &$data, Type $type, $parentName)
+    protected function &handleClassExtension(&$class, &$data, Type $type, $parentName)
     {
+        $property = array();
         if ($alias = $this->getTypeAlias($type)) {
-
 
             $property = array();
             $property["expose"] = true;
@@ -329,13 +329,15 @@ class YamlConverter extends AbstractConverter
             }
 
             $data["properties"]["__value"] = $property;
-
+            return $property;
 
         } else {
             $extension = $this->visitType($type, true);
 
             if (isset($extension['properties']['__value']) && count($extension['properties']) === 1) {
-                $data["properties"]["__value"] = $extension['properties']['__value'];
+                $property = &$extension['properties']['__value'];
+                $data["properties"]["__value"] = $property;
+                return $property;
             } else {
                 if ($type instanceof SimpleType) { // @todo ?? basta come controllo?
                     $property = array();
@@ -355,13 +357,15 @@ class YamlConverter extends AbstractConverter
                     }
 
                     $data["properties"]["__value"] = $property;
-
+                    return $property;
                 }
             }
         }
+
+        return $property;
     }
 
-    private function visitAttribute(&$class, Schema $schema, AttributeItem $attribute)
+    protected function &visitAttribute(&$class, Schema $schema, AttributeItem $attribute)
     {
         $property = array();
         $property["expose"] = true;
@@ -395,7 +399,7 @@ class YamlConverter extends AbstractConverter
         return $property;
     }
 
-    private function typeHasValue(Type $type, $parentClass, $name)
+    protected function typeHasValue(Type $type, $parentClass, $name)
     {
         do {
             if (!($type instanceof SimpleType)) {
@@ -428,7 +432,7 @@ class YamlConverter extends AbstractConverter
      * @param bool $arrayize
      * @return \GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPProperty
      */
-    private function visitElement(&$class, Schema $schema, ElementItem $element, $arrayize = true)
+    protected function &visitElement(&$class, Schema $schema, ElementItem $element, $arrayize = true)
     {
         $property = array();
         $property["expose"] = true;
@@ -518,7 +522,7 @@ class YamlConverter extends AbstractConverter
         return $property;
     }
 
-    private function findPHPClass(&$class, Item $node)
+    protected function findPHPClass(&$class, Item $node)
     {
         $type = $node->getType();
 

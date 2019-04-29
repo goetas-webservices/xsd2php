@@ -16,11 +16,14 @@ class I43Test extends \PHPUnit_Framework_TestCase
     {
 
         $nss = array(
-            "http://schemas.openxmlformats.org/package/2006/metadata/core-properties" => "Iag/ECMA376/Package/Model/CoreProperties/",
-            "http://purl.org/dc/elements/1.1/" => "Iag/ECMA376/Package/Model/CoreProperties/DcElements/",
-            "http://purl.org/dc/terms/" => "Iag/ECMA376/Package/Model/CoreProperties/DcTerms/",
-            "http://purl.org/dc/dcmitype/" => "Iag/ECMA376/Package/Model/CoreProperties/DcMiType/",
+            "http://schemas.openxmlformats.org/package/2006/metadata/core-properties" => "Iag/ECMA376/Package/Model/CoreProperties",
+            "http://purl.org/dc/elements/1.1/" => "Iag/ECMA376/Package/Model/CoreProperties/DcElements",
+            "http://purl.org/dc/terms/" => "Iag/ECMA376/Package/Model/CoreProperties/DcTerms",
+            "http://purl.org/dc/dcmitype/" => "Iag/ECMA376/Package/Model/CoreProperties/DcMiType"
         );
+        $nss = array_map(function ($a){
+            return strtr($a, '/', '\\');
+        }, $nss);
 
         $reader = new SchemaReader();
         $reader->addKnownSchemaLocation('http://dublincore.org/schemas/xmls/qdc/2003/04/02/dc.xsd', __DIR__ . '/opc/dc.xsd');
@@ -30,11 +33,13 @@ class I43Test extends \PHPUnit_Framework_TestCase
 
         $schema = $reader->readFile(__DIR__ . '/opc/opc-coreProperties.xsd');
 
-        $generator = new Generator($nss);
+        $generator = new Generator($nss, [],__DIR__ . '/tmp');
 
-        list($phpClasses, $yamlItems) = $generator->getData([$schema]);
+        list($phpClasses, $yamlItems, $validationItems) = $generator->getData([$schema]);
+        $generator->generate([$schema]);
 
         $this->assertEquals(count($phpClasses), count($yamlItems));
         $this->assertGreaterThan(0, count($phpClasses));
+        $this->assertGreaterThan(0, count($validationItems));
     }
 }
