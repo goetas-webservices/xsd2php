@@ -147,7 +147,7 @@ class YamlValidatorConverter extends YamlConverter
                     case 'pattern':
                         foreach ($check as $item) {
                             $rules[] = [
-                                'Regex' => ['pattern' => "/{$item['value']}/"]
+                                'Regex' => ['pattern' => "~{$item['value']}~"]
                             ];
                         }
                         break;
