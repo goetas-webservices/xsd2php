@@ -127,7 +127,7 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                 [
                     [
                         'Regex' => [
-                            'pattern' => '/\\([0-9]{2}\\)\\s[0-9]{4}-[0-9]{4,5}/',
+                            'pattern' => '~\\([0-9]{2}\\)\\s[0-9]{4}-[0-9]{4,5}~',
                             'groups' => ['xsd_rules']
                         ]
                     ]
