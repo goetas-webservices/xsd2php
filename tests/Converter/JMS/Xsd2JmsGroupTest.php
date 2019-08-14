@@ -627,4 +627,94 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
                 )
             ), $classes['Example\\Element1']);
     }
+
+    public function testListOfRestriction()
+    {
+        $xml = '
+            <xs:schema targetNamespace="http://www.example.com" xmlns:xs="http://www.w3.org/2001/XMLSchema"  xmlns:ex="http://www.example.com">
+            
+                <xs:simpleType name="JustRestriction">
+                    <xs:restriction base="xs:float"/>
+                </xs:simpleType>            
+                
+                <xs:simpleType name="RestrictionOfJustRestriction">
+                    <xs:restriction base="JustRestriction"/>
+                </xs:simpleType>
+                                
+                
+                <xs:simpleType name="ListOfXSDFloats">
+                    <xs:list itemType="xs:float"/>
+                </xs:simpleType>
+
+                <xs:simpleType name="ListOfJustRestriction">
+                    <xs:list itemType="JustRestriction"/>
+                </xs:simpleType>
+                
+                <xs:simpleType name="ListOfRestrictionOfJustRestriction">
+                    <xs:list itemType="JustRestriction"/>
+                </xs:simpleType>
+                                            
+                <xs:simpleType name="ListOfListOfJustRestriction">
+                    <xs:restriction base="ListOfJustRestriction"/>
+                </xs:simpleType>
+                
+                 <xs:complexType name="ComplexListOfXSDFloats">
+                  <xs:simpleContent>
+                    <xs:extension base="ListOfXSDFloats"/>
+                  </xs:simpleContent>
+                </xs:complexType>
+                
+                <xs:complexType name="ComplexListOfListOfJustRestriction">
+                  <xs:simpleContent>
+                    <xs:extension base="ListOfListOfJustRestriction"/>
+                  </xs:simpleContent>
+                </xs:complexType>
+                
+                 <xs:complexType name="ElementsCt">
+                    <xs:sequence>
+                         <xs:element minOccurs="1" maxOccurs="1" name="AttListOfXSDFloats" type="ListOfXSDFloats"/>
+                         <xs:element minOccurs="1" maxOccurs="1" name="AttListOfJustRestriction" type="ListOfJustRestriction"/>
+                         <xs:element minOccurs="1" maxOccurs="1" name="AttListOfRestrictionOfJustRestriction" type="ListOfRestrictionOfJustRestriction"/>
+                         <xs:element minOccurs="1" maxOccurs="1" name="AttListOfListOfJustRestriction" type="ListOfListOfJustRestriction"/>
+                         
+                         <xs:element minOccurs="1" maxOccurs="1" name="AttrComplexListOfXSDFloats" type="ComplexListOfXSDFloats"/>
+                         <xs:element minOccurs="1" maxOccurs="1" name="AttrAnonComplexListOfXSDFloats">
+                              <xs:simpleType>
+                                <xs:restriction base="ListOfJustRestriction"/>
+                            </xs:simpleType>
+                         </xs:element>
+                         <xs:element minOccurs="1" maxOccurs="1" name="AttrComplexListOfListOfJustRestriction" type="ComplexListOfListOfJustRestriction"/>
+                     </xs:sequence>
+                </xs:complexType>
+                
+                <xs:complexType name="Ct">
+                     <xs:attribute name="AttListOfXSDFloats" type="ListOfXSDFloats"/>
+                     <xs:attribute name="AttListOfJustRestriction" type="ListOfJustRestriction"/>
+                     <xs:attribute name="AttListOfRestrictionOfJustRestriction" type="ListOfRestrictionOfJustRestriction"/>
+                     <xs:attribute name="AttListOfListOfJustRestriction" type="ListOfListOfJustRestriction"/>
+                     
+                     <xs:attribute name="AttrAnonComplexListOfXSDFloats">
+                          <xs:simpleType>
+                            <xs:restriction base="ListOfJustRestriction"/>
+                        </xs:simpleType>
+                     </xs:attribute>
+                     
+                     <xs:attribute name="AttrComplexListOfXSDFloats" type="ComplexListOfXSDFloats"/>
+                     <xs:attribute name="AttrComplexListOfListOfJustRestriction" type="ComplexListOfListOfJustRestriction"/>
+                </xs:complexType>
+            </xs:schema>';
+        $classes = $this->getClasses($xml);
+
+        $this->assertCount(2, $classes);
+
+        $this->assertCount(7, $classes['Example\ElementsCtType']['Example\ElementsCtType']['properties']);
+        foreach ($classes['Example\ElementsCtType']['Example\ElementsCtType']['properties'] as $property) {
+            self::assertSame('GoetasWebservices\Xsd\XsdToPhp\Jms\SimpleListOf<float>', $property['type']);
+        }
+
+        $this->assertCount(7, $classes['Example\CtType']['Example\CtType']['properties']);
+        foreach ($classes['Example\CtType']['Example\CtType']['properties'] as $property) {
+            self::assertSame('GoetasWebservices\Xsd\XsdToPhp\Jms\SimpleListOf<float>', $property['type']);
+        }
+    }
 }
