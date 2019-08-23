@@ -4,6 +4,7 @@ namespace GoetasWebservices\Xsd\XsdToPhp;
 use GoetasWebservices\XML\XSDReader\Schema\Element\ElementSingle;
 use GoetasWebservices\XML\XSDReader\Schema\Schema;
 use GoetasWebservices\XML\XSDReader\Schema\Type\ComplexType;
+use GoetasWebservices\XML\XSDReader\Schema\Type\ComplexTypeSimpleContent;
 use GoetasWebservices\XML\XSDReader\Schema\Type\SimpleType;
 use GoetasWebservices\XML\XSDReader\Schema\Type\Type;
 use GoetasWebservices\Xsd\XsdToPhp\Naming\NamingStrategy;
@@ -206,8 +207,18 @@ abstract class AbstractConverter
     protected function isArrayType(Type $type)
     {
         if ($type instanceof SimpleType) {
-            return $type->getList();
+            if ($type->getList()) {
+                return $type->getList();
+            } elseif (($rst = $type->getRestriction()) && $rst->getBase() instanceof SimpleType) {
+              return $this->isArrayType($rst->getBase());
+            }
+        } elseif ($type instanceof ComplexTypeSimpleContent) {
+            if ($ext = $type->getExtension()) {
+                return $this->isArrayType($ext->getBase());
+            }
         }
+
+        return  null;
     }
 
     /**

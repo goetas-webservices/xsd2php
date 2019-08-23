@@ -380,12 +380,13 @@ class PhpConverter extends AbstractConverter
 
         if ($arrayize && $itemOfArray = $this->isArrayType($attribute->getType())) {
             if ($attribute->getType()->getName()) {
-                $arg = new PHPArg($this->getNamingStrategy()->getPropertyName($attribute));
-                $arg->setType($this->visitType($itemOfArray));
-                $property->setType(new PHPClassOf($arg));
+                $visitedType = $this->visitType($itemOfArray);
             } else {
-                $property->setType($this->visitTypeAnonymous($attribute->getType(), $attribute->getName(), $class));
+                $visitedType = $this->visitTypeAnonymous($itemOfArray, $attribute->getName(), $class);
             }
+            $arg = new PHPArg($this->getNamingStrategy()->getPropertyName($attribute));
+            $arg->setType($visitedType);
+            $property->setType(new PHPClassOf($arg));
         } else {
             $property->setType($this->findPHPClass($class, $attribute, true));
         }
@@ -476,7 +477,12 @@ class PhpConverter extends AbstractConverter
 
     private function typeHasValue(Type $type, PHPClass $parentClass, $name)
     {
+        $newType = null;
         do {
+            if ($newType) {
+                $type = $newType;
+                $newType = null;
+            }
             if (!($type instanceof SimpleType)) {
                 return false;
             }
@@ -495,9 +501,9 @@ class PhpConverter extends AbstractConverter
                 return $prop->getType();
             }
         } while (
-            (method_exists($type, 'getRestriction') && ($rest = $type->getRestriction()) && $type = $rest->getBase())
+            (method_exists($type, 'getRestriction') && ($rest = $type->getRestriction()) && $newType = $rest->getBase())
             ||
-            (method_exists($type, 'getUnions') && ($unions = $type->getUnions()) && $type = reset($unions))
+            (method_exists($type, 'getUnions') && ($unions = $type->getUnions()) && $newType = reset($unions))
         );
 
         return false;
