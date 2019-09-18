@@ -18,7 +18,7 @@
   ],
   "license": "MIT",
   "require": {
-    "php": "^5.5|^7.0",
+    "php": "^7.1",
     "symfony/console": "^2.7|^3.0|^4.0",
     "symfony/dependency-injection": "^2.2|^3.0|^4.0",
     "symfony/yaml": "^2.2|^3.0|^4.0",
