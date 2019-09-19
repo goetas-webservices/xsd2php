@@ -18,14 +18,14 @@
   ],
   "license": "MIT",
   "require": {
-    "php": "^5.5|^7.0",
+    "php": "^7.1",
     "symfony/console": "^2.7|^3.0|^4.0",
     "symfony/dependency-injection": "^2.2|^3.0|^4.0",
     "symfony/yaml": "^2.2|^3.0|^4.0",
     "symfony/config": "^2.2|^3.0|^4.0",
     "goetas-webservices/xsd-reader": "^0.2.8|^0.3.5",
     "doctrine/inflector": "^1.0",
-    "zendframework/zend-code": "^3.0.3",
+    "zendframework/zend-code": "^3.3.2",
 
     "psr/log": "^1.0"
   },

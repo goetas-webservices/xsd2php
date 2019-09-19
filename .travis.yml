@@ -6,22 +6,17 @@ cache:
     - vendor
     - $HOME/.composer/cache
 php:
-  - 5.5
-  - 5.6
-  - 7.0
   - 7.1
   - 7.2
 
 matrix:
   include:
-    - php: 5.5
+    - php: 7.1
       env: COMPOSER_FLAGS='--prefer-lowest --prefer-stable'
 
 before_script:
   - pecl install xmldiff
   - echo "xdebug.max_nesting_level=1000" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
-  - if [[ $TRAVIS_PHP_VERSION = '7.0' ]]; then PHPUNIT_FLAGS="--coverage-clover=coverage.clover"; else PHPUNIT_FLAGS=""; fi
-  - if [[ $TRAVIS_PHP_VERSION != '7.0' ]]; then phpenv config-rm xdebug.ini; fi
   - if [[ $TRAVIS_PHP_VERSION == '7.'* ]]; then composer --dev require ocramius/package-versions:^1.0 --no-update; fi
 
   - composer update $COMPOSER_FLAGS
@@ -32,5 +27,5 @@ script:
 
 after_script:
   - wget https://scrutinizer-ci.com/ocular.phar
-  - if [[ $TRAVIS_PHP_VERSION = '7.0' ]] ; then php ocular.phar code-coverage:upload --format=php-clover coverage.clover; fi
-  
+  - if [[ $TRAVIS_PHP_VERSION = '7.1' ]] ; then php ocular.phar code-coverage:upload --format=php-clover coverage.clover; fi
+
