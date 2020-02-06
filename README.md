@@ -250,8 +250,8 @@ There are two types of naming strategies: `short` and `long`. The default is `sh
 
 The `long` naming strategy will suffix elements with `Element` and types with `Type`.
 
-* `MyNamesapce\User` will become `MyNamesapce\UserElement`
-* `MyNamesapce\UserType` will become `MyNamesapce\UserTypeType`
+* `MyNamespace\User` will become `MyNamespace\UserElement`
+* `MyNamespace\UserType` will become `MyNamespace\UserTypeType`
 
 An XSD for instance with a type named `User`, a type named `UserType`, a root element named `User` and `UserElement`, will only work when using the `long` naming strategy.
 
