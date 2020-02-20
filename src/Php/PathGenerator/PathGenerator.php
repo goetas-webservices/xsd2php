@@ -1,7 +1,7 @@
 <?php
 namespace GoetasWebservices\Xsd\XsdToPhp\Php\PathGenerator;
 
-use Zend\Code\Generator\ClassGenerator;
+use Laminas\Code\Generator\ClassGenerator;
 
 interface PathGenerator
 {

@@ -5,14 +5,14 @@ use Doctrine\Common\Inflector\Inflector;
 use GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPClass;
 use GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPClassOf;
 use GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPProperty;
-use Zend\Code\Generator;
-use Zend\Code\Generator\DocBlock\Tag\ParamTag;
-use Zend\Code\Generator\DocBlock\Tag\VarTag;
-use Zend\Code\Generator\DocBlock\Tag\ReturnTag;
-use Zend\Code\Generator\DocBlockGenerator;
-use Zend\Code\Generator\MethodGenerator;
-use Zend\Code\Generator\ParameterGenerator;
-use Zend\Code\Generator\PropertyGenerator;
+use Laminas\Code\Generator;
+use Laminas\Code\Generator\DocBlock\Tag\ParamTag;
+use Laminas\Code\Generator\DocBlock\Tag\VarTag;
+use Laminas\Code\Generator\DocBlock\Tag\ReturnTag;
+use Laminas\Code\Generator\DocBlockGenerator;
+use Laminas\Code\Generator\MethodGenerator;
+use Laminas\Code\Generator\ParameterGenerator;
+use Laminas\Code\Generator\PropertyGenerator;
 
 class ClassGenerator
 {
@@ -356,7 +356,7 @@ class ClassGenerator
 
     public function generate(PHPClass $type)
     {
-        $class = new \Zend\Code\Generator\ClassGenerator();
+        $class = new \Laminas\Code\Generator\ClassGenerator();
         $docblock = new DocBlockGenerator("Class representing " . $type->getName());
         $docblock->setWordWrap(false);
         if ($type->getDoc()) {

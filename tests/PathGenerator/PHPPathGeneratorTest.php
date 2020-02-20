@@ -3,7 +3,7 @@ namespace GoetasWebservices\Xsd\XsdToPhp\Tests\Php\PathGenerator;
 
 use GoetasWebservices\Xsd\XsdToPhp\Php\PathGenerator\Psr4PathGenerator;
 use GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPClass;
-use Zend\Code\Generator\ClassGenerator;
+use Laminas\Code\Generator\ClassGenerator;
 
 class PHPPathGeneratorTest extends \PHPUnit_Framework_TestCase
 {
