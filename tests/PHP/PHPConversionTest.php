@@ -12,7 +12,7 @@ class PHPConversionTest extends \PHPUnit_Framework_TestCase
     /**
      *
      * @param mixed $xml
-     * @return \Zend\Code\Generator\ClassGenerator[]
+     * @return \Laminas\Code\Generator\ClassGenerator[]
      */
     protected function getClasses($xml)
     {
