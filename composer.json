@@ -23,7 +23,7 @@
     "symfony/dependency-injection": "^2.2|^3.0|^4.0|^5.0",
     "symfony/yaml": "^2.2|^3.0|^4.0|^5.0",
     "symfony/config": "^2.2|^3.0|^4.0|^5.0",
-    "goetas-webservices/xsd-reader": "^0.2.8|^0.3.5",
+    "goetas-webservices/xsd-reader": "^0.3.7",
     "doctrine/inflector": "^1.0",
     "laminas/laminas-code": "^3.3.2",
 
