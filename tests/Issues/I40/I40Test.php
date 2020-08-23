@@ -7,8 +7,9 @@ use GoetasWebservices\Xsd\XsdToPhp\Php\PhpConverter;
 use GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPClass;
 use GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPProperty;
 use GoetasWebservices\XML\XSDReader\SchemaReader;
+use PHPUnit\Framework\TestCase;
 
-class I40Test extends \PHPUnit_Framework_TestCase
+class I40Test extends TestCase
 {
 
     public function testMissingClass()

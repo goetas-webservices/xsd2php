@@ -10,9 +10,10 @@ use GoetasWebservices\Xsd\XsdToPhpRuntime\Jms\Handler\BaseTypesHandler;
 use GoetasWebservices\Xsd\XsdToPhpRuntime\Jms\Handler\XmlSchemaDateHandler;
 use JMS\Serializer\Handler\HandlerRegistryInterface;
 use PackageVersions\Versions;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-class OTASerializationTest extends \PHPUnit_Framework_TestCase
+class OTASerializationTest extends TestCase
 {
     /**
      * @var Generator
@@ -27,7 +28,7 @@ class OTASerializationTest extends \PHPUnit_Framework_TestCase
     private static $namespace = 'OTA';
     private static $files = [];
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         if (!self::$files) {
             self::$files = self::getXmlFiles();
@@ -53,7 +54,7 @@ class OTASerializationTest extends \PHPUnit_Framework_TestCase
         self::$validator = self::$generator->getValidator($schemas);
     }
 
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass(): void
     {
         self::$generator->unRegisterAutoloader();
         self::$generator->cleanDirectories();
@@ -203,6 +204,8 @@ class OTASerializationTest extends \PHPUnit_Framework_TestCase
 
         if (@$xmlDom->schemaValidate($xsd)) {
             $this->assertCount(0, $violations, 'Validation errors in '.$xml);
+        } else {
+            $this->assertTrue(true);
         }
     }
 

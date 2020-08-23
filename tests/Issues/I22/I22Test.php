@@ -4,8 +4,9 @@ namespace GoetasWebservices\Xsd\XsdToPhp\Tests\Issues\I22;
 use GoetasWebservices\XML\XSDReader\SchemaReader;
 use GoetasWebservices\Xsd\XsdToPhp\Jms\YamlConverter;
 use GoetasWebservices\Xsd\XsdToPhp\Naming\ShortNamingStrategy;
+use PHPUnit\Framework\TestCase;
 
-class I22Test extends \PHPUnit_Framework_TestCase{
+class I22Test extends TestCase {
 
     public function testNamespace()
     {
