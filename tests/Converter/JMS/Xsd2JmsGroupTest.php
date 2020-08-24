@@ -582,9 +582,9 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
                             'expose' => true,
                             'access_type' => 'public_method',
                             'serialized_name' => 'element-1',
-//                            'xml_element' => array(
-//                                'namespace' => 'http://www.example.com'
-//                            ),
+                            'xml_element' => array(
+                                'namespace' => 'http://www.example.com'
+                            ),
                             'accessor' => array(
                                 'getter' => 'getElement1',
                                 'setter' => 'setElement1'
