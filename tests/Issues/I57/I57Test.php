@@ -5,8 +5,9 @@ use GoetasWebservices\Xsd\XsdToPhp\Jms\YamlConverter;
 use GoetasWebservices\Xsd\XsdToPhp\Naming\ShortNamingStrategy;
 use GoetasWebservices\Xsd\XsdToPhp\Php\PhpConverter;
 use GoetasWebservices\XML\XSDReader\SchemaReader;
+use PHPUnit\Framework\TestCase;
 
-class I57Test extends \PHPUnit_Framework_TestCase
+class I57Test extends TestCase
 {
 
     public function testMissingClass()

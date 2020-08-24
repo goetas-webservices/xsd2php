@@ -6,8 +6,9 @@ use GoetasWebservices\Xsd\XsdToPhp\Naming\ShortNamingStrategy;
 use GoetasWebservices\Xsd\XsdToPhp\Php\PhpConverter;
 use GoetasWebservices\XML\XSDReader\SchemaReader;
 use GoetasWebservices\Xsd\XsdToPhp\Tests\Generator;
+use PHPUnit\Framework\TestCase;
 
-class I43Test extends \PHPUnit_Framework_TestCase
+class I43Test extends TestCase
 {
     /**
      * @group long

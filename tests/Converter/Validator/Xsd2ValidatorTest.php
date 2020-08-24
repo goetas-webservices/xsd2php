@@ -5,8 +5,9 @@ namespace GoetasWebservices\Xsd\XsdToPhp\Tests\Converter\Validator;
 use GoetasWebservices\Xsd\XsdToPhp\Jms\YamlValidatorConverter;
 use GoetasWebservices\Xsd\XsdToPhp\Naming\ShortNamingStrategy;
 use GoetasWebservices\XML\XSDReader\SchemaReader;
+use PHPUnit\Framework\TestCase;
 
-class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
+class Xsd2ValidatorTest extends TestCase
 {
     /**
      * @var YamlValidatorConverter
@@ -21,7 +22,7 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
     /**
      * Set up converter and reader properties
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->converter = new YamlValidatorConverter(new ShortNamingStrategy());
         $this->converter->addNamespace('http://www.example.com', "Example");
