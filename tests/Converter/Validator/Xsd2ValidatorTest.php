@@ -198,6 +198,11 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                          </xs:restriction>
                     </xs:simpleType>
                 </xs:element>
+                <xs:complexType name="type-one">
+                    <xs:sequence>
+                        <xs:element ref="element-one" minOccurs="0"/>
+                    </xs:sequence>
+                </xs:complexType>
                </xs:schema>
             ';
 
@@ -207,12 +212,12 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(
             [
-                'Example\\ElementOne' => [
+                'Example\\TypeOneType' => [
                     'properties' => [
-                        '__value' => $ymlValidations
+                        'elementOne' => $ymlValidations
                     ]
                 ]
-            ], $classes['Example\ElementOne']);
+            ], $classes['Example\TypeOneType']);
     }
 
     /**

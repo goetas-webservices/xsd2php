@@ -147,7 +147,7 @@ class Xsd2PhpGroupTest extends Xsd2PhpBase
 
         $this->assertInstanceOf('GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPClass', $book = $classes['Example\AddressBookType']);
         $this->assertInstanceOf('GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPClass', $contacts = $classes['Example\Contacts']);
-        $this->assertInstanceOf('GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPClass', $contactsContact = $classes['Example\Contacts\ContactAType']);
+        $this->assertInstanceOf('GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPClass', $contactsContact = $classes['Example\Contacts\ContactsAType\ContactAType']);
         $this->assertInstanceOf('GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPClass', $contactsType = $classes['Example\Contacts\ContactsAType']);
         $this->assertSame($book->getProperty('contacts')->getType()->getArg()->getType()->getFullName(), $contactsContact->getFullName());
     }
@@ -418,10 +418,10 @@ class Xsd2PhpGroupTest extends Xsd2PhpBase
             ';
         $classes = $this->getClasses($content);
 
-        $this->assertCount(2, $classes);
+        $this->assertCount(1, $classes);
 
         $this->assertInstanceOf('GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPClass', $complexType1 = $classes['Example\ComplexType1Type']);
-        $this->assertInstanceOf('GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPClass', $element1 = $classes['Example\Element1']);
+
 
 
         //$complexType1

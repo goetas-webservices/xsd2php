@@ -17,6 +17,6 @@ class I63Test extends \PHPUnit_Framework_TestCase
         $phpConv->addNamespace('http://www.example.com/', 'Epa');
 
         $phpClasses = $phpConv->convert([$schema]);
-        $this->assertEquals('convertToReseller', $phpClasses['Epa\Two']->getProperty('convertToReseller')->getType()->getArg()->getName());
+        $this->assertEquals('convertToReseller', $phpClasses['Epa\Two\TwoAType']->getProperty('convertToReseller')->getType()->getArg()->getName());
     }
 }

@@ -45,6 +45,9 @@ class PhpConverter extends AbstractConverter
         $this->addAliasMap("http://www.w3.org/2001/XMLSchema", "anyType", function (Type $type) {
             return "mixed";
         });
+        $this->addAliasMap("http://www.w3.org/2001/XMLSchema", "base64Binary", function (Type $type) {
+            return "string";
+        });
     }
 
     private $classes = [];
@@ -145,11 +148,11 @@ class PhpConverter extends AbstractConverter
      * @param bool $skip
      * @return PHPClass
      */
-    public function visitElementDef(ElementDef $element, $skip = false)
+    public function visitElementDef(ElementDef $element)
     {
         if (!isset($this->classes[spl_object_hash($element)])) {
             $schema = $element->getSchema();
-            $skip = $skip || in_array($element->getSchema()->getTargetNamespace(), $this->baseSchemas, true);
+
             $class = new PHPClass();
             $class->setDoc($element->getDoc());
             $class->setName($this->getNamingStrategy()->getItemName($element));
@@ -160,24 +163,22 @@ class PhpConverter extends AbstractConverter
             }
             $class->setNamespace($this->namespaces[$schema->getTargetNamespace()]);
 
+            $type = $element->getType();
+            if (!$type->getName()) {
+                $typeClass = $this->visitTypeAnonymous($type, $element->getName(), $class);
+            } else {
+                $typeClass = $this->visitType($type);
+            }
+            $class->setExtends($typeClass);
+
+            $skip = in_array($element->getSchema()->getTargetNamespace(), $this->baseSchemas, true)
+                || $this->getTypeAlias($type, $type->getSchema())
+                || $typeClass->getPropertyInHierarchy('__value')
+            ;
             $this->classes[spl_object_hash($element)]["class"] = $class;
             $this->classes[spl_object_hash($element)]["skip"] = $skip;
             $this->skipByType[spl_object_hash($class)] = $skip;
 
-            if (!$element->getType()->getName()) {
-                $this->visitTypeBase($class, $element->getType());
-            } else {
-
-                if ($alias = $this->getTypeAlias($element)) {
-                    $class->setName($alias);
-                    $class->setNamespace(null);
-                    $this->classes[spl_object_hash($element)]["skip"] = true;
-                    $this->skipByType[spl_object_hash($element)] = true;
-                    return $class;
-                }
-
-                $this->handleClassExtension($class, $element->getType());
-            }
         }
         return $this->classes[spl_object_hash($element)]["class"];
     }
@@ -416,7 +417,8 @@ class PhpConverter extends AbstractConverter
 
                 if (!$itemOfArray->getName()) {
                     if ($element instanceof ElementRef) {
-                        $itemClass = $this->findPHPClass($class, $element);
+                        $refClass = $this->visitElementDef($element->getReferencedElement());
+                        $itemClass = $this->findPHPClass($refClass, $element);
                     } else {
                         $itemClass = $class;
                     }
@@ -433,7 +435,8 @@ class PhpConverter extends AbstractConverter
             } elseif ($itemOfArray = $this->isArrayNestedElement($t)) {
                 if (!$t->getName()) {
                     if ($element instanceof ElementRef) {
-                        $itemClass = $this->findPHPClass($class, $element);
+                        $refClass = $this->visitElementDef($element->getReferencedElement());
+                        $itemClass = $this->findPHPClass($refClass, $element);
                     } else {
                         $itemClass = $class;
                     }
@@ -455,7 +458,14 @@ class PhpConverter extends AbstractConverter
             }
         }
 
-        $property->setType($this->findPHPClass($class, $element, true));
+
+        if ($element instanceof ElementRef) {
+            $refClass = $this->visitElementDef($element->getReferencedElement());
+            $property->setType($this->findPHPClass($refClass, $element->getReferencedElement(), true));
+        } else {
+            $property->setType($this->findPHPClass($class, $element, true));
+        }
+
         return $property;
     }
 
@@ -465,7 +475,7 @@ class PhpConverter extends AbstractConverter
         if ($node instanceof ElementRef) {
             return $this->visitElementDef($node->getReferencedElement());
         }
-        if ($valueProp = $this->typeHasValue($node->getType(), $class, '')) {
+        if ($valueProp = $this->typeHasValue($node->getType(), $class, $node->getName())) {
             return $valueProp;
         }
         if (!$node->getType()->getName()) {

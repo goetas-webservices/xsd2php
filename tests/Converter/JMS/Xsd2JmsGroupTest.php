@@ -237,16 +237,17 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
             </xs:schema>
             ';
         $classes = $this->getClasses($content);
+
         $this->assertCount(4, $classes);
 
         $this->assertArrayHasKey('Example\AddressBookType', $classes);
         $this->assertArrayHasKey('Example\Contacts', $classes);
-        $this->assertArrayHasKey('Example\Contacts\ContactAType', $classes);
+        $this->assertArrayHasKey('Example\Contacts\ContactsAType\ContactAType', $classes);
         $this->assertArrayHasKey('Example\Contacts\ContactsAType', $classes);
         $this->assertArrayHasKey('Example\AddressBookType', $classes);
 
         $book = $classes['Example\AddressBookType']['Example\AddressBookType'];
-        $this->assertSame('array<Example\Contacts\ContactAType>', $book['properties']['contacts']['type']);
+        $this->assertSame('array<Example\Contacts\ContactsAType\ContactAType>', $book['properties']['contacts']['type']);
     }
 
     public function testSomeInheritance()
@@ -258,7 +259,7 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
                      <xs:sequence>
                             <xs:element name="complexType-1-el-1" type="xs:string"/>
                      </xs:sequence>
-                </xs:complexType>
+                </xs:complexType>ContactsAType
                 <xs:complexType name="complexType-2">
                      <xs:complexContent>
                         <xs:extension base="ex:complexType-1">
@@ -502,7 +503,7 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
             ';
         $classes = $this->getClasses($content);
 
-        $this->assertCount(2, $classes);
+        $this->assertCount(1, $classes);
 
         $this->assertEquals(
             array(
@@ -607,25 +608,6 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
                     )
                 )
             ), $classes['Example\\ComplexType1Type']);
-        $this->assertEquals(
-            array(
-                'Example\\Element1' => array(
-                    'xml_root_name' => 'ns-8ece61d2:element-1',
-                    'xml_root_namespace' => 'http://www.example.com',
-                    'properties' => array(
-                        '__value' => array(
-                            'expose' => true,
-                            'xml_value' => true,
-                            'access_type' => 'public_method',
-                            'accessor' => array(
-                                'getter' => 'value',
-                                'setter' => 'value'
-                            ),
-                            'type' => 'string'
-                        )
-                    )
-                )
-            ), $classes['Example\\Element1']);
     }
 
     public function testListOfRestriction()
