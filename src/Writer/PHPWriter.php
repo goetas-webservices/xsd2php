@@ -1,4 +1,5 @@
 <?php
+
 namespace GoetasWebservices\Xsd\XsdToPhp\Writer;
 
 use GoetasWebservices\Xsd\XsdToPhp\Php\ClassGenerator;
@@ -27,8 +28,8 @@ class PHPWriter extends Writer implements LoggerAwareInterface
      */
     public function write(array $items)
     {
-        while($item = array_pop($items)) {
-            if($generator = $this->generator->generate($item)) {
+        while ($item = array_pop($items)) {
+            if ($generator = $this->generator->generate($item)) {
                 $this->classWriter->write([$generator]);
             }
         }

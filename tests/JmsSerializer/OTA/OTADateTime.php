@@ -1,9 +1,9 @@
 <?php
+
 namespace GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA;
 
 class OTADateTime extends \DateTime
 {
-
     const TYPE_DATE = 1;
 
     const TYPE_TIME = 2;

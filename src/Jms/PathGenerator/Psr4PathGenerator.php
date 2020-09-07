@@ -1,4 +1,5 @@
 <?php
+
 namespace GoetasWebservices\Xsd\XsdToPhp\Jms\PathGenerator;
 
 use GoetasWebservices\Xsd\XsdToPhp\PathGenerator\PathGeneratorException;
@@ -11,18 +12,17 @@ class Psr4PathGenerator extends Psr4PathGeneratorBase implements PathGenerator
         $ns = key($yaml);
 
         foreach ($this->namespaces as $namespace => $dir) {
-
             $pos = strpos($ns, $namespace);
 
             if ($pos === 0) {
                 if (!is_dir($dir) && !mkdir($dir, 0777, true)) {
                     throw new PathGeneratorException("Can't create the folder '$dir'");
                 }
-                $f = trim(strtr(substr($ns, strlen($namespace)), "\\/", ".."), ".");
-                return $dir . "/" . $f . ".yml";
+                $f = trim(strtr(substr($ns, strlen($namespace)), '\\/', '..'), '.');
+
+                return $dir . '/' . $f . '.yml';
             }
         }
         throw new PathGeneratorException("Unable to determine location to save JMS metadata for class '$ns'");
     }
 }
-

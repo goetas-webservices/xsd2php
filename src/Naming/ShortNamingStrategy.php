@@ -91,19 +91,20 @@ class ShortNamingStrategy implements NamingStrategy
     {
         $name = $this->classify($type->getName());
         if ($name && substr($name, -4) !== 'Type') {
-            $name .= "Type";
+            $name .= 'Type';
         }
+
         return $name;
     }
 
     public function getAnonymousTypeName(Type $type, $parentName)
     {
-        return $this->classify($parentName) . "AType";
+        return $this->classify($parentName) . 'AType';
     }
 
     public function getPropertyName($item)
     {
-        return Inflector::camelize(str_replace(".", " ", $item->getName()));
+        return Inflector::camelize(str_replace('.', ' ', $item->getName()));
     }
 
     public function getItemName(Item $item)
@@ -112,11 +113,12 @@ class ShortNamingStrategy implements NamingStrategy
         if (in_array(strtolower($name), $this->reservedWords)) {
             $name .= 'Xsd';
         }
+
         return $name;
     }
 
     private function classify($name)
     {
-        return Inflector::classify(str_replace(".", " ", $name));
+        return Inflector::classify(str_replace('.', ' ', $name));
     }
 }

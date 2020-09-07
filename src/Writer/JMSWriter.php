@@ -1,4 +1,5 @@
 <?php
+
 namespace GoetasWebservices\Xsd\XsdToPhp\Writer;
 
 use GoetasWebservices\Xsd\XsdToPhp\Jms\PathGenerator\PathGenerator;
@@ -29,8 +30,8 @@ class JMSWriter extends Writer implements LoggerAwareInterface
             $source = $dumper->dump($item, 10000);
             $path = $this->pathGenerator->getPath($item);
             file_put_contents($path, $source);
-            $this->logger->debug(sprintf("Written JMS metadata file %s", $path));
+            $this->logger->debug(sprintf('Written JMS metadata file %s', $path));
         }
-        $this->logger->info(sprintf("Written %s JMS metadata files ", count($items)));
+        $this->logger->info(sprintf('Written %s JMS metadata files ', count($items)));
     }
 }

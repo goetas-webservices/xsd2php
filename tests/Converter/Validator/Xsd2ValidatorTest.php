@@ -2,9 +2,9 @@
 
 namespace GoetasWebservices\Xsd\XsdToPhp\Tests\Converter\Validator;
 
+use GoetasWebservices\XML\XSDReader\SchemaReader;
 use GoetasWebservices\Xsd\XsdToPhp\Jms\YamlValidatorConverter;
 use GoetasWebservices\Xsd\XsdToPhp\Naming\ShortNamingStrategy;
-use GoetasWebservices\XML\XSDReader\SchemaReader;
 
 class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
 {
@@ -19,26 +19,28 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
     protected $reader;
 
     /**
-     * Set up converter and reader properties
+     * Set up converter and reader properties.
      */
     public function setUp()
     {
         $this->converter = new YamlValidatorConverter(new ShortNamingStrategy());
-        $this->converter->addNamespace('http://www.example.com', "Example");
+        $this->converter->addNamespace('http://www.example.com', 'Example');
 
         $this->reader = new SchemaReader();
     }
 
     /**
-     * Return classes coverted through YamlValidatorConverter
+     * Return classes coverted through YamlValidatorConverter.
      *
      * @param string $xml
+     *
      * @return array
      */
     protected function getClasses($xml)
     {
         $schema = $this->reader->readString($xml);
-        return $this->converter->convert(array($schema));
+
+        return $this->converter->convert([$schema]);
     }
 
     public function getRestrictionsValidations()
@@ -57,33 +59,33 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                                 '201115',
                                 '203015',
                                 '213150',
-                                '225105'
+                                '225105',
                             ],
-                            'groups' => ['xsd_rules']
-                        ]
-                    ]
-                ]
+                            'groups' => ['xsd_rules'],
+                        ],
+                    ],
+                ],
             ],
-//            // fractionDigits / Regex
-//            //                / Range
-//            [
-//                '<xs:fractionDigits value="2"/>',
-//                [
-//                    [
-//                        'Regex' => '/^\-?(\\d+\.\\d{2})|\\d*$/',
-//                    ]
-//                ]
-//            ],
-//            // fractionDigits / Regex
-//            //                / Range
-//            [
-//                '<xs:totalDigits value="4"/>',
-//                [
-//                    [
-//                        'Regex' => '/^\-?[\\d]{0,4}$/',
-//                    ],
-//                ]
-//            ],
+            //            // fractionDigits / Regex
+            //            //                / Range
+            //            [
+            //                '<xs:fractionDigits value="2"/>',
+            //                [
+            //                    [
+            //                        'Regex' => '/^\-?(\\d+\.\\d{2})|\\d*$/',
+            //                    ]
+            //                ]
+            //            ],
+            //            // fractionDigits / Regex
+            //            //                / Range
+            //            [
+            //                '<xs:totalDigits value="4"/>',
+            //                [
+            //                    [
+            //                        'Regex' => '/^\-?[\\d]{0,4}$/',
+            //                    ],
+            //                ]
+            //            ],
             // length / Length(min/max)
             [
                 '<xs:length value="12"/>',
@@ -92,10 +94,10 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                         'Length' => [
                             'min' => 12,
                             'max' => 12,
-                            'groups' => ['xsd_rules']
-                        ]
-                    ]
-                ]
+                            'groups' => ['xsd_rules'],
+                        ],
+                    ],
+                ],
             ],
             // maxLength / Length(max)
             [
@@ -104,10 +106,10 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                     [
                         'Length' => [
                             'max' => 100,
-                            'groups' => ['xsd_rules']
-                        ]
-                    ]
-                ]
+                            'groups' => ['xsd_rules'],
+                        ],
+                    ],
+                ],
             ],
             // minLength / Length(min)
             [
@@ -116,10 +118,10 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                     [
                         'Length' => [
                             'min' => 3,
-                            'groups' => ['xsd_rules']
-                        ]
-                    ]
-                ]
+                            'groups' => ['xsd_rules'],
+                        ],
+                    ],
+                ],
             ],
             // pattern / Regex
             [
@@ -128,10 +130,10 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                     [
                         'Regex' => [
                             'pattern' => '~\\([0-9]{2}\\)\\s[0-9]{4}-[0-9]{4,5}~',
-                            'groups' => ['xsd_rules']
-                        ]
-                    ]
-                ]
+                            'groups' => ['xsd_rules'],
+                        ],
+                    ],
+                ],
             ],
             // maxExclusive / LessThan
             [
@@ -140,10 +142,10 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                     [
                         'LessThan' => [
                             'value' => 50,
-                            'groups' => ['xsd_rules']
-                        ]
-                    ]
-                ]
+                            'groups' => ['xsd_rules'],
+                        ],
+                    ],
+                ],
             ],
             // maxInclusive / LessThanOrEqual
             [
@@ -152,10 +154,10 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                     [
                         'LessThanOrEqual' => [
                             'value' => 60,
-                            'groups' => ['xsd_rules']
-                        ]
-                    ]
-                ]
+                            'groups' => ['xsd_rules'],
+                        ],
+                    ],
+                ],
             ],
             // minExclusive / GreaterThan
             [
@@ -164,10 +166,10 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                     [
                         'GreaterThan' => [
                             'value' => 10,
-                            'groups' => ['xsd_rules']
-                        ]
-                    ]
-                ]
+                            'groups' => ['xsd_rules'],
+                        ],
+                    ],
+                ],
             ],
             // minInclusive / GreaterThanOrEqual
             [
@@ -176,11 +178,11 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                     [
                         'GreaterThanOrEqual' => [
                             'value' => 10,
-                            'groups' => ['xsd_rules']
-                        ]
-                    ]
-                ]
-            ]
+                            'groups' => ['xsd_rules'],
+                        ],
+                    ],
+                ],
+            ],
         ];
     }
 
@@ -214,15 +216,12 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
             [
                 'Example\\TypeOneType' => [
                     'properties' => [
-                        'elementOne' => $ymlValidations
-                    ]
-                ]
+                        'elementOne' => $ymlValidations,
+                    ],
+                ],
             ], $classes['Example\TypeOneType']);
     }
 
-    /**
-     *
-     */
     public function testComplexTypeWithRequired()
     {
         $content = '
@@ -245,18 +244,15 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                         'column1' => [
                             [
                                 'NotNull' => [
-                                    'groups' => ['xsd_rules']
-                                ]
-                            ]
-                        ]
-                    ]
-                ]
+                                    'groups' => ['xsd_rules'],
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
             ], $classes['Example\\ComplexType1Type']);
     }
 
-    /**
-     *
-     */
     public function testComplexTypeWithNoRequired()
     {
         $content = '
@@ -306,21 +302,21 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                             [
                                 [
                                     'NotNull' => [
-                                        'groups' => ['xsd_rules']
-                                    ]
-                                ]
+                                        'groups' => ['xsd_rules'],
+                                    ],
+                                ],
                             ]
-                        )
-                    ]
-                ]
+                        ),
+                    ],
+                ],
             ], $classes['Example\\ComplexType1Type'], print_r([array_merge(
             $ymlValidations,
             [
                 [
                     'NotNull' => [
-                        'groups' => ['xsd_rules']
-                    ]
-                ]
+                        'groups' => ['xsd_rules'],
+                    ],
+                ],
             ]
         ), $classes['Example\\ComplexType1Type']], 1));
     }
@@ -353,15 +349,12 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
             [
                 'Example\\ComplexType1Type' => [
                     'properties' => [
-                        'column1' => $ymlValidations
-                    ]
-                ]
+                        'column1' => $ymlValidations,
+                    ],
+                ],
             ], $classes['Example\\ComplexType1Type']);
     }
 
-    /**
-     *
-     */
     public function testComplexTypeWithArray_1()
     {
         $content = '
@@ -384,19 +377,16 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                         'column1' => [
                             [
                                 'NotNull' => [
-                                    'groups' => ['xsd_rules']
-                                ]
+                                    'groups' => ['xsd_rules'],
+                                ],
                             ],
-                        ]
-                    ]
-                ]
+                        ],
+                    ],
+                ],
             ], $classes['Example\\ComplexType1Type'], print_r($classes['Example\\ComplexType1Type'], 1));
     }
 
-    /**
-     *
-     */
-    function testComplexTypeWithArray_2()
+    public function testComplexTypeWithArray_2()
     {
         $content = '
              <xs:schema targetNamespace="http://www.example.com" xmlns:xs="http://www.w3.org/2001/XMLSchema"  xmlns:ex="http://www.example.com">
@@ -418,19 +408,16 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                         'column1' => [
                             [
                                 'NotNull' => [
-                                    'groups' => ['xsd_rules']
-                                ]
+                                    'groups' => ['xsd_rules'],
+                                ],
                             ],
-                        ]
-                    ]
-                ]
+                        ],
+                    ],
+                ],
             ], $classes['Example\\ComplexType1Type']);
     }
 
-    /**
-     *
-     */
-    function testComplexTypeWithArray_3()
+    public function testComplexTypeWithArray_3()
     {
         $content = '
              <xs:schema targetNamespace="http://www.example.com" xmlns:xs="http://www.w3.org/2001/XMLSchema"  xmlns:ex="http://www.example.com">
@@ -446,12 +433,8 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(0, $classes);
     }
 
-    /**
-     *
-     */
     public function testComplexTypeWithElementArrayRestriction()
     {
-
         $content = '
              <xs:schema targetNamespace="http://www.example.com" xmlns:xs="http://www.w3.org/2001/XMLSchema"  xmlns:ex="http://www.example.com">
                 <xs:complexType name="complexType-2">
@@ -480,8 +463,8 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                         'protocols' => [
                             [
                                 'NotNull' => [
-                                    'groups' => ['xsd_rules']
-                                ]
+                                    'groups' => ['xsd_rules'],
+                                ],
                             ],
                             [
                                 'All' => [
@@ -490,27 +473,22 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                                         [
                                             'Length' => [
                                                 'min' => 1,
-                                            ]
-
+                                            ],
                                         ],
                                         [
                                             'Length' => [
                                                 'max' => 12,
-                                            ]
+                                            ],
                                         ],
-                                    ]
-                                ]
+                                    ],
+                                ],
                             ],
-
-                        ]
-                    ]
-                ]
+                        ],
+                    ],
+                ],
             ], $classes['Example\\ComplexType2Type'], print_r($classes['Example\\ComplexType2Type'], 1));
     }
 
-    /**
-     *
-     */
     public function testComplexTypeWithArrayNestedRestriction()
     {
         $content = '
@@ -547,8 +525,8 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                         'protocolNumber' => [
                             [
                                 'NotNull' => [
-                                    'groups' => ['xsd_rules']
-                                ]
+                                    'groups' => ['xsd_rules'],
+                                ],
                             ],
                             [
                                 'All' => [
@@ -557,21 +535,19 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                                         [
                                             'Length' => [
                                                 'min' => 1,
-                                            ]
-
+                                            ],
                                         ],
                                         [
                                             'Length' => [
                                                 'max' => 12,
-                                            ]
-                                        ]
-                                    ]
-                                ]
+                                            ],
+                                        ],
+                                    ],
+                                ],
                             ],
-
-                        ]
-                    ]
-                ]
+                        ],
+                    ],
+                ],
             ], $classes['Example\\ComplexType1Type\\ProtocolsAType'], print_r($classes['Example\\ComplexType1Type\\ProtocolsAType'], 1));
 
         $this->assertEquals(
@@ -579,31 +555,27 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                 'Example\\ComplexType1Type' => [
                     'properties' => [
                         'protocols' => [
-
                             [
                                 'NotNull' => [
-                                    'groups' => ['xsd_rules']
-                                ]
+                                    'groups' => ['xsd_rules'],
+                                ],
                             ],
                             [
                                 'Count' => [
                                     'min' => 1,
                                     'max' => 30,
-                                    'groups' => ['xsd_rules']
-                                ]
+                                    'groups' => ['xsd_rules'],
+                                ],
                             ],
                             [
-                                'Valid' => null
+                                'Valid' => null,
                             ],
-                        ]
-                    ]
-                ]
+                        ],
+                    ],
+                ],
             ], $classes['Example\\ComplexType1Type'], print_r($classes['Example\\ComplexType1Type'], 1));
     }
 
-    /**
-     *
-     */
     public function testComplexTypeWithElementArrayRestrictionNoRequired()
     {
         $content = '
@@ -632,11 +604,11 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                 'Example\\ComplexType2Type' => [
                     'properties' => [
                         'protocols' => [
-//                            [
-//                                'Count' => [
-//                                    'max' => 10
-//                                ]
-//                            ],
+                            //                            [
+                            //                                'Count' => [
+                            //                                    'max' => 10
+                            //                                ]
+                            //                            ],
                             [
                                 'All' => [
                                     'groups' => ['xsd_rules'],
@@ -644,26 +616,22 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                                         [
                                             'Length' => [
                                                 'min' => 1,
-                                            ]
-
+                                            ],
                                         ],
                                         [
                                             'Length' => [
                                                 'max' => 12,
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
-                ]
+                                            ],
+                                        ],
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
             ], $classes['Example\\ComplexType2Type']);
     }
 
-    /**
-     *
-     */
     public function testComplexTypeWithArrayNestedRestrictionNoRequired_1()
     {
         $content = '
@@ -705,20 +673,19 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                                         [
                                             'Length' => [
                                                 'min' => 1,
-                                            ]
-
+                                            ],
                                         ],
                                         [
                                             'Length' => [
                                                 'max' => 12,
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
-                ]
+                                            ],
+                                        ],
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
             ], $classes['Example\\ComplexType1Type\\ProtocolsAType']);
 
         $this->assertEquals(
@@ -726,30 +693,26 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                 'Example\\ComplexType1Type' => [
                     'properties' => [
                         'protocols' => [
-
                             [
                                 'NotNull' => [
-                                    'groups' => ['xsd_rules']
-                                ]
+                                    'groups' => ['xsd_rules'],
+                                ],
                             ],
                             [
                                 'Count' => [
                                     'max' => 30,
-                                    'groups' => ['xsd_rules']
-                                ]
+                                    'groups' => ['xsd_rules'],
+                                ],
                             ],
                             [
-                                'Valid' => null
-                            ]
-                        ]
-                    ]
-                ]
+                                'Valid' => null,
+                            ],
+                        ],
+                    ],
+                ],
             ], $classes['Example\\ComplexType1Type']);
     }
 
-    /**
-     *
-     */
     public function testComplexTypeWithArrayNestedRestrictionNoRequired_2()
     {
         $content = '
@@ -784,7 +747,6 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                 'Example\\ComplexType1Type\\ProtocolsAType' => [
                     'properties' => [
                         'protocolNumber' => [
-
                             [
                                 'All' => [
                                     'groups' => ['xsd_rules'],
@@ -792,20 +754,19 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                                         [
                                             'Length' => [
                                                 'min' => 1,
-                                            ]
-
+                                            ],
                                         ],
                                         [
                                             'Length' => [
                                                 'max' => 12,
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
-                ]
+                                            ],
+                                        ],
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
             ], $classes['Example\\ComplexType1Type\\ProtocolsAType']);
 
         $this->assertEquals(
@@ -816,21 +777,18 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                             [
                                 'Count' => [
                                     'max' => 30,
-                                    'groups' => ['xsd_rules']
-                                ]
+                                    'groups' => ['xsd_rules'],
+                                ],
                             ],
                             [
-                                'Valid' => null
-                            ]
-                        ]
-                    ]
-                ]
+                                'Valid' => null,
+                            ],
+                        ],
+                    ],
+                ],
             ], $classes['Example\\ComplexType1Type']);
     }
 
-    /**
-     *
-     */
     public function testComplexTypeWithNestedComplexRestrictionRequired()
     {
         $content = '
@@ -868,15 +826,15 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                         'diagnostcs' => [
                             [
                                 'NotNull' => [
-                                    'groups' => ['xsd_rules']
-                                ]
+                                    'groups' => ['xsd_rules'],
+                                ],
                             ],
                             [
-                                'Valid' => null
-                            ]
-                        ]
-                    ]
-                ]
+                                'Valid' => null,
+                            ],
+                        ],
+                    ],
+                ],
             ], $classes['Example\ComplexType1Type']);
 
         $this->assertEquals(
@@ -886,39 +844,34 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                         'table' => [
                             [
                                 'NotNull' => [
-                                    'groups' => ['xsd_rules']
-                                ]
-                            ]
+                                    'groups' => ['xsd_rules'],
+                                ],
+                            ],
                         ],
                         'code' => [
                             [
                                 'Length' => [
                                     'min' => 1,
-                                    'groups' => ['xsd_rules']
-                                ]
+                                    'groups' => ['xsd_rules'],
+                                ],
                             ],
                             [
                                 'Length' => [
                                     'max' => 10,
-                                    'groups' => ['xsd_rules']
-                                ]
-
+                                    'groups' => ['xsd_rules'],
+                                ],
                             ],
                             [
                                 'NotNull' => [
-                                    'groups' => ['xsd_rules']
-                                ]
-
-                            ]
-                        ]
-                    ]
-                ]
+                                    'groups' => ['xsd_rules'],
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
             ], $classes['Example\\ComplexType1Type\\DiagnostcsAType']);
     }
 
-    /**
-     *
-     */
     public function testComplexTypeWithArrayNestedComplexRestrictionRequired()
     {
         $content = '
@@ -962,21 +915,21 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                         'consult' => [
                             [
                                 'NotNull' => [
-                                    'groups' => ['xsd_rules']
-                                ]
+                                    'groups' => ['xsd_rules'],
+                                ],
                             ],
                             [
                                 'Count' => [
                                     'min' => 1,
-                                    'groups' => ['xsd_rules']
-                                ]
+                                    'groups' => ['xsd_rules'],
+                                ],
                             ],
                             [
-                                'Valid' => null
+                                'Valid' => null,
                             ],
-                        ]
-                    ]
-                ]
+                        ],
+                    ],
+                ],
             ], $classes['Example\\ComplexType1Type']);
 
         $this->assertEquals(
@@ -986,32 +939,31 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                         'table' => [
                             [
                                 'NotNull' => [
-                                    'groups' => ['xsd_rules']
-                                ]
-                            ]
+                                    'groups' => ['xsd_rules'],
+                                ],
+                            ],
                         ],
                         'code' => [
                             [
                                 'Length' => [
                                     'min' => 1,
-                                    'groups' => ['xsd_rules']
-                                ]
+                                    'groups' => ['xsd_rules'],
+                                ],
                             ],
                             [
                                 'Length' => [
                                     'max' => 10,
-                                    'groups' => ['xsd_rules']
-                                ]
-
+                                    'groups' => ['xsd_rules'],
+                                ],
                             ],
                             [
                                 'NotNull' => [
-                                    'groups' => ['xsd_rules']
-                                ]
+                                    'groups' => ['xsd_rules'],
+                                ],
                             ],
-                        ]
-                    ]
-                ]
+                        ],
+                    ],
+                ],
             ], $classes['Example\\ComplexType1Type\\ConsultAType\\DiagnostcsAType']);
 
         $this->assertEquals(
@@ -1021,27 +973,23 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                         'diagnostcs' => [
                             [
                                 'NotNull' => [
-                                    'groups' => ['xsd_rules']
-                                ]
+                                    'groups' => ['xsd_rules'],
+                                ],
                             ],
-//                            [
-//                                'Count' => [
-//                                    'min' => 1
-//                                ]
-//                            ],
+                            //                            [
+                            //                                'Count' => [
+                            //                                    'min' => 1
+                            //                                ]
+                            //                            ],
                             [
-                                'Valid' => null
+                                'Valid' => null,
                             ],
-
-                        ]
-                    ]
-                ]
+                        ],
+                    ],
+                ],
             ], $classes['Example\\ComplexType1Type\\ConsultAType']);
     }
 
-    /**
-     *
-     */
     public function testComplexTypeWithExtension_1()
     {
         $content = '
@@ -1078,33 +1026,33 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                         'lang' => [
                             [
                                 'NotNull' => [
-                                    'groups' => ['xsd_rules']
-                                ]
-                            ]
+                                    'groups' => ['xsd_rules'],
+                                ],
+                            ],
                         ],
                         'address' => [
                             [
                                 'NotNull' => [
-                                    'groups' => ['xsd_rules']
-                                ]
-                            ]
+                                    'groups' => ['xsd_rules'],
+                                ],
+                            ],
                         ],
                         'city' => [
                             [
                                 'NotNull' => [
-                                    'groups' => ['xsd_rules']
-                                ]
-                            ]
+                                    'groups' => ['xsd_rules'],
+                                ],
+                            ],
                         ],
                         'country' => [
                             [
                                 'NotNull' => [
-                                    'groups' => ['xsd_rules']
-                                ]
-                            ]
-                        ]
-                    ]
-                ]
+                                    'groups' => ['xsd_rules'],
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
             ], $classes['Example\\FullpersoninfoType']);
 
         $this->assertEquals(
@@ -1114,19 +1062,19 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
                         'firstname' => [
                             [
                                 'NotNull' => [
-                                    'groups' => ['xsd_rules']
-                                ]
-                            ]
+                                    'groups' => ['xsd_rules'],
+                                ],
+                            ],
                         ],
                         'lastname' => [
                             [
                                 'NotNull' => [
-                                    'groups' => ['xsd_rules']
-                                ]
-                            ]
-                        ]
-                    ]
-                ]
+                                    'groups' => ['xsd_rules'],
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
             ], $classes['Example\\PersoninfoType']);
     }
 }

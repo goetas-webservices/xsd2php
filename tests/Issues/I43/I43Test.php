@@ -1,9 +1,7 @@
 <?php
+
 namespace GoetasWebservices\Xsd\XsdToPhp\Tests\Issues\I40;
 
-use GoetasWebservices\Xsd\XsdToPhp\Jms\YamlConverter;
-use GoetasWebservices\Xsd\XsdToPhp\Naming\ShortNamingStrategy;
-use GoetasWebservices\Xsd\XsdToPhp\Php\PhpConverter;
 use GoetasWebservices\XML\XSDReader\SchemaReader;
 use GoetasWebservices\Xsd\XsdToPhp\Tests\Generator;
 
@@ -14,14 +12,13 @@ class I43Test extends \PHPUnit_Framework_TestCase
      */
     public function testOpcGeneration()
     {
-
-        $nss = array(
-            "http://schemas.openxmlformats.org/package/2006/metadata/core-properties" => "Iag/ECMA376/Package/Model/CoreProperties",
-            "http://purl.org/dc/elements/1.1/" => "Iag/ECMA376/Package/Model/CoreProperties/DcElements",
-            "http://purl.org/dc/terms/" => "Iag/ECMA376/Package/Model/CoreProperties/DcTerms",
-            "http://purl.org/dc/dcmitype/" => "Iag/ECMA376/Package/Model/CoreProperties/DcMiType"
-        );
-        $nss = array_map(function ($a){
+        $nss = [
+            'http://schemas.openxmlformats.org/package/2006/metadata/core-properties' => 'Iag/ECMA376/Package/Model/CoreProperties',
+            'http://purl.org/dc/elements/1.1/' => 'Iag/ECMA376/Package/Model/CoreProperties/DcElements',
+            'http://purl.org/dc/terms/' => 'Iag/ECMA376/Package/Model/CoreProperties/DcTerms',
+            'http://purl.org/dc/dcmitype/' => 'Iag/ECMA376/Package/Model/CoreProperties/DcMiType',
+        ];
+        $nss = array_map(function ($a) {
             return strtr($a, '/', '\\');
         }, $nss);
 
@@ -33,13 +30,13 @@ class I43Test extends \PHPUnit_Framework_TestCase
 
         $schema = $reader->readFile(__DIR__ . '/opc/opc-coreProperties.xsd');
 
-        $generator = new Generator($nss, [],__DIR__ . '/tmp');
+        $generator = new Generator($nss, [], __DIR__ . '/tmp');
 
         list($phpClasses, $yamlItems, $validationItems) = $generator->getData([$schema]);
         $generator->generate([$schema]);
 
-        $this->assertEquals(count($phpClasses), count($yamlItems));
-        $this->assertGreaterThan(0, count($phpClasses));
-        $this->assertGreaterThan(0, count($validationItems));
+        $this->assertGreaterThanOrEqual(24, count($yamlItems));
+        $this->assertGreaterThanOrEqual(24, count($phpClasses));
+        $this->assertGreaterThanOrEqual(3, count($validationItems));
     }
 }

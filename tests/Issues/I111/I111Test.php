@@ -1,16 +1,17 @@
 <?php
+
 namespace GoetasWebservices\Xsd\XsdToPhp\Tests\Issues\I11;
 
 use GoetasWebservices\XML\XSDReader\SchemaReader;
 use GoetasWebservices\Xsd\XsdToPhp\Jms\YamlConverter;
 use GoetasWebservices\Xsd\XsdToPhp\Naming\ShortNamingStrategy;
 
-class I111Test extends \PHPUnit_Framework_TestCase{
-
+class I111Test extends \PHPUnit_Framework_TestCase
+{
     public function testNamespace()
     {
         $reader = new SchemaReader();
-        $schema = $reader->readFile(__DIR__.'/data.xsd');
+        $schema = $reader->readFile(__DIR__ . '/data.xsd');
 
         $jmsConv = new YamlConverter(new ShortNamingStrategy());
         $jmsConv->addNamespace('http://www.example.com', 'Tst');
