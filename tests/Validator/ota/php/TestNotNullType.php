@@ -3,14 +3,12 @@
 namespace ota;
 
 /**
- * Class representing TestNotNull
+ * Class representing TestNotNull.
  *
- * 
  * XSD Type: testNotNull
  */
 class TestNotNullType
 {
-
     /**
      * @property string
      * $value
@@ -18,7 +16,7 @@ class TestNotNullType
     private $value = null;
 
     /**
-     * Gets as value
+     * Gets as value.
      *
      * @return string
      */
@@ -28,16 +26,16 @@ class TestNotNullType
     }
 
     /**
-     * Sets a new value
+     * Sets a new value.
      *
      * @param string $value
+     *
      * @return self
      */
     public function setValue($value)
     {
         $this->value = $value;
+
         return $this;
     }
-
 }
-

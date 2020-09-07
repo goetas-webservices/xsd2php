@@ -1,22 +1,23 @@
 <?php
+
 namespace GoetasWebservices\Xsd\XsdToPhp\Tests\Issues\I57;
 
+use GoetasWebservices\XML\XSDReader\SchemaReader;
 use GoetasWebservices\Xsd\XsdToPhp\Jms\YamlConverter;
 use GoetasWebservices\Xsd\XsdToPhp\Naming\ShortNamingStrategy;
 use GoetasWebservices\Xsd\XsdToPhp\Php\PhpConverter;
-use GoetasWebservices\XML\XSDReader\SchemaReader;
 
 class I57Test extends \PHPUnit_Framework_TestCase
 {
-
     public function testMissingClass()
     {
-
-        $expectedItems = array(
-            'Epa\\Job',
-            'Epa\\Item',
-            'Epa\\Item\\PriceAType'
-        );
+        $expectedItems = [
+            0 => 'Epa\\Job',
+            1 => 'Epa\\Item',
+            2 => 'Epa\\Item\\ItemAType\\PriceAType',
+            3 => 'Epa\\Item\\ItemAType',
+            4 => 'Epa\\Job\\JobAType',
+        ];
 
         $reader = new SchemaReader();
         $schema = $reader->readFile(__DIR__ . '/data.xsd');
@@ -26,6 +27,7 @@ class I57Test extends \PHPUnit_Framework_TestCase
 
         $yamlItems = $yamlConv->convert([$schema]);
         $yamlItems = array_keys($yamlItems);
+
         $this->assertEmpty(array_diff($expectedItems, ($yamlItems)));
 
         $phpConv = new PhpConverter(new ShortNamingStrategy());

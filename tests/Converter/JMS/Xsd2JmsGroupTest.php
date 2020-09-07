@@ -1,9 +1,9 @@
 <?php
+
 namespace GoetasWebservices\Xsd\XsdToPhp\Tests\Converter\JMS;
 
 class Xsd2PhpGroupTest extends Xsd2JmsBase
 {
-
     public function testGroupArray()
     {
         $content = '
@@ -92,21 +92,21 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
         $classes = $this->getClasses($content);
         $this->assertCount(2, $classes);
         $this->assertEquals(
-            array(
-                'Example\\ComplexType1Type' => array(
-                    'properties' => array(
-                        'att' => array(
+            [
+                'Example\\ComplexType1Type' => [
+                    'properties' => [
+                        'att' => [
                             'expose' => true,
                             'access_type' => 'public_method',
                             'serialized_name' => 'att',
-                            'accessor' => array(
+                            'accessor' => [
                                 'getter' => 'getAtt',
-                                'setter' => 'setAtt'
-                            ),
+                                'setter' => 'setAtt',
+                            ],
                             'xml_attribute' => true,
-                            'type' => 'string'
-                        ),
-                        'string1' => array(
+                            'type' => 'string',
+                        ],
+                        'string1' => [
                             'expose' => true,
                             'access_type' => 'public_method',
                             'serialized_name' => 'string1',
@@ -115,28 +115,28 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
                                'namespace' => 'http://www.example.com'
                            ),
                             */
-                           'accessor' => array(
-                               'getter' => 'getString1',
-                               'setter' => 'setString1'
-                           ),
-                           'type' => 'string'
-                       ),
-                       'string2' => array(
-                           'expose' => true,
-                           'access_type' => 'public_method',
-                           'serialized_name' => 'string2',
-                           /*
+                            'accessor' => [
+                                'getter' => 'getString1',
+                                'setter' => 'setString1',
+                            ],
+                            'type' => 'string',
+                        ],
+                        'string2' => [
+                            'expose' => true,
+                            'access_type' => 'public_method',
+                            'serialized_name' => 'string2',
+                            /*
                            'xml_element' => array(
                                'namespace' => 'http://www.example.com'
                            ),
                            */
-                            'accessor' => array(
+                            'accessor' => [
                                 'getter' => 'getString2',
-                                'setter' => 'setString2'
-                            ),
-                            'type' => 'Example\\ComplexType1Type\\String2AType'
-                        ),
-                        'string3' => array(
+                                'setter' => 'setString2',
+                            ],
+                            'type' => 'Example\\ComplexType1Type\\String2AType',
+                        ],
+                        'string3' => [
                             'expose' => true,
                             'access_type' => 'public_method',
                             'serialized_name' => 'string3',
@@ -145,13 +145,13 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
                                 'namespace' => 'http://www.example.com'
                             ),
                             */
-                            'accessor' => array(
+                            'accessor' => [
                                 'getter' => 'getString3',
-                                'setter' => 'setString3'
-                            ),
-                            'type' => 'string'
-                        ),
-                        'string4' => array(
+                                'setter' => 'setString3',
+                            ],
+                            'type' => 'string',
+                        ],
+                        'string4' => [
                             'expose' => true,
                             'access_type' => 'public_method',
                             'serialized_name' => 'string4',
@@ -160,13 +160,13 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
                                 'namespace' => 'http://www.example.com'
                             ),
                             */
-                            'accessor' => array(
+                            'accessor' => [
                                 'getter' => 'getString4',
-                                'setter' => 'setString4'
-                            ),
-                            'type' => 'string'
-                        ),
-                        'string5' => array(
+                                'setter' => 'setString4',
+                            ],
+                            'type' => 'string',
+                        ],
+                        'string5' => [
                             'expose' => true,
                             'access_type' => 'public_method',
                             'serialized_name' => 'string5',
@@ -175,39 +175,38 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
                                 'namespace' => 'http://www.example.com'
                             ),
                             */
-                            'accessor' => array(
+                            'accessor' => [
                                 'getter' => 'getString5',
-                                'setter' => 'setString5'
-                            ),
-                            'type' => 'string'
-                        ),
-                    )
-                )
-            ), $classes['Example\\ComplexType1Type']);
-
+                                'setter' => 'setString5',
+                            ],
+                            'type' => 'string',
+                        ],
+                    ],
+                ],
+            ], $classes['Example\\ComplexType1Type']);
 
         $this->assertEquals(
-            array(
-                'Example\\ComplexType1Type\\String2AType' => array(
-                    'properties' => array(
-                        'string3' => array(
+            [
+                'Example\\ComplexType1Type\\String2AType' => [
+                    'properties' => [
+                        'string3' => [
                             'expose' => true,
                             'access_type' => 'public_method',
                             'serialized_name' => 'string3',
-                             /*
+                            /*
                             'xml_element' => array(
                                 'namespace' => 'http://www.example.com'
                             ),
                              */
-                            'accessor' => array(
+                            'accessor' => [
                                 'getter' => 'getString3',
-                                'setter' => 'setString3'
-                            ),
-                            'type' => 'string'
-                        )
-                    )
-                )
-            ), $classes['Example\\ComplexType1Type\\String2AType']);
+                                'setter' => 'setString3',
+                            ],
+                            'type' => 'string',
+                        ],
+                    ],
+                ],
+            ], $classes['Example\\ComplexType1Type\\String2AType']);
     }
 
     public function testSomeAnonymousWithRefs()
@@ -237,16 +236,17 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
             </xs:schema>
             ';
         $classes = $this->getClasses($content);
+
         $this->assertCount(4, $classes);
 
         $this->assertArrayHasKey('Example\AddressBookType', $classes);
         $this->assertArrayHasKey('Example\Contacts', $classes);
-        $this->assertArrayHasKey('Example\Contacts\ContactAType', $classes);
+        $this->assertArrayHasKey('Example\Contacts\ContactsAType\ContactAType', $classes);
         $this->assertArrayHasKey('Example\Contacts\ContactsAType', $classes);
         $this->assertArrayHasKey('Example\AddressBookType', $classes);
 
         $book = $classes['Example\AddressBookType']['Example\AddressBookType'];
-        $this->assertSame('array<Example\Contacts\ContactAType>', $book['properties']['contacts']['type']);
+        $this->assertSame('array<Example\Contacts\ContactsAType\ContactAType>', $book['properties']['contacts']['type']);
     }
 
     public function testSomeInheritance()
@@ -258,7 +258,7 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
                      <xs:sequence>
                             <xs:element name="complexType-1-el-1" type="xs:string"/>
                      </xs:sequence>
-                </xs:complexType>
+                </xs:complexType>ContactsAType
                 <xs:complexType name="complexType-2">
                      <xs:complexContent>
                         <xs:extension base="ex:complexType-1">
@@ -275,72 +275,72 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
         $this->assertCount(2, $classes);
 
         $this->assertEquals(
-            array(
-                'Example\\ComplexType1Type' => array(
-                    'properties' => array(
-                        'attribute2' => array(
+            [
+                'Example\\ComplexType1Type' => [
+                    'properties' => [
+                        'attribute2' => [
                             'expose' => true,
                             'access_type' => 'public_method',
                             'serialized_name' => 'attribute-2',
-                            'accessor' => array(
+                            'accessor' => [
                                 'getter' => 'getAttribute2',
-                                'setter' => 'setAttribute2'
-                            ),
+                                'setter' => 'setAttribute2',
+                            ],
                             'xml_attribute' => true,
-                            'type' => 'string'
-                        ),
-                        'complexType1El1' => array(
+                            'type' => 'string',
+                        ],
+                        'complexType1El1' => [
                             'expose' => true,
                             'access_type' => 'public_method',
                             'serialized_name' => 'complexType-1-el-1',
-                             /*
+                            /*
                             'xml_element' => array(
                                 'namespace' => 'http://www.example.com'
                             ),
                              */
-                            'accessor' => array(
+                            'accessor' => [
                                 'getter' => 'getComplexType1El1',
-                                'setter' => 'setComplexType1El1'
-                            ),
-                            'type' => 'string'
-                        )
-                    )
-                )
-            ), $classes['Example\\ComplexType1Type']);
+                                'setter' => 'setComplexType1El1',
+                            ],
+                            'type' => 'string',
+                        ],
+                    ],
+                ],
+            ], $classes['Example\\ComplexType1Type']);
 
         $this->assertEquals(
-            array(
-                'Example\\ComplexType2Type' => array(
-                    'properties' => array(
-                        'complexType2Att1' => array(
+            [
+                'Example\\ComplexType2Type' => [
+                    'properties' => [
+                        'complexType2Att1' => [
                             'expose' => true,
                             'access_type' => 'public_method',
                             'serialized_name' => 'complexType-2-att1',
-                            'accessor' => array(
+                            'accessor' => [
                                 'getter' => 'getComplexType2Att1',
-                                'setter' => 'setComplexType2Att1'
-                            ),
+                                'setter' => 'setComplexType2Att1',
+                            ],
                             'xml_attribute' => true,
-                            'type' => 'string'
-                        ),
-                        'complexType2El1' => array(
+                            'type' => 'string',
+                        ],
+                        'complexType2El1' => [
                             'expose' => true,
                             'access_type' => 'public_method',
                             'serialized_name' => 'complexType-2-el1',
-                             /*
+                            /*
                             'xml_element' => array(
                                 'namespace' => 'http://www.example.com'
                             ),
                              */
-                            'accessor' => array(
+                            'accessor' => [
                                 'getter' => 'getComplexType2El1',
-                                'setter' => 'setComplexType2El1'
-                            ),
-                            'type' => 'string'
-                        )
-                    )
-                )
-            ), $classes['Example\\ComplexType2Type']);
+                                'setter' => 'setComplexType2El1',
+                            ],
+                            'type' => 'string',
+                        ],
+                    ],
+                ],
+            ], $classes['Example\\ComplexType2Type']);
     }
 
     public function getMaxOccurs()
@@ -348,11 +348,11 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
         return [
             [
                 null,
-                false
+                false,
             ],
             [
                 '1',
-                false
+                false,
             ],
             /*
             ['2', true],
@@ -387,32 +387,32 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
         $this->assertCount(2, $classes);
 
         $this->assertEquals(
-            array(
-                'Example\\ComplexType1Type' => array(
-                    'properties' => array(
-                        'strings' => array(
+            [
+                'Example\\ComplexType1Type' => [
+                    'properties' => [
+                        'strings' => [
                             'expose' => true,
                             'access_type' => 'public_method',
                             'serialized_name' => 'strings',
-                             /*
+                            /*
                             'xml_element' => array(
                                 'namespace' => 'http://www.example.com'
                             ),
                              */
-                            'accessor' => array(
+                            'accessor' => [
                                 'getter' => 'getStrings',
-                                'setter' => 'setStrings'
-                            ),
+                                'setter' => 'setStrings',
+                            ],
                             'type' => 'array<string>',
-                            'xml_list' => array(
+                            'xml_list' => [
                                 'inline' => false,
                                 'entry_name' => 'string',
-                                'skip_when_empty' => false
-                            )
-                        )
-                    )
-                )
-            ), $classes['Example\\ComplexType1Type']);
+                                'skip_when_empty' => false,
+                            ],
+                        ],
+                    ],
+                ],
+            ], $classes['Example\\ComplexType1Type']);
     }
 
     /**
@@ -424,7 +424,7 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
              <xs:schema targetNamespace="http://www.example.com" xmlns:xs="http://www.w3.org/2001/XMLSchema">
                 <xs:complexType name="complexType-1">
                      <xs:sequence>
-                            <xs:element ' . ($max !== null ? (' maxOccurs="' . $max . '"') : "") . ' name="complexType-1-el-1" type="xs:string"/>
+                            <xs:element ' . ($max !== null ? (' maxOccurs="' . $max . '"') : '') . ' name="complexType-1-el-1" type="xs:string"/>
                      </xs:sequence>
                 </xs:complexType>
             </xs:schema>
@@ -433,27 +433,27 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
         $this->assertCount(1, $classes);
 
         $this->assertEquals(
-            array(
-                'Example\\ComplexType1Type' => array(
-                    'properties' => array(
-                        'complexType1El1' => array(
+            [
+                'Example\\ComplexType1Type' => [
+                    'properties' => [
+                        'complexType1El1' => [
                             'expose' => true,
                             'access_type' => 'public_method',
                             'serialized_name' => 'complexType-1-el-1',
-                             /*
+                            /*
                             'xml_element' => array(
                                 'namespace' => 'http://www.example.com'
                             ),
                              */
-                            'accessor' => array(
+                            'accessor' => [
                                 'getter' => 'getComplexType1El1',
-                                'setter' => 'setComplexType1El1'
-                            ),
-                            'type' => 'string'
-                        )
-                    )
-                )
-            ), $classes['Example\\ComplexType1Type']);
+                                'setter' => 'setComplexType1El1',
+                            ],
+                            'type' => 'string',
+                        ],
+                    ],
+                ],
+            ], $classes['Example\\ComplexType1Type']);
     }
 
     public function testGeneralParts()
@@ -502,130 +502,111 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
             ';
         $classes = $this->getClasses($content);
 
-        $this->assertCount(2, $classes);
+        $this->assertCount(1, $classes);
 
         $this->assertEquals(
-            array(
-                'Example\\ComplexType1Type' => array(
-                    'properties' => array(
-                        'attribute1' => array(
+            [
+                'Example\\ComplexType1Type' => [
+                    'properties' => [
+                        'attribute1' => [
                             'expose' => true,
                             'access_type' => 'public_method',
                             'serialized_name' => 'attribute-1',
-                            'accessor' => array(
+                            'accessor' => [
                                 'getter' => 'getAttribute1',
-                                'setter' => 'setAttribute1'
-                            ),
+                                'setter' => 'setAttribute1',
+                            ],
                             'xml_attribute' => true,
-                            'type' => 'string'
-                        ),
-                        'attribute2' => array(
+                            'type' => 'string',
+                        ],
+                        'attribute2' => [
                             'expose' => true,
                             'access_type' => 'public_method',
                             'serialized_name' => 'attribute-2',
-                            'accessor' => array(
+                            'accessor' => [
                                 'getter' => 'getAttribute2',
-                                'setter' => 'setAttribute2'
-                            ),
+                                'setter' => 'setAttribute2',
+                            ],
                             'xml_attribute' => true,
-                            'type' => 'string'
-                        ),
-                        'attributeGroup1Att1' => array(
+                            'type' => 'string',
+                        ],
+                        'attributeGroup1Att1' => [
                             'expose' => true,
                             'access_type' => 'public_method',
                             'serialized_name' => 'attributeGroup-1-att-1',
-                            'accessor' => array(
+                            'accessor' => [
                                 'getter' => 'getAttributeGroup1Att1',
-                                'setter' => 'setAttributeGroup1Att1'
-                            ),
+                                'setter' => 'setAttributeGroup1Att1',
+                            ],
                             'xml_attribute' => true,
-                            'type' => 'string'
-                        ),
-                        'attributeGroup2Att2' => array(
+                            'type' => 'string',
+                        ],
+                        'attributeGroup2Att2' => [
                             'expose' => true,
                             'access_type' => 'public_method',
                             'serialized_name' => 'attributeGroup-2-att-2',
-                            'accessor' => array(
+                            'accessor' => [
                                 'getter' => 'getAttributeGroup2Att2',
-                                'setter' => 'setAttributeGroup2Att2'
-                            ),
+                                'setter' => 'setAttributeGroup2Att2',
+                            ],
                             'xml_attribute' => true,
-                            'type' => 'string'
-                        ),
-                        'group1El1' => array(
+                            'type' => 'string',
+                        ],
+                        'group1El1' => [
                             'expose' => true,
                             'access_type' => 'public_method',
                             'serialized_name' => 'group-1-el-1',
-//                            'xml_element' => array(
-//                                'namespace' => 'http://www.example.com'
-//                            ),
-                            'accessor' => array(
+                            //                            'xml_element' => array(
+                            //                                'namespace' => 'http://www.example.com'
+                            //                            ),
+                            'accessor' => [
                                 'getter' => 'getGroup1El1',
-                                'setter' => 'setGroup1El1'
-                            ),
-                            'type' => 'string'
-                        ),
-                        'group2El1' => array(
+                                'setter' => 'setGroup1El1',
+                            ],
+                            'type' => 'string',
+                        ],
+                        'group2El1' => [
                             'expose' => true,
                             'access_type' => 'public_method',
                             'serialized_name' => 'group-2-el-1',
-//                            'xml_element' => array(
-//                                'namespace' => 'http://www.example.com'
-//                            ),
-                            'accessor' => array(
+                            //                            'xml_element' => array(
+                            //                                'namespace' => 'http://www.example.com'
+                            //                            ),
+                            'accessor' => [
                                 'getter' => 'getGroup2El1',
-                                'setter' => 'setGroup2El1'
-                            ),
-                            'type' => 'string'
-                        ),
-                        'element1' => array(
+                                'setter' => 'setGroup2El1',
+                            ],
+                            'type' => 'string',
+                        ],
+                        'element1' => [
                             'expose' => true,
                             'access_type' => 'public_method',
                             'serialized_name' => 'element-1',
-                            'xml_element' => array(
-                                'namespace' => 'http://www.example.com'
-                            ),
-                            'accessor' => array(
+                            'xml_element' => [
+                                'namespace' => 'http://www.example.com',
+                            ],
+                            'accessor' => [
                                 'getter' => 'getElement1',
-                                'setter' => 'setElement1'
-                            ),
-                            'type' => 'string'
-                        ),
-                        'complexType1El1' => array(
+                                'setter' => 'setElement1',
+                            ],
+                            'type' => 'string',
+                        ],
+                        'complexType1El1' => [
                             'expose' => true,
                             'access_type' => 'public_method',
                             'serialized_name' => 'complexType-1-el-1',
-//                            'xml_element' => array(
-//                                'namespace' => 'http://www.example.com'
-//                            ),
-                            'accessor' => array(
+                            //                            'xml_element' => array(
+                            //                                'namespace' => 'http://www.example.com'
+                            //                            ),
+                            'accessor' => [
                                 'getter' => 'getComplexType1El1',
-                                'setter' => 'setComplexType1El1'
-                            ),
-                            'type' => 'string'
-                        )
-                    )
-                )
-            ), $classes['Example\\ComplexType1Type']);
-        $this->assertEquals(
-            array(
-                'Example\\Element1' => array(
-                    'xml_root_name' => 'ns-8ece61d2:element-1',
-                    'xml_root_namespace' => 'http://www.example.com',
-                    'properties' => array(
-                        '__value' => array(
-                            'expose' => true,
-                            'xml_value' => true,
-                            'access_type' => 'public_method',
-                            'accessor' => array(
-                                'getter' => 'value',
-                                'setter' => 'value'
-                            ),
-                            'type' => 'string'
-                        )
-                    )
-                )
-            ), $classes['Example\\Element1']);
+                                'setter' => 'setComplexType1El1',
+                            ],
+                            'type' => 'string',
+                        ],
+                    ],
+                ],
+            ], $classes['Example\\ComplexType1Type']);
     }
 
     public function testListOfRestriction()

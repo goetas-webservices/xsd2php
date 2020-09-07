@@ -1,9 +1,9 @@
 <?php
+
 namespace GoetasWebservices\Xsd\XsdToPhp\Php\Structure;
 
 class PHPProperty extends PHPArg
 {
-
     /**
      * @var string
      */
@@ -19,11 +19,13 @@ class PHPProperty extends PHPArg
 
     /**
      * @param string $visibility
+     *
      * @return $this
      */
     public function setVisibility($visibility)
     {
         $this->visibility = $visibility;
+
         return $this;
     }
 }

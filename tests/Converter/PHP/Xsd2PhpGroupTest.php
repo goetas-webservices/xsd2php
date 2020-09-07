@@ -1,11 +1,11 @@
 <?php
+
 namespace GoetasWebservices\Xsd\XsdToPhp\Tests\Converter\PHP;
 
 use GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPClassOf;
 
 class Xsd2PhpGroupTest extends Xsd2PhpBase
 {
-
     public function testAutoDiscoveryTraits()
     {
         $content = '
@@ -112,7 +112,6 @@ class Xsd2PhpGroupTest extends Xsd2PhpBase
 
         $a1Prop = $complexType1->getProperty('att');
         $this->assertSame('\string', $a1Prop->getType()->getFullName());
-
     }
 
     public function testSomeAnonymousWithRefs()
@@ -144,10 +143,9 @@ class Xsd2PhpGroupTest extends Xsd2PhpBase
 
         $this->assertCount(4, $classes);
 
-
         $this->assertInstanceOf('GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPClass', $book = $classes['Example\AddressBookType']);
         $this->assertInstanceOf('GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPClass', $contacts = $classes['Example\Contacts']);
-        $this->assertInstanceOf('GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPClass', $contactsContact = $classes['Example\Contacts\ContactAType']);
+        $this->assertInstanceOf('GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPClass', $contactsContact = $classes['Example\Contacts\ContactsAType\ContactAType']);
         $this->assertInstanceOf('GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPClass', $contactsType = $classes['Example\Contacts\ContactsAType']);
         $this->assertSame($book->getProperty('contacts')->getType()->getArg()->getType()->getFullName(), $contactsContact->getFullName());
     }
@@ -242,7 +240,7 @@ class Xsd2PhpGroupTest extends Xsd2PhpBase
             if (($p = $tt->isSimpleType()) && ($t = $p->getType())) {
                 $typ = $t->getPhpType();
             }
-            self::assertSame("float", $typ);
+            self::assertSame('float', $typ);
         }
 
         $complexType = $classes['Example\ElementsCtType'];
@@ -259,7 +257,7 @@ class Xsd2PhpGroupTest extends Xsd2PhpBase
             if (($p = $tt->isSimpleType()) && ($t = $p->getType())) {
                 $typ = $t->getPhpType();
             }
-            self::assertSame("float", $typ);
+            self::assertSame('float', $typ);
         }
     }
 
@@ -302,7 +300,6 @@ class Xsd2PhpGroupTest extends Xsd2PhpBase
         $this->assertEquals('complexType2El1', $property->getName());
         $this->assertEquals('', $property->getType()->getNamespace());
         $this->assertEquals('string', $property->getType()->getName());
-
     }
 
     public function getMaxOccurs()
@@ -348,7 +345,6 @@ class Xsd2PhpGroupTest extends Xsd2PhpBase
 
         $this->assertEquals('', $typePropType->getNamespace());
         $this->assertEquals('string', $typePropType->getName());
-
     }
 
     /**
@@ -360,7 +356,7 @@ class Xsd2PhpGroupTest extends Xsd2PhpBase
              <xs:schema targetNamespace="http://www.example.com" xmlns:xs="http://www.w3.org/2001/XMLSchema">
                 <xs:complexType name="complexType-1">
                      <xs:sequence>
-                            <xs:element ' . ($max !== null ? (' maxOccurs="' . $max . '"') : "") . ' name="complexType-1-el-1" type="xs:string"/>
+                            <xs:element ' . ($max !== null ? (' maxOccurs="' . $max . '"') : '') . ' name="complexType-1-el-1" type="xs:string"/>
                      </xs:sequence>
                 </xs:complexType>
             </xs:schema>
@@ -368,9 +364,7 @@ class Xsd2PhpGroupTest extends Xsd2PhpBase
         $classes = $this->getClasses($content);
         $this->assertCount(1, $classes);
         $this->assertInstanceOf('GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPClass', $complexType1 = $classes['Example\ComplexType1Type']);
-
     }
-
 
     public function testGeneralParts()
     {
@@ -418,11 +412,9 @@ class Xsd2PhpGroupTest extends Xsd2PhpBase
             ';
         $classes = $this->getClasses($content);
 
-        $this->assertCount(2, $classes);
+        $this->assertCount(1, $classes);
 
         $this->assertInstanceOf('GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPClass', $complexType1 = $classes['Example\ComplexType1Type']);
-        $this->assertInstanceOf('GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPClass', $element1 = $classes['Example\Element1']);
-
 
         //$complexType1
         $property = $complexType1->getProperty('attribute1');
@@ -439,7 +431,5 @@ class Xsd2PhpGroupTest extends Xsd2PhpBase
         $this->assertEquals('complexType1El1', $property->getName());
         $this->assertEquals('', $property->getType()->getNamespace());
         $this->assertEquals('string', $property->getType()->getName());
-
     }
-
 }

@@ -7,13 +7,13 @@ use GoetasWebservices\XML\XSDReader\Schema\Type\Type;
 use GoetasWebservices\Xsd\XsdToPhp\Naming\ShortNamingStrategy;
 
 /**
- * The OTA psr4 class paths can exceed windows max dir length
+ * The OTA psr4 class paths can exceed windows max dir length.
  */
 class VeryShortNamingStrategy extends ShortNamingStrategy
 {
     /**
-     * Suffix with 'T' instead of 'Type'
-     * @param Type $type
+     * Suffix with 'T' instead of 'Type'.
+     *
      * @return string
      */
     public function getTypeName(Type $type)
@@ -32,9 +32,10 @@ class VeryShortNamingStrategy extends ShortNamingStrategy
     }
 
     /**
-     * Suffix with 'A' instead of 'AType'
-     * @param Type $type
+     * Suffix with 'A' instead of 'AType'.
+     *
      * @param string $parentName
+     *
      * @return string
      */
     public function getAnonymousTypeName(Type $type, $parentName)
@@ -44,10 +45,11 @@ class VeryShortNamingStrategy extends ShortNamingStrategy
 
     /**
      * @param string $name
+     *
      * @return string
      */
     private function classify($name)
     {
-        return Inflector::classify(str_replace(".", " ", $name));
+        return Inflector::classify(str_replace('.', ' ', $name));
     }
 }

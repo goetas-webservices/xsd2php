@@ -1,4 +1,5 @@
 <?php
+
 namespace GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA;
 
 use JMS\Serializer\Context;
@@ -10,25 +11,24 @@ use RuntimeException;
 
 class OTASchemaDateHandler implements SubscribingHandlerInterface
 {
-
     protected $defaultTimezone;
 
     public static function getSubscribingMethods()
     {
-        return array(
-            array(
+        return [
+            [
                 'direction' => GraphNavigator::DIRECTION_DESERIALIZATION,
                 'format' => 'xml',
                 'type' => 'GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime',
-                'method' => 'deserializeDateTime'
-            ),
-            array(
+                'method' => 'deserializeDateTime',
+            ],
+            [
                 'direction' => GraphNavigator::DIRECTION_SERIALIZATION,
                 'format' => 'xml',
                 'type' => 'GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime',
-                'method' => 'serializeDateTime'
-            )
-        );
+                'method' => 'serializeDateTime',
+            ],
+        ];
     }
 
     public function __construct($defaultTimezone = 'UTC')
@@ -49,13 +49,14 @@ class OTASchemaDateHandler implements SubscribingHandlerInterface
             $format .= 'H:i:s';
         }
         $v = $date->format($format);
+
         return $visitor->visitSimpleString($v, $type, $context);
     }
 
     public function deserializeDateTime(XmlDeserializationVisitor $visitor, $data, array $type)
     {
         $attributes = $data->attributes('xsi', true);
-        if (isset($attributes['nil'][0]) && (string)$attributes['nil'][0] === 'true') {
+        if (isset($attributes['nil'][0]) && (string) $attributes['nil'][0] === 'true') {
             return null;
         }
 
@@ -83,4 +84,3 @@ class OTASchemaDateHandler implements SubscribingHandlerInterface
         return $datetime;
     }
 }
-

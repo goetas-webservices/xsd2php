@@ -1,0 +1,18 @@
+<?php
+
+$finder = PhpCsFixer\Finder::create()
+    ->in([__DIR__. '/src', __DIR__. '/tests'])
+    ->exclude('tmp')
+
+;
+
+return PhpCsFixer\Config::create()
+    ->setRules(array(
+        '@Symfony' => true,
+        'concat_space' => array('spacing' => 'one'),
+        'phpdoc_annotation_without_dot' => false,
+        'yoda_style' => false,
+        'array_indentation' => true,
+    ))
+    ->setFinder($finder)
+;

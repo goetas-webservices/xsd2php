@@ -1,17 +1,17 @@
 <?php
+
 namespace GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA;
 
+use GoetasWebservices\XML\XSDReader\SchemaReader;
 use GoetasWebservices\Xsd\XsdToPhp\Naming\ShortNamingStrategy;
 use GoetasWebservices\Xsd\XsdToPhp\Php\ClassGenerator;
 use GoetasWebservices\Xsd\XsdToPhp\Php\PhpConverter;
-use GoetasWebservices\XML\XSDReader\SchemaReader;
 
 class PHPConversionTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
-     *
      * @param mixed $xml
+     *
      * @return \Laminas\Code\Generator\ClassGenerator[]
      */
     protected function getClasses($xml)
@@ -24,7 +24,7 @@ class PHPConversionTest extends \PHPUnit_Framework_TestCase
 
         if (!is_array($xml)) {
             $xml = [
-                'schema.xsd' => $xml
+                'schema.xsd' => $xml,
             ];
         }
         $schemas = [];
@@ -33,12 +33,13 @@ class PHPConversionTest extends \PHPUnit_Framework_TestCase
         }
         $items = $phpcreator->convert($schemas);
 
-        $classes = array();
+        $classes = [];
         foreach ($items as $k => $item) {
             if ($codegen = $generator->generate($item)) {
                 $classes[$k] = $codegen;
             }
         }
+
         return $classes;
     }
 
@@ -94,7 +95,6 @@ class PHPConversionTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($codegen->hasMethod('__toString'));
     }
 
-
     public function testNoMulteplicity()
     {
         $xml = '
@@ -148,7 +148,6 @@ class PHPConversionTest extends \PHPUnit_Framework_TestCase
 
         $this->assertNull($codegen->getMethod('issetId')->getParameters()['index']->getType());
         $this->assertNull($codegen->getMethod('issetId')->getParameters()['index']->getType());
-
     }
 
     public function testNestedMulteplicity()
@@ -219,7 +218,6 @@ class PHPConversionTest extends \PHPUnit_Framework_TestCase
         $single = $items['Example\SingleType'];
         $this->assertTrue($single->hasMethod('addToA'));
         $this->assertTrue($single->hasMethod('addToB'));
-
     }
 
     public function testSimpleMulteplicity()

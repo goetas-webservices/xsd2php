@@ -3,5 +3,7 @@
 /.settings
 /.idea
 composer.lock
-vendor/
+vendor
+/php-cs-fixer
+/.php_cs.cache
 

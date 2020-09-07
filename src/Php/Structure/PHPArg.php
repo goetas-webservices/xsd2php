@@ -1,9 +1,9 @@
 <?php
+
 namespace GoetasWebservices\Xsd\XsdToPhp\Php\Structure;
 
 class PHPArg
 {
-
     protected $doc;
 
     protected $type;
@@ -26,6 +26,7 @@ class PHPArg
     public function setDoc($doc)
     {
         $this->doc = $doc;
+
         return $this;
     }
 
@@ -40,6 +41,7 @@ class PHPArg
     public function setType(PHPClass $type)
     {
         $this->type = $type;
+
         return $this;
     }
 
@@ -51,6 +53,7 @@ class PHPArg
     public function setName($name)
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -62,6 +65,7 @@ class PHPArg
     public function setDefault($default)
     {
         $this->default = $default;
+
         return $this;
     }
 }

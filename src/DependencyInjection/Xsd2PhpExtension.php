@@ -1,4 +1,5 @@
 <?php
+
 namespace GoetasWebservices\Xsd\XsdToPhp\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
@@ -8,7 +9,6 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
 class Xsd2PhpExtension extends Extension
 {
-
     public function load(array $configs, ContainerBuilder $container)
     {
         $xml = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
@@ -22,7 +22,6 @@ class Xsd2PhpExtension extends Extension
 
         $definition = $container->getDefinition('goetas_webservices.xsd2php.naming_convention.' . $config['naming_strategy']);
         $container->setDefinition('goetas_webservices.xsd2php.naming_convention', $definition);
-
 
         $schemaReader = $container->getDefinition('goetas_webservices.xsd2php.schema_reader');
         foreach ($config['known_locations'] as $remote => $local) {

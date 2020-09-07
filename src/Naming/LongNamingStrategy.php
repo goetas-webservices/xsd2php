@@ -1,4 +1,5 @@
 <?php
+
 namespace GoetasWebservices\Xsd\XsdToPhp\Naming;
 
 use Doctrine\Common\Inflector\Inflector;
@@ -88,12 +89,12 @@ class LongNamingStrategy implements NamingStrategy
 
     public function getTypeName(Type $type)
     {
-        return $this->classify($type->getName()) . "Type";
+        return $this->classify($type->getName()) . 'Type';
     }
 
     public function getAnonymousTypeName(Type $type, $parentName)
     {
-        return $this->classify($parentName) . "AnonymousType";
+        return $this->classify($parentName) . 'AnonymousType';
     }
 
     public function getItemName(Item $item)
@@ -102,16 +103,17 @@ class LongNamingStrategy implements NamingStrategy
         if (in_array(strtolower($name), $this->reservedWords)) {
             $name .= 'Xsd';
         }
+
         return $name;
     }
 
     public function getPropertyName($item)
     {
-        return Inflector::camelize(str_replace(".", " ", $item->getName()));
+        return Inflector::camelize(str_replace('.', ' ', $item->getName()));
     }
 
     private function classify($name)
     {
-        return Inflector::classify(str_replace(".", " ", $name));
+        return Inflector::classify(str_replace('.', ' ', $name));
     }
 }

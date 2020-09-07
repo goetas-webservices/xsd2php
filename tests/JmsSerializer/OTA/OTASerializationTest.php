@@ -4,7 +4,6 @@ namespace GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA;
 
 use Doctrine\Common\Inflector\Inflector;
 use GoetasWebservices\XML\XSDReader\SchemaReader;
-use GoetasWebservices\Xsd\XsdToPhp\Jms\Handler\OTA\SchemaDateHandler;
 use GoetasWebservices\Xsd\XsdToPhp\Tests\Generator;
 use GoetasWebservices\Xsd\XsdToPhpRuntime\Jms\Handler\BaseTypesHandler;
 use GoetasWebservices\Xsd\XsdToPhpRuntime\Jms\Handler\XmlSchemaDateHandler;
@@ -34,15 +33,15 @@ class OTASerializationTest extends \PHPUnit_Framework_TestCase
         }
 
         self::$generator = new Generator([
-            'http://www.opentravel.org/OTA/2003/05' => self::$namespace
+            'http://www.opentravel.org/OTA/2003/05' => self::$namespace,
         ], [
             ['http://www.opentravel.org/OTA/2003/05', 'DateOrTimeOrDateTimeType', 'GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime'],
             ['http://www.opentravel.org/OTA/2003/05', 'DateOrDateTimeType', 'GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime'],
-            ['http://www.opentravel.org/OTA/2003/05', 'TimeOrDateTimeType', 'GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime']
+            ['http://www.opentravel.org/OTA/2003/05', 'TimeOrDateTimeType', 'GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime'],
         ]);
 
         $reader = new SchemaReader();
-        $schemas = array();
+        $schemas = [];
         foreach (self::$files as $d) {
             if (!isset($schemas[$d[1]])) {
                 $schemas[$d[1]] = $reader->readFile($d[1]);
@@ -62,35 +61,35 @@ class OTASerializationTest extends \PHPUnit_Framework_TestCase
     protected function clearXML($xml)
     {
         $xml = str_replace("\r", "\n", $xml);
-        $xml = str_replace(array(
-            'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"'
-        ), '', $xml);
+        $xml = str_replace([
+            'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"',
+        ], '', $xml);
         $xml = preg_replace('~xsi:[a-z]+="[^"]+"~msi', '', $xml);
 
-        $xml = preg_replace("/" . preg_quote('<![CDATA[', '/') . "(.*?)" . preg_quote(']]>', '/') . "/mis", "\\1", $xml);
+        $xml = preg_replace('/' . preg_quote('<![CDATA[', '/') . '(.*?)' . preg_quote(']]>', '/') . '/mis', '\\1', $xml);
 
         $xml = str_replace('&', '', $xml);
-        $xml = preg_replace_callback('/(ItinSeqNumber|UnitOfMeasureQuantity|Quantity)="(\d+)"/', function ($mch){
-            return $mch[1].'="'.intval($mch[2]).'"';
+        $xml = preg_replace_callback('/(ItinSeqNumber|UnitOfMeasureQuantity|Quantity)="(\d+)"/', function ($mch) {
+            return $mch[1] . '="' . intval($mch[2]) . '"';
         }, $xml);
 
         $dom = new \DOMDocument();
         if (!$dom->loadXML($xml)) {
-            file_put_contents("d.xml", $xml);
+            file_put_contents('d.xml', $xml);
         }
 
         $fix = function ($str) {
             $str = trim($str);
             // period
-            if (preg_match("/^P([0-9]+[A-Z])+/", $str) || preg_match("/^PT([0-9]+[A-Z])+$/", $str)) {
-                $str = str_replace("N", "D", $str);
-                while (preg_match("/P0+[A-Z]/", $str)) {
-                    $str = preg_replace("/P0+[A-Z]/", "P", $str); //P0D => P
+            if (preg_match('/^P([0-9]+[A-Z])+/', $str) || preg_match('/^PT([0-9]+[A-Z])+$/', $str)) {
+                $str = str_replace('N', 'D', $str);
+                while (preg_match('/P0+[A-Z]/', $str)) {
+                    $str = preg_replace('/P0+[A-Z]/', 'P', $str); //P0D => P
                 }
-                while (preg_match("/T0+[A-Z]/", $str)) {
-                    $str = preg_replace("/T0+[A-Z]/", "T", $str); //T0H => T
+                while (preg_match('/T0+[A-Z]/', $str)) {
+                    $str = preg_replace('/T0+[A-Z]/', 'T', $str); //T0H => T
                 }
-                if ($str[strlen($str) - 1] == "T") {
+                if ($str[strlen($str) - 1] == 'T') {
                     $str = substr($str, 0, -1);
                 }
             }
@@ -99,10 +98,10 @@ class OTASerializationTest extends \PHPUnit_Framework_TestCase
             $str = str_replace(['true', 'false'], ['1', '0'], $str); // 'true' => '1'
 
             // datetime
-            $str = str_replace(array(
+            $str = str_replace([
                 '+00:00',
-                '-05:00'
-            ), '', $str);
+                '-05:00',
+            ], '', $str);
 
             $str = preg_replace('/Z$/', '', $str);
 
@@ -112,6 +111,7 @@ class OTASerializationTest extends \PHPUnit_Framework_TestCase
             } else {
                 $str = preg_replace('/\.0+$/', '', $str); // 1.0000 => 1, .0 => ''
             }
+
             return $str;
         };
 
@@ -124,10 +124,10 @@ class OTASerializationTest extends \PHPUnit_Framework_TestCase
             }
         } while ($l);
 
-        foreach ($xp->query("//@*") as $attr) {
+        foreach ($xp->query('//@*') as $attr) {
             $attr->value = $fix($attr->value);
         }
-        foreach ($xp->query("//text()") as $text) {
+        foreach ($xp->query('//text()') as $text) {
             $text->data = $fix($text->data);
         }
 
@@ -143,7 +143,6 @@ class OTASerializationTest extends \PHPUnit_Framework_TestCase
      */
     public function testConversion($xml, $xsd, $class)
     {
-
         $serializer = self::$generator->buildSerializer(function (HandlerRegistryInterface $h) {
             $h->registerSubscribingHandler(new XmlSchemaDateHandler());
             $h->registerSubscribingHandler(new OTASchemaDateHandler());
@@ -162,9 +161,9 @@ class OTASerializationTest extends \PHPUnit_Framework_TestCase
         $notEqual = strpos($diff, '<dm:copy count="1"/>') === false || strlen($diff) > 110;
 
         if (0 && $notEqual) {
-            file_put_contents("a.xml", $original);
-            file_put_contents("b.xml", $new);
-            file_put_contents("c.xml", $diff);
+            file_put_contents('a.xml', $original);
+            file_put_contents('b.xml', $new);
+            file_put_contents('c.xml', $diff);
             exit;
         }
 
@@ -177,7 +176,7 @@ class OTASerializationTest extends \PHPUnit_Framework_TestCase
      */
     public function testValidation($xml, $xsd, $class)
     {
-        if (strpos($xml, 'OTA_UpdateRQ.xml')!==false) {
+        if (strpos($xml, 'OTA_UpdateRQ.xml') !== false) {
             if (!class_exists(Versions::class) || version_compare(Versions::getVersion('goetas-webservices/xsd-reader'), '0.3.6', '<')) {
                 $this->markTestSkipped();
             }
@@ -196,33 +195,35 @@ class OTASerializationTest extends \PHPUnit_Framework_TestCase
 
         $xmlDom = new \DOMDocument();
 
-        if (!@$xmlDom->load($xml)){
+        if (!@$xmlDom->load($xml)) {
             $this->markTestSkipped();
+
             return;
         }
 
         if (@$xmlDom->schemaValidate($xsd)) {
-            $this->assertCount(0, $violations, 'Validation errors in '.$xml);
+            $this->assertCount(0, $violations, 'Validation errors in ' . $xml);
         }
     }
 
     private static function getXmlFiles()
     {
-        $files = glob(__DIR__ . "/otaxml/*.xml");
+        $files = glob(__DIR__ . '/otaxml/*.xml');
 
-        $tests = array();
+        $tests = [];
         foreach ($files as $n => $file) {
             $name = basename($file);
             $dir = dirname($file);
 
-            $name = str_replace(".xml", ".xsd", $name);
-            $name = preg_replace("/[0-9]+/", "", $name);
-            if (is_file($dir . "/" . $name)) {
+            $name = str_replace('.xml', '.xsd', $name);
+            $name = preg_replace('/[0-9]+/', '', $name);
+            if (is_file($dir . '/' . $name)) {
                 $tests[$n][0] = $file;
-                $tests[$n][1] = $dir . "/" . $name;
-                $tests[$n][2] = self::$namespace . "\\" . Inflector::classify(str_replace(".xsd", "", $name));
+                $tests[$n][1] = $dir . '/' . $name;
+                $tests[$n][2] = self::$namespace . '\\' . Inflector::classify(str_replace('.xsd', '', $name));
             }
         }
+
         return $tests;
     }
 
@@ -231,6 +232,7 @@ class OTASerializationTest extends \PHPUnit_Framework_TestCase
         if (!self::$files) {
             self::$files = self::getXmlFiles();
         }
+
         return self::$files;
     }
 }
