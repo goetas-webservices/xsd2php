@@ -1,0 +1,149 @@
+OTA\TransportationType\TransportationAType:
+    properties:
+        notificationRequired:
+            expose: true
+            access_type: public_method
+            serialized_name: NotificationRequired
+            accessor:
+                getter: getNotificationRequired
+                setter: setNotificationRequired
+            xml_attribute: true
+            type: string
+        transportationCode:
+            expose: true
+            access_type: public_method
+            serialized_name: TransportationCode
+            accessor:
+                getter: getTransportationCode
+                setter: setTransportationCode
+            xml_attribute: true
+            type: string
+        chargeUnit:
+            expose: true
+            access_type: public_method
+            serialized_name: ChargeUnit
+            accessor:
+                getter: getChargeUnit
+                setter: setChargeUnit
+            xml_attribute: true
+            type: string
+        included:
+            expose: true
+            access_type: public_method
+            serialized_name: Included
+            accessor:
+                getter: getIncluded
+                setter: setIncluded
+            xml_attribute: true
+            type: bool
+        codeDetail:
+            expose: true
+            access_type: public_method
+            serialized_name: CodeDetail
+            accessor:
+                getter: getCodeDetail
+                setter: setCodeDetail
+            xml_attribute: true
+            type: string
+        removal:
+            expose: true
+            access_type: public_method
+            serialized_name: Removal
+            accessor:
+                getter: getRemoval
+                setter: setRemoval
+            xml_attribute: true
+            type: bool
+        description:
+            expose: true
+            access_type: public_method
+            serialized_name: Description
+            accessor:
+                getter: getDescription
+                setter: setDescription
+            xml_attribute: true
+            type: string
+        typicalTravelTime:
+            expose: true
+            access_type: public_method
+            serialized_name: TypicalTravelTime
+            accessor:
+                getter: getTypicalTravelTime
+                setter: setTypicalTravelTime
+            xml_attribute: true
+            type: string
+        amount:
+            expose: true
+            access_type: public_method
+            serialized_name: Amount
+            accessor:
+                getter: getAmount
+                setter: setAmount
+            xml_attribute: true
+            type: float
+        currencyCode:
+            expose: true
+            access_type: public_method
+            serialized_name: CurrencyCode
+            accessor:
+                getter: getCurrencyCode
+                setter: setCurrencyCode
+            xml_attribute: true
+            type: string
+        decimalPlaces:
+            expose: true
+            access_type: public_method
+            serialized_name: DecimalPlaces
+            accessor:
+                getter: getDecimalPlaces
+                setter: setDecimalPlaces
+            xml_attribute: true
+            type: int
+        existsCode:
+            expose: true
+            access_type: public_method
+            serialized_name: ExistsCode
+            accessor:
+                getter: getExistsCode
+                setter: setExistsCode
+            xml_attribute: true
+            type: string
+        iD:
+            expose: true
+            access_type: public_method
+            serialized_name: ID
+            accessor:
+                getter: getID
+                setter: setID
+            xml_attribute: true
+            type: string
+        multimediaDescriptions:
+            expose: true
+            access_type: public_method
+            serialized_name: MultimediaDescriptions
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getMultimediaDescriptions
+                setter: setMultimediaDescriptions
+            type: OTA\MultimediaDescriptionsType
+        operationSchedules:
+            expose: true
+            access_type: public_method
+            serialized_name: OperationSchedules
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getOperationSchedules
+                setter: setOperationSchedules
+            type: OTA\OperationSchedulesType
+        descriptiveText:
+            expose: true
+            access_type: public_method
+            serialized_name: DescriptiveText
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getDescriptiveText
+                setter: setDescriptiveText
+            type: string

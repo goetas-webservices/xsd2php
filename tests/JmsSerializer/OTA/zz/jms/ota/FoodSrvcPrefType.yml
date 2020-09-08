@@ -1,0 +1,28 @@
+OTA\FoodSrvcPrefType:
+    properties:
+        __value:
+            expose: true
+            xml_value: true
+            access_type: public_method
+            accessor:
+                getter: value
+                setter: value
+            type: string
+        preferLevel:
+            expose: true
+            access_type: public_method
+            serialized_name: PreferLevel
+            accessor:
+                getter: getPreferLevel
+                setter: setPreferLevel
+            xml_attribute: true
+            type: string
+        foodSrvcType:
+            expose: true
+            access_type: public_method
+            serialized_name: FoodSrvcType
+            accessor:
+                getter: getFoodSrvcType
+                setter: setFoodSrvcType
+            xml_attribute: true
+            type: string

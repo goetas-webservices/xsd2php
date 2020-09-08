@@ -1,0 +1,28 @@
+OTA\ServiceRequestType:
+    properties:
+        __value:
+            expose: true
+            xml_value: true
+            access_type: public_method
+            accessor:
+                getter: value
+                setter: value
+            type: string
+        travelSector:
+            expose: true
+            access_type: public_method
+            serialized_name: TravelSector
+            accessor:
+                getter: getTravelSector
+                setter: setTravelSector
+            xml_attribute: true
+            type: string
+        inventoryItemRPH:
+            expose: true
+            access_type: public_method
+            serialized_name: InventoryItemRPH
+            accessor:
+                getter: getInventoryItemRPH
+                setter: setInventoryItemRPH
+            xml_attribute: true
+            type: string

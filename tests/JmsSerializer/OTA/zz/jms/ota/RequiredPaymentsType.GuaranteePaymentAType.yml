@@ -1,0 +1,304 @@
+OTA\RequiredPaymentsType\GuaranteePaymentAType:
+    properties:
+        retributionType:
+            expose: true
+            access_type: public_method
+            serialized_name: RetributionType
+            accessor:
+                getter: getRetributionType
+                setter: setRetributionType
+            xml_attribute: true
+            type: string
+        paymentCode:
+            expose: true
+            access_type: public_method
+            serialized_name: PaymentCode
+            accessor:
+                getter: getPaymentCode
+                setter: setPaymentCode
+            xml_attribute: true
+            type: string
+        type:
+            expose: true
+            access_type: public_method
+            serialized_name: Type
+            accessor:
+                getter: getType
+                setter: setType
+            xml_attribute: true
+            type: string
+        guaranteeCode:
+            expose: true
+            access_type: public_method
+            serialized_name: GuaranteeCode
+            accessor:
+                getter: getGuaranteeCode
+                setter: setGuaranteeCode
+            xml_attribute: true
+            type: string
+        guaranteeType:
+            expose: true
+            access_type: public_method
+            serialized_name: GuaranteeType
+            accessor:
+                getter: getGuaranteeType
+                setter: setGuaranteeType
+            xml_attribute: true
+            type: string
+        holdTime:
+            expose: true
+            access_type: public_method
+            serialized_name: HoldTime
+            accessor:
+                getter: getHoldTime
+                setter: setHoldTime
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\Time
+        mon:
+            expose: true
+            access_type: public_method
+            serialized_name: Mon
+            accessor:
+                getter: getMon
+                setter: setMon
+            xml_attribute: true
+            type: bool
+        tue:
+            expose: true
+            access_type: public_method
+            serialized_name: Tue
+            accessor:
+                getter: getTue
+                setter: setTue
+            xml_attribute: true
+            type: bool
+        weds:
+            expose: true
+            access_type: public_method
+            serialized_name: Weds
+            accessor:
+                getter: getWeds
+                setter: setWeds
+            xml_attribute: true
+            type: bool
+        thur:
+            expose: true
+            access_type: public_method
+            serialized_name: Thur
+            accessor:
+                getter: getThur
+                setter: setThur
+            xml_attribute: true
+            type: bool
+        fri:
+            expose: true
+            access_type: public_method
+            serialized_name: Fri
+            accessor:
+                getter: getFri
+                setter: setFri
+            xml_attribute: true
+            type: bool
+        sat:
+            expose: true
+            access_type: public_method
+            serialized_name: Sat
+            accessor:
+                getter: getSat
+                setter: setSat
+            xml_attribute: true
+            type: bool
+        sun:
+            expose: true
+            access_type: public_method
+            serialized_name: Sun
+            accessor:
+                getter: getSun
+                setter: setSun
+            xml_attribute: true
+            type: bool
+        start:
+            expose: true
+            access_type: public_method
+            serialized_name: Start
+            accessor:
+                getter: getStart
+                setter: setStart
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime
+        duration:
+            expose: true
+            access_type: public_method
+            serialized_name: Duration
+            accessor:
+                getter: getDuration
+                setter: setDuration
+            xml_attribute: true
+            type: DateInterval
+        end:
+            expose: true
+            access_type: public_method
+            serialized_name: End
+            accessor:
+                getter: getEnd
+                setter: setEnd
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime
+        noCardHolderInfoReqInd:
+            expose: true
+            access_type: public_method
+            serialized_name: NoCardHolderInfoReqInd
+            accessor:
+                getter: getNoCardHolderInfoReqInd
+                setter: setNoCardHolderInfoReqInd
+            xml_attribute: true
+            type: bool
+        nameInd:
+            expose: true
+            access_type: public_method
+            serialized_name: NameInd
+            accessor:
+                getter: getNameInd
+                setter: setNameInd
+            xml_attribute: true
+            type: bool
+        addressInd:
+            expose: true
+            access_type: public_method
+            serialized_name: AddressInd
+            accessor:
+                getter: getAddressInd
+                setter: setAddressInd
+            xml_attribute: true
+            type: bool
+        phoneInd:
+            expose: true
+            access_type: public_method
+            serialized_name: PhoneInd
+            accessor:
+                getter: getPhoneInd
+                setter: setPhoneInd
+            xml_attribute: true
+            type: bool
+        interbankNbrInd:
+            expose: true
+            access_type: public_method
+            serialized_name: InterbankNbrInd
+            accessor:
+                getter: getInterbankNbrInd
+                setter: setInterbankNbrInd
+            xml_attribute: true
+            type: bool
+        roomTypeCode:
+            expose: true
+            access_type: public_method
+            serialized_name: RoomTypeCode
+            accessor:
+                getter: getRoomTypeCode
+                setter: setRoomTypeCode
+            xml_attribute: true
+            type: string
+        infoSource:
+            expose: true
+            access_type: public_method
+            serialized_name: InfoSource
+            accessor:
+                getter: getInfoSource
+                setter: setInfoSource
+            xml_attribute: true
+            type: string
+        nonRefundableIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: NonRefundableIndicator
+            accessor:
+                getter: getNonRefundableIndicator
+                setter: setNonRefundableIndicator
+            xml_attribute: true
+            type: bool
+        policyCode:
+            expose: true
+            access_type: public_method
+            serialized_name: PolicyCode
+            accessor:
+                getter: getPolicyCode
+                setter: setPolicyCode
+            xml_attribute: true
+            type: string
+        acceptedPayments:
+            expose: true
+            access_type: public_method
+            serialized_name: AcceptedPayments
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getAcceptedPayments
+                setter: setAcceptedPayments
+            type: array<OTA\PaymentFormType>
+            xml_list:
+                inline: false
+                entry_name: AcceptedPayment
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        amountPercent:
+            expose: true
+            access_type: public_method
+            serialized_name: AmountPercent
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getAmountPercent
+                setter: setAmountPercent
+            type: OTA\AmountPercentType
+        deadline:
+            expose: true
+            access_type: public_method
+            serialized_name: Deadline
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getDeadline
+                setter: setDeadline
+            xml_list:
+                inline: true
+                entry_name: Deadline
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\RequiredPaymentsType\GuaranteePaymentAType\DeadlineAType>
+        description:
+            expose: true
+            access_type: public_method
+            serialized_name: Description
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getDescription
+                setter: setDescription
+            xml_list:
+                inline: true
+                entry_name: Description
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\ParagraphType>
+        address:
+            expose: true
+            access_type: public_method
+            serialized_name: Address
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getAddress
+                setter: setAddress
+            xml_list:
+                inline: true
+                entry_name: Address
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\RequiredPaymentsType\GuaranteePaymentAType\AddressAType>
+        tPAExtensions:
+            expose: true
+            access_type: public_method
+            serialized_name: TPA_Extensions
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getTPAExtensions
+                setter: setTPAExtensions
+            type: OTA\TPAExtensionsType

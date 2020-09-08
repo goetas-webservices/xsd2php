@@ -1,0 +1,47 @@
+OTA\ConnectionType\ConnectionLocationAType:
+    properties:
+        inclusive:
+            expose: true
+            access_type: public_method
+            serialized_name: Inclusive
+            accessor:
+                getter: getInclusive
+                setter: setInclusive
+            xml_attribute: true
+            type: bool
+        preferLevel:
+            expose: true
+            access_type: public_method
+            serialized_name: PreferLevel
+            accessor:
+                getter: getPreferLevel
+                setter: setPreferLevel
+            xml_attribute: true
+            type: string
+        minChangeTime:
+            expose: true
+            access_type: public_method
+            serialized_name: MinChangeTime
+            accessor:
+                getter: getMinChangeTime
+                setter: setMinChangeTime
+            xml_attribute: true
+            type: int
+        connectionInfo:
+            expose: true
+            access_type: public_method
+            serialized_name: ConnectionInfo
+            accessor:
+                getter: getConnectionInfo
+                setter: setConnectionInfo
+            xml_attribute: true
+            type: string
+        multiAirportCityInd:
+            expose: true
+            access_type: public_method
+            serialized_name: MultiAirportCityInd
+            accessor:
+                getter: getMultiAirportCityInd
+                setter: setMultiAirportCityInd
+            xml_attribute: true
+            type: bool

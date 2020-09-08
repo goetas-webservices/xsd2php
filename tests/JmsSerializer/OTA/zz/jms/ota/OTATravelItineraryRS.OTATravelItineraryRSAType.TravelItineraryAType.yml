@@ -1,0 +1,82 @@
+OTA\OTATravelItineraryRS\OTATravelItineraryRSAType\TravelItineraryAType:
+    properties:
+        itineraryRef:
+            expose: true
+            access_type: public_method
+            serialized_name: ItineraryRef
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getItineraryRef
+                setter: setItineraryRef
+            type: OTA\UniqueIDType
+        customerInfos:
+            expose: true
+            access_type: public_method
+            serialized_name: CustomerInfos
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getCustomerInfos
+                setter: setCustomerInfos
+            type: OTA\OTATravelItineraryRS\OTATravelItineraryRSAType\TravelItineraryAType\CustomerInfosAType
+        itineraryInfo:
+            expose: true
+            access_type: public_method
+            serialized_name: ItineraryInfo
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getItineraryInfo
+                setter: setItineraryInfo
+            type: OTA\ItineraryInfoType
+        associatedContent:
+            expose: true
+            access_type: public_method
+            serialized_name: AssociatedContent
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getAssociatedContent
+                setter: setAssociatedContent
+            type: OTA\AssociatedContentType
+        travelCost:
+            expose: true
+            access_type: public_method
+            serialized_name: TravelCost
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getTravelCost
+                setter: setTravelCost
+            type: OTA\TravelCostType
+        remarks:
+            expose: true
+            access_type: public_method
+            serialized_name: Remarks
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getRemarks
+                setter: setRemarks
+            type: OTA\OTATravelItineraryRS\OTATravelItineraryRSAType\TravelItineraryAType\RemarksAType
+        updatedBy:
+            expose: true
+            access_type: public_method
+            serialized_name: UpdatedBy
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getUpdatedBy
+                setter: setUpdatedBy
+            type: OTA\AccessesType
+        tPAExtensions:
+            expose: true
+            access_type: public_method
+            serialized_name: TPA_Extensions
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getTPAExtensions
+                setter: setTPAExtensions
+            type: OTA\TPAExtensionsType

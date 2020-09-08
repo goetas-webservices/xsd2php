@@ -1,0 +1,46 @@
+OTA\LoyaltyProgramType:
+    properties:
+        __value:
+            expose: true
+            xml_value: true
+            access_type: public_method
+            accessor:
+                getter: value
+                setter: value
+            type: string
+        programCode:
+            expose: true
+            access_type: public_method
+            serialized_name: ProgramCode
+            accessor:
+                getter: getProgramCode
+                setter: setProgramCode
+            xml_attribute: true
+            type: string
+        singleVendorInd:
+            expose: true
+            access_type: public_method
+            serialized_name: SingleVendorInd
+            accessor:
+                getter: getSingleVendorInd
+                setter: setSingleVendorInd
+            xml_attribute: true
+            type: string
+        loyaltyLevel:
+            expose: true
+            access_type: public_method
+            serialized_name: LoyaltyLevel
+            accessor:
+                getter: getLoyaltyLevel
+                setter: setLoyaltyLevel
+            xml_attribute: true
+            type: string
+        rPH:
+            expose: true
+            access_type: public_method
+            serialized_name: RPH
+            accessor:
+                getter: getRPH
+                setter: setRPH
+            xml_attribute: true
+            type: string

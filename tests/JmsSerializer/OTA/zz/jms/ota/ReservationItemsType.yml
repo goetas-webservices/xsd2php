@@ -1,0 +1,49 @@
+OTA\ReservationItemsType:
+    properties:
+        chronoOrdered:
+            expose: true
+            access_type: public_method
+            serialized_name: ChronoOrdered
+            accessor:
+                getter: getChronoOrdered
+                setter: setChronoOrdered
+            xml_attribute: true
+            type: bool
+        item:
+            expose: true
+            access_type: public_method
+            serialized_name: Item
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getItem
+                setter: setItem
+            xml_list:
+                inline: true
+                entry_name: Item
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\ReservationItemsType\ItemAType>
+        itemPricing:
+            expose: true
+            access_type: public_method
+            serialized_name: ItemPricing
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getItemPricing
+                setter: setItemPricing
+            xml_list:
+                inline: true
+                entry_name: ItemPricing
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\ReservationItemsType\ItemPricingAType>
+        specialRequestDetails:
+            expose: true
+            access_type: public_method
+            serialized_name: SpecialRequestDetails
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getSpecialRequestDetails
+                setter: setSpecialRequestDetails
+            type: OTA\ReservationItemsType\SpecialRequestDetailsAType

@@ -1,0 +1,11 @@
+OTA\VendorMessageType:
+    properties:
+        infoType:
+            expose: true
+            access_type: public_method
+            serialized_name: InfoType
+            accessor:
+                getter: getInfoType
+                setter: setInfoType
+            xml_attribute: true
+            type: string

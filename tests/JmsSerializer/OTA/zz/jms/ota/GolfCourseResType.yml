@@ -1,0 +1,63 @@
+OTA\GolfCourseResType:
+    properties:
+        status:
+            expose: true
+            access_type: public_method
+            serialized_name: Status
+            accessor:
+                getter: getStatus
+                setter: setStatus
+            xml_attribute: true
+            type: string
+        statusMessage:
+            expose: true
+            access_type: public_method
+            serialized_name: StatusMessage
+            accessor:
+                getter: getStatusMessage
+                setter: setStatusMessage
+            xml_attribute: true
+            type: string
+        requestorResID:
+            expose: true
+            access_type: public_method
+            serialized_name: RequestorResID
+            accessor:
+                getter: getRequestorResID
+                setter: setRequestorResID
+            xml_attribute: true
+            type: string
+        responderResConfID:
+            expose: true
+            access_type: public_method
+            serialized_name: ResponderResConfID
+            accessor:
+                getter: getResponderResConfID
+                setter: setResponderResConfID
+            xml_attribute: true
+            type: string
+        rounds:
+            expose: true
+            access_type: public_method
+            serialized_name: Rounds
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getRounds
+                setter: setRounds
+            type: array<OTA\RoundType>
+            xml_list:
+                inline: false
+                entry_name: Round
+                skip_when_empty: false
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        resID:
+            expose: true
+            access_type: public_method
+            serialized_name: ResID
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getResID
+                setter: setResID
+            type: OTA\UniqueIDType

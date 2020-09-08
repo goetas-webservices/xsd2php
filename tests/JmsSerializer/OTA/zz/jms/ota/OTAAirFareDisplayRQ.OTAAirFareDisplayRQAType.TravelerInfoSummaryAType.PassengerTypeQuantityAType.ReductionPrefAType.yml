@@ -1,0 +1,38 @@
+OTA\OTAAirFareDisplayRQ\OTAAirFareDisplayRQAType\TravelerInfoSummaryAType\PassengerTypeQuantityAType\ReductionPrefAType:
+    properties:
+        amount:
+            expose: true
+            access_type: public_method
+            serialized_name: Amount
+            accessor:
+                getter: getAmount
+                setter: setAmount
+            xml_attribute: true
+            type: float
+        currency:
+            expose: true
+            access_type: public_method
+            serialized_name: Currency
+            accessor:
+                getter: getCurrency
+                setter: setCurrency
+            xml_attribute: true
+            type: string
+        percent:
+            expose: true
+            access_type: public_method
+            serialized_name: Percent
+            accessor:
+                getter: getPercent
+                setter: setPercent
+            xml_attribute: true
+            type: float
+        preferLevel:
+            expose: true
+            access_type: public_method
+            serialized_name: PreferLevel
+            accessor:
+                getter: getPreferLevel
+                setter: setPreferLevel
+            xml_attribute: true
+            type: string

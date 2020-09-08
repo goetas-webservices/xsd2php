@@ -1,0 +1,92 @@
+OTA\PaymentFormType\LoyaltyRedemptionAType\LoyaltyCertificateAType:
+    properties:
+        iD:
+            expose: true
+            access_type: public_method
+            serialized_name: ID
+            accessor:
+                getter: getID
+                setter: setID
+            xml_attribute: true
+            type: string
+        iDContext:
+            expose: true
+            access_type: public_method
+            serialized_name: ID_Context
+            accessor:
+                getter: getIDContext
+                setter: setIDContext
+            xml_attribute: true
+            type: string
+        certificateNumber:
+            expose: true
+            access_type: public_method
+            serialized_name: CertificateNumber
+            accessor:
+                getter: getCertificateNumber
+                setter: setCertificateNumber
+            xml_attribute: true
+            type: string
+        memberNumber:
+            expose: true
+            access_type: public_method
+            serialized_name: MemberNumber
+            accessor:
+                getter: getMemberNumber
+                setter: setMemberNumber
+            xml_attribute: true
+            type: string
+        programName:
+            expose: true
+            access_type: public_method
+            serialized_name: ProgramName
+            accessor:
+                getter: getProgramName
+                setter: setProgramName
+            xml_attribute: true
+            type: string
+        effectiveDate:
+            expose: true
+            access_type: public_method
+            serialized_name: EffectiveDate
+            accessor:
+                getter: getEffectiveDate
+                setter: setEffectiveDate
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\Date
+        expireDate:
+            expose: true
+            access_type: public_method
+            serialized_name: ExpireDate
+            accessor:
+                getter: getExpireDate
+                setter: setExpireDate
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\Date
+        nmbrOfNights:
+            expose: true
+            access_type: public_method
+            serialized_name: NmbrOfNights
+            accessor:
+                getter: getNmbrOfNights
+                setter: setNmbrOfNights
+            xml_attribute: true
+            type: int
+        format:
+            expose: true
+            access_type: public_method
+            serialized_name: Format
+            accessor:
+                getter: getFormat
+                setter: setFormat
+            xml_attribute: true
+            type: string
+        status:
+            expose: true
+            access_type: public_method
+            serialized_name: Status
+            accessor:
+                getter: getStatus
+                setter: setStatus
+            xml_attribute: true
+            type: string

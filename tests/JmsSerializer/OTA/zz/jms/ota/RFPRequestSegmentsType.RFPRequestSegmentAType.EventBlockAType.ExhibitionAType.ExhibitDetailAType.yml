@@ -1,0 +1,11 @@
+OTA\RFPRequestSegmentsType\RFPRequestSegmentAType\EventBlockAType\ExhibitionAType\ExhibitDetailAType:
+    properties:
+        exhibitTypeCode:
+            expose: true
+            access_type: public_method
+            serialized_name: ExhibitTypeCode
+            accessor:
+                getter: getExhibitTypeCode
+                setter: setExhibitTypeCode
+            xml_attribute: true
+            type: string

@@ -1,0 +1,165 @@
+OTA\EventType\EventAType\SitesAType\SiteAType:
+    properties:
+        primaryFacilityIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: PrimaryFacilityIndicator
+            accessor:
+                getter: getPrimaryFacilityIndicator
+                setter: setPrimaryFacilityIndicator
+            xml_attribute: true
+            type: bool
+        headquarterHotelIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: HeadquarterHotelIndicator
+            accessor:
+                getter: getHeadquarterHotelIndicator
+                setter: setHeadquarterHotelIndicator
+            xml_attribute: true
+            type: bool
+        chainCode:
+            expose: true
+            access_type: public_method
+            serialized_name: ChainCode
+            accessor:
+                getter: getChainCode
+                setter: setChainCode
+            xml_attribute: true
+            type: string
+        brandCode:
+            expose: true
+            access_type: public_method
+            serialized_name: BrandCode
+            accessor:
+                getter: getBrandCode
+                setter: setBrandCode
+            xml_attribute: true
+            type: string
+        hotelCode:
+            expose: true
+            access_type: public_method
+            serialized_name: HotelCode
+            accessor:
+                getter: getHotelCode
+                setter: setHotelCode
+            xml_attribute: true
+            type: string
+        hotelCityCode:
+            expose: true
+            access_type: public_method
+            serialized_name: HotelCityCode
+            accessor:
+                getter: getHotelCityCode
+                setter: setHotelCityCode
+            xml_attribute: true
+            type: string
+        hotelName:
+            expose: true
+            access_type: public_method
+            serialized_name: HotelName
+            accessor:
+                getter: getHotelName
+                setter: setHotelName
+            xml_attribute: true
+            type: string
+        hotelCodeContext:
+            expose: true
+            access_type: public_method
+            serialized_name: HotelCodeContext
+            accessor:
+                getter: getHotelCodeContext
+                setter: setHotelCodeContext
+            xml_attribute: true
+            type: string
+        chainName:
+            expose: true
+            access_type: public_method
+            serialized_name: ChainName
+            accessor:
+                getter: getChainName
+                setter: setChainName
+            xml_attribute: true
+            type: string
+        brandName:
+            expose: true
+            access_type: public_method
+            serialized_name: BrandName
+            accessor:
+                getter: getBrandName
+                setter: setBrandName
+            xml_attribute: true
+            type: string
+        areaID:
+            expose: true
+            access_type: public_method
+            serialized_name: AreaID
+            accessor:
+                getter: getAreaID
+                setter: setAreaID
+            xml_attribute: true
+            type: string
+        contacts:
+            expose: true
+            access_type: public_method
+            serialized_name: Contacts
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getContacts
+                setter: setContacts
+            type: array<OTA\ContactPersonType>
+            xml_list:
+                inline: false
+                entry_name: Contact
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        roomBlock:
+            expose: true
+            access_type: public_method
+            serialized_name: RoomBlock
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getRoomBlock
+                setter: setRoomBlock
+            xml_list:
+                inline: true
+                entry_name: RoomBlock
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\EventType\EventAType\SitesAType\SiteAType\RoomBlockAType>
+        eventDays:
+            expose: true
+            access_type: public_method
+            serialized_name: EventDays
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getEventDays
+                setter: setEventDays
+            type: OTA\EventType\EventAType\SitesAType\SiteAType\EventDaysAType
+        shippingReceivingDetails:
+            expose: true
+            access_type: public_method
+            serialized_name: ShippingReceivingDetails
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getShippingReceivingDetails
+                setter: setShippingReceivingDetails
+            type: OTA\EventType\EventAType\SitesAType\SiteAType\ShippingReceivingDetailsAType
+        comments:
+            expose: true
+            access_type: public_method
+            serialized_name: Comments
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getComments
+                setter: setComments
+            type: array<OTA\ParagraphType>
+            xml_list:
+                inline: false
+                entry_name: Comment
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'

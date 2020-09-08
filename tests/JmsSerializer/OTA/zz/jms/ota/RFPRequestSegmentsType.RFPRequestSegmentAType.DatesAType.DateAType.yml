@@ -1,0 +1,20 @@
+OTA\RFPRequestSegmentsType\RFPRequestSegmentAType\DatesAType\DateAType:
+    properties:
+        dateType:
+            expose: true
+            access_type: public_method
+            serialized_name: DateType
+            accessor:
+                getter: getDateType
+                setter: setDateType
+            xml_attribute: true
+            type: string
+        promotionRPH:
+            expose: true
+            access_type: public_method
+            serialized_name: PromotionRPH
+            accessor:
+                getter: getPromotionRPH
+                setter: setPromotionRPH
+            xml_attribute: true
+            type: string

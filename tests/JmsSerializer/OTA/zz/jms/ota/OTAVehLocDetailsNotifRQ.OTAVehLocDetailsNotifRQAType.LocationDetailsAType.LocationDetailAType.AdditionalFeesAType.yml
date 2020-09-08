@@ -1,0 +1,57 @@
+OTA\OTAVehLocDetailsNotifRQ\OTAVehLocDetailsNotifRQAType\LocationDetailsAType\LocationDetailAType\AdditionalFeesAType:
+    properties:
+        type:
+            expose: true
+            access_type: public_method
+            serialized_name: Type
+            accessor:
+                getter: getType
+                setter: setType
+            xml_attribute: true
+            type: string
+        start:
+            expose: true
+            access_type: public_method
+            serialized_name: Start
+            accessor:
+                getter: getStart
+                setter: setStart
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime
+        duration:
+            expose: true
+            access_type: public_method
+            serialized_name: Duration
+            accessor:
+                getter: getDuration
+                setter: setDuration
+            xml_attribute: true
+            type: DateInterval
+        end:
+            expose: true
+            access_type: public_method
+            serialized_name: End
+            accessor:
+                getter: getEnd
+                setter: setEnd
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime
+        action:
+            expose: true
+            access_type: public_method
+            serialized_name: Action
+            accessor:
+                getter: getAction
+                setter: setAction
+            xml_attribute: true
+            type: string
+        additionalFeeInfo:
+            expose: true
+            access_type: public_method
+            serialized_name: AdditionalFeeInfo
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getAdditionalFeeInfo
+                setter: setAdditionalFeeInfo
+            type: OTA\FormattedTextType

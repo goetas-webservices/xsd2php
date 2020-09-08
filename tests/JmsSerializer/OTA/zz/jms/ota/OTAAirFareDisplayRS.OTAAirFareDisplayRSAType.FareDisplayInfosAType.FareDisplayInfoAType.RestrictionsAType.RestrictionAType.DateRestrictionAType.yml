@@ -1,0 +1,38 @@
+OTA\OTAAirFareDisplayRS\OTAAirFareDisplayRSAType\FareDisplayInfosAType\FareDisplayInfoAType\RestrictionsAType\RestrictionAType\DateRestrictionAType:
+    properties:
+        application:
+            expose: true
+            access_type: public_method
+            serialized_name: Application
+            accessor:
+                getter: getApplication
+                setter: setApplication
+            xml_attribute: true
+            type: string
+        startDate:
+            expose: true
+            access_type: public_method
+            serialized_name: StartDate
+            accessor:
+                getter: getStartDate
+                setter: setStartDate
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\DateTime
+        endDate:
+            expose: true
+            access_type: public_method
+            serialized_name: EndDate
+            accessor:
+                getter: getEndDate
+                setter: setEndDate
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\DateTime
+        includeIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: IncludeIndicator
+            accessor:
+                getter: getIncludeIndicator
+                setter: setIncludeIndicator
+            xml_attribute: true
+            type: bool

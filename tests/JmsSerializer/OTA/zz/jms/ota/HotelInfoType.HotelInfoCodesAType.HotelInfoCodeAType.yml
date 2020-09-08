@@ -1,0 +1,47 @@
+OTA\HotelInfoType\HotelInfoCodesAType\HotelInfoCodeAType:
+    properties:
+        code:
+            expose: true
+            access_type: public_method
+            serialized_name: Code
+            accessor:
+                getter: getCode
+                setter: setCode
+            xml_attribute: true
+            type: string
+        codeDetail:
+            expose: true
+            access_type: public_method
+            serialized_name: CodeDetail
+            accessor:
+                getter: getCodeDetail
+                setter: setCodeDetail
+            xml_attribute: true
+            type: string
+        removal:
+            expose: true
+            access_type: public_method
+            serialized_name: Removal
+            accessor:
+                getter: getRemoval
+                setter: setRemoval
+            xml_attribute: true
+            type: bool
+        quantity:
+            expose: true
+            access_type: public_method
+            serialized_name: Quantity
+            accessor:
+                getter: getQuantity
+                setter: setQuantity
+            xml_attribute: true
+            type: int
+        optionCode:
+            expose: true
+            access_type: public_method
+            serialized_name: OptionCode
+            accessor:
+                getter: getOptionCode
+                setter: setOptionCode
+            xml_attribute: true
+            type: string

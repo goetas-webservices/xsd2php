@@ -1,0 +1,61 @@
+OTA\CruiseBookingInfoType:
+    properties:
+        bookingPrices:
+            expose: true
+            access_type: public_method
+            serialized_name: BookingPrices
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getBookingPrices
+                setter: setBookingPrices
+            type: array<OTA\CruiseBookingInfoType\BookingPricesAType\BookingPriceAType>
+            xml_list:
+                inline: false
+                entry_name: BookingPrice
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        paymentSchedule:
+            expose: true
+            access_type: public_method
+            serialized_name: PaymentSchedule
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getPaymentSchedule
+                setter: setPaymentSchedule
+            type: array<OTA\CruiseBookingInfoType\PaymentScheduleAType\PaymentAType>
+            xml_list:
+                inline: false
+                entry_name: Payment
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        guestPrices:
+            expose: true
+            access_type: public_method
+            serialized_name: GuestPrices
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getGuestPrices
+                setter: setGuestPrices
+            type: array<OTA\CruiseBookingInfoType\GuestPricesAType\GuestPriceAType>
+            xml_list:
+                inline: false
+                entry_name: GuestPrice
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        policyInfo:
+            expose: true
+            access_type: public_method
+            serialized_name: PolicyInfo
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getPolicyInfo
+                setter: setPolicyInfo
+            xml_list:
+                inline: true
+                entry_name: PolicyInfo
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\ParagraphType>

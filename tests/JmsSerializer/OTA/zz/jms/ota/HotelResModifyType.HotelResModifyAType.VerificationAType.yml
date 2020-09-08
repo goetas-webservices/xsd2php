@@ -1,0 +1,12 @@
+OTA\HotelResModifyType\HotelResModifyAType\VerificationAType:
+    properties:
+        currentStateReservation:
+            expose: true
+            access_type: public_method
+            serialized_name: CurrentStateReservation
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getCurrentStateReservation
+                setter: setCurrentStateReservation
+            type: OTA\HotelReservationType

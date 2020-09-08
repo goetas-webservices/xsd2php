@@ -1,0 +1,47 @@
+OTA\OTACruisePriceBookingRS\OTACruisePriceBookingRSAType\ReservationIDAType:
+    properties:
+        statusCode:
+            expose: true
+            access_type: public_method
+            serialized_name: StatusCode
+            accessor:
+                getter: getStatusCode
+                setter: setStatusCode
+            xml_attribute: true
+            type: string
+        lastModifyDateTime:
+            expose: true
+            access_type: public_method
+            serialized_name: LastModifyDateTime
+            accessor:
+                getter: getLastModifyDateTime
+                setter: setLastModifyDateTime
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\DateTime
+        bookedDate:
+            expose: true
+            access_type: public_method
+            serialized_name: BookedDate
+            accessor:
+                getter: getBookedDate
+                setter: setBookedDate
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime
+        offerDate:
+            expose: true
+            access_type: public_method
+            serialized_name: OfferDate
+            accessor:
+                getter: getOfferDate
+                setter: setOfferDate
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime
+        syncDateTime:
+            expose: true
+            access_type: public_method
+            serialized_name: SyncDateTime
+            accessor:
+                getter: getSyncDateTime
+                setter: setSyncDateTime
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\DateTime

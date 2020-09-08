@@ -1,0 +1,117 @@
+OTA\PaymentFormType:
+    properties:
+        shareSynchInd:
+            expose: true
+            access_type: public_method
+            serialized_name: ShareSynchInd
+            accessor:
+                getter: getShareSynchInd
+                setter: setShareSynchInd
+            xml_attribute: true
+            type: string
+        shareMarketInd:
+            expose: true
+            access_type: public_method
+            serialized_name: ShareMarketInd
+            accessor:
+                getter: getShareMarketInd
+                setter: setShareMarketInd
+            xml_attribute: true
+            type: string
+        costCenterID:
+            expose: true
+            access_type: public_method
+            serialized_name: CostCenterID
+            accessor:
+                getter: getCostCenterID
+                setter: setCostCenterID
+            xml_attribute: true
+            type: string
+        rPH:
+            expose: true
+            access_type: public_method
+            serialized_name: RPH
+            accessor:
+                getter: getRPH
+                setter: setRPH
+            xml_attribute: true
+            type: string
+        paymentTransactionTypeCode:
+            expose: true
+            access_type: public_method
+            serialized_name: PaymentTransactionTypeCode
+            accessor:
+                getter: getPaymentTransactionTypeCode
+                setter: setPaymentTransactionTypeCode
+            xml_attribute: true
+            type: string
+        paymentCard:
+            expose: true
+            access_type: public_method
+            serialized_name: PaymentCard
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getPaymentCard
+                setter: setPaymentCard
+            type: OTA\PaymentCardType
+        bankAcct:
+            expose: true
+            access_type: public_method
+            serialized_name: BankAcct
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getBankAcct
+                setter: setBankAcct
+            type: OTA\BankAcctType
+        directBill:
+            expose: true
+            access_type: public_method
+            serialized_name: DirectBill
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getDirectBill
+                setter: setDirectBill
+            type: OTA\DirectBillType
+        voucher:
+            expose: true
+            access_type: public_method
+            serialized_name: Voucher
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getVoucher
+                setter: setVoucher
+            type: OTA\PaymentFormType\VoucherAType
+        loyaltyRedemption:
+            expose: true
+            access_type: public_method
+            serialized_name: LoyaltyRedemption
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getLoyaltyRedemption
+                setter: setLoyaltyRedemption
+            type: OTA\PaymentFormType\LoyaltyRedemptionAType
+        miscChargeOrder:
+            expose: true
+            access_type: public_method
+            serialized_name: MiscChargeOrder
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getMiscChargeOrder
+                setter: setMiscChargeOrder
+            type: OTA\PaymentFormType\MiscChargeOrderAType
+        cash:
+            expose: true
+            access_type: public_method
+            serialized_name: Cash
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getCash
+                setter: setCash
+            type: OTA\PaymentFormType\CashAType

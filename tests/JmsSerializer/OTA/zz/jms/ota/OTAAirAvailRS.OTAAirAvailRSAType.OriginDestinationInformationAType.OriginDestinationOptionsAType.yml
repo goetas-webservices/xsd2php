@@ -1,0 +1,17 @@
+OTA\OTAAirAvailRS\OTAAirAvailRSAType\OriginDestinationInformationAType\OriginDestinationOptionsAType:
+    properties:
+        originDestinationOption:
+            expose: true
+            access_type: public_method
+            serialized_name: OriginDestinationOption
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getOriginDestinationOption
+                setter: setOriginDestinationOption
+            type: array<OTA\OTAAirAvailRS\OTAAirAvailRSAType\OriginDestinationInformationAType\OriginDestinationOptionsAType\OriginDestinationOptionAType\FlightSegmentAType>
+            xml_list:
+                inline: false
+                entry_name: FlightSegment
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'

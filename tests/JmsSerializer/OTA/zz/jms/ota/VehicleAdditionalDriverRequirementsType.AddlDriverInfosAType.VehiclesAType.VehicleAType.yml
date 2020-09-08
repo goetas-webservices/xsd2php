@@ -1,0 +1,11 @@
+OTA\VehicleAdditionalDriverRequirementsType\AddlDriverInfosAType\VehiclesAType\VehicleAType:
+    properties:
+        includeExclude:
+            expose: true
+            access_type: public_method
+            serialized_name: IncludeExclude
+            accessor:
+                getter: getIncludeExclude
+                setter: setIncludeExclude
+            xml_attribute: true
+            type: string

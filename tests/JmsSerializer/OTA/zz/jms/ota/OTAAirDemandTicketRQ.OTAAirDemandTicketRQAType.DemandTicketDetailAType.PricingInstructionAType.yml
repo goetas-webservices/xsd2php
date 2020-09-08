@@ -1,0 +1,20 @@
+OTA\OTAAirDemandTicketRQ\OTAAirDemandTicketRQAType\DemandTicketDetailAType\PricingInstructionAType:
+    properties:
+        useStoredFareInd:
+            expose: true
+            access_type: public_method
+            serialized_name: UseStoredFareInd
+            accessor:
+                getter: getUseStoredFareInd
+                setter: setUseStoredFareInd
+            xml_attribute: true
+            type: bool
+        number:
+            expose: true
+            access_type: public_method
+            serialized_name: Number
+            accessor:
+                getter: getNumber
+                setter: setNumber
+            xml_attribute: true
+            type: int

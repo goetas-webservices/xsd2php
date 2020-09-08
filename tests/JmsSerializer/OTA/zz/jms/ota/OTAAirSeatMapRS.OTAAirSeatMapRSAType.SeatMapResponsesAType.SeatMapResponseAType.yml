@@ -1,0 +1,49 @@
+OTA\OTAAirSeatMapRS\OTAAirSeatMapRSAType\SeatMapResponsesAType\SeatMapResponseAType:
+    properties:
+        seatUpgradeApplied:
+            expose: true
+            access_type: public_method
+            serialized_name: SeatUpgradeApplied
+            accessor:
+                getter: getSeatUpgradeApplied
+                setter: setSeatUpgradeApplied
+            xml_attribute: true
+            type: bool
+        flightSegmentInfo:
+            expose: true
+            access_type: public_method
+            serialized_name: FlightSegmentInfo
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getFlightSegmentInfo
+                setter: setFlightSegmentInfo
+            type: OTA\OTAAirSeatMapRS\OTAAirSeatMapRSAType\SeatMapResponsesAType\SeatMapResponseAType\FlightSegmentInfoAType
+        seatMapDetails:
+            expose: true
+            access_type: public_method
+            serialized_name: SeatMapDetails
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getSeatMapDetails
+                setter: setSeatMapDetails
+            xml_list:
+                inline: true
+                entry_name: SeatMapDetails
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\SeatMapDetailsType>
+        bookingReferenceID:
+            expose: true
+            access_type: public_method
+            serialized_name: BookingReferenceID
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getBookingReferenceID
+                setter: setBookingReferenceID
+            xml_list:
+                inline: true
+                entry_name: BookingReferenceID
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\UniqueIDType>

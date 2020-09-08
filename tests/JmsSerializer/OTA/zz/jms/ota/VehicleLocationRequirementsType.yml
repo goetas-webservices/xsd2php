@@ -1,0 +1,57 @@
+OTA\VehicleLocationRequirementsType:
+    properties:
+        age:
+            expose: true
+            access_type: public_method
+            serialized_name: Age
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getAge
+                setter: setAge
+            type: OTA\VehicleLocationRequirementsType\AgeAType
+        additionalDriver:
+            expose: true
+            access_type: public_method
+            serialized_name: AdditionalDriver
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getAdditionalDriver
+                setter: setAdditionalDriver
+            type: OTA\VehicleLocationRequirementsType\AdditionalDriverAType
+        paymentOptions:
+            expose: true
+            access_type: public_method
+            serialized_name: PaymentOptions
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getPaymentOptions
+                setter: setPaymentOptions
+            type: OTA\VehicleLocationRequirementsType\PaymentOptionsAType
+        requirementInfos:
+            expose: true
+            access_type: public_method
+            serialized_name: RequirementInfos
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getRequirementInfos
+                setter: setRequirementInfos
+            type: array<OTA\VehicleLocationRequirementsType\RequirementInfosAType\RequirementInfoAType>
+            xml_list:
+                inline: false
+                entry_name: RequirementInfo
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        tPAExtensions:
+            expose: true
+            access_type: public_method
+            serialized_name: TPA_Extensions
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getTPAExtensions
+                setter: setTPAExtensions
+            type: OTA\TPAExtensionsType

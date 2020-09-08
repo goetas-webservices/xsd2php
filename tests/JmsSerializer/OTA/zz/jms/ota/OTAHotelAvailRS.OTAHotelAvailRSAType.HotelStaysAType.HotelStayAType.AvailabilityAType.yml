@@ -1,0 +1,52 @@
+OTA\OTAHotelAvailRS\OTAHotelAvailRSAType\HotelStaysAType\HotelStayAType\AvailabilityAType:
+    properties:
+        status:
+            expose: true
+            access_type: public_method
+            serialized_name: Status
+            accessor:
+                getter: getStatus
+                setter: setStatus
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Jms\SimpleListOf<string>
+        start:
+            expose: true
+            access_type: public_method
+            serialized_name: Start
+            accessor:
+                getter: getStart
+                setter: setStart
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime
+        duration:
+            expose: true
+            access_type: public_method
+            serialized_name: Duration
+            accessor:
+                getter: getDuration
+                setter: setDuration
+            xml_attribute: true
+            type: DateInterval
+        end:
+            expose: true
+            access_type: public_method
+            serialized_name: End
+            accessor:
+                getter: getEnd
+                setter: setEnd
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime
+        restriction:
+            expose: true
+            access_type: public_method
+            serialized_name: Restriction
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getRestriction
+                setter: setRestriction
+            xml_list:
+                inline: true
+                entry_name: Restriction
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\OTAHotelAvailRS\OTAHotelAvailRSAType\HotelStaysAType\HotelStayAType\AvailabilityAType\RestrictionAType>

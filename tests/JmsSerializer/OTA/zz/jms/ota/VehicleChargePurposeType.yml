@@ -1,0 +1,20 @@
+OTA\VehicleChargePurposeType:
+    properties:
+        purpose:
+            expose: true
+            access_type: public_method
+            serialized_name: Purpose
+            accessor:
+                getter: getPurpose
+                setter: setPurpose
+            xml_attribute: true
+            type: string
+        rateConvertInd:
+            expose: true
+            access_type: public_method
+            serialized_name: RateConvertInd
+            accessor:
+                getter: getRateConvertInd
+                setter: setRateConvertInd
+            xml_attribute: true
+            type: bool

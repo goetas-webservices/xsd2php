@@ -1,0 +1,28 @@
+OTA\OTAAirFareDisplayRQ\OTAAirFareDisplayRQAType\TravelPreferencesAType\FareAccessTypePrefAType\NegotiatedFareCodesAType\NegotiatedFareCodeAType:
+    properties:
+        __value:
+            expose: true
+            xml_value: true
+            access_type: public_method
+            accessor:
+                getter: value
+                setter: value
+            type: string
+        code:
+            expose: true
+            access_type: public_method
+            serialized_name: Code
+            accessor:
+                getter: getCode
+                setter: setCode
+            xml_attribute: true
+            type: string
+        codeContext:
+            expose: true
+            access_type: public_method
+            serialized_name: CodeContext
+            accessor:
+                getter: getCodeContext
+                setter: setCodeContext
+            xml_attribute: true
+            type: string

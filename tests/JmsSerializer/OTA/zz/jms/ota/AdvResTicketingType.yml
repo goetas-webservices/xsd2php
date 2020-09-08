@@ -1,0 +1,49 @@
+OTA\AdvResTicketingType:
+    properties:
+        advResInd:
+            expose: true
+            access_type: public_method
+            serialized_name: AdvResInd
+            accessor:
+                getter: getAdvResInd
+                setter: setAdvResInd
+            xml_attribute: true
+            type: bool
+        advTicketingInd:
+            expose: true
+            access_type: public_method
+            serialized_name: AdvTicketingInd
+            accessor:
+                getter: getAdvTicketingInd
+                setter: setAdvTicketingInd
+            xml_attribute: true
+            type: bool
+        requestedTicketingDate:
+            expose: true
+            access_type: public_method
+            serialized_name: RequestedTicketingDate
+            accessor:
+                getter: getRequestedTicketingDate
+                setter: setRequestedTicketingDate
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime
+        advReservation:
+            expose: true
+            access_type: public_method
+            serialized_name: AdvReservation
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getAdvReservation
+                setter: setAdvReservation
+            type: OTA\AdvResTicketingType\AdvReservationAType
+        advTicketing:
+            expose: true
+            access_type: public_method
+            serialized_name: AdvTicketing
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getAdvTicketing
+                setter: setAdvTicketing
+            type: OTA\AdvResTicketingType\AdvTicketingAType

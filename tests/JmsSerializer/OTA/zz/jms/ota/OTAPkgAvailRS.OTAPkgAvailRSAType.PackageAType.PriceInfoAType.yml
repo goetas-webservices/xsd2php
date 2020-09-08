@@ -1,0 +1,20 @@
+OTA\OTAPkgAvailRS\OTAPkgAvailRSAType\PackageAType\PriceInfoAType:
+    properties:
+        otherPrice:
+            expose: true
+            access_type: public_method
+            serialized_name: OtherPrice
+            accessor:
+                getter: getOtherPrice
+                setter: setOtherPrice
+            xml_attribute: true
+            type: float
+        otherPriceDescription:
+            expose: true
+            access_type: public_method
+            serialized_name: OtherPriceDescription
+            accessor:
+                getter: getOtherPriceDescription
+                setter: setOtherPriceDescription
+            xml_attribute: true
+            type: string

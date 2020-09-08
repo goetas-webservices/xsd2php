@@ -1,0 +1,29 @@
+OTA\OTAVehLocDetailsNotifRQ\OTAVehLocDetailsNotifRQAType\LocationDetailsAType\LocationDetailAType\OperationSchedulesAType:
+    properties:
+        policyNumber:
+            expose: true
+            access_type: public_method
+            serialized_name: PolicyNumber
+            accessor:
+                getter: getPolicyNumber
+                setter: setPolicyNumber
+            xml_attribute: true
+            type: string
+        text:
+            expose: true
+            access_type: public_method
+            serialized_name: Text
+            accessor:
+                getter: getText
+                setter: setText
+            xml_attribute: true
+            type: string
+        action:
+            expose: true
+            access_type: public_method
+            serialized_name: Action
+            accessor:
+                getter: getAction
+                setter: setAction
+            xml_attribute: true
+            type: string

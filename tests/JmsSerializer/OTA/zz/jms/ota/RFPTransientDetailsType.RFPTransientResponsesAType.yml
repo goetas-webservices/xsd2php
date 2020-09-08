@@ -1,0 +1,16 @@
+OTA\RFPTransientDetailsType\RFPTransientResponsesAType:
+    properties:
+        rFPTransientResponse:
+            expose: true
+            access_type: public_method
+            serialized_name: RFP_TransientResponse
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getRFPTransientResponse
+                setter: setRFPTransientResponse
+            xml_list:
+                inline: true
+                entry_name: RFP_TransientResponse
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\RFPTransientResponseType>

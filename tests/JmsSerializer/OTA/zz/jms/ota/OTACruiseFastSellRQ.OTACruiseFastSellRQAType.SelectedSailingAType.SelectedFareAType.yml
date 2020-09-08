@@ -1,0 +1,20 @@
+OTA\OTACruiseFastSellRQ\OTACruiseFastSellRQAType\SelectedSailingAType\SelectedFareAType:
+    properties:
+        fareCode:
+            expose: true
+            access_type: public_method
+            serialized_name: FareCode
+            accessor:
+                getter: getFareCode
+                setter: setFareCode
+            xml_attribute: true
+            type: string
+        groupCode:
+            expose: true
+            access_type: public_method
+            serialized_name: GroupCode
+            accessor:
+                getter: getGroupCode
+                setter: setGroupCode
+            xml_attribute: true
+            type: string

@@ -1,0 +1,29 @@
+OTA\BaseInvCountType\InvCountsAType\InvCountAType\InvBlockCutoffAType:
+    properties:
+        absoluteCutoff:
+            expose: true
+            access_type: public_method
+            serialized_name: AbsoluteCutoff
+            accessor:
+                getter: getAbsoluteCutoff
+                setter: setAbsoluteCutoff
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime
+        offsetDuration:
+            expose: true
+            access_type: public_method
+            serialized_name: OffsetDuration
+            accessor:
+                getter: getOffsetDuration
+                setter: setOffsetDuration
+            xml_attribute: true
+            type: DateInterval
+        offsetCalculationMode:
+            expose: true
+            access_type: public_method
+            serialized_name: OffsetCalculationMode
+            accessor:
+                getter: getOffsetCalculationMode
+                setter: setOffsetCalculationMode
+            xml_attribute: true
+            type: string

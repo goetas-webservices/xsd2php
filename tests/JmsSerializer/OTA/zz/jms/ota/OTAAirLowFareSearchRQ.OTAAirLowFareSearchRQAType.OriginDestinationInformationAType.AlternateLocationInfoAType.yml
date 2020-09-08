@@ -1,0 +1,20 @@
+OTA\OTAAirLowFareSearchRQ\OTAAirLowFareSearchRQAType\OriginDestinationInformationAType\AlternateLocationInfoAType:
+    properties:
+        originLocation:
+            expose: true
+            access_type: public_method
+            serialized_name: OriginLocation
+            accessor:
+                getter: getOriginLocation
+                setter: setOriginLocation
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Jms\SimpleListOf<string>
+        destinationLocation:
+            expose: true
+            access_type: public_method
+            serialized_name: DestinationLocation
+            accessor:
+                getter: getDestinationLocation
+                setter: setDestinationLocation
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Jms\SimpleListOf<string>

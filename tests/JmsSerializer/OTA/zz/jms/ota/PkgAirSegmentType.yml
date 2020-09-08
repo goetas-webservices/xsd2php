@@ -1,0 +1,87 @@
+OTA\PkgAirSegmentType:
+    properties:
+        checkInDate:
+            expose: true
+            access_type: public_method
+            serialized_name: CheckInDate
+            accessor:
+                getter: getCheckInDate
+                setter: setCheckInDate
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\DateTime
+        type:
+            expose: true
+            access_type: public_method
+            serialized_name: Type
+            accessor:
+                getter: getType
+                setter: setType
+            xml_attribute: true
+            type: string
+        departureDay:
+            expose: true
+            access_type: public_method
+            serialized_name: DepartureDay
+            accessor:
+                getter: getDepartureDay
+                setter: setDepartureDay
+            xml_attribute: true
+            type: string
+        travelCode:
+            expose: true
+            access_type: public_method
+            serialized_name: TravelCode
+            accessor:
+                getter: getTravelCode
+                setter: setTravelCode
+            xml_attribute: true
+            type: string
+        duration:
+            expose: true
+            access_type: public_method
+            serialized_name: Duration
+            accessor:
+                getter: getDuration
+                setter: setDuration
+            xml_attribute: true
+            type: DateInterval
+        supplementCharges:
+            expose: true
+            access_type: public_method
+            serialized_name: SupplementCharges
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getSupplementCharges
+                setter: setSupplementCharges
+            type: array<OTA\FeeType>
+            xml_list:
+                inline: false
+                entry_name: Charge
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        availableSeats:
+            expose: true
+            access_type: public_method
+            serialized_name: AvailableSeats
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getAvailableSeats
+                setter: setAvailableSeats
+            type: array<OTA\SeatAvailabilityType>
+            xml_list:
+                inline: false
+                entry_name: SeatAvailability
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        passengers:
+            expose: true
+            access_type: public_method
+            serialized_name: Passengers
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getPassengers
+                setter: setPassengers
+            type: OTA\PkgAirSegmentType\PassengersAType

@@ -1,0 +1,63 @@
+OTA\OTAResRetrieveRS\OTAResRetrieveRSAType\ReservationsListAType\AirReservationAType:
+    properties:
+        bookingReferenceID:
+            expose: true
+            access_type: public_method
+            serialized_name: BookingReferenceID
+            accessor:
+                getter: getBookingReferenceID
+                setter: setBookingReferenceID
+            xml_attribute: true
+            type: string
+        dateBooked:
+            expose: true
+            access_type: public_method
+            serialized_name: DateBooked
+            accessor:
+                getter: getDateBooked
+                setter: setDateBooked
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\DateTime
+        itineraryName:
+            expose: true
+            access_type: public_method
+            serialized_name: ItineraryName
+            accessor:
+                getter: getItineraryName
+                setter: setItineraryName
+            xml_attribute: true
+            type: string
+        flightSegment:
+            expose: true
+            access_type: public_method
+            serialized_name: FlightSegment
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getFlightSegment
+                setter: setFlightSegment
+            type: OTA\FlightSegmentType
+        travelerName:
+            expose: true
+            access_type: public_method
+            serialized_name: TravelerName
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getTravelerName
+                setter: setTravelerName
+            xml_list:
+                inline: true
+                entry_name: TravelerName
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\PersonNameType>
+        tPAExtensions:
+            expose: true
+            access_type: public_method
+            serialized_name: TPA_Extensions
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getTPAExtensions
+                setter: setTPAExtensions
+            type: OTA\TPAExtensionsType

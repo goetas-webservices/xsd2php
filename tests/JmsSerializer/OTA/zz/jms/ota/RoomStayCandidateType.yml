@@ -1,0 +1,233 @@
+OTA\RoomStayCandidateType:
+    properties:
+        roomType:
+            expose: true
+            access_type: public_method
+            serialized_name: RoomType
+            accessor:
+                getter: getRoomType
+                setter: setRoomType
+            xml_attribute: true
+            type: string
+        roomTypeCode:
+            expose: true
+            access_type: public_method
+            serialized_name: RoomTypeCode
+            accessor:
+                getter: getRoomTypeCode
+                setter: setRoomTypeCode
+            xml_attribute: true
+            type: string
+        roomCategory:
+            expose: true
+            access_type: public_method
+            serialized_name: RoomCategory
+            accessor:
+                getter: getRoomCategory
+                setter: setRoomCategory
+            xml_attribute: true
+            type: string
+        roomID:
+            expose: true
+            access_type: public_method
+            serialized_name: RoomID
+            accessor:
+                getter: getRoomID
+                setter: setRoomID
+            xml_attribute: true
+            type: string
+        floor:
+            expose: true
+            access_type: public_method
+            serialized_name: Floor
+            accessor:
+                getter: getFloor
+                setter: setFloor
+            xml_attribute: true
+            type: int
+        invBlockCode:
+            expose: true
+            access_type: public_method
+            serialized_name: InvBlockCode
+            accessor:
+                getter: getInvBlockCode
+                setter: setInvBlockCode
+            xml_attribute: true
+            type: string
+        promotionCode:
+            expose: true
+            access_type: public_method
+            serialized_name: PromotionCode
+            accessor:
+                getter: getPromotionCode
+                setter: setPromotionCode
+            xml_attribute: true
+            type: string
+        promotionVendorCode:
+            expose: true
+            access_type: public_method
+            serialized_name: PromotionVendorCode
+            accessor:
+                getter: getPromotionVendorCode
+                setter: setPromotionVendorCode
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Jms\SimpleListOf<string>
+        roomLocationCode:
+            expose: true
+            access_type: public_method
+            serialized_name: RoomLocationCode
+            accessor:
+                getter: getRoomLocationCode
+                setter: setRoomLocationCode
+            xml_attribute: true
+            type: string
+        roomViewCode:
+            expose: true
+            access_type: public_method
+            serialized_name: RoomViewCode
+            accessor:
+                getter: getRoomViewCode
+                setter: setRoomViewCode
+            xml_attribute: true
+            type: string
+        bedTypeCode:
+            expose: true
+            access_type: public_method
+            serialized_name: BedTypeCode
+            accessor:
+                getter: getBedTypeCode
+                setter: setBedTypeCode
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Jms\SimpleListOf<string>
+        nonSmoking:
+            expose: true
+            access_type: public_method
+            serialized_name: NonSmoking
+            accessor:
+                getter: getNonSmoking
+                setter: setNonSmoking
+            xml_attribute: true
+            type: bool
+        configuration:
+            expose: true
+            access_type: public_method
+            serialized_name: Configuration
+            accessor:
+                getter: getConfiguration
+                setter: setConfiguration
+            xml_attribute: true
+            type: string
+        sizeMeasurement:
+            expose: true
+            access_type: public_method
+            serialized_name: SizeMeasurement
+            accessor:
+                getter: getSizeMeasurement
+                setter: setSizeMeasurement
+            xml_attribute: true
+            type: string
+        quantity:
+            expose: true
+            access_type: public_method
+            serialized_name: Quantity
+            accessor:
+                getter: getQuantity
+                setter: setQuantity
+            xml_attribute: true
+            type: int
+        composite:
+            expose: true
+            access_type: public_method
+            serialized_name: Composite
+            accessor:
+                getter: getComposite
+                setter: setComposite
+            xml_attribute: true
+            type: bool
+        roomClassificationCode:
+            expose: true
+            access_type: public_method
+            serialized_name: RoomClassificationCode
+            accessor:
+                getter: getRoomClassificationCode
+                setter: setRoomClassificationCode
+            xml_attribute: true
+            type: string
+        roomArchitectureCode:
+            expose: true
+            access_type: public_method
+            serialized_name: RoomArchitectureCode
+            accessor:
+                getter: getRoomArchitectureCode
+                setter: setRoomArchitectureCode
+            xml_attribute: true
+            type: string
+        rPH:
+            expose: true
+            access_type: public_method
+            serialized_name: RPH
+            accessor:
+                getter: getRPH
+                setter: setRPH
+            xml_attribute: true
+            type: string
+        ratePlanCandidateRPH:
+            expose: true
+            access_type: public_method
+            serialized_name: RatePlanCandidateRPH
+            accessor:
+                getter: getRatePlanCandidateRPH
+                setter: setRatePlanCandidateRPH
+            xml_attribute: true
+            type: string
+        bookingCode:
+            expose: true
+            access_type: public_method
+            serialized_name: BookingCode
+            accessor:
+                getter: getBookingCode
+                setter: setBookingCode
+            xml_attribute: true
+            type: string
+        effectiveDate:
+            expose: true
+            access_type: public_method
+            serialized_name: EffectiveDate
+            accessor:
+                getter: getEffectiveDate
+                setter: setEffectiveDate
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\Date
+        expireDate:
+            expose: true
+            access_type: public_method
+            serialized_name: ExpireDate
+            accessor:
+                getter: getExpireDate
+                setter: setExpireDate
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\Date
+        guestCounts:
+            expose: true
+            access_type: public_method
+            serialized_name: GuestCounts
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getGuestCounts
+                setter: setGuestCounts
+            type: OTA\GuestCountType
+        roomAmenity:
+            expose: true
+            access_type: public_method
+            serialized_name: RoomAmenity
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getRoomAmenity
+                setter: setRoomAmenity
+            xml_list:
+                inline: true
+                entry_name: RoomAmenity
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\RoomAmenityPrefType>

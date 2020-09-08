@@ -1,0 +1,20 @@
+OTA\OTACruiseBookRQ\OTACruiseBookRQAType\AgentInfoAType:
+    properties:
+        contact:
+            expose: true
+            access_type: public_method
+            serialized_name: Contact
+            accessor:
+                getter: getContact
+                setter: setContact
+            xml_attribute: true
+            type: string
+        contactID:
+            expose: true
+            access_type: public_method
+            serialized_name: ContactID
+            accessor:
+                getter: getContactID
+                setter: setContactID
+            xml_attribute: true
+            type: string

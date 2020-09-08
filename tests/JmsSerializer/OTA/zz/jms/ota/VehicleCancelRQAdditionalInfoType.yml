@@ -1,0 +1,52 @@
+OTA\VehicleCancelRQAdditionalInfoType:
+    properties:
+        custLoyalty:
+            expose: true
+            access_type: public_method
+            serialized_name: CustLoyalty
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getCustLoyalty
+                setter: setCustLoyalty
+            type: OTA\VehicleCancelRQAdditionalInfoType\CustLoyaltyAType
+        telephone:
+            expose: true
+            access_type: public_method
+            serialized_name: Telephone
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getTelephone
+                setter: setTelephone
+            type: OTA\VehicleCancelRQAdditionalInfoType\TelephoneAType
+        vendor:
+            expose: true
+            access_type: public_method
+            serialized_name: Vendor
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getVendor
+                setter: setVendor
+            type: OTA\CompanyNameType
+        rentalInfo:
+            expose: true
+            access_type: public_method
+            serialized_name: RentalInfo
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getRentalInfo
+                setter: setRentalInfo
+            type: OTA\VehicleCancelRQAdditionalInfoType\RentalInfoAType
+        tPAExtensions:
+            expose: true
+            access_type: public_method
+            serialized_name: TPA_Extensions
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getTPAExtensions
+                setter: setTPAExtensions
+            type: OTA\TPAExtensionsType

@@ -1,0 +1,27 @@
+OTA\VehicleAvailRSCoreType:
+    properties:
+        vehRentalCore:
+            expose: true
+            access_type: public_method
+            serialized_name: VehRentalCore
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getVehRentalCore
+                setter: setVehRentalCore
+            type: OTA\VehicleRentalCoreType
+        vehVendorAvails:
+            expose: true
+            access_type: public_method
+            serialized_name: VehVendorAvails
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getVehVendorAvails
+                setter: setVehVendorAvails
+            type: array<OTA\VehicleVendorAvailabilityType>
+            xml_list:
+                inline: false
+                entry_name: VehVendorAvail
+                skip_when_empty: false
+                namespace: 'http://www.opentravel.org/OTA/2003/05'

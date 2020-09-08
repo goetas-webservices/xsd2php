@@ -1,0 +1,16 @@
+OTA\SpecialReqDetailsType\SeatRequestsAType:
+    properties:
+        seatRequest:
+            expose: true
+            access_type: public_method
+            serialized_name: SeatRequest
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getSeatRequest
+                setter: setSeatRequest
+            xml_list:
+                inline: true
+                entry_name: SeatRequest
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\SpecialReqDetailsType\SeatRequestsAType\SeatRequestAType>

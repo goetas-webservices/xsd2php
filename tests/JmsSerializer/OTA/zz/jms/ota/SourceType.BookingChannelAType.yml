@@ -1,0 +1,30 @@
+OTA\SourceType\BookingChannelAType:
+    properties:
+        type:
+            expose: true
+            access_type: public_method
+            serialized_name: Type
+            accessor:
+                getter: getType
+                setter: setType
+            xml_attribute: true
+            type: string
+        primary:
+            expose: true
+            access_type: public_method
+            serialized_name: Primary
+            accessor:
+                getter: getPrimary
+                setter: setPrimary
+            xml_attribute: true
+            type: bool
+        companyName:
+            expose: true
+            access_type: public_method
+            serialized_name: CompanyName
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getCompanyName
+                setter: setCompanyName
+            type: OTA\CompanyNameType

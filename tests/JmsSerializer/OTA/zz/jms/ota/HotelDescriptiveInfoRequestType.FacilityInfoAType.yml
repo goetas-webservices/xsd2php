@@ -1,0 +1,29 @@
+OTA\HotelDescriptiveInfoRequestType\FacilityInfoAType:
+    properties:
+        sendMeetingRooms:
+            expose: true
+            access_type: public_method
+            serialized_name: SendMeetingRooms
+            accessor:
+                getter: getSendMeetingRooms
+                setter: setSendMeetingRooms
+            xml_attribute: true
+            type: bool
+        sendGuestRooms:
+            expose: true
+            access_type: public_method
+            serialized_name: SendGuestRooms
+            accessor:
+                getter: getSendGuestRooms
+                setter: setSendGuestRooms
+            xml_attribute: true
+            type: bool
+        sendRestaurants:
+            expose: true
+            access_type: public_method
+            serialized_name: SendRestaurants
+            accessor:
+                getter: getSendRestaurants
+                setter: setSendRestaurants
+            xml_attribute: true
+            type: bool

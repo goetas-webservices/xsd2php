@@ -1,0 +1,117 @@
+OTA\OTAAirDemandTicketRQ\OTAAirDemandTicketRQAType:
+    properties:
+        echoToken:
+            expose: true
+            access_type: public_method
+            serialized_name: EchoToken
+            accessor:
+                getter: getEchoToken
+                setter: setEchoToken
+            xml_attribute: true
+            type: string
+        timeStamp:
+            expose: true
+            access_type: public_method
+            serialized_name: TimeStamp
+            accessor:
+                getter: getTimeStamp
+                setter: setTimeStamp
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\DateTime
+        target:
+            expose: true
+            access_type: public_method
+            serialized_name: Target
+            accessor:
+                getter: getTarget
+                setter: setTarget
+            xml_attribute: true
+            type: string
+        version:
+            expose: true
+            access_type: public_method
+            serialized_name: Version
+            accessor:
+                getter: getVersion
+                setter: setVersion
+            xml_attribute: true
+            type: float
+        transactionIdentifier:
+            expose: true
+            access_type: public_method
+            serialized_name: TransactionIdentifier
+            accessor:
+                getter: getTransactionIdentifier
+                setter: setTransactionIdentifier
+            xml_attribute: true
+            type: string
+        sequenceNmbr:
+            expose: true
+            access_type: public_method
+            serialized_name: SequenceNmbr
+            accessor:
+                getter: getSequenceNmbr
+                setter: setSequenceNmbr
+            xml_attribute: true
+            type: int
+        transactionStatusCode:
+            expose: true
+            access_type: public_method
+            serialized_name: TransactionStatusCode
+            accessor:
+                getter: getTransactionStatusCode
+                setter: setTransactionStatusCode
+            xml_attribute: true
+            type: string
+        primaryLangID:
+            expose: true
+            access_type: public_method
+            serialized_name: PrimaryLangID
+            accessor:
+                getter: getPrimaryLangID
+                setter: setPrimaryLangID
+            xml_attribute: true
+            type: string
+        altLangID:
+            expose: true
+            access_type: public_method
+            serialized_name: AltLangID
+            accessor:
+                getter: getAltLangID
+                setter: setAltLangID
+            xml_attribute: true
+            type: string
+        retransmissionIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: RetransmissionIndicator
+            accessor:
+                getter: getRetransmissionIndicator
+                setter: setRetransmissionIndicator
+            xml_attribute: true
+            type: bool
+        pOS:
+            expose: true
+            access_type: public_method
+            serialized_name: POS
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getPOS
+                setter: setPOS
+            type: array<OTA\SourceType>
+            xml_list:
+                inline: false
+                entry_name: Source
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        demandTicketDetail:
+            expose: true
+            access_type: public_method
+            serialized_name: DemandTicketDetail
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getDemandTicketDetail
+                setter: setDemandTicketDetail
+            type: OTA\OTAAirDemandTicketRQ\OTAAirDemandTicketRQAType\DemandTicketDetailAType

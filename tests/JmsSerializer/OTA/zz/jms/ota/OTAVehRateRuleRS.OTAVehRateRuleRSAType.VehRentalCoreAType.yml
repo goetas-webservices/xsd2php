@@ -1,0 +1,56 @@
+OTA\OTAVehRateRuleRS\OTAVehRateRuleRSAType\VehRentalCoreAType:
+    properties:
+        dayOfWeek:
+            expose: true
+            access_type: public_method
+            serialized_name: DayOfWeek
+            accessor:
+                getter: getDayOfWeek
+                setter: setDayOfWeek
+            xml_attribute: true
+            type: string
+        currencyCode:
+            expose: true
+            access_type: public_method
+            serialized_name: CurrencyCode
+            accessor:
+                getter: getCurrencyCode
+                setter: setCurrencyCode
+            xml_attribute: true
+            type: string
+        companyShortName:
+            expose: true
+            access_type: public_method
+            serialized_name: CompanyShortName
+            accessor:
+                getter: getCompanyShortName
+                setter: setCompanyShortName
+            xml_attribute: true
+            type: string
+        travelSector:
+            expose: true
+            access_type: public_method
+            serialized_name: TravelSector
+            accessor:
+                getter: getTravelSector
+                setter: setTravelSector
+            xml_attribute: true
+            type: string
+        code:
+            expose: true
+            access_type: public_method
+            serialized_name: Code
+            accessor:
+                getter: getCode
+                setter: setCode
+            xml_attribute: true
+            type: string
+        codeContext:
+            expose: true
+            access_type: public_method
+            serialized_name: CodeContext
+            accessor:
+                getter: getCodeContext
+                setter: setCodeContext
+            xml_attribute: true
+            type: string

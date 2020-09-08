@@ -1,0 +1,56 @@
+OTA\StayRestrictionsType\MaximumStayAType:
+    properties:
+        returnType:
+            expose: true
+            access_type: public_method
+            serialized_name: ReturnType
+            accessor:
+                getter: getReturnType
+                setter: setReturnType
+            xml_attribute: true
+            type: string
+        returnTimeOfDay:
+            expose: true
+            access_type: public_method
+            serialized_name: ReturnTimeOfDay
+            accessor:
+                getter: getReturnTimeOfDay
+                setter: setReturnTimeOfDay
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime
+        maxStay:
+            expose: true
+            access_type: public_method
+            serialized_name: MaxStay
+            accessor:
+                getter: getMaxStay
+                setter: setMaxStay
+            xml_attribute: true
+            type: int
+        stayUnit:
+            expose: true
+            access_type: public_method
+            serialized_name: StayUnit
+            accessor:
+                getter: getStayUnit
+                setter: setStayUnit
+            xml_attribute: true
+            type: string
+        maxStayDate:
+            expose: true
+            access_type: public_method
+            serialized_name: MaxStayDate
+            accessor:
+                getter: getMaxStayDate
+                setter: setMaxStayDate
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime
+        complicatedRulesInd:
+            expose: true
+            access_type: public_method
+            serialized_name: ComplicatedRulesInd
+            accessor:
+                getter: getComplicatedRulesInd
+                setter: setComplicatedRulesInd
+            xml_attribute: true
+            type: bool

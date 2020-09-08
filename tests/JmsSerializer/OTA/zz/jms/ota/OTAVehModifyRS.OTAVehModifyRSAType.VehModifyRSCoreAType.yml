@@ -1,0 +1,11 @@
+OTA\OTAVehModifyRS\OTAVehModifyRSAType\VehModifyRSCoreAType:
+    properties:
+        modifyStatus:
+            expose: true
+            access_type: public_method
+            serialized_name: ModifyStatus
+            accessor:
+                getter: getModifyStatus
+                setter: setModifyStatus
+            xml_attribute: true
+            type: string

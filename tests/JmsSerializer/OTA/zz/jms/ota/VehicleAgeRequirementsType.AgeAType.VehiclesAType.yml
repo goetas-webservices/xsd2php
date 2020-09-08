@@ -1,0 +1,16 @@
+OTA\VehicleAgeRequirementsType\AgeAType\VehiclesAType:
+    properties:
+        vehicle:
+            expose: true
+            access_type: public_method
+            serialized_name: Vehicle
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getVehicle
+                setter: setVehicle
+            xml_list:
+                inline: true
+                entry_name: Vehicle
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\VehicleAgeRequirementsType\AgeAType\VehiclesAType\VehicleAType>

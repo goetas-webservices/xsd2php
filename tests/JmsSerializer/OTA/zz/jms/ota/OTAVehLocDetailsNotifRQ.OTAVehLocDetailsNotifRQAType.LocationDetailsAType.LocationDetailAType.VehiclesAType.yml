@@ -1,0 +1,56 @@
+OTA\OTAVehLocDetailsNotifRQ\OTAVehLocDetailsNotifRQAType\LocationDetailsAType\LocationDetailAType\VehiclesAType:
+    properties:
+        start:
+            expose: true
+            access_type: public_method
+            serialized_name: Start
+            accessor:
+                getter: getStart
+                setter: setStart
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime
+        duration:
+            expose: true
+            access_type: public_method
+            serialized_name: Duration
+            accessor:
+                getter: getDuration
+                setter: setDuration
+            xml_attribute: true
+            type: DateInterval
+        end:
+            expose: true
+            access_type: public_method
+            serialized_name: End
+            accessor:
+                getter: getEnd
+                setter: setEnd
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime
+        policyNumber:
+            expose: true
+            access_type: public_method
+            serialized_name: PolicyNumber
+            accessor:
+                getter: getPolicyNumber
+                setter: setPolicyNumber
+            xml_attribute: true
+            type: string
+        text:
+            expose: true
+            access_type: public_method
+            serialized_name: Text
+            accessor:
+                getter: getText
+                setter: setText
+            xml_attribute: true
+            type: string
+        action:
+            expose: true
+            access_type: public_method
+            serialized_name: Action
+            accessor:
+                getter: getAction
+                setter: setAction
+            xml_attribute: true
+            type: string

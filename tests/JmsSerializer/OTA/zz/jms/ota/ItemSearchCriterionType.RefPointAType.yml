@@ -1,0 +1,91 @@
+OTA\ItemSearchCriterionType\RefPointAType:
+    properties:
+        __value:
+            expose: true
+            xml_value: true
+            access_type: public_method
+            accessor:
+                getter: value
+                setter: value
+            type: string
+        stateProv:
+            expose: true
+            access_type: public_method
+            serialized_name: StateProv
+            accessor:
+                getter: getStateProv
+                setter: setStateProv
+            xml_attribute: true
+            type: string
+        countryCode:
+            expose: true
+            access_type: public_method
+            serialized_name: CountryCode
+            accessor:
+                getter: getCountryCode
+                setter: setCountryCode
+            xml_attribute: true
+            type: string
+        code:
+            expose: true
+            access_type: public_method
+            serialized_name: Code
+            accessor:
+                getter: getCode
+                setter: setCode
+            xml_attribute: true
+            type: string
+        codeContext:
+            expose: true
+            access_type: public_method
+            serialized_name: CodeContext
+            accessor:
+                getter: getCodeContext
+                setter: setCodeContext
+            xml_attribute: true
+            type: string
+        uRI:
+            expose: true
+            access_type: public_method
+            serialized_name: URI
+            accessor:
+                getter: getURI
+                setter: setURI
+            xml_attribute: true
+            type: string
+        quantity:
+            expose: true
+            access_type: public_method
+            serialized_name: Quantity
+            accessor:
+                getter: getQuantity
+                setter: setQuantity
+            xml_attribute: true
+            type: int
+        refPointType:
+            expose: true
+            access_type: public_method
+            serialized_name: RefPointType
+            accessor:
+                getter: getRefPointType
+                setter: setRefPointType
+            xml_attribute: true
+            type: string
+        name:
+            expose: true
+            access_type: public_method
+            serialized_name: Name
+            accessor:
+                getter: getName
+                setter: setName
+            xml_attribute: true
+            type: string
+        cityName:
+            expose: true
+            access_type: public_method
+            serialized_name: CityName
+            accessor:
+                getter: getCityName
+                setter: setCityName
+            xml_attribute: true
+            type: string

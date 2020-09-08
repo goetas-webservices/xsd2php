@@ -1,0 +1,47 @@
+OTA\StayRestrictionsType\MinimumStayAType:
+    properties:
+        returnTimeOfDay:
+            expose: true
+            access_type: public_method
+            serialized_name: ReturnTimeOfDay
+            accessor:
+                getter: getReturnTimeOfDay
+                setter: setReturnTimeOfDay
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime
+        minStay:
+            expose: true
+            access_type: public_method
+            serialized_name: MinStay
+            accessor:
+                getter: getMinStay
+                setter: setMinStay
+            xml_attribute: true
+            type: int
+        stayUnit:
+            expose: true
+            access_type: public_method
+            serialized_name: StayUnit
+            accessor:
+                getter: getStayUnit
+                setter: setStayUnit
+            xml_attribute: true
+            type: string
+        minStayDate:
+            expose: true
+            access_type: public_method
+            serialized_name: MinStayDate
+            accessor:
+                getter: getMinStayDate
+                setter: setMinStayDate
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime
+        complicatedRulesInd:
+            expose: true
+            access_type: public_method
+            serialized_name: ComplicatedRulesInd
+            accessor:
+                getter: getComplicatedRulesInd
+                setter: setComplicatedRulesInd
+            xml_attribute: true
+            type: bool

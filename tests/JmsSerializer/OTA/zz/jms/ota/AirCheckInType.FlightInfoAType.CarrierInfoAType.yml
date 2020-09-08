@@ -1,0 +1,38 @@
+OTA\AirCheckInType\FlightInfoAType\CarrierInfoAType:
+    properties:
+        marketingInd:
+            expose: true
+            access_type: public_method
+            serialized_name: MarketingInd
+            accessor:
+                getter: getMarketingInd
+                setter: setMarketingInd
+            xml_attribute: true
+            type: bool
+        bookedRBD:
+            expose: true
+            access_type: public_method
+            serialized_name: BookedRBD
+            accessor:
+                getter: getBookedRBD
+                setter: setBookedRBD
+            xml_attribute: true
+            type: string
+        ticketedRBD:
+            expose: true
+            access_type: public_method
+            serialized_name: TicketedRBD
+            accessor:
+                getter: getTicketedRBD
+                setter: setTicketedRBD
+            xml_attribute: true
+            type: string
+        frequentFlierMiles:
+            expose: true
+            access_type: public_method
+            serialized_name: FrequentFlierMiles
+            accessor:
+                getter: getFrequentFlierMiles
+                setter: setFrequentFlierMiles
+            xml_attribute: true
+            type: string

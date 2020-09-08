@@ -1,0 +1,20 @@
+OTA\SearchQualifierType\ResidencyAType:
+    properties:
+        stateProvCode:
+            expose: true
+            access_type: public_method
+            serialized_name: StateProvCode
+            accessor:
+                getter: getStateProvCode
+                setter: setStateProvCode
+            xml_attribute: true
+            type: string
+        countryCode:
+            expose: true
+            access_type: public_method
+            serialized_name: CountryCode
+            accessor:
+                getter: getCountryCode
+                setter: setCountryCode
+            xml_attribute: true
+            type: string

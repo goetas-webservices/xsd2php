@@ -1,0 +1,172 @@
+OTA\BookFlightSegmentType:
+    properties:
+        resBookDesigCode:
+            expose: true
+            access_type: public_method
+            serialized_name: ResBookDesigCode
+            accessor:
+                getter: getResBookDesigCode
+                setter: setResBookDesigCode
+            xml_attribute: true
+            type: string
+        numberInParty:
+            expose: true
+            access_type: public_method
+            serialized_name: NumberInParty
+            accessor:
+                getter: getNumberInParty
+                setter: setNumberInParty
+            xml_attribute: true
+            type: int
+        status:
+            expose: true
+            access_type: public_method
+            serialized_name: Status
+            accessor:
+                getter: getStatus
+                setter: setStatus
+            xml_attribute: true
+            type: string
+        eTicketEligibility:
+            expose: true
+            access_type: public_method
+            serialized_name: E_TicketEligibility
+            accessor:
+                getter: getETicketEligibility
+                setter: setETicketEligibility
+            xml_attribute: true
+            type: string
+        mealCode:
+            expose: true
+            access_type: public_method
+            serialized_name: MealCode
+            accessor:
+                getter: getMealCode
+                setter: setMealCode
+            xml_attribute: true
+            type: string
+        departureDay:
+            expose: true
+            access_type: public_method
+            serialized_name: DepartureDay
+            accessor:
+                getter: getDepartureDay
+                setter: setDepartureDay
+            xml_attribute: true
+            type: string
+        stopoverInd:
+            expose: true
+            access_type: public_method
+            serialized_name: StopoverInd
+            accessor:
+                getter: getStopoverInd
+                setter: setStopoverInd
+            xml_attribute: true
+            type: bool
+        lineNumber:
+            expose: true
+            access_type: public_method
+            serialized_name: LineNumber
+            accessor:
+                getter: getLineNumber
+                setter: setLineNumber
+            xml_attribute: true
+            type: int
+        connectionType:
+            expose: true
+            access_type: public_method
+            serialized_name: ConnectionType
+            accessor:
+                getter: getConnectionType
+                setter: setConnectionType
+            xml_attribute: true
+            type: string
+        participationLevelCode:
+            expose: true
+            access_type: public_method
+            serialized_name: ParticipationLevelCode
+            accessor:
+                getter: getParticipationLevelCode
+                setter: setParticipationLevelCode
+            xml_attribute: true
+            type: string
+        distance:
+            expose: true
+            access_type: public_method
+            serialized_name: Distance
+            accessor:
+                getter: getDistance
+                setter: setDistance
+            xml_attribute: true
+            type: int
+        dateChangeNbr:
+            expose: true
+            access_type: public_method
+            serialized_name: DateChangeNbr
+            accessor:
+                getter: getDateChangeNbr
+                setter: setDateChangeNbr
+            xml_attribute: true
+            type: string
+        validConnectionInd:
+            expose: true
+            access_type: public_method
+            serialized_name: ValidConnectionInd
+            accessor:
+                getter: getValidConnectionInd
+                setter: setValidConnectionInd
+            xml_attribute: true
+            type: bool
+        marriageGrp:
+            expose: true
+            access_type: public_method
+            serialized_name: MarriageGrp
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getMarriageGrp
+                setter: setMarriageGrp
+            type: string
+        bookingClassAvails:
+            expose: true
+            access_type: public_method
+            serialized_name: BookingClassAvails
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getBookingClassAvails
+                setter: setBookingClassAvails
+            type: array<OTA\BookFlightSegmentType\BookingClassAvailsAType\BookingClassAvailAType>
+            xml_list:
+                inline: false
+                entry_name: BookingClassAvail
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        comment:
+            expose: true
+            access_type: public_method
+            serialized_name: Comment
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getComment
+                setter: setComment
+            xml_list:
+                inline: true
+                entry_name: Comment
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\FreeTextType>
+        stopLocation:
+            expose: true
+            access_type: public_method
+            serialized_name: StopLocation
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getStopLocation
+                setter: setStopLocation
+            xml_list:
+                inline: true
+                entry_name: StopLocation
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\BookFlightSegmentType\StopLocationAType>

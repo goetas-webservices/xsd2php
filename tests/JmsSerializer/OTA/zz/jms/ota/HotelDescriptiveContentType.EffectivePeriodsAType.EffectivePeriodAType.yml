@@ -1,0 +1,29 @@
+OTA\HotelDescriptiveContentType\EffectivePeriodsAType\EffectivePeriodAType:
+    properties:
+        startPeriod:
+            expose: true
+            access_type: public_method
+            serialized_name: StartPeriod
+            accessor:
+                getter: getStartPeriod
+                setter: setStartPeriod
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\Date
+        duration:
+            expose: true
+            access_type: public_method
+            serialized_name: Duration
+            accessor:
+                getter: getDuration
+                setter: setDuration
+            xml_attribute: true
+            type: DateInterval
+        endPeriod:
+            expose: true
+            access_type: public_method
+            serialized_name: EndPeriod
+            accessor:
+                getter: getEndPeriod
+                setter: setEndPeriod
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\Date

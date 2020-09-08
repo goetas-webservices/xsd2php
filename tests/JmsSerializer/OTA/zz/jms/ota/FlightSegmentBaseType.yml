@@ -1,0 +1,91 @@
+OTA\FlightSegmentBaseType:
+    properties:
+        departureDateTime:
+            expose: true
+            access_type: public_method
+            serialized_name: DepartureDateTime
+            accessor:
+                getter: getDepartureDateTime
+                setter: setDepartureDateTime
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\DateTime
+        arrivalDateTime:
+            expose: true
+            access_type: public_method
+            serialized_name: ArrivalDateTime
+            accessor:
+                getter: getArrivalDateTime
+                setter: setArrivalDateTime
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\DateTime
+        stopQuantity:
+            expose: true
+            access_type: public_method
+            serialized_name: StopQuantity
+            accessor:
+                getter: getStopQuantity
+                setter: setStopQuantity
+            xml_attribute: true
+            type: int
+        rPH:
+            expose: true
+            access_type: public_method
+            serialized_name: RPH
+            accessor:
+                getter: getRPH
+                setter: setRPH
+            xml_attribute: true
+            type: string
+        infoSource:
+            expose: true
+            access_type: public_method
+            serialized_name: InfoSource
+            accessor:
+                getter: getInfoSource
+                setter: setInfoSource
+            xml_attribute: true
+            type: string
+        departureAirport:
+            expose: true
+            access_type: public_method
+            serialized_name: DepartureAirport
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getDepartureAirport
+                setter: setDepartureAirport
+            type: OTA\FlightSegmentBaseType\DepartureAirportAType
+        arrivalAirport:
+            expose: true
+            access_type: public_method
+            serialized_name: ArrivalAirport
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getArrivalAirport
+                setter: setArrivalAirport
+            type: OTA\FlightSegmentBaseType\ArrivalAirportAType
+        operatingAirline:
+            expose: true
+            access_type: public_method
+            serialized_name: OperatingAirline
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getOperatingAirline
+                setter: setOperatingAirline
+            type: OTA\OperatingAirlineType
+        equipment:
+            expose: true
+            access_type: public_method
+            serialized_name: Equipment
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getEquipment
+                setter: setEquipment
+            xml_list:
+                inline: true
+                entry_name: Equipment
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\EquipmentType>

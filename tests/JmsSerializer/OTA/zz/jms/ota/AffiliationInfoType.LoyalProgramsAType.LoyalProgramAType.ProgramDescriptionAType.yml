@@ -1,0 +1,11 @@
+OTA\AffiliationInfoType\LoyalProgramsAType\LoyalProgramAType\ProgramDescriptionAType:
+    properties:
+        removal:
+            expose: true
+            access_type: public_method
+            serialized_name: Removal
+            accessor:
+                getter: getRemoval
+                setter: setRemoval
+            xml_attribute: true
+            type: bool

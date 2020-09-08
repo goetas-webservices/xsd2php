@@ -1,0 +1,59 @@
+OTA\AccountInfoType:
+    properties:
+        pointBalance:
+            expose: true
+            access_type: public_method
+            serialized_name: PointBalance
+            accessor:
+                getter: getPointBalance
+                setter: setPointBalance
+            xml_attribute: true
+            type: int
+        enrollmentType:
+            expose: true
+            access_type: public_method
+            serialized_name: EnrollmentType
+            accessor:
+                getter: getEnrollmentType
+                setter: setEnrollmentType
+            xml_attribute: true
+            type: string
+        enrollmentMethod:
+            expose: true
+            access_type: public_method
+            serialized_name: EnrollmentMethod
+            accessor:
+                getter: getEnrollmentMethod
+                setter: setEnrollmentMethod
+            xml_attribute: true
+            type: string
+        memberInfo:
+            expose: true
+            access_type: public_method
+            serialized_name: MemberInfo
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getMemberInfo
+                setter: setMemberInfo
+            type: OTA\ContactPersonType
+        memberPreferences:
+            expose: true
+            access_type: public_method
+            serialized_name: MemberPreferences
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getMemberPreferences
+                setter: setMemberPreferences
+            type: OTA\AccountInfoType\MemberPreferencesAType
+        securityInfo:
+            expose: true
+            access_type: public_method
+            serialized_name: SecurityInfo
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getSecurityInfo
+                setter: setSecurityInfo
+            type: OTA\AccountInfoType\SecurityInfoAType

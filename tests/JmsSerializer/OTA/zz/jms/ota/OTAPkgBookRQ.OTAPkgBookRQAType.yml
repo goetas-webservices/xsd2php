@@ -1,0 +1,219 @@
+OTA\OTAPkgBookRQ\OTAPkgBookRQAType:
+    properties:
+        echoToken:
+            expose: true
+            access_type: public_method
+            serialized_name: EchoToken
+            accessor:
+                getter: getEchoToken
+                setter: setEchoToken
+            xml_attribute: true
+            type: string
+        timeStamp:
+            expose: true
+            access_type: public_method
+            serialized_name: TimeStamp
+            accessor:
+                getter: getTimeStamp
+                setter: setTimeStamp
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\DateTime
+        target:
+            expose: true
+            access_type: public_method
+            serialized_name: Target
+            accessor:
+                getter: getTarget
+                setter: setTarget
+            xml_attribute: true
+            type: string
+        version:
+            expose: true
+            access_type: public_method
+            serialized_name: Version
+            accessor:
+                getter: getVersion
+                setter: setVersion
+            xml_attribute: true
+            type: float
+        transactionIdentifier:
+            expose: true
+            access_type: public_method
+            serialized_name: TransactionIdentifier
+            accessor:
+                getter: getTransactionIdentifier
+                setter: setTransactionIdentifier
+            xml_attribute: true
+            type: string
+        sequenceNmbr:
+            expose: true
+            access_type: public_method
+            serialized_name: SequenceNmbr
+            accessor:
+                getter: getSequenceNmbr
+                setter: setSequenceNmbr
+            xml_attribute: true
+            type: int
+        transactionStatusCode:
+            expose: true
+            access_type: public_method
+            serialized_name: TransactionStatusCode
+            accessor:
+                getter: getTransactionStatusCode
+                setter: setTransactionStatusCode
+            xml_attribute: true
+            type: string
+        primaryLangID:
+            expose: true
+            access_type: public_method
+            serialized_name: PrimaryLangID
+            accessor:
+                getter: getPrimaryLangID
+                setter: setPrimaryLangID
+            xml_attribute: true
+            type: string
+        altLangID:
+            expose: true
+            access_type: public_method
+            serialized_name: AltLangID
+            accessor:
+                getter: getAltLangID
+                setter: setAltLangID
+            xml_attribute: true
+            type: string
+        retransmissionIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: RetransmissionIndicator
+            accessor:
+                getter: getRetransmissionIndicator
+                setter: setRetransmissionIndicator
+            xml_attribute: true
+            type: bool
+        reqRespVersion:
+            expose: true
+            access_type: public_method
+            serialized_name: ReqRespVersion
+            accessor:
+                getter: getReqRespVersion
+                setter: setReqRespVersion
+            xml_attribute: true
+            type: string
+        actionType:
+            expose: true
+            access_type: public_method
+            serialized_name: ActionType
+            accessor:
+                getter: getActionType
+                setter: setActionType
+            xml_attribute: true
+            type: string
+        expectedGrossAmount:
+            expose: true
+            access_type: public_method
+            serialized_name: ExpectedGrossAmount
+            accessor:
+                getter: getExpectedGrossAmount
+                setter: setExpectedGrossAmount
+            xml_attribute: true
+            type: float
+        pOS:
+            expose: true
+            access_type: public_method
+            serialized_name: POS
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getPOS
+                setter: setPOS
+            type: array<OTA\SourceType>
+            xml_list:
+                inline: false
+                entry_name: Source
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        uniqueID:
+            expose: true
+            access_type: public_method
+            serialized_name: UniqueID
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getUniqueID
+                setter: setUniqueID
+            type: OTA\UniqueIDType
+        packageRequest:
+            expose: true
+            access_type: public_method
+            serialized_name: PackageRequest
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getPackageRequest
+                setter: setPackageRequest
+            type: OTA\PackageType
+        contactDetail:
+            expose: true
+            access_type: public_method
+            serialized_name: ContactDetail
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getContactDetail
+                setter: setContactDetail
+            type: OTA\ContactPersonType
+        passengerListItems:
+            expose: true
+            access_type: public_method
+            serialized_name: PassengerListItems
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getPassengerListItems
+                setter: setPassengerListItems
+            type: array<OTA\PkgPassengerListItemType>
+            xml_list:
+                inline: false
+                entry_name: PassengerListItem
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        ownInsuranceChoices:
+            expose: true
+            access_type: public_method
+            serialized_name: OwnInsuranceChoices
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getOwnInsuranceChoices
+                setter: setOwnInsuranceChoices
+            type: array<OTA\OwnInsuranceChoiceType>
+            xml_list:
+                inline: false
+                entry_name: OwnInsuranceChoice
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        paymentDetails:
+            expose: true
+            access_type: public_method
+            serialized_name: PaymentDetails
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getPaymentDetails
+                setter: setPaymentDetails
+            type: array<OTA\OTAPkgBookRQ\OTAPkgBookRQAType\PaymentDetailsAType\PaymentDetailAType>
+            xml_list:
+                inline: false
+                entry_name: PaymentDetail
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        tPAExtensions:
+            expose: true
+            access_type: public_method
+            serialized_name: TPA_Extensions
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getTPAExtensions
+                setter: setTPAExtensions
+            type: OTA\TPAExtensionsType

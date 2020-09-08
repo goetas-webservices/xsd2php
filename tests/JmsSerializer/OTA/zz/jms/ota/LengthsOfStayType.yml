@@ -1,0 +1,34 @@
+OTA\LengthsOfStayType:
+    properties:
+        arrivalDateBased:
+            expose: true
+            access_type: public_method
+            serialized_name: ArrivalDateBased
+            accessor:
+                getter: getArrivalDateBased
+                setter: setArrivalDateBased
+            xml_attribute: true
+            type: bool
+        fixedPatternLength:
+            expose: true
+            access_type: public_method
+            serialized_name: FixedPatternLength
+            accessor:
+                getter: getFixedPatternLength
+                setter: setFixedPatternLength
+            xml_attribute: true
+            type: int
+        lengthOfStay:
+            expose: true
+            access_type: public_method
+            serialized_name: LengthOfStay
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getLengthOfStay
+                setter: setLengthOfStay
+            xml_list:
+                inline: true
+                entry_name: LengthOfStay
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\LengthsOfStayType\LengthOfStayAType>

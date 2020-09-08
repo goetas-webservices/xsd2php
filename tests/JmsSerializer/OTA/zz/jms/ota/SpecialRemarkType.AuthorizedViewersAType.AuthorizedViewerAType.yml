@@ -1,0 +1,20 @@
+OTA\SpecialRemarkType\AuthorizedViewersAType\AuthorizedViewerAType:
+    properties:
+        viewerCode:
+            expose: true
+            access_type: public_method
+            serialized_name: ViewerCode
+            accessor:
+                getter: getViewerCode
+                setter: setViewerCode
+            xml_attribute: true
+            type: string
+        viewerCarrierCode:
+            expose: true
+            access_type: public_method
+            serialized_name: ViewerCarrierCode
+            accessor:
+                getter: getViewerCarrierCode
+                setter: setViewerCarrierCode
+            xml_attribute: true
+            type: string

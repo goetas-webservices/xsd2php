@@ -1,0 +1,11 @@
+OTA\TicketingInfoRSType:
+    properties:
+        eTicketNumber:
+            expose: true
+            access_type: public_method
+            serialized_name: eTicketNumber
+            accessor:
+                getter: getETicketNumber
+                setter: setETicketNumber
+            xml_attribute: true
+            type: string

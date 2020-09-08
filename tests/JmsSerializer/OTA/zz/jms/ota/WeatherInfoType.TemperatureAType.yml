@@ -1,0 +1,29 @@
+OTA\WeatherInfoType\TemperatureAType:
+    properties:
+        averageHighTemp:
+            expose: true
+            access_type: public_method
+            serialized_name: AverageHighTemp
+            accessor:
+                getter: getAverageHighTemp
+                setter: setAverageHighTemp
+            xml_attribute: true
+            type: int
+        averageLowTemp:
+            expose: true
+            access_type: public_method
+            serialized_name: AverageLowTemp
+            accessor:
+                getter: getAverageLowTemp
+                setter: setAverageLowTemp
+            xml_attribute: true
+            type: int
+        tempUnit:
+            expose: true
+            access_type: public_method
+            serialized_name: TempUnit
+            accessor:
+                getter: getTempUnit
+                setter: setTempUnit
+            xml_attribute: true
+            type: string

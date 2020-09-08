@@ -1,0 +1,111 @@
+OTA\OTAVehRateRuleRQ\OTAVehRateRuleRQAType\RentalInfoAType:
+    properties:
+        vehRentalCore:
+            expose: true
+            access_type: public_method
+            serialized_name: VehRentalCore
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getVehRentalCore
+                setter: setVehRentalCore
+            type: OTA\VehicleRentalCoreType
+        vehicleInfo:
+            expose: true
+            access_type: public_method
+            serialized_name: VehicleInfo
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getVehicleInfo
+                setter: setVehicleInfo
+            type: OTA\VehiclePrefType
+        specialEquipPrefs:
+            expose: true
+            access_type: public_method
+            serialized_name: SpecialEquipPrefs
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getSpecialEquipPrefs
+                setter: setSpecialEquipPrefs
+            type: array<OTA\OTAVehRateRuleRQ\OTAVehRateRuleRQAType\RentalInfoAType\SpecialEquipPrefsAType\SpecialEquipPrefAType>
+            xml_list:
+                inline: false
+                entry_name: SpecialEquipPref
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        custLoyalty:
+            expose: true
+            access_type: public_method
+            serialized_name: CustLoyalty
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getCustLoyalty
+                setter: setCustLoyalty
+            xml_list:
+                inline: true
+                entry_name: CustLoyalty
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\OTAVehRateRuleRQ\OTAVehRateRuleRQAType\RentalInfoAType\CustLoyaltyAType>
+        rateQualifier:
+            expose: true
+            access_type: public_method
+            serialized_name: RateQualifier
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getRateQualifier
+                setter: setRateQualifier
+            type: OTA\OTAVehRateRuleRQ\OTAVehRateRuleRQAType\RentalInfoAType\RateQualifierAType
+        offLocService:
+            expose: true
+            access_type: public_method
+            serialized_name: OffLocService
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getOffLocService
+                setter: setOffLocService
+            type: OTA\OffLocationServiceType
+        arrivalDetails:
+            expose: true
+            access_type: public_method
+            serialized_name: ArrivalDetails
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getArrivalDetails
+                setter: setArrivalDetails
+            type: OTA\VehicleArrivalDetailsType
+        tourInfo:
+            expose: true
+            access_type: public_method
+            serialized_name: TourInfo
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getTourInfo
+                setter: setTourInfo
+            type: OTA\VehicleTourInfoType
+        customerID:
+            expose: true
+            access_type: public_method
+            serialized_name: CustomerID
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getCustomerID
+                setter: setCustomerID
+            type: OTA\UniqueIDType
+        tPAExtensions:
+            expose: true
+            access_type: public_method
+            serialized_name: TPA_Extensions
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getTPAExtensions
+                setter: setTPAExtensions
+            type: OTA\TPAExtensionsType

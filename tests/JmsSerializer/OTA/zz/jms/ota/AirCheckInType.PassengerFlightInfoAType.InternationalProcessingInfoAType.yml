@@ -1,0 +1,29 @@
+OTA\AirCheckInType\PassengerFlightInfoAType\InternationalProcessingInfoAType:
+    properties:
+        documentVerification:
+            expose: true
+            access_type: public_method
+            serialized_name: DocumentVerification
+            accessor:
+                getter: getDocumentVerification
+                setter: setDocumentVerification
+            xml_attribute: true
+            type: string
+        airportPassengerProcessingCode:
+            expose: true
+            access_type: public_method
+            serialized_name: AirportPassengerProcessingCode
+            accessor:
+                getter: getAirportPassengerProcessingCode
+                setter: setAirportPassengerProcessingCode
+            xml_attribute: true
+            type: string
+        documentVerifiedInd:
+            expose: true
+            access_type: public_method
+            serialized_name: DocumentVerifiedInd
+            accessor:
+                getter: getDocumentVerifiedInd
+                setter: setDocumentVerifiedInd
+            xml_attribute: true
+            type: bool

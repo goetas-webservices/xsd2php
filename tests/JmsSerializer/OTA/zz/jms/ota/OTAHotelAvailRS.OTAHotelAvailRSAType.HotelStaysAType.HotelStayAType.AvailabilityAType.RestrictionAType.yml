@@ -1,0 +1,29 @@
+OTA\OTAHotelAvailRS\OTAHotelAvailRSAType\HotelStaysAType\HotelStayAType\AvailabilityAType\RestrictionAType:
+    properties:
+        restrictionType:
+            expose: true
+            access_type: public_method
+            serialized_name: RestrictionType
+            accessor:
+                getter: getRestrictionType
+                setter: setRestrictionType
+            xml_attribute: true
+            type: string
+        time:
+            expose: true
+            access_type: public_method
+            serialized_name: Time
+            accessor:
+                getter: getTime
+                setter: setTime
+            xml_attribute: true
+            type: int
+        timeUnit:
+            expose: true
+            access_type: public_method
+            serialized_name: TimeUnit
+            accessor:
+                getter: getTimeUnit
+                setter: setTimeUnit
+            xml_attribute: true
+            type: string

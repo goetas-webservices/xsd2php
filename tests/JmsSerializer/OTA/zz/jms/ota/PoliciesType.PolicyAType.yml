@@ -1,0 +1,262 @@
+OTA\PoliciesType\PolicyAType:
+    properties:
+        defaultValidBookingMinOffset:
+            expose: true
+            access_type: public_method
+            serialized_name: DefaultValidBookingMinOffset
+            accessor:
+                getter: getDefaultValidBookingMinOffset
+                setter: setDefaultValidBookingMinOffset
+            xml_attribute: true
+            type: int
+        start:
+            expose: true
+            access_type: public_method
+            serialized_name: Start
+            accessor:
+                getter: getStart
+                setter: setStart
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime
+        duration:
+            expose: true
+            access_type: public_method
+            serialized_name: Duration
+            accessor:
+                getter: getDuration
+                setter: setDuration
+            xml_attribute: true
+            type: DateInterval
+        end:
+            expose: true
+            access_type: public_method
+            serialized_name: End
+            accessor:
+                getter: getEnd
+                setter: setEnd
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime
+        code:
+            expose: true
+            access_type: public_method
+            serialized_name: Code
+            accessor:
+                getter: getCode
+                setter: setCode
+            xml_attribute: true
+            type: string
+        codeDetail:
+            expose: true
+            access_type: public_method
+            serialized_name: CodeDetail
+            accessor:
+                getter: getCodeDetail
+                setter: setCodeDetail
+            xml_attribute: true
+            type: string
+        removal:
+            expose: true
+            access_type: public_method
+            serialized_name: Removal
+            accessor:
+                getter: getRemoval
+                setter: setRemoval
+            xml_attribute: true
+            type: bool
+        lastUpdated:
+            expose: true
+            access_type: public_method
+            serialized_name: LastUpdated
+            accessor:
+                getter: getLastUpdated
+                setter: setLastUpdated
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\DateTime
+        mon:
+            expose: true
+            access_type: public_method
+            serialized_name: Mon
+            accessor:
+                getter: getMon
+                setter: setMon
+            xml_attribute: true
+            type: bool
+        tue:
+            expose: true
+            access_type: public_method
+            serialized_name: Tue
+            accessor:
+                getter: getTue
+                setter: setTue
+            xml_attribute: true
+            type: bool
+        weds:
+            expose: true
+            access_type: public_method
+            serialized_name: Weds
+            accessor:
+                getter: getWeds
+                setter: setWeds
+            xml_attribute: true
+            type: bool
+        thur:
+            expose: true
+            access_type: public_method
+            serialized_name: Thur
+            accessor:
+                getter: getThur
+                setter: setThur
+            xml_attribute: true
+            type: bool
+        fri:
+            expose: true
+            access_type: public_method
+            serialized_name: Fri
+            accessor:
+                getter: getFri
+                setter: setFri
+            xml_attribute: true
+            type: bool
+        sat:
+            expose: true
+            access_type: public_method
+            serialized_name: Sat
+            accessor:
+                getter: getSat
+                setter: setSat
+            xml_attribute: true
+            type: bool
+        sun:
+            expose: true
+            access_type: public_method
+            serialized_name: Sun
+            accessor:
+                getter: getSun
+                setter: setSun
+            xml_attribute: true
+            type: bool
+        cancelPolicy:
+            expose: true
+            access_type: public_method
+            serialized_name: CancelPolicy
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getCancelPolicy
+                setter: setCancelPolicy
+            type: OTA\CancelPenaltiesType
+        guaranteePaymentPolicy:
+            expose: true
+            access_type: public_method
+            serialized_name: GuaranteePaymentPolicy
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getGuaranteePaymentPolicy
+                setter: setGuaranteePaymentPolicy
+            type: OTA\PoliciesType\PolicyAType\GuaranteePaymentPolicyAType
+        policyInfoCodes:
+            expose: true
+            access_type: public_method
+            serialized_name: PolicyInfoCodes
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getPolicyInfoCodes
+                setter: setPolicyInfoCodes
+            type: array<OTA\PoliciesType\PolicyAType\PolicyInfoCodesAType\PolicyInfoCodeAType>
+            xml_list:
+                inline: false
+                entry_name: PolicyInfoCode
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        checkoutCharges:
+            expose: true
+            access_type: public_method
+            serialized_name: CheckoutCharges
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getCheckoutCharges
+                setter: setCheckoutCharges
+            type: array<OTA\PoliciesType\PolicyAType\CheckoutChargesAType\CheckoutChargeAType>
+            xml_list:
+                inline: false
+                entry_name: CheckoutCharge
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        policyInfo:
+            expose: true
+            access_type: public_method
+            serialized_name: PolicyInfo
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getPolicyInfo
+                setter: setPolicyInfo
+            type: OTA\PoliciesType\PolicyAType\PolicyInfoAType
+        taxPolicies:
+            expose: true
+            access_type: public_method
+            serialized_name: TaxPolicies
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getTaxPolicies
+                setter: setTaxPolicies
+            type: array<OTA\PoliciesType\PolicyAType\TaxPoliciesAType\TaxPolicyAType>
+            xml_list:
+                inline: false
+                entry_name: TaxPolicy
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        petsPolicies:
+            expose: true
+            access_type: public_method
+            serialized_name: PetsPolicies
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getPetsPolicies
+                setter: setPetsPolicies
+            type: OTA\PoliciesType\PolicyAType\PetsPoliciesAType
+        stayRequirements:
+            expose: true
+            access_type: public_method
+            serialized_name: StayRequirements
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getStayRequirements
+                setter: setStayRequirements
+            type: array<OTA\PoliciesType\PolicyAType\StayRequirementsAType\StayRequirementAType>
+            xml_list:
+                inline: false
+                entry_name: StayRequirement
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        commissionPolicy:
+            expose: true
+            access_type: public_method
+            serialized_name: CommissionPolicy
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getCommissionPolicy
+                setter: setCommissionPolicy
+            type: OTA\PoliciesType\PolicyAType\CommissionPolicyAType
+        feePolicies:
+            expose: true
+            access_type: public_method
+            serialized_name: FeePolicies
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getFeePolicies
+                setter: setFeePolicies
+            type: array<OTA\FeeType>
+            xml_list:
+                inline: false
+                entry_name: FeePolicy
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'

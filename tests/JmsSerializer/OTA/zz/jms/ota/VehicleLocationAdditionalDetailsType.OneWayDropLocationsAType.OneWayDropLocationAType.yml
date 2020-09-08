@@ -1,0 +1,11 @@
+OTA\VehicleLocationAdditionalDetailsType\OneWayDropLocationsAType\OneWayDropLocationAType:
+    properties:
+        extendedLocationCode:
+            expose: true
+            access_type: public_method
+            serialized_name: ExtendedLocationCode
+            accessor:
+                getter: getExtendedLocationCode
+                setter: setExtendedLocationCode
+            xml_attribute: true
+            type: string

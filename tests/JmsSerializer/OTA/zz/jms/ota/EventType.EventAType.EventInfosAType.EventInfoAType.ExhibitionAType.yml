@@ -1,0 +1,147 @@
+OTA\EventType\EventAType\EventInfosAType\EventInfoAType\ExhibitionAType:
+    properties:
+        type:
+            expose: true
+            access_type: public_method
+            serialized_name: Type
+            accessor:
+                getter: getType
+                setter: setType
+            xml_attribute: true
+            type: string
+        kitDistributionCode:
+            expose: true
+            access_type: public_method
+            serialized_name: KitDistributionCode
+            accessor:
+                getter: getKitDistributionCode
+                setter: setKitDistributionCode
+            xml_attribute: true
+            type: string
+        kitFormatCode:
+            expose: true
+            access_type: public_method
+            serialized_name: KitFormatCode
+            accessor:
+                getter: getKitFormatCode
+                setter: setKitFormatCode
+            xml_attribute: true
+            type: string
+        generalServiceContractorInd:
+            expose: true
+            access_type: public_method
+            serialized_name: GeneralServiceContractorInd
+            accessor:
+                getter: getGeneralServiceContractorInd
+                setter: setGeneralServiceContractorInd
+            xml_attribute: true
+            type: bool
+        grossExhibitionSpace:
+            expose: true
+            access_type: public_method
+            serialized_name: GrossExhibitionSpace
+            accessor:
+                getter: getGrossExhibitionSpace
+                setter: setGrossExhibitionSpace
+            xml_attribute: true
+            type: int
+        netExhibitionSpace:
+            expose: true
+            access_type: public_method
+            serialized_name: NetExhibitionSpace
+            accessor:
+                getter: getNetExhibitionSpace
+                setter: setNetExhibitionSpace
+            xml_attribute: true
+            type: int
+        unitOfMeasureCode:
+            expose: true
+            access_type: public_method
+            serialized_name: UnitOfMeasureCode
+            accessor:
+                getter: getUnitOfMeasureCode
+                setter: setUnitOfMeasureCode
+            xml_attribute: true
+            type: string
+        exhibitQuantity:
+            expose: true
+            access_type: public_method
+            serialized_name: ExhibitQuantity
+            accessor:
+                getter: getExhibitQuantity
+                setter: setExhibitQuantity
+            xml_attribute: true
+            type: int
+        companyQuantity:
+            expose: true
+            access_type: public_method
+            serialized_name: CompanyQuantity
+            accessor:
+                getter: getCompanyQuantity
+                setter: setCompanyQuantity
+            xml_attribute: true
+            type: int
+        securedAreaIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: SecuredAreaIndicator
+            accessor:
+                getter: getSecuredAreaIndicator
+                setter: setSecuredAreaIndicator
+            xml_attribute: true
+            type: bool
+        exhibitDetails:
+            expose: true
+            access_type: public_method
+            serialized_name: ExhibitDetails
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getExhibitDetails
+                setter: setExhibitDetails
+            type: array<OTA\EventType\EventAType\EventInfosAType\EventInfoAType\ExhibitionAType\ExhibitDetailsAType\ExhibitDetailAType>
+            xml_list:
+                inline: false
+                entry_name: ExhibitDetail
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        exhibitorInfo:
+            expose: true
+            access_type: public_method
+            serialized_name: ExhibitorInfo
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getExhibitorInfo
+                setter: setExhibitorInfo
+            type: OTA\EventType\EventAType\EventInfosAType\EventInfoAType\ExhibitionAType\ExhibitorInfoAType
+        additionalDates:
+            expose: true
+            access_type: public_method
+            serialized_name: AdditionalDates
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getAdditionalDates
+                setter: setAdditionalDates
+            type: array<OTA\EventType\EventAType\EventInfosAType\EventInfoAType\ExhibitionAType\AdditionalDatesAType\AdditionalDateAType>
+            xml_list:
+                inline: false
+                entry_name: AdditionalDate
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        comments:
+            expose: true
+            access_type: public_method
+            serialized_name: Comments
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getComments
+                setter: setComments
+            type: array<OTA\ParagraphType>
+            xml_list:
+                inline: false
+                entry_name: Comment
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'

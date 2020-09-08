@@ -1,0 +1,31 @@
+OTA\OTAAirSeatMapRQ\OTAAirSeatMapRQAType\SeatMapRequestsAType\SeatMapRequestAType:
+    properties:
+        travelerRefNumberRPHs:
+            expose: true
+            access_type: public_method
+            serialized_name: TravelerRefNumberRPHs
+            accessor:
+                getter: getTravelerRefNumberRPHs
+                setter: setTravelerRefNumberRPHs
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Jms\SimpleListOf<string>
+        flightSegmentInfo:
+            expose: true
+            access_type: public_method
+            serialized_name: FlightSegmentInfo
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getFlightSegmentInfo
+                setter: setFlightSegmentInfo
+            type: OTA\FlightSegmentType
+        seatDetails:
+            expose: true
+            access_type: public_method
+            serialized_name: SeatDetails
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getSeatDetails
+                setter: setSeatDetails
+            type: OTA\OTAAirSeatMapRQ\OTAAirSeatMapRQAType\SeatMapRequestsAType\SeatMapRequestAType\SeatDetailsAType

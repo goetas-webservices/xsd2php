@@ -1,0 +1,137 @@
+OTA\FareType:
+    properties:
+        negotiatedFare:
+            expose: true
+            access_type: public_method
+            serialized_name: NegotiatedFare
+            accessor:
+                getter: getNegotiatedFare
+                setter: setNegotiatedFare
+            xml_attribute: true
+            type: bool
+        negotiatedFareCode:
+            expose: true
+            access_type: public_method
+            serialized_name: NegotiatedFareCode
+            accessor:
+                getter: getNegotiatedFareCode
+                setter: setNegotiatedFareCode
+            xml_attribute: true
+            type: string
+        ticketDesignatorCode:
+            expose: true
+            access_type: public_method
+            serialized_name: TicketDesignatorCode
+            accessor:
+                getter: getTicketDesignatorCode
+                setter: setTicketDesignatorCode
+            xml_attribute: true
+            type: string
+        totalNbrTrips:
+            expose: true
+            access_type: public_method
+            serialized_name: TotalNbrTrips
+            accessor:
+                getter: getTotalNbrTrips
+                setter: setTotalNbrTrips
+            xml_attribute: true
+            type: int
+        totalNbrPTC:
+            expose: true
+            access_type: public_method
+            serialized_name: TotalNbrPTC
+            accessor:
+                getter: getTotalNbrPTC
+                setter: setTotalNbrPTC
+            xml_attribute: true
+            type: int
+        baseFare:
+            expose: true
+            access_type: public_method
+            serialized_name: BaseFare
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getBaseFare
+                setter: setBaseFare
+            type: OTA\FareType\BaseFareAType
+        equivFare:
+            expose: true
+            access_type: public_method
+            serialized_name: EquivFare
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getEquivFare
+                setter: setEquivFare
+            type: OTA\FareType\EquivFareAType
+        taxes:
+            expose: true
+            access_type: public_method
+            serialized_name: Taxes
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getTaxes
+                setter: setTaxes
+            type: array<OTA\AirTaxType>
+            xml_list:
+                inline: false
+                entry_name: Tax
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        fees:
+            expose: true
+            access_type: public_method
+            serialized_name: Fees
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getFees
+                setter: setFees
+            type: array<OTA\AirFeeType>
+            xml_list:
+                inline: false
+                entry_name: Fee
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        totalFare:
+            expose: true
+            access_type: public_method
+            serialized_name: TotalFare
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getTotalFare
+                setter: setTotalFare
+            type: OTA\FareType\TotalFareAType
+        fareConstruction:
+            expose: true
+            access_type: public_method
+            serialized_name: FareConstruction
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getFareConstruction
+                setter: setFareConstruction
+            type: OTA\FareType\FareConstructionAType
+        unstructuredFareCalc:
+            expose: true
+            access_type: public_method
+            serialized_name: UnstructuredFareCalc
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getUnstructuredFareCalc
+                setter: setUnstructuredFareCalc
+            type: OTA\FareType\UnstructuredFareCalcAType
+        tPAExtensions:
+            expose: true
+            access_type: public_method
+            serialized_name: TPA_Extensions
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getTPAExtensions
+                setter: setTPAExtensions
+            type: OTA\TPAExtensionsType

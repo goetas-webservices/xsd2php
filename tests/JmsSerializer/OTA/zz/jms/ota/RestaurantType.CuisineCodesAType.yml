@@ -1,0 +1,16 @@
+OTA\RestaurantType\CuisineCodesAType:
+    properties:
+        cuisineCode:
+            expose: true
+            access_type: public_method
+            serialized_name: CuisineCode
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getCuisineCode
+                setter: setCuisineCode
+            xml_list:
+                inline: true
+                entry_name: CuisineCode
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\RestaurantType\CuisineCodesAType\CuisineCodeAType>

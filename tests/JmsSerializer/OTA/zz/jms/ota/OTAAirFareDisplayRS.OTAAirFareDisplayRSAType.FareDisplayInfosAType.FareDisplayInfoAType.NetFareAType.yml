@@ -1,0 +1,110 @@
+OTA\OTAAirFareDisplayRS\OTAAirFareDisplayRSAType\FareDisplayInfosAType\FareDisplayInfoAType\NetFareAType:
+    properties:
+        minAmount:
+            expose: true
+            access_type: public_method
+            serialized_name: MinAmount
+            accessor:
+                getter: getMinAmount
+                setter: setMinAmount
+            xml_attribute: true
+            type: float
+        maxAmount:
+            expose: true
+            access_type: public_method
+            serialized_name: MaxAmount
+            accessor:
+                getter: getMaxAmount
+                setter: setMaxAmount
+            xml_attribute: true
+            type: float
+        distributorName:
+            expose: true
+            access_type: public_method
+            serialized_name: DistributorName
+            accessor:
+                getter: getDistributorName
+                setter: setDistributorName
+            xml_attribute: true
+            type: string
+        fareBasisCode:
+            expose: true
+            access_type: public_method
+            serialized_name: FareBasisCode
+            accessor:
+                getter: getFareBasisCode
+                setter: setFareBasisCode
+            xml_attribute: true
+            type: string
+        fareAmount:
+            expose: true
+            access_type: public_method
+            serialized_name: FareAmount
+            accessor:
+                getter: getFareAmount
+                setter: setFareAmount
+            xml_attribute: true
+            type: float
+        currencyCode:
+            expose: true
+            access_type: public_method
+            serialized_name: CurrencyCode
+            accessor:
+                getter: getCurrencyCode
+                setter: setCurrencyCode
+            xml_attribute: true
+            type: string
+        unlimitedAmountInd:
+            expose: true
+            access_type: public_method
+            serialized_name: UnlimitedAmountInd
+            accessor:
+                getter: getUnlimitedAmountInd
+                setter: setUnlimitedAmountInd
+            xml_attribute: true
+            type: bool
+        updateFareInd:
+            expose: true
+            access_type: public_method
+            serialized_name: UpdateFareInd
+            accessor:
+                getter: getUpdateFareInd
+                setter: setUpdateFareInd
+            xml_attribute: true
+            type: bool
+        sellInd:
+            expose: true
+            access_type: public_method
+            serialized_name: SellInd
+            accessor:
+                getter: getSellInd
+                setter: setSellInd
+            xml_attribute: true
+            type: bool
+        ticketInd:
+            expose: true
+            access_type: public_method
+            serialized_name: TicketInd
+            accessor:
+                getter: getTicketInd
+                setter: setTicketInd
+            xml_attribute: true
+            type: bool
+        viewInd:
+            expose: true
+            access_type: public_method
+            serialized_name: ViewInd
+            accessor:
+                getter: getViewInd
+                setter: setViewInd
+            xml_attribute: true
+            type: bool
+        redistributeInd:
+            expose: true
+            access_type: public_method
+            serialized_name: RedistributeInd
+            accessor:
+                getter: getRedistributeInd
+                setter: setRedistributeInd
+            xml_attribute: true
+            type: bool

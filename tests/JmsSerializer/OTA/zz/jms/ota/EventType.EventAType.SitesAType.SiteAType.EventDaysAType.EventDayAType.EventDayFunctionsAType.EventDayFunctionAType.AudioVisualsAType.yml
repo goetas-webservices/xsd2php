@@ -1,0 +1,34 @@
+OTA\EventType\EventAType\SitesAType\SiteAType\EventDaysAType\EventDayAType\EventDayFunctionsAType\EventDayFunctionAType\AudioVisualsAType:
+    properties:
+        providedBy:
+            expose: true
+            access_type: public_method
+            serialized_name: ProvidedBy
+            accessor:
+                getter: getProvidedBy
+                setter: setProvidedBy
+            xml_attribute: true
+            type: string
+        providerName:
+            expose: true
+            access_type: public_method
+            serialized_name: ProviderName
+            accessor:
+                getter: getProviderName
+                setter: setProviderName
+            xml_attribute: true
+            type: string
+        audioVisual:
+            expose: true
+            access_type: public_method
+            serialized_name: AudioVisual
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getAudioVisual
+                setter: setAudioVisual
+            xml_list:
+                inline: true
+                entry_name: AudioVisual
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\EventType\EventAType\SitesAType\SiteAType\EventDaysAType\EventDayAType\EventDayFunctionsAType\EventDayFunctionAType\AudioVisualsAType\AudioVisualAType>

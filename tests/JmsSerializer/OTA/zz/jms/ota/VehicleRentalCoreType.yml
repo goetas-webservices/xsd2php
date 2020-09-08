@@ -1,0 +1,98 @@
+OTA\VehicleRentalCoreType:
+    properties:
+        pickUpDateTime:
+            expose: true
+            access_type: public_method
+            serialized_name: PickUpDateTime
+            accessor:
+                getter: getPickUpDateTime
+                setter: setPickUpDateTime
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\DateTime
+        returnDateTime:
+            expose: true
+            access_type: public_method
+            serialized_name: ReturnDateTime
+            accessor:
+                getter: getReturnDateTime
+                setter: setReturnDateTime
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\DateTime
+        startChargesDateTime:
+            expose: true
+            access_type: public_method
+            serialized_name: StartChargesDateTime
+            accessor:
+                getter: getStartChargesDateTime
+                setter: setStartChargesDateTime
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\DateTime
+        stopChargesDateTime:
+            expose: true
+            access_type: public_method
+            serialized_name: StopChargesDateTime
+            accessor:
+                getter: getStopChargesDateTime
+                setter: setStopChargesDateTime
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\DateTime
+        oneWayIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: OneWayIndicator
+            accessor:
+                getter: getOneWayIndicator
+                setter: setOneWayIndicator
+            xml_attribute: true
+            type: bool
+        multiIslandRentalDays:
+            expose: true
+            access_type: public_method
+            serialized_name: MultiIslandRentalDays
+            accessor:
+                getter: getMultiIslandRentalDays
+                setter: setMultiIslandRentalDays
+            xml_attribute: true
+            type: int
+        quantity:
+            expose: true
+            access_type: public_method
+            serialized_name: Quantity
+            accessor:
+                getter: getQuantity
+                setter: setQuantity
+            xml_attribute: true
+            type: int
+        distUnitName:
+            expose: true
+            access_type: public_method
+            serialized_name: DistUnitName
+            accessor:
+                getter: getDistUnitName
+                setter: setDistUnitName
+            xml_attribute: true
+            type: string
+        pickUpLocation:
+            expose: true
+            access_type: public_method
+            serialized_name: PickUpLocation
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getPickUpLocation
+                setter: setPickUpLocation
+            xml_list:
+                inline: true
+                entry_name: PickUpLocation
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\VehicleRentalCoreType\PickUpLocationAType>
+        returnLocation:
+            expose: true
+            access_type: public_method
+            serialized_name: ReturnLocation
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getReturnLocation
+                setter: setReturnLocation
+            type: OTA\VehicleRentalCoreType\ReturnLocationAType

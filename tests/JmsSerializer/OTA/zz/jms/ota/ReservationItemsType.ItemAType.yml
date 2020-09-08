@@ -1,0 +1,38 @@
+OTA\ReservationItemsType\ItemAType:
+    properties:
+        itinSeqNumber:
+            expose: true
+            access_type: public_method
+            serialized_name: ItinSeqNumber
+            accessor:
+                getter: getItinSeqNumber
+                setter: setItinSeqNumber
+            xml_attribute: true
+            type: int
+        isPassive:
+            expose: true
+            access_type: public_method
+            serialized_name: IsPassive
+            accessor:
+                getter: getIsPassive
+                setter: setIsPassive
+            xml_attribute: true
+            type: bool
+        issueBoardingPass:
+            expose: true
+            access_type: public_method
+            serialized_name: IssueBoardingPass
+            accessor:
+                getter: getIssueBoardingPass
+                setter: setIssueBoardingPass
+            xml_attribute: true
+            type: bool
+        boardingPassIssued:
+            expose: true
+            access_type: public_method
+            serialized_name: BoardingPassIssued
+            accessor:
+                getter: getBoardingPassIssued
+                setter: setBoardingPassIssued
+            xml_attribute: true
+            type: bool

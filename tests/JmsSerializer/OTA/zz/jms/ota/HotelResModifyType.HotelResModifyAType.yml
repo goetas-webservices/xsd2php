@@ -1,0 +1,16 @@
+OTA\HotelResModifyType\HotelResModifyAType:
+    properties:
+        verification:
+            expose: true
+            access_type: public_method
+            serialized_name: Verification
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getVerification
+                setter: setVerification
+            xml_list:
+                inline: true
+                entry_name: Verification
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\HotelResModifyType\HotelResModifyAType\VerificationAType>

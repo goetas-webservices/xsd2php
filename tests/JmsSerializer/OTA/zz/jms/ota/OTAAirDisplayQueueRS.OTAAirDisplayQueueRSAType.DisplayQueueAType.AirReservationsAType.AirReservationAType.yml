@@ -1,0 +1,12 @@
+OTA\OTAAirDisplayQueueRS\OTAAirDisplayQueueRSAType\DisplayQueueAType\AirReservationsAType\AirReservationAType:
+    properties:
+        reason:
+            expose: true
+            access_type: public_method
+            serialized_name: Reason
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getReason
+                setter: setReason
+            type: OTA\OTAAirDisplayQueueRS\OTAAirDisplayQueueRSAType\DisplayQueueAType\AirReservationsAType\AirReservationAType\ReasonAType

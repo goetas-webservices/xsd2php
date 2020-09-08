@@ -1,0 +1,25 @@
+OTA\PoliciesType\PolicyAType\CommissionPolicyAType:
+    properties:
+        commissionApplicability:
+            expose: true
+            access_type: public_method
+            serialized_name: CommissionApplicability
+            accessor:
+                getter: getCommissionApplicability
+                setter: setCommissionApplicability
+            xml_attribute: true
+            type: string
+        paymentCompany:
+            expose: true
+            access_type: public_method
+            serialized_name: PaymentCompany
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getPaymentCompany
+                setter: setPaymentCompany
+            xml_list:
+                inline: true
+                entry_name: PaymentCompany
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\PoliciesType\PolicyAType\CommissionPolicyAType\PaymentCompanyAType>

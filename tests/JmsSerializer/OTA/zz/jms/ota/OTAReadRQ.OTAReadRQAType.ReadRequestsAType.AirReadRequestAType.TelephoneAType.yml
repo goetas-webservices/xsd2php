@@ -1,0 +1,110 @@
+OTA\OTAReadRQ\OTAReadRQAType\ReadRequestsAType\AirReadRequestAType\TelephoneAType:
+    properties:
+        shareSynchInd:
+            expose: true
+            access_type: public_method
+            serialized_name: ShareSynchInd
+            accessor:
+                getter: getShareSynchInd
+                setter: setShareSynchInd
+            xml_attribute: true
+            type: string
+        shareMarketInd:
+            expose: true
+            access_type: public_method
+            serialized_name: ShareMarketInd
+            accessor:
+                getter: getShareMarketInd
+                setter: setShareMarketInd
+            xml_attribute: true
+            type: string
+        phoneLocationType:
+            expose: true
+            access_type: public_method
+            serialized_name: PhoneLocationType
+            accessor:
+                getter: getPhoneLocationType
+                setter: setPhoneLocationType
+            xml_attribute: true
+            type: string
+        phoneTechType:
+            expose: true
+            access_type: public_method
+            serialized_name: PhoneTechType
+            accessor:
+                getter: getPhoneTechType
+                setter: setPhoneTechType
+            xml_attribute: true
+            type: string
+        phoneUseType:
+            expose: true
+            access_type: public_method
+            serialized_name: PhoneUseType
+            accessor:
+                getter: getPhoneUseType
+                setter: setPhoneUseType
+            xml_attribute: true
+            type: string
+        countryAccessCode:
+            expose: true
+            access_type: public_method
+            serialized_name: CountryAccessCode
+            accessor:
+                getter: getCountryAccessCode
+                setter: setCountryAccessCode
+            xml_attribute: true
+            type: string
+        areaCityCode:
+            expose: true
+            access_type: public_method
+            serialized_name: AreaCityCode
+            accessor:
+                getter: getAreaCityCode
+                setter: setAreaCityCode
+            xml_attribute: true
+            type: string
+        phoneNumber:
+            expose: true
+            access_type: public_method
+            serialized_name: PhoneNumber
+            accessor:
+                getter: getPhoneNumber
+                setter: setPhoneNumber
+            xml_attribute: true
+            type: string
+        extension:
+            expose: true
+            access_type: public_method
+            serialized_name: Extension
+            accessor:
+                getter: getExtension
+                setter: setExtension
+            xml_attribute: true
+            type: string
+        pIN:
+            expose: true
+            access_type: public_method
+            serialized_name: PIN
+            accessor:
+                getter: getPIN
+                setter: setPIN
+            xml_attribute: true
+            type: string
+        remark:
+            expose: true
+            access_type: public_method
+            serialized_name: Remark
+            accessor:
+                getter: getRemark
+                setter: setRemark
+            xml_attribute: true
+            type: string
+        formattedInd:
+            expose: true
+            access_type: public_method
+            serialized_name: FormattedInd
+            accessor:
+                getter: getFormattedInd
+                setter: setFormattedInd
+            xml_attribute: true
+            type: bool

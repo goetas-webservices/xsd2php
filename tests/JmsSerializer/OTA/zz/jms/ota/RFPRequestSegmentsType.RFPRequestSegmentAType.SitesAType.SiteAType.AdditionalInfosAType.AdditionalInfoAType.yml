@@ -1,0 +1,20 @@
+OTA\RFPRequestSegmentsType\RFPRequestSegmentAType\SitesAType\SiteAType\AdditionalInfosAType\AdditionalInfoAType:
+    properties:
+        addtionalInfoCode:
+            expose: true
+            access_type: public_method
+            serialized_name: AddtionalInfoCode
+            accessor:
+                getter: getAddtionalInfoCode
+                setter: setAddtionalInfoCode
+            xml_attribute: true
+            type: string
+        deliveryMethodCode:
+            expose: true
+            access_type: public_method
+            serialized_name: DeliveryMethodCode
+            accessor:
+                getter: getDeliveryMethodCode
+                setter: setDeliveryMethodCode
+            xml_attribute: true
+            type: string

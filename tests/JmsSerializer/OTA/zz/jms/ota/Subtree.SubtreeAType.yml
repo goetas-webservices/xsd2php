@@ -1,0 +1,20 @@
+OTA\Subtree\SubtreeAType:
+    properties:
+        operation:
+            expose: true
+            access_type: public_method
+            serialized_name: Operation
+            accessor:
+                getter: getOperation
+                setter: setOperation
+            xml_attribute: true
+            type: string
+        child:
+            expose: true
+            access_type: public_method
+            serialized_name: Child
+            accessor:
+                getter: getChild
+                setter: setChild
+            xml_attribute: true
+            type: string

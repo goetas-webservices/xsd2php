@@ -1,0 +1,38 @@
+OTA\BookedTrainSegmentType\CompartmentsAType\CompartmentAType:
+    properties:
+        passengerRPH:
+            expose: true
+            access_type: public_method
+            serialized_name: PassengerRPH
+            accessor:
+                getter: getPassengerRPH
+                setter: setPassengerRPH
+            xml_attribute: true
+            type: string
+        carNumber:
+            expose: true
+            access_type: public_method
+            serialized_name: CarNumber
+            accessor:
+                getter: getCarNumber
+                setter: setCarNumber
+            xml_attribute: true
+            type: int
+        roomNumber:
+            expose: true
+            access_type: public_method
+            serialized_name: RoomNumber
+            accessor:
+                getter: getRoomNumber
+                setter: setRoomNumber
+            xml_attribute: true
+            type: int
+        berthNumber:
+            expose: true
+            access_type: public_method
+            serialized_name: BerthNumber
+            accessor:
+                getter: getBerthNumber
+                setter: setBerthNumber
+            xml_attribute: true
+            type: int

@@ -1,0 +1,111 @@
+OTA\RoomStaysType\RoomStayAType:
+    properties:
+        indexNumber:
+            expose: true
+            access_type: public_method
+            serialized_name: IndexNumber
+            accessor:
+                getter: getIndexNumber
+                setter: setIndexNumber
+            xml_attribute: true
+            type: int
+        resGuestRPHs:
+            expose: true
+            access_type: public_method
+            serialized_name: ResGuestRPHs
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getResGuestRPHs
+                setter: setResGuestRPHs
+            type: array<OTA\ResGuestRPHsType\ResGuestRPHAType>
+            xml_list:
+                inline: false
+                entry_name: ResGuestRPH
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        memberships:
+            expose: true
+            access_type: public_method
+            serialized_name: Memberships
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getMemberships
+                setter: setMemberships
+            type: array<OTA\MembershipType\MembershipAType>
+            xml_list:
+                inline: false
+                entry_name: Membership
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        comments:
+            expose: true
+            access_type: public_method
+            serialized_name: Comments
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getComments
+                setter: setComments
+            type: array<OTA\CommentType\CommentAType>
+            xml_list:
+                inline: false
+                entry_name: Comment
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        specialRequests:
+            expose: true
+            access_type: public_method
+            serialized_name: SpecialRequests
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getSpecialRequests
+                setter: setSpecialRequests
+            type: array<OTA\SpecialRequestType\SpecialRequestAType>
+            xml_list:
+                inline: false
+                entry_name: SpecialRequest
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        serviceRPHs:
+            expose: true
+            access_type: public_method
+            serialized_name: ServiceRPHs
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getServiceRPHs
+                setter: setServiceRPHs
+            type: array<OTA\ServiceRPHsType\ServiceRPHAType>
+            xml_list:
+                inline: false
+                entry_name: ServiceRPH
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        reference:
+            expose: true
+            access_type: public_method
+            serialized_name: Reference
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getReference
+                setter: setReference
+            type: OTA\RoomStaysType\RoomStayAType\ReferenceAType
+        bookingRules:
+            expose: true
+            access_type: public_method
+            serialized_name: BookingRules
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getBookingRules
+                setter: setBookingRules
+            type: array<OTA\BookingRulesType\BookingRuleAType>
+            xml_list:
+                inline: false
+                entry_name: BookingRule
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'

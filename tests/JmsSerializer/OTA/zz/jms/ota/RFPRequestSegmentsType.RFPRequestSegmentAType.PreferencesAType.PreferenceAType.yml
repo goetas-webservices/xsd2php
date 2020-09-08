@@ -1,0 +1,56 @@
+OTA\RFPRequestSegmentsType\RFPRequestSegmentAType\PreferencesAType\PreferenceAType:
+    properties:
+        locationCategories:
+            expose: true
+            access_type: public_method
+            serialized_name: LocationCategories
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getLocationCategories
+                setter: setLocationCategories
+            xml_list:
+                inline: true
+                entry_name: LocationCategories
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\RFPRequestSegmentsType\RFPRequestSegmentAType\PreferencesAType\PreferenceAType\LocationCategoriesAType>
+        recreations:
+            expose: true
+            access_type: public_method
+            serialized_name: Recreations
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getRecreations
+                setter: setRecreations
+            type: array<OTA\RFPRequestSegmentsType\RFPRequestSegmentAType\PreferencesAType\PreferenceAType\RecreationsAType\RecreationAType>
+            xml_list:
+                inline: false
+                entry_name: Recreation
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        properties:
+            expose: true
+            access_type: public_method
+            serialized_name: Properties
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getProperties
+                setter: setProperties
+            type: array<OTA\RFPRequestSegmentsType\RFPRequestSegmentAType\PreferencesAType\PreferenceAType\PropertiesAType\PropertyAType>
+            xml_list:
+                inline: false
+                entry_name: Property
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        comments:
+            expose: true
+            access_type: public_method
+            serialized_name: Comments
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getComments
+                setter: setComments
+            type: OTA\ParagraphType

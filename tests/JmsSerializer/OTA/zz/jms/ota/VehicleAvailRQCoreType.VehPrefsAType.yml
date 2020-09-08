@@ -1,0 +1,16 @@
+OTA\VehicleAvailRQCoreType\VehPrefsAType:
+    properties:
+        vehPref:
+            expose: true
+            access_type: public_method
+            serialized_name: VehPref
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getVehPref
+                setter: setVehPref
+            xml_list:
+                inline: true
+                entry_name: VehPref
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\VehicleAvailRQCoreType\VehPrefsAType\VehPrefAType>

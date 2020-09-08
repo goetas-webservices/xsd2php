@@ -1,0 +1,149 @@
+OTA\AirSearchPrefsType:
+    properties:
+        smokingAllowed:
+            expose: true
+            access_type: public_method
+            serialized_name: SmokingAllowed
+            accessor:
+                getter: getSmokingAllowed
+                setter: setSmokingAllowed
+            xml_attribute: true
+            type: bool
+        onTimeRate:
+            expose: true
+            access_type: public_method
+            serialized_name: OnTimeRate
+            accessor:
+                getter: getOnTimeRate
+                setter: setOnTimeRate
+            xml_attribute: true
+            type: float
+        eTicketDesired:
+            expose: true
+            access_type: public_method
+            serialized_name: ETicketDesired
+            accessor:
+                getter: getETicketDesired
+                setter: setETicketDesired
+            xml_attribute: true
+            type: bool
+        maxStopsQuantity:
+            expose: true
+            access_type: public_method
+            serialized_name: MaxStopsQuantity
+            accessor:
+                getter: getMaxStopsQuantity
+                setter: setMaxStopsQuantity
+            xml_attribute: true
+            type: int
+        start:
+            expose: true
+            access_type: public_method
+            serialized_name: Start
+            accessor:
+                getter: getStart
+                setter: setStart
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime
+        duration:
+            expose: true
+            access_type: public_method
+            serialized_name: Duration
+            accessor:
+                getter: getDuration
+                setter: setDuration
+            xml_attribute: true
+            type: DateInterval
+        end:
+            expose: true
+            access_type: public_method
+            serialized_name: End
+            accessor:
+                getter: getEnd
+                setter: setEnd
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime
+        vendorPref:
+            expose: true
+            access_type: public_method
+            serialized_name: VendorPref
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getVendorPref
+                setter: setVendorPref
+            xml_list:
+                inline: true
+                entry_name: VendorPref
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\AirSearchPrefsType\VendorPrefAType>
+        flightTypePref:
+            expose: true
+            access_type: public_method
+            serialized_name: FlightTypePref
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getFlightTypePref
+                setter: setFlightTypePref
+            xml_list:
+                inline: true
+                entry_name: FlightTypePref
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\AirSearchPrefsType\FlightTypePrefAType>
+        fareRestrictPref:
+            expose: true
+            access_type: public_method
+            serialized_name: FareRestrictPref
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getFareRestrictPref
+                setter: setFareRestrictPref
+            xml_list:
+                inline: true
+                entry_name: FareRestrictPref
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\AirSearchPrefsType\FareRestrictPrefAType>
+        equipPref:
+            expose: true
+            access_type: public_method
+            serialized_name: EquipPref
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getEquipPref
+                setter: setEquipPref
+            xml_list:
+                inline: true
+                entry_name: EquipPref
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\EquipmentTypePrefType>
+        cabinPref:
+            expose: true
+            access_type: public_method
+            serialized_name: CabinPref
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getCabinPref
+                setter: setCabinPref
+            xml_list:
+                inline: true
+                entry_name: CabinPref
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\AirSearchPrefsType\CabinPrefAType>
+        ticketDistribPref:
+            expose: true
+            access_type: public_method
+            serialized_name: TicketDistribPref
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getTicketDistribPref
+                setter: setTicketDistribPref
+            xml_list:
+                inline: true
+                entry_name: TicketDistribPref
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\AirSearchPrefsType\TicketDistribPrefAType>

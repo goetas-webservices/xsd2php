@@ -1,0 +1,40 @@
+OTA\GuestTransportationType:
+    properties:
+        mode:
+            expose: true
+            access_type: public_method
+            serialized_name: Mode
+            accessor:
+                getter: getMode
+                setter: setMode
+            xml_attribute: true
+            type: string
+        status:
+            expose: true
+            access_type: public_method
+            serialized_name: Status
+            accessor:
+                getter: getStatus
+                setter: setStatus
+            xml_attribute: true
+            type: string
+        guestCity:
+            expose: true
+            access_type: public_method
+            serialized_name: GuestCity
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getGuestCity
+                setter: setGuestCity
+            type: OTA\LocationType
+        gatewayCity:
+            expose: true
+            access_type: public_method
+            serialized_name: GatewayCity
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getGatewayCity
+                setter: setGatewayCity
+            type: OTA\LocationType

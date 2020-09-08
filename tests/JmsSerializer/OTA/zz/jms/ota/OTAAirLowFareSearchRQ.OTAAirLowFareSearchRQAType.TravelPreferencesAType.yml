@@ -1,0 +1,47 @@
+OTA\OTAAirLowFareSearchRQ\OTAAirLowFareSearchRQAType\TravelPreferencesAType:
+    properties:
+        flexDatePref:
+            expose: true
+            access_type: public_method
+            serialized_name: FlexDatePref
+            accessor:
+                getter: getFlexDatePref
+                setter: setFlexDatePref
+            xml_attribute: true
+            type: string
+        flexWeekendIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: FlexWeekendIndicator
+            accessor:
+                getter: getFlexWeekendIndicator
+                setter: setFlexWeekendIndicator
+            xml_attribute: true
+            type: bool
+        flexLevelIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: FlexLevelIndicator
+            accessor:
+                getter: getFlexLevelIndicator
+                setter: setFlexLevelIndicator
+            xml_attribute: true
+            type: bool
+        noFareBreakIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: NoFareBreakIndicator
+            accessor:
+                getter: getNoFareBreakIndicator
+                setter: setNoFareBreakIndicator
+            xml_attribute: true
+            type: bool
+        originDestinationRPHs:
+            expose: true
+            access_type: public_method
+            serialized_name: OriginDestinationRPHs
+            accessor:
+                getter: getOriginDestinationRPHs
+                setter: setOriginDestinationRPHs
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Jms\SimpleListOf<string>

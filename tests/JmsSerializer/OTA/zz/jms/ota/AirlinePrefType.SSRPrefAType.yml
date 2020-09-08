@@ -1,0 +1,20 @@
+OTA\AirlinePrefType\SSRPrefAType:
+    properties:
+        preferLevel:
+            expose: true
+            access_type: public_method
+            serialized_name: PreferLevel
+            accessor:
+                getter: getPreferLevel
+                setter: setPreferLevel
+            xml_attribute: true
+            type: string
+        sSRCode:
+            expose: true
+            access_type: public_method
+            serialized_name: SSR_Code
+            accessor:
+                getter: getSSRCode
+                setter: setSSRCode
+            xml_attribute: true
+            type: string

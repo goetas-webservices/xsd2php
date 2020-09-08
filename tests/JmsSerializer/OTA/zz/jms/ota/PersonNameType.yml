@@ -1,0 +1,119 @@
+OTA\PersonNameType:
+    properties:
+        shareSynchInd:
+            expose: true
+            access_type: public_method
+            serialized_name: ShareSynchInd
+            accessor:
+                getter: getShareSynchInd
+                setter: setShareSynchInd
+            xml_attribute: true
+            type: string
+        shareMarketInd:
+            expose: true
+            access_type: public_method
+            serialized_name: ShareMarketInd
+            accessor:
+                getter: getShareMarketInd
+                setter: setShareMarketInd
+            xml_attribute: true
+            type: string
+        nameType:
+            expose: true
+            access_type: public_method
+            serialized_name: NameType
+            accessor:
+                getter: getNameType
+                setter: setNameType
+            xml_attribute: true
+            type: string
+        namePrefix:
+            expose: true
+            access_type: public_method
+            serialized_name: NamePrefix
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getNamePrefix
+                setter: setNamePrefix
+            xml_list:
+                inline: true
+                entry_name: NamePrefix
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<string>
+        givenName:
+            expose: true
+            access_type: public_method
+            serialized_name: GivenName
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getGivenName
+                setter: setGivenName
+            xml_list:
+                inline: true
+                entry_name: GivenName
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<string>
+        middleName:
+            expose: true
+            access_type: public_method
+            serialized_name: MiddleName
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getMiddleName
+                setter: setMiddleName
+            xml_list:
+                inline: true
+                entry_name: MiddleName
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<string>
+        surnamePrefix:
+            expose: true
+            access_type: public_method
+            serialized_name: SurnamePrefix
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getSurnamePrefix
+                setter: setSurnamePrefix
+            type: string
+        surname:
+            expose: true
+            access_type: public_method
+            serialized_name: Surname
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getSurname
+                setter: setSurname
+            type: string
+        nameSuffix:
+            expose: true
+            access_type: public_method
+            serialized_name: NameSuffix
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getNameSuffix
+                setter: setNameSuffix
+            xml_list:
+                inline: true
+                entry_name: NameSuffix
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<string>
+        nameTitle:
+            expose: true
+            access_type: public_method
+            serialized_name: NameTitle
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getNameTitle
+                setter: setNameTitle
+            xml_list:
+                inline: true
+                entry_name: NameTitle
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<string>

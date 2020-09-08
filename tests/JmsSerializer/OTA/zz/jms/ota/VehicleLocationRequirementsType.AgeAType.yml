@@ -1,0 +1,49 @@
+OTA\VehicleLocationRequirementsType\AgeAType:
+    properties:
+        minimumAge:
+            expose: true
+            access_type: public_method
+            serialized_name: MinimumAge
+            accessor:
+                getter: getMinimumAge
+                setter: setMinimumAge
+            xml_attribute: true
+            type: int
+        maximumAge:
+            expose: true
+            access_type: public_method
+            serialized_name: MaximumAge
+            accessor:
+                getter: getMaximumAge
+                setter: setMaximumAge
+            xml_attribute: true
+            type: int
+        ageSurcharge:
+            expose: true
+            access_type: public_method
+            serialized_name: AgeSurcharge
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getAgeSurcharge
+                setter: setAgeSurcharge
+            xml_list:
+                inline: true
+                entry_name: AgeSurcharge
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\VehicleLocationRequirementsType\AgeAType\AgeSurchargeAType>
+        ageInfos:
+            expose: true
+            access_type: public_method
+            serialized_name: AgeInfos
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getAgeInfos
+                setter: setAgeInfos
+            type: array<OTA\VehicleLocationRequirementsType\AgeAType\AgeInfosAType\AgeInfoAType>
+            xml_list:
+                inline: false
+                entry_name: AgeInfo
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'

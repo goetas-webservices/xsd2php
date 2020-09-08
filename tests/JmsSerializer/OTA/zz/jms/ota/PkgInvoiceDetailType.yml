@@ -1,0 +1,91 @@
+OTA\PkgInvoiceDetailType:
+    properties:
+        costingItems:
+            expose: true
+            access_type: public_method
+            serialized_name: CostingItems
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getCostingItems
+                setter: setCostingItems
+            type: array<OTA\CostingItemType>
+            xml_list:
+                inline: false
+                entry_name: CostingItem
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        grossAmount:
+            expose: true
+            access_type: public_method
+            serialized_name: GrossAmount
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getGrossAmount
+                setter: setGrossAmount
+            type: OTA\PkgInvoiceDetailType\GrossAmountAType
+        depositAmount:
+            expose: true
+            access_type: public_method
+            serialized_name: DepositAmount
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getDepositAmount
+                setter: setDepositAmount
+            type: OTA\PkgInvoiceDetailType\DepositAmountAType
+        agentCommission:
+            expose: true
+            access_type: public_method
+            serialized_name: AgentCommission
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getAgentCommission
+                setter: setAgentCommission
+            xml_list:
+                inline: true
+                entry_name: AgentCommission
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\PkgInvoiceDetailType\AgentCommissionAType>
+        netAmount:
+            expose: true
+            access_type: public_method
+            serialized_name: NetAmount
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getNetAmount
+                setter: setNetAmount
+            type: OTA\PkgInvoiceDetailType\NetAmountAType
+        taxItems:
+            expose: true
+            access_type: public_method
+            serialized_name: TaxItems
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getTaxItems
+                setter: setTaxItems
+            type: OTA\TaxesType
+        balanceDueAmount:
+            expose: true
+            access_type: public_method
+            serialized_name: BalanceDueAmount
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getBalanceDueAmount
+                setter: setBalanceDueAmount
+            type: OTA\PkgInvoiceDetailType\BalanceDueAmountAType
+        amountReceived:
+            expose: true
+            access_type: public_method
+            serialized_name: AmountReceived
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getAmountReceived
+                setter: setAmountReceived
+            type: OTA\PkgInvoiceDetailType\AmountReceivedAType

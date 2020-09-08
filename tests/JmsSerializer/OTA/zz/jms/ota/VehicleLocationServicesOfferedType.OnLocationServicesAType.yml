@@ -1,0 +1,16 @@
+OTA\VehicleLocationServicesOfferedType\OnLocationServicesAType:
+    properties:
+        onLocationService:
+            expose: true
+            access_type: public_method
+            serialized_name: OnLocationService
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getOnLocationService
+                setter: setOnLocationService
+            xml_list:
+                inline: true
+                entry_name: OnLocationService
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\VehicleLocationServicesOfferedType\OnLocationServicesAType\OnLocationServiceAType>

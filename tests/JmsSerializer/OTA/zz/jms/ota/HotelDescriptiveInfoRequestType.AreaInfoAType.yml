@@ -1,0 +1,29 @@
+OTA\HotelDescriptiveInfoRequestType\AreaInfoAType:
+    properties:
+        sendRefPoints:
+            expose: true
+            access_type: public_method
+            serialized_name: SendRefPoints
+            accessor:
+                getter: getSendRefPoints
+                setter: setSendRefPoints
+            xml_attribute: true
+            type: bool
+        sendAttractions:
+            expose: true
+            access_type: public_method
+            serialized_name: SendAttractions
+            accessor:
+                getter: getSendAttractions
+                setter: setSendAttractions
+            xml_attribute: true
+            type: bool
+        sendRecreations:
+            expose: true
+            access_type: public_method
+            serialized_name: SendRecreations
+            accessor:
+                getter: getSendRecreations
+                setter: setSendRecreations
+            xml_attribute: true
+            type: bool

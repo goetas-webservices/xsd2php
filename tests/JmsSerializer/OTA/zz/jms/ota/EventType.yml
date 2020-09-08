@@ -1,0 +1,16 @@
+OTA\EventType:
+    properties:
+        event:
+            expose: true
+            access_type: public_method
+            serialized_name: Event
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getEvent
+                setter: setEvent
+            xml_list:
+                inline: true
+                entry_name: Event
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\EventType\EventAType>

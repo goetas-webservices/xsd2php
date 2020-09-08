@@ -1,0 +1,21 @@
+OTA\AirCheckInType\PassengerInfoAType\ContactInfoAType:
+    properties:
+        optionToDecline:
+            expose: true
+            access_type: public_method
+            serialized_name: OptionToDecline
+            accessor:
+                getter: getOptionToDecline
+                setter: setOptionToDecline
+            xml_attribute: true
+            type: bool
+        relationship:
+            expose: true
+            access_type: public_method
+            serialized_name: Relationship
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getRelationship
+                setter: setRelationship
+            type: string

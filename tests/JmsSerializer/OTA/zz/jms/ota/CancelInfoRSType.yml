@@ -1,0 +1,27 @@
+OTA\CancelInfoRSType:
+    properties:
+        cancelRules:
+            expose: true
+            access_type: public_method
+            serialized_name: CancelRules
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getCancelRules
+                setter: setCancelRules
+            type: array<OTA\CancelRuleType>
+            xml_list:
+                inline: false
+                entry_name: CancelRule
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        uniqueID:
+            expose: true
+            access_type: public_method
+            serialized_name: UniqueID
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getUniqueID
+                setter: setUniqueID
+            type: OTA\UniqueIDType

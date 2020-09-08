@@ -1,0 +1,11 @@
+OTA\OTAVehResRQ\OTAVehResRQAType\VehResRQInfoAType:
+    properties:
+        resStatus:
+            expose: true
+            access_type: public_method
+            serialized_name: ResStatus
+            accessor:
+                getter: getResStatus
+                setter: setResStatus
+            xml_attribute: true
+            type: string

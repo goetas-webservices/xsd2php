@@ -1,0 +1,38 @@
+OTA\OTAAirFareDisplayRS\OTAAirFareDisplayRSAType\FareDisplayInfosAType\FareDisplayInfoAType\RestrictionsAType\RestrictionAType\FlightNumberRangeAType:
+    properties:
+        airlineCode:
+            expose: true
+            access_type: public_method
+            serialized_name: AirlineCode
+            accessor:
+                getter: getAirlineCode
+                setter: setAirlineCode
+            xml_attribute: true
+            type: string
+        rangeStart:
+            expose: true
+            access_type: public_method
+            serialized_name: RangeStart
+            accessor:
+                getter: getRangeStart
+                setter: setRangeStart
+            xml_attribute: true
+            type: string
+        rangeEnd:
+            expose: true
+            access_type: public_method
+            serialized_name: RangeEnd
+            accessor:
+                getter: getRangeEnd
+                setter: setRangeEnd
+            xml_attribute: true
+            type: string
+        includeIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: IncludeIndicator
+            accessor:
+                getter: getIncludeIndicator
+                setter: setIncludeIndicator
+            xml_attribute: true
+            type: bool

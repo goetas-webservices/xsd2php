@@ -1,0 +1,56 @@
+OTA\RailFareType\PassengerLimitsAType:
+    properties:
+        minPassengers:
+            expose: true
+            access_type: public_method
+            serialized_name: MinPassengers
+            accessor:
+                getter: getMinPassengers
+                setter: setMinPassengers
+            xml_attribute: true
+            type: string
+        maxPassengers:
+            expose: true
+            access_type: public_method
+            serialized_name: MaxPassengers
+            accessor:
+                getter: getMaxPassengers
+                setter: setMaxPassengers
+            xml_attribute: true
+            type: string
+        minAdults:
+            expose: true
+            access_type: public_method
+            serialized_name: MinAdults
+            accessor:
+                getter: getMinAdults
+                setter: setMinAdults
+            xml_attribute: true
+            type: string
+        maxAdults:
+            expose: true
+            access_type: public_method
+            serialized_name: MaxAdults
+            accessor:
+                getter: getMaxAdults
+                setter: setMaxAdults
+            xml_attribute: true
+            type: string
+        minChildren:
+            expose: true
+            access_type: public_method
+            serialized_name: MinChildren
+            accessor:
+                getter: getMinChildren
+                setter: setMinChildren
+            xml_attribute: true
+            type: string
+        maxChildren:
+            expose: true
+            access_type: public_method
+            serialized_name: MaxChildren
+            accessor:
+                getter: getMaxChildren
+                setter: setMaxChildren
+            xml_attribute: true
+            type: string

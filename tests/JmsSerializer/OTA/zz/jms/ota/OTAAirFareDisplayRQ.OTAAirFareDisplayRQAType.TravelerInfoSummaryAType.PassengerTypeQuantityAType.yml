@@ -1,0 +1,12 @@
+OTA\OTAAirFareDisplayRQ\OTAAirFareDisplayRQAType\TravelerInfoSummaryAType\PassengerTypeQuantityAType:
+    properties:
+        reductionPref:
+            expose: true
+            access_type: public_method
+            serialized_name: ReductionPref
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getReductionPref
+                setter: setReductionPref
+            type: OTA\OTAAirFareDisplayRQ\OTAAirFareDisplayRQAType\TravelerInfoSummaryAType\PassengerTypeQuantityAType\ReductionPrefAType

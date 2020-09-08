@@ -1,0 +1,16 @@
+OTA\RowDetailsType\AirSeatsAType:
+    properties:
+        airSeat:
+            expose: true
+            access_type: public_method
+            serialized_name: AirSeat
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getAirSeat
+                setter: setAirSeat
+            xml_list:
+                inline: true
+                entry_name: AirSeat
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\RowDetailsType\AirSeatsAType\AirSeatAType>

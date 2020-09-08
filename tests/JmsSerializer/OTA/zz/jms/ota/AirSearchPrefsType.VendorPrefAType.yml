@@ -1,0 +1,20 @@
+OTA\AirSearchPrefsType\VendorPrefAType:
+    properties:
+        allianceAllowedInd:
+            expose: true
+            access_type: public_method
+            serialized_name: AllianceAllowedInd
+            accessor:
+                getter: getAllianceAllowedInd
+                setter: setAllianceAllowedInd
+            xml_attribute: true
+            type: bool
+        loyaltyAllowedInd:
+            expose: true
+            access_type: public_method
+            serialized_name: LoyaltyAllowedInd
+            accessor:
+                getter: getLoyaltyAllowedInd
+                setter: setLoyaltyAllowedInd
+            xml_attribute: true
+            type: bool

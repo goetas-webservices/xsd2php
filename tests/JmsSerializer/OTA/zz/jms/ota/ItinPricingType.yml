@@ -1,0 +1,40 @@
+OTA\ItinPricingType:
+    properties:
+        itemRPHList:
+            expose: true
+            access_type: public_method
+            serialized_name: ItemRPH_List
+            accessor:
+                getter: getItemRPHList
+                setter: setItemRPHList
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Jms\SimpleListOf<string>
+        associatedItemRPH:
+            expose: true
+            access_type: public_method
+            serialized_name: AssociatedItemRPH
+            accessor:
+                getter: getAssociatedItemRPH
+                setter: setAssociatedItemRPH
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Jms\SimpleListOf<string>
+        cost:
+            expose: true
+            access_type: public_method
+            serialized_name: Cost
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getCost
+                setter: setCost
+            type: OTA\ItinPricingType\CostAType
+        tPAExtensions:
+            expose: true
+            access_type: public_method
+            serialized_name: TPA_Extensions
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getTPAExtensions
+                setter: setTPAExtensions
+            type: OTA\TPAExtensionsType

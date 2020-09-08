@@ -1,0 +1,11 @@
+OTA\FareRuleResponseInfoType\AdvisoryInfoAType:
+    properties:
+        advisoryCode:
+            expose: true
+            access_type: public_method
+            serialized_name: AdvisoryCode
+            accessor:
+                getter: getAdvisoryCode
+                setter: setAdvisoryCode
+            xml_attribute: true
+            type: string

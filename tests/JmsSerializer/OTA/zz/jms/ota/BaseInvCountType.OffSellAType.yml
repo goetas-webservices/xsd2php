@@ -1,0 +1,20 @@
+OTA\BaseInvCountType\OffSellAType:
+    properties:
+        offSellValueType:
+            expose: true
+            access_type: public_method
+            serialized_name: OffSellValueType
+            accessor:
+                getter: getOffSellValueType
+                setter: setOffSellValueType
+            xml_attribute: true
+            type: string
+        offSellValue:
+            expose: true
+            access_type: public_method
+            serialized_name: OffSellValue
+            accessor:
+                getter: getOffSellValue
+                setter: setOffSellValue
+            xml_attribute: true
+            type: float

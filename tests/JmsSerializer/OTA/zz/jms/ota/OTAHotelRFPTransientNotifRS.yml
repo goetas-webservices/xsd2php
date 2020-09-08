@@ -1,0 +1,3 @@
+OTA\OTAHotelRFPTransientNotifRS:
+    xml_root_name: OTA_HotelRFP_TransientNotifRS
+    xml_root_namespace: 'http://www.opentravel.org/OTA/2003/05'

@@ -1,0 +1,46 @@
+OTA\StationDetailsType:
+    properties:
+        details:
+            expose: true
+            access_type: public_method
+            serialized_name: Details
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getDetails
+                setter: setDetails
+            type: OTA\StationType
+        operationSchedules:
+            expose: true
+            access_type: public_method
+            serialized_name: OperationSchedules
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getOperationSchedules
+                setter: setOperationSchedules
+            type: OTA\OperationSchedulesType
+        address:
+            expose: true
+            access_type: public_method
+            serialized_name: Address
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getAddress
+                setter: setAddress
+            type: OTA\AddressType
+        telephone:
+            expose: true
+            access_type: public_method
+            serialized_name: Telephone
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getTelephone
+                setter: setTelephone
+            xml_list:
+                inline: true
+                entry_name: Telephone
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\StationDetailsType\TelephoneAType>

@@ -1,0 +1,41 @@
+OTA\FacilityInfoType:
+    properties:
+        lastUpdated:
+            expose: true
+            access_type: public_method
+            serialized_name: LastUpdated
+            accessor:
+                getter: getLastUpdated
+                setter: setLastUpdated
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\DateTime
+        meetingRooms:
+            expose: true
+            access_type: public_method
+            serialized_name: MeetingRooms
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getMeetingRooms
+                setter: setMeetingRooms
+            type: OTA\FacilityInfoType\MeetingRoomsAType
+        guestRooms:
+            expose: true
+            access_type: public_method
+            serialized_name: GuestRooms
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getGuestRooms
+                setter: setGuestRooms
+            type: OTA\FacilityInfoType\GuestRoomsAType
+        restaurants:
+            expose: true
+            access_type: public_method
+            serialized_name: Restaurants
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getRestaurants
+                setter: setRestaurants
+            type: OTA\RestaurantsType

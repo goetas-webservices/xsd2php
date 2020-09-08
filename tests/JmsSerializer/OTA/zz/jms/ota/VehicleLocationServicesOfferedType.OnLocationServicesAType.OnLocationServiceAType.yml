@@ -1,0 +1,46 @@
+OTA\VehicleLocationServicesOfferedType\OnLocationServicesAType\OnLocationServiceAType:
+    properties:
+        type:
+            expose: true
+            access_type: public_method
+            serialized_name: Type
+            accessor:
+                getter: getType
+                setter: setType
+            xml_attribute: true
+            type: string
+        onLocServiceDesc:
+            expose: true
+            access_type: public_method
+            serialized_name: OnLocServiceDesc
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getOnLocServiceDesc
+                setter: setOnLocServiceDesc
+            type: OTA\VehicleLocationServicesOfferedType\OnLocationServicesAType\OnLocationServiceAType\OnLocServiceDescAType
+        operationSchedules:
+            expose: true
+            access_type: public_method
+            serialized_name: OperationSchedules
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getOperationSchedules
+                setter: setOperationSchedules
+            type: OTA\OperationSchedulesType
+        onLocServiceCharges:
+            expose: true
+            access_type: public_method
+            serialized_name: OnLocServiceCharges
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getOnLocServiceCharges
+                setter: setOnLocServiceCharges
+            type: array<OTA\VehicleLocationServicesOfferedType\OnLocationServicesAType\OnLocationServiceAType\OnLocServiceChargesAType\OnLocServiceChargeAType>
+            xml_list:
+                inline: false
+                entry_name: OnLocServiceCharge
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'

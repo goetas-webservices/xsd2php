@@ -1,0 +1,11 @@
+OTA\CruiseGuestInfoType\LinkedBookingsAType\LinkedBookingAType:
+    properties:
+        linkTypeCode:
+            expose: true
+            access_type: public_method
+            serialized_name: LinkTypeCode
+            accessor:
+                getter: getLinkTypeCode
+                setter: setLinkTypeCode
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Jms\SimpleListOf<string>

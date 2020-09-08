@@ -1,0 +1,16 @@
+OTA\PTCFareBreakdownType\TicketDesignatorsAType:
+    properties:
+        ticketDesignator:
+            expose: true
+            access_type: public_method
+            serialized_name: TicketDesignator
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getTicketDesignator
+                setter: setTicketDesignator
+            xml_list:
+                inline: true
+                entry_name: TicketDesignator
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\PTCFareBreakdownType\TicketDesignatorsAType\TicketDesignatorAType>

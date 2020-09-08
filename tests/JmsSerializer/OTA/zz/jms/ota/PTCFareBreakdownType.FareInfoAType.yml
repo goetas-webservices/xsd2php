@@ -1,0 +1,12 @@
+OTA\PTCFareBreakdownType\FareInfoAType:
+    properties:
+        passengerFare:
+            expose: true
+            access_type: public_method
+            serialized_name: PassengerFare
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getPassengerFare
+                setter: setPassengerFare
+            type: OTA\FareType

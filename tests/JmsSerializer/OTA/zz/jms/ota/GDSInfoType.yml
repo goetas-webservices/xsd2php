@@ -1,0 +1,21 @@
+OTA\GDSInfoType:
+    properties:
+        masterChainCode:
+            expose: true
+            access_type: public_method
+            serialized_name: MasterChainCode
+            accessor:
+                getter: getMasterChainCode
+                setter: setMasterChainCode
+            xml_attribute: true
+            type: string
+        gDSCodes:
+            expose: true
+            access_type: public_method
+            serialized_name: GDS_Codes
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getGDSCodes
+                setter: setGDSCodes
+            type: OTA\GDSInfoType\GDSCodesAType

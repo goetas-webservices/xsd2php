@@ -1,0 +1,76 @@
+OTA\OTAResRetrieveRS\OTAResRetrieveRSAType\ReservationsListAType\GolfReservationAType:
+    properties:
+        iD:
+            expose: true
+            access_type: public_method
+            serialized_name: ID
+            accessor:
+                getter: getID
+                setter: setID
+            xml_attribute: true
+            type: string
+        roundID:
+            expose: true
+            access_type: public_method
+            serialized_name: RoundID
+            accessor:
+                getter: getRoundID
+                setter: setRoundID
+            xml_attribute: true
+            type: int
+        playDateTime:
+            expose: true
+            access_type: public_method
+            serialized_name: PlayDateTime
+            accessor:
+                getter: getPlayDateTime
+                setter: setPlayDateTime
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime
+        packageID:
+            expose: true
+            access_type: public_method
+            serialized_name: PackageID
+            accessor:
+                getter: getPackageID
+                setter: setPackageID
+            xml_attribute: true
+            type: string
+        requestorResID:
+            expose: true
+            access_type: public_method
+            serialized_name: RequestorResID
+            accessor:
+                getter: getRequestorResID
+                setter: setRequestorResID
+            xml_attribute: true
+            type: string
+        responderResConfID:
+            expose: true
+            access_type: public_method
+            serialized_name: ResponderResConfID
+            accessor:
+                getter: getResponderResConfID
+                setter: setResponderResConfID
+            xml_attribute: true
+            type: string
+        membership:
+            expose: true
+            access_type: public_method
+            serialized_name: Membership
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getMembership
+                setter: setMembership
+            type: OTA\OTAResRetrieveRS\OTAResRetrieveRSAType\ReservationsListAType\GolfReservationAType\MembershipAType
+        name:
+            expose: true
+            access_type: public_method
+            serialized_name: Name
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getName
+                setter: setName
+            type: OTA\PersonNameType

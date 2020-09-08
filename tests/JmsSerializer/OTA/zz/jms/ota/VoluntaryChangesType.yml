@@ -1,0 +1,21 @@
+OTA\VoluntaryChangesType:
+    properties:
+        volChangeInd:
+            expose: true
+            access_type: public_method
+            serialized_name: VolChangeInd
+            accessor:
+                getter: getVolChangeInd
+                setter: setVolChangeInd
+            xml_attribute: true
+            type: bool
+        penalty:
+            expose: true
+            access_type: public_method
+            serialized_name: Penalty
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getPenalty
+                setter: setPenalty
+            type: OTA\VoluntaryChangesType\PenaltyAType

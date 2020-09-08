@@ -1,0 +1,101 @@
+OTA\DOWRulesType:
+    properties:
+        mon:
+            expose: true
+            access_type: public_method
+            serialized_name: Mon
+            accessor:
+                getter: getMon
+                setter: setMon
+            xml_attribute: true
+            type: bool
+        tue:
+            expose: true
+            access_type: public_method
+            serialized_name: Tue
+            accessor:
+                getter: getTue
+                setter: setTue
+            xml_attribute: true
+            type: bool
+        weds:
+            expose: true
+            access_type: public_method
+            serialized_name: Weds
+            accessor:
+                getter: getWeds
+                setter: setWeds
+            xml_attribute: true
+            type: bool
+        thur:
+            expose: true
+            access_type: public_method
+            serialized_name: Thur
+            accessor:
+                getter: getThur
+                setter: setThur
+            xml_attribute: true
+            type: bool
+        fri:
+            expose: true
+            access_type: public_method
+            serialized_name: Fri
+            accessor:
+                getter: getFri
+                setter: setFri
+            xml_attribute: true
+            type: bool
+        sat:
+            expose: true
+            access_type: public_method
+            serialized_name: Sat
+            accessor:
+                getter: getSat
+                setter: setSat
+            xml_attribute: true
+            type: bool
+        sun:
+            expose: true
+            access_type: public_method
+            serialized_name: Sun
+            accessor:
+                getter: getSun
+                setter: setSun
+            xml_attribute: true
+            type: bool
+        dOWTypeCode:
+            expose: true
+            access_type: public_method
+            serialized_name: DOW_TypeCode
+            accessor:
+                getter: getDOWTypeCode
+                setter: setDOWTypeCode
+            xml_attribute: true
+            type: string
+        start:
+            expose: true
+            access_type: public_method
+            serialized_name: Start
+            accessor:
+                getter: getStart
+                setter: setStart
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime
+        duration:
+            expose: true
+            access_type: public_method
+            serialized_name: Duration
+            accessor:
+                getter: getDuration
+                setter: setDuration
+            xml_attribute: true
+            type: DateInterval
+        end:
+            expose: true
+            access_type: public_method
+            serialized_name: End
+            accessor:
+                getter: getEnd
+                setter: setEnd
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime

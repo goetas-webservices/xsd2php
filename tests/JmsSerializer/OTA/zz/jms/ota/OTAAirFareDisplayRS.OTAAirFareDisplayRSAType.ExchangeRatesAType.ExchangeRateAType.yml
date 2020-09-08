@@ -1,0 +1,38 @@
+OTA\OTAAirFareDisplayRS\OTAAirFareDisplayRSAType\ExchangeRatesAType\ExchangeRateAType:
+    properties:
+        fromCurrency:
+            expose: true
+            access_type: public_method
+            serialized_name: FromCurrency
+            accessor:
+                getter: getFromCurrency
+                setter: setFromCurrency
+            xml_attribute: true
+            type: string
+        toCurrency:
+            expose: true
+            access_type: public_method
+            serialized_name: ToCurrency
+            accessor:
+                getter: getToCurrency
+                setter: setToCurrency
+            xml_attribute: true
+            type: string
+        rate:
+            expose: true
+            access_type: public_method
+            serialized_name: Rate
+            accessor:
+                getter: getRate
+                setter: setRate
+            xml_attribute: true
+            type: float
+        date:
+            expose: true
+            access_type: public_method
+            serialized_name: Date
+            accessor:
+                getter: getDate
+                setter: setDate
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\Date

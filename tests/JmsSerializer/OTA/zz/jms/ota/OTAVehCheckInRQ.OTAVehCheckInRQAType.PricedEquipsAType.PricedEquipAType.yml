@@ -1,0 +1,26 @@
+OTA\OTAVehCheckInRQ\OTAVehCheckInRQAType\PricedEquipsAType\PricedEquipAType:
+    properties:
+        equipment:
+            expose: true
+            access_type: public_method
+            serialized_name: Equipment
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getEquipment
+                setter: setEquipment
+            xml_list:
+                inline: true
+                entry_name: Equipment
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\OTAVehCheckInRQ\OTAVehCheckInRQAType\PricedEquipsAType\PricedEquipAType\EquipmentAType>
+        charge:
+            expose: true
+            access_type: public_method
+            serialized_name: Charge
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getCharge
+                setter: setCharge
+            type: OTA\VehicleChargeType

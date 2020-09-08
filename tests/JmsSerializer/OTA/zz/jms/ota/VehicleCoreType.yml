@@ -1,0 +1,58 @@
+OTA\VehicleCoreType:
+    properties:
+        airConditionInd:
+            expose: true
+            access_type: public_method
+            serialized_name: AirConditionInd
+            accessor:
+                getter: getAirConditionInd
+                setter: setAirConditionInd
+            xml_attribute: true
+            type: bool
+        transmissionType:
+            expose: true
+            access_type: public_method
+            serialized_name: TransmissionType
+            accessor:
+                getter: getTransmissionType
+                setter: setTransmissionType
+            xml_attribute: true
+            type: string
+        fuelType:
+            expose: true
+            access_type: public_method
+            serialized_name: FuelType
+            accessor:
+                getter: getFuelType
+                setter: setFuelType
+            xml_attribute: true
+            type: string
+        driveType:
+            expose: true
+            access_type: public_method
+            serialized_name: DriveType
+            accessor:
+                getter: getDriveType
+                setter: setDriveType
+            xml_attribute: true
+            type: string
+        vehType:
+            expose: true
+            access_type: public_method
+            serialized_name: VehType
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getVehType
+                setter: setVehType
+            type: OTA\VehicleCoreType\VehTypeAType
+        vehClass:
+            expose: true
+            access_type: public_method
+            serialized_name: VehClass
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getVehClass
+                setter: setVehClass
+            type: OTA\VehicleCoreType\VehClassAType

@@ -1,0 +1,80 @@
+OTA\VehicleReservationSummaryType:
+    properties:
+        pickUpDateTime:
+            expose: true
+            access_type: public_method
+            serialized_name: PickUpDateTime
+            accessor:
+                getter: getPickUpDateTime
+                setter: setPickUpDateTime
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\DateTime
+        returnDateTime:
+            expose: true
+            access_type: public_method
+            serialized_name: ReturnDateTime
+            accessor:
+                getter: getReturnDateTime
+                setter: setReturnDateTime
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\DateTime
+        confID:
+            expose: true
+            access_type: public_method
+            serialized_name: ConfID
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getConfID
+                setter: setConfID
+            type: OTA\UniqueIDType
+        pickUpLocation:
+            expose: true
+            access_type: public_method
+            serialized_name: PickUpLocation
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getPickUpLocation
+                setter: setPickUpLocation
+            type: OTA\LocationType
+        returnLocation:
+            expose: true
+            access_type: public_method
+            serialized_name: ReturnLocation
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getReturnLocation
+                setter: setReturnLocation
+            type: OTA\LocationType
+        personName:
+            expose: true
+            access_type: public_method
+            serialized_name: PersonName
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getPersonName
+                setter: setPersonName
+            type: OTA\PersonNameType
+        vehicle:
+            expose: true
+            access_type: public_method
+            serialized_name: Vehicle
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getVehicle
+                setter: setVehicle
+            type: OTA\VehicleType
+        tPAExtensions:
+            expose: true
+            access_type: public_method
+            serialized_name: TPA_Extensions
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getTPAExtensions
+                setter: setTPAExtensions
+            type: OTA\TPAExtensionsType

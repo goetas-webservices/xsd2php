@@ -1,0 +1,20 @@
+OTA\OTACruisePaymentRQ\OTACruisePaymentRQAType\ReservationPaymentAType\ReservationIDAType:
+    properties:
+        syncDateTime:
+            expose: true
+            access_type: public_method
+            serialized_name: SyncDateTime
+            accessor:
+                getter: getSyncDateTime
+                setter: setSyncDateTime
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\DateTime
+        status:
+            expose: true
+            access_type: public_method
+            serialized_name: Status
+            accessor:
+                getter: getStatus
+                setter: setStatus
+            xml_attribute: true
+            type: string

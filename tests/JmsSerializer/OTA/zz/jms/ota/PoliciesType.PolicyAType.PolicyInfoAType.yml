@@ -1,0 +1,111 @@
+OTA\PoliciesType\PolicyAType\PolicyInfoAType:
+    properties:
+        checkInTime:
+            expose: true
+            access_type: public_method
+            serialized_name: CheckInTime
+            accessor:
+                getter: getCheckInTime
+                setter: setCheckInTime
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime
+        checkOutTime:
+            expose: true
+            access_type: public_method
+            serialized_name: CheckOutTime
+            accessor:
+                getter: getCheckOutTime
+                setter: setCheckOutTime
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime
+        minGuestAge:
+            expose: true
+            access_type: public_method
+            serialized_name: MinGuestAge
+            accessor:
+                getter: getMinGuestAge
+                setter: setMinGuestAge
+            xml_attribute: true
+            type: int
+        minRecommendedGuestAge:
+            expose: true
+            access_type: public_method
+            serialized_name: MinRecommendedGuestAge
+            accessor:
+                getter: getMinRecommendedGuestAge
+                setter: setMinRecommendedGuestAge
+            xml_attribute: true
+            type: int
+        usualStayFreeCutoffAge:
+            expose: true
+            access_type: public_method
+            serialized_name: UsualStayFreeCutoffAge
+            accessor:
+                getter: getUsualStayFreeCutoffAge
+                setter: setUsualStayFreeCutoffAge
+            xml_attribute: true
+            type: int
+        usualStayFreeChildPerAdult:
+            expose: true
+            access_type: public_method
+            serialized_name: UsualStayFreeChildPerAdult
+            accessor:
+                getter: getUsualStayFreeChildPerAdult
+                setter: setUsualStayFreeChildPerAdult
+            xml_attribute: true
+            type: int
+        totalGuestCount:
+            expose: true
+            access_type: public_method
+            serialized_name: TotalGuestCount
+            accessor:
+                getter: getTotalGuestCount
+                setter: setTotalGuestCount
+            xml_attribute: true
+            type: int
+        defaultTaxServiceInclusive:
+            expose: true
+            access_type: public_method
+            serialized_name: DefaultTaxServiceInclusive
+            accessor:
+                getter: getDefaultTaxServiceInclusive
+                setter: setDefaultTaxServiceInclusive
+            xml_attribute: true
+            type: bool
+        kidsStayFree:
+            expose: true
+            access_type: public_method
+            serialized_name: KidsStayFree
+            accessor:
+                getter: getKidsStayFree
+                setter: setKidsStayFree
+            xml_attribute: true
+            type: bool
+        maxChildAge:
+            expose: true
+            access_type: public_method
+            serialized_name: MaxChildAge
+            accessor:
+                getter: getMaxChildAge
+                setter: setMaxChildAge
+            xml_attribute: true
+            type: int
+        internetGuaranteeRequiredInd:
+            expose: true
+            access_type: public_method
+            serialized_name: InternetGuaranteeRequiredInd
+            accessor:
+                getter: getInternetGuaranteeRequiredInd
+                setter: setInternetGuaranteeRequiredInd
+            xml_attribute: true
+            type: bool
+        description:
+            expose: true
+            access_type: public_method
+            serialized_name: Description
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getDescription
+                setter: setDescription
+            type: OTA\ParagraphType

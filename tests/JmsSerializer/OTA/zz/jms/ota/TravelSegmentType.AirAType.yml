@@ -1,0 +1,22 @@
+OTA\TravelSegmentType\AirAType:
+    properties:
+        reservation:
+            expose: true
+            access_type: public_method
+            serialized_name: Reservation
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getReservation
+                setter: setReservation
+            type: OTA\TravelSegmentType\AirAType\ReservationAType
+        detailedReservation:
+            expose: true
+            access_type: public_method
+            serialized_name: DetailedReservation
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getDetailedReservation
+                setter: setDetailedReservation
+            type: OTA\AirReservationType

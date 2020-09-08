@@ -1,0 +1,97 @@
+OTA\StayInfosType:
+    properties:
+        chainCode:
+            expose: true
+            access_type: public_method
+            serialized_name: ChainCode
+            accessor:
+                getter: getChainCode
+                setter: setChainCode
+            xml_attribute: true
+            type: string
+        brandCode:
+            expose: true
+            access_type: public_method
+            serialized_name: BrandCode
+            accessor:
+                getter: getBrandCode
+                setter: setBrandCode
+            xml_attribute: true
+            type: string
+        hotelCode:
+            expose: true
+            access_type: public_method
+            serialized_name: HotelCode
+            accessor:
+                getter: getHotelCode
+                setter: setHotelCode
+            xml_attribute: true
+            type: string
+        hotelCityCode:
+            expose: true
+            access_type: public_method
+            serialized_name: HotelCityCode
+            accessor:
+                getter: getHotelCityCode
+                setter: setHotelCityCode
+            xml_attribute: true
+            type: string
+        hotelName:
+            expose: true
+            access_type: public_method
+            serialized_name: HotelName
+            accessor:
+                getter: getHotelName
+                setter: setHotelName
+            xml_attribute: true
+            type: string
+        hotelCodeContext:
+            expose: true
+            access_type: public_method
+            serialized_name: HotelCodeContext
+            accessor:
+                getter: getHotelCodeContext
+                setter: setHotelCodeContext
+            xml_attribute: true
+            type: string
+        chainName:
+            expose: true
+            access_type: public_method
+            serialized_name: ChainName
+            accessor:
+                getter: getChainName
+                setter: setChainName
+            xml_attribute: true
+            type: string
+        brandName:
+            expose: true
+            access_type: public_method
+            serialized_name: BrandName
+            accessor:
+                getter: getBrandName
+                setter: setBrandName
+            xml_attribute: true
+            type: string
+        areaID:
+            expose: true
+            access_type: public_method
+            serialized_name: AreaID
+            accessor:
+                getter: getAreaID
+                setter: setAreaID
+            xml_attribute: true
+            type: string
+        stayInfo:
+            expose: true
+            access_type: public_method
+            serialized_name: StayInfo
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getStayInfo
+                setter: setStayInfo
+            xml_list:
+                inline: true
+                entry_name: StayInfo
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\StayInfoType>

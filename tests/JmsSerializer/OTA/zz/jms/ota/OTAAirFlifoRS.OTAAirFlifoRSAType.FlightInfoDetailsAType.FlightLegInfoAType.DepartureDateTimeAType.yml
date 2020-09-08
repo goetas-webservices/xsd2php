@@ -1,0 +1,47 @@
+OTA\OTAAirFlifoRS\OTAAirFlifoRSAType\FlightInfoDetailsAType\FlightLegInfoAType\DepartureDateTimeAType:
+    properties:
+        scheduled:
+            expose: true
+            access_type: public_method
+            serialized_name: Scheduled
+            accessor:
+                getter: getScheduled
+                setter: setScheduled
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime
+        estimated:
+            expose: true
+            access_type: public_method
+            serialized_name: Estimated
+            accessor:
+                getter: getEstimated
+                setter: setEstimated
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime
+        actual:
+            expose: true
+            access_type: public_method
+            serialized_name: Actual
+            accessor:
+                getter: getActual
+                setter: setActual
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime
+        reasonCode:
+            expose: true
+            access_type: public_method
+            serialized_name: ReasonCode
+            accessor:
+                getter: getReasonCode
+                setter: setReasonCode
+            xml_attribute: true
+            type: string
+        nextAdvisoryTime:
+            expose: true
+            access_type: public_method
+            serialized_name: NextAdvisoryTime
+            accessor:
+                getter: getNextAdvisoryTime
+                setter: setNextAdvisoryTime
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime

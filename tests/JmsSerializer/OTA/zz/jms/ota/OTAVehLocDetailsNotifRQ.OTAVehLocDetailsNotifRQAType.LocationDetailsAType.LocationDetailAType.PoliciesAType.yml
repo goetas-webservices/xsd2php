@@ -1,0 +1,16 @@
+OTA\OTAVehLocDetailsNotifRQ\OTAVehLocDetailsNotifRQAType\LocationDetailsAType\LocationDetailAType\PoliciesAType:
+    properties:
+        policy:
+            expose: true
+            access_type: public_method
+            serialized_name: Policy
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getPolicy
+                setter: setPolicy
+            xml_list:
+                inline: true
+                entry_name: Policy
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\OTAVehLocDetailsNotifRQ\OTAVehLocDetailsNotifRQAType\LocationDetailsAType\LocationDetailAType\PoliciesAType\PolicyAType>

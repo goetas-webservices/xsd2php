@@ -1,0 +1,122 @@
+OTA\VehicleLocationRequirementsType\PaymentOptionsAType:
+    properties:
+        creditCard:
+            expose: true
+            access_type: public_method
+            serialized_name: CreditCard
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getCreditCard
+                setter: setCreditCard
+            type: OTA\AcceptablePaymentCardsInfoType
+        debitCard:
+            expose: true
+            access_type: public_method
+            serialized_name: DebitCard
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getDebitCard
+                setter: setDebitCard
+            type: OTA\AcceptablePaymentCardsInfoType
+        cash:
+            expose: true
+            access_type: public_method
+            serialized_name: Cash
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getCash
+                setter: setCash
+            type: OTA\VehicleLocationRequirementsType\PaymentOptionsAType\CashAType
+        voucher:
+            expose: true
+            access_type: public_method
+            serialized_name: Voucher
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getVoucher
+                setter: setVoucher
+            type: OTA\VehicleLocationRequirementsType\PaymentOptionsAType\VoucherAType
+        bankAcct:
+            expose: true
+            access_type: public_method
+            serialized_name: BankAcct
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getBankAcct
+                setter: setBankAcct
+            type: OTA\VehicleLocationRequirementsType\PaymentOptionsAType\BankAcctAType
+        directBill:
+            expose: true
+            access_type: public_method
+            serialized_name: DirectBill
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getDirectBill
+                setter: setDirectBill
+            type: OTA\VehicleLocationRequirementsType\PaymentOptionsAType\DirectBillAType
+        loyaltyRedemption:
+            expose: true
+            access_type: public_method
+            serialized_name: LoyaltyRedemption
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getLoyaltyRedemption
+                setter: setLoyaltyRedemption
+            type: OTA\VehicleLocationRequirementsType\PaymentOptionsAType\LoyaltyRedemptionAType
+        miscChargeOrder:
+            expose: true
+            access_type: public_method
+            serialized_name: MiscChargeOrder
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getMiscChargeOrder
+                setter: setMiscChargeOrder
+            type: OTA\VehicleLocationRequirementsType\PaymentOptionsAType\MiscChargeOrderAType
+        deposit:
+            expose: true
+            access_type: public_method
+            serialized_name: Deposit
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getDeposit
+                setter: setDeposit
+            type: OTA\AcceptablePaymentCardsInfoType
+        guarantee:
+            expose: true
+            access_type: public_method
+            serialized_name: Guarantee
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getGuarantee
+                setter: setGuarantee
+            type: OTA\AcceptablePaymentCardsInfoType
+        prePayment:
+            expose: true
+            access_type: public_method
+            serialized_name: PrePayment
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getPrePayment
+                setter: setPrePayment
+            type: OTA\AcceptablePaymentCardsInfoType
+        paymentOptionsInfo:
+            expose: true
+            access_type: public_method
+            serialized_name: PaymentOptionsInfo
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getPaymentOptionsInfo
+                setter: setPaymentOptionsInfo
+            type: OTA\FormattedTextType

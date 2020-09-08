@@ -1,0 +1,57 @@
+OTA\UniqueIDType:
+    properties:
+        uRL:
+            expose: true
+            access_type: public_method
+            serialized_name: URL
+            accessor:
+                getter: getURL
+                setter: setURL
+            xml_attribute: true
+            type: string
+        type:
+            expose: true
+            access_type: public_method
+            serialized_name: Type
+            accessor:
+                getter: getType
+                setter: setType
+            xml_attribute: true
+            type: string
+        instance:
+            expose: true
+            access_type: public_method
+            serialized_name: Instance
+            accessor:
+                getter: getInstance
+                setter: setInstance
+            xml_attribute: true
+            type: string
+        iD:
+            expose: true
+            access_type: public_method
+            serialized_name: ID
+            accessor:
+                getter: getID
+                setter: setID
+            xml_attribute: true
+            type: string
+        iDContext:
+            expose: true
+            access_type: public_method
+            serialized_name: ID_Context
+            accessor:
+                getter: getIDContext
+                setter: setIDContext
+            xml_attribute: true
+            type: string
+        companyName:
+            expose: true
+            access_type: public_method
+            serialized_name: CompanyName
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getCompanyName
+                setter: setCompanyName
+            type: OTA\CompanyNameType

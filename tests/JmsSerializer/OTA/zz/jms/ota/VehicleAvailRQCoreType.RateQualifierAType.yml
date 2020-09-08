@@ -1,0 +1,74 @@
+OTA\VehicleAvailRQCoreType\RateQualifierAType:
+    properties:
+        travelPurpose:
+            expose: true
+            access_type: public_method
+            serialized_name: TravelPurpose
+            accessor:
+                getter: getTravelPurpose
+                setter: setTravelPurpose
+            xml_attribute: true
+            type: string
+        rateCategory:
+            expose: true
+            access_type: public_method
+            serialized_name: RateCategory
+            accessor:
+                getter: getRateCategory
+                setter: setRateCategory
+            xml_attribute: true
+            type: string
+        corpDiscountNmbr:
+            expose: true
+            access_type: public_method
+            serialized_name: CorpDiscountNmbr
+            accessor:
+                getter: getCorpDiscountNmbr
+                setter: setCorpDiscountNmbr
+            xml_attribute: true
+            type: string
+        promotionCode:
+            expose: true
+            access_type: public_method
+            serialized_name: PromotionCode
+            accessor:
+                getter: getPromotionCode
+                setter: setPromotionCode
+            xml_attribute: true
+            type: string
+        promotionVendorCode:
+            expose: true
+            access_type: public_method
+            serialized_name: PromotionVendorCode
+            accessor:
+                getter: getPromotionVendorCode
+                setter: setPromotionVendorCode
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Jms\SimpleListOf<string>
+        rateQualifier:
+            expose: true
+            access_type: public_method
+            serialized_name: RateQualifier
+            accessor:
+                getter: getRateQualifier
+                setter: setRateQualifier
+            xml_attribute: true
+            type: string
+        ratePeriod:
+            expose: true
+            access_type: public_method
+            serialized_name: RatePeriod
+            accessor:
+                getter: getRatePeriod
+                setter: setRatePeriod
+            xml_attribute: true
+            type: string
+        guaranteedInd:
+            expose: true
+            access_type: public_method
+            serialized_name: GuaranteedInd
+            accessor:
+                getter: getGuaranteedInd
+                setter: setGuaranteedInd
+            xml_attribute: true
+            type: bool

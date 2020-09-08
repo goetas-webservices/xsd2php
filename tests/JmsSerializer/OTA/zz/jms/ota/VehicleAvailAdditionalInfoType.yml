@@ -1,0 +1,51 @@
+OTA\VehicleAvailAdditionalInfoType:
+    properties:
+        chargeablePeriod:
+            expose: true
+            access_type: public_method
+            serialized_name: ChargeablePeriod
+            accessor:
+                getter: getChargeablePeriod
+                setter: setChargeablePeriod
+            xml_attribute: true
+            type: DateInterval
+        pricedCoverages:
+            expose: true
+            access_type: public_method
+            serialized_name: PricedCoverages
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getPricedCoverages
+                setter: setPricedCoverages
+            type: array<OTA\CoveragePricedType>
+            xml_list:
+                inline: false
+                entry_name: PricedCoverage
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        paymentRules:
+            expose: true
+            access_type: public_method
+            serialized_name: PaymentRules
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getPaymentRules
+                setter: setPaymentRules
+            type: array<OTA\MonetaryRuleType>
+            xml_list:
+                inline: false
+                entry_name: PaymentRule
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        tPAExtensions:
+            expose: true
+            access_type: public_method
+            serialized_name: TPA_Extensions
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getTPAExtensions
+                setter: setTPAExtensions
+            type: OTA\TPAExtensionsType

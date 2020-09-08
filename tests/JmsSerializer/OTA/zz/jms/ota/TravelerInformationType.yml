@@ -1,0 +1,26 @@
+OTA\TravelerInformationType:
+    properties:
+        passengerTypeQuantity:
+            expose: true
+            access_type: public_method
+            serialized_name: PassengerTypeQuantity
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getPassengerTypeQuantity
+                setter: setPassengerTypeQuantity
+            xml_list:
+                inline: true
+                entry_name: PassengerTypeQuantity
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\PassengerTypeQuantityType>
+        airTraveler:
+            expose: true
+            access_type: public_method
+            serialized_name: AirTraveler
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getAirTraveler
+                setter: setAirTraveler
+            type: OTA\AirTravelerType

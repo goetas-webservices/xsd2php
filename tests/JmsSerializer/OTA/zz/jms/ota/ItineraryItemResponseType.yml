@@ -1,0 +1,59 @@
+OTA\ItineraryItemResponseType:
+    properties:
+        itinerarySequence:
+            expose: true
+            access_type: public_method
+            serialized_name: ItinerarySequence
+            accessor:
+                getter: getItinerarySequence
+                setter: setItinerarySequence
+            xml_attribute: true
+            type: int
+        chronologicalSequence:
+            expose: true
+            access_type: public_method
+            serialized_name: ChronologicalSequence
+            accessor:
+                getter: getChronologicalSequence
+                setter: setChronologicalSequence
+            xml_attribute: true
+            type: int
+        rPH:
+            expose: true
+            access_type: public_method
+            serialized_name: RPH
+            accessor:
+                getter: getRPH
+                setter: setRPH
+            xml_attribute: true
+            type: string
+        accommodation:
+            expose: true
+            access_type: public_method
+            serialized_name: Accommodation
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getAccommodation
+                setter: setAccommodation
+            type: OTA\ItineraryItemResponseType\AccommodationAType
+        flight:
+            expose: true
+            access_type: public_method
+            serialized_name: Flight
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getFlight
+                setter: setFlight
+            type: OTA\PkgFlightSegmentType
+        rentalCar:
+            expose: true
+            access_type: public_method
+            serialized_name: RentalCar
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getRentalCar
+                setter: setRentalCar
+            type: OTA\ItineraryItemResponseType\RentalCarAType

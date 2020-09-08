@@ -1,0 +1,57 @@
+OTA\RFPRequestSegmentsType\RFPRequestSegmentAType\RoomBlockAType\StayDaysAType\StayDayAType\StayDayRoomsAType\StayDayRoomAType:
+    properties:
+        roomTypeRequirement:
+            expose: true
+            access_type: public_method
+            serialized_name: RoomTypeRequirement
+            accessor:
+                getter: getRoomTypeRequirement
+                setter: setRoomTypeRequirement
+            xml_attribute: true
+            type: string
+        numberOfUnits:
+            expose: true
+            access_type: public_method
+            serialized_name: NumberOfUnits
+            accessor:
+                getter: getNumberOfUnits
+                setter: setNumberOfUnits
+            xml_attribute: true
+            type: int
+        amount:
+            expose: true
+            access_type: public_method
+            serialized_name: Amount
+            accessor:
+                getter: getAmount
+                setter: setAmount
+            xml_attribute: true
+            type: float
+        currencyCode:
+            expose: true
+            access_type: public_method
+            serialized_name: CurrencyCode
+            accessor:
+                getter: getCurrencyCode
+                setter: setCurrencyCode
+            xml_attribute: true
+            type: string
+        decimalPlaces:
+            expose: true
+            access_type: public_method
+            serialized_name: DecimalPlaces
+            accessor:
+                getter: getDecimalPlaces
+                setter: setDecimalPlaces
+            xml_attribute: true
+            type: int
+        comment:
+            expose: true
+            access_type: public_method
+            serialized_name: Comment
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getComment
+                setter: setComment
+            type: OTA\ParagraphType

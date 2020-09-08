@@ -1,0 +1,117 @@
+OTA\EventType\EventAType\EventInfosAType\EventInfoAType:
+    properties:
+        start:
+            expose: true
+            access_type: public_method
+            serialized_name: Start
+            accessor:
+                getter: getStart
+                setter: setStart
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime
+        duration:
+            expose: true
+            access_type: public_method
+            serialized_name: Duration
+            accessor:
+                getter: getDuration
+                setter: setDuration
+            xml_attribute: true
+            type: DateInterval
+        end:
+            expose: true
+            access_type: public_method
+            serialized_name: End
+            accessor:
+                getter: getEnd
+                setter: setEnd
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime
+        additionalDates:
+            expose: true
+            access_type: public_method
+            serialized_name: AdditionalDates
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getAdditionalDates
+                setter: setAdditionalDates
+            type: array<OTA\EventType\EventAType\EventInfosAType\EventInfoAType\AdditionalDatesAType\AdditionalDateAType>
+            xml_list:
+                inline: false
+                entry_name: AdditionalDate
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        contacts:
+            expose: true
+            access_type: public_method
+            serialized_name: Contacts
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getContacts
+                setter: setContacts
+            type: array<OTA\EventType\EventAType\EventInfosAType\EventInfoAType\ContactsAType\ContactAType>
+            xml_list:
+                inline: false
+                entry_name: Contact
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        exhibition:
+            expose: true
+            access_type: public_method
+            serialized_name: Exhibition
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getExhibition
+                setter: setExhibition
+            xml_list:
+                inline: true
+                entry_name: Exhibition
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\EventType\EventAType\EventInfosAType\EventInfoAType\ExhibitionAType>
+        transportations:
+            expose: true
+            access_type: public_method
+            serialized_name: Transportations
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getTransportations
+                setter: setTransportations
+            type: array<OTA\TransportationType\TransportationAType>
+            xml_list:
+                inline: false
+                entry_name: Transportation
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        taxExemptInfo:
+            expose: true
+            access_type: public_method
+            serialized_name: TaxExemptInfo
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getTaxExemptInfo
+                setter: setTaxExemptInfo
+            xml_list:
+                inline: true
+                entry_name: TaxExemptInfo
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\EventType\EventAType\EventInfosAType\EventInfoAType\TaxExemptInfoAType>
+        comments:
+            expose: true
+            access_type: public_method
+            serialized_name: Comments
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getComments
+                setter: setComments
+            type: array<OTA\ParagraphType>
+            xml_list:
+                inline: false
+                entry_name: Comment
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'

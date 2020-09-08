@@ -1,0 +1,94 @@
+OTA\FareInfoType\FareInfoAType:
+    properties:
+        fareBasisCode:
+            expose: true
+            access_type: public_method
+            serialized_name: FareBasisCode
+            accessor:
+                getter: getFareBasisCode
+                setter: setFareBasisCode
+            xml_attribute: true
+            type: string
+        globalIndicatorCode:
+            expose: true
+            access_type: public_method
+            serialized_name: GlobalIndicatorCode
+            accessor:
+                getter: getGlobalIndicatorCode
+                setter: setGlobalIndicatorCode
+            xml_attribute: true
+            type: string
+        maximumPermittedMileage:
+            expose: true
+            access_type: public_method
+            serialized_name: MaximumPermittedMileage
+            accessor:
+                getter: getMaximumPermittedMileage
+                setter: setMaximumPermittedMileage
+            xml_attribute: true
+            type: int
+        tripType:
+            expose: true
+            access_type: public_method
+            serialized_name: TripType
+            accessor:
+                getter: getTripType
+                setter: setTripType
+            xml_attribute: true
+            type: string
+        fareType:
+            expose: true
+            access_type: public_method
+            serialized_name: FareType
+            accessor:
+                getter: getFareType
+                setter: setFareType
+            xml_attribute: true
+            type: string
+        fareStatus:
+            expose: true
+            access_type: public_method
+            serialized_name: FareStatus
+            accessor:
+                getter: getFareStatus
+                setter: setFareStatus
+            xml_attribute: true
+            type: string
+        date:
+            expose: true
+            access_type: public_method
+            serialized_name: Date
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getDate
+                setter: setDate
+            xml_list:
+                inline: true
+                entry_name: Date
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\FareInfoType\FareInfoAType\DateAType>
+        fare:
+            expose: true
+            access_type: public_method
+            serialized_name: Fare
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getFare
+                setter: setFare
+            type: OTA\FareInfoType\FareInfoAType\FareAType
+        pTC:
+            expose: true
+            access_type: public_method
+            serialized_name: PTC
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getPTC
+                setter: setPTC
+            xml_list:
+                inline: true
+                entry_name: PTC
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\FareInfoType\FareInfoAType\PTCAType>

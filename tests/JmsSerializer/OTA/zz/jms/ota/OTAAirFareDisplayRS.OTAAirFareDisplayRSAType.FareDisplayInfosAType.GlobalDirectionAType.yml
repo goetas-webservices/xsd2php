@@ -1,0 +1,29 @@
+OTA\OTAAirFareDisplayRS\OTAAirFareDisplayRSAType\FareDisplayInfosAType\GlobalDirectionAType:
+    properties:
+        globalIndicatorCode:
+            expose: true
+            access_type: public_method
+            serialized_name: GlobalIndicatorCode
+            accessor:
+                getter: getGlobalIndicatorCode
+                setter: setGlobalIndicatorCode
+            xml_attribute: true
+            type: string
+        maximumPermittedMileage:
+            expose: true
+            access_type: public_method
+            serialized_name: MaximumPermittedMileage
+            accessor:
+                getter: getMaximumPermittedMileage
+                setter: setMaximumPermittedMileage
+            xml_attribute: true
+            type: int
+        includeIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: IncludeIndicator
+            accessor:
+                getter: getIncludeIndicator
+                setter: setIncludeIndicator
+            xml_attribute: true
+            type: bool

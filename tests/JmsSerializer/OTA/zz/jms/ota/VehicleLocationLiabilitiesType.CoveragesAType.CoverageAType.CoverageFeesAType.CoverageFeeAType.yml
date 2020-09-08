@@ -1,0 +1,37 @@
+OTA\VehicleLocationLiabilitiesType\CoveragesAType\CoverageAType\CoverageFeesAType\CoverageFeeAType:
+    properties:
+        charge:
+            expose: true
+            access_type: public_method
+            serialized_name: Charge
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getCharge
+                setter: setCharge
+            type: OTA\VehicleChargeType
+        vehicles:
+            expose: true
+            access_type: public_method
+            serialized_name: Vehicles
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getVehicles
+                setter: setVehicles
+            type: array<OTA\VehicleLocationLiabilitiesType\CoveragesAType\CoverageAType\CoverageFeesAType\CoverageFeeAType\VehiclesAType\VehicleAType>
+            xml_list:
+                inline: false
+                entry_name: Vehicle
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        deductible:
+            expose: true
+            access_type: public_method
+            serialized_name: Deductible
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getDeductible
+                setter: setDeductible
+            type: OTA\VehicleLocationLiabilitiesType\CoveragesAType\CoverageAType\CoverageFeesAType\CoverageFeeAType\DeductibleAType

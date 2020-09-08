@@ -1,0 +1,88 @@
+OTA\AccommodationInfoType:
+    properties:
+        packageID:
+            expose: true
+            access_type: public_method
+            serialized_name: PackageID
+            accessor:
+                getter: getPackageID
+                setter: setPackageID
+            xml_attribute: true
+            type: string
+        minChildAge:
+            expose: true
+            access_type: public_method
+            serialized_name: MinChildAge
+            accessor:
+                getter: getMinChildAge
+                setter: setMinChildAge
+            xml_attribute: true
+            type: int
+        maxChildAge:
+            expose: true
+            access_type: public_method
+            serialized_name: MaxChildAge
+            accessor:
+                getter: getMaxChildAge
+                setter: setMaxChildAge
+            xml_attribute: true
+            type: int
+        baseMealPlan:
+            expose: true
+            access_type: public_method
+            serialized_name: BaseMealPlan
+            accessor:
+                getter: getBaseMealPlan
+                setter: setBaseMealPlan
+            xml_attribute: true
+            type: string
+        property:
+            expose: true
+            access_type: public_method
+            serialized_name: Property
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getProperty
+                setter: setProperty
+            type: OTA\PropertyIdentityType
+        resort:
+            expose: true
+            access_type: public_method
+            serialized_name: Resort
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getResort
+                setter: setResort
+            type: OTA\AccommodationInfoType\ResortAType
+        accommodationClass:
+            expose: true
+            access_type: public_method
+            serialized_name: AccommodationClass
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getAccommodationClass
+                setter: setAccommodationClass
+            type: OTA\AccommodationInfoType\AccommodationClassAType
+        sourceIdentification:
+            expose: true
+            access_type: public_method
+            serialized_name: SourceIdentification
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getSourceIdentification
+                setter: setSourceIdentification
+            type: OTA\SourceIdentificationType
+        contentInfo:
+            expose: true
+            access_type: public_method
+            serialized_name: ContentInfo
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getContentInfo
+                setter: setContentInfo
+            type: OTA\URLType

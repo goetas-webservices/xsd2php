@@ -1,0 +1,48 @@
+OTA\LengthsOfStayType\LengthOfStayAType:
+    properties:
+        time:
+            expose: true
+            access_type: public_method
+            serialized_name: Time
+            accessor:
+                getter: getTime
+                setter: setTime
+            xml_attribute: true
+            type: int
+        timeUnit:
+            expose: true
+            access_type: public_method
+            serialized_name: TimeUnit
+            accessor:
+                getter: getTimeUnit
+                setter: setTimeUnit
+            xml_attribute: true
+            type: string
+        openStatusIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: OpenStatusIndicator
+            accessor:
+                getter: getOpenStatusIndicator
+                setter: setOpenStatusIndicator
+            xml_attribute: true
+            type: bool
+        minMaxMessageType:
+            expose: true
+            access_type: public_method
+            serialized_name: MinMaxMessageType
+            accessor:
+                getter: getMinMaxMessageType
+                setter: setMinMaxMessageType
+            xml_attribute: true
+            type: string
+        lOSPattern:
+            expose: true
+            access_type: public_method
+            serialized_name: LOS_Pattern
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getLOSPattern
+                setter: setLOSPattern
+            type: OTA\LengthsOfStayType\LengthOfStayAType\LOSPatternAType

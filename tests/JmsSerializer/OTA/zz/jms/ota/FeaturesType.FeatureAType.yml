@@ -1,0 +1,95 @@
+OTA\FeaturesType\FeatureAType:
+    properties:
+        codeDetail:
+            expose: true
+            access_type: public_method
+            serialized_name: CodeDetail
+            accessor:
+                getter: getCodeDetail
+                setter: setCodeDetail
+            xml_attribute: true
+            type: string
+        removal:
+            expose: true
+            access_type: public_method
+            serialized_name: Removal
+            accessor:
+                getter: getRemoval
+                setter: setRemoval
+            xml_attribute: true
+            type: bool
+        accessibleCode:
+            expose: true
+            access_type: public_method
+            serialized_name: AccessibleCode
+            accessor:
+                getter: getAccessibleCode
+                setter: setAccessibleCode
+            xml_attribute: true
+            type: string
+        securityCode:
+            expose: true
+            access_type: public_method
+            serialized_name: SecurityCode
+            accessor:
+                getter: getSecurityCode
+                setter: setSecurityCode
+            xml_attribute: true
+            type: string
+        existsCode:
+            expose: true
+            access_type: public_method
+            serialized_name: ExistsCode
+            accessor:
+                getter: getExistsCode
+                setter: setExistsCode
+            xml_attribute: true
+            type: string
+        proximityCode:
+            expose: true
+            access_type: public_method
+            serialized_name: ProximityCode
+            accessor:
+                getter: getProximityCode
+                setter: setProximityCode
+            xml_attribute: true
+            type: string
+        iD:
+            expose: true
+            access_type: public_method
+            serialized_name: ID
+            accessor:
+                getter: getID
+                setter: setID
+            xml_attribute: true
+            type: string
+        charge:
+            expose: true
+            access_type: public_method
+            serialized_name: Charge
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getCharge
+                setter: setCharge
+            type: OTA\FeaturesType\FeatureAType\ChargeAType
+        multimediaDescriptions:
+            expose: true
+            access_type: public_method
+            serialized_name: MultimediaDescriptions
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getMultimediaDescriptions
+                setter: setMultimediaDescriptions
+            type: OTA\MultimediaDescriptionsType
+        descriptiveText:
+            expose: true
+            access_type: public_method
+            serialized_name: DescriptiveText
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getDescriptiveText
+                setter: setDescriptiveText
+            type: string

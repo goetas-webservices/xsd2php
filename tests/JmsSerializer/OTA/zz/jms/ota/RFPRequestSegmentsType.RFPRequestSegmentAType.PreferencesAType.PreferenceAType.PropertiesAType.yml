@@ -1,0 +1,16 @@
+OTA\RFPRequestSegmentsType\RFPRequestSegmentAType\PreferencesAType\PreferenceAType\PropertiesAType:
+    properties:
+        property:
+            expose: true
+            access_type: public_method
+            serialized_name: Property
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getProperty
+                setter: setProperty
+            xml_list:
+                inline: true
+                entry_name: Property
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\RFPRequestSegmentsType\RFPRequestSegmentAType\PreferencesAType\PreferenceAType\PropertiesAType\PropertyAType>

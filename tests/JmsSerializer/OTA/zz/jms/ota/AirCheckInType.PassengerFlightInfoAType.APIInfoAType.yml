@@ -1,0 +1,52 @@
+OTA\AirCheckInType\PassengerFlightInfoAType\APIInfoAType:
+    properties:
+        aPIInfoSource:
+            expose: true
+            access_type: public_method
+            serialized_name: API_InfoSource
+            accessor:
+                getter: getAPIInfoSource
+                setter: setAPIInfoSource
+            xml_attribute: true
+            type: string
+        infantInd:
+            expose: true
+            access_type: public_method
+            serialized_name: InfantInd
+            accessor:
+                getter: getInfantInd
+                setter: setInfantInd
+            xml_attribute: true
+            type: bool
+        birthStateProv:
+            expose: true
+            access_type: public_method
+            serialized_name: BirthStateProv
+            accessor:
+                getter: getBirthStateProv
+                setter: setBirthStateProv
+            xml_attribute: true
+            type: string
+        birthLocation:
+            expose: true
+            access_type: public_method
+            serialized_name: BirthLocation
+            accessor:
+                getter: getBirthLocation
+                setter: setBirthLocation
+            xml_attribute: true
+            type: string
+        address:
+            expose: true
+            access_type: public_method
+            serialized_name: Address
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getAddress
+                setter: setAddress
+            xml_list:
+                inline: true
+                entry_name: Address
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\AirCheckInType\PassengerFlightInfoAType\APIInfoAType\AddressAType>

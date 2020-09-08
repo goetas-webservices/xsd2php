@@ -1,0 +1,26 @@
+OTA\VehicleLocationAdditionalFeesType\MiscellaneousChargesAType:
+    properties:
+        miscellaneousCharge:
+            expose: true
+            access_type: public_method
+            serialized_name: MiscellaneousCharge
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getMiscellaneousCharge
+                setter: setMiscellaneousCharge
+            xml_list:
+                inline: true
+                entry_name: MiscellaneousCharge
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\VehicleLocationAdditionalFeesType\MiscellaneousChargesAType\MiscellaneousChargeAType>
+        info:
+            expose: true
+            access_type: public_method
+            serialized_name: Info
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getInfo
+                setter: setInfo
+            type: OTA\FormattedTextType

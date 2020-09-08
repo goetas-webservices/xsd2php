@@ -1,0 +1,29 @@
+OTA\OTAAirRulesRQ\OTAAirRulesRQAType\RuleReqInfoAType\SubSectionAType:
+    properties:
+        subTitle:
+            expose: true
+            access_type: public_method
+            serialized_name: SubTitle
+            accessor:
+                getter: getSubTitle
+                setter: setSubTitle
+            xml_attribute: true
+            type: string
+        subCode:
+            expose: true
+            access_type: public_method
+            serialized_name: SubCode
+            accessor:
+                getter: getSubCode
+                setter: setSubCode
+            xml_attribute: true
+            type: string
+        subSectionNumber:
+            expose: true
+            access_type: public_method
+            serialized_name: SubSectionNumber
+            accessor:
+                getter: getSubSectionNumber
+                setter: setSubSectionNumber
+            xml_attribute: true
+            type: string

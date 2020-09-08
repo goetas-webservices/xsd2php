@@ -1,0 +1,21 @@
+OTA\ProductDescriptionsType\ProductDescriptionAType:
+    properties:
+        productDescriptionRPH:
+            expose: true
+            access_type: public_method
+            serialized_name: ProductDescriptionRPH
+            accessor:
+                getter: getProductDescriptionRPH
+                setter: setProductDescriptionRPH
+            xml_attribute: true
+            type: string
+        description:
+            expose: true
+            access_type: public_method
+            serialized_name: Description
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getDescription
+                setter: setDescription
+            type: OTA\ParagraphType

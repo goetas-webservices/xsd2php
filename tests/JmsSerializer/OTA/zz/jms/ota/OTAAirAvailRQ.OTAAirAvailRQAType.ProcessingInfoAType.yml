@@ -1,0 +1,65 @@
+OTA\OTAAirAvailRQ\OTAAirAvailRQAType\ProcessingInfoAType:
+    properties:
+        targetSource:
+            expose: true
+            access_type: public_method
+            serialized_name: TargetSource
+            accessor:
+                getter: getTargetSource
+                setter: setTargetSource
+            xml_attribute: true
+            type: string
+        flightSvcInfoIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: FlightSvcInfoIndicator
+            accessor:
+                getter: getFlightSvcInfoIndicator
+                setter: setFlightSvcInfoIndicator
+            xml_attribute: true
+            type: bool
+        displayOrder:
+            expose: true
+            access_type: public_method
+            serialized_name: DisplayOrder
+            accessor:
+                getter: getDisplayOrder
+                setter: setDisplayOrder
+            xml_attribute: true
+            type: string
+        reducedDataIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: ReducedDataIndicator
+            accessor:
+                getter: getReducedDataIndicator
+                setter: setReducedDataIndicator
+            xml_attribute: true
+            type: bool
+        baseFaresOnlyIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: BaseFaresOnlyIndicator
+            accessor:
+                getter: getBaseFaresOnlyIndicator
+                setter: setBaseFaresOnlyIndicator
+            xml_attribute: true
+            type: bool
+        searchType:
+            expose: true
+            access_type: public_method
+            serialized_name: SearchType
+            accessor:
+                getter: getSearchType
+                setter: setSearchType
+            xml_attribute: true
+            type: string
+        availabilityIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: AvailabilityIndicator
+            accessor:
+                getter: getAvailabilityIndicator
+                setter: setAvailabilityIndicator
+            xml_attribute: true
+            type: bool

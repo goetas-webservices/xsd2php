@@ -1,0 +1,130 @@
+OTA\ParagraphType:
+    properties:
+        name:
+            expose: true
+            access_type: public_method
+            serialized_name: Name
+            accessor:
+                getter: getName
+                setter: setName
+            xml_attribute: true
+            type: string
+        paragraphNumber:
+            expose: true
+            access_type: public_method
+            serialized_name: ParagraphNumber
+            accessor:
+                getter: getParagraphNumber
+                setter: setParagraphNumber
+            xml_attribute: true
+            type: int
+        createDateTime:
+            expose: true
+            access_type: public_method
+            serialized_name: CreateDateTime
+            accessor:
+                getter: getCreateDateTime
+                setter: setCreateDateTime
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\DateTime
+        creatorID:
+            expose: true
+            access_type: public_method
+            serialized_name: CreatorID
+            accessor:
+                getter: getCreatorID
+                setter: setCreatorID
+            xml_attribute: true
+            type: string
+        lastModifyDateTime:
+            expose: true
+            access_type: public_method
+            serialized_name: LastModifyDateTime
+            accessor:
+                getter: getLastModifyDateTime
+                setter: setLastModifyDateTime
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\DateTime
+        lastModifierID:
+            expose: true
+            access_type: public_method
+            serialized_name: LastModifierID
+            accessor:
+                getter: getLastModifierID
+                setter: setLastModifierID
+            xml_attribute: true
+            type: string
+        purgeDate:
+            expose: true
+            access_type: public_method
+            serialized_name: PurgeDate
+            accessor:
+                getter: getPurgeDate
+                setter: setPurgeDate
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\Date
+        language:
+            expose: true
+            access_type: public_method
+            serialized_name: Language
+            accessor:
+                getter: getLanguage
+                setter: setLanguage
+            xml_attribute: true
+            type: string
+        text:
+            expose: true
+            access_type: public_method
+            serialized_name: Text
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getText
+                setter: setText
+            xml_list:
+                inline: true
+                entry_name: Text
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\FormattedTextTextType>
+        image:
+            expose: true
+            access_type: public_method
+            serialized_name: Image
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getImage
+                setter: setImage
+            xml_list:
+                inline: true
+                entry_name: Image
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<string>
+        uRL:
+            expose: true
+            access_type: public_method
+            serialized_name: URL
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getURL
+                setter: setURL
+            xml_list:
+                inline: true
+                entry_name: URL
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<string>
+        listItem:
+            expose: true
+            access_type: public_method
+            serialized_name: ListItem
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getListItem
+                setter: setListItem
+            xml_list:
+                inline: true
+                entry_name: ListItem
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\ParagraphType\ListItemAType>

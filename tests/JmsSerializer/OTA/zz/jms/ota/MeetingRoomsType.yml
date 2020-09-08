@@ -1,0 +1,124 @@
+OTA\MeetingRoomsType:
+    properties:
+        meetingRoomCount:
+            expose: true
+            access_type: public_method
+            serialized_name: MeetingRoomCount
+            accessor:
+                getter: getMeetingRoomCount
+                setter: setMeetingRoomCount
+            xml_attribute: true
+            type: int
+        smallestRoomSpace:
+            expose: true
+            access_type: public_method
+            serialized_name: SmallestRoomSpace
+            accessor:
+                getter: getSmallestRoomSpace
+                setter: setSmallestRoomSpace
+            xml_attribute: true
+            type: int
+        largestRoomSpace:
+            expose: true
+            access_type: public_method
+            serialized_name: LargestRoomSpace
+            accessor:
+                getter: getLargestRoomSpace
+                setter: setLargestRoomSpace
+            xml_attribute: true
+            type: int
+        unitOfMeasureQuantity:
+            expose: true
+            access_type: public_method
+            serialized_name: UnitOfMeasureQuantity
+            accessor:
+                getter: getUnitOfMeasureQuantity
+                setter: setUnitOfMeasureQuantity
+            xml_attribute: true
+            type: float
+        unitOfMeasure:
+            expose: true
+            access_type: public_method
+            serialized_name: UnitOfMeasure
+            accessor:
+                getter: getUnitOfMeasure
+                setter: setUnitOfMeasure
+            xml_attribute: true
+            type: string
+        unitOfMeasureCode:
+            expose: true
+            access_type: public_method
+            serialized_name: UnitOfMeasureCode
+            accessor:
+                getter: getUnitOfMeasureCode
+                setter: setUnitOfMeasureCode
+            xml_attribute: true
+            type: string
+        totalRoomSpace:
+            expose: true
+            access_type: public_method
+            serialized_name: TotalRoomSpace
+            accessor:
+                getter: getTotalRoomSpace
+                setter: setTotalRoomSpace
+            xml_attribute: true
+            type: int
+        largestSeatingCapacity:
+            expose: true
+            access_type: public_method
+            serialized_name: LargestSeatingCapacity
+            accessor:
+                getter: getLargestSeatingCapacity
+                setter: setLargestSeatingCapacity
+            xml_attribute: true
+            type: int
+        secondLargestSeatingCapacity:
+            expose: true
+            access_type: public_method
+            serialized_name: SecondLargestSeatingCapacity
+            accessor:
+                getter: getSecondLargestSeatingCapacity
+                setter: setSecondLargestSeatingCapacity
+            xml_attribute: true
+            type: int
+        smallestSeatingCapacity:
+            expose: true
+            access_type: public_method
+            serialized_name: SmallestSeatingCapacity
+            accessor:
+                getter: getSmallestSeatingCapacity
+                setter: setSmallestSeatingCapacity
+            xml_attribute: true
+            type: int
+        totalRoomSeatingCapacity:
+            expose: true
+            access_type: public_method
+            serialized_name: TotalRoomSeatingCapacity
+            accessor:
+                getter: getTotalRoomSeatingCapacity
+                setter: setTotalRoomSeatingCapacity
+            xml_attribute: true
+            type: int
+        largestRoomHeight:
+            expose: true
+            access_type: public_method
+            serialized_name: LargestRoomHeight
+            accessor:
+                getter: getLargestRoomHeight
+                setter: setLargestRoomHeight
+            xml_attribute: true
+            type: int
+        meetingRoom:
+            expose: true
+            access_type: public_method
+            serialized_name: MeetingRoom
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getMeetingRoom
+                setter: setMeetingRoom
+            xml_list:
+                inline: true
+                entry_name: MeetingRoom
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\MeetingRoomsType\MeetingRoomAType>

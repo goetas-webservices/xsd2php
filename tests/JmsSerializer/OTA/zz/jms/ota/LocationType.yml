@@ -1,0 +1,28 @@
+OTA\LocationType:
+    properties:
+        __value:
+            expose: true
+            xml_value: true
+            access_type: public_method
+            accessor:
+                getter: value
+                setter: value
+            type: string
+        locationCode:
+            expose: true
+            access_type: public_method
+            serialized_name: LocationCode
+            accessor:
+                getter: getLocationCode
+                setter: setLocationCode
+            xml_attribute: true
+            type: string
+        codeContext:
+            expose: true
+            access_type: public_method
+            serialized_name: CodeContext
+            accessor:
+                getter: getCodeContext
+                setter: setCodeContext
+            xml_attribute: true
+            type: string

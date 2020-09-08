@@ -1,0 +1,16 @@
+OTA\OTACruisePkgAvailRQ\OTACruisePkgAvailRQAType\GuestInfosAType:
+    properties:
+        guestInfo:
+            expose: true
+            access_type: public_method
+            serialized_name: GuestInfo
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getGuestInfo
+                setter: setGuestInfo
+            xml_list:
+                inline: true
+                entry_name: GuestInfo
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\OTACruisePkgAvailRQ\OTACruisePkgAvailRQAType\GuestInfosAType\GuestInfoAType>

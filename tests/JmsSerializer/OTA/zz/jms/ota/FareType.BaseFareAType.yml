@@ -1,0 +1,65 @@
+OTA\FareType\BaseFareAType:
+    properties:
+        amount:
+            expose: true
+            access_type: public_method
+            serialized_name: Amount
+            accessor:
+                getter: getAmount
+                setter: setAmount
+            xml_attribute: true
+            type: float
+        currencyCode:
+            expose: true
+            access_type: public_method
+            serialized_name: CurrencyCode
+            accessor:
+                getter: getCurrencyCode
+                setter: setCurrencyCode
+            xml_attribute: true
+            type: string
+        decimalPlaces:
+            expose: true
+            access_type: public_method
+            serialized_name: DecimalPlaces
+            accessor:
+                getter: getDecimalPlaces
+                setter: setDecimalPlaces
+            xml_attribute: true
+            type: int
+        fromCurrency:
+            expose: true
+            access_type: public_method
+            serialized_name: FromCurrency
+            accessor:
+                getter: getFromCurrency
+                setter: setFromCurrency
+            xml_attribute: true
+            type: string
+        toCurrency:
+            expose: true
+            access_type: public_method
+            serialized_name: ToCurrency
+            accessor:
+                getter: getToCurrency
+                setter: setToCurrency
+            xml_attribute: true
+            type: string
+        rate:
+            expose: true
+            access_type: public_method
+            serialized_name: Rate
+            accessor:
+                getter: getRate
+                setter: setRate
+            xml_attribute: true
+            type: float
+        date:
+            expose: true
+            access_type: public_method
+            serialized_name: Date
+            accessor:
+                getter: getDate
+                setter: setDate
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\Date

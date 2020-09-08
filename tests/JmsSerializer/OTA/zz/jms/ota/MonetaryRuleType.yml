@@ -1,0 +1,73 @@
+OTA\MonetaryRuleType:
+    properties:
+        __value:
+            expose: true
+            xml_value: true
+            access_type: public_method
+            accessor:
+                getter: value
+                setter: value
+            type: string
+        amount:
+            expose: true
+            access_type: public_method
+            serialized_name: Amount
+            accessor:
+                getter: getAmount
+                setter: setAmount
+            xml_attribute: true
+            type: float
+        currencyCode:
+            expose: true
+            access_type: public_method
+            serialized_name: CurrencyCode
+            accessor:
+                getter: getCurrencyCode
+                setter: setCurrencyCode
+            xml_attribute: true
+            type: string
+        decimalPlaces:
+            expose: true
+            access_type: public_method
+            serialized_name: DecimalPlaces
+            accessor:
+                getter: getDecimalPlaces
+                setter: setDecimalPlaces
+            xml_attribute: true
+            type: int
+        ruleType:
+            expose: true
+            access_type: public_method
+            serialized_name: RuleType
+            accessor:
+                getter: getRuleType
+                setter: setRuleType
+            xml_attribute: true
+            type: string
+        percent:
+            expose: true
+            access_type: public_method
+            serialized_name: Percent
+            accessor:
+                getter: getPercent
+                setter: setPercent
+            xml_attribute: true
+            type: float
+        dateTime:
+            expose: true
+            access_type: public_method
+            serialized_name: DateTime
+            accessor:
+                getter: getDateTime
+                setter: setDateTime
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\DateTime
+        paymentType:
+            expose: true
+            access_type: public_method
+            serialized_name: PaymentType
+            accessor:
+                getter: getPaymentType
+                setter: setPaymentType
+            xml_attribute: true
+            type: string

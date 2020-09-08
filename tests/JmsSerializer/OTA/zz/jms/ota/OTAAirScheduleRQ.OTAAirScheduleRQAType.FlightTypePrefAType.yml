@@ -1,0 +1,101 @@
+OTA\OTAAirScheduleRQ\OTAAirScheduleRQAType\FlightTypePrefAType:
+    properties:
+        preferLevel:
+            expose: true
+            access_type: public_method
+            serialized_name: PreferLevel
+            accessor:
+                getter: getPreferLevel
+                setter: setPreferLevel
+            xml_attribute: true
+            type: string
+        flightType:
+            expose: true
+            access_type: public_method
+            serialized_name: FlightType
+            accessor:
+                getter: getFlightType
+                setter: setFlightType
+            xml_attribute: true
+            type: string
+        maxConnections:
+            expose: true
+            access_type: public_method
+            serialized_name: MaxConnections
+            accessor:
+                getter: getMaxConnections
+                setter: setMaxConnections
+            xml_attribute: true
+            type: int
+        nonScheduledFltInfo:
+            expose: true
+            access_type: public_method
+            serialized_name: NonScheduledFltInfo
+            accessor:
+                getter: getNonScheduledFltInfo
+                setter: setNonScheduledFltInfo
+            xml_attribute: true
+            type: string
+        backhaulIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: BackhaulIndicator
+            accessor:
+                getter: getBackhaulIndicator
+                setter: setBackhaulIndicator
+            xml_attribute: true
+            type: bool
+        groundTransportIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: GroundTransportIndicator
+            accessor:
+                getter: getGroundTransportIndicator
+                setter: setGroundTransportIndicator
+            xml_attribute: true
+            type: bool
+        directAndNonStopOnlyInd:
+            expose: true
+            access_type: public_method
+            serialized_name: DirectAndNonStopOnlyInd
+            accessor:
+                getter: getDirectAndNonStopOnlyInd
+                setter: setDirectAndNonStopOnlyInd
+            xml_attribute: true
+            type: bool
+        nonStopsOnlyInd:
+            expose: true
+            access_type: public_method
+            serialized_name: NonStopsOnlyInd
+            accessor:
+                getter: getNonStopsOnlyInd
+                setter: setNonStopsOnlyInd
+            xml_attribute: true
+            type: bool
+        onlineConnectionsOnlyInd:
+            expose: true
+            access_type: public_method
+            serialized_name: OnlineConnectionsOnlyInd
+            accessor:
+                getter: getOnlineConnectionsOnlyInd
+                setter: setOnlineConnectionsOnlyInd
+            xml_attribute: true
+            type: bool
+        routingType:
+            expose: true
+            access_type: public_method
+            serialized_name: RoutingType
+            accessor:
+                getter: getRoutingType
+                setter: setRoutingType
+            xml_attribute: true
+            type: string
+        excludeTrainInd:
+            expose: true
+            access_type: public_method
+            serialized_name: ExcludeTrainInd
+            accessor:
+                getter: getExcludeTrainInd
+                setter: setExcludeTrainInd
+            xml_attribute: true
+            type: bool

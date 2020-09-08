@@ -1,0 +1,37 @@
+OTA\VehicleLocationLiabilitiesType:
+    properties:
+        coverages:
+            expose: true
+            access_type: public_method
+            serialized_name: Coverages
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getCoverages
+                setter: setCoverages
+            type: array<OTA\VehicleLocationLiabilitiesType\CoveragesAType\CoverageAType>
+            xml_list:
+                inline: false
+                entry_name: Coverage
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        info:
+            expose: true
+            access_type: public_method
+            serialized_name: Info
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getInfo
+                setter: setInfo
+            type: OTA\FormattedTextType
+        tPAExtensions:
+            expose: true
+            access_type: public_method
+            serialized_name: TPA_Extensions
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getTPAExtensions
+                setter: setTPAExtensions
+            type: OTA\TPAExtensionsType

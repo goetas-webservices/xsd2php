@@ -1,0 +1,53 @@
+OTA\CabinAvailType:
+    properties:
+        code:
+            expose: true
+            access_type: public_method
+            serialized_name: Code
+            accessor:
+                getter: getCode
+                setter: setCode
+            xml_attribute: true
+            type: string
+        name:
+            expose: true
+            access_type: public_method
+            serialized_name: Name
+            accessor:
+                getter: getName
+                setter: setName
+            xml_attribute: true
+            type: string
+        meal:
+            expose: true
+            access_type: public_method
+            serialized_name: Meal
+            accessor:
+                getter: getMeal
+                setter: setMeal
+            xml_attribute: true
+            type: string
+        seat:
+            expose: true
+            access_type: public_method
+            serialized_name: Seat
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getSeat
+                setter: setSeat
+            xml_list:
+                inline: true
+                entry_name: Seat
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\SeatAvailabilityType>
+        baggageAllowance:
+            expose: true
+            access_type: public_method
+            serialized_name: BaggageAllowance
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getBaggageAllowance
+                setter: setBaggageAllowance
+            type: OTA\CabinAvailType\BaggageAllowanceAType

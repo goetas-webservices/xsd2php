@@ -1,0 +1,40 @@
+OTA\OTAAirAvailRQ\OTAAirAvailRQAType\OriginDestinationInformationAType:
+    properties:
+        sameAirportInd:
+            expose: true
+            access_type: public_method
+            serialized_name: SameAirportInd
+            accessor:
+                getter: getSameAirportInd
+                setter: setSameAirportInd
+            xml_attribute: true
+            type: bool
+        rPH:
+            expose: true
+            access_type: public_method
+            serialized_name: RPH
+            accessor:
+                getter: getRPH
+                setter: setRPH
+            xml_attribute: true
+            type: string
+        specificFlightInfo:
+            expose: true
+            access_type: public_method
+            serialized_name: SpecificFlightInfo
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getSpecificFlightInfo
+                setter: setSpecificFlightInfo
+            type: OTA\SpecificFlightInfoType
+        travelPreferences:
+            expose: true
+            access_type: public_method
+            serialized_name: TravelPreferences
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getTravelPreferences
+                setter: setTravelPreferences
+            type: OTA\AirSearchPrefsType

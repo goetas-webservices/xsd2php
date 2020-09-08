@@ -1,0 +1,99 @@
+OTA\RatePlanCandidatesType\RatePlanCandidateAType:
+    properties:
+        ratePlanType:
+            expose: true
+            access_type: public_method
+            serialized_name: RatePlanType
+            accessor:
+                getter: getRatePlanType
+                setter: setRatePlanType
+            xml_attribute: true
+            type: string
+        ratePlanCode:
+            expose: true
+            access_type: public_method
+            serialized_name: RatePlanCode
+            accessor:
+                getter: getRatePlanCode
+                setter: setRatePlanCode
+            xml_attribute: true
+            type: string
+        ratePlanID:
+            expose: true
+            access_type: public_method
+            serialized_name: RatePlanID
+            accessor:
+                getter: getRatePlanID
+                setter: setRatePlanID
+            xml_attribute: true
+            type: string
+        ratePlanQualifier:
+            expose: true
+            access_type: public_method
+            serialized_name: RatePlanQualifier
+            accessor:
+                getter: getRatePlanQualifier
+                setter: setRatePlanQualifier
+            xml_attribute: true
+            type: bool
+        promotionCode:
+            expose: true
+            access_type: public_method
+            serialized_name: PromotionCode
+            accessor:
+                getter: getPromotionCode
+                setter: setPromotionCode
+            xml_attribute: true
+            type: string
+        promotionVendorCode:
+            expose: true
+            access_type: public_method
+            serialized_name: PromotionVendorCode
+            accessor:
+                getter: getPromotionVendorCode
+                setter: setPromotionVendorCode
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Jms\SimpleListOf<string>
+        ratePlanCategory:
+            expose: true
+            access_type: public_method
+            serialized_name: RatePlanCategory
+            accessor:
+                getter: getRatePlanCategory
+                setter: setRatePlanCategory
+            xml_attribute: true
+            type: string
+        rPH:
+            expose: true
+            access_type: public_method
+            serialized_name: RPH
+            accessor:
+                getter: getRPH
+                setter: setRPH
+            xml_attribute: true
+            type: string
+        hotelRefs:
+            expose: true
+            access_type: public_method
+            serialized_name: HotelRefs
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getHotelRefs
+                setter: setHotelRefs
+            type: array<OTA\RatePlanCandidatesType\RatePlanCandidateAType\HotelRefsAType\HotelRefAType>
+            xml_list:
+                inline: false
+                entry_name: HotelRef
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        mealsIncluded:
+            expose: true
+            access_type: public_method
+            serialized_name: MealsIncluded
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getMealsIncluded
+                setter: setMealsIncluded
+            type: OTA\RatePlanCandidatesType\RatePlanCandidateAType\MealsIncludedAType

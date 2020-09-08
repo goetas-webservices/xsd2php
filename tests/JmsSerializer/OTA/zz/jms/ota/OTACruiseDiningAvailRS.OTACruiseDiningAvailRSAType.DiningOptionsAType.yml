@@ -1,0 +1,16 @@
+OTA\OTACruiseDiningAvailRS\OTACruiseDiningAvailRSAType\DiningOptionsAType:
+    properties:
+        diningOption:
+            expose: true
+            access_type: public_method
+            serialized_name: DiningOption
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getDiningOption
+                setter: setDiningOption
+            xml_list:
+                inline: true
+                entry_name: DiningOption
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\OTACruiseDiningAvailRS\OTACruiseDiningAvailRSAType\DiningOptionsAType\DiningOptionAType>

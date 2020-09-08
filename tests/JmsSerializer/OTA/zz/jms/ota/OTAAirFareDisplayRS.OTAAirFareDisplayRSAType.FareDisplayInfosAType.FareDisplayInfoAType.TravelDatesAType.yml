@@ -1,0 +1,29 @@
+OTA\OTAAirFareDisplayRS\OTAAirFareDisplayRSAType\FareDisplayInfosAType\FareDisplayInfoAType\TravelDatesAType:
+    properties:
+        departureDate:
+            expose: true
+            access_type: public_method
+            serialized_name: DepartureDate
+            accessor:
+                getter: getDepartureDate
+                setter: setDepartureDate
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\Date
+        arrivalDate:
+            expose: true
+            access_type: public_method
+            serialized_name: ArrivalDate
+            accessor:
+                getter: getArrivalDate
+                setter: setArrivalDate
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\Date
+        blackoutDatesInd:
+            expose: true
+            access_type: public_method
+            serialized_name: BlackoutDatesInd
+            accessor:
+                getter: getBlackoutDatesInd
+                setter: setBlackoutDatesInd
+            xml_attribute: true
+            type: bool

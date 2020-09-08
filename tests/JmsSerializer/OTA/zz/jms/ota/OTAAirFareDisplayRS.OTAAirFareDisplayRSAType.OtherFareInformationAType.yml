@@ -1,0 +1,62 @@
+OTA\OTAAirFareDisplayRS\OTAAirFareDisplayRSAType\OtherFareInformationAType:
+    properties:
+        otherCarrierFaresExistInd:
+            expose: true
+            access_type: public_method
+            serialized_name: OtherCarrierFaresExistInd
+            accessor:
+                getter: getOtherCarrierFaresExistInd
+                setter: setOtherCarrierFaresExistInd
+            xml_attribute: true
+            type: bool
+        groupFaresExistInd:
+            expose: true
+            access_type: public_method
+            serialized_name: GroupFaresExistInd
+            accessor:
+                getter: getGroupFaresExistInd
+                setter: setGroupFaresExistInd
+            xml_attribute: true
+            type: bool
+        otherCurrencyFaresExistInd:
+            expose: true
+            access_type: public_method
+            serialized_name: OtherCurrencyFaresExistInd
+            accessor:
+                getter: getOtherCurrencyFaresExistInd
+                setter: setOtherCurrencyFaresExistInd
+            xml_attribute: true
+            type: bool
+        unsellableFaresExistInd:
+            expose: true
+            access_type: public_method
+            serialized_name: UnsellableFaresExistInd
+            accessor:
+                getter: getUnsellableFaresExistInd
+                setter: setUnsellableFaresExistInd
+            xml_attribute: true
+            type: bool
+        airportFaresExistInd:
+            expose: true
+            access_type: public_method
+            serialized_name: AirportFaresExistInd
+            accessor:
+                getter: getAirportFaresExistInd
+                setter: setAirportFaresExistInd
+            xml_attribute: true
+            type: bool
+        airlines:
+            expose: true
+            access_type: public_method
+            serialized_name: Airlines
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getAirlines
+                setter: setAirlines
+            type: array<OTA\CompanyNameType>
+            xml_list:
+                inline: false
+                entry_name: Airline
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'

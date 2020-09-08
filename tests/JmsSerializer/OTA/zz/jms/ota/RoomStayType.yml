@@ -1,0 +1,204 @@
+OTA\RoomStayType:
+    properties:
+        marketCode:
+            expose: true
+            access_type: public_method
+            serialized_name: MarketCode
+            accessor:
+                getter: getMarketCode
+                setter: setMarketCode
+            xml_attribute: true
+            type: string
+        sourceOfBusiness:
+            expose: true
+            access_type: public_method
+            serialized_name: SourceOfBusiness
+            accessor:
+                getter: getSourceOfBusiness
+                setter: setSourceOfBusiness
+            xml_attribute: true
+            type: string
+        discountCode:
+            expose: true
+            access_type: public_method
+            serialized_name: DiscountCode
+            accessor:
+                getter: getDiscountCode
+                setter: setDiscountCode
+            xml_attribute: true
+            type: string
+        promotionCode:
+            expose: true
+            access_type: public_method
+            serialized_name: PromotionCode
+            accessor:
+                getter: getPromotionCode
+                setter: setPromotionCode
+            xml_attribute: true
+            type: string
+        promotionVendorCode:
+            expose: true
+            access_type: public_method
+            serialized_name: PromotionVendorCode
+            accessor:
+                getter: getPromotionVendorCode
+                setter: setPromotionVendorCode
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Jms\SimpleListOf<string>
+        roomStayStatus:
+            expose: true
+            access_type: public_method
+            serialized_name: RoomStayStatus
+            accessor:
+                getter: getRoomStayStatus
+                setter: setRoomStayStatus
+            xml_attribute: true
+            type: string
+        warningRPH:
+            expose: true
+            access_type: public_method
+            serialized_name: WarningRPH
+            accessor:
+                getter: getWarningRPH
+                setter: setWarningRPH
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Jms\SimpleListOf<string>
+        roomTypes:
+            expose: true
+            access_type: public_method
+            serialized_name: RoomTypes
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getRoomTypes
+                setter: setRoomTypes
+            type: array<OTA\RoomTypeType>
+            xml_list:
+                inline: false
+                entry_name: RoomType
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        ratePlans:
+            expose: true
+            access_type: public_method
+            serialized_name: RatePlans
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getRatePlans
+                setter: setRatePlans
+            type: array<OTA\RatePlanType>
+            xml_list:
+                inline: false
+                entry_name: RatePlan
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        roomRates:
+            expose: true
+            access_type: public_method
+            serialized_name: RoomRates
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getRoomRates
+                setter: setRoomRates
+            type: OTA\RoomStayType\RoomRatesAType
+        guestCounts:
+            expose: true
+            access_type: public_method
+            serialized_name: GuestCounts
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getGuestCounts
+                setter: setGuestCounts
+            type: OTA\GuestCountType
+        timeSpan:
+            expose: true
+            access_type: public_method
+            serialized_name: TimeSpan
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getTimeSpan
+                setter: setTimeSpan
+            type: OTA\DateTimeSpanType
+        guarantee:
+            expose: true
+            access_type: public_method
+            serialized_name: Guarantee
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getGuarantee
+                setter: setGuarantee
+            xml_list:
+                inline: true
+                entry_name: Guarantee
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\GuaranteeType>
+        depositPayments:
+            expose: true
+            access_type: public_method
+            serialized_name: DepositPayments
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getDepositPayments
+                setter: setDepositPayments
+            type: array<OTA\RequiredPaymentsType\GuaranteePaymentAType>
+            xml_list:
+                inline: false
+                entry_name: GuaranteePayment
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        cancelPenalties:
+            expose: true
+            access_type: public_method
+            serialized_name: CancelPenalties
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getCancelPenalties
+                setter: setCancelPenalties
+            type: OTA\CancelPenaltiesType
+        discount:
+            expose: true
+            access_type: public_method
+            serialized_name: Discount
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getDiscount
+                setter: setDiscount
+            type: OTA\DiscountType
+        total:
+            expose: true
+            access_type: public_method
+            serialized_name: Total
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getTotal
+                setter: setTotal
+            type: OTA\TotalType
+        basicPropertyInfo:
+            expose: true
+            access_type: public_method
+            serialized_name: BasicPropertyInfo
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getBasicPropertyInfo
+                setter: setBasicPropertyInfo
+            type: OTA\BasicPropertyInfoType
+        tPAExtensions:
+            expose: true
+            access_type: public_method
+            serialized_name: TPA_Extensions
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getTPAExtensions
+                setter: setTPAExtensions
+            type: OTA\TPAExtensionsType

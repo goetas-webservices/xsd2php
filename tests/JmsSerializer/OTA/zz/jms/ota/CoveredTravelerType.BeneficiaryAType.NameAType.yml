@@ -1,0 +1,11 @@
+OTA\CoveredTravelerType\BeneficiaryAType\NameAType:
+    properties:
+        birthDate:
+            expose: true
+            access_type: public_method
+            serialized_name: BirthDate
+            accessor:
+                getter: getBirthDate
+                setter: setBirthDate
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\Date

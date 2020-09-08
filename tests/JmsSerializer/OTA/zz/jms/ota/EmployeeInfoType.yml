@@ -1,0 +1,46 @@
+OTA\EmployeeInfoType:
+    properties:
+        __value:
+            expose: true
+            xml_value: true
+            access_type: public_method
+            accessor:
+                getter: value
+                setter: value
+            type: string
+        employeeId:
+            expose: true
+            access_type: public_method
+            serialized_name: EmployeeId
+            accessor:
+                getter: getEmployeeId
+                setter: setEmployeeId
+            xml_attribute: true
+            type: string
+        employeeLevel:
+            expose: true
+            access_type: public_method
+            serialized_name: EmployeeLevel
+            accessor:
+                getter: getEmployeeLevel
+                setter: setEmployeeLevel
+            xml_attribute: true
+            type: string
+        employeeTitle:
+            expose: true
+            access_type: public_method
+            serialized_name: EmployeeTitle
+            accessor:
+                getter: getEmployeeTitle
+                setter: setEmployeeTitle
+            xml_attribute: true
+            type: string
+        employeeStatus:
+            expose: true
+            access_type: public_method
+            serialized_name: EmployeeStatus
+            accessor:
+                getter: getEmployeeStatus
+                setter: setEmployeeStatus
+            xml_attribute: true
+            type: string

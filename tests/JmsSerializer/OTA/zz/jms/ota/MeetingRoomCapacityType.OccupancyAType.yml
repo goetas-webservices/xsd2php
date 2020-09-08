@@ -1,0 +1,39 @@
+OTA\MeetingRoomCapacityType\OccupancyAType:
+    properties:
+        minOccupancy:
+            expose: true
+            access_type: public_method
+            serialized_name: MinOccupancy
+            accessor:
+                getter: getMinOccupancy
+                setter: setMinOccupancy
+            xml_attribute: true
+            type: int
+        maxOccupancy:
+            expose: true
+            access_type: public_method
+            serialized_name: MaxOccupancy
+            accessor:
+                getter: getMaxOccupancy
+                setter: setMaxOccupancy
+            xml_attribute: true
+            type: int
+        standardOccupancy:
+            expose: true
+            access_type: public_method
+            serialized_name: StandardOccupancy
+            accessor:
+                getter: getStandardOccupancy
+                setter: setStandardOccupancy
+            xml_attribute: true
+            type: int
+        minRoomCharge:
+            expose: true
+            access_type: public_method
+            serialized_name: MinRoomCharge
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getMinRoomCharge
+                setter: setMinRoomCharge
+            type: OTA\FeeType

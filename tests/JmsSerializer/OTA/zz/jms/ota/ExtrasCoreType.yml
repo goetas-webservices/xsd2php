@@ -1,0 +1,88 @@
+OTA\ExtrasCoreType:
+    properties:
+        rPH:
+            expose: true
+            access_type: public_method
+            serialized_name: RPH
+            accessor:
+                getter: getRPH
+                setter: setRPH
+            xml_attribute: true
+            type: string
+        code:
+            expose: true
+            access_type: public_method
+            serialized_name: Code
+            accessor:
+                getter: getCode
+                setter: setCode
+            xml_attribute: true
+            type: string
+        type:
+            expose: true
+            access_type: public_method
+            serialized_name: Type
+            accessor:
+                getter: getType
+                setter: setType
+            xml_attribute: true
+            type: string
+        quantity:
+            expose: true
+            access_type: public_method
+            serialized_name: Quantity
+            accessor:
+                getter: getQuantity
+                setter: setQuantity
+            xml_attribute: true
+            type: int
+        groupCode:
+            expose: true
+            access_type: public_method
+            serialized_name: GroupCode
+            accessor:
+                getter: getGroupCode
+                setter: setGroupCode
+            xml_attribute: true
+            type: string
+        name:
+            expose: true
+            access_type: public_method
+            serialized_name: Name
+            accessor:
+                getter: getName
+                setter: setName
+            xml_attribute: true
+            type: string
+        listOfInventoryItemRPH:
+            expose: true
+            access_type: public_method
+            serialized_name: ListOfInventoryItemRPH
+            accessor:
+                getter: getListOfInventoryItemRPH
+                setter: setListOfInventoryItemRPH
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Jms\SimpleListOf<string>
+        listofRoomRPH:
+            expose: true
+            access_type: public_method
+            serialized_name: ListofRoomRPH
+            accessor:
+                getter: getListofRoomRPH
+                setter: setListofRoomRPH
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Jms\SimpleListOf<string>
+        subCategory:
+            expose: true
+            access_type: public_method
+            serialized_name: SubCategory
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getSubCategory
+                setter: setSubCategory
+            xml_list:
+                inline: true
+                entry_name: SubCategory
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\ExtrasCoreType\SubCategoryAType>

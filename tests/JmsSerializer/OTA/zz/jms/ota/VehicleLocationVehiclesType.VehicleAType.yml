@@ -1,0 +1,43 @@
+OTA\VehicleLocationVehiclesType\VehicleAType:
+    properties:
+        isConfirmableInd:
+            expose: true
+            access_type: public_method
+            serialized_name: IsConfirmableInd
+            accessor:
+                getter: getIsConfirmableInd
+                setter: setIsConfirmableInd
+            xml_attribute: true
+            type: bool
+        distanceUnit:
+            expose: true
+            access_type: public_method
+            serialized_name: DistanceUnit
+            accessor:
+                getter: getDistanceUnit
+                setter: setDistanceUnit
+            xml_attribute: true
+            type: string
+        distancePerFuelUnit:
+            expose: true
+            access_type: public_method
+            serialized_name: DistancePerFuelUnit
+            accessor:
+                getter: getDistancePerFuelUnit
+                setter: setDistancePerFuelUnit
+            xml_attribute: true
+            type: int
+        text:
+            expose: true
+            access_type: public_method
+            serialized_name: Text
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getText
+                setter: setText
+            xml_list:
+                inline: true
+                entry_name: Text
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\FormattedTextType>

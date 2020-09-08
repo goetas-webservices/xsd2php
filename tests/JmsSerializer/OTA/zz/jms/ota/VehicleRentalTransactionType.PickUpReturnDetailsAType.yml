@@ -1,0 +1,11 @@
+OTA\VehicleRentalTransactionType\PickUpReturnDetailsAType:
+    properties:
+        expectedActualCode:
+            expose: true
+            access_type: public_method
+            serialized_name: ExpectedActualCode
+            accessor:
+                getter: getExpectedActualCode
+                setter: setExpectedActualCode
+            xml_attribute: true
+            type: string

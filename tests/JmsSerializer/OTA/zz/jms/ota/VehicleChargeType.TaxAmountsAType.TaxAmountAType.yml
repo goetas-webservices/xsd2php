@@ -1,0 +1,47 @@
+OTA\VehicleChargeType\TaxAmountsAType\TaxAmountAType:
+    properties:
+        total:
+            expose: true
+            access_type: public_method
+            serialized_name: Total
+            accessor:
+                getter: getTotal
+                setter: setTotal
+            xml_attribute: true
+            type: float
+        currencyCode:
+            expose: true
+            access_type: public_method
+            serialized_name: CurrencyCode
+            accessor:
+                getter: getCurrencyCode
+                setter: setCurrencyCode
+            xml_attribute: true
+            type: string
+        taxCode:
+            expose: true
+            access_type: public_method
+            serialized_name: TaxCode
+            accessor:
+                getter: getTaxCode
+                setter: setTaxCode
+            xml_attribute: true
+            type: string
+        percentage:
+            expose: true
+            access_type: public_method
+            serialized_name: Percentage
+            accessor:
+                getter: getPercentage
+                setter: setPercentage
+            xml_attribute: true
+            type: float
+        description:
+            expose: true
+            access_type: public_method
+            serialized_name: Description
+            accessor:
+                getter: getDescription
+                setter: setDescription
+            xml_attribute: true
+            type: string

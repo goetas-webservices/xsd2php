@@ -1,0 +1,88 @@
+OTA\PeriodPriceType:
+    properties:
+        rPH:
+            expose: true
+            access_type: public_method
+            serialized_name: RPH
+            accessor:
+                getter: getRPH
+                setter: setRPH
+            xml_attribute: true
+            type: string
+        category:
+            expose: true
+            access_type: public_method
+            serialized_name: Category
+            accessor:
+                getter: getCategory
+                setter: setCategory
+            xml_attribute: true
+            type: string
+        type:
+            expose: true
+            access_type: public_method
+            serialized_name: Type
+            accessor:
+                getter: getType
+                setter: setType
+            xml_attribute: true
+            type: string
+        durationPeriod:
+            expose: true
+            access_type: public_method
+            serialized_name: DurationPeriod
+            accessor:
+                getter: getDurationPeriod
+                setter: setDurationPeriod
+            xml_attribute: true
+            type: DateInterval
+        priceBasis:
+            expose: true
+            access_type: public_method
+            serialized_name: PriceBasis
+            accessor:
+                getter: getPriceBasis
+                setter: setPriceBasis
+            xml_attribute: true
+            type: string
+        basePeriodRPHs:
+            expose: true
+            access_type: public_method
+            serialized_name: BasePeriodRPHs
+            accessor:
+                getter: getBasePeriodRPHs
+                setter: setBasePeriodRPHs
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Jms\SimpleListOf<string>
+        guidePriceIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: GuidePriceIndicator
+            accessor:
+                getter: getGuidePriceIndicator
+                setter: setGuidePriceIndicator
+            xml_attribute: true
+            type: bool
+        maximumPeriod:
+            expose: true
+            access_type: public_method
+            serialized_name: MaximumPeriod
+            accessor:
+                getter: getMaximumPeriod
+                setter: setMaximumPeriod
+            xml_attribute: true
+            type: DateInterval
+        price:
+            expose: true
+            access_type: public_method
+            serialized_name: Price
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getPrice
+                setter: setPrice
+            xml_list:
+                inline: true
+                entry_name: Price
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\PkgPriceType>

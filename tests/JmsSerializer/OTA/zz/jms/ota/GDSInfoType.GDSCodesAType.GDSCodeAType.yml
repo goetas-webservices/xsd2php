@@ -1,0 +1,53 @@
+OTA\GDSInfoType\GDSCodesAType\GDSCodeAType:
+    properties:
+        chainCode:
+            expose: true
+            access_type: public_method
+            serialized_name: ChainCode
+            accessor:
+                getter: getChainCode
+                setter: setChainCode
+            xml_attribute: true
+            type: string
+        gDSPropertyCode:
+            expose: true
+            access_type: public_method
+            serialized_name: GDS_PropertyCode
+            accessor:
+                getter: getGDSPropertyCode
+                setter: setGDSPropertyCode
+            xml_attribute: true
+            type: string
+        gDSName:
+            expose: true
+            access_type: public_method
+            serialized_name: GDS_Name
+            accessor:
+                getter: getGDSName
+                setter: setGDSName
+            xml_attribute: true
+            type: string
+        loadGDSIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: LoadGDSIndicator
+            accessor:
+                getter: getLoadGDSIndicator
+                setter: setLoadGDSIndicator
+            xml_attribute: true
+            type: bool
+        gDSCodeDetails:
+            expose: true
+            access_type: public_method
+            serialized_name: GDS_CodeDetails
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getGDSCodeDetails
+                setter: setGDSCodeDetails
+            type: array<OTA\GDSInfoType\GDSCodesAType\GDSCodeAType\GDSCodeDetailsAType\GDSCodeDetailAType>
+            xml_list:
+                inline: false
+                entry_name: GDS_CodeDetail
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'

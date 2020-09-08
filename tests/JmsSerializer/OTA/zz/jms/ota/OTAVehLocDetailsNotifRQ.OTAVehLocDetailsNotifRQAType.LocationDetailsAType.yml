@@ -1,0 +1,25 @@
+OTA\OTAVehLocDetailsNotifRQ\OTAVehLocDetailsNotifRQAType\LocationDetailsAType:
+    properties:
+        locationQuantity:
+            expose: true
+            access_type: public_method
+            serialized_name: LocationQuantity
+            accessor:
+                getter: getLocationQuantity
+                setter: setLocationQuantity
+            xml_attribute: true
+            type: int
+        locationDetail:
+            expose: true
+            access_type: public_method
+            serialized_name: LocationDetail
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getLocationDetail
+                setter: setLocationDetail
+            xml_list:
+                inline: true
+                entry_name: LocationDetail
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\OTAVehLocDetailsNotifRQ\OTAVehLocDetailsNotifRQAType\LocationDetailsAType\LocationDetailAType>

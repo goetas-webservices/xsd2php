@@ -1,0 +1,11 @@
+OTA\MealPlanType\PassengerRPHsAType:
+    properties:
+        listOfPassengerRPH:
+            expose: true
+            access_type: public_method
+            serialized_name: ListOfPassengerRPH
+            accessor:
+                getter: getListOfPassengerRPH
+                setter: setListOfPassengerRPH
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Jms\SimpleListOf<string>

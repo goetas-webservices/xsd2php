@@ -1,0 +1,27 @@
+OTA\OTAAirDisplayQueueRS\OTAAirDisplayQueueRSAType\DisplayQueueAType:
+    properties:
+        queueItems:
+            expose: true
+            access_type: public_method
+            serialized_name: QueueItems
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getQueueItems
+                setter: setQueueItems
+            type: OTA\OTAAirDisplayQueueRS\OTAAirDisplayQueueRSAType\DisplayQueueAType\QueueItemsAType
+        airReservations:
+            expose: true
+            access_type: public_method
+            serialized_name: AirReservations
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getAirReservations
+                setter: setAirReservations
+            type: array<OTA\OTAAirDisplayQueueRS\OTAAirDisplayQueueRSAType\DisplayQueueAType\AirReservationsAType\AirReservationAType>
+            xml_list:
+                inline: false
+                entry_name: AirReservation
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'

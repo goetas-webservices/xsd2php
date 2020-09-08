@@ -1,0 +1,49 @@
+OTA\FlightLegType:
+    properties:
+        flightNumber:
+            expose: true
+            access_type: public_method
+            serialized_name: FlightNumber
+            accessor:
+                getter: getFlightNumber
+                setter: setFlightNumber
+            xml_attribute: true
+            type: string
+        resBookDesigCode:
+            expose: true
+            access_type: public_method
+            serialized_name: ResBookDesigCode
+            accessor:
+                getter: getResBookDesigCode
+                setter: setResBookDesigCode
+            xml_attribute: true
+            type: string
+        date:
+            expose: true
+            access_type: public_method
+            serialized_name: Date
+            accessor:
+                getter: getDate
+                setter: setDate
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\DateTime
+        departureAirport:
+            expose: true
+            access_type: public_method
+            serialized_name: DepartureAirport
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getDepartureAirport
+                setter: setDepartureAirport
+            type: OTA\FlightLegType\DepartureAirportAType
+        arrivalAirport:
+            expose: true
+            access_type: public_method
+            serialized_name: ArrivalAirport
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getArrivalAirport
+                setter: setArrivalAirport
+            type: OTA\FlightLegType\ArrivalAirportAType

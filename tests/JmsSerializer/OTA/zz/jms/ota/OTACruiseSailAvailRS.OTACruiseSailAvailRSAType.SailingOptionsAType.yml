@@ -1,0 +1,16 @@
+OTA\OTACruiseSailAvailRS\OTACruiseSailAvailRSAType\SailingOptionsAType:
+    properties:
+        sailingOption:
+            expose: true
+            access_type: public_method
+            serialized_name: SailingOption
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getSailingOption
+                setter: setSailingOption
+            xml_list:
+                inline: true
+                entry_name: SailingOption
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\OTACruiseSailAvailRS\OTACruiseSailAvailRSAType\SailingOptionsAType\SailingOptionAType>

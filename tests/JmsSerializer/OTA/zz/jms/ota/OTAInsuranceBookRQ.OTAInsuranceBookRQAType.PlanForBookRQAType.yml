@@ -1,0 +1,32 @@
+OTA\OTAInsuranceBookRQ\OTAInsuranceBookRQAType\PlanForBookRQAType:
+    properties:
+        insuranceCustomer:
+            expose: true
+            access_type: public_method
+            serialized_name: InsuranceCustomer
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getInsuranceCustomer
+                setter: setInsuranceCustomer
+            type: OTA\InsuranceCustomerType
+        planCost:
+            expose: true
+            access_type: public_method
+            serialized_name: PlanCost
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getPlanCost
+                setter: setPlanCost
+            type: OTA\PlanCostType
+        uniqueID:
+            expose: true
+            access_type: public_method
+            serialized_name: UniqueID
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getUniqueID
+                setter: setUniqueID
+            type: OTA\UniqueIDType

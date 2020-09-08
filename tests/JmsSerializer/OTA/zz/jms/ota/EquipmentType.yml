@@ -1,0 +1,28 @@
+OTA\EquipmentType:
+    properties:
+        __value:
+            expose: true
+            xml_value: true
+            access_type: public_method
+            accessor:
+                getter: value
+                setter: value
+            type: string
+        airEquipType:
+            expose: true
+            access_type: public_method
+            serialized_name: AirEquipType
+            accessor:
+                getter: getAirEquipType
+                setter: setAirEquipType
+            xml_attribute: true
+            type: string
+        changeofGauge:
+            expose: true
+            access_type: public_method
+            serialized_name: ChangeofGauge
+            accessor:
+                getter: getChangeofGauge
+                setter: setChangeofGauge
+            xml_attribute: true
+            type: bool

@@ -1,0 +1,52 @@
+OTA\OTACruisePkgAvailRS\OTACruisePkgAvailRSAType\CruisePackagesAType\CruisePackageAType:
+    properties:
+        description:
+            expose: true
+            access_type: public_method
+            serialized_name: Description
+            accessor:
+                getter: getDescription
+                setter: setDescription
+            xml_attribute: true
+            type: string
+        transferIncludedIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: TransferIncludedIndicator
+            accessor:
+                getter: getTransferIncludedIndicator
+                setter: setTransferIncludedIndicator
+            xml_attribute: true
+            type: bool
+        selectionAllowedIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: SelectionAllowedIndicator
+            accessor:
+                getter: getSelectionAllowedIndicator
+                setter: setSelectionAllowedIndicator
+            xml_attribute: true
+            type: bool
+        flightInfoRequiredInd:
+            expose: true
+            access_type: public_method
+            serialized_name: FlightInfoRequiredInd
+            accessor:
+                getter: getFlightInfoRequiredInd
+                setter: setFlightInfoRequiredInd
+            xml_attribute: true
+            type: bool
+        priceInfo:
+            expose: true
+            access_type: public_method
+            serialized_name: PriceInfo
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getPriceInfo
+                setter: setPriceInfo
+            xml_list:
+                inline: true
+                entry_name: PriceInfo
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\OTACruisePkgAvailRS\OTACruisePkgAvailRSAType\CruisePackagesAType\CruisePackageAType\PriceInfoAType>

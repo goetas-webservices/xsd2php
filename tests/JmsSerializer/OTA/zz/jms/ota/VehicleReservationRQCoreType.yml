@@ -1,0 +1,173 @@
+OTA\VehicleReservationRQCoreType:
+    properties:
+        status:
+            expose: true
+            access_type: public_method
+            serialized_name: Status
+            accessor:
+                getter: getStatus
+                setter: setStatus
+            xml_attribute: true
+            type: string
+        uniqueID:
+            expose: true
+            access_type: public_method
+            serialized_name: UniqueID
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getUniqueID
+                setter: setUniqueID
+            xml_list:
+                inline: true
+                entry_name: UniqueID
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\UniqueIDType>
+        vehRentalCore:
+            expose: true
+            access_type: public_method
+            serialized_name: VehRentalCore
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getVehRentalCore
+                setter: setVehRentalCore
+            type: OTA\VehicleRentalCoreType
+        customer:
+            expose: true
+            access_type: public_method
+            serialized_name: Customer
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getCustomer
+                setter: setCustomer
+            type: OTA\CustomerPrimaryAdditionalType
+        vendorPref:
+            expose: true
+            access_type: public_method
+            serialized_name: VendorPref
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getVendorPref
+                setter: setVendorPref
+            type: OTA\CompanyNamePrefType
+        vehPref:
+            expose: true
+            access_type: public_method
+            serialized_name: VehPref
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getVehPref
+                setter: setVehPref
+            type: OTA\VehiclePrefType
+        driverType:
+            expose: true
+            access_type: public_method
+            serialized_name: DriverType
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getDriverType
+                setter: setDriverType
+            xml_list:
+                inline: true
+                entry_name: DriverType
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\VehicleReservationRQCoreType\DriverTypeAType>
+        rateQualifier:
+            expose: true
+            access_type: public_method
+            serialized_name: RateQualifier
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getRateQualifier
+                setter: setRateQualifier
+            type: OTA\RateQualifierType
+        fees:
+            expose: true
+            access_type: public_method
+            serialized_name: Fees
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getFees
+                setter: setFees
+            type: array<OTA\VehicleChargePurposeType>
+            xml_list:
+                inline: false
+                entry_name: Fee
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        vehicleCharges:
+            expose: true
+            access_type: public_method
+            serialized_name: VehicleCharges
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getVehicleCharges
+                setter: setVehicleCharges
+            type: array<OTA\VehicleChargePurposeType>
+            xml_list:
+                inline: false
+                entry_name: VehicleCharge
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        specialEquipPrefs:
+            expose: true
+            access_type: public_method
+            serialized_name: SpecialEquipPrefs
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getSpecialEquipPrefs
+                setter: setSpecialEquipPrefs
+            type: OTA\VehicleReservationRQCoreType\SpecialEquipPrefsAType
+        rateDistance:
+            expose: true
+            access_type: public_method
+            serialized_name: RateDistance
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getRateDistance
+                setter: setRateDistance
+            xml_list:
+                inline: true
+                entry_name: RateDistance
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\VehicleReservationRQCoreType\RateDistanceAType>
+        totalCharge:
+            expose: true
+            access_type: public_method
+            serialized_name: TotalCharge
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getTotalCharge
+                setter: setTotalCharge
+            type: OTA\VehicleReservationRQCoreType\TotalChargeAType
+        queue:
+            expose: true
+            access_type: public_method
+            serialized_name: Queue
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getQueue
+                setter: setQueue
+            type: OTA\VehicleReservationRQCoreType\QueueAType
+        tPAExtensions:
+            expose: true
+            access_type: public_method
+            serialized_name: TPA_Extensions
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getTPAExtensions
+                setter: setTPAExtensions
+            type: OTA\TPAExtensionsType

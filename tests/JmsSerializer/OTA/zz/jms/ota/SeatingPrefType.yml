@@ -1,0 +1,55 @@
+OTA\SeatingPrefType:
+    properties:
+        __value:
+            expose: true
+            xml_value: true
+            access_type: public_method
+            accessor:
+                getter: value
+                setter: value
+            type: string
+        preferLevel:
+            expose: true
+            access_type: public_method
+            serialized_name: PreferLevel
+            accessor:
+                getter: getPreferLevel
+                setter: setPreferLevel
+            xml_attribute: true
+            type: string
+        seatDirection:
+            expose: true
+            access_type: public_method
+            serialized_name: SeatDirection
+            accessor:
+                getter: getSeatDirection
+                setter: setSeatDirection
+            xml_attribute: true
+            type: string
+        seatLocation:
+            expose: true
+            access_type: public_method
+            serialized_name: SeatLocation
+            accessor:
+                getter: getSeatLocation
+                setter: setSeatLocation
+            xml_attribute: true
+            type: string
+        seatPosition:
+            expose: true
+            access_type: public_method
+            serialized_name: SeatPosition
+            accessor:
+                getter: getSeatPosition
+                setter: setSeatPosition
+            xml_attribute: true
+            type: string
+        seatRow:
+            expose: true
+            access_type: public_method
+            serialized_name: SeatRow
+            accessor:
+                getter: getSeatRow
+                setter: setSeatRow
+            xml_attribute: true
+            type: string

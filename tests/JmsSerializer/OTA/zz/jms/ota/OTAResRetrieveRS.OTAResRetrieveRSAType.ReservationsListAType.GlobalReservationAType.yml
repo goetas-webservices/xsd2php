@@ -1,0 +1,40 @@
+OTA\OTAResRetrieveRS\OTAResRetrieveRSAType\ReservationsListAType\GlobalReservationAType:
+    properties:
+        itineraryName:
+            expose: true
+            access_type: public_method
+            serialized_name: ItineraryName
+            accessor:
+                getter: getItineraryName
+                setter: setItineraryName
+            xml_attribute: true
+            type: string
+        start:
+            expose: true
+            access_type: public_method
+            serialized_name: Start
+            accessor:
+                getter: getStart
+                setter: setStart
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime
+        uniqueID:
+            expose: true
+            access_type: public_method
+            serialized_name: UniqueID
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getUniqueID
+                setter: setUniqueID
+            type: OTA\UniqueIDType
+        travelerName:
+            expose: true
+            access_type: public_method
+            serialized_name: TravelerName
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getTravelerName
+                setter: setTravelerName
+            type: OTA\PersonNameType

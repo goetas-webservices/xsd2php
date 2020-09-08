@@ -1,0 +1,11 @@
+OTA\VerificationType\PersonNameAType:
+    properties:
+        partialName:
+            expose: true
+            access_type: public_method
+            serialized_name: PartialName
+            accessor:
+                getter: getPartialName
+                setter: setPartialName
+            xml_attribute: true
+            type: bool

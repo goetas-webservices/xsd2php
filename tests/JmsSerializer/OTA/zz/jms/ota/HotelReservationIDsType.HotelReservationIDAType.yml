@@ -1,0 +1,83 @@
+OTA\HotelReservationIDsType\HotelReservationIDAType:
+    properties:
+        resIDType:
+            expose: true
+            access_type: public_method
+            serialized_name: ResID_Type
+            accessor:
+                getter: getResIDType
+                setter: setResIDType
+            xml_attribute: true
+            type: string
+        resIDValue:
+            expose: true
+            access_type: public_method
+            serialized_name: ResID_Value
+            accessor:
+                getter: getResIDValue
+                setter: setResIDValue
+            xml_attribute: true
+            type: string
+        resIDSource:
+            expose: true
+            access_type: public_method
+            serialized_name: ResID_Source
+            accessor:
+                getter: getResIDSource
+                setter: setResIDSource
+            xml_attribute: true
+            type: string
+        resIDSourceContext:
+            expose: true
+            access_type: public_method
+            serialized_name: ResID_SourceContext
+            accessor:
+                getter: getResIDSourceContext
+                setter: setResIDSourceContext
+            xml_attribute: true
+            type: string
+        resIDDate:
+            expose: true
+            access_type: public_method
+            serialized_name: ResID_Date
+            accessor:
+                getter: getResIDDate
+                setter: setResIDDate
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\DateTime
+        forGuest:
+            expose: true
+            access_type: public_method
+            serialized_name: ForGuest
+            accessor:
+                getter: getForGuest
+                setter: setForGuest
+            xml_attribute: true
+            type: bool
+        resGuestRPH:
+            expose: true
+            access_type: public_method
+            serialized_name: ResGuestRPH
+            accessor:
+                getter: getResGuestRPH
+                setter: setResGuestRPH
+            xml_attribute: true
+            type: string
+        cancelOriginatorCode:
+            expose: true
+            access_type: public_method
+            serialized_name: CancelOriginatorCode
+            accessor:
+                getter: getCancelOriginatorCode
+                setter: setCancelOriginatorCode
+            xml_attribute: true
+            type: string
+        cancellationDate:
+            expose: true
+            access_type: public_method
+            serialized_name: CancellationDate
+            accessor:
+                getter: getCancellationDate
+                setter: setCancellationDate
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\DateTime

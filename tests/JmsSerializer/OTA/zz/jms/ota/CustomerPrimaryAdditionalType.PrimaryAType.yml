@@ -1,0 +1,12 @@
+OTA\CustomerPrimaryAdditionalType\PrimaryAType:
+    properties:
+        customerID:
+            expose: true
+            access_type: public_method
+            serialized_name: CustomerID
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getCustomerID
+                setter: setCustomerID
+            type: OTA\UniqueIDType

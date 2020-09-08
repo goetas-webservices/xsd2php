@@ -1,0 +1,97 @@
+OTA\RateRulesType:
+    properties:
+        minimumKeep:
+            expose: true
+            access_type: public_method
+            serialized_name: MinimumKeep
+            accessor:
+                getter: getMinimumKeep
+                setter: setMinimumKeep
+            xml_attribute: true
+            type: DateInterval
+        maximumKeep:
+            expose: true
+            access_type: public_method
+            serialized_name: MaximumKeep
+            accessor:
+                getter: getMaximumKeep
+                setter: setMaximumKeep
+            xml_attribute: true
+            type: DateInterval
+        maximumRental:
+            expose: true
+            access_type: public_method
+            serialized_name: MaximumRental
+            accessor:
+                getter: getMaximumRental
+                setter: setMaximumRental
+            xml_attribute: true
+            type: DateInterval
+        advanceBooking:
+            expose: true
+            access_type: public_method
+            serialized_name: AdvanceBooking
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getAdvanceBooking
+                setter: setAdvanceBooking
+            type: OTA\RateRulesType\AdvanceBookingAType
+        pickupReturnRules:
+            expose: true
+            access_type: public_method
+            serialized_name: PickupReturnRules
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getPickupReturnRules
+                setter: setPickupReturnRules
+            xml_list:
+                inline: true
+                entry_name: PickupReturnRules
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\RateRulesType\PickupReturnRulesAType>
+        rateGuarantee:
+            expose: true
+            access_type: public_method
+            serialized_name: RateGuarantee
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getRateGuarantee
+                setter: setRateGuarantee
+            type: OTA\RateRulesType\RateGuaranteeAType
+        paymentRules:
+            expose: true
+            access_type: public_method
+            serialized_name: PaymentRules
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getPaymentRules
+                setter: setPaymentRules
+            type: OTA\RateRulesType\PaymentRulesAType
+        cancelPenaltyInfo:
+            expose: true
+            access_type: public_method
+            serialized_name: CancelPenaltyInfo
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getCancelPenaltyInfo
+                setter: setCancelPenaltyInfo
+            xml_list:
+                inline: true
+                entry_name: CancelPenaltyInfo
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\RateRulesType\CancelPenaltyInfoAType>
+        rateDeposit:
+            expose: true
+            access_type: public_method
+            serialized_name: RateDeposit
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getRateDeposit
+                setter: setRateDeposit
+            type: OTA\RateRulesType\RateDepositAType

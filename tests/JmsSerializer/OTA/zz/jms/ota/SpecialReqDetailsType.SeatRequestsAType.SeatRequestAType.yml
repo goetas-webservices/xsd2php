@@ -1,0 +1,29 @@
+OTA\SpecialReqDetailsType\SeatRequestsAType\SeatRequestAType:
+    properties:
+        travelerRefNumberRPHList:
+            expose: true
+            access_type: public_method
+            serialized_name: TravelerRefNumberRPHList
+            accessor:
+                getter: getTravelerRefNumberRPHList
+                setter: setTravelerRefNumberRPHList
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Jms\SimpleListOf<string>
+        flightRefNumberRPHList:
+            expose: true
+            access_type: public_method
+            serialized_name: FlightRefNumberRPHList
+            accessor:
+                getter: getFlightRefNumberRPHList
+                setter: setFlightRefNumberRPHList
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Jms\SimpleListOf<string>
+        partialSeatingInd:
+            expose: true
+            access_type: public_method
+            serialized_name: PartialSeatingInd
+            accessor:
+                getter: getPartialSeatingInd
+                setter: setPartialSeatingInd
+            xml_attribute: true
+            type: bool

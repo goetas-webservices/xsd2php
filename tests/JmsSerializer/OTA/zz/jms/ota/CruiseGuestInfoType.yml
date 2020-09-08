@@ -1,0 +1,71 @@
+OTA\CruiseGuestInfoType:
+    properties:
+        reservationID:
+            expose: true
+            access_type: public_method
+            serialized_name: ReservationID
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getReservationID
+                setter: setReservationID
+            xml_list:
+                inline: true
+                entry_name: ReservationID
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\ReservationIDType>
+        guestDetails:
+            expose: true
+            access_type: public_method
+            serialized_name: GuestDetails
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getGuestDetails
+                setter: setGuestDetails
+            type: array<OTA\CruiseGuestDetailType>
+            xml_list:
+                inline: false
+                entry_name: GuestDetail
+                skip_when_empty: false
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        linkedBookings:
+            expose: true
+            access_type: public_method
+            serialized_name: LinkedBookings
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getLinkedBookings
+                setter: setLinkedBookings
+            type: array<OTA\CruiseGuestInfoType\LinkedBookingsAType\LinkedBookingAType>
+            xml_list:
+                inline: false
+                entry_name: LinkedBooking
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        paymentOptions:
+            expose: true
+            access_type: public_method
+            serialized_name: PaymentOptions
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getPaymentOptions
+                setter: setPaymentOptions
+            type: array<OTA\CruiseGuestInfoType\PaymentOptionsAType\PaymentOptionAType>
+            xml_list:
+                inline: false
+                entry_name: PaymentOption
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        cancellationPenalty:
+            expose: true
+            access_type: public_method
+            serialized_name: CancellationPenalty
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getCancellationPenalty
+                setter: setCancellationPenalty
+            type: OTA\CruiseGuestInfoType\CancellationPenaltyAType

@@ -1,0 +1,56 @@
+OTA\OfferType\OfferRulesAType\OfferRuleAType\OccupancyAType:
+    properties:
+        minOccupancy:
+            expose: true
+            access_type: public_method
+            serialized_name: MinOccupancy
+            accessor:
+                getter: getMinOccupancy
+                setter: setMinOccupancy
+            xml_attribute: true
+            type: int
+        maxOccupancy:
+            expose: true
+            access_type: public_method
+            serialized_name: MaxOccupancy
+            accessor:
+                getter: getMaxOccupancy
+                setter: setMaxOccupancy
+            xml_attribute: true
+            type: int
+        ageQualifyingCode:
+            expose: true
+            access_type: public_method
+            serialized_name: AgeQualifyingCode
+            accessor:
+                getter: getAgeQualifyingCode
+                setter: setAgeQualifyingCode
+            xml_attribute: true
+            type: string
+        minAge:
+            expose: true
+            access_type: public_method
+            serialized_name: MinAge
+            accessor:
+                getter: getMinAge
+                setter: setMinAge
+            xml_attribute: true
+            type: int
+        maxAge:
+            expose: true
+            access_type: public_method
+            serialized_name: MaxAge
+            accessor:
+                getter: getMaxAge
+                setter: setMaxAge
+            xml_attribute: true
+            type: int
+        ageTimeUnit:
+            expose: true
+            access_type: public_method
+            serialized_name: AgeTimeUnit
+            accessor:
+                getter: getAgeTimeUnit
+                setter: setAgeTimeUnit
+            xml_attribute: true
+            type: string

@@ -1,0 +1,65 @@
+OTA\OTAVehLocDetailRQ\OTAVehLocDetailRQAType\ResponseFilterAType:
+    properties:
+        locationAddressPhoneIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: LocationAddressPhoneIndicator
+            accessor:
+                getter: getLocationAddressPhoneIndicator
+                setter: setLocationAddressPhoneIndicator
+            xml_attribute: true
+            type: bool
+        locationInfoIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: LocationInfoIndicator
+            accessor:
+                getter: getLocationInfoIndicator
+                setter: setLocationInfoIndicator
+            xml_attribute: true
+            type: bool
+        vehiclesIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: VehiclesIndicator
+            accessor:
+                getter: getVehiclesIndicator
+                setter: setVehiclesIndicator
+            xml_attribute: true
+            type: bool
+        requirementsIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: RequirementsIndicator
+            accessor:
+                getter: getRequirementsIndicator
+                setter: setRequirementsIndicator
+            xml_attribute: true
+            type: bool
+        additionalFeesIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: AdditionalFeesIndicator
+            accessor:
+                getter: getAdditionalFeesIndicator
+                setter: setAdditionalFeesIndicator
+            xml_attribute: true
+            type: bool
+        liabilitiesIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: LiabilitiesIndicator
+            accessor:
+                getter: getLiabilitiesIndicator
+                setter: setLiabilitiesIndicator
+            xml_attribute: true
+            type: bool
+        servicesOfferedIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: ServicesOfferedIndicator
+            accessor:
+                getter: getServicesOfferedIndicator
+                setter: setServicesOfferedIndicator
+            xml_attribute: true
+            type: bool

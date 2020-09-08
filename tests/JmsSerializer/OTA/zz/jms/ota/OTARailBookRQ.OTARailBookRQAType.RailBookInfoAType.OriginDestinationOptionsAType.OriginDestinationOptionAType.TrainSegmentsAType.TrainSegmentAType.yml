@@ -1,0 +1,78 @@
+OTA\OTARailBookRQ\OTARailBookRQAType\RailBookInfoAType\OriginDestinationOptionsAType\OriginDestinationOptionAType\TrainSegmentsAType\TrainSegmentAType:
+    properties:
+        departureDateTime:
+            expose: true
+            access_type: public_method
+            serialized_name: DepartureDateTime
+            accessor:
+                getter: getDepartureDateTime
+                setter: setDepartureDateTime
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\DateTime
+        trainNumber:
+            expose: true
+            access_type: public_method
+            serialized_name: TrainNumber
+            accessor:
+                getter: getTrainNumber
+                setter: setTrainNumber
+            xml_attribute: true
+            type: string
+        seatPreference:
+            expose: true
+            access_type: public_method
+            serialized_name: SeatPreference
+            accessor:
+                getter: getSeatPreference
+                setter: setSeatPreference
+            xml_attribute: true
+            type: string
+        seatDirection:
+            expose: true
+            access_type: public_method
+            serialized_name: SeatDirection
+            accessor:
+                getter: getSeatDirection
+                setter: setSeatDirection
+            xml_attribute: true
+            type: string
+        departureStation:
+            expose: true
+            access_type: public_method
+            serialized_name: DepartureStation
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getDepartureStation
+                setter: setDepartureStation
+            type: OTA\LocationType
+        arrivalStation:
+            expose: true
+            access_type: public_method
+            serialized_name: ArrivalStation
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getArrivalStation
+                setter: setArrivalStation
+            type: OTA\LocationType
+        classCode:
+            expose: true
+            access_type: public_method
+            serialized_name: ClassCode
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getClassCode
+                setter: setClassCode
+            type: OTA\OTARailBookRQ\OTARailBookRQAType\RailBookInfoAType\OriginDestinationOptionsAType\OriginDestinationOptionAType\TrainSegmentsAType\TrainSegmentAType\ClassCodeAType
+        vendor:
+            expose: true
+            access_type: public_method
+            serialized_name: Vendor
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getVendor
+                setter: setVendor
+            type: OTA\CompanyNameType

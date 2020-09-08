@@ -1,0 +1,56 @@
+OTA\EventType\EventAType\SitesAType\SiteAType\EventDaysAType\EventDayAType\ServicesAType\ServiceAType:
+    properties:
+        providedBy:
+            expose: true
+            access_type: public_method
+            serialized_name: ProvidedBy
+            accessor:
+                getter: getProvidedBy
+                setter: setProvidedBy
+            xml_attribute: true
+            type: string
+        providerName:
+            expose: true
+            access_type: public_method
+            serialized_name: ProviderName
+            accessor:
+                getter: getProviderName
+                setter: setProviderName
+            xml_attribute: true
+            type: string
+        locationName:
+            expose: true
+            access_type: public_method
+            serialized_name: LocationName
+            accessor:
+                getter: getLocationName
+                setter: setLocationName
+            xml_attribute: true
+            type: string
+        startTime:
+            expose: true
+            access_type: public_method
+            serialized_name: StartTime
+            accessor:
+                getter: getStartTime
+                setter: setStartTime
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\Time
+        endTime:
+            expose: true
+            access_type: public_method
+            serialized_name: EndTime
+            accessor:
+                getter: getEndTime
+                setter: setEndTime
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\Time
+        code:
+            expose: true
+            access_type: public_method
+            serialized_name: Code
+            accessor:
+                getter: getCode
+                setter: setCode
+            xml_attribute: true
+            type: string

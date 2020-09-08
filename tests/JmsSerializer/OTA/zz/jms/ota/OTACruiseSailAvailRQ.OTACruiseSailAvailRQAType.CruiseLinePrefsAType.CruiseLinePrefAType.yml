@@ -1,0 +1,67 @@
+OTA\OTACruiseSailAvailRQ\OTACruiseSailAvailRQAType\CruiseLinePrefsAType\CruiseLinePrefAType:
+    properties:
+        vendorCode:
+            expose: true
+            access_type: public_method
+            serialized_name: VendorCode
+            accessor:
+                getter: getVendorCode
+                setter: setVendorCode
+            xml_attribute: true
+            type: string
+        vendorName:
+            expose: true
+            access_type: public_method
+            serialized_name: VendorName
+            accessor:
+                getter: getVendorName
+                setter: setVendorName
+            xml_attribute: true
+            type: string
+        shipCode:
+            expose: true
+            access_type: public_method
+            serialized_name: ShipCode
+            accessor:
+                getter: getShipCode
+                setter: setShipCode
+            xml_attribute: true
+            type: string
+        shipName:
+            expose: true
+            access_type: public_method
+            serialized_name: ShipName
+            accessor:
+                getter: getShipName
+                setter: setShipName
+            xml_attribute: true
+            type: string
+        vendorCodeContext:
+            expose: true
+            access_type: public_method
+            serialized_name: VendorCodeContext
+            accessor:
+                getter: getVendorCodeContext
+                setter: setVendorCodeContext
+            xml_attribute: true
+            type: string
+        inclusivePackageOption:
+            expose: true
+            access_type: public_method
+            serialized_name: InclusivePackageOption
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getInclusivePackageOption
+                setter: setInclusivePackageOption
+            type: OTA\OTACruiseSailAvailRQ\OTACruiseSailAvailRQAType\CruiseLinePrefsAType\CruiseLinePrefAType\InclusivePackageOptionAType
+        searchQualifiers:
+            expose: true
+            access_type: public_method
+            serialized_name: SearchQualifiers
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getSearchQualifiers
+                setter: setSearchQualifiers
+            type: OTA\SailingSearchQualifierType

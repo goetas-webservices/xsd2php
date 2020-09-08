@@ -1,0 +1,47 @@
+OTA\AffiliationInfoType\BrandsAType\BrandAType:
+    properties:
+        uRL:
+            expose: true
+            access_type: public_method
+            serialized_name: URL
+            accessor:
+                getter: getURL
+                setter: setURL
+            xml_attribute: true
+            type: string
+        categoryCode:
+            expose: true
+            access_type: public_method
+            serialized_name: CategoryCode
+            accessor:
+                getter: getCategoryCode
+                setter: setCategoryCode
+            xml_attribute: true
+            type: string
+        codeDetail:
+            expose: true
+            access_type: public_method
+            serialized_name: CodeDetail
+            accessor:
+                getter: getCodeDetail
+                setter: setCodeDetail
+            xml_attribute: true
+            type: string
+        removal:
+            expose: true
+            access_type: public_method
+            serialized_name: Removal
+            accessor:
+                getter: getRemoval
+                setter: setRemoval
+            xml_attribute: true
+            type: bool
+        marketing:
+            expose: true
+            access_type: public_method
+            serialized_name: Marketing
+            accessor:
+                getter: getMarketing
+                setter: setMarketing
+            xml_attribute: true
+            type: string

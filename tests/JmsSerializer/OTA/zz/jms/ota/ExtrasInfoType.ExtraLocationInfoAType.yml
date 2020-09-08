@@ -1,0 +1,20 @@
+OTA\ExtrasInfoType\ExtraLocationInfoAType:
+    properties:
+        location:
+            expose: true
+            access_type: public_method
+            serialized_name: Location
+            accessor:
+                getter: getLocation
+                setter: setLocation
+            xml_attribute: true
+            type: string
+        type:
+            expose: true
+            access_type: public_method
+            serialized_name: Type
+            accessor:
+                getter: getType
+                setter: setType
+            xml_attribute: true
+            type: string

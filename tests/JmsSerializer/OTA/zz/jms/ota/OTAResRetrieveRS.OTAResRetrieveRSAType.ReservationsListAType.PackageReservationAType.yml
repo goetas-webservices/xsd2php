@@ -1,0 +1,123 @@
+OTA\OTAResRetrieveRS\OTAResRetrieveRSAType\ReservationsListAType\PackageReservationAType:
+    properties:
+        travelCode:
+            expose: true
+            access_type: public_method
+            serialized_name: TravelCode
+            accessor:
+                getter: getTravelCode
+                setter: setTravelCode
+            xml_attribute: true
+            type: string
+        tourCode:
+            expose: true
+            access_type: public_method
+            serialized_name: TourCode
+            accessor:
+                getter: getTourCode
+                setter: setTourCode
+            xml_attribute: true
+            type: string
+        packageID:
+            expose: true
+            access_type: public_method
+            serialized_name: PackageID
+            accessor:
+                getter: getPackageID
+                setter: setPackageID
+            xml_attribute: true
+            type: string
+        start:
+            expose: true
+            access_type: public_method
+            serialized_name: Start
+            accessor:
+                getter: getStart
+                setter: setStart
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime
+        duration:
+            expose: true
+            access_type: public_method
+            serialized_name: Duration
+            accessor:
+                getter: getDuration
+                setter: setDuration
+            xml_attribute: true
+            type: DateInterval
+        end:
+            expose: true
+            access_type: public_method
+            serialized_name: End
+            accessor:
+                getter: getEnd
+                setter: setEnd
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime
+        quantity:
+            expose: true
+            access_type: public_method
+            serialized_name: Quantity
+            accessor:
+                getter: getQuantity
+                setter: setQuantity
+            xml_attribute: true
+            type: int
+        reservationStatusCode:
+            expose: true
+            access_type: public_method
+            serialized_name: ReservationStatusCode
+            accessor:
+                getter: getReservationStatusCode
+                setter: setReservationStatusCode
+            xml_attribute: true
+            type: string
+        reservationStatus:
+            expose: true
+            access_type: public_method
+            serialized_name: ReservationStatus
+            accessor:
+                getter: getReservationStatus
+                setter: setReservationStatus
+            xml_attribute: true
+            type: string
+        uniqueID:
+            expose: true
+            access_type: public_method
+            serialized_name: UniqueID
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getUniqueID
+                setter: setUniqueID
+            type: OTA\UniqueIDType
+        name:
+            expose: true
+            access_type: public_method
+            serialized_name: Name
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getName
+                setter: setName
+            type: OTA\PersonNameType
+        arrivalLocation:
+            expose: true
+            access_type: public_method
+            serialized_name: ArrivalLocation
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getArrivalLocation
+                setter: setArrivalLocation
+            type: OTA\LocationType
+        departureLocation:
+            expose: true
+            access_type: public_method
+            serialized_name: DepartureLocation
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getDepartureLocation
+                setter: setDepartureLocation
+            type: OTA\LocationType

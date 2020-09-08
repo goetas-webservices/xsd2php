@@ -1,0 +1,26 @@
+OTA\AirCheckInType\PaymentInfoAType:
+    properties:
+        paymentDetail:
+            expose: true
+            access_type: public_method
+            serialized_name: PaymentDetail
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getPaymentDetail
+                setter: setPaymentDetail
+            xml_list:
+                inline: true
+                entry_name: PaymentDetail
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\AirCheckInType\PaymentInfoAType\PaymentDetailAType>
+        paymentTotal:
+            expose: true
+            access_type: public_method
+            serialized_name: PaymentTotal
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getPaymentTotal
+                setter: setPaymentTotal
+            type: OTA\AirCheckInType\PaymentInfoAType\PaymentTotalAType

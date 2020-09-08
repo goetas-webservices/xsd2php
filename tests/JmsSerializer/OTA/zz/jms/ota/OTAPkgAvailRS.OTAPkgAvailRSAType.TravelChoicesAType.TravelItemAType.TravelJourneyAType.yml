@@ -1,0 +1,92 @@
+OTA\OTAPkgAvailRS\OTAPkgAvailRSAType\TravelChoicesAType\TravelItemAType\TravelJourneyAType:
+    properties:
+        type:
+            expose: true
+            access_type: public_method
+            serialized_name: Type
+            accessor:
+                getter: getType
+                setter: setType
+            xml_attribute: true
+            type: string
+        originAirportID:
+            expose: true
+            access_type: public_method
+            serialized_name: OriginAirportID
+            accessor:
+                getter: getOriginAirportID
+                setter: setOriginAirportID
+            xml_attribute: true
+            type: string
+        destinationAirportID:
+            expose: true
+            access_type: public_method
+            serialized_name: DestinationAirportID
+            accessor:
+                getter: getDestinationAirportID
+                setter: setDestinationAirportID
+            xml_attribute: true
+            type: string
+        outwardDateTime:
+            expose: true
+            access_type: public_method
+            serialized_name: OutwardDateTime
+            accessor:
+                getter: getOutwardDateTime
+                setter: setOutwardDateTime
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\DateTime
+        returnDateTime:
+            expose: true
+            access_type: public_method
+            serialized_name: ReturnDateTime
+            accessor:
+                getter: getReturnDateTime
+                setter: setReturnDateTime
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\DateTime
+        travelCode:
+            expose: true
+            access_type: public_method
+            serialized_name: TravelCode
+            accessor:
+                getter: getTravelCode
+                setter: setTravelCode
+            xml_attribute: true
+            type: string
+        companyShortName:
+            expose: true
+            access_type: public_method
+            serialized_name: CompanyShortName
+            accessor:
+                getter: getCompanyShortName
+                setter: setCompanyShortName
+            xml_attribute: true
+            type: string
+        travelSector:
+            expose: true
+            access_type: public_method
+            serialized_name: TravelSector
+            accessor:
+                getter: getTravelSector
+                setter: setTravelSector
+            xml_attribute: true
+            type: string
+        code:
+            expose: true
+            access_type: public_method
+            serialized_name: Code
+            accessor:
+                getter: getCode
+                setter: setCode
+            xml_attribute: true
+            type: string
+        codeContext:
+            expose: true
+            access_type: public_method
+            serialized_name: CodeContext
+            accessor:
+                getter: getCodeContext
+                setter: setCodeContext
+            xml_attribute: true
+            type: string

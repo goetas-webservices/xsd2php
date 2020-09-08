@@ -1,0 +1,47 @@
+OTA\OTACruisePkgAvailRQ\OTACruisePkgAvailRQAType\GuestCountsAType\GuestCountAType:
+    properties:
+        age:
+            expose: true
+            access_type: public_method
+            serialized_name: Age
+            accessor:
+                getter: getAge
+                setter: setAge
+            xml_attribute: true
+            type: int
+        code:
+            expose: true
+            access_type: public_method
+            serialized_name: Code
+            accessor:
+                getter: getCode
+                setter: setCode
+            xml_attribute: true
+            type: string
+        codeContext:
+            expose: true
+            access_type: public_method
+            serialized_name: CodeContext
+            accessor:
+                getter: getCodeContext
+                setter: setCodeContext
+            xml_attribute: true
+            type: string
+        uRI:
+            expose: true
+            access_type: public_method
+            serialized_name: URI
+            accessor:
+                getter: getURI
+                setter: setURI
+            xml_attribute: true
+            type: string
+        quantity:
+            expose: true
+            access_type: public_method
+            serialized_name: Quantity
+            accessor:
+                getter: getQuantity
+                setter: setQuantity
+            xml_attribute: true
+            type: int

@@ -1,0 +1,29 @@
+OTA\OTACruiseDiningAvailRS\OTACruiseDiningAvailRSAType\DiningOptionsAType\DiningOptionAType\DiningRoomAType\SittingDetailsAType\SittingDetailAType:
+    properties:
+        mealName:
+            expose: true
+            access_type: public_method
+            serialized_name: MealName
+            accessor:
+                getter: getMealName
+                setter: setMealName
+            xml_attribute: true
+            type: string
+        mealStartTime:
+            expose: true
+            access_type: public_method
+            serialized_name: MealStartTime
+            accessor:
+                getter: getMealStartTime
+                setter: setMealStartTime
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\Time
+        mealEndTime:
+            expose: true
+            access_type: public_method
+            serialized_name: MealEndTime
+            accessor:
+                getter: getMealEndTime
+                setter: setMealEndTime
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\Time

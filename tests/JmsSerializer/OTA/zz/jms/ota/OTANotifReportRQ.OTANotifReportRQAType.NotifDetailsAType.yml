@@ -1,0 +1,12 @@
+OTA\OTANotifReportRQ\OTANotifReportRQAType\NotifDetailsAType:
+    properties:
+        hotelNotifReport:
+            expose: true
+            access_type: public_method
+            serialized_name: HotelNotifReport
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getHotelNotifReport
+                setter: setHotelNotifReport
+            type: OTA\OTANotifReportRQ\OTANotifReportRQAType\NotifDetailsAType\HotelNotifReportAType

@@ -1,0 +1,177 @@
+OTA\ContactPersonType:
+    properties:
+        shareSynchInd:
+            expose: true
+            access_type: public_method
+            serialized_name: ShareSynchInd
+            accessor:
+                getter: getShareSynchInd
+                setter: setShareSynchInd
+            xml_attribute: true
+            type: string
+        shareMarketInd:
+            expose: true
+            access_type: public_method
+            serialized_name: ShareMarketInd
+            accessor:
+                getter: getShareMarketInd
+                setter: setShareMarketInd
+            xml_attribute: true
+            type: string
+        defaultInd:
+            expose: true
+            access_type: public_method
+            serialized_name: DefaultInd
+            accessor:
+                getter: getDefaultInd
+                setter: setDefaultInd
+            xml_attribute: true
+            type: bool
+        contactType:
+            expose: true
+            access_type: public_method
+            serialized_name: ContactType
+            accessor:
+                getter: getContactType
+                setter: setContactType
+            xml_attribute: true
+            type: string
+        relation:
+            expose: true
+            access_type: public_method
+            serialized_name: Relation
+            accessor:
+                getter: getRelation
+                setter: setRelation
+            xml_attribute: true
+            type: string
+        emergencyFlag:
+            expose: true
+            access_type: public_method
+            serialized_name: EmergencyFlag
+            accessor:
+                getter: getEmergencyFlag
+                setter: setEmergencyFlag
+            xml_attribute: true
+            type: bool
+        rPH:
+            expose: true
+            access_type: public_method
+            serialized_name: RPH
+            accessor:
+                getter: getRPH
+                setter: setRPH
+            xml_attribute: true
+            type: string
+        communicationMethodCode:
+            expose: true
+            access_type: public_method
+            serialized_name: CommunicationMethodCode
+            accessor:
+                getter: getCommunicationMethodCode
+                setter: setCommunicationMethodCode
+            xml_attribute: true
+            type: string
+        documentDistribMethodCode:
+            expose: true
+            access_type: public_method
+            serialized_name: DocumentDistribMethodCode
+            accessor:
+                getter: getDocumentDistribMethodCode
+                setter: setDocumentDistribMethodCode
+            xml_attribute: true
+            type: string
+        personName:
+            expose: true
+            access_type: public_method
+            serialized_name: PersonName
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getPersonName
+                setter: setPersonName
+            type: OTA\PersonNameType
+        telephone:
+            expose: true
+            access_type: public_method
+            serialized_name: Telephone
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getTelephone
+                setter: setTelephone
+            xml_list:
+                inline: true
+                entry_name: Telephone
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\ContactPersonType\TelephoneAType>
+        address:
+            expose: true
+            access_type: public_method
+            serialized_name: Address
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getAddress
+                setter: setAddress
+            xml_list:
+                inline: true
+                entry_name: Address
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\AddressInfoType>
+        email:
+            expose: true
+            access_type: public_method
+            serialized_name: Email
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getEmail
+                setter: setEmail
+            xml_list:
+                inline: true
+                entry_name: Email
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\EmailType>
+        uRL:
+            expose: true
+            access_type: public_method
+            serialized_name: URL
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getURL
+                setter: setURL
+            xml_list:
+                inline: true
+                entry_name: URL
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\URLType>
+        companyName:
+            expose: true
+            access_type: public_method
+            serialized_name: CompanyName
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getCompanyName
+                setter: setCompanyName
+            xml_list:
+                inline: true
+                entry_name: CompanyName
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\CompanyNameType>
+        employeeInfo:
+            expose: true
+            access_type: public_method
+            serialized_name: EmployeeInfo
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getEmployeeInfo
+                setter: setEmployeeInfo
+            xml_list:
+                inline: true
+                entry_name: EmployeeInfo
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\EmployeeInfoType>

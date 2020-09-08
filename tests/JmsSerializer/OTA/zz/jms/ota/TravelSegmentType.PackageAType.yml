@@ -1,0 +1,30 @@
+OTA\TravelSegmentType\PackageAType:
+    properties:
+        itemRPHList:
+            expose: true
+            access_type: public_method
+            serialized_name: ItemRPH_List
+            accessor:
+                getter: getItemRPHList
+                setter: setItemRPHList
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Jms\SimpleListOf<string>
+        assocItemRPHList:
+            expose: true
+            access_type: public_method
+            serialized_name: AssocItemRPH_List
+            accessor:
+                getter: getAssocItemRPHList
+                setter: setAssocItemRPHList
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Jms\SimpleListOf<string>
+        tPAExtensions:
+            expose: true
+            access_type: public_method
+            serialized_name: TPA_Extensions
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getTPAExtensions
+                setter: setTPAExtensions
+            type: OTA\TPAExtensionsType

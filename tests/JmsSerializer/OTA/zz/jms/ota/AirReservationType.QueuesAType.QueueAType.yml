@@ -1,0 +1,74 @@
+OTA\AirReservationType\QueuesAType\QueueAType:
+    properties:
+        pseudoCityCode:
+            expose: true
+            access_type: public_method
+            serialized_name: PseudoCityCode
+            accessor:
+                getter: getPseudoCityCode
+                setter: setPseudoCityCode
+            xml_attribute: true
+            type: string
+        queueNumber:
+            expose: true
+            access_type: public_method
+            serialized_name: QueueNumber
+            accessor:
+                getter: getQueueNumber
+                setter: setQueueNumber
+            xml_attribute: true
+            type: string
+        queueCategory:
+            expose: true
+            access_type: public_method
+            serialized_name: QueueCategory
+            accessor:
+                getter: getQueueCategory
+                setter: setQueueCategory
+            xml_attribute: true
+            type: string
+        systemCode:
+            expose: true
+            access_type: public_method
+            serialized_name: SystemCode
+            accessor:
+                getter: getSystemCode
+                setter: setSystemCode
+            xml_attribute: true
+            type: string
+        queueID:
+            expose: true
+            access_type: public_method
+            serialized_name: QueueID
+            accessor:
+                getter: getQueueID
+                setter: setQueueID
+            xml_attribute: true
+            type: string
+        dateTime:
+            expose: true
+            access_type: public_method
+            serialized_name: DateTime
+            accessor:
+                getter: getDateTime
+                setter: setDateTime
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime
+        text:
+            expose: true
+            access_type: public_method
+            serialized_name: Text
+            accessor:
+                getter: getText
+                setter: setText
+            xml_attribute: true
+            type: string
+        carrierCode:
+            expose: true
+            access_type: public_method
+            serialized_name: CarrierCode
+            accessor:
+                getter: getCarrierCode
+                setter: setCarrierCode
+            xml_attribute: true
+            type: string

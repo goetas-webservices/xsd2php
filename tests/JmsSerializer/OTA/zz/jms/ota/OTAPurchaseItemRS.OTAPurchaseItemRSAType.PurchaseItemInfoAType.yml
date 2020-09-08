@@ -1,0 +1,47 @@
+OTA\OTAPurchaseItemRS\OTAPurchaseItemRSAType\PurchaseItemInfoAType:
+    properties:
+        orders:
+            expose: true
+            access_type: public_method
+            serialized_name: Orders
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getOrders
+                setter: setOrders
+            type: OTA\OrdersType
+        recipientInfos:
+            expose: true
+            access_type: public_method
+            serialized_name: RecipientInfos
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getRecipientInfos
+                setter: setRecipientInfos
+            type: array<OTA\RecipientInfosType\RecipientInfoAType>
+            xml_list:
+                inline: false
+                entry_name: RecipientInfo
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        paymentInformation:
+            expose: true
+            access_type: public_method
+            serialized_name: PaymentInformation
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getPaymentInformation
+                setter: setPaymentInformation
+            type: OTA\PaymentDetailType
+        comments:
+            expose: true
+            access_type: public_method
+            serialized_name: Comments
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getComments
+                setter: setComments
+            type: OTA\OTAPurchaseItemRS\OTAPurchaseItemRSAType\PurchaseItemInfoAType\CommentsAType

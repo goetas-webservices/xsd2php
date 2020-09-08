@@ -1,0 +1,130 @@
+OTA\HotelSummaryMessagesType\HotelSummaryMessageAType:
+    properties:
+        start:
+            expose: true
+            access_type: public_method
+            serialized_name: Start
+            accessor:
+                getter: getStart
+                setter: setStart
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime
+        duration:
+            expose: true
+            access_type: public_method
+            serialized_name: Duration
+            accessor:
+                getter: getDuration
+                setter: setDuration
+            xml_attribute: true
+            type: DateInterval
+        end:
+            expose: true
+            access_type: public_method
+            serialized_name: End
+            accessor:
+                getter: getEnd
+                setter: setEnd
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime
+        mon:
+            expose: true
+            access_type: public_method
+            serialized_name: Mon
+            accessor:
+                getter: getMon
+                setter: setMon
+            xml_attribute: true
+            type: bool
+        tue:
+            expose: true
+            access_type: public_method
+            serialized_name: Tue
+            accessor:
+                getter: getTue
+                setter: setTue
+            xml_attribute: true
+            type: bool
+        weds:
+            expose: true
+            access_type: public_method
+            serialized_name: Weds
+            accessor:
+                getter: getWeds
+                setter: setWeds
+            xml_attribute: true
+            type: bool
+        thur:
+            expose: true
+            access_type: public_method
+            serialized_name: Thur
+            accessor:
+                getter: getThur
+                setter: setThur
+            xml_attribute: true
+            type: bool
+        fri:
+            expose: true
+            access_type: public_method
+            serialized_name: Fri
+            accessor:
+                getter: getFri
+                setter: setFri
+            xml_attribute: true
+            type: bool
+        sat:
+            expose: true
+            access_type: public_method
+            serialized_name: Sat
+            accessor:
+                getter: getSat
+                setter: setSat
+            xml_attribute: true
+            type: bool
+        sun:
+            expose: true
+            access_type: public_method
+            serialized_name: Sun
+            accessor:
+                getter: getSun
+                setter: setSun
+            xml_attribute: true
+            type: bool
+        statusType:
+            expose: true
+            access_type: public_method
+            serialized_name: StatusType
+            accessor:
+                getter: getStatusType
+                setter: setStatusType
+            xml_attribute: true
+            type: string
+        arrivalsOnlyFlag:
+            expose: true
+            access_type: public_method
+            serialized_name: ArrivalsOnlyFlag
+            accessor:
+                getter: getArrivalsOnlyFlag
+                setter: setArrivalsOnlyFlag
+            xml_attribute: true
+            type: bool
+        rateMin:
+            expose: true
+            access_type: public_method
+            serialized_name: RateMin
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getRateMin
+                setter: setRateMin
+            type: OTA\HotelSummaryMessagesType\HotelSummaryMessageAType\RateMinAType
+        rateMax:
+            expose: true
+            access_type: public_method
+            serialized_name: RateMax
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getRateMax
+                setter: setRateMax
+            type: OTA\HotelSummaryMessagesType\HotelSummaryMessageAType\RateMaxAType

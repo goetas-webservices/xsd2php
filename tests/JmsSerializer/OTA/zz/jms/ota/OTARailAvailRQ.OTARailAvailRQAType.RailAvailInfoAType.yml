@@ -1,0 +1,92 @@
+OTA\OTARailAvailRQ\OTARailAvailRQAType\RailAvailInfoAType:
+    properties:
+        maxChanges:
+            expose: true
+            access_type: public_method
+            serialized_name: MaxChanges
+            accessor:
+                getter: getMaxChanges
+                setter: setMaxChanges
+            xml_attribute: true
+            type: int
+        trainNumber:
+            expose: true
+            access_type: public_method
+            serialized_name: TrainNumber
+            accessor:
+                getter: getTrainNumber
+                setter: setTrainNumber
+            xml_attribute: true
+            type: string
+        class:
+            expose: true
+            access_type: public_method
+            serialized_name: Class
+            accessor:
+                getter: getClass
+                setter: setClass
+            xml_attribute: true
+            type: string
+        bulletinRequired:
+            expose: true
+            access_type: public_method
+            serialized_name: BulletinRequired
+            accessor:
+                getter: getBulletinRequired
+                setter: setBulletinRequired
+            xml_attribute: true
+            type: bool
+        originDestinationInformation:
+            expose: true
+            access_type: public_method
+            serialized_name: OriginDestinationInformation
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getOriginDestinationInformation
+                setter: setOriginDestinationInformation
+            type: OTA\OriginDestinationInformationType
+        passengerType:
+            expose: true
+            access_type: public_method
+            serialized_name: PassengerType
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getPassengerType
+                setter: setPassengerType
+            xml_list:
+                inline: true
+                entry_name: PassengerType
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\OTARailAvailRQ\OTARailAvailRQAType\RailAvailInfoAType\PassengerTypeAType>
+        returnDateTime:
+            expose: true
+            access_type: public_method
+            serialized_name: ReturnDateTime
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getReturnDateTime
+                setter: setReturnDateTime
+            type: OTA\TravelDateTimeType
+        railPrefs:
+            expose: true
+            access_type: public_method
+            serialized_name: RailPrefs
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getRailPrefs
+                setter: setRailPrefs
+            type: OTA\RailAvailPrefsType
+        fareQualifier:
+            expose: true
+            access_type: public_method
+            serialized_name: FareQualifier
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getFareQualifier
+                setter: setFareQualifier
+            type: OTA\OTARailAvailRQ\OTARailAvailRQAType\RailAvailInfoAType\FareQualifierAType

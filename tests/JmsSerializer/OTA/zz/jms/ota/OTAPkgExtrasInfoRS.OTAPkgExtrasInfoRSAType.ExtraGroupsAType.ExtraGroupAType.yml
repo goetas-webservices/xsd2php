@@ -1,0 +1,38 @@
+OTA\OTAPkgExtrasInfoRS\OTAPkgExtrasInfoRSAType\ExtraGroupsAType\ExtraGroupAType:
+    properties:
+        code:
+            expose: true
+            access_type: public_method
+            serialized_name: Code
+            accessor:
+                getter: getCode
+                setter: setCode
+            xml_attribute: true
+            type: string
+        selectionType:
+            expose: true
+            access_type: public_method
+            serialized_name: SelectionType
+            accessor:
+                getter: getSelectionType
+                setter: setSelectionType
+            xml_attribute: true
+            type: string
+        ruleCode:
+            expose: true
+            access_type: public_method
+            serialized_name: RuleCode
+            accessor:
+                getter: getRuleCode
+                setter: setRuleCode
+            xml_attribute: true
+            type: string
+        listofExtrasRPH:
+            expose: true
+            access_type: public_method
+            serialized_name: ListofExtrasRPH
+            accessor:
+                getter: getListofExtrasRPH
+                setter: setListofExtrasRPH
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Jms\SimpleListOf<string>

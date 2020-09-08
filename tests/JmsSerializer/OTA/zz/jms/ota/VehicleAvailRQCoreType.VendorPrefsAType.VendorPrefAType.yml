@@ -1,0 +1,11 @@
+OTA\VehicleAvailRQCoreType\VendorPrefsAType\VendorPrefAType:
+    properties:
+        corpDiscountNmbr:
+            expose: true
+            access_type: public_method
+            serialized_name: CorpDiscountNmbr
+            accessor:
+                getter: getCorpDiscountNmbr
+                setter: setCorpDiscountNmbr
+            xml_attribute: true
+            type: string

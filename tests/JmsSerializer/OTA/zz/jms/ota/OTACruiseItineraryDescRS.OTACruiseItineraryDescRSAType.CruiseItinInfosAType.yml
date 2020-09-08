@@ -1,0 +1,16 @@
+OTA\OTACruiseItineraryDescRS\OTACruiseItineraryDescRSAType\CruiseItinInfosAType:
+    properties:
+        cruiseItinInfo:
+            expose: true
+            access_type: public_method
+            serialized_name: CruiseItinInfo
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getCruiseItinInfo
+                setter: setCruiseItinInfo
+            xml_list:
+                inline: true
+                entry_name: CruiseItinInfo
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\OTACruiseItineraryDescRS\OTACruiseItineraryDescRSAType\CruiseItinInfosAType\CruiseItinInfoAType>

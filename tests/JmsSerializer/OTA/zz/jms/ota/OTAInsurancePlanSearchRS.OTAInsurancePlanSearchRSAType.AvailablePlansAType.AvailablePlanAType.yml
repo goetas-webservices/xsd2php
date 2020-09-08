@@ -1,0 +1,119 @@
+OTA\OTAInsurancePlanSearchRS\OTAInsurancePlanSearchRSAType\AvailablePlansAType\AvailablePlanAType:
+    properties:
+        featured:
+            expose: true
+            access_type: public_method
+            serialized_name: Featured
+            accessor:
+                getter: getFeatured
+                setter: setFeatured
+            xml_attribute: true
+            type: bool
+        preferLevel:
+            expose: true
+            access_type: public_method
+            serialized_name: PreferLevel
+            accessor:
+                getter: getPreferLevel
+                setter: setPreferLevel
+            xml_attribute: true
+            type: string
+        planID:
+            expose: true
+            access_type: public_method
+            serialized_name: PlanID
+            accessor:
+                getter: getPlanID
+                setter: setPlanID
+            xml_attribute: true
+            type: string
+        name:
+            expose: true
+            access_type: public_method
+            serialized_name: Name
+            accessor:
+                getter: getName
+                setter: setName
+            xml_attribute: true
+            type: string
+        type:
+            expose: true
+            access_type: public_method
+            serialized_name: Type
+            accessor:
+                getter: getType
+                setter: setType
+            xml_attribute: true
+            type: string
+        typeID:
+            expose: true
+            access_type: public_method
+            serialized_name: TypeID
+            accessor:
+                getter: getTypeID
+                setter: setTypeID
+            xml_attribute: true
+            type: string
+        effectiveDate:
+            expose: true
+            access_type: public_method
+            serialized_name: EffectiveDate
+            accessor:
+                getter: getEffectiveDate
+                setter: setEffectiveDate
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\Date
+        expireDate:
+            expose: true
+            access_type: public_method
+            serialized_name: ExpireDate
+            accessor:
+                getter: getExpireDate
+                setter: setExpireDate
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\Date
+        planDetail:
+            expose: true
+            access_type: public_method
+            serialized_name: PlanDetail
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getPlanDetail
+                setter: setPlanDetail
+            type: OTA\OTAInsurancePlanSearchRS\OTAInsurancePlanSearchRSAType\AvailablePlansAType\AvailablePlanAType\PlanDetailAType
+        providerDetail:
+            expose: true
+            access_type: public_method
+            serialized_name: ProviderDetail
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getProviderDetail
+                setter: setProviderDetail
+            type: OTA\OTAInsurancePlanSearchRS\OTAInsurancePlanSearchRSAType\AvailablePlansAType\AvailablePlanAType\ProviderDetailAType
+        underwriterDetail:
+            expose: true
+            access_type: public_method
+            serialized_name: UnderwriterDetail
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getUnderwriterDetail
+                setter: setUnderwriterDetail
+            type: OTA\OTAInsurancePlanSearchRS\OTAInsurancePlanSearchRSAType\AvailablePlansAType\AvailablePlanAType\UnderwriterDetailAType
+        planRestrictions:
+            expose: true
+            access_type: public_method
+            serialized_name: PlanRestrictions
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getPlanRestrictions
+                setter: setPlanRestrictions
+            type: array<OTA\PlanRestrictionType\PlanRestrictionAType>
+            xml_list:
+                inline: false
+                entry_name: PlanRestriction
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'

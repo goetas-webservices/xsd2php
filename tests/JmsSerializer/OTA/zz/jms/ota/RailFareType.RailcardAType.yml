@@ -1,0 +1,29 @@
+OTA\RailFareType\RailcardAType:
+    properties:
+        multipleRailcardsReqd:
+            expose: true
+            access_type: public_method
+            serialized_name: MultipleRailcardsReqd
+            accessor:
+                getter: getMultipleRailcardsReqd
+                setter: setMultipleRailcardsReqd
+            xml_attribute: true
+            type: bool
+        railcardCodeSupplied:
+            expose: true
+            access_type: public_method
+            serialized_name: RailcardCodeSupplied
+            accessor:
+                getter: getRailcardCodeSupplied
+                setter: setRailcardCodeSupplied
+            xml_attribute: true
+            type: string
+        railcardCodeUsed:
+            expose: true
+            access_type: public_method
+            serialized_name: RailcardCodeUsed
+            accessor:
+                getter: getRailcardCodeUsed
+                setter: setRailcardCodeUsed
+            xml_attribute: true
+            type: string

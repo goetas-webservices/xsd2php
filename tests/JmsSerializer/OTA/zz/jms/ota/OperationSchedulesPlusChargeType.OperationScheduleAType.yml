@@ -1,0 +1,11 @@
+OTA\OperationSchedulesPlusChargeType\OperationScheduleAType:
+    properties:
+        name:
+            expose: true
+            access_type: public_method
+            serialized_name: Name
+            accessor:
+                getter: getName
+                setter: setName
+            xml_attribute: true
+            type: string

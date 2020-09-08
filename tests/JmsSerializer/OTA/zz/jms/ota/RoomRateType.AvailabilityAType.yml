@@ -1,0 +1,11 @@
+OTA\RoomRateType\AvailabilityAType:
+    properties:
+        availabilityStatus:
+            expose: true
+            access_type: public_method
+            serialized_name: AvailabilityStatus
+            accessor:
+                getter: getAvailabilityStatus
+                setter: setAvailabilityStatus
+            xml_attribute: true
+            type: string

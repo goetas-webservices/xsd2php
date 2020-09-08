@@ -1,0 +1,43 @@
+OTA\OperationSchedulesType:
+    properties:
+        start:
+            expose: true
+            access_type: public_method
+            serialized_name: Start
+            accessor:
+                getter: getStart
+                setter: setStart
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime
+        duration:
+            expose: true
+            access_type: public_method
+            serialized_name: Duration
+            accessor:
+                getter: getDuration
+                setter: setDuration
+            xml_attribute: true
+            type: DateInterval
+        end:
+            expose: true
+            access_type: public_method
+            serialized_name: End
+            accessor:
+                getter: getEnd
+                setter: setEnd
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime
+        operationSchedule:
+            expose: true
+            access_type: public_method
+            serialized_name: OperationSchedule
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getOperationSchedule
+                setter: setOperationSchedule
+            xml_list:
+                inline: true
+                entry_name: OperationSchedule
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\OperationScheduleType>

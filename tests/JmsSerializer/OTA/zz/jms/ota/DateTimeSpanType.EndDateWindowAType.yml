@@ -1,0 +1,29 @@
+OTA\DateTimeSpanType\EndDateWindowAType:
+    properties:
+        earliestDate:
+            expose: true
+            access_type: public_method
+            serialized_name: EarliestDate
+            accessor:
+                getter: getEarliestDate
+                setter: setEarliestDate
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime
+        latestDate:
+            expose: true
+            access_type: public_method
+            serialized_name: LatestDate
+            accessor:
+                getter: getLatestDate
+                setter: setLatestDate
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime
+        dOW:
+            expose: true
+            access_type: public_method
+            serialized_name: DOW
+            accessor:
+                getter: getDOW
+                setter: setDOW
+            xml_attribute: true
+            type: string

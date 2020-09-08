@@ -1,0 +1,29 @@
+OTA\AddressInfoType:
+    properties:
+        defaultInd:
+            expose: true
+            access_type: public_method
+            serialized_name: DefaultInd
+            accessor:
+                getter: getDefaultInd
+                setter: setDefaultInd
+            xml_attribute: true
+            type: bool
+        useType:
+            expose: true
+            access_type: public_method
+            serialized_name: UseType
+            accessor:
+                getter: getUseType
+                setter: setUseType
+            xml_attribute: true
+            type: string
+        rPH:
+            expose: true
+            access_type: public_method
+            serialized_name: RPH
+            accessor:
+                getter: getRPH
+                setter: setRPH
+            xml_attribute: true
+            type: string

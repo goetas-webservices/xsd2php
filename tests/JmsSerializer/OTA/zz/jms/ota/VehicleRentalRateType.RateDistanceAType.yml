@@ -1,0 +1,38 @@
+OTA\VehicleRentalRateType\RateDistanceAType:
+    properties:
+        unlimited:
+            expose: true
+            access_type: public_method
+            serialized_name: Unlimited
+            accessor:
+                getter: getUnlimited
+                setter: setUnlimited
+            xml_attribute: true
+            type: bool
+        quantity:
+            expose: true
+            access_type: public_method
+            serialized_name: Quantity
+            accessor:
+                getter: getQuantity
+                setter: setQuantity
+            xml_attribute: true
+            type: int
+        distUnitName:
+            expose: true
+            access_type: public_method
+            serialized_name: DistUnitName
+            accessor:
+                getter: getDistUnitName
+                setter: setDistUnitName
+            xml_attribute: true
+            type: string
+        vehiclePeriodUnitName:
+            expose: true
+            access_type: public_method
+            serialized_name: VehiclePeriodUnitName
+            accessor:
+                getter: getVehiclePeriodUnitName
+                setter: setVehiclePeriodUnitName
+            xml_attribute: true
+            type: string

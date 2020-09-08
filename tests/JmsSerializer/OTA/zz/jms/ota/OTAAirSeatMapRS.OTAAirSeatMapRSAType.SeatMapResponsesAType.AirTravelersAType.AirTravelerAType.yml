@@ -1,0 +1,109 @@
+OTA\OTAAirSeatMapRS\OTAAirSeatMapRSAType\SeatMapResponsesAType\AirTravelersAType\AirTravelerAType:
+    properties:
+        gender:
+            expose: true
+            access_type: public_method
+            serialized_name: Gender
+            accessor:
+                getter: getGender
+                setter: setGender
+            xml_attribute: true
+            type: string
+        shareSynchInd:
+            expose: true
+            access_type: public_method
+            serialized_name: ShareSynchInd
+            accessor:
+                getter: getShareSynchInd
+                setter: setShareSynchInd
+            xml_attribute: true
+            type: string
+        shareMarketInd:
+            expose: true
+            access_type: public_method
+            serialized_name: ShareMarketInd
+            accessor:
+                getter: getShareMarketInd
+                setter: setShareMarketInd
+            xml_attribute: true
+            type: string
+        birthDate:
+            expose: true
+            access_type: public_method
+            serialized_name: BirthDate
+            accessor:
+                getter: getBirthDate
+                setter: setBirthDate
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\Date
+        currencyCode:
+            expose: true
+            access_type: public_method
+            serialized_name: CurrencyCode
+            accessor:
+                getter: getCurrencyCode
+                setter: setCurrencyCode
+            xml_attribute: true
+            type: string
+        passengerTypeCode:
+            expose: true
+            access_type: public_method
+            serialized_name: PassengerTypeCode
+            accessor:
+                getter: getPassengerTypeCode
+                setter: setPassengerTypeCode
+            xml_attribute: true
+            type: string
+        accompaniedByInfant:
+            expose: true
+            access_type: public_method
+            serialized_name: AccompaniedByInfant
+            accessor:
+                getter: getAccompaniedByInfant
+                setter: setAccompaniedByInfant
+            xml_attribute: true
+            type: bool
+        personName:
+            expose: true
+            access_type: public_method
+            serialized_name: PersonName
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getPersonName
+                setter: setPersonName
+            type: OTA\PersonNameType
+        custLoyalty:
+            expose: true
+            access_type: public_method
+            serialized_name: CustLoyalty
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getCustLoyalty
+                setter: setCustLoyalty
+            xml_list:
+                inline: true
+                entry_name: CustLoyalty
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\OTAAirSeatMapRS\OTAAirSeatMapRSAType\SeatMapResponsesAType\AirTravelersAType\AirTravelerAType\CustLoyaltyAType>
+        passengerTypeQuantity:
+            expose: true
+            access_type: public_method
+            serialized_name: PassengerTypeQuantity
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getPassengerTypeQuantity
+                setter: setPassengerTypeQuantity
+            type: OTA\PassengerTypeQuantityType
+        travelerRefNumber:
+            expose: true
+            access_type: public_method
+            serialized_name: TravelerRefNumber
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getTravelerRefNumber
+                setter: setTravelerRefNumber
+            type: OTA\OTAAirSeatMapRS\OTAAirSeatMapRSAType\SeatMapResponsesAType\AirTravelersAType\AirTravelerAType\TravelerRefNumberAType

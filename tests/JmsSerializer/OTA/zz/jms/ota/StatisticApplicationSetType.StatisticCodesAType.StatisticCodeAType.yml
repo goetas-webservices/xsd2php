@@ -1,0 +1,20 @@
+OTA\StatisticApplicationSetType\StatisticCodesAType\StatisticCodeAType:
+    properties:
+        statCode:
+            expose: true
+            access_type: public_method
+            serialized_name: StatCode
+            accessor:
+                getter: getStatCode
+                setter: setStatCode
+            xml_attribute: true
+            type: string
+        statCategoryCode:
+            expose: true
+            access_type: public_method
+            serialized_name: StatCategoryCode
+            accessor:
+                getter: getStatCategoryCode
+                setter: setStatCategoryCode
+            xml_attribute: true
+            type: string

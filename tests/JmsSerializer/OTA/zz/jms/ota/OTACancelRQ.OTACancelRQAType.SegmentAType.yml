@@ -1,0 +1,29 @@
+OTA\OTACancelRQ\OTACancelRQAType\SegmentAType:
+    properties:
+        itinSegNbr:
+            expose: true
+            access_type: public_method
+            serialized_name: ItinSegNbr
+            accessor:
+                getter: getItinSegNbr
+                setter: setItinSegNbr
+            xml_attribute: true
+            type: int
+        firstItinSegNbr:
+            expose: true
+            access_type: public_method
+            serialized_name: FirstItinSegNbr
+            accessor:
+                getter: getFirstItinSegNbr
+                setter: setFirstItinSegNbr
+            xml_attribute: true
+            type: int
+        lastItinSegNbr:
+            expose: true
+            access_type: public_method
+            serialized_name: LastItinSegNbr
+            accessor:
+                getter: getLastItinSegNbr
+                setter: setLastItinSegNbr
+            xml_attribute: true
+            type: int

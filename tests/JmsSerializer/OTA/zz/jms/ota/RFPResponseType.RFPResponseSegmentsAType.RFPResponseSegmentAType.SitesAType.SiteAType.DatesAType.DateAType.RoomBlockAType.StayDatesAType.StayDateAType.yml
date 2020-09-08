@@ -1,0 +1,67 @@
+OTA\RFPResponseType\RFPResponseSegmentsAType\RFPResponseSegmentAType\SitesAType\SiteAType\DatesAType\DateAType\RoomBlockAType\StayDatesAType\StayDateAType:
+    properties:
+        start:
+            expose: true
+            access_type: public_method
+            serialized_name: Start
+            accessor:
+                getter: getStart
+                setter: setStart
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime
+        duration:
+            expose: true
+            access_type: public_method
+            serialized_name: Duration
+            accessor:
+                getter: getDuration
+                setter: setDuration
+            xml_attribute: true
+            type: DateInterval
+        end:
+            expose: true
+            access_type: public_method
+            serialized_name: End
+            accessor:
+                getter: getEnd
+                setter: setEnd
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime
+        availabilityOptionType:
+            expose: true
+            access_type: public_method
+            serialized_name: AvailabilityOptionType
+            accessor:
+                getter: getAvailabilityOptionType
+                setter: setAvailabilityOptionType
+            xml_attribute: true
+            type: string
+        stayDateRooms:
+            expose: true
+            access_type: public_method
+            serialized_name: StayDateRooms
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getStayDateRooms
+                setter: setStayDateRooms
+            type: array<OTA\RFPResponseType\RFPResponseSegmentsAType\RFPResponseSegmentAType\SitesAType\SiteAType\DatesAType\DateAType\RoomBlockAType\StayDatesAType\StayDateAType\StayDateRoomsAType\StayDateRoomAType>
+            xml_list:
+                inline: false
+                entry_name: StayDateRoom
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        comment:
+            expose: true
+            access_type: public_method
+            serialized_name: Comment
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getComment
+                setter: setComment
+            xml_list:
+                inline: true
+                entry_name: Comment
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\ParagraphType>

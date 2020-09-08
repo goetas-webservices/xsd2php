@@ -1,0 +1,29 @@
+OTA\OTACruiseSailAvailRQ\OTACruiseSailAvailRQAType\SailingDateRangeAType:
+    properties:
+        minDuration:
+            expose: true
+            access_type: public_method
+            serialized_name: MinDuration
+            accessor:
+                getter: getMinDuration
+                setter: setMinDuration
+            xml_attribute: true
+            type: DateInterval
+        maxDuration:
+            expose: true
+            access_type: public_method
+            serialized_name: MaxDuration
+            accessor:
+                getter: getMaxDuration
+                setter: setMaxDuration
+            xml_attribute: true
+            type: DateInterval
+        listOfDurations:
+            expose: true
+            access_type: public_method
+            serialized_name: ListOfDurations
+            accessor:
+                getter: getListOfDurations
+                setter: setListOfDurations
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Jms\SimpleListOf<DateInterval>

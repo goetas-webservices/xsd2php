@@ -1,0 +1,92 @@
+OTA\AccountSpecificInformationType\AccountSpecificRateInfoAType:
+    properties:
+        roomNightTargetIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: RoomNightTargetIndicator
+            accessor:
+                getter: getRoomNightTargetIndicator
+                setter: setRoomNightTargetIndicator
+            xml_attribute: true
+            type: bool
+        roomNightTargetQuantity:
+            expose: true
+            access_type: public_method
+            serialized_name: RoomNightTargetQuantity
+            accessor:
+                getter: getRoomNightTargetQuantity
+                setter: setRoomNightTargetQuantity
+            xml_attribute: true
+            type: int
+        roomNightProductionQuantity:
+            expose: true
+            access_type: public_method
+            serialized_name: RoomNightProductionQuantity
+            accessor:
+                getter: getRoomNightProductionQuantity
+                setter: setRoomNightProductionQuantity
+            xml_attribute: true
+            type: int
+        start:
+            expose: true
+            access_type: public_method
+            serialized_name: Start
+            accessor:
+                getter: getStart
+                setter: setStart
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime
+        duration:
+            expose: true
+            access_type: public_method
+            serialized_name: Duration
+            accessor:
+                getter: getDuration
+                setter: setDuration
+            xml_attribute: true
+            type: DateInterval
+        end:
+            expose: true
+            access_type: public_method
+            serialized_name: End
+            accessor:
+                getter: getEnd
+                setter: setEnd
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime
+        subsidiaryEmpRateIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: SubsidiaryEmpRateIndicator
+            accessor:
+                getter: getSubsidiaryEmpRateIndicator
+                setter: setSubsidiaryEmpRateIndicator
+            xml_attribute: true
+            type: bool
+        personalUseRateIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: PersonalUseRateIndicator
+            accessor:
+                getter: getPersonalUseRateIndicator
+                setter: setPersonalUseRateIndicator
+            xml_attribute: true
+            type: bool
+        contractorsRateIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: ContractorsRateIndicator
+            accessor:
+                getter: getContractorsRateIndicator
+                setter: setContractorsRateIndicator
+            xml_attribute: true
+            type: bool
+        retireeRateIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: RetireeRateIndicator
+            accessor:
+                getter: getRetireeRateIndicator
+                setter: setRetireeRateIndicator
+            xml_attribute: true
+            type: bool

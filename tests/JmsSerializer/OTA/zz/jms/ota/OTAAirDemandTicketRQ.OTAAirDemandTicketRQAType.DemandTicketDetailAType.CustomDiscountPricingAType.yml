@@ -1,0 +1,47 @@
+OTA\OTAAirDemandTicketRQ\OTAAirDemandTicketRQAType\DemandTicketDetailAType\CustomDiscountPricingAType:
+    properties:
+        discount:
+            expose: true
+            access_type: public_method
+            serialized_name: Discount
+            accessor:
+                getter: getDiscount
+                setter: setDiscount
+            xml_attribute: true
+            type: float
+        type:
+            expose: true
+            access_type: public_method
+            serialized_name: Type
+            accessor:
+                getter: getType
+                setter: setType
+            xml_attribute: true
+            type: string
+        currencyCode:
+            expose: true
+            access_type: public_method
+            serialized_name: CurrencyCode
+            accessor:
+                getter: getCurrencyCode
+                setter: setCurrencyCode
+            xml_attribute: true
+            type: string
+        decimalPlaces:
+            expose: true
+            access_type: public_method
+            serialized_name: DecimalPlaces
+            accessor:
+                getter: getDecimalPlaces
+                setter: setDecimalPlaces
+            xml_attribute: true
+            type: int
+        ticketDesignatorCode:
+            expose: true
+            access_type: public_method
+            serialized_name: TicketDesignatorCode
+            accessor:
+                getter: getTicketDesignatorCode
+                setter: setTicketDesignatorCode
+            xml_attribute: true
+            type: string

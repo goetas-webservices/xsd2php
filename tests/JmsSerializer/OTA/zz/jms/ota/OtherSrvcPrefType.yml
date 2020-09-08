@@ -1,0 +1,114 @@
+OTA\OtherSrvcPrefType:
+    properties:
+        preferLevel:
+            expose: true
+            access_type: public_method
+            serialized_name: PreferLevel
+            accessor:
+                getter: getPreferLevel
+                setter: setPreferLevel
+            xml_attribute: true
+            type: string
+        shareSynchInd:
+            expose: true
+            access_type: public_method
+            serialized_name: ShareSynchInd
+            accessor:
+                getter: getShareSynchInd
+                setter: setShareSynchInd
+            xml_attribute: true
+            type: string
+        shareMarketInd:
+            expose: true
+            access_type: public_method
+            serialized_name: ShareMarketInd
+            accessor:
+                getter: getShareMarketInd
+                setter: setShareMarketInd
+            xml_attribute: true
+            type: string
+        travelPurpose:
+            expose: true
+            access_type: public_method
+            serialized_name: TravelPurpose
+            accessor:
+                getter: getTravelPurpose
+                setter: setTravelPurpose
+            xml_attribute: true
+            type: string
+        otherSrvcName:
+            expose: true
+            access_type: public_method
+            serialized_name: OtherSrvcName
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getOtherSrvcName
+                setter: setOtherSrvcName
+            type: string
+        vendorPref:
+            expose: true
+            access_type: public_method
+            serialized_name: VendorPref
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getVendorPref
+                setter: setVendorPref
+            xml_list:
+                inline: true
+                entry_name: VendorPref
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\CompanyNamePrefType>
+        loyaltyPref:
+            expose: true
+            access_type: public_method
+            serialized_name: LoyaltyPref
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getLoyaltyPref
+                setter: setLoyaltyPref
+            xml_list:
+                inline: true
+                entry_name: LoyaltyPref
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\LoyaltyPrefType>
+        paymentFormPref:
+            expose: true
+            access_type: public_method
+            serialized_name: PaymentFormPref
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getPaymentFormPref
+                setter: setPaymentFormPref
+            xml_list:
+                inline: true
+                entry_name: PaymentFormPref
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\PaymentFormPrefType>
+        specRequestPref:
+            expose: true
+            access_type: public_method
+            serialized_name: SpecRequestPref
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getSpecRequestPref
+                setter: setSpecRequestPref
+            xml_list:
+                inline: true
+                entry_name: SpecRequestPref
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\SpecRequestPrefType>
+        tPAExtensions:
+            expose: true
+            access_type: public_method
+            serialized_name: TPA_Extensions
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getTPAExtensions
+                setter: setTPAExtensions
+            type: OTA\TPAExtensionsType

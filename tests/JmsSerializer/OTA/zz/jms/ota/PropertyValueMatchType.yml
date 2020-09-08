@@ -1,0 +1,68 @@
+OTA\PropertyValueMatchType:
+    properties:
+        moreDataEchoToken:
+            expose: true
+            access_type: public_method
+            serialized_name: MoreDataEchoToken
+            accessor:
+                getter: getMoreDataEchoToken
+                setter: setMoreDataEchoToken
+            xml_attribute: true
+            type: string
+        sameCountryInd:
+            expose: true
+            access_type: public_method
+            serialized_name: SameCountryInd
+            accessor:
+                getter: getSameCountryInd
+                setter: setSameCountryInd
+            xml_attribute: true
+            type: bool
+        availabilityStatus:
+            expose: true
+            access_type: public_method
+            serialized_name: AvailabilityStatus
+            accessor:
+                getter: getAvailabilityStatus
+                setter: setAvailabilityStatus
+            xml_attribute: true
+            type: string
+        searchValueMatch:
+            expose: true
+            access_type: public_method
+            serialized_name: SearchValueMatch
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getSearchValueMatch
+                setter: setSearchValueMatch
+            xml_list:
+                inline: true
+                entry_name: SearchValueMatch
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\PropertyValueMatchType\SearchValueMatchAType>
+        amenities:
+            expose: true
+            access_type: public_method
+            serialized_name: Amenities
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getAmenities
+                setter: setAmenities
+            type: array<OTA\PropertyValueMatchType\AmenitiesAType\AmenityAType>
+            xml_list:
+                inline: false
+                entry_name: Amenity
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        rateRange:
+            expose: true
+            access_type: public_method
+            serialized_name: RateRange
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getRateRange
+                setter: setRateRange
+            type: OTA\PropertyValueMatchType\RateRangeAType

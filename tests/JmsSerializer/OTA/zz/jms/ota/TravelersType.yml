@@ -1,0 +1,16 @@
+OTA\TravelersType:
+    properties:
+        traveler:
+            expose: true
+            access_type: public_method
+            serialized_name: Traveler
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getTraveler
+                setter: setTraveler
+            xml_list:
+                inline: true
+                entry_name: Traveler
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\TravelersType\TravelerAType>

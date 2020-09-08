@@ -1,0 +1,31 @@
+OTA\OfferType\FreeUpgradeAType:
+    properties:
+        upgradeBookingCode:
+            expose: true
+            access_type: public_method
+            serialized_name: UpgradeBookingCode
+            accessor:
+                getter: getUpgradeBookingCode
+                setter: setUpgradeBookingCode
+            xml_attribute: true
+            type: string
+        upgradeFrom:
+            expose: true
+            access_type: public_method
+            serialized_name: UpgradeFrom
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getUpgradeFrom
+                setter: setUpgradeFrom
+            type: OTA\OfferType\FreeUpgradeAType\UpgradeFromAType
+        upgradeTo:
+            expose: true
+            access_type: public_method
+            serialized_name: UpgradeTo
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getUpgradeTo
+                setter: setUpgradeTo
+            type: OTA\OfferType\FreeUpgradeAType\UpgradeToAType

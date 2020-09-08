@@ -1,0 +1,39 @@
+OTA\VehicleEquipmentType:
+    properties:
+        equipType:
+            expose: true
+            access_type: public_method
+            serialized_name: EquipType
+            accessor:
+                getter: getEquipType
+                setter: setEquipType
+            xml_attribute: true
+            type: string
+        quantity:
+            expose: true
+            access_type: public_method
+            serialized_name: Quantity
+            accessor:
+                getter: getQuantity
+                setter: setQuantity
+            xml_attribute: true
+            type: int
+        restriction:
+            expose: true
+            access_type: public_method
+            serialized_name: Restriction
+            accessor:
+                getter: getRestriction
+                setter: setRestriction
+            xml_attribute: true
+            type: string
+        description:
+            expose: true
+            access_type: public_method
+            serialized_name: Description
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getDescription
+                setter: setDescription
+            type: string

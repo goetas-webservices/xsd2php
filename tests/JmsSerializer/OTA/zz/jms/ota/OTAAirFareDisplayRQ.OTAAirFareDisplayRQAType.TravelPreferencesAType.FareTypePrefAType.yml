@@ -1,0 +1,20 @@
+OTA\OTAAirFareDisplayRQ\OTAAirFareDisplayRQAType\TravelPreferencesAType\FareTypePrefAType:
+    properties:
+        fareType:
+            expose: true
+            access_type: public_method
+            serialized_name: FareType
+            accessor:
+                getter: getFareType
+                setter: setFareType
+            xml_attribute: true
+            type: string
+        preferLevel:
+            expose: true
+            access_type: public_method
+            serialized_name: PreferLevel
+            accessor:
+                getter: getPreferLevel
+                setter: setPreferLevel
+            xml_attribute: true
+            type: string

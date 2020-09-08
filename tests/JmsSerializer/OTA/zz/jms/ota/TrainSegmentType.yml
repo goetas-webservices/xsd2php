@@ -1,0 +1,133 @@
+OTA\TrainSegmentType:
+    properties:
+        departureDateTime:
+            expose: true
+            access_type: public_method
+            serialized_name: DepartureDateTime
+            accessor:
+                getter: getDepartureDateTime
+                setter: setDepartureDateTime
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\DateTime
+        arrivalDateTime:
+            expose: true
+            access_type: public_method
+            serialized_name: ArrivalDateTime
+            accessor:
+                getter: getArrivalDateTime
+                setter: setArrivalDateTime
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\DateTime
+        trainNumber:
+            expose: true
+            access_type: public_method
+            serialized_name: TrainNumber
+            accessor:
+                getter: getTrainNumber
+                setter: setTrainNumber
+            xml_attribute: true
+            type: string
+        stopQuantity:
+            expose: true
+            access_type: public_method
+            serialized_name: StopQuantity
+            accessor:
+                getter: getStopQuantity
+                setter: setStopQuantity
+            xml_attribute: true
+            type: int
+        journeyDuration:
+            expose: true
+            access_type: public_method
+            serialized_name: JourneyDuration
+            accessor:
+                getter: getJourneyDuration
+                setter: setJourneyDuration
+            xml_attribute: true
+            type: DateInterval
+        smokingAllowed:
+            expose: true
+            access_type: public_method
+            serialized_name: SmokingAllowed
+            accessor:
+                getter: getSmokingAllowed
+                setter: setSmokingAllowed
+            xml_attribute: true
+            type: bool
+        trainServiceType:
+            expose: true
+            access_type: public_method
+            serialized_name: TrainServiceType
+            accessor:
+                getter: getTrainServiceType
+                setter: setTrainServiceType
+            xml_attribute: true
+            type: string
+        crossBorder:
+            expose: true
+            access_type: public_method
+            serialized_name: CrossBorder
+            accessor:
+                getter: getCrossBorder
+                setter: setCrossBorder
+            xml_attribute: true
+            type: bool
+        seatAssignable:
+            expose: true
+            access_type: public_method
+            serialized_name: SeatAssignable
+            accessor:
+                getter: getSeatAssignable
+                setter: setSeatAssignable
+            xml_attribute: true
+            type: bool
+        departureStation:
+            expose: true
+            access_type: public_method
+            serialized_name: DepartureStation
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getDepartureStation
+                setter: setDepartureStation
+            type: OTA\StationDetailsType
+        arrivalStation:
+            expose: true
+            access_type: public_method
+            serialized_name: ArrivalStation
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getArrivalStation
+                setter: setArrivalStation
+            type: OTA\StationDetailsType
+        marketingCompany:
+            expose: true
+            access_type: public_method
+            serialized_name: MarketingCompany
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getMarketingCompany
+                setter: setMarketingCompany
+            type: OTA\CompanyNameType
+        operatingCompany:
+            expose: true
+            access_type: public_method
+            serialized_name: OperatingCompany
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getOperatingCompany
+                setter: setOperatingCompany
+            type: OTA\CompanyNameType
+        equipment:
+            expose: true
+            access_type: public_method
+            serialized_name: Equipment
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getEquipment
+                setter: setEquipment
+            type: OTA\TrainSegmentType\EquipmentAType

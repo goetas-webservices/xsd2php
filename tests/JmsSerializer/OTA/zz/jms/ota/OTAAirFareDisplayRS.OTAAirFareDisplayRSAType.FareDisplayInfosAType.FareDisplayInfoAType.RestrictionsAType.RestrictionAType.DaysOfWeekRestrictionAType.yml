@@ -1,0 +1,101 @@
+OTA\OTAAirFareDisplayRS\OTAAirFareDisplayRSAType\FareDisplayInfosAType\FareDisplayInfoAType\RestrictionsAType\RestrictionAType\DaysOfWeekRestrictionAType:
+    properties:
+        application:
+            expose: true
+            access_type: public_method
+            serialized_name: Application
+            accessor:
+                getter: getApplication
+                setter: setApplication
+            xml_attribute: true
+            type: string
+        tripType:
+            expose: true
+            access_type: public_method
+            serialized_name: TripType
+            accessor:
+                getter: getTripType
+                setter: setTripType
+            xml_attribute: true
+            type: string
+        restrictionExistsInd:
+            expose: true
+            access_type: public_method
+            serialized_name: RestrictionExistsInd
+            accessor:
+                getter: getRestrictionExistsInd
+                setter: setRestrictionExistsInd
+            xml_attribute: true
+            type: bool
+        includeExcludeUseInd:
+            expose: true
+            access_type: public_method
+            serialized_name: IncludeExcludeUseInd
+            accessor:
+                getter: getIncludeExcludeUseInd
+                setter: setIncludeExcludeUseInd
+            xml_attribute: true
+            type: bool
+        mon:
+            expose: true
+            access_type: public_method
+            serialized_name: Mon
+            accessor:
+                getter: getMon
+                setter: setMon
+            xml_attribute: true
+            type: bool
+        tue:
+            expose: true
+            access_type: public_method
+            serialized_name: Tue
+            accessor:
+                getter: getTue
+                setter: setTue
+            xml_attribute: true
+            type: bool
+        weds:
+            expose: true
+            access_type: public_method
+            serialized_name: Weds
+            accessor:
+                getter: getWeds
+                setter: setWeds
+            xml_attribute: true
+            type: bool
+        thur:
+            expose: true
+            access_type: public_method
+            serialized_name: Thur
+            accessor:
+                getter: getThur
+                setter: setThur
+            xml_attribute: true
+            type: bool
+        fri:
+            expose: true
+            access_type: public_method
+            serialized_name: Fri
+            accessor:
+                getter: getFri
+                setter: setFri
+            xml_attribute: true
+            type: bool
+        sat:
+            expose: true
+            access_type: public_method
+            serialized_name: Sat
+            accessor:
+                getter: getSat
+                setter: setSat
+            xml_attribute: true
+            type: bool
+        sun:
+            expose: true
+            access_type: public_method
+            serialized_name: Sun
+            accessor:
+                getter: getSun
+                setter: setSun
+            xml_attribute: true
+            type: bool

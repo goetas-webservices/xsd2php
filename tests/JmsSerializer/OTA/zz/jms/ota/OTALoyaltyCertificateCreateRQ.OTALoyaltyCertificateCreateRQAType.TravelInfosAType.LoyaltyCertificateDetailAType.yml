@@ -1,0 +1,29 @@
+OTA\OTALoyaltyCertificateCreateRQ\OTALoyaltyCertificateCreateRQAType\TravelInfosAType\LoyaltyCertificateDetailAType:
+    properties:
+        certificateNumber:
+            expose: true
+            access_type: public_method
+            serialized_name: CertificateNumber
+            accessor:
+                getter: getCertificateNumber
+                setter: setCertificateNumber
+            xml_attribute: true
+            type: string
+        memberNumber:
+            expose: true
+            access_type: public_method
+            serialized_name: MemberNumber
+            accessor:
+                getter: getMemberNumber
+                setter: setMemberNumber
+            xml_attribute: true
+            type: string
+        programName:
+            expose: true
+            access_type: public_method
+            serialized_name: ProgramName
+            accessor:
+                getter: getProgramName
+                setter: setProgramName
+            xml_attribute: true
+            type: string

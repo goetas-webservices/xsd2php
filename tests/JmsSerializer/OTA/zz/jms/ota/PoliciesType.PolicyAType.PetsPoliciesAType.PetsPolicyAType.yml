@@ -1,0 +1,124 @@
+OTA\PoliciesType\PolicyAType\PetsPoliciesAType\PetsPolicyAType:
+    properties:
+        petsPolicyCode:
+            expose: true
+            access_type: public_method
+            serialized_name: PetsPolicyCode
+            accessor:
+                getter: getPetsPolicyCode
+                setter: setPetsPolicyCode
+            xml_attribute: true
+            type: string
+        unitOfMeasureQuantity:
+            expose: true
+            access_type: public_method
+            serialized_name: UnitOfMeasureQuantity
+            accessor:
+                getter: getUnitOfMeasureQuantity
+                setter: setUnitOfMeasureQuantity
+            xml_attribute: true
+            type: float
+        unitOfMeasure:
+            expose: true
+            access_type: public_method
+            serialized_name: UnitOfMeasure
+            accessor:
+                getter: getUnitOfMeasure
+                setter: setUnitOfMeasure
+            xml_attribute: true
+            type: string
+        unitOfMeasureCode:
+            expose: true
+            access_type: public_method
+            serialized_name: UnitOfMeasureCode
+            accessor:
+                getter: getUnitOfMeasureCode
+                setter: setUnitOfMeasureCode
+            xml_attribute: true
+            type: string
+        maxPetQuantity:
+            expose: true
+            access_type: public_method
+            serialized_name: MaxPetQuantity
+            accessor:
+                getter: getMaxPetQuantity
+                setter: setMaxPetQuantity
+            xml_attribute: true
+            type: int
+        refundableDeposit:
+            expose: true
+            access_type: public_method
+            serialized_name: RefundableDeposit
+            accessor:
+                getter: getRefundableDeposit
+                setter: setRefundableDeposit
+            xml_attribute: true
+            type: float
+        nonRefundableFee:
+            expose: true
+            access_type: public_method
+            serialized_name: NonRefundableFee
+            accessor:
+                getter: getNonRefundableFee
+                setter: setNonRefundableFee
+            xml_attribute: true
+            type: float
+        currencyCode:
+            expose: true
+            access_type: public_method
+            serialized_name: CurrencyCode
+            accessor:
+                getter: getCurrencyCode
+                setter: setCurrencyCode
+            xml_attribute: true
+            type: string
+        decimalPlaces:
+            expose: true
+            access_type: public_method
+            serialized_name: DecimalPlaces
+            accessor:
+                getter: getDecimalPlaces
+                setter: setDecimalPlaces
+            xml_attribute: true
+            type: int
+        chargeCode:
+            expose: true
+            access_type: public_method
+            serialized_name: ChargeCode
+            accessor:
+                getter: getChargeCode
+                setter: setChargeCode
+            xml_attribute: true
+            type: string
+        restrictionInd:
+            expose: true
+            access_type: public_method
+            serialized_name: RestrictionInd
+            accessor:
+                getter: getRestrictionInd
+                setter: setRestrictionInd
+            xml_attribute: true
+            type: bool
+        minUnitOfMeasureQuantity:
+            expose: true
+            access_type: public_method
+            serialized_name: MinUnitOfMeasureQuantity
+            accessor:
+                getter: getMinUnitOfMeasureQuantity
+                setter: setMinUnitOfMeasureQuantity
+            xml_attribute: true
+            type: float
+        description:
+            expose: true
+            access_type: public_method
+            serialized_name: Description
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getDescription
+                setter: setDescription
+            xml_list:
+                inline: true
+                entry_name: Description
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\ParagraphType>

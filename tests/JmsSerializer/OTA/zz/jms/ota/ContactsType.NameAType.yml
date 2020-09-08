@@ -1,0 +1,97 @@
+OTA\ContactsType\NameAType:
+    properties:
+        codeDetail:
+            expose: true
+            access_type: public_method
+            serialized_name: CodeDetail
+            accessor:
+                getter: getCodeDetail
+                setter: setCodeDetail
+            xml_attribute: true
+            type: string
+        removal:
+            expose: true
+            access_type: public_method
+            serialized_name: Removal
+            accessor:
+                getter: getRemoval
+                setter: setRemoval
+            xml_attribute: true
+            type: bool
+        gender:
+            expose: true
+            access_type: public_method
+            serialized_name: Gender
+            accessor:
+                getter: getGender
+                setter: setGender
+            xml_attribute: true
+            type: string
+        srvcCode:
+            expose: true
+            access_type: public_method
+            serialized_name: SrvcCode
+            accessor:
+                getter: getSrvcCode
+                setter: setSrvcCode
+            xml_attribute: true
+            type: string
+        location:
+            expose: true
+            access_type: public_method
+            serialized_name: Location
+            accessor:
+                getter: getLocation
+                setter: setLocation
+            xml_attribute: true
+            type: string
+        corporatePosition:
+            expose: true
+            access_type: public_method
+            serialized_name: CorporatePosition
+            accessor:
+                getter: getCorporatePosition
+                setter: setCorporatePosition
+            xml_attribute: true
+            type: string
+        oKToPublish:
+            expose: true
+            access_type: public_method
+            serialized_name: OKToPublish
+            accessor:
+                getter: getOKToPublish
+                setter: setOKToPublish
+            xml_attribute: true
+            type: bool
+        nameOrdered:
+            expose: true
+            access_type: public_method
+            serialized_name: NameOrdered
+            accessor:
+                getter: getNameOrdered
+                setter: setNameOrdered
+            xml_attribute: true
+            type: string
+        iD:
+            expose: true
+            access_type: public_method
+            serialized_name: ID
+            accessor:
+                getter: getID
+                setter: setID
+            xml_attribute: true
+            type: string
+        jobTitle:
+            expose: true
+            access_type: public_method
+            serialized_name: JobTitle
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getJobTitle
+                setter: setJobTitle
+            xml_list:
+                inline: true
+                entry_name: JobTitle
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\ContactsType\NameAType\JobTitleAType>

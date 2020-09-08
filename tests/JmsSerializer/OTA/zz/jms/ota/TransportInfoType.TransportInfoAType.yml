@@ -1,0 +1,38 @@
+OTA\TransportInfoType\TransportInfoAType:
+    properties:
+        type:
+            expose: true
+            access_type: public_method
+            serialized_name: Type
+            accessor:
+                getter: getType
+                setter: setType
+            xml_attribute: true
+            type: string
+        iD:
+            expose: true
+            access_type: public_method
+            serialized_name: ID
+            accessor:
+                getter: getID
+                setter: setID
+            xml_attribute: true
+            type: string
+        locationCode:
+            expose: true
+            access_type: public_method
+            serialized_name: LocationCode
+            accessor:
+                getter: getLocationCode
+                setter: setLocationCode
+            xml_attribute: true
+            type: string
+        time:
+            expose: true
+            access_type: public_method
+            serialized_name: Time
+            accessor:
+                getter: getTime
+                setter: setTime
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\DateTime

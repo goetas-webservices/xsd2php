@@ -1,0 +1,42 @@
+OTA\DOWRestrictionsType:
+    properties:
+        availableDaysOfWeek:
+            expose: true
+            access_type: public_method
+            serialized_name: AvailableDaysOfWeek
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getAvailableDaysOfWeek
+                setter: setAvailableDaysOfWeek
+            type: OTA\DOWRestrictionsType\AvailableDaysOfWeekAType
+        arrivalDaysOfWeek:
+            expose: true
+            access_type: public_method
+            serialized_name: ArrivalDaysOfWeek
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getArrivalDaysOfWeek
+                setter: setArrivalDaysOfWeek
+            type: OTA\DOWRestrictionsType\ArrivalDaysOfWeekAType
+        departureDaysOfWeek:
+            expose: true
+            access_type: public_method
+            serialized_name: DepartureDaysOfWeek
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getDepartureDaysOfWeek
+                setter: setDepartureDaysOfWeek
+            type: OTA\DOWRestrictionsType\DepartureDaysOfWeekAType
+        requiredDaysOfWeek:
+            expose: true
+            access_type: public_method
+            serialized_name: RequiredDaysOfWeek
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getRequiredDaysOfWeek
+                setter: setRequiredDaysOfWeek
+            type: OTA\DOWRestrictionsType\RequiredDaysOfWeekAType

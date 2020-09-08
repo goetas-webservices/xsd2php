@@ -1,0 +1,131 @@
+OTA\PaymentCardType:
+    properties:
+        shareSynchInd:
+            expose: true
+            access_type: public_method
+            serialized_name: ShareSynchInd
+            accessor:
+                getter: getShareSynchInd
+                setter: setShareSynchInd
+            xml_attribute: true
+            type: string
+        shareMarketInd:
+            expose: true
+            access_type: public_method
+            serialized_name: ShareMarketInd
+            accessor:
+                getter: getShareMarketInd
+                setter: setShareMarketInd
+            xml_attribute: true
+            type: string
+        cardType:
+            expose: true
+            access_type: public_method
+            serialized_name: CardType
+            accessor:
+                getter: getCardType
+                setter: setCardType
+            xml_attribute: true
+            type: string
+        cardCode:
+            expose: true
+            access_type: public_method
+            serialized_name: CardCode
+            accessor:
+                getter: getCardCode
+                setter: setCardCode
+            xml_attribute: true
+            type: string
+        cardNumber:
+            expose: true
+            access_type: public_method
+            serialized_name: CardNumber
+            accessor:
+                getter: getCardNumber
+                setter: setCardNumber
+            xml_attribute: true
+            type: string
+        seriesCode:
+            expose: true
+            access_type: public_method
+            serialized_name: SeriesCode
+            accessor:
+                getter: getSeriesCode
+                setter: setSeriesCode
+            xml_attribute: true
+            type: string
+        effectiveDate:
+            expose: true
+            access_type: public_method
+            serialized_name: EffectiveDate
+            accessor:
+                getter: getEffectiveDate
+                setter: setEffectiveDate
+            xml_attribute: true
+            type: string
+        expireDate:
+            expose: true
+            access_type: public_method
+            serialized_name: ExpireDate
+            accessor:
+                getter: getExpireDate
+                setter: setExpireDate
+            xml_attribute: true
+            type: string
+        maskedCardNumber:
+            expose: true
+            access_type: public_method
+            serialized_name: MaskedCardNumber
+            accessor:
+                getter: getMaskedCardNumber
+                setter: setMaskedCardNumber
+            xml_attribute: true
+            type: string
+        cardHolderRPH:
+            expose: true
+            access_type: public_method
+            serialized_name: CardHolderRPH
+            accessor:
+                getter: getCardHolderRPH
+                setter: setCardHolderRPH
+            xml_attribute: true
+            type: string
+        extendPaymentIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: ExtendPaymentIndicator
+            accessor:
+                getter: getExtendPaymentIndicator
+                setter: setExtendPaymentIndicator
+            xml_attribute: true
+            type: bool
+        cardHolderName:
+            expose: true
+            access_type: public_method
+            serialized_name: CardHolderName
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getCardHolderName
+                setter: setCardHolderName
+            type: string
+        cardIssuerName:
+            expose: true
+            access_type: public_method
+            serialized_name: CardIssuerName
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getCardIssuerName
+                setter: setCardIssuerName
+            type: OTA\PaymentCardType\CardIssuerNameAType
+        address:
+            expose: true
+            access_type: public_method
+            serialized_name: Address
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getAddress
+                setter: setAddress
+            type: OTA\AddressType

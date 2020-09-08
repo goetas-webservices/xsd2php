@@ -1,0 +1,110 @@
+OTA\AirCheckInType\PassengerFlightInfoAType\FrequentTravelerInfoAType:
+    properties:
+        shareSynchInd:
+            expose: true
+            access_type: public_method
+            serialized_name: ShareSynchInd
+            accessor:
+                getter: getShareSynchInd
+                setter: setShareSynchInd
+            xml_attribute: true
+            type: string
+        shareMarketInd:
+            expose: true
+            access_type: public_method
+            serialized_name: ShareMarketInd
+            accessor:
+                getter: getShareMarketInd
+                setter: setShareMarketInd
+            xml_attribute: true
+            type: string
+        programID:
+            expose: true
+            access_type: public_method
+            serialized_name: ProgramID
+            accessor:
+                getter: getProgramID
+                setter: setProgramID
+            xml_attribute: true
+            type: string
+        membershipID:
+            expose: true
+            access_type: public_method
+            serialized_name: MembershipID
+            accessor:
+                getter: getMembershipID
+                setter: setMembershipID
+            xml_attribute: true
+            type: string
+        travelSector:
+            expose: true
+            access_type: public_method
+            serialized_name: TravelSector
+            accessor:
+                getter: getTravelSector
+                setter: setTravelSector
+            xml_attribute: true
+            type: string
+        loyalLevel:
+            expose: true
+            access_type: public_method
+            serialized_name: LoyalLevel
+            accessor:
+                getter: getLoyalLevel
+                setter: setLoyalLevel
+            xml_attribute: true
+            type: string
+        singleVendorInd:
+            expose: true
+            access_type: public_method
+            serialized_name: SingleVendorInd
+            accessor:
+                getter: getSingleVendorInd
+                setter: setSingleVendorInd
+            xml_attribute: true
+            type: string
+        signupDate:
+            expose: true
+            access_type: public_method
+            serialized_name: SignupDate
+            accessor:
+                getter: getSignupDate
+                setter: setSignupDate
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\Date
+        effectiveDate:
+            expose: true
+            access_type: public_method
+            serialized_name: EffectiveDate
+            accessor:
+                getter: getEffectiveDate
+                setter: setEffectiveDate
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\Date
+        expireDate:
+            expose: true
+            access_type: public_method
+            serialized_name: ExpireDate
+            accessor:
+                getter: getExpireDate
+                setter: setExpireDate
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\Date
+        rPH:
+            expose: true
+            access_type: public_method
+            serialized_name: RPH
+            accessor:
+                getter: getRPH
+                setter: setRPH
+            xml_attribute: true
+            type: string
+        vendorCode:
+            expose: true
+            access_type: public_method
+            serialized_name: VendorCode
+            accessor:
+                getter: getVendorCode
+                setter: setVendorCode
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Jms\SimpleListOf<string>

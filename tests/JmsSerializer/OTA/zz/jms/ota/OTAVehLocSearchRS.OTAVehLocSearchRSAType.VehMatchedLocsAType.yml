@@ -1,0 +1,16 @@
+OTA\OTAVehLocSearchRS\OTAVehLocSearchRSAType\VehMatchedLocsAType:
+    properties:
+        vehMatchedLoc:
+            expose: true
+            access_type: public_method
+            serialized_name: VehMatchedLoc
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getVehMatchedLoc
+                setter: setVehMatchedLoc
+            xml_list:
+                inline: true
+                entry_name: VehMatchedLoc
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\VehicleMatchedLocationType>

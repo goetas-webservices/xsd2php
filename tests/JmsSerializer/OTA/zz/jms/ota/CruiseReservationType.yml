@@ -1,0 +1,65 @@
+OTA\CruiseReservationType:
+    properties:
+        sailingInfo:
+            expose: true
+            access_type: public_method
+            serialized_name: SailingInfo
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getSailingInfo
+                setter: setSailingInfo
+            type: OTA\SailingCategoryInfoType
+        sailingProfile:
+            expose: true
+            access_type: public_method
+            serialized_name: SailingProfile
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getSailingProfile
+                setter: setSailingProfile
+            xml_list:
+                inline: true
+                entry_name: SailingProfile
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\CruiseProfileType>
+        reservationInfo:
+            expose: true
+            access_type: public_method
+            serialized_name: ReservationInfo
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getReservationInfo
+                setter: setReservationInfo
+            type: OTA\CruiseGuestInfoType
+        paymentsDue:
+            expose: true
+            access_type: public_method
+            serialized_name: PaymentsDue
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getPaymentsDue
+                setter: setPaymentsDue
+            type: array<OTA\CruiseReservationType\PaymentsDueAType\PaymentDueAType>
+            xml_list:
+                inline: false
+                entry_name: PaymentDue
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        information:
+            expose: true
+            access_type: public_method
+            serialized_name: Information
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getInformation
+                setter: setInformation
+            xml_list:
+                inline: true
+                entry_name: Information
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\ParagraphType>

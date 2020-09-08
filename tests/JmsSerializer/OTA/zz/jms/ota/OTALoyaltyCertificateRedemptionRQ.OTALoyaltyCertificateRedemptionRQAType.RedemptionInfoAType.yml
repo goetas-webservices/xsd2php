@@ -1,0 +1,37 @@
+OTA\OTALoyaltyCertificateRedemptionRQ\OTALoyaltyCertificateRedemptionRQAType\RedemptionInfoAType:
+    properties:
+        redemptionDetail:
+            expose: true
+            access_type: public_method
+            serialized_name: RedemptionDetail
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getRedemptionDetail
+                setter: setRedemptionDetail
+            type: OTA\OTALoyaltyCertificateRedemptionRQ\OTALoyaltyCertificateRedemptionRQAType\RedemptionInfoAType\RedemptionDetailAType
+        customer:
+            expose: true
+            access_type: public_method
+            serialized_name: Customer
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getCustomer
+                setter: setCustomer
+            type: OTA\PersonNameType
+        travelInfos:
+            expose: true
+            access_type: public_method
+            serialized_name: TravelInfos
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getTravelInfos
+                setter: setTravelInfos
+            type: array<OTA\LoyaltyTravelInfoType>
+            xml_list:
+                inline: false
+                entry_name: TravelInfo
+                skip_when_empty: false
+                namespace: 'http://www.opentravel.org/OTA/2003/05'

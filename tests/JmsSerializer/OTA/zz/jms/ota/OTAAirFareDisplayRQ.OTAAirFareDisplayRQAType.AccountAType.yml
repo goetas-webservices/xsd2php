@@ -1,0 +1,20 @@
+OTA\OTAAirFareDisplayRQ\OTAAirFareDisplayRQAType\AccountAType:
+    properties:
+        codeOnlyFaresInd:
+            expose: true
+            access_type: public_method
+            serialized_name: CodeOnlyFaresInd
+            accessor:
+                getter: getCodeOnlyFaresInd
+                setter: setCodeOnlyFaresInd
+            xml_attribute: true
+            type: bool
+        code:
+            expose: true
+            access_type: public_method
+            serialized_name: Code
+            accessor:
+                getter: getCode
+                setter: setCode
+            xml_attribute: true
+            type: string

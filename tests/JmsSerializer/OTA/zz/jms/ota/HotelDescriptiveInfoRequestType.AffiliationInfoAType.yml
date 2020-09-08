@@ -1,0 +1,38 @@
+OTA\HotelDescriptiveInfoRequestType\AffiliationInfoAType:
+    properties:
+        sendDistribSystems:
+            expose: true
+            access_type: public_method
+            serialized_name: SendDistribSystems
+            accessor:
+                getter: getSendDistribSystems
+                setter: setSendDistribSystems
+            xml_attribute: true
+            type: bool
+        sendBrands:
+            expose: true
+            access_type: public_method
+            serialized_name: SendBrands
+            accessor:
+                getter: getSendBrands
+                setter: setSendBrands
+            xml_attribute: true
+            type: bool
+        sendLoyalPrograms:
+            expose: true
+            access_type: public_method
+            serialized_name: SendLoyalPrograms
+            accessor:
+                getter: getSendLoyalPrograms
+                setter: setSendLoyalPrograms
+            xml_attribute: true
+            type: bool
+        sendAwards:
+            expose: true
+            access_type: public_method
+            serialized_name: SendAwards
+            accessor:
+                getter: getSendAwards
+                setter: setSendAwards
+            xml_attribute: true
+            type: bool

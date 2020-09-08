@@ -1,0 +1,16 @@
+OTA\AddressesType:
+    properties:
+        address:
+            expose: true
+            access_type: public_method
+            serialized_name: Address
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getAddress
+                setter: setAddress
+            xml_list:
+                inline: true
+                entry_name: Address
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\AddressesType\AddressAType>

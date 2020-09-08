@@ -1,0 +1,56 @@
+OTA\OfferType\OfferRulesAType\OfferRuleAType\InventoriesAType\InventoryAType:
+    properties:
+        invCodeApplication:
+            expose: true
+            access_type: public_method
+            serialized_name: InvCodeApplication
+            accessor:
+                getter: getInvCodeApplication
+                setter: setInvCodeApplication
+            xml_attribute: true
+            type: string
+        invCode:
+            expose: true
+            access_type: public_method
+            serialized_name: InvCode
+            accessor:
+                getter: getInvCode
+                setter: setInvCode
+            xml_attribute: true
+            type: string
+        invType:
+            expose: true
+            access_type: public_method
+            serialized_name: InvType
+            accessor:
+                getter: getInvType
+                setter: setInvType
+            xml_attribute: true
+            type: string
+        invTypeCode:
+            expose: true
+            access_type: public_method
+            serialized_name: InvTypeCode
+            accessor:
+                getter: getInvTypeCode
+                setter: setInvTypeCode
+            xml_attribute: true
+            type: string
+        isRoom:
+            expose: true
+            access_type: public_method
+            serialized_name: IsRoom
+            accessor:
+                getter: getIsRoom
+                setter: setIsRoom
+            xml_attribute: true
+            type: bool
+        appliesToIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: AppliesToIndicator
+            accessor:
+                getter: getAppliesToIndicator
+                setter: setAppliesToIndicator
+            xml_attribute: true
+            type: bool

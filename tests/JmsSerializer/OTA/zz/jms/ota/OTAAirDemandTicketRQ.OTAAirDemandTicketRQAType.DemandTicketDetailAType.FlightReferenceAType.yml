@@ -1,0 +1,20 @@
+OTA\OTAAirDemandTicketRQ\OTAAirDemandTicketRQAType\DemandTicketDetailAType\FlightReferenceAType:
+    properties:
+        flightRefNumber:
+            expose: true
+            access_type: public_method
+            serialized_name: FlightRefNumber
+            accessor:
+                getter: getFlightRefNumber
+                setter: setFlightRefNumber
+            xml_attribute: true
+            type: int
+        rangePosition:
+            expose: true
+            access_type: public_method
+            serialized_name: RangePosition
+            accessor:
+                getter: getRangePosition
+                setter: setRangePosition
+            xml_attribute: true
+            type: string

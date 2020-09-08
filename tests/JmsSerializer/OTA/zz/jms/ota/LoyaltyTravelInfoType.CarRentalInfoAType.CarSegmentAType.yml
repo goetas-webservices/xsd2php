@@ -1,0 +1,32 @@
+OTA\LoyaltyTravelInfoType\CarRentalInfoAType\CarSegmentAType:
+    properties:
+        vendor:
+            expose: true
+            access_type: public_method
+            serialized_name: Vendor
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getVendor
+                setter: setVendor
+            type: OTA\CompanyNameType
+        vehRentalCore:
+            expose: true
+            access_type: public_method
+            serialized_name: VehRentalCore
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getVehRentalCore
+                setter: setVehRentalCore
+            type: OTA\VehicleRentalCoreType
+        vehicle:
+            expose: true
+            access_type: public_method
+            serialized_name: Vehicle
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getVehicle
+                setter: setVehicle
+            type: OTA\VehicleCoreType

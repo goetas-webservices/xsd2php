@@ -1,0 +1,55 @@
+OTA\RoomAmenityPrefType:
+    properties:
+        __value:
+            expose: true
+            xml_value: true
+            access_type: public_method
+            accessor:
+                getter: value
+                setter: value
+            type: string
+        preferLevel:
+            expose: true
+            access_type: public_method
+            serialized_name: PreferLevel
+            accessor:
+                getter: getPreferLevel
+                setter: setPreferLevel
+            xml_attribute: true
+            type: string
+        roomAmenity:
+            expose: true
+            access_type: public_method
+            serialized_name: RoomAmenity
+            accessor:
+                getter: getRoomAmenity
+                setter: setRoomAmenity
+            xml_attribute: true
+            type: string
+        existsCode:
+            expose: true
+            access_type: public_method
+            serialized_name: ExistsCode
+            accessor:
+                getter: getExistsCode
+                setter: setExistsCode
+            xml_attribute: true
+            type: string
+        quantity:
+            expose: true
+            access_type: public_method
+            serialized_name: Quantity
+            accessor:
+                getter: getQuantity
+                setter: setQuantity
+            xml_attribute: true
+            type: int
+        qualityLevel:
+            expose: true
+            access_type: public_method
+            serialized_name: QualityLevel
+            accessor:
+                getter: getQualityLevel
+                setter: setQualityLevel
+            xml_attribute: true
+            type: string

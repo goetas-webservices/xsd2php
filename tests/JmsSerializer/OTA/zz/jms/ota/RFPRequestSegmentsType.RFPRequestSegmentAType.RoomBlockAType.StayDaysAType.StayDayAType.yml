@@ -1,0 +1,44 @@
+OTA\RFPRequestSegmentsType\RFPRequestSegmentAType\RoomBlockAType\StayDaysAType\StayDayAType:
+    properties:
+        dayNumber:
+            expose: true
+            access_type: public_method
+            serialized_name: DayNumber
+            accessor:
+                getter: getDayNumber
+                setter: setDayNumber
+            xml_attribute: true
+            type: int
+        guestQuantity:
+            expose: true
+            access_type: public_method
+            serialized_name: GuestQuantity
+            accessor:
+                getter: getGuestQuantity
+                setter: setGuestQuantity
+            xml_attribute: true
+            type: int
+        totalNumberOfUnits:
+            expose: true
+            access_type: public_method
+            serialized_name: TotalNumberOfUnits
+            accessor:
+                getter: getTotalNumberOfUnits
+                setter: setTotalNumberOfUnits
+            xml_attribute: true
+            type: int
+        stayDayRooms:
+            expose: true
+            access_type: public_method
+            serialized_name: StayDayRooms
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getStayDayRooms
+                setter: setStayDayRooms
+            type: array<OTA\RFPRequestSegmentsType\RFPRequestSegmentAType\RoomBlockAType\StayDaysAType\StayDayAType\StayDayRoomsAType\StayDayRoomAType>
+            xml_list:
+                inline: false
+                entry_name: StayDayRoom
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'

@@ -1,0 +1,25 @@
+OTA\RateRulesType\PaymentRulesAType\AcceptablePaymentsAType:
+    properties:
+        paymentTypeCode:
+            expose: true
+            access_type: public_method
+            serialized_name: PaymentTypeCode
+            accessor:
+                getter: getPaymentTypeCode
+                setter: setPaymentTypeCode
+            xml_attribute: true
+            type: string
+        acceptablePayment:
+            expose: true
+            access_type: public_method
+            serialized_name: AcceptablePayment
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getAcceptablePayment
+                setter: setAcceptablePayment
+            xml_list:
+                inline: true
+                entry_name: AcceptablePayment
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\RateRulesType\PaymentRulesAType\AcceptablePaymentsAType\AcceptablePaymentAType>

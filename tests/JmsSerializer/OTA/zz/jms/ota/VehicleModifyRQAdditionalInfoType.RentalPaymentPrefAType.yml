@@ -1,0 +1,11 @@
+OTA\VehicleModifyRQAdditionalInfoType\RentalPaymentPrefAType:
+    properties:
+        paymentType:
+            expose: true
+            access_type: public_method
+            serialized_name: PaymentType
+            accessor:
+                getter: getPaymentType
+                setter: setPaymentType
+            xml_attribute: true
+            type: string

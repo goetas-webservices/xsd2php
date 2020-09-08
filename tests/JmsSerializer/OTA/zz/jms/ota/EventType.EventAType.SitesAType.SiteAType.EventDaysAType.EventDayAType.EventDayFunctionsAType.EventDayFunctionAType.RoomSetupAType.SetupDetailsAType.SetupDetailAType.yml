@@ -1,0 +1,89 @@
+OTA\EventType\EventAType\SitesAType\SiteAType\EventDaysAType\EventDayAType\EventDayFunctionsAType\EventDayFunctionAType\RoomSetupAType\SetupDetailsAType\SetupDetailAType:
+    properties:
+        area:
+            expose: true
+            access_type: public_method
+            serialized_name: Area
+            accessor:
+                getter: getArea
+                setter: setArea
+            xml_attribute: true
+            type: float
+        height:
+            expose: true
+            access_type: public_method
+            serialized_name: Height
+            accessor:
+                getter: getHeight
+                setter: setHeight
+            xml_attribute: true
+            type: float
+        length:
+            expose: true
+            access_type: public_method
+            serialized_name: Length
+            accessor:
+                getter: getLength
+                setter: setLength
+            xml_attribute: true
+            type: float
+        width:
+            expose: true
+            access_type: public_method
+            serialized_name: Width
+            accessor:
+                getter: getWidth
+                setter: setWidth
+            xml_attribute: true
+            type: float
+        units:
+            expose: true
+            access_type: public_method
+            serialized_name: Units
+            accessor:
+                getter: getUnits
+                setter: setUnits
+            xml_attribute: true
+            type: string
+        unitOfMeasureCode:
+            expose: true
+            access_type: public_method
+            serialized_name: UnitOfMeasureCode
+            accessor:
+                getter: getUnitOfMeasureCode
+                setter: setUnitOfMeasureCode
+            xml_attribute: true
+            type: string
+        code:
+            expose: true
+            access_type: public_method
+            serialized_name: Code
+            accessor:
+                getter: getCode
+                setter: setCode
+            xml_attribute: true
+            type: string
+        quantity:
+            expose: true
+            access_type: public_method
+            serialized_name: Quantity
+            accessor:
+                getter: getQuantity
+                setter: setQuantity
+            xml_attribute: true
+            type: int
+        comments:
+            expose: true
+            access_type: public_method
+            serialized_name: Comments
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getComments
+                setter: setComments
+            type: array<OTA\ParagraphType>
+            xml_list:
+                inline: false
+                entry_name: Comment
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'

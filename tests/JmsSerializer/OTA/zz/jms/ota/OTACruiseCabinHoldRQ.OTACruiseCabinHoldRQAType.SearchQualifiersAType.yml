@@ -1,0 +1,20 @@
+OTA\OTACruiseCabinHoldRQ\OTACruiseCabinHoldRQAType\SearchQualifiersAType:
+    properties:
+        deckNumber:
+            expose: true
+            access_type: public_method
+            serialized_name: DeckNumber
+            accessor:
+                getter: getDeckNumber
+                setter: setDeckNumber
+            xml_attribute: true
+            type: string
+        deckName:
+            expose: true
+            access_type: public_method
+            serialized_name: DeckName
+            accessor:
+                getter: getDeckName
+                setter: setDeckName
+            xml_attribute: true
+            type: string

@@ -1,0 +1,16 @@
+OTA\OTAHotelAvailRS\OTAHotelAvailRSAType\CriteriaAType:
+    properties:
+        criterion:
+            expose: true
+            access_type: public_method
+            serialized_name: Criterion
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getCriterion
+                setter: setCriterion
+            xml_list:
+                inline: true
+                entry_name: Criterion
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\HotelSearchCriterionType>

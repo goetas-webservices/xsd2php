@@ -1,0 +1,37 @@
+OTA\LoyaltyTravelInfoType:
+    properties:
+        hotelStayInfo:
+            expose: true
+            access_type: public_method
+            serialized_name: HotelStayInfo
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getHotelStayInfo
+                setter: setHotelStayInfo
+            type: OTA\LoyaltyTravelInfoType\HotelStayInfoAType
+        airFlightInfo:
+            expose: true
+            access_type: public_method
+            serialized_name: AirFlightInfo
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getAirFlightInfo
+                setter: setAirFlightInfo
+            type: array<OTA\FlightSegmentBaseType>
+            xml_list:
+                inline: false
+                entry_name: FlightSegment
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        carRentalInfo:
+            expose: true
+            access_type: public_method
+            serialized_name: CarRentalInfo
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getCarRentalInfo
+                setter: setCarRentalInfo
+            type: OTA\LoyaltyTravelInfoType\CarRentalInfoAType

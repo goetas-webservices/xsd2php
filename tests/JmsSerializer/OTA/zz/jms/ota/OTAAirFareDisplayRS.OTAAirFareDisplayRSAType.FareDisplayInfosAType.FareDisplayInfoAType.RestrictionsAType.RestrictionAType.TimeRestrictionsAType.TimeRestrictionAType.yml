@@ -1,0 +1,29 @@
+OTA\OTAAirFareDisplayRS\OTAAirFareDisplayRSAType\FareDisplayInfosAType\FareDisplayInfoAType\RestrictionsAType\RestrictionAType\TimeRestrictionsAType\TimeRestrictionAType:
+    properties:
+        startTime:
+            expose: true
+            access_type: public_method
+            serialized_name: StartTime
+            accessor:
+                getter: getStartTime
+                setter: setStartTime
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\Time
+        endTime:
+            expose: true
+            access_type: public_method
+            serialized_name: EndTime
+            accessor:
+                getter: getEndTime
+                setter: setEndTime
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\Time
+        includeExcludeUseInd:
+            expose: true
+            access_type: public_method
+            serialized_name: IncludeExcludeUseInd
+            accessor:
+                getter: getIncludeExcludeUseInd
+                setter: setIncludeExcludeUseInd
+            xml_attribute: true
+            type: bool

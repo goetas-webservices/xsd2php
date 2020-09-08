@@ -1,0 +1,16 @@
+OTA\RateUploadType\AdditionalGuestAmountsAType:
+    properties:
+        additionalGuestAmount:
+            expose: true
+            access_type: public_method
+            serialized_name: AdditionalGuestAmount
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getAdditionalGuestAmount
+                setter: setAdditionalGuestAmount
+            xml_list:
+                inline: true
+                entry_name: AdditionalGuestAmount
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\RateUploadType\AdditionalGuestAmountsAType\AdditionalGuestAmountAType>

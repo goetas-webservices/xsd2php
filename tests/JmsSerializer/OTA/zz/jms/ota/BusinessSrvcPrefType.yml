@@ -1,0 +1,28 @@
+OTA\BusinessSrvcPrefType:
+    properties:
+        __value:
+            expose: true
+            xml_value: true
+            access_type: public_method
+            accessor:
+                getter: value
+                setter: value
+            type: string
+        preferLevel:
+            expose: true
+            access_type: public_method
+            serialized_name: PreferLevel
+            accessor:
+                getter: getPreferLevel
+                setter: setPreferLevel
+            xml_attribute: true
+            type: string
+        businessSrvcType:
+            expose: true
+            access_type: public_method
+            serialized_name: BusinessSrvcType
+            accessor:
+                getter: getBusinessSrvcType
+                setter: setBusinessSrvcType
+            xml_attribute: true
+            type: string

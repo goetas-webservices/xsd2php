@@ -1,0 +1,17 @@
+OTA\OTACruiseCabinAvailRS\OTACruiseCabinAvailRSAType\CabinOptionsAType\CabinOptionAType:
+    properties:
+        cabinFilters:
+            expose: true
+            access_type: public_method
+            serialized_name: CabinFilters
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getCabinFilters
+                setter: setCabinFilters
+            type: array<OTA\OTACruiseCabinAvailRS\OTACruiseCabinAvailRSAType\CabinOptionsAType\CabinOptionAType\CabinFiltersAType\CabinFilterAType>
+            xml_list:
+                inline: false
+                entry_name: CabinFilter
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'

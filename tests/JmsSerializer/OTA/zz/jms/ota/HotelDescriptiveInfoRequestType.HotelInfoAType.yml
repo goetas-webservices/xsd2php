@@ -1,0 +1,29 @@
+OTA\HotelDescriptiveInfoRequestType\HotelInfoAType:
+    properties:
+        sendData:
+            expose: true
+            access_type: public_method
+            serialized_name: SendData
+            accessor:
+                getter: getSendData
+                setter: setSendData
+            xml_attribute: true
+            type: bool
+        hotelStatus:
+            expose: true
+            access_type: public_method
+            serialized_name: HotelStatus
+            accessor:
+                getter: getHotelStatus
+                setter: setHotelStatus
+            xml_attribute: true
+            type: string
+        hotelStatusCode:
+            expose: true
+            access_type: public_method
+            serialized_name: HotelStatusCode
+            accessor:
+                getter: getHotelStatusCode
+                setter: setHotelStatusCode
+            xml_attribute: true
+            type: string

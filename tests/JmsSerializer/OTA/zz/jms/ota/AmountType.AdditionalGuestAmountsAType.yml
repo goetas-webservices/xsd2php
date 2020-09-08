@@ -1,0 +1,52 @@
+OTA\AmountType\AdditionalGuestAmountsAType:
+    properties:
+        amountBeforeTax:
+            expose: true
+            access_type: public_method
+            serialized_name: AmountBeforeTax
+            accessor:
+                getter: getAmountBeforeTax
+                setter: setAmountBeforeTax
+            xml_attribute: true
+            type: float
+        amountAfterTax:
+            expose: true
+            access_type: public_method
+            serialized_name: AmountAfterTax
+            accessor:
+                getter: getAmountAfterTax
+                setter: setAmountAfterTax
+            xml_attribute: true
+            type: float
+        currencyCode:
+            expose: true
+            access_type: public_method
+            serialized_name: CurrencyCode
+            accessor:
+                getter: getCurrencyCode
+                setter: setCurrencyCode
+            xml_attribute: true
+            type: string
+        decimalPlaces:
+            expose: true
+            access_type: public_method
+            serialized_name: DecimalPlaces
+            accessor:
+                getter: getDecimalPlaces
+                setter: setDecimalPlaces
+            xml_attribute: true
+            type: int
+        additionalGuestAmount:
+            expose: true
+            access_type: public_method
+            serialized_name: AdditionalGuestAmount
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getAdditionalGuestAmount
+                setter: setAdditionalGuestAmount
+            xml_list:
+                inline: true
+                entry_name: AdditionalGuestAmount
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\AdditionalGuestAmountType>

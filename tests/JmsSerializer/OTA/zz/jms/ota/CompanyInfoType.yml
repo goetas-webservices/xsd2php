@@ -1,0 +1,142 @@
+OTA\CompanyInfoType:
+    properties:
+        companyName:
+            expose: true
+            access_type: public_method
+            serialized_name: CompanyName
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getCompanyName
+                setter: setCompanyName
+            xml_list:
+                inline: true
+                entry_name: CompanyName
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\CompanyNameType>
+        addressInfo:
+            expose: true
+            access_type: public_method
+            serialized_name: AddressInfo
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getAddressInfo
+                setter: setAddressInfo
+            xml_list:
+                inline: true
+                entry_name: AddressInfo
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\AddressInfoType>
+        telephoneInfo:
+            expose: true
+            access_type: public_method
+            serialized_name: TelephoneInfo
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getTelephoneInfo
+                setter: setTelephoneInfo
+            xml_list:
+                inline: true
+                entry_name: TelephoneInfo
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\CompanyInfoType\TelephoneInfoAType>
+        email:
+            expose: true
+            access_type: public_method
+            serialized_name: Email
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getEmail
+                setter: setEmail
+            xml_list:
+                inline: true
+                entry_name: Email
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\EmailType>
+        uRL:
+            expose: true
+            access_type: public_method
+            serialized_name: URL
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getURL
+                setter: setURL
+            xml_list:
+                inline: true
+                entry_name: URL
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\URLType>
+        businessLocale:
+            expose: true
+            access_type: public_method
+            serialized_name: BusinessLocale
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getBusinessLocale
+                setter: setBusinessLocale
+            xml_list:
+                inline: true
+                entry_name: BusinessLocale
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\AddressType>
+        paymentForm:
+            expose: true
+            access_type: public_method
+            serialized_name: PaymentForm
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getPaymentForm
+                setter: setPaymentForm
+            xml_list:
+                inline: true
+                entry_name: PaymentForm
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\PaymentFormType>
+        contactPerson:
+            expose: true
+            access_type: public_method
+            serialized_name: ContactPerson
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getContactPerson
+                setter: setContactPerson
+            xml_list:
+                inline: true
+                entry_name: ContactPerson
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\ContactPersonType>
+        travelArranger:
+            expose: true
+            access_type: public_method
+            serialized_name: TravelArranger
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getTravelArranger
+                setter: setTravelArranger
+            xml_list:
+                inline: true
+                entry_name: TravelArranger
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\TravelArrangerType>
+        loyaltyProgram:
+            expose: true
+            access_type: public_method
+            serialized_name: LoyaltyProgram
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getLoyaltyProgram
+                setter: setLoyaltyProgram
+            xml_list:
+                inline: true
+                entry_name: LoyaltyProgram
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\LoyaltyProgramType>

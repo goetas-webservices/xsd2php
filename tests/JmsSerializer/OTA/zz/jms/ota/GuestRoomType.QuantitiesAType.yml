@@ -1,0 +1,29 @@
+OTA\GuestRoomType\QuantitiesAType:
+    properties:
+        maxRollaways:
+            expose: true
+            access_type: public_method
+            serialized_name: MaxRollaways
+            accessor:
+                getter: getMaxRollaways
+                setter: setMaxRollaways
+            xml_attribute: true
+            type: int
+        standardNumBeds:
+            expose: true
+            access_type: public_method
+            serialized_name: StandardNumBeds
+            accessor:
+                getter: getStandardNumBeds
+                setter: setStandardNumBeds
+            xml_attribute: true
+            type: int
+        maximumAdditionalGuests:
+            expose: true
+            access_type: public_method
+            serialized_name: MaximumAdditionalGuests
+            accessor:
+                getter: getMaximumAdditionalGuests
+                setter: setMaximumAdditionalGuests
+            xml_attribute: true
+            type: int

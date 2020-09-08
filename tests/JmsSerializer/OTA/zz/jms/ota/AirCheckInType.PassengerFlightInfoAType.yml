@@ -1,0 +1,192 @@
+OTA\AirCheckInType\PassengerFlightInfoAType:
+    properties:
+        passengerRPH:
+            expose: true
+            access_type: public_method
+            serialized_name: PassengerRPH
+            accessor:
+                getter: getPassengerRPH
+                setter: setPassengerRPH
+            xml_attribute: true
+            type: string
+        flightRPH:
+            expose: true
+            access_type: public_method
+            serialized_name: FlightRPH
+            accessor:
+                getter: getFlightRPH
+                setter: setFlightRPH
+            xml_attribute: true
+            type: string
+        baggageCabinType:
+            expose: true
+            access_type: public_method
+            serialized_name: BaggageCabinType
+            accessor:
+                getter: getBaggageCabinType
+                setter: setBaggageCabinType
+            xml_attribute: true
+            type: string
+        specialPurposeCode:
+            expose: true
+            access_type: public_method
+            serialized_name: SpecialPurposeCode
+            accessor:
+                getter: getSpecialPurposeCode
+                setter: setSpecialPurposeCode
+            xml_attribute: true
+            type: string
+        deniedBoardingVolunteerInd:
+            expose: true
+            access_type: public_method
+            serialized_name: DeniedBoardingVolunteerInd
+            accessor:
+                getter: getDeniedBoardingVolunteerInd
+                setter: setDeniedBoardingVolunteerInd
+            xml_attribute: true
+            type: bool
+        shortCheckInd:
+            expose: true
+            access_type: public_method
+            serialized_name: ShortCheckInd
+            accessor:
+                getter: getShortCheckInd
+                setter: setShortCheckInd
+            xml_attribute: true
+            type: bool
+        nonRevAuthorizedInd:
+            expose: true
+            access_type: public_method
+            serialized_name: NonRevAuthorizedInd
+            accessor:
+                getter: getNonRevAuthorizedInd
+                setter: setNonRevAuthorizedInd
+            xml_attribute: true
+            type: bool
+        passengerCouponStatus:
+            expose: true
+            access_type: public_method
+            serialized_name: PassengerCouponStatus
+            accessor:
+                getter: getPassengerCouponStatus
+                setter: setPassengerCouponStatus
+            xml_attribute: true
+            type: string
+        dCSSequenceNumber:
+            expose: true
+            access_type: public_method
+            serialized_name: DCS_SequenceNumber
+            accessor:
+                getter: getDCSSequenceNumber
+                setter: setDCSSequenceNumber
+            xml_attribute: true
+            type: string
+        dCSPassengerRefNumber:
+            expose: true
+            access_type: public_method
+            serialized_name: DCS_PassengerRefNumber
+            accessor:
+                getter: getDCSPassengerRefNumber
+                setter: setDCSPassengerRefNumber
+            xml_attribute: true
+            type: int
+        boardingPassColor:
+            expose: true
+            access_type: public_method
+            serialized_name: BoardingPassColor
+            accessor:
+                getter: getBoardingPassColor
+                setter: setBoardingPassColor
+            xml_attribute: true
+            type: string
+        standbyIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: StandbyIndicator
+            accessor:
+                getter: getStandbyIndicator
+                setter: setStandbyIndicator
+            xml_attribute: true
+            type: bool
+        bookingInfo:
+            expose: true
+            access_type: public_method
+            serialized_name: BookingInfo
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getBookingInfo
+                setter: setBookingInfo
+            type: OTA\AirCheckInType\PassengerFlightInfoAType\BookingInfoAType
+        seatBoardingInfo:
+            expose: true
+            access_type: public_method
+            serialized_name: SeatBoardingInfo
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getSeatBoardingInfo
+                setter: setSeatBoardingInfo
+            type: OTA\AirCheckInType\PassengerFlightInfoAType\SeatBoardingInfoAType
+        fee:
+            expose: true
+            access_type: public_method
+            serialized_name: Fee
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getFee
+                setter: setFee
+            xml_list:
+                inline: true
+                entry_name: Fee
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\FeeType>
+        specialServiceRequest:
+            expose: true
+            access_type: public_method
+            serialized_name: SpecialServiceRequest
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getSpecialServiceRequest
+                setter: setSpecialServiceRequest
+            xml_list:
+                inline: true
+                entry_name: SpecialServiceRequest
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\SpecialServiceRequestType>
+        aPIInfo:
+            expose: true
+            access_type: public_method
+            serialized_name: API_Info
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getAPIInfo
+                setter: setAPIInfo
+            xml_list:
+                inline: true
+                entry_name: API_Info
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\AirCheckInType\PassengerFlightInfoAType\APIInfoAType>
+        internationalProcessingInfo:
+            expose: true
+            access_type: public_method
+            serialized_name: InternationalProcessingInfo
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getInternationalProcessingInfo
+                setter: setInternationalProcessingInfo
+            type: OTA\AirCheckInType\PassengerFlightInfoAType\InternationalProcessingInfoAType
+        frequentTravelerInfo:
+            expose: true
+            access_type: public_method
+            serialized_name: FrequentTravelerInfo
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getFrequentTravelerInfo
+                setter: setFrequentTravelerInfo
+            type: OTA\AirCheckInType\PassengerFlightInfoAType\FrequentTravelerInfoAType

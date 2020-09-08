@@ -1,0 +1,22 @@
+OTA\OTAInsurancePlanSearchRS\OTAInsurancePlanSearchRSAType\AvailablePlansAType\AvailablePlanAType\UnderwriterDetailAType:
+    properties:
+        underwriterCompany:
+            expose: true
+            access_type: public_method
+            serialized_name: UnderwriterCompany
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getUnderwriterCompany
+                setter: setUnderwriterCompany
+            type: OTA\CompanyNameType
+        underwriterDescription:
+            expose: true
+            access_type: public_method
+            serialized_name: UnderwriterDescription
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getUnderwriterDescription
+                setter: setUnderwriterDescription
+            type: OTA\FormattedTextType

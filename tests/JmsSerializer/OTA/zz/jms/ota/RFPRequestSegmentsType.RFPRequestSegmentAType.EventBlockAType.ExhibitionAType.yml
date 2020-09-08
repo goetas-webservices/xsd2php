@@ -1,0 +1,125 @@
+OTA\RFPRequestSegmentsType\RFPRequestSegmentAType\EventBlockAType\ExhibitionAType:
+    properties:
+        type:
+            expose: true
+            access_type: public_method
+            serialized_name: Type
+            accessor:
+                getter: getType
+                setter: setType
+            xml_attribute: true
+            type: string
+        kitDistributionCode:
+            expose: true
+            access_type: public_method
+            serialized_name: KitDistributionCode
+            accessor:
+                getter: getKitDistributionCode
+                setter: setKitDistributionCode
+            xml_attribute: true
+            type: string
+        kitFormatCode:
+            expose: true
+            access_type: public_method
+            serialized_name: KitFormatCode
+            accessor:
+                getter: getKitFormatCode
+                setter: setKitFormatCode
+            xml_attribute: true
+            type: string
+        generalServiceContractorInd:
+            expose: true
+            access_type: public_method
+            serialized_name: GeneralServiceContractorInd
+            accessor:
+                getter: getGeneralServiceContractorInd
+                setter: setGeneralServiceContractorInd
+            xml_attribute: true
+            type: bool
+        grossExhibitionSpace:
+            expose: true
+            access_type: public_method
+            serialized_name: GrossExhibitionSpace
+            accessor:
+                getter: getGrossExhibitionSpace
+                setter: setGrossExhibitionSpace
+            xml_attribute: true
+            type: int
+        netExhibitionSpace:
+            expose: true
+            access_type: public_method
+            serialized_name: NetExhibitionSpace
+            accessor:
+                getter: getNetExhibitionSpace
+                setter: setNetExhibitionSpace
+            xml_attribute: true
+            type: int
+        grossUnitOfMeasure:
+            expose: true
+            access_type: public_method
+            serialized_name: GrossUnitOfMeasure
+            accessor:
+                getter: getGrossUnitOfMeasure
+                setter: setGrossUnitOfMeasure
+            xml_attribute: true
+            type: string
+        netUnitOfMeasure:
+            expose: true
+            access_type: public_method
+            serialized_name: NetUnitOfMeasure
+            accessor:
+                getter: getNetUnitOfMeasure
+                setter: setNetUnitOfMeasure
+            xml_attribute: true
+            type: string
+        exhibitQuantity:
+            expose: true
+            access_type: public_method
+            serialized_name: ExhibitQuantity
+            accessor:
+                getter: getExhibitQuantity
+                setter: setExhibitQuantity
+            xml_attribute: true
+            type: int
+        companyQuantity:
+            expose: true
+            access_type: public_method
+            serialized_name: CompanyQuantity
+            accessor:
+                getter: getCompanyQuantity
+                setter: setCompanyQuantity
+            xml_attribute: true
+            type: int
+        securedAreaIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: SecuredAreaIndicator
+            accessor:
+                getter: getSecuredAreaIndicator
+                setter: setSecuredAreaIndicator
+            xml_attribute: true
+            type: bool
+        exhibitDetail:
+            expose: true
+            access_type: public_method
+            serialized_name: ExhibitDetail
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getExhibitDetail
+                setter: setExhibitDetail
+            xml_list:
+                inline: true
+                entry_name: ExhibitDetail
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\RFPRequestSegmentsType\RFPRequestSegmentAType\EventBlockAType\ExhibitionAType\ExhibitDetailAType>
+        comments:
+            expose: true
+            access_type: public_method
+            serialized_name: Comments
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getComments
+                setter: setComments
+            type: OTA\ParagraphType

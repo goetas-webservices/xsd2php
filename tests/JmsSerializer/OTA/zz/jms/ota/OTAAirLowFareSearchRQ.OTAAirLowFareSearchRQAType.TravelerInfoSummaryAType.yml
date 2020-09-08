@@ -1,0 +1,20 @@
+OTA\OTAAirLowFareSearchRQ\OTAAirLowFareSearchRQAType\TravelerInfoSummaryAType:
+    properties:
+        ticketingCountryCode:
+            expose: true
+            access_type: public_method
+            serialized_name: TicketingCountryCode
+            accessor:
+                getter: getTicketingCountryCode
+                setter: setTicketingCountryCode
+            xml_attribute: true
+            type: string
+        specificPTCIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: SpecificPTC_Indicator
+            accessor:
+                getter: getSpecificPTCIndicator
+                setter: setSpecificPTCIndicator
+            xml_attribute: true
+            type: bool

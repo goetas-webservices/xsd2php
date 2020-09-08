@@ -1,0 +1,11 @@
+OTA\OTAAirSeatMapRQ\OTAAirSeatMapRQAType\SeatMapRequestsAType\SeatMapRequestAType\SeatDetailsAType\ResBookDesignationsAType\ResBookDesignationAType:
+    properties:
+        resBookDesigCode:
+            expose: true
+            access_type: public_method
+            serialized_name: ResBookDesigCode
+            accessor:
+                getter: getResBookDesigCode
+                setter: setResBookDesigCode
+            xml_attribute: true
+            type: string

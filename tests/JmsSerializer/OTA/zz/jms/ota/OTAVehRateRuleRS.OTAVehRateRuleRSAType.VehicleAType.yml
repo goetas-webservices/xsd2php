@@ -1,0 +1,30 @@
+OTA\OTAVehRateRuleRS\OTAVehRateRuleRSAType\VehicleAType:
+    properties:
+        lowMileage:
+            expose: true
+            access_type: public_method
+            serialized_name: LowMileage
+            accessor:
+                getter: getLowMileage
+                setter: setLowMileage
+            xml_attribute: true
+            type: int
+        highMileage:
+            expose: true
+            access_type: public_method
+            serialized_name: HighMileage
+            accessor:
+                getter: getHighMileage
+                setter: setHighMileage
+            xml_attribute: true
+            type: int
+        description:
+            expose: true
+            access_type: public_method
+            serialized_name: Description
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getDescription
+                setter: setDescription
+            type: OTA\FormattedTextTextType

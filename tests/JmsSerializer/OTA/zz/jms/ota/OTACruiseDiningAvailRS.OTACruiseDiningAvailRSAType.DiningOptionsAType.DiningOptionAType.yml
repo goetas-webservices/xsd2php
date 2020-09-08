@@ -1,0 +1,61 @@
+OTA\OTACruiseDiningAvailRS\OTACruiseDiningAvailRSAType\DiningOptionsAType\DiningOptionAType:
+    properties:
+        selectionAllowedIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: SelectionAllowedIndicator
+            accessor:
+                getter: getSelectionAllowedIndicator
+                setter: setSelectionAllowedIndicator
+            xml_attribute: true
+            type: bool
+        sitting:
+            expose: true
+            access_type: public_method
+            serialized_name: Sitting
+            accessor:
+                getter: getSitting
+                setter: setSitting
+            xml_attribute: true
+            type: string
+        sittingDescription:
+            expose: true
+            access_type: public_method
+            serialized_name: SittingDescription
+            accessor:
+                getter: getSittingDescription
+                setter: setSittingDescription
+            xml_attribute: true
+            type: string
+        sittingStatus:
+            expose: true
+            access_type: public_method
+            serialized_name: SittingStatus
+            accessor:
+                getter: getSittingStatus
+                setter: setSittingStatus
+            xml_attribute: true
+            type: string
+        smokingAllowed:
+            expose: true
+            access_type: public_method
+            serialized_name: SmokingAllowed
+            accessor:
+                getter: getSmokingAllowed
+                setter: setSmokingAllowed
+            xml_attribute: true
+            type: bool
+        diningRoom:
+            expose: true
+            access_type: public_method
+            serialized_name: DiningRoom
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getDiningRoom
+                setter: setDiningRoom
+            xml_list:
+                inline: true
+                entry_name: DiningRoom
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\OTACruiseDiningAvailRS\OTACruiseDiningAvailRSAType\DiningOptionsAType\DiningOptionAType\DiningRoomAType>

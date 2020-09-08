@@ -1,0 +1,264 @@
+OTA\HotelInfoType:
+    properties:
+        whenBuilt:
+            expose: true
+            access_type: public_method
+            serialized_name: WhenBuilt
+            accessor:
+                getter: getWhenBuilt
+                setter: setWhenBuilt
+            xml_attribute: true
+            type: string
+        lastUpdated:
+            expose: true
+            access_type: public_method
+            serialized_name: LastUpdated
+            accessor:
+                getter: getLastUpdated
+                setter: setLastUpdated
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\DateTime
+        areaWeather:
+            expose: true
+            access_type: public_method
+            serialized_name: AreaWeather
+            accessor:
+                getter: getAreaWeather
+                setter: setAreaWeather
+            xml_attribute: true
+            type: string
+        interfaceCompliance:
+            expose: true
+            access_type: public_method
+            serialized_name: InterfaceCompliance
+            accessor:
+                getter: getInterfaceCompliance
+                setter: setInterfaceCompliance
+            xml_attribute: true
+            type: string
+        pMSSystem:
+            expose: true
+            access_type: public_method
+            serialized_name: PMSSystem
+            accessor:
+                getter: getPMSSystem
+                setter: setPMSSystem
+            xml_attribute: true
+            type: string
+        start:
+            expose: true
+            access_type: public_method
+            serialized_name: Start
+            accessor:
+                getter: getStart
+                setter: setStart
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime
+        duration:
+            expose: true
+            access_type: public_method
+            serialized_name: Duration
+            accessor:
+                getter: getDuration
+                setter: setDuration
+            xml_attribute: true
+            type: DateInterval
+        end:
+            expose: true
+            access_type: public_method
+            serialized_name: End
+            accessor:
+                getter: getEnd
+                setter: setEnd
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime
+        hotelStatus:
+            expose: true
+            access_type: public_method
+            serialized_name: HotelStatus
+            accessor:
+                getter: getHotelStatus
+                setter: setHotelStatus
+            xml_attribute: true
+            type: string
+        hotelStatusCode:
+            expose: true
+            access_type: public_method
+            serialized_name: HotelStatusCode
+            accessor:
+                getter: getHotelStatusCode
+                setter: setHotelStatusCode
+            xml_attribute: true
+            type: string
+        taxID:
+            expose: true
+            access_type: public_method
+            serialized_name: TaxID
+            accessor:
+                getter: getTaxID
+                setter: setTaxID
+            xml_attribute: true
+            type: string
+        daylightSavingIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: DaylightSavingIndicator
+            accessor:
+                getter: getDaylightSavingIndicator
+                setter: setDaylightSavingIndicator
+            xml_attribute: true
+            type: bool
+        iSO9000CertifiedInd:
+            expose: true
+            access_type: public_method
+            serialized_name: ISO9000CertifiedInd
+            accessor:
+                getter: getISO9000CertifiedInd
+                setter: setISO9000CertifiedInd
+            xml_attribute: true
+            type: bool
+        hotelName:
+            expose: true
+            access_type: public_method
+            serialized_name: HotelName
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getHotelName
+                setter: setHotelName
+            type: OTA\HotelInfoType\HotelNameAType
+        closedSeasons:
+            expose: true
+            access_type: public_method
+            serialized_name: ClosedSeasons
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getClosedSeasons
+                setter: setClosedSeasons
+            type: array<OTA\DateTimeSpanType>
+            xml_list:
+                inline: false
+                entry_name: ClosedSeason
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        relativePositions:
+            expose: true
+            access_type: public_method
+            serialized_name: RelativePositions
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getRelativePositions
+                setter: setRelativePositions
+            type: array<OTA\RelativePositionType>
+            xml_list:
+                inline: false
+                entry_name: RelativePosition
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        categoryCodes:
+            expose: true
+            access_type: public_method
+            serialized_name: CategoryCodes
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getCategoryCodes
+                setter: setCategoryCodes
+            type: OTA\CategoryCodesType
+        descriptions:
+            expose: true
+            access_type: public_method
+            serialized_name: Descriptions
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getDescriptions
+                setter: setDescriptions
+            type: OTA\HotelInfoType\DescriptionsAType
+        hotelInfoCodes:
+            expose: true
+            access_type: public_method
+            serialized_name: HotelInfoCodes
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getHotelInfoCodes
+                setter: setHotelInfoCodes
+            type: array<OTA\HotelInfoType\HotelInfoCodesAType\HotelInfoCodeAType>
+            xml_list:
+                inline: false
+                entry_name: HotelInfoCode
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        position:
+            expose: true
+            access_type: public_method
+            serialized_name: Position
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getPosition
+                setter: setPosition
+            type: OTA\HotelInfoType\PositionAType
+        services:
+            expose: true
+            access_type: public_method
+            serialized_name: Services
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getServices
+                setter: setServices
+            type: array<OTA\HotelInfoType\ServicesAType\ServiceAType>
+            xml_list:
+                inline: false
+                entry_name: Service
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        weatherInfos:
+            expose: true
+            access_type: public_method
+            serialized_name: WeatherInfos
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getWeatherInfos
+                setter: setWeatherInfos
+            type: array<OTA\WeatherInfoType>
+            xml_list:
+                inline: false
+                entry_name: WeatherInfo
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        ownershipManagementInfos:
+            expose: true
+            access_type: public_method
+            serialized_name: OwnershipManagementInfos
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getOwnershipManagementInfos
+                setter: setOwnershipManagementInfos
+            type: array<OTA\HotelInfoType\OwnershipManagementInfosAType\OwnershipManagementInfoAType>
+            xml_list:
+                inline: false
+                entry_name: OwnershipManagementInfo
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        languages:
+            expose: true
+            access_type: public_method
+            serialized_name: Languages
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getLanguages
+                setter: setLanguages
+            type: array<OTA\HotelInfoType\LanguagesAType\LanguageAType>
+            xml_list:
+                inline: false
+                entry_name: Language
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'

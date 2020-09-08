@@ -1,0 +1,16 @@
+OTA\GolfCourseResType\RoundsAType:
+    properties:
+        round:
+            expose: true
+            access_type: public_method
+            serialized_name: Round
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getRound
+                setter: setRound
+            xml_list:
+                inline: true
+                entry_name: Round
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\RoundType>

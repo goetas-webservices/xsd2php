@@ -1,0 +1,11 @@
+OTA\RFPRequestSegmentsType\RFPRequestSegmentAType\SitesAType\SiteAType\PromotionsAType\PromotionAType\AvailableDateRangeAType:
+    properties:
+        dateRPH:
+            expose: true
+            access_type: public_method
+            serialized_name: DateRPH
+            accessor:
+                getter: getDateRPH
+                setter: setDateRPH
+            xml_attribute: true
+            type: string

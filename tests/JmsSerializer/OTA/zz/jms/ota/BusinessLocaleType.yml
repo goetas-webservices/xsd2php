@@ -1,0 +1,21 @@
+OTA\BusinessLocaleType:
+    properties:
+        defaultInd:
+            expose: true
+            access_type: public_method
+            serialized_name: DefaultInd
+            accessor:
+                getter: getDefaultInd
+                setter: setDefaultInd
+            xml_attribute: true
+            type: bool
+        address:
+            expose: true
+            access_type: public_method
+            serialized_name: Address
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getAddress
+                setter: setAddress
+            type: OTA\AddressType

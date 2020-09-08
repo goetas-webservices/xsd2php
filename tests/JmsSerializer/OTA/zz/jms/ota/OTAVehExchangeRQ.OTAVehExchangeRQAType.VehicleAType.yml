@@ -1,0 +1,36 @@
+OTA\OTAVehExchangeRQ\OTAVehExchangeRQAType\VehicleAType:
+    properties:
+        returnVehicleIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: ReturnVehicleIndicator
+            accessor:
+                getter: getReturnVehicleIndicator
+                setter: setReturnVehicleIndicator
+            xml_attribute: true
+            type: bool
+        vehRentalDetails:
+            expose: true
+            access_type: public_method
+            serialized_name: VehRentalDetails
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getVehRentalDetails
+                setter: setVehRentalDetails
+            type: OTA\VehicleRentalDetailsType
+        pricedEquips:
+            expose: true
+            access_type: public_method
+            serialized_name: PricedEquips
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getPricedEquips
+                setter: setPricedEquips
+            type: array<OTA\VehicleEquipmentType>
+            xml_list:
+                inline: false
+                entry_name: PricedEquip
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'

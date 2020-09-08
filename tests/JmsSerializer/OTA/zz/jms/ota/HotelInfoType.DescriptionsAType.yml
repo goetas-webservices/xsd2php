@@ -1,0 +1,36 @@
+OTA\HotelInfoType\DescriptionsAType:
+    properties:
+        renovation:
+            expose: true
+            access_type: public_method
+            serialized_name: Renovation
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getRenovation
+                setter: setRenovation
+            xml_list:
+                inline: true
+                entry_name: Renovation
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\HotelInfoType\DescriptionsAType\RenovationAType>
+        multimediaDescriptions:
+            expose: true
+            access_type: public_method
+            serialized_name: MultimediaDescriptions
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getMultimediaDescriptions
+                setter: setMultimediaDescriptions
+            type: OTA\HotelInfoType\DescriptionsAType\MultimediaDescriptionsAType
+        descriptiveText:
+            expose: true
+            access_type: public_method
+            serialized_name: DescriptiveText
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getDescriptiveText
+                setter: setDescriptiveText
+            type: string

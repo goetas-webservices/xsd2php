@@ -1,0 +1,110 @@
+OTA\AdjustmentsType\AdjustmentAType:
+    properties:
+        reservationOriginatorCode:
+            expose: true
+            access_type: public_method
+            serialized_name: ReservationOriginatorCode
+            accessor:
+                getter: getReservationOriginatorCode
+                setter: setReservationOriginatorCode
+            xml_attribute: true
+            type: string
+        confirmationID:
+            expose: true
+            access_type: public_method
+            serialized_name: ConfirmationID
+            accessor:
+                getter: getConfirmationID
+                setter: setConfirmationID
+            xml_attribute: true
+            type: string
+        reservationID:
+            expose: true
+            access_type: public_method
+            serialized_name: ReservationID
+            accessor:
+                getter: getReservationID
+                setter: setReservationID
+            xml_attribute: true
+            type: string
+        roomInventoryCode:
+            expose: true
+            access_type: public_method
+            serialized_name: RoomInventoryCode
+            accessor:
+                getter: getRoomInventoryCode
+                setter: setRoomInventoryCode
+            xml_attribute: true
+            type: string
+        promotionCode:
+            expose: true
+            access_type: public_method
+            serialized_name: PromotionCode
+            accessor:
+                getter: getPromotionCode
+                setter: setPromotionCode
+            xml_attribute: true
+            type: string
+        promotionVendorCode:
+            expose: true
+            access_type: public_method
+            serialized_name: PromotionVendorCode
+            accessor:
+                getter: getPromotionVendorCode
+                setter: setPromotionVendorCode
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Jms\SimpleListOf<string>
+        adjustReason:
+            expose: true
+            access_type: public_method
+            serialized_name: AdjustReason
+            accessor:
+                getter: getAdjustReason
+                setter: setAdjustReason
+            xml_attribute: true
+            type: string
+        sequence:
+            expose: true
+            access_type: public_method
+            serialized_name: Sequence
+            accessor:
+                getter: getSequence
+                setter: setSequence
+            xml_attribute: true
+            type: int
+        invValue:
+            expose: true
+            access_type: public_method
+            serialized_name: InvValue
+            accessor:
+                getter: getInvValue
+                setter: setInvValue
+            xml_attribute: true
+            type: int
+        start:
+            expose: true
+            access_type: public_method
+            serialized_name: Start
+            accessor:
+                getter: getStart
+                setter: setStart
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime
+        duration:
+            expose: true
+            access_type: public_method
+            serialized_name: Duration
+            accessor:
+                getter: getDuration
+                setter: setDuration
+            xml_attribute: true
+            type: DateInterval
+        end:
+            expose: true
+            access_type: public_method
+            serialized_name: End
+            accessor:
+                getter: getEnd
+                setter: setEnd
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime

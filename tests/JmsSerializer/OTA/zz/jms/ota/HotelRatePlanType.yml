@@ -1,0 +1,429 @@
+OTA\HotelRatePlanType:
+    properties:
+        start:
+            expose: true
+            access_type: public_method
+            serialized_name: Start
+            accessor:
+                getter: getStart
+                setter: setStart
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime
+        duration:
+            expose: true
+            access_type: public_method
+            serialized_name: Duration
+            accessor:
+                getter: getDuration
+                setter: setDuration
+            xml_attribute: true
+            type: DateInterval
+        end:
+            expose: true
+            access_type: public_method
+            serialized_name: End
+            accessor:
+                getter: getEnd
+                setter: setEnd
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime
+        currencyCode:
+            expose: true
+            access_type: public_method
+            serialized_name: CurrencyCode
+            accessor:
+                getter: getCurrencyCode
+                setter: setCurrencyCode
+            xml_attribute: true
+            type: string
+        decimalPlaces:
+            expose: true
+            access_type: public_method
+            serialized_name: DecimalPlaces
+            accessor:
+                getter: getDecimalPlaces
+                setter: setDecimalPlaces
+            xml_attribute: true
+            type: int
+        ratePlanType:
+            expose: true
+            access_type: public_method
+            serialized_name: RatePlanType
+            accessor:
+                getter: getRatePlanType
+                setter: setRatePlanType
+            xml_attribute: true
+            type: string
+        ratePlanCode:
+            expose: true
+            access_type: public_method
+            serialized_name: RatePlanCode
+            accessor:
+                getter: getRatePlanCode
+                setter: setRatePlanCode
+            xml_attribute: true
+            type: string
+        ratePlanID:
+            expose: true
+            access_type: public_method
+            serialized_name: RatePlanID
+            accessor:
+                getter: getRatePlanID
+                setter: setRatePlanID
+            xml_attribute: true
+            type: string
+        ratePlanQualifier:
+            expose: true
+            access_type: public_method
+            serialized_name: RatePlanQualifier
+            accessor:
+                getter: getRatePlanQualifier
+                setter: setRatePlanQualifier
+            xml_attribute: true
+            type: bool
+        promotionCode:
+            expose: true
+            access_type: public_method
+            serialized_name: PromotionCode
+            accessor:
+                getter: getPromotionCode
+                setter: setPromotionCode
+            xml_attribute: true
+            type: string
+        promotionVendorCode:
+            expose: true
+            access_type: public_method
+            serialized_name: PromotionVendorCode
+            accessor:
+                getter: getPromotionVendorCode
+                setter: setPromotionVendorCode
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Jms\SimpleListOf<string>
+        ratePlanCategory:
+            expose: true
+            access_type: public_method
+            serialized_name: RatePlanCategory
+            accessor:
+                getter: getRatePlanCategory
+                setter: setRatePlanCategory
+            xml_attribute: true
+            type: string
+        ratePlanCodeType:
+            expose: true
+            access_type: public_method
+            serialized_name: RatePlanCodeType
+            accessor:
+                getter: getRatePlanCodeType
+                setter: setRatePlanCodeType
+            xml_attribute: true
+            type: string
+        ratePlanNotifType:
+            expose: true
+            access_type: public_method
+            serialized_name: RatePlanNotifType
+            accessor:
+                getter: getRatePlanNotifType
+                setter: setRatePlanNotifType
+            xml_attribute: true
+            type: string
+        ratePlanStatusType:
+            expose: true
+            access_type: public_method
+            serialized_name: RatePlanStatusType
+            accessor:
+                getter: getRatePlanStatusType
+                setter: setRatePlanStatusType
+            xml_attribute: true
+            type: string
+        ratePlanNotifScopeType:
+            expose: true
+            access_type: public_method
+            serialized_name: RatePlanNotifScopeType
+            accessor:
+                getter: getRatePlanNotifScopeType
+                setter: setRatePlanNotifScopeType
+            xml_attribute: true
+            type: string
+        isCommissionable:
+            expose: true
+            access_type: public_method
+            serialized_name: IsCommissionable
+            accessor:
+                getter: getIsCommissionable
+                setter: setIsCommissionable
+            xml_attribute: true
+            type: bool
+        rateReturn:
+            expose: true
+            access_type: public_method
+            serialized_name: RateReturn
+            accessor:
+                getter: getRateReturn
+                setter: setRateReturn
+            xml_attribute: true
+            type: bool
+        yieldableIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: YieldableIndicator
+            accessor:
+                getter: getYieldableIndicator
+                setter: setYieldableIndicator
+            xml_attribute: true
+            type: bool
+        marketCode:
+            expose: true
+            access_type: public_method
+            serialized_name: MarketCode
+            accessor:
+                getter: getMarketCode
+                setter: setMarketCode
+            xml_attribute: true
+            type: string
+        yieldDeltaAmount:
+            expose: true
+            access_type: public_method
+            serialized_name: YieldDeltaAmount
+            accessor:
+                getter: getYieldDeltaAmount
+                setter: setYieldDeltaAmount
+            xml_attribute: true
+            type: float
+        inventoryAllocatedInd:
+            expose: true
+            access_type: public_method
+            serialized_name: InventoryAllocatedInd
+            accessor:
+                getter: getInventoryAllocatedInd
+                setter: setInventoryAllocatedInd
+            xml_attribute: true
+            type: bool
+        restrictedDisplayIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: RestrictedDisplayIndicator
+            accessor:
+                getter: getRestrictedDisplayIndicator
+                setter: setRestrictedDisplayIndicator
+            xml_attribute: true
+            type: bool
+        earliestStartIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: EarliestStartIndicator
+            accessor:
+                getter: getEarliestStartIndicator
+                setter: setEarliestStartIndicator
+            xml_attribute: true
+            type: bool
+        latestEndIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: LatestEndIndicator
+            accessor:
+                getter: getLatestEndIndicator
+                setter: setLatestEndIndicator
+            xml_attribute: true
+            type: bool
+        extraNightRatePlanCode:
+            expose: true
+            access_type: public_method
+            serialized_name: ExtraNightRatePlanCode
+            accessor:
+                getter: getExtraNightRatePlanCode
+                setter: setExtraNightRatePlanCode
+            xml_attribute: true
+            type: string
+        baseRatePlanCode:
+            expose: true
+            access_type: public_method
+            serialized_name: BaseRatePlanCode
+            accessor:
+                getter: getBaseRatePlanCode
+                setter: setBaseRatePlanCode
+            xml_attribute: true
+            type: string
+        adjustedAmount:
+            expose: true
+            access_type: public_method
+            serialized_name: AdjustedAmount
+            accessor:
+                getter: getAdjustedAmount
+                setter: setAdjustedAmount
+            xml_attribute: true
+            type: float
+        adjustedPercentage:
+            expose: true
+            access_type: public_method
+            serialized_name: AdjustedPercentage
+            accessor:
+                getter: getAdjustedPercentage
+                setter: setAdjustedPercentage
+            xml_attribute: true
+            type: float
+        floorAmount:
+            expose: true
+            access_type: public_method
+            serialized_name: FloorAmount
+            accessor:
+                getter: getFloorAmount
+                setter: setFloorAmount
+            xml_attribute: true
+            type: float
+        ceilingAmount:
+            expose: true
+            access_type: public_method
+            serialized_name: CeilingAmount
+            accessor:
+                getter: getCeilingAmount
+                setter: setCeilingAmount
+            xml_attribute: true
+            type: float
+        adjustUpIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: AdjustUpIndicator
+            accessor:
+                getter: getAdjustUpIndicator
+                setter: setAdjustUpIndicator
+            xml_attribute: true
+            type: bool
+        destinationSystemsCode:
+            expose: true
+            access_type: public_method
+            serialized_name: DestinationSystemsCode
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getDestinationSystemsCode
+                setter: setDestinationSystemsCode
+            type: array<string>
+            xml_list:
+                inline: false
+                entry_name: DestinationSystemCode
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        bookingRules:
+            expose: true
+            access_type: public_method
+            serialized_name: BookingRules
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getBookingRules
+                setter: setBookingRules
+            type: OTA\HotelRatePlanType\BookingRulesAType
+        rates:
+            expose: true
+            access_type: public_method
+            serialized_name: Rates
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getRates
+                setter: setRates
+            type: array<OTA\HotelRatePlanType\RatesAType\RateAType>
+            xml_list:
+                inline: false
+                entry_name: Rate
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        offers:
+            expose: true
+            access_type: public_method
+            serialized_name: Offers
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getOffers
+                setter: setOffers
+            type: array<OTA\OfferType>
+            xml_list:
+                inline: false
+                entry_name: Offer
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        ratePlanShoulders:
+            expose: true
+            access_type: public_method
+            serialized_name: RatePlanShoulders
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getRatePlanShoulders
+                setter: setRatePlanShoulders
+            type: array<OTA\HotelRatePlanType\RatePlanShouldersAType\RatePlanShoulderAType>
+            xml_list:
+                inline: false
+                entry_name: RatePlanShoulder
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        sellableProducts:
+            expose: true
+            access_type: public_method
+            serialized_name: SellableProducts
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getSellableProducts
+                setter: setSellableProducts
+            type: array<OTA\SellableProductsType\SellableProductAType>
+            xml_list:
+                inline: false
+                entry_name: SellableProduct
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        ratePlanLevelFee:
+            expose: true
+            access_type: public_method
+            serialized_name: RatePlanLevelFee
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getRatePlanLevelFee
+                setter: setRatePlanLevelFee
+            type: OTA\HotelRatePlanType\RatePlanLevelFeeAType
+        commission:
+            expose: true
+            access_type: public_method
+            serialized_name: Commission
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getCommission
+                setter: setCommission
+            type: OTA\CommissionType
+        description:
+            expose: true
+            access_type: public_method
+            serialized_name: Description
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getDescription
+                setter: setDescription
+            xml_list:
+                inline: true
+                entry_name: Description
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\ParagraphType>
+        uniqueID:
+            expose: true
+            access_type: public_method
+            serialized_name: UniqueID
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getUniqueID
+                setter: setUniqueID
+            type: OTA\UniqueIDType
+        hotelRef:
+            expose: true
+            access_type: public_method
+            serialized_name: HotelRef
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getHotelRef
+                setter: setHotelRef
+            type: OTA\HotelRatePlanType\HotelRefAType

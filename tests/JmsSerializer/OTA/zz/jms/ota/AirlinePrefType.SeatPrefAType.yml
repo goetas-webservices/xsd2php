@@ -1,0 +1,38 @@
+OTA\AirlinePrefType\SeatPrefAType:
+    properties:
+        preferLevel:
+            expose: true
+            access_type: public_method
+            serialized_name: PreferLevel
+            accessor:
+                getter: getPreferLevel
+                setter: setPreferLevel
+            xml_attribute: true
+            type: string
+        seatNumber:
+            expose: true
+            access_type: public_method
+            serialized_name: SeatNumber
+            accessor:
+                getter: getSeatNumber
+                setter: setSeatNumber
+            xml_attribute: true
+            type: string
+        seatPreference:
+            expose: true
+            access_type: public_method
+            serialized_name: SeatPreference
+            accessor:
+                getter: getSeatPreference
+                setter: setSeatPreference
+            xml_attribute: true
+            type: string
+        smokingAllowed:
+            expose: true
+            access_type: public_method
+            serialized_name: SmokingAllowed
+            accessor:
+                getter: getSmokingAllowed
+                setter: setSmokingAllowed
+            xml_attribute: true
+            type: bool

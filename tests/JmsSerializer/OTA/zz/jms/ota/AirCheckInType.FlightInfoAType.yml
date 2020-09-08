@@ -1,0 +1,97 @@
+OTA\AirCheckInType\FlightInfoAType:
+    properties:
+        rPH:
+            expose: true
+            access_type: public_method
+            serialized_name: RPH
+            accessor:
+                getter: getRPH
+                setter: setRPH
+            xml_attribute: true
+            type: string
+        cabinType:
+            expose: true
+            access_type: public_method
+            serialized_name: CabinType
+            accessor:
+                getter: getCabinType
+                setter: setCabinType
+            xml_attribute: true
+            type: string
+        cabinName:
+            expose: true
+            access_type: public_method
+            serialized_name: CabinName
+            accessor:
+                getter: getCabinName
+                setter: setCabinName
+            xml_attribute: true
+            type: string
+        carrierInfo:
+            expose: true
+            access_type: public_method
+            serialized_name: CarrierInfo
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getCarrierInfo
+                setter: setCarrierInfo
+            xml_list:
+                inline: true
+                entry_name: CarrierInfo
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\AirCheckInType\FlightInfoAType\CarrierInfoAType>
+        aircraftOwner:
+            expose: true
+            access_type: public_method
+            serialized_name: AircraftOwner
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getAircraftOwner
+                setter: setAircraftOwner
+            type: OTA\CompanyNameType
+        departureInformation:
+            expose: true
+            access_type: public_method
+            serialized_name: DepartureInformation
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getDepartureInformation
+                setter: setDepartureInformation
+            type: OTA\AirCheckInType\FlightInfoAType\DepartureInformationAType
+        arrivalInformation:
+            expose: true
+            access_type: public_method
+            serialized_name: ArrivalInformation
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getArrivalInformation
+                setter: setArrivalInformation
+            type: OTA\AirCheckInType\FlightInfoAType\ArrivalInformationAType
+        serviceDetails:
+            expose: true
+            access_type: public_method
+            serialized_name: ServiceDetails
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getServiceDetails
+                setter: setServiceDetails
+            type: OTA\AirCheckInType\FlightInfoAType\ServiceDetailsAType
+        transitPoint:
+            expose: true
+            access_type: public_method
+            serialized_name: TransitPoint
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getTransitPoint
+                setter: setTransitPoint
+            xml_list:
+                inline: true
+                entry_name: TransitPoint
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\LocationType>

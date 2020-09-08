@@ -1,0 +1,48 @@
+OTA\OTAVehLocDetailsNotifRQ\OTAVehLocDetailsNotifRQAType\LocationDetailsAType\LocationDetailAType\SpecialEquipmentsAType\SpecialEquipmentAType:
+    properties:
+        gDSTypeCode:
+            expose: true
+            access_type: public_method
+            serialized_name: GDS_TypeCode
+            accessor:
+                getter: getGDSTypeCode
+                setter: setGDSTypeCode
+            xml_attribute: true
+            type: string
+        name:
+            expose: true
+            access_type: public_method
+            serialized_name: Name
+            accessor:
+                getter: getName
+                setter: setName
+            xml_attribute: true
+            type: string
+        freeInd:
+            expose: true
+            access_type: public_method
+            serialized_name: FreeInd
+            accessor:
+                getter: getFreeInd
+                setter: setFreeInd
+            xml_attribute: true
+            type: bool
+        readEquipPolicyInd:
+            expose: true
+            access_type: public_method
+            serialized_name: ReadEquipPolicyInd
+            accessor:
+                getter: getReadEquipPolicyInd
+                setter: setReadEquipPolicyInd
+            xml_attribute: true
+            type: bool
+        charge:
+            expose: true
+            access_type: public_method
+            serialized_name: Charge
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getCharge
+                setter: setCharge
+            type: OTA\VehicleChargeType

@@ -1,0 +1,47 @@
+OTA\RatePlanCandidatesType\RatePlanCandidateAType\MealsIncludedAType:
+    properties:
+        breakfast:
+            expose: true
+            access_type: public_method
+            serialized_name: Breakfast
+            accessor:
+                getter: getBreakfast
+                setter: setBreakfast
+            xml_attribute: true
+            type: bool
+        lunch:
+            expose: true
+            access_type: public_method
+            serialized_name: Lunch
+            accessor:
+                getter: getLunch
+                setter: setLunch
+            xml_attribute: true
+            type: bool
+        dinner:
+            expose: true
+            access_type: public_method
+            serialized_name: Dinner
+            accessor:
+                getter: getDinner
+                setter: setDinner
+            xml_attribute: true
+            type: bool
+        mealPlanIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: MealPlanIndicator
+            accessor:
+                getter: getMealPlanIndicator
+                setter: setMealPlanIndicator
+            xml_attribute: true
+            type: bool
+        mealPlanCodes:
+            expose: true
+            access_type: public_method
+            serialized_name: MealPlanCodes
+            accessor:
+                getter: getMealPlanCodes
+                setter: setMealPlanCodes
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Jms\SimpleListOf<string>

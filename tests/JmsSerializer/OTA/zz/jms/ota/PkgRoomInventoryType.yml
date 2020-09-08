@@ -1,0 +1,71 @@
+OTA\PkgRoomInventoryType:
+    properties:
+        description:
+            expose: true
+            access_type: public_method
+            serialized_name: Description
+            accessor:
+                getter: getDescription
+                setter: setDescription
+            xml_attribute: true
+            type: string
+        minOccupancy:
+            expose: true
+            access_type: public_method
+            serialized_name: MinOccupancy
+            accessor:
+                getter: getMinOccupancy
+                setter: setMinOccupancy
+            xml_attribute: true
+            type: int
+        maxOccupancy:
+            expose: true
+            access_type: public_method
+            serialized_name: MaxOccupancy
+            accessor:
+                getter: getMaxOccupancy
+                setter: setMaxOccupancy
+            xml_attribute: true
+            type: int
+        maxAdults:
+            expose: true
+            access_type: public_method
+            serialized_name: MaxAdults
+            accessor:
+                getter: getMaxAdults
+                setter: setMaxAdults
+            xml_attribute: true
+            type: int
+        cotQuantity:
+            expose: true
+            access_type: public_method
+            serialized_name: CotQuantity
+            accessor:
+                getter: getCotQuantity
+                setter: setCotQuantity
+            xml_attribute: true
+            type: int
+        freeChildFlag:
+            expose: true
+            access_type: public_method
+            serialized_name: FreeChildFlag
+            accessor:
+                getter: getFreeChildFlag
+                setter: setFreeChildFlag
+            xml_attribute: true
+            type: bool
+        supplementCharges:
+            expose: true
+            access_type: public_method
+            serialized_name: SupplementCharges
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getSupplementCharges
+                setter: setSupplementCharges
+            type: array<OTA\FeeType>
+            xml_list:
+                inline: false
+                entry_name: Charge
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'

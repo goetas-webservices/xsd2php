@@ -1,0 +1,70 @@
+OTA\OTACruiseSpecialServiceAvailRS\OTACruiseSpecialServiceAvailRSAType\SpecialServicesAType\SpecialServiceAType:
+    properties:
+        description:
+            expose: true
+            access_type: public_method
+            serialized_name: Description
+            accessor:
+                getter: getDescription
+                setter: setDescription
+            xml_attribute: true
+            type: string
+        status:
+            expose: true
+            access_type: public_method
+            serialized_name: Status
+            accessor:
+                getter: getStatus
+                setter: setStatus
+            xml_attribute: true
+            type: string
+        serviceDateRequiredInd:
+            expose: true
+            access_type: public_method
+            serialized_name: ServiceDateRequiredInd
+            accessor:
+                getter: getServiceDateRequiredInd
+                setter: setServiceDateRequiredInd
+            xml_attribute: true
+            type: bool
+        nbrOfYearsRequiredInd:
+            expose: true
+            access_type: public_method
+            serialized_name: NbrOfYearsRequiredInd
+            accessor:
+                getter: getNbrOfYearsRequiredInd
+                setter: setNbrOfYearsRequiredInd
+            xml_attribute: true
+            type: bool
+        minGuestsRequired:
+            expose: true
+            access_type: public_method
+            serialized_name: MinGuestsRequired
+            accessor:
+                getter: getMinGuestsRequired
+                setter: setMinGuestsRequired
+            xml_attribute: true
+            type: int
+        userRemarkRequiredInd:
+            expose: true
+            access_type: public_method
+            serialized_name: UserRemarkRequiredInd
+            accessor:
+                getter: getUserRemarkRequiredInd
+                setter: setUserRemarkRequiredInd
+            xml_attribute: true
+            type: bool
+        priceInfo:
+            expose: true
+            access_type: public_method
+            serialized_name: PriceInfo
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getPriceInfo
+                setter: setPriceInfo
+            xml_list:
+                inline: true
+                entry_name: PriceInfo
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\OTACruiseSpecialServiceAvailRS\OTACruiseSpecialServiceAvailRSAType\SpecialServicesAType\SpecialServiceAType\PriceInfoAType>

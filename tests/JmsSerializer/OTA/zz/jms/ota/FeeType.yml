@@ -1,0 +1,188 @@
+OTA\FeeType:
+    properties:
+        taxInclusive:
+            expose: true
+            access_type: public_method
+            serialized_name: TaxInclusive
+            accessor:
+                getter: getTaxInclusive
+                setter: setTaxInclusive
+            xml_attribute: true
+            type: bool
+        type:
+            expose: true
+            access_type: public_method
+            serialized_name: Type
+            accessor:
+                getter: getType
+                setter: setType
+            xml_attribute: true
+            type: string
+        code:
+            expose: true
+            access_type: public_method
+            serialized_name: Code
+            accessor:
+                getter: getCode
+                setter: setCode
+            xml_attribute: true
+            type: string
+        percent:
+            expose: true
+            access_type: public_method
+            serialized_name: Percent
+            accessor:
+                getter: getPercent
+                setter: setPercent
+            xml_attribute: true
+            type: float
+        amount:
+            expose: true
+            access_type: public_method
+            serialized_name: Amount
+            accessor:
+                getter: getAmount
+                setter: setAmount
+            xml_attribute: true
+            type: float
+        currencyCode:
+            expose: true
+            access_type: public_method
+            serialized_name: CurrencyCode
+            accessor:
+                getter: getCurrencyCode
+                setter: setCurrencyCode
+            xml_attribute: true
+            type: string
+        decimalPlaces:
+            expose: true
+            access_type: public_method
+            serialized_name: DecimalPlaces
+            accessor:
+                getter: getDecimalPlaces
+                setter: setDecimalPlaces
+            xml_attribute: true
+            type: int
+        effectiveDate:
+            expose: true
+            access_type: public_method
+            serialized_name: EffectiveDate
+            accessor:
+                getter: getEffectiveDate
+                setter: setEffectiveDate
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\Date
+        expireDate:
+            expose: true
+            access_type: public_method
+            serialized_name: ExpireDate
+            accessor:
+                getter: getExpireDate
+                setter: setExpireDate
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\Date
+        mandatoryIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: MandatoryIndicator
+            accessor:
+                getter: getMandatoryIndicator
+                setter: setMandatoryIndicator
+            xml_attribute: true
+            type: bool
+        rPH:
+            expose: true
+            access_type: public_method
+            serialized_name: RPH
+            accessor:
+                getter: getRPH
+                setter: setRPH
+            xml_attribute: true
+            type: string
+        chargeUnit:
+            expose: true
+            access_type: public_method
+            serialized_name: ChargeUnit
+            accessor:
+                getter: getChargeUnit
+                setter: setChargeUnit
+            xml_attribute: true
+            type: string
+        chargeFrequency:
+            expose: true
+            access_type: public_method
+            serialized_name: ChargeFrequency
+            accessor:
+                getter: getChargeFrequency
+                setter: setChargeFrequency
+            xml_attribute: true
+            type: string
+        chargeUnitExempt:
+            expose: true
+            access_type: public_method
+            serialized_name: ChargeUnitExempt
+            accessor:
+                getter: getChargeUnitExempt
+                setter: setChargeUnitExempt
+            xml_attribute: true
+            type: int
+        chargeFrequencyExempt:
+            expose: true
+            access_type: public_method
+            serialized_name: ChargeFrequencyExempt
+            accessor:
+                getter: getChargeFrequencyExempt
+                setter: setChargeFrequencyExempt
+            xml_attribute: true
+            type: int
+        maxChargeUnitApplies:
+            expose: true
+            access_type: public_method
+            serialized_name: MaxChargeUnitApplies
+            accessor:
+                getter: getMaxChargeUnitApplies
+                setter: setMaxChargeUnitApplies
+            xml_attribute: true
+            type: int
+        maxChargeFrequencyApplies:
+            expose: true
+            access_type: public_method
+            serialized_name: MaxChargeFrequencyApplies
+            accessor:
+                getter: getMaxChargeFrequencyApplies
+                setter: setMaxChargeFrequencyApplies
+            xml_attribute: true
+            type: int
+        taxableIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: TaxableIndicator
+            accessor:
+                getter: getTaxableIndicator
+                setter: setTaxableIndicator
+            xml_attribute: true
+            type: bool
+        taxes:
+            expose: true
+            access_type: public_method
+            serialized_name: Taxes
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getTaxes
+                setter: setTaxes
+            type: OTA\TaxesType
+        description:
+            expose: true
+            access_type: public_method
+            serialized_name: Description
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getDescription
+                setter: setDescription
+            xml_list:
+                inline: true
+                entry_name: Description
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\ParagraphType>

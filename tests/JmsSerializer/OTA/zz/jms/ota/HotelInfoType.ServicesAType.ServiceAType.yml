@@ -1,0 +1,198 @@
+OTA\HotelInfoType\ServicesAType\ServiceAType:
+    properties:
+        included:
+            expose: true
+            access_type: public_method
+            serialized_name: Included
+            accessor:
+                getter: getIncluded
+                setter: setIncluded
+            xml_attribute: true
+            type: bool
+        code:
+            expose: true
+            access_type: public_method
+            serialized_name: Code
+            accessor:
+                getter: getCode
+                setter: setCode
+            xml_attribute: true
+            type: string
+        businessServiceCode:
+            expose: true
+            access_type: public_method
+            serialized_name: BusinessServiceCode
+            accessor:
+                getter: getBusinessServiceCode
+                setter: setBusinessServiceCode
+            xml_attribute: true
+            type: string
+        existsCode:
+            expose: true
+            access_type: public_method
+            serialized_name: ExistsCode
+            accessor:
+                getter: getExistsCode
+                setter: setExistsCode
+            xml_attribute: true
+            type: string
+        codeDetail:
+            expose: true
+            access_type: public_method
+            serialized_name: CodeDetail
+            accessor:
+                getter: getCodeDetail
+                setter: setCodeDetail
+            xml_attribute: true
+            type: string
+        removal:
+            expose: true
+            access_type: public_method
+            serialized_name: Removal
+            accessor:
+                getter: getRemoval
+                setter: setRemoval
+            xml_attribute: true
+            type: bool
+        availableToAnyGuest:
+            expose: true
+            access_type: public_method
+            serialized_name: AvailableToAnyGuest
+            accessor:
+                getter: getAvailableToAnyGuest
+                setter: setAvailableToAnyGuest
+            xml_attribute: true
+            type: bool
+        invCode:
+            expose: true
+            access_type: public_method
+            serialized_name: InvCode
+            accessor:
+                getter: getInvCode
+                setter: setInvCode
+            xml_attribute: true
+            type: string
+        proximityCode:
+            expose: true
+            access_type: public_method
+            serialized_name: ProximityCode
+            accessor:
+                getter: getProximityCode
+                setter: setProximityCode
+            xml_attribute: true
+            type: string
+        mealPlanCode:
+            expose: true
+            access_type: public_method
+            serialized_name: MealPlanCode
+            accessor:
+                getter: getMealPlanCode
+                setter: setMealPlanCode
+            xml_attribute: true
+            type: string
+        quantity:
+            expose: true
+            access_type: public_method
+            serialized_name: Quantity
+            accessor:
+                getter: getQuantity
+                setter: setQuantity
+            xml_attribute: true
+            type: int
+        sort:
+            expose: true
+            access_type: public_method
+            serialized_name: Sort
+            accessor:
+                getter: getSort
+                setter: setSort
+            xml_attribute: true
+            type: int
+        meetingRoomCode:
+            expose: true
+            access_type: public_method
+            serialized_name: MeetingRoomCode
+            accessor:
+                getter: getMeetingRoomCode
+                setter: setMeetingRoomCode
+            xml_attribute: true
+            type: string
+        iD:
+            expose: true
+            access_type: public_method
+            serialized_name: ID
+            accessor:
+                getter: getID
+                setter: setID
+            xml_attribute: true
+            type: string
+        contact:
+            expose: true
+            access_type: public_method
+            serialized_name: Contact
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getContact
+                setter: setContact
+            type: OTA\ContactInfoType
+        relativePosition:
+            expose: true
+            access_type: public_method
+            serialized_name: RelativePosition
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getRelativePosition
+                setter: setRelativePosition
+            type: OTA\RelativePositionType
+        operationSchedules:
+            expose: true
+            access_type: public_method
+            serialized_name: OperationSchedules
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getOperationSchedules
+                setter: setOperationSchedules
+            type: array<OTA\OperationSchedulesPlusChargeType\OperationScheduleAType>
+            xml_list:
+                inline: false
+                entry_name: OperationSchedule
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        multimediaDescriptions:
+            expose: true
+            access_type: public_method
+            serialized_name: MultimediaDescriptions
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getMultimediaDescriptions
+                setter: setMultimediaDescriptions
+            type: OTA\MultimediaDescriptionsType
+        features:
+            expose: true
+            access_type: public_method
+            serialized_name: Features
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getFeatures
+                setter: setFeatures
+            type: array<OTA\FeaturesType\FeatureAType>
+            xml_list:
+                inline: false
+                entry_name: Feature
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        descriptiveText:
+            expose: true
+            access_type: public_method
+            serialized_name: DescriptiveText
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getDescriptiveText
+                setter: setDescriptiveText
+            type: string

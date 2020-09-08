@@ -1,0 +1,102 @@
+OTA\PoliciesType\PolicyAType\StayRequirementsAType\StayRequirementAType:
+    properties:
+        mon:
+            expose: true
+            access_type: public_method
+            serialized_name: Mon
+            accessor:
+                getter: getMon
+                setter: setMon
+            xml_attribute: true
+            type: bool
+        tue:
+            expose: true
+            access_type: public_method
+            serialized_name: Tue
+            accessor:
+                getter: getTue
+                setter: setTue
+            xml_attribute: true
+            type: bool
+        weds:
+            expose: true
+            access_type: public_method
+            serialized_name: Weds
+            accessor:
+                getter: getWeds
+                setter: setWeds
+            xml_attribute: true
+            type: bool
+        thur:
+            expose: true
+            access_type: public_method
+            serialized_name: Thur
+            accessor:
+                getter: getThur
+                setter: setThur
+            xml_attribute: true
+            type: bool
+        fri:
+            expose: true
+            access_type: public_method
+            serialized_name: Fri
+            accessor:
+                getter: getFri
+                setter: setFri
+            xml_attribute: true
+            type: bool
+        sat:
+            expose: true
+            access_type: public_method
+            serialized_name: Sat
+            accessor:
+                getter: getSat
+                setter: setSat
+            xml_attribute: true
+            type: bool
+        sun:
+            expose: true
+            access_type: public_method
+            serialized_name: Sun
+            accessor:
+                getter: getSun
+                setter: setSun
+            xml_attribute: true
+            type: bool
+        minLOS:
+            expose: true
+            access_type: public_method
+            serialized_name: MinLOS
+            accessor:
+                getter: getMinLOS
+                setter: setMinLOS
+            xml_attribute: true
+            type: int
+        maxLOS:
+            expose: true
+            access_type: public_method
+            serialized_name: MaxLOS
+            accessor:
+                getter: getMaxLOS
+                setter: setMaxLOS
+            xml_attribute: true
+            type: int
+        stayContext:
+            expose: true
+            access_type: public_method
+            serialized_name: StayContext
+            accessor:
+                getter: getStayContext
+                setter: setStayContext
+            xml_attribute: true
+            type: string
+        description:
+            expose: true
+            access_type: public_method
+            serialized_name: Description
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getDescription
+                setter: setDescription
+            type: OTA\ParagraphType

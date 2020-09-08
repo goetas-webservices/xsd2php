@@ -1,0 +1,56 @@
+OTA\RFPRequestSegmentsType\RFPRequestSegmentAType\EventBlockAType\FunctionSpaceReqAType:
+    properties:
+        largestRoomSpace:
+            expose: true
+            access_type: public_method
+            serialized_name: LargestRoomSpace
+            accessor:
+                getter: getLargestRoomSpace
+                setter: setLargestRoomSpace
+            xml_attribute: true
+            type: int
+        meetingRoomFormatCode:
+            expose: true
+            access_type: public_method
+            serialized_name: MeetingRoomFormatCode
+            accessor:
+                getter: getMeetingRoomFormatCode
+                setter: setMeetingRoomFormatCode
+            xml_attribute: true
+            type: string
+        minOccupancy:
+            expose: true
+            access_type: public_method
+            serialized_name: MinOccupancy
+            accessor:
+                getter: getMinOccupancy
+                setter: setMinOccupancy
+            xml_attribute: true
+            type: int
+        ceilingHeight:
+            expose: true
+            access_type: public_method
+            serialized_name: CeilingHeight
+            accessor:
+                getter: getCeilingHeight
+                setter: setCeilingHeight
+            xml_attribute: true
+            type: float
+        unitOfMeasure:
+            expose: true
+            access_type: public_method
+            serialized_name: UnitOfMeasure
+            accessor:
+                getter: getUnitOfMeasure
+                setter: setUnitOfMeasure
+            xml_attribute: true
+            type: string
+        minBreakoutRoomQuantity:
+            expose: true
+            access_type: public_method
+            serialized_name: MinBreakoutRoomQuantity
+            accessor:
+                getter: getMinBreakoutRoomQuantity
+                setter: setMinBreakoutRoomQuantity
+            xml_attribute: true
+            type: int

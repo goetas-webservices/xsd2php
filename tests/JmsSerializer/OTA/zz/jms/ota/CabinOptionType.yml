@@ -1,0 +1,193 @@
+OTA\CabinOptionType:
+    properties:
+        status:
+            expose: true
+            access_type: public_method
+            serialized_name: Status
+            accessor:
+                getter: getStatus
+                setter: setStatus
+            xml_attribute: true
+            type: string
+        categoryLocation:
+            expose: true
+            access_type: public_method
+            serialized_name: CategoryLocation
+            accessor:
+                getter: getCategoryLocation
+                setter: setCategoryLocation
+            xml_attribute: true
+            type: string
+        shipSide:
+            expose: true
+            access_type: public_method
+            serialized_name: ShipSide
+            accessor:
+                getter: getShipSide
+                setter: setShipSide
+            xml_attribute: true
+            type: string
+        positionInShip:
+            expose: true
+            access_type: public_method
+            serialized_name: PositionInShip
+            accessor:
+                getter: getPositionInShip
+                setter: setPositionInShip
+            xml_attribute: true
+            type: string
+        bedType:
+            expose: true
+            access_type: public_method
+            serialized_name: BedType
+            accessor:
+                getter: getBedType
+                setter: setBedType
+            xml_attribute: true
+            type: string
+        cabinNumber:
+            expose: true
+            access_type: public_method
+            serialized_name: CabinNumber
+            accessor:
+                getter: getCabinNumber
+                setter: setCabinNumber
+            xml_attribute: true
+            type: string
+        maxOccupancy:
+            expose: true
+            access_type: public_method
+            serialized_name: MaxOccupancy
+            accessor:
+                getter: getMaxOccupancy
+                setter: setMaxOccupancy
+            xml_attribute: true
+            type: int
+        declineIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: DeclineIndicator
+            accessor:
+                getter: getDeclineIndicator
+                setter: setDeclineIndicator
+            xml_attribute: true
+            type: bool
+        heldIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: HeldIndicator
+            accessor:
+                getter: getHeldIndicator
+                setter: setHeldIndicator
+            xml_attribute: true
+            type: bool
+        releaseDateTime:
+            expose: true
+            access_type: public_method
+            serialized_name: ReleaseDateTime
+            accessor:
+                getter: getReleaseDateTime
+                setter: setReleaseDateTime
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\DateTime
+        deckNumber:
+            expose: true
+            access_type: public_method
+            serialized_name: DeckNumber
+            accessor:
+                getter: getDeckNumber
+                setter: setDeckNumber
+            xml_attribute: true
+            type: string
+        deckName:
+            expose: true
+            access_type: public_method
+            serialized_name: DeckName
+            accessor:
+                getter: getDeckName
+                setter: setDeckName
+            xml_attribute: true
+            type: string
+        cabinCategoryStatusCode:
+            expose: true
+            access_type: public_method
+            serialized_name: CabinCategoryStatusCode
+            accessor:
+                getter: getCabinCategoryStatusCode
+                setter: setCabinCategoryStatusCode
+            xml_attribute: true
+            type: string
+        cabinCategoryCode:
+            expose: true
+            access_type: public_method
+            serialized_name: CabinCategoryCode
+            accessor:
+                getter: getCabinCategoryCode
+                setter: setCabinCategoryCode
+            xml_attribute: true
+            type: string
+        cabinRanking:
+            expose: true
+            access_type: public_method
+            serialized_name: CabinRanking
+            accessor:
+                getter: getCabinRanking
+                setter: setCabinRanking
+            xml_attribute: true
+            type: int
+        connectingCabinIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: ConnectingCabinIndicator
+            accessor:
+                getter: getConnectingCabinIndicator
+                setter: setConnectingCabinIndicator
+            xml_attribute: true
+            type: bool
+        connectingCabinNumber:
+            expose: true
+            access_type: public_method
+            serialized_name: ConnectingCabinNumber
+            accessor:
+                getter: getConnectingCabinNumber
+                setter: setConnectingCabinNumber
+            xml_attribute: true
+            type: string
+        cabinConfiguration:
+            expose: true
+            access_type: public_method
+            serialized_name: CabinConfiguration
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getCabinConfiguration
+                setter: setCabinConfiguration
+            xml_list:
+                inline: true
+                entry_name: CabinConfiguration
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\CabinOptionType\CabinConfigurationAType>
+        measurementInfo:
+            expose: true
+            access_type: public_method
+            serialized_name: MeasurementInfo
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getMeasurementInfo
+                setter: setMeasurementInfo
+            xml_list:
+                inline: true
+                entry_name: MeasurementInfo
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\CabinOptionType\MeasurementInfoAType>
+        remark:
+            expose: true
+            access_type: public_method
+            serialized_name: Remark
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getRemark
+                setter: setRemark
+            type: OTA\FreeTextType

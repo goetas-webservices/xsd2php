@@ -1,0 +1,25 @@
+OTA\CancelPenaltiesType:
+    properties:
+        cancelPolicyIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: CancelPolicyIndicator
+            accessor:
+                getter: getCancelPolicyIndicator
+                setter: setCancelPolicyIndicator
+            xml_attribute: true
+            type: bool
+        cancelPenalty:
+            expose: true
+            access_type: public_method
+            serialized_name: CancelPenalty
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getCancelPenalty
+                setter: setCancelPenalty
+            xml_list:
+                inline: true
+                entry_name: CancelPenalty
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\CancelPenaltyType>

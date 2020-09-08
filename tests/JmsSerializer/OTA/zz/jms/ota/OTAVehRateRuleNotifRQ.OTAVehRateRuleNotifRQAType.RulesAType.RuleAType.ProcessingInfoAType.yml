@@ -1,0 +1,74 @@
+OTA\OTAVehRateRuleNotifRQ\OTAVehRateRuleNotifRQAType\RulesAType\RuleAType\ProcessingInfoAType:
+    properties:
+        action:
+            expose: true
+            access_type: public_method
+            serialized_name: Action
+            accessor:
+                getter: getAction
+                setter: setAction
+            xml_attribute: true
+            type: string
+        start:
+            expose: true
+            access_type: public_method
+            serialized_name: Start
+            accessor:
+                getter: getStart
+                setter: setStart
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime
+        duration:
+            expose: true
+            access_type: public_method
+            serialized_name: Duration
+            accessor:
+                getter: getDuration
+                setter: setDuration
+            xml_attribute: true
+            type: DateInterval
+        end:
+            expose: true
+            access_type: public_method
+            serialized_name: End
+            accessor:
+                getter: getEnd
+                setter: setEnd
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime
+        companyShortName:
+            expose: true
+            access_type: public_method
+            serialized_name: CompanyShortName
+            accessor:
+                getter: getCompanyShortName
+                setter: setCompanyShortName
+            xml_attribute: true
+            type: string
+        travelSector:
+            expose: true
+            access_type: public_method
+            serialized_name: TravelSector
+            accessor:
+                getter: getTravelSector
+                setter: setTravelSector
+            xml_attribute: true
+            type: string
+        code:
+            expose: true
+            access_type: public_method
+            serialized_name: Code
+            accessor:
+                getter: getCode
+                setter: setCode
+            xml_attribute: true
+            type: string
+        codeContext:
+            expose: true
+            access_type: public_method
+            serialized_name: CodeContext
+            accessor:
+                getter: getCodeContext
+                setter: setCodeContext
+            xml_attribute: true
+            type: string

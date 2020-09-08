@@ -1,0 +1,28 @@
+OTA\PropertyValueMatchType\SearchValueMatchAType:
+    properties:
+        __value:
+            expose: true
+            xml_value: true
+            access_type: public_method
+            accessor:
+                getter: value
+                setter: value
+            type: string
+        match:
+            expose: true
+            access_type: public_method
+            serialized_name: Match
+            accessor:
+                getter: getMatch
+                setter: setMatch
+            xml_attribute: true
+            type: bool
+        relevance:
+            expose: true
+            access_type: public_method
+            serialized_name: Relevance
+            accessor:
+                getter: getRelevance
+                setter: setRelevance
+            xml_attribute: true
+            type: float

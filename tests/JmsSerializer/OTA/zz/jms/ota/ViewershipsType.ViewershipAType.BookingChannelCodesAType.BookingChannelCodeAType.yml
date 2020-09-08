@@ -1,0 +1,28 @@
+OTA\ViewershipsType\ViewershipAType\BookingChannelCodesAType\BookingChannelCodeAType:
+    properties:
+        __value:
+            expose: true
+            xml_value: true
+            access_type: public_method
+            accessor:
+                getter: value
+                setter: value
+            type: string
+        restrictedDisplayIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: RestrictedDisplayIndicator
+            accessor:
+                getter: getRestrictedDisplayIndicator
+                setter: setRestrictedDisplayIndicator
+            xml_attribute: true
+            type: bool
+        sort:
+            expose: true
+            access_type: public_method
+            serialized_name: Sort
+            accessor:
+                getter: getSort
+                setter: setSort
+            xml_attribute: true
+            type: int

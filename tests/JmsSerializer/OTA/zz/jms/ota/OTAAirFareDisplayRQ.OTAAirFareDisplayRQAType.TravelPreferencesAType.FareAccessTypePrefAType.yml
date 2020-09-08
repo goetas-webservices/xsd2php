@@ -1,0 +1,35 @@
+OTA\OTAAirFareDisplayRQ\OTAAirFareDisplayRQAType\TravelPreferencesAType\FareAccessTypePrefAType:
+    properties:
+        fareAccess:
+            expose: true
+            access_type: public_method
+            serialized_name: FareAccess
+            accessor:
+                getter: getFareAccess
+                setter: setFareAccess
+            xml_attribute: true
+            type: string
+        preferLevel:
+            expose: true
+            access_type: public_method
+            serialized_name: PreferLevel
+            accessor:
+                getter: getPreferLevel
+                setter: setPreferLevel
+            xml_attribute: true
+            type: string
+        negotiatedFareCodes:
+            expose: true
+            access_type: public_method
+            serialized_name: NegotiatedFareCodes
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getNegotiatedFareCodes
+                setter: setNegotiatedFareCodes
+            type: array<OTA\OTAAirFareDisplayRQ\OTAAirFareDisplayRQAType\TravelPreferencesAType\FareAccessTypePrefAType\NegotiatedFareCodesAType\NegotiatedFareCodeAType>
+            xml_list:
+                inline: false
+                entry_name: NegotiatedFareCode
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'

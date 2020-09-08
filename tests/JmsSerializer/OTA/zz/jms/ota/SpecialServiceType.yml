@@ -1,0 +1,75 @@
+OTA\SpecialServiceType:
+    properties:
+        type:
+            expose: true
+            access_type: public_method
+            serialized_name: Type
+            accessor:
+                getter: getType
+                setter: setType
+            xml_attribute: true
+            type: string
+        code:
+            expose: true
+            access_type: public_method
+            serialized_name: Code
+            accessor:
+                getter: getCode
+                setter: setCode
+            xml_attribute: true
+            type: string
+        codeName:
+            expose: true
+            access_type: public_method
+            serialized_name: CodeName
+            accessor:
+                getter: getCodeName
+                setter: setCodeName
+            xml_attribute: true
+            type: string
+        codeDetail:
+            expose: true
+            access_type: public_method
+            serialized_name: CodeDetail
+            accessor:
+                getter: getCodeDetail
+                setter: setCodeDetail
+            xml_attribute: true
+            type: string
+        associationType:
+            expose: true
+            access_type: public_method
+            serialized_name: AssociationType
+            accessor:
+                getter: getAssociationType
+                setter: setAssociationType
+            xml_attribute: true
+            type: string
+        date:
+            expose: true
+            access_type: public_method
+            serialized_name: Date
+            accessor:
+                getter: getDate
+                setter: setDate
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime
+        nbrOfYears:
+            expose: true
+            access_type: public_method
+            serialized_name: NbrOfYears
+            accessor:
+                getter: getNbrOfYears
+                setter: setNbrOfYears
+            xml_attribute: true
+            type: int
+        comment:
+            expose: true
+            access_type: public_method
+            serialized_name: Comment
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getComment
+                setter: setComment
+            type: OTA\ParagraphType

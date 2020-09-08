@@ -1,0 +1,20 @@
+OTA\EventType\EventAType\SitesAType\SiteAType\EventDaysAType\EventDayAType\EventDayFunctionsAType\EventDayFunctionAType\SessionTimesAType:
+    properties:
+        startTime:
+            expose: true
+            access_type: public_method
+            serialized_name: StartTime
+            accessor:
+                getter: getStartTime
+                setter: setStartTime
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\Time
+        endTime:
+            expose: true
+            access_type: public_method
+            serialized_name: EndTime
+            accessor:
+                getter: getEndTime
+                setter: setEndTime
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\Time

@@ -1,0 +1,54 @@
+OTA\RowDetailsType:
+    properties:
+        maxNumberOfSeats:
+            expose: true
+            access_type: public_method
+            serialized_name: MaxNumberOfSeats
+            accessor:
+                getter: getMaxNumberOfSeats
+                setter: setMaxNumberOfSeats
+            xml_attribute: true
+            type: int
+        rowNumber:
+            expose: true
+            access_type: public_method
+            serialized_name: RowNumber
+            accessor:
+                getter: getRowNumber
+                setter: setRowNumber
+            xml_attribute: true
+            type: int
+        airBookDesigCode:
+            expose: true
+            access_type: public_method
+            serialized_name: AirBookDesigCode
+            accessor:
+                getter: getAirBookDesigCode
+                setter: setAirBookDesigCode
+            xml_attribute: true
+            type: string
+        airSeats:
+            expose: true
+            access_type: public_method
+            serialized_name: AirSeats
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getAirSeats
+                setter: setAirSeats
+            type: array<OTA\RowDetailsType\AirSeatsAType\AirSeatAType>
+            xml_list:
+                inline: false
+                entry_name: AirSeat
+                skip_when_empty: false
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        airRowCharacteristics:
+            expose: true
+            access_type: public_method
+            serialized_name: AirRowCharacteristics
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getAirRowCharacteristics
+                setter: setAirRowCharacteristics
+            type: OTA\RowDetailsType\AirRowCharacteristicsAType

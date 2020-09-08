@@ -1,0 +1,32 @@
+OTA\OTAVehRateRuleRS\OTAVehRateRuleRSAType\RateRulesAType\PickupReturnRulesAType:
+    properties:
+        earliestPickup:
+            expose: true
+            access_type: public_method
+            serialized_name: EarliestPickup
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getEarliestPickup
+                setter: setEarliestPickup
+            type: OTA\OTAVehRateRuleRS\OTAVehRateRuleRSAType\RateRulesAType\PickupReturnRulesAType\EarliestPickupAType
+        latestPickup:
+            expose: true
+            access_type: public_method
+            serialized_name: LatestPickup
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getLatestPickup
+                setter: setLatestPickup
+            type: OTA\OTAVehRateRuleRS\OTAVehRateRuleRSAType\RateRulesAType\PickupReturnRulesAType\LatestPickupAType
+        latestReturn:
+            expose: true
+            access_type: public_method
+            serialized_name: LatestReturn
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getLatestReturn
+                setter: setLatestReturn
+            type: OTA\OTAVehRateRuleRS\OTAVehRateRuleRSAType\RateRulesAType\PickupReturnRulesAType\LatestReturnAType

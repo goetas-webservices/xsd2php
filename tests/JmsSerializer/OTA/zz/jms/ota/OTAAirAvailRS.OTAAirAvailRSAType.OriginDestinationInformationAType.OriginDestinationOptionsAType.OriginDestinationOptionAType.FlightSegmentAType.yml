@@ -1,0 +1,180 @@
+OTA\OTAAirAvailRS\OTAAirAvailRSAType\OriginDestinationInformationAType\OriginDestinationOptionsAType\OriginDestinationOptionAType\FlightSegmentAType:
+    properties:
+        journeyDuration:
+            expose: true
+            access_type: public_method
+            serialized_name: JourneyDuration
+            accessor:
+                getter: getJourneyDuration
+                setter: setJourneyDuration
+            xml_attribute: true
+            type: DateInterval
+        smokingAllowed:
+            expose: true
+            access_type: public_method
+            serialized_name: SmokingAllowed
+            accessor:
+                getter: getSmokingAllowed
+                setter: setSmokingAllowed
+            xml_attribute: true
+            type: bool
+        onTimeRate:
+            expose: true
+            access_type: public_method
+            serialized_name: OnTimeRate
+            accessor:
+                getter: getOnTimeRate
+                setter: setOnTimeRate
+            xml_attribute: true
+            type: float
+        ticket:
+            expose: true
+            access_type: public_method
+            serialized_name: Ticket
+            accessor:
+                getter: getTicket
+                setter: setTicket
+            xml_attribute: true
+            type: string
+        participationLevelCode:
+            expose: true
+            access_type: public_method
+            serialized_name: ParticipationLevelCode
+            accessor:
+                getter: getParticipationLevelCode
+                setter: setParticipationLevelCode
+            xml_attribute: true
+            type: string
+        groundDuration:
+            expose: true
+            access_type: public_method
+            serialized_name: GroundDuration
+            accessor:
+                getter: getGroundDuration
+                setter: setGroundDuration
+            xml_attribute: true
+            type: DateInterval
+        accumulatedDuration:
+            expose: true
+            access_type: public_method
+            serialized_name: AccumulatedDuration
+            accessor:
+                getter: getAccumulatedDuration
+                setter: setAccumulatedDuration
+            xml_attribute: true
+            type: DateInterval
+        distance:
+            expose: true
+            access_type: public_method
+            serialized_name: Distance
+            accessor:
+                getter: getDistance
+                setter: setDistance
+            xml_attribute: true
+            type: int
+        codeshareInd:
+            expose: true
+            access_type: public_method
+            serialized_name: CodeshareInd
+            accessor:
+                getter: getCodeshareInd
+                setter: setCodeshareInd
+            xml_attribute: true
+            type: bool
+        flifoInd:
+            expose: true
+            access_type: public_method
+            serialized_name: FlifoInd
+            accessor:
+                getter: getFlifoInd
+                setter: setFlifoInd
+            xml_attribute: true
+            type: bool
+        dateChangeNbr:
+            expose: true
+            access_type: public_method
+            serialized_name: DateChangeNbr
+            accessor:
+                getter: getDateChangeNbr
+                setter: setDateChangeNbr
+            xml_attribute: true
+            type: string
+        sequenceNumber:
+            expose: true
+            access_type: public_method
+            serialized_name: SequenceNumber
+            accessor:
+                getter: getSequenceNumber
+                setter: setSequenceNumber
+            xml_attribute: true
+            type: int
+        trafficRestrictionInfo:
+            expose: true
+            access_type: public_method
+            serialized_name: TrafficRestrictionInfo
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getTrafficRestrictionInfo
+                setter: setTrafficRestrictionInfo
+            xml_list:
+                inline: true
+                entry_name: TrafficRestrictionInfo
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\OTAAirAvailRS\OTAAirAvailRSAType\OriginDestinationInformationAType\OriginDestinationOptionsAType\OriginDestinationOptionAType\FlightSegmentAType\TrafficRestrictionInfoAType>
+        comment:
+            expose: true
+            access_type: public_method
+            serialized_name: Comment
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getComment
+                setter: setComment
+            xml_list:
+                inline: true
+                entry_name: Comment
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\FreeTextType>
+        marketingCabin:
+            expose: true
+            access_type: public_method
+            serialized_name: MarketingCabin
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getMarketingCabin
+                setter: setMarketingCabin
+            xml_list:
+                inline: true
+                entry_name: MarketingCabin
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\MarketingCabinType>
+        bookingClassAvail:
+            expose: true
+            access_type: public_method
+            serialized_name: BookingClassAvail
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getBookingClassAvail
+                setter: setBookingClassAvail
+            xml_list:
+                inline: true
+                entry_name: BookingClassAvail
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\OTAAirAvailRS\OTAAirAvailRSAType\OriginDestinationInformationAType\OriginDestinationOptionsAType\OriginDestinationOptionAType\FlightSegmentAType\BookingClassAvailAType>
+        stopLocation:
+            expose: true
+            access_type: public_method
+            serialized_name: StopLocation
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getStopLocation
+                setter: setStopLocation
+            xml_list:
+                inline: true
+                entry_name: StopLocation
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\OTAAirAvailRS\OTAAirAvailRSAType\OriginDestinationInformationAType\OriginDestinationOptionsAType\OriginDestinationOptionAType\FlightSegmentAType\StopLocationAType>

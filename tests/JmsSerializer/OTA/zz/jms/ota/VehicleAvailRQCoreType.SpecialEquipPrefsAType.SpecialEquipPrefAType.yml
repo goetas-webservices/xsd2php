@@ -1,0 +1,38 @@
+OTA\VehicleAvailRQCoreType\SpecialEquipPrefsAType\SpecialEquipPrefAType:
+    properties:
+        equipType:
+            expose: true
+            access_type: public_method
+            serialized_name: EquipType
+            accessor:
+                getter: getEquipType
+                setter: setEquipType
+            xml_attribute: true
+            type: string
+        quantity:
+            expose: true
+            access_type: public_method
+            serialized_name: Quantity
+            accessor:
+                getter: getQuantity
+                setter: setQuantity
+            xml_attribute: true
+            type: int
+        preferLevel:
+            expose: true
+            access_type: public_method
+            serialized_name: PreferLevel
+            accessor:
+                getter: getPreferLevel
+                setter: setPreferLevel
+            xml_attribute: true
+            type: string
+        action:
+            expose: true
+            access_type: public_method
+            serialized_name: Action
+            accessor:
+                getter: getAction
+                setter: setAction
+            xml_attribute: true
+            type: string

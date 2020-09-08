@@ -1,0 +1,29 @@
+OTA\OTAAirFareDisplayRS\OTAAirFareDisplayRSAType\FareDisplayInfosAType\FareDisplayInfoAType\RestrictionsAType\RestrictionAType\FlightsAType\FlightAType:
+    properties:
+        airlineCode:
+            expose: true
+            access_type: public_method
+            serialized_name: AirlineCode
+            accessor:
+                getter: getAirlineCode
+                setter: setAirlineCode
+            xml_attribute: true
+            type: string
+        flightNumber:
+            expose: true
+            access_type: public_method
+            serialized_name: FlightNumber
+            accessor:
+                getter: getFlightNumber
+                setter: setFlightNumber
+            xml_attribute: true
+            type: string
+        includeExcludeUseInd:
+            expose: true
+            access_type: public_method
+            serialized_name: IncludeExcludeUseInd
+            accessor:
+                getter: getIncludeExcludeUseInd
+                setter: setIncludeExcludeUseInd
+            xml_attribute: true
+            type: bool

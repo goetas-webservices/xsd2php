@@ -1,0 +1,38 @@
+OTA\ContactInfoRootType:
+    properties:
+        removal:
+            expose: true
+            access_type: public_method
+            serialized_name: Removal
+            accessor:
+                getter: getRemoval
+                setter: setRemoval
+            xml_attribute: true
+            type: bool
+        contactProfileID:
+            expose: true
+            access_type: public_method
+            serialized_name: ContactProfileID
+            accessor:
+                getter: getContactProfileID
+                setter: setContactProfileID
+            xml_attribute: true
+            type: string
+        contactProfileType:
+            expose: true
+            access_type: public_method
+            serialized_name: ContactProfileType
+            accessor:
+                getter: getContactProfileType
+                setter: setContactProfileType
+            xml_attribute: true
+            type: string
+        lastUpdated:
+            expose: true
+            access_type: public_method
+            serialized_name: LastUpdated
+            accessor:
+                getter: getLastUpdated
+                setter: setLastUpdated
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\DateTime

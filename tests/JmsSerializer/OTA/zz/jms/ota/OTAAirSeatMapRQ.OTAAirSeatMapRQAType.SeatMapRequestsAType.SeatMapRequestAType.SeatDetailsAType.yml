@@ -1,0 +1,40 @@
+OTA\OTAAirSeatMapRQ\OTAAirSeatMapRQAType\SeatMapRequestsAType\SeatMapRequestAType\SeatDetailsAType:
+    properties:
+        seatUpgrade:
+            expose: true
+            access_type: public_method
+            serialized_name: SeatUpgrade
+            accessor:
+                getter: getSeatUpgrade
+                setter: setSeatUpgrade
+            xml_attribute: true
+            type: bool
+        cabinClass:
+            expose: true
+            access_type: public_method
+            serialized_name: CabinClass
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getCabinClass
+                setter: setCabinClass
+            xml_list:
+                inline: true
+                entry_name: CabinClass
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\OTAAirSeatMapRQ\OTAAirSeatMapRQAType\SeatMapRequestsAType\SeatMapRequestAType\SeatDetailsAType\CabinClassAType>
+        resBookDesignations:
+            expose: true
+            access_type: public_method
+            serialized_name: ResBookDesignations
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getResBookDesignations
+                setter: setResBookDesignations
+            type: array<OTA\OTAAirSeatMapRQ\OTAAirSeatMapRQAType\SeatMapRequestsAType\SeatMapRequestAType\SeatDetailsAType\ResBookDesignationsAType\ResBookDesignationAType>
+            xml_list:
+                inline: false
+                entry_name: ResBookDesignation
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'

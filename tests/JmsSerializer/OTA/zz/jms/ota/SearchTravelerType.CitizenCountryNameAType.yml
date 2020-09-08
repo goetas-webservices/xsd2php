@@ -1,0 +1,20 @@
+OTA\SearchTravelerType\CitizenCountryNameAType:
+    properties:
+        defaultInd:
+            expose: true
+            access_type: public_method
+            serialized_name: DefaultInd
+            accessor:
+                getter: getDefaultInd
+                setter: setDefaultInd
+            xml_attribute: true
+            type: bool
+        code:
+            expose: true
+            access_type: public_method
+            serialized_name: Code
+            accessor:
+                getter: getCode
+                setter: setCode
+            xml_attribute: true
+            type: string

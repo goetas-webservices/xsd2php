@@ -1,0 +1,47 @@
+OTA\AccommodationInfoType\ResortAType:
+    properties:
+        resortCode:
+            expose: true
+            access_type: public_method
+            serialized_name: ResortCode
+            accessor:
+                getter: getResortCode
+                setter: setResortCode
+            xml_attribute: true
+            type: string
+        resortName:
+            expose: true
+            access_type: public_method
+            serialized_name: ResortName
+            accessor:
+                getter: getResortName
+                setter: setResortName
+            xml_attribute: true
+            type: string
+        destinationCode:
+            expose: true
+            access_type: public_method
+            serialized_name: DestinationCode
+            accessor:
+                getter: getDestinationCode
+                setter: setDestinationCode
+            xml_attribute: true
+            type: string
+        destinationLevel:
+            expose: true
+            access_type: public_method
+            serialized_name: DestinationLevel
+            accessor:
+                getter: getDestinationLevel
+                setter: setDestinationLevel
+            xml_attribute: true
+            type: string
+        destinationName:
+            expose: true
+            access_type: public_method
+            serialized_name: DestinationName
+            accessor:
+                getter: getDestinationName
+                setter: setDestinationName
+            xml_attribute: true
+            type: string

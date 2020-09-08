@@ -1,0 +1,29 @@
+OTA\CategoryOptionType\DiningAType:
+    properties:
+        sitting:
+            expose: true
+            access_type: public_method
+            serialized_name: Sitting
+            accessor:
+                getter: getSitting
+                setter: setSitting
+            xml_attribute: true
+            type: string
+        status:
+            expose: true
+            access_type: public_method
+            serialized_name: Status
+            accessor:
+                getter: getStatus
+                setter: setStatus
+            xml_attribute: true
+            type: string
+        occupancy:
+            expose: true
+            access_type: public_method
+            serialized_name: Occupancy
+            accessor:
+                getter: getOccupancy
+                setter: setOccupancy
+            xml_attribute: true
+            type: int

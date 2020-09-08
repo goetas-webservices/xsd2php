@@ -1,0 +1,31 @@
+OTA\StayRestrictionsType:
+    properties:
+        stayRestrictionsInd:
+            expose: true
+            access_type: public_method
+            serialized_name: StayRestrictionsInd
+            accessor:
+                getter: getStayRestrictionsInd
+                setter: setStayRestrictionsInd
+            xml_attribute: true
+            type: bool
+        minimumStay:
+            expose: true
+            access_type: public_method
+            serialized_name: MinimumStay
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getMinimumStay
+                setter: setMinimumStay
+            type: OTA\StayRestrictionsType\MinimumStayAType
+        maximumStay:
+            expose: true
+            access_type: public_method
+            serialized_name: MaximumStay
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getMaximumStay
+                setter: setMaximumStay
+            type: OTA\StayRestrictionsType\MaximumStayAType

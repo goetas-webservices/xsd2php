@@ -1,0 +1,11 @@
+OTA\VehicleAvailRQCoreType\VehPrefsAType\VehPrefAType:
+    properties:
+        upSellInd:
+            expose: true
+            access_type: public_method
+            serialized_name: UpSellInd
+            accessor:
+                getter: getUpSellInd
+                setter: setUpSellInd
+            xml_attribute: true
+            type: bool

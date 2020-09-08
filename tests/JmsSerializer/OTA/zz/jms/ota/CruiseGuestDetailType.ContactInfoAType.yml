@@ -1,0 +1,74 @@
+OTA\CruiseGuestDetailType\ContactInfoAType:
+    properties:
+        guestRefNumber:
+            expose: true
+            access_type: public_method
+            serialized_name: GuestRefNumber
+            accessor:
+                getter: getGuestRefNumber
+                setter: setGuestRefNumber
+            xml_attribute: true
+            type: string
+        age:
+            expose: true
+            access_type: public_method
+            serialized_name: Age
+            accessor:
+                getter: getAge
+                setter: setAge
+            xml_attribute: true
+            type: int
+        nationality:
+            expose: true
+            access_type: public_method
+            serialized_name: Nationality
+            accessor:
+                getter: getNationality
+                setter: setNationality
+            xml_attribute: true
+            type: string
+        guestOccupation:
+            expose: true
+            access_type: public_method
+            serialized_name: GuestOccupation
+            accessor:
+                getter: getGuestOccupation
+                setter: setGuestOccupation
+            xml_attribute: true
+            type: string
+        birthDate:
+            expose: true
+            access_type: public_method
+            serialized_name: BirthDate
+            accessor:
+                getter: getBirthDate
+                setter: setBirthDate
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\Date
+        gender:
+            expose: true
+            access_type: public_method
+            serialized_name: Gender
+            accessor:
+                getter: getGender
+                setter: setGender
+            xml_attribute: true
+            type: string
+        loyaltyMembershipID:
+            expose: true
+            access_type: public_method
+            serialized_name: LoyaltyMembershipID
+            accessor:
+                getter: getLoyaltyMembershipID
+                setter: setLoyaltyMembershipID
+            xml_attribute: true
+            type: string
+        loyalLevel:
+            expose: true
+            access_type: public_method
+            serialized_name: LoyalLevel
+            accessor:
+                getter: getLoyalLevel
+                setter: setLoyalLevel
+            xml_attribute: true
+            type: string

@@ -1,0 +1,104 @@
+OTA\OfferType:
+    properties:
+        offerCode:
+            expose: true
+            access_type: public_method
+            serialized_name: OfferCode
+            accessor:
+                getter: getOfferCode
+                setter: setOfferCode
+            xml_attribute: true
+            type: string
+        rPH:
+            expose: true
+            access_type: public_method
+            serialized_name: RPH
+            accessor:
+                getter: getRPH
+                setter: setRPH
+            xml_attribute: true
+            type: string
+        applicationOrder:
+            expose: true
+            access_type: public_method
+            serialized_name: ApplicationOrder
+            accessor:
+                getter: getApplicationOrder
+                setter: setApplicationOrder
+            xml_attribute: true
+            type: int
+        offerRules:
+            expose: true
+            access_type: public_method
+            serialized_name: OfferRules
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getOfferRules
+                setter: setOfferRules
+            type: array<OTA\OfferType\OfferRulesAType\OfferRuleAType>
+            xml_list:
+                inline: false
+                entry_name: OfferRule
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        discount:
+            expose: true
+            access_type: public_method
+            serialized_name: Discount
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getDiscount
+                setter: setDiscount
+            type: OTA\OfferType\DiscountAType
+        freeUpgrade:
+            expose: true
+            access_type: public_method
+            serialized_name: FreeUpgrade
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getFreeUpgrade
+                setter: setFreeUpgrade
+            type: OTA\OfferType\FreeUpgradeAType
+        offerDescription:
+            expose: true
+            access_type: public_method
+            serialized_name: OfferDescription
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getOfferDescription
+                setter: setOfferDescription
+            type: OTA\ParagraphType
+        compatibleOffers:
+            expose: true
+            access_type: public_method
+            serialized_name: CompatibleOffers
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getCompatibleOffers
+                setter: setCompatibleOffers
+            type: array<OTA\OfferType\CompatibleOffersAType\CompatibleOfferAType>
+            xml_list:
+                inline: false
+                entry_name: CompatibleOffer
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        inventories:
+            expose: true
+            access_type: public_method
+            serialized_name: Inventories
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getInventories
+                setter: setInventories
+            type: array<OTA\OfferType\InventoriesAType\InventoryAType>
+            xml_list:
+                inline: false
+                entry_name: Inventory
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'

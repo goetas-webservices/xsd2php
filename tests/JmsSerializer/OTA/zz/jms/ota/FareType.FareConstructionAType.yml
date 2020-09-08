@@ -1,0 +1,56 @@
+OTA\FareType\FareConstructionAType:
+    properties:
+        formattedIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: FormattedIndicator
+            accessor:
+                getter: getFormattedIndicator
+                setter: setFormattedIndicator
+            xml_attribute: true
+            type: bool
+        language:
+            expose: true
+            access_type: public_method
+            serialized_name: Language
+            accessor:
+                getter: getLanguage
+                setter: setLanguage
+            xml_attribute: true
+            type: string
+        originCityCode:
+            expose: true
+            access_type: public_method
+            serialized_name: OriginCityCode
+            accessor:
+                getter: getOriginCityCode
+                setter: setOriginCityCode
+            xml_attribute: true
+            type: string
+        originCodeContext:
+            expose: true
+            access_type: public_method
+            serialized_name: OriginCodeContext
+            accessor:
+                getter: getOriginCodeContext
+                setter: setOriginCodeContext
+            xml_attribute: true
+            type: string
+        destinationCityCode:
+            expose: true
+            access_type: public_method
+            serialized_name: DestinationCityCode
+            accessor:
+                getter: getDestinationCityCode
+                setter: setDestinationCityCode
+            xml_attribute: true
+            type: string
+        destinationCodeContext:
+            expose: true
+            access_type: public_method
+            serialized_name: DestinationCodeContext
+            accessor:
+                getter: getDestinationCodeContext
+                setter: setDestinationCodeContext
+            xml_attribute: true
+            type: string

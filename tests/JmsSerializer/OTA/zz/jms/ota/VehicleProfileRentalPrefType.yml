@@ -1,0 +1,145 @@
+OTA\VehicleProfileRentalPrefType:
+    properties:
+        preferLevel:
+            expose: true
+            access_type: public_method
+            serialized_name: PreferLevel
+            accessor:
+                getter: getPreferLevel
+                setter: setPreferLevel
+            xml_attribute: true
+            type: string
+        shareSynchInd:
+            expose: true
+            access_type: public_method
+            serialized_name: ShareSynchInd
+            accessor:
+                getter: getShareSynchInd
+                setter: setShareSynchInd
+            xml_attribute: true
+            type: string
+        shareMarketInd:
+            expose: true
+            access_type: public_method
+            serialized_name: ShareMarketInd
+            accessor:
+                getter: getShareMarketInd
+                setter: setShareMarketInd
+            xml_attribute: true
+            type: string
+        smokingAllowed:
+            expose: true
+            access_type: public_method
+            serialized_name: SmokingAllowed
+            accessor:
+                getter: getSmokingAllowed
+                setter: setSmokingAllowed
+            xml_attribute: true
+            type: bool
+        gasPrePay:
+            expose: true
+            access_type: public_method
+            serialized_name: GasPrePay
+            accessor:
+                getter: getGasPrePay
+                setter: setGasPrePay
+            xml_attribute: true
+            type: bool
+        loyaltyPref:
+            expose: true
+            access_type: public_method
+            serialized_name: LoyaltyPref
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getLoyaltyPref
+                setter: setLoyaltyPref
+            xml_list:
+                inline: true
+                entry_name: LoyaltyPref
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\VehicleProfileRentalPrefType\LoyaltyPrefAType>
+        vendorPref:
+            expose: true
+            access_type: public_method
+            serialized_name: VendorPref
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getVendorPref
+                setter: setVendorPref
+            xml_list:
+                inline: true
+                entry_name: VendorPref
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\CompanyNamePrefType>
+        paymentFormPref:
+            expose: true
+            access_type: public_method
+            serialized_name: PaymentFormPref
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getPaymentFormPref
+                setter: setPaymentFormPref
+            xml_list:
+                inline: true
+                entry_name: PaymentFormPref
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\VehicleProfileRentalPrefType\PaymentFormPrefAType>
+        coveragePref:
+            expose: true
+            access_type: public_method
+            serialized_name: CoveragePref
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getCoveragePref
+                setter: setCoveragePref
+            xml_list:
+                inline: true
+                entry_name: CoveragePref
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\VehicleProfileRentalPrefType\CoveragePrefAType>
+        specialReqPref:
+            expose: true
+            access_type: public_method
+            serialized_name: SpecialReqPref
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getSpecialReqPref
+                setter: setSpecialReqPref
+            xml_list:
+                inline: true
+                entry_name: SpecialReqPref
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\VehicleSpecialReqPrefType>
+        vehTypePref:
+            expose: true
+            access_type: public_method
+            serialized_name: VehTypePref
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getVehTypePref
+                setter: setVehTypePref
+            xml_list:
+                inline: true
+                entry_name: VehTypePref
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\VehiclePrefType>
+        specialEquipPref:
+            expose: true
+            access_type: public_method
+            serialized_name: SpecialEquipPref
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getSpecialEquipPref
+                setter: setSpecialEquipPref
+            xml_list:
+                inline: true
+                entry_name: SpecialEquipPref
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\VehicleProfileRentalPrefType\SpecialEquipPrefAType>

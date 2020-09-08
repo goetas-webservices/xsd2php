@@ -1,0 +1,158 @@
+OTA\AreaInfoType\RecreationsAType\RecreationAType:
+    properties:
+        codeDetail:
+            expose: true
+            access_type: public_method
+            serialized_name: CodeDetail
+            accessor:
+                getter: getCodeDetail
+                setter: setCodeDetail
+            xml_attribute: true
+            type: string
+        removal:
+            expose: true
+            access_type: public_method
+            serialized_name: Removal
+            accessor:
+                getter: getRemoval
+                setter: setRemoval
+            xml_attribute: true
+            type: bool
+        code:
+            expose: true
+            access_type: public_method
+            serialized_name: Code
+            accessor:
+                getter: getCode
+                setter: setCode
+            xml_attribute: true
+            type: string
+        name:
+            expose: true
+            access_type: public_method
+            serialized_name: Name
+            accessor:
+                getter: getName
+                setter: setName
+            xml_attribute: true
+            type: string
+        proximityCode:
+            expose: true
+            access_type: public_method
+            serialized_name: ProximityCode
+            accessor:
+                getter: getProximityCode
+                setter: setProximityCode
+            xml_attribute: true
+            type: string
+        included:
+            expose: true
+            access_type: public_method
+            serialized_name: Included
+            accessor:
+                getter: getIncluded
+                setter: setIncluded
+            xml_attribute: true
+            type: bool
+        existsCode:
+            expose: true
+            access_type: public_method
+            serialized_name: ExistsCode
+            accessor:
+                getter: getExistsCode
+                setter: setExistsCode
+            xml_attribute: true
+            type: string
+        iD:
+            expose: true
+            access_type: public_method
+            serialized_name: ID
+            accessor:
+                getter: getID
+                setter: setID
+            xml_attribute: true
+            type: string
+        sort:
+            expose: true
+            access_type: public_method
+            serialized_name: Sort
+            accessor:
+                getter: getSort
+                setter: setSort
+            xml_attribute: true
+            type: int
+        contact:
+            expose: true
+            access_type: public_method
+            serialized_name: Contact
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getContact
+                setter: setContact
+            type: OTA\ContactInfoType
+        operationSchedules:
+            expose: true
+            access_type: public_method
+            serialized_name: OperationSchedules
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getOperationSchedules
+                setter: setOperationSchedules
+            type: array<OTA\OperationSchedulesPlusChargeType\OperationScheduleAType>
+            xml_list:
+                inline: false
+                entry_name: OperationSchedule
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        refPoints:
+            expose: true
+            access_type: public_method
+            serialized_name: RefPoints
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getRefPoints
+                setter: setRefPoints
+            type: array<OTA\RefPointsType\RefPointAType>
+            xml_list:
+                inline: false
+                entry_name: RefPoint
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        multimediaDescriptions:
+            expose: true
+            access_type: public_method
+            serialized_name: MultimediaDescriptions
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getMultimediaDescriptions
+                setter: setMultimediaDescriptions
+            type: OTA\AreaInfoType\RecreationsAType\RecreationAType\MultimediaDescriptionsAType
+        recreationDetails:
+            expose: true
+            access_type: public_method
+            serialized_name: RecreationDetails
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getRecreationDetails
+                setter: setRecreationDetails
+            type: array<OTA\AreaInfoType\RecreationsAType\RecreationAType\RecreationDetailsAType\RecreationDetailAType>
+            xml_list:
+                inline: false
+                entry_name: RecreationDetail
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        descriptiveText:
+            expose: true
+            access_type: public_method
+            serialized_name: DescriptiveText
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getDescriptiveText
+                setter: setDescriptiveText
+            type: string

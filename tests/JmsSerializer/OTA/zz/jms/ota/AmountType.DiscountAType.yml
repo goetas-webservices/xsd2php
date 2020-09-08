@@ -1,0 +1,20 @@
+OTA\AmountType\DiscountAType:
+    properties:
+        appliesTo:
+            expose: true
+            access_type: public_method
+            serialized_name: AppliesTo
+            accessor:
+                getter: getAppliesTo
+                setter: setAppliesTo
+            xml_attribute: true
+            type: string
+        itemRPH:
+            expose: true
+            access_type: public_method
+            serialized_name: ItemRPH
+            accessor:
+                getter: getItemRPH
+                setter: setItemRPH
+            xml_attribute: true
+            type: string

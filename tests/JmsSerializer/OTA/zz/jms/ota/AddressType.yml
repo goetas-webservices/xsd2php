@@ -1,0 +1,126 @@
+OTA\AddressType:
+    properties:
+        formattedInd:
+            expose: true
+            access_type: public_method
+            serialized_name: FormattedInd
+            accessor:
+                getter: getFormattedInd
+                setter: setFormattedInd
+            xml_attribute: true
+            type: bool
+        shareSynchInd:
+            expose: true
+            access_type: public_method
+            serialized_name: ShareSynchInd
+            accessor:
+                getter: getShareSynchInd
+                setter: setShareSynchInd
+            xml_attribute: true
+            type: string
+        shareMarketInd:
+            expose: true
+            access_type: public_method
+            serialized_name: ShareMarketInd
+            accessor:
+                getter: getShareMarketInd
+                setter: setShareMarketInd
+            xml_attribute: true
+            type: string
+        type:
+            expose: true
+            access_type: public_method
+            serialized_name: Type
+            accessor:
+                getter: getType
+                setter: setType
+            xml_attribute: true
+            type: string
+        streetNmbr:
+            expose: true
+            access_type: public_method
+            serialized_name: StreetNmbr
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getStreetNmbr
+                setter: setStreetNmbr
+            type: OTA\AddressType\StreetNmbrAType
+        bldgRoom:
+            expose: true
+            access_type: public_method
+            serialized_name: BldgRoom
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getBldgRoom
+                setter: setBldgRoom
+            xml_list:
+                inline: true
+                entry_name: BldgRoom
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\AddressType\BldgRoomAType>
+        addressLine:
+            expose: true
+            access_type: public_method
+            serialized_name: AddressLine
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getAddressLine
+                setter: setAddressLine
+            xml_list:
+                inline: true
+                entry_name: AddressLine
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<string>
+        cityName:
+            expose: true
+            access_type: public_method
+            serialized_name: CityName
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getCityName
+                setter: setCityName
+            type: string
+        postalCode:
+            expose: true
+            access_type: public_method
+            serialized_name: PostalCode
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getPostalCode
+                setter: setPostalCode
+            type: string
+        county:
+            expose: true
+            access_type: public_method
+            serialized_name: County
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getCounty
+                setter: setCounty
+            type: string
+        stateProv:
+            expose: true
+            access_type: public_method
+            serialized_name: StateProv
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getStateProv
+                setter: setStateProv
+            type: OTA\StateProvType
+        countryName:
+            expose: true
+            access_type: public_method
+            serialized_name: CountryName
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getCountryName
+                setter: setCountryName
+            type: OTA\CountryNameType

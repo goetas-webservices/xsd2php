@@ -1,0 +1,39 @@
+OTA\WeatherInfoType:
+    properties:
+        period:
+            expose: true
+            access_type: public_method
+            serialized_name: Period
+            accessor:
+                getter: getPeriod
+                setter: setPeriod
+            xml_attribute: true
+            type: string
+        precipitation:
+            expose: true
+            access_type: public_method
+            serialized_name: Precipitation
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getPrecipitation
+                setter: setPrecipitation
+            xml_list:
+                inline: true
+                entry_name: Precipitation
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\WeatherInfoType\PrecipitationAType>
+        temperature:
+            expose: true
+            access_type: public_method
+            serialized_name: Temperature
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getTemperature
+                setter: setTemperature
+            xml_list:
+                inline: true
+                entry_name: Temperature
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\WeatherInfoType\TemperatureAType>

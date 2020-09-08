@@ -1,0 +1,20 @@
+OTA\VehicleCoreType\VehTypeAType:
+    properties:
+        vehicleCategory:
+            expose: true
+            access_type: public_method
+            serialized_name: VehicleCategory
+            accessor:
+                getter: getVehicleCategory
+                setter: setVehicleCategory
+            xml_attribute: true
+            type: string
+        doorCount:
+            expose: true
+            access_type: public_method
+            serialized_name: DoorCount
+            accessor:
+                getter: getDoorCount
+                setter: setDoorCount
+            xml_attribute: true
+            type: string

@@ -1,0 +1,20 @@
+OTA\StatisticApplicationSetType\CountCategorySummariesAType\CountCategorySummaryAType:
+    properties:
+        summaryCount:
+            expose: true
+            access_type: public_method
+            serialized_name: SummaryCount
+            accessor:
+                getter: getSummaryCount
+                setter: setSummaryCount
+            xml_attribute: true
+            type: int
+        countCategoryCode:
+            expose: true
+            access_type: public_method
+            serialized_name: CountCategoryCode
+            accessor:
+                getter: getCountCategoryCode
+                setter: setCountCategoryCode
+            xml_attribute: true
+            type: string

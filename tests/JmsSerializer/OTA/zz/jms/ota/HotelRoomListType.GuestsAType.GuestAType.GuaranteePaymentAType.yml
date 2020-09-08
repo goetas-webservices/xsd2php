@@ -1,0 +1,20 @@
+OTA\HotelRoomListType\GuestsAType\GuestAType\GuaranteePaymentAType:
+    properties:
+        detailType:
+            expose: true
+            access_type: public_method
+            serialized_name: DetailType
+            accessor:
+                getter: getDetailType
+                setter: setDetailType
+            xml_attribute: true
+            type: string
+        guaranteeType:
+            expose: true
+            access_type: public_method
+            serialized_name: GuaranteeType
+            accessor:
+                getter: getGuaranteeType
+                setter: setGuaranteeType
+            xml_attribute: true
+            type: string

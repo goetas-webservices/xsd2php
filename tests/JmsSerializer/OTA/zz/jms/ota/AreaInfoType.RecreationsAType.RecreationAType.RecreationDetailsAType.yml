@@ -1,0 +1,16 @@
+OTA\AreaInfoType\RecreationsAType\RecreationAType\RecreationDetailsAType:
+    properties:
+        recreationDetail:
+            expose: true
+            access_type: public_method
+            serialized_name: RecreationDetail
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getRecreationDetail
+                setter: setRecreationDetail
+            xml_list:
+                inline: true
+                entry_name: RecreationDetail
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\AreaInfoType\RecreationsAType\RecreationAType\RecreationDetailsAType\RecreationDetailAType>

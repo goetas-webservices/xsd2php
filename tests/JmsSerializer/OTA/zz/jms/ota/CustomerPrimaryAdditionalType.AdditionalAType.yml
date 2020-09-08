@@ -1,0 +1,101 @@
+OTA\CustomerPrimaryAdditionalType\AdditionalAType:
+    properties:
+        start:
+            expose: true
+            access_type: public_method
+            serialized_name: Start
+            accessor:
+                getter: getStart
+                setter: setStart
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime
+        duration:
+            expose: true
+            access_type: public_method
+            serialized_name: Duration
+            accessor:
+                getter: getDuration
+                setter: setDuration
+            xml_attribute: true
+            type: DateInterval
+        end:
+            expose: true
+            access_type: public_method
+            serialized_name: End
+            accessor:
+                getter: getEnd
+                setter: setEnd
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime
+        corpDiscountName:
+            expose: true
+            access_type: public_method
+            serialized_name: CorpDiscountName
+            accessor:
+                getter: getCorpDiscountName
+                setter: setCorpDiscountName
+            xml_attribute: true
+            type: string
+        corpDiscountNmbr:
+            expose: true
+            access_type: public_method
+            serialized_name: CorpDiscountNmbr
+            accessor:
+                getter: getCorpDiscountNmbr
+                setter: setCorpDiscountNmbr
+            xml_attribute: true
+            type: string
+        qualificationMethod:
+            expose: true
+            access_type: public_method
+            serialized_name: QualificationMethod
+            accessor:
+                getter: getQualificationMethod
+                setter: setQualificationMethod
+            xml_attribute: true
+            type: string
+        age:
+            expose: true
+            access_type: public_method
+            serialized_name: Age
+            accessor:
+                getter: getAge
+                setter: setAge
+            xml_attribute: true
+            type: int
+        code:
+            expose: true
+            access_type: public_method
+            serialized_name: Code
+            accessor:
+                getter: getCode
+                setter: setCode
+            xml_attribute: true
+            type: string
+        codeContext:
+            expose: true
+            access_type: public_method
+            serialized_name: CodeContext
+            accessor:
+                getter: getCodeContext
+                setter: setCodeContext
+            xml_attribute: true
+            type: string
+        uRI:
+            expose: true
+            access_type: public_method
+            serialized_name: URI
+            accessor:
+                getter: getURI
+                setter: setURI
+            xml_attribute: true
+            type: string
+        quantity:
+            expose: true
+            access_type: public_method
+            serialized_name: Quantity
+            accessor:
+                getter: getQuantity
+                setter: setQuantity
+            xml_attribute: true
+            type: int

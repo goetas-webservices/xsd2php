@@ -1,0 +1,93 @@
+OTA\EventChargeType\EventChargeAType:
+    properties:
+        eventCharge:
+            expose: true
+            access_type: public_method
+            serialized_name: EventCharge
+            accessor:
+                getter: getEventCharge
+                setter: setEventCharge
+            xml_attribute: true
+            type: string
+        primaryChargeType:
+            expose: true
+            access_type: public_method
+            serialized_name: PrimaryChargeType
+            accessor:
+                getter: getPrimaryChargeType
+                setter: setPrimaryChargeType
+            xml_attribute: true
+            type: string
+        secondaryChargeType:
+            expose: true
+            access_type: public_method
+            serialized_name: SecondaryChargeType
+            accessor:
+                getter: getSecondaryChargeType
+                setter: setSecondaryChargeType
+            xml_attribute: true
+            type: string
+        appliedPercentageEventCharge:
+            expose: true
+            access_type: public_method
+            serialized_name: AppliedPercentageEventCharge
+            accessor:
+                getter: getAppliedPercentageEventCharge
+                setter: setAppliedPercentageEventCharge
+            xml_attribute: true
+            type: string
+        minChargeAmount:
+            expose: true
+            access_type: public_method
+            serialized_name: MinChargeAmount
+            accessor:
+                getter: getMinChargeAmount
+                setter: setMinChargeAmount
+            xml_attribute: true
+            type: float
+        maxChargeAmount:
+            expose: true
+            access_type: public_method
+            serialized_name: MaxChargeAmount
+            accessor:
+                getter: getMaxChargeAmount
+                setter: setMaxChargeAmount
+            xml_attribute: true
+            type: float
+        averageChargeAmount:
+            expose: true
+            access_type: public_method
+            serialized_name: AverageChargeAmount
+            accessor:
+                getter: getAverageChargeAmount
+                setter: setAverageChargeAmount
+            xml_attribute: true
+            type: float
+        currencyCode:
+            expose: true
+            access_type: public_method
+            serialized_name: CurrencyCode
+            accessor:
+                getter: getCurrencyCode
+                setter: setCurrencyCode
+            xml_attribute: true
+            type: string
+        decimalPlaces:
+            expose: true
+            access_type: public_method
+            serialized_name: DecimalPlaces
+            accessor:
+                getter: getDecimalPlaces
+                setter: setDecimalPlaces
+            xml_attribute: true
+            type: int
+        taxes:
+            expose: true
+            access_type: public_method
+            serialized_name: Taxes
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getTaxes
+                setter: setTaxes
+            type: OTA\TaxesType

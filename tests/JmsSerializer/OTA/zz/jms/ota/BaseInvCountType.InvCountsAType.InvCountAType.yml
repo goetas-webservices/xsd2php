@@ -1,0 +1,48 @@
+OTA\BaseInvCountType\InvCountsAType\InvCountAType:
+    properties:
+        countType:
+            expose: true
+            access_type: public_method
+            serialized_name: CountType
+            accessor:
+                getter: getCountType
+                setter: setCountType
+            xml_attribute: true
+            type: string
+        count:
+            expose: true
+            access_type: public_method
+            serialized_name: Count
+            accessor:
+                getter: getCount
+                setter: setCount
+            xml_attribute: true
+            type: int
+        adjustReason:
+            expose: true
+            access_type: public_method
+            serialized_name: AdjustReason
+            accessor:
+                getter: getAdjustReason
+                setter: setAdjustReason
+            xml_attribute: true
+            type: string
+        actionType:
+            expose: true
+            access_type: public_method
+            serialized_name: ActionType
+            accessor:
+                getter: getActionType
+                setter: setActionType
+            xml_attribute: true
+            type: string
+        invBlockCutoff:
+            expose: true
+            access_type: public_method
+            serialized_name: InvBlockCutoff
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getInvBlockCutoff
+                setter: setInvBlockCutoff
+            type: OTA\BaseInvCountType\InvCountsAType\InvCountAType\InvBlockCutoffAType

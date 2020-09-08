@@ -1,0 +1,62 @@
+OTA\EventType\EventAType\SitesAType\SiteAType\RoomBlockAType:
+    properties:
+        totalRoomNightQuantity:
+            expose: true
+            access_type: public_method
+            serialized_name: TotalRoomNightQuantity
+            accessor:
+                getter: getTotalRoomNightQuantity
+                setter: setTotalRoomNightQuantity
+            xml_attribute: true
+            type: int
+        peakRoomNightQuantity:
+            expose: true
+            access_type: public_method
+            serialized_name: PeakRoomNightQuantity
+            accessor:
+                getter: getPeakRoomNightQuantity
+                setter: setPeakRoomNightQuantity
+            xml_attribute: true
+            type: int
+        concessionsIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: ConcessionsIndicator
+            accessor:
+                getter: getConcessionsIndicator
+                setter: setConcessionsIndicator
+            xml_attribute: true
+            type: bool
+        housingProviderName:
+            expose: true
+            access_type: public_method
+            serialized_name: HousingProviderName
+            accessor:
+                getter: getHousingProviderName
+                setter: setHousingProviderName
+            xml_attribute: true
+            type: string
+        reservationMethod:
+            expose: true
+            access_type: public_method
+            serialized_name: ReservationMethod
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getReservationMethod
+                setter: setReservationMethod
+            xml_list:
+                inline: true
+                entry_name: ReservationMethod
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\EventType\EventAType\SitesAType\SiteAType\RoomBlockAType\ReservationMethodAType>
+        stayDays:
+            expose: true
+            access_type: public_method
+            serialized_name: StayDays
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getStayDays
+                setter: setStayDays
+            type: OTA\EventType\EventAType\SitesAType\SiteAType\RoomBlockAType\StayDaysAType

@@ -1,0 +1,47 @@
+OTA\ItemSearchCriterionType\RadiusAType:
+    properties:
+        distance:
+            expose: true
+            access_type: public_method
+            serialized_name: Distance
+            accessor:
+                getter: getDistance
+                setter: setDistance
+            xml_attribute: true
+            type: string
+        distanceMeasure:
+            expose: true
+            access_type: public_method
+            serialized_name: DistanceMeasure
+            accessor:
+                getter: getDistanceMeasure
+                setter: setDistanceMeasure
+            xml_attribute: true
+            type: string
+        direction:
+            expose: true
+            access_type: public_method
+            serialized_name: Direction
+            accessor:
+                getter: getDirection
+                setter: setDirection
+            xml_attribute: true
+            type: string
+        distanceMax:
+            expose: true
+            access_type: public_method
+            serialized_name: DistanceMax
+            accessor:
+                getter: getDistanceMax
+                setter: setDistanceMax
+            xml_attribute: true
+            type: string
+        unitOfMeasureCode:
+            expose: true
+            access_type: public_method
+            serialized_name: UnitOfMeasureCode
+            accessor:
+                getter: getUnitOfMeasureCode
+                setter: setUnitOfMeasureCode
+            xml_attribute: true
+            type: string

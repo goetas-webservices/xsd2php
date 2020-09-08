@@ -1,0 +1,11 @@
+OTA\SailingCategoryInfoType\SelectedCategoryAType\CabinAttributesAType\CabinAttributeAType:
+    properties:
+        cabinAttributeCode:
+            expose: true
+            access_type: public_method
+            serialized_name: CabinAttributeCode
+            accessor:
+                getter: getCabinAttributeCode
+                setter: setCabinAttributeCode
+            xml_attribute: true
+            type: string

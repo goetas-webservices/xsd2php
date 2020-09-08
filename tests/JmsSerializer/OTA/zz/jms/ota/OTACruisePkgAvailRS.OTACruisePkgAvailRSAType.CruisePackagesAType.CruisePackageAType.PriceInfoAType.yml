@@ -1,0 +1,11 @@
+OTA\OTACruisePkgAvailRS\OTACruisePkgAvailRSAType\CruisePackagesAType\CruisePackageAType\PriceInfoAType:
+    properties:
+        status:
+            expose: true
+            access_type: public_method
+            serialized_name: Status
+            accessor:
+                getter: getStatus
+                setter: setStatus
+            xml_attribute: true
+            type: string

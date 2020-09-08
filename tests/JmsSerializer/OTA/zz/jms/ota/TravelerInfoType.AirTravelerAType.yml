@@ -1,0 +1,16 @@
+OTA\TravelerInfoType\AirTravelerAType:
+    properties:
+        comment:
+            expose: true
+            access_type: public_method
+            serialized_name: Comment
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getComment
+                setter: setComment
+            xml_list:
+                inline: true
+                entry_name: Comment
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\TravelerInfoType\AirTravelerAType\CommentAType>

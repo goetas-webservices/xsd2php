@@ -1,0 +1,28 @@
+OTA\SpecialReqDetailsType\RemarksAType\RemarkAType:
+    properties:
+        __value:
+            expose: true
+            xml_value: true
+            access_type: public_method
+            accessor:
+                getter: value
+                setter: value
+            type: string
+        rPH:
+            expose: true
+            access_type: public_method
+            serialized_name: RPH
+            accessor:
+                getter: getRPH
+                setter: setRPH
+            xml_attribute: true
+            type: string
+        operation:
+            expose: true
+            access_type: public_method
+            serialized_name: Operation
+            accessor:
+                getter: getOperation
+                setter: setOperation
+            xml_attribute: true
+            type: string

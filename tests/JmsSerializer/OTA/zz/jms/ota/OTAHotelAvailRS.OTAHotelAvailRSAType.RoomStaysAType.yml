@@ -1,0 +1,25 @@
+OTA\OTAHotelAvailRS\OTAHotelAvailRSAType\RoomStaysAType:
+    properties:
+        moreIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: MoreIndicator
+            accessor:
+                getter: getMoreIndicator
+                setter: setMoreIndicator
+            xml_attribute: true
+            type: string
+        roomStay:
+            expose: true
+            access_type: public_method
+            serialized_name: RoomStay
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getRoomStay
+                setter: setRoomStay
+            xml_list:
+                inline: true
+                entry_name: RoomStay
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\OTAHotelAvailRS\OTAHotelAvailRSAType\RoomStaysAType\RoomStayAType>

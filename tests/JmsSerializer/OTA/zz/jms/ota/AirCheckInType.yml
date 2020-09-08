@@ -1,0 +1,107 @@
+OTA\AirCheckInType:
+    properties:
+        pOS:
+            expose: true
+            access_type: public_method
+            serialized_name: POS
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getPOS
+                setter: setPOS
+            type: array<OTA\SourceType>
+            xml_list:
+                inline: false
+                entry_name: Source
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        messageFunction:
+            expose: true
+            access_type: public_method
+            serialized_name: MessageFunction
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getMessageFunction
+                setter: setMessageFunction
+            xml_list:
+                inline: true
+                entry_name: MessageFunction
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\AirCheckInType\MessageFunctionAType>
+        documentAndPrintInfo:
+            expose: true
+            access_type: public_method
+            serialized_name: DocumentAndPrintInfo
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getDocumentAndPrintInfo
+                setter: setDocumentAndPrintInfo
+            type: OTA\AirCheckInType\DocumentAndPrintInfoAType
+        flightInfo:
+            expose: true
+            access_type: public_method
+            serialized_name: FlightInfo
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getFlightInfo
+                setter: setFlightInfo
+            xml_list:
+                inline: true
+                entry_name: FlightInfo
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\AirCheckInType\FlightInfoAType>
+        passengerInfo:
+            expose: true
+            access_type: public_method
+            serialized_name: PassengerInfo
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getPassengerInfo
+                setter: setPassengerInfo
+            xml_list:
+                inline: true
+                entry_name: PassengerInfo
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\AirCheckInType\PassengerInfoAType>
+        passengerFlightInfo:
+            expose: true
+            access_type: public_method
+            serialized_name: PassengerFlightInfo
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getPassengerFlightInfo
+                setter: setPassengerFlightInfo
+            xml_list:
+                inline: true
+                entry_name: PassengerFlightInfo
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\AirCheckInType\PassengerFlightInfoAType>
+        baggageInfo:
+            expose: true
+            access_type: public_method
+            serialized_name: BaggageInfo
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getBaggageInfo
+                setter: setBaggageInfo
+            xml_list:
+                inline: true
+                entry_name: BaggageInfo
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\AirCheckInType\BaggageInfoAType>
+        paymentInfo:
+            expose: true
+            access_type: public_method
+            serialized_name: PaymentInfo
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getPaymentInfo
+                setter: setPaymentInfo
+            type: OTA\AirCheckInType\PaymentInfoAType

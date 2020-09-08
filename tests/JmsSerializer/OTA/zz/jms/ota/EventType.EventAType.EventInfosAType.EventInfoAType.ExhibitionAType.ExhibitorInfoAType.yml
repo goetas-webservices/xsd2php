@@ -1,0 +1,53 @@
+OTA\EventType\EventAType\EventInfosAType\EventInfoAType\ExhibitionAType\ExhibitorInfoAType:
+    properties:
+        expectedTotalQuantity:
+            expose: true
+            access_type: public_method
+            serialized_name: ExpectedTotalQuantity
+            accessor:
+                getter: getExpectedTotalQuantity
+                setter: setExpectedTotalQuantity
+            xml_attribute: true
+            type: int
+        domesticQuantity:
+            expose: true
+            access_type: public_method
+            serialized_name: DomesticQuantity
+            accessor:
+                getter: getDomesticQuantity
+                setter: setDomesticQuantity
+            xml_attribute: true
+            type: int
+        internationalQuantity:
+            expose: true
+            access_type: public_method
+            serialized_name: InternationalQuantity
+            accessor:
+                getter: getInternationalQuantity
+                setter: setInternationalQuantity
+            xml_attribute: true
+            type: int
+        preRegisteredQuantity:
+            expose: true
+            access_type: public_method
+            serialized_name: PreRegisteredQuantity
+            accessor:
+                getter: getPreRegisteredQuantity
+                setter: setPreRegisteredQuantity
+            xml_attribute: true
+            type: int
+        comments:
+            expose: true
+            access_type: public_method
+            serialized_name: Comments
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getComments
+                setter: setComments
+            type: array<OTA\ParagraphType>
+            xml_list:
+                inline: false
+                entry_name: Comment
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'

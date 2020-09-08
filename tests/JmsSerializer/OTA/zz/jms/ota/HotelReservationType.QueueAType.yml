@@ -1,0 +1,47 @@
+OTA\HotelReservationType\QueueAType:
+    properties:
+        pseudoCityCode:
+            expose: true
+            access_type: public_method
+            serialized_name: PseudoCityCode
+            accessor:
+                getter: getPseudoCityCode
+                setter: setPseudoCityCode
+            xml_attribute: true
+            type: string
+        queueNumber:
+            expose: true
+            access_type: public_method
+            serialized_name: QueueNumber
+            accessor:
+                getter: getQueueNumber
+                setter: setQueueNumber
+            xml_attribute: true
+            type: string
+        queueCategory:
+            expose: true
+            access_type: public_method
+            serialized_name: QueueCategory
+            accessor:
+                getter: getQueueCategory
+                setter: setQueueCategory
+            xml_attribute: true
+            type: string
+        systemCode:
+            expose: true
+            access_type: public_method
+            serialized_name: SystemCode
+            accessor:
+                getter: getSystemCode
+                setter: setSystemCode
+            xml_attribute: true
+            type: string
+        queueID:
+            expose: true
+            access_type: public_method
+            serialized_name: QueueID
+            accessor:
+                getter: getQueueID
+                setter: setQueueID
+            xml_attribute: true
+            type: string

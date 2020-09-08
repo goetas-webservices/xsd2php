@@ -1,0 +1,67 @@
+OTA\WrittenConfInstType:
+    properties:
+        languageID:
+            expose: true
+            access_type: public_method
+            serialized_name: LanguageID
+            accessor:
+                getter: getLanguageID
+                setter: setLanguageID
+            xml_attribute: true
+            type: string
+        addresseeName:
+            expose: true
+            access_type: public_method
+            serialized_name: AddresseeName
+            accessor:
+                getter: getAddresseeName
+                setter: setAddresseeName
+            xml_attribute: true
+            type: string
+        address:
+            expose: true
+            access_type: public_method
+            serialized_name: Address
+            accessor:
+                getter: getAddress
+                setter: setAddress
+            xml_attribute: true
+            type: string
+        telephone:
+            expose: true
+            access_type: public_method
+            serialized_name: Telephone
+            accessor:
+                getter: getTelephone
+                setter: setTelephone
+            xml_attribute: true
+            type: string
+        confirmInd:
+            expose: true
+            access_type: public_method
+            serialized_name: ConfirmInd
+            accessor:
+                getter: getConfirmInd
+                setter: setConfirmInd
+            xml_attribute: true
+            type: bool
+        supplementalData:
+            expose: true
+            access_type: public_method
+            serialized_name: SupplementalData
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getSupplementalData
+                setter: setSupplementalData
+            type: OTA\ParagraphType
+        email:
+            expose: true
+            access_type: public_method
+            serialized_name: Email
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getEmail
+                setter: setEmail
+            type: OTA\EmailType

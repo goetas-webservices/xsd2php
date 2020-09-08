@@ -1,0 +1,270 @@
+OTA\OTAVehRateRuleRS\OTAVehRateRuleRSAType:
+    properties:
+        echoToken:
+            expose: true
+            access_type: public_method
+            serialized_name: EchoToken
+            accessor:
+                getter: getEchoToken
+                setter: setEchoToken
+            xml_attribute: true
+            type: string
+        timeStamp:
+            expose: true
+            access_type: public_method
+            serialized_name: TimeStamp
+            accessor:
+                getter: getTimeStamp
+                setter: setTimeStamp
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\DateTime
+        target:
+            expose: true
+            access_type: public_method
+            serialized_name: Target
+            accessor:
+                getter: getTarget
+                setter: setTarget
+            xml_attribute: true
+            type: string
+        version:
+            expose: true
+            access_type: public_method
+            serialized_name: Version
+            accessor:
+                getter: getVersion
+                setter: setVersion
+            xml_attribute: true
+            type: float
+        transactionIdentifier:
+            expose: true
+            access_type: public_method
+            serialized_name: TransactionIdentifier
+            accessor:
+                getter: getTransactionIdentifier
+                setter: setTransactionIdentifier
+            xml_attribute: true
+            type: string
+        sequenceNmbr:
+            expose: true
+            access_type: public_method
+            serialized_name: SequenceNmbr
+            accessor:
+                getter: getSequenceNmbr
+                setter: setSequenceNmbr
+            xml_attribute: true
+            type: int
+        transactionStatusCode:
+            expose: true
+            access_type: public_method
+            serialized_name: TransactionStatusCode
+            accessor:
+                getter: getTransactionStatusCode
+                setter: setTransactionStatusCode
+            xml_attribute: true
+            type: string
+        primaryLangID:
+            expose: true
+            access_type: public_method
+            serialized_name: PrimaryLangID
+            accessor:
+                getter: getPrimaryLangID
+                setter: setPrimaryLangID
+            xml_attribute: true
+            type: string
+        altLangID:
+            expose: true
+            access_type: public_method
+            serialized_name: AltLangID
+            accessor:
+                getter: getAltLangID
+                setter: setAltLangID
+            xml_attribute: true
+            type: string
+        retransmissionIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: RetransmissionIndicator
+            accessor:
+                getter: getRetransmissionIndicator
+                setter: setRetransmissionIndicator
+            xml_attribute: true
+            type: bool
+        success:
+            expose: true
+            access_type: public_method
+            serialized_name: Success
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getSuccess
+                setter: setSuccess
+            type: OTA\SuccessType
+        warnings:
+            expose: true
+            access_type: public_method
+            serialized_name: Warnings
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getWarnings
+                setter: setWarnings
+            type: array<OTA\WarningType>
+            xml_list:
+                inline: false
+                entry_name: Warning
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        vehRentalCore:
+            expose: true
+            access_type: public_method
+            serialized_name: VehRentalCore
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getVehRentalCore
+                setter: setVehRentalCore
+            type: OTA\OTAVehRateRuleRS\OTAVehRateRuleRSAType\VehRentalCoreAType
+        vehicle:
+            expose: true
+            access_type: public_method
+            serialized_name: Vehicle
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getVehicle
+                setter: setVehicle
+            type: OTA\OTAVehRateRuleRS\OTAVehRateRuleRSAType\VehicleAType
+        rentalRate:
+            expose: true
+            access_type: public_method
+            serialized_name: RentalRate
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getRentalRate
+                setter: setRentalRate
+            xml_list:
+                inline: true
+                entry_name: RentalRate
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\OTAVehRateRuleRS\OTAVehRateRuleRSAType\RentalRateAType>
+        totalCharge:
+            expose: true
+            access_type: public_method
+            serialized_name: TotalCharge
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getTotalCharge
+                setter: setTotalCharge
+            type: OTA\OTAVehRateRuleRS\OTAVehRateRuleRSAType\TotalChargeAType
+        rateRules:
+            expose: true
+            access_type: public_method
+            serialized_name: RateRules
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getRateRules
+                setter: setRateRules
+            type: OTA\OTAVehRateRuleRS\OTAVehRateRuleRSAType\RateRulesAType
+        pricedEquips:
+            expose: true
+            access_type: public_method
+            serialized_name: PricedEquips
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getPricedEquips
+                setter: setPricedEquips
+            type: array<OTA\VehicleEquipmentPricedType>
+            xml_list:
+                inline: false
+                entry_name: PricedEquip
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        fees:
+            expose: true
+            access_type: public_method
+            serialized_name: Fees
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getFees
+                setter: setFees
+            type: array<OTA\VehicleChargePurposeType>
+            xml_list:
+                inline: false
+                entry_name: Fee
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        pricedCoverages:
+            expose: true
+            access_type: public_method
+            serialized_name: PricedCoverages
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getPricedCoverages
+                setter: setPricedCoverages
+            type: array<OTA\CoveragePricedType>
+            xml_list:
+                inline: false
+                entry_name: PricedCoverage
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        locationDetails:
+            expose: true
+            access_type: public_method
+            serialized_name: LocationDetails
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getLocationDetails
+                setter: setLocationDetails
+            xml_list:
+                inline: true
+                entry_name: LocationDetails
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\OTAVehRateRuleRS\OTAVehRateRuleRSAType\LocationDetailsAType>
+        vendorMessages:
+            expose: true
+            access_type: public_method
+            serialized_name: VendorMessages
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getVendorMessages
+                setter: setVendorMessages
+            type: array<OTA\VendorMessageType>
+            xml_list:
+                inline: false
+                entry_name: VendorMessage
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        tPAExtensions:
+            expose: true
+            access_type: public_method
+            serialized_name: TPA_Extensions
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getTPAExtensions
+                setter: setTPAExtensions
+            type: OTA\TPAExtensionsType
+        errors:
+            expose: true
+            access_type: public_method
+            serialized_name: Errors
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getErrors
+                setter: setErrors
+            type: array<OTA\ErrorType>
+            xml_list:
+                inline: false
+                entry_name: Error
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'

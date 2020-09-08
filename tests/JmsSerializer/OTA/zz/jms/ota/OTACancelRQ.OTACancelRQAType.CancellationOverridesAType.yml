@@ -1,0 +1,12 @@
+OTA\OTACancelRQ\OTACancelRQAType\CancellationOverridesAType:
+    properties:
+        cancellationOverride:
+            expose: true
+            access_type: public_method
+            serialized_name: CancellationOverride
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getCancellationOverride
+                setter: setCancellationOverride
+            type: OTA\CancelRuleType

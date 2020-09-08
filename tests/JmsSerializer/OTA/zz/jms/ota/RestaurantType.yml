@@ -1,0 +1,176 @@
+OTA\RestaurantType:
+    properties:
+        restaurantName:
+            expose: true
+            access_type: public_method
+            serialized_name: RestaurantName
+            accessor:
+                getter: getRestaurantName
+                setter: setRestaurantName
+            xml_attribute: true
+            type: string
+        maxSeatingCapacity:
+            expose: true
+            access_type: public_method
+            serialized_name: MaxSeatingCapacity
+            accessor:
+                getter: getMaxSeatingCapacity
+                setter: setMaxSeatingCapacity
+            xml_attribute: true
+            type: int
+        maxSingleParty:
+            expose: true
+            access_type: public_method
+            serialized_name: MaxSingleParty
+            accessor:
+                getter: getMaxSingleParty
+                setter: setMaxSingleParty
+            xml_attribute: true
+            type: int
+        invCode:
+            expose: true
+            access_type: public_method
+            serialized_name: InvCode
+            accessor:
+                getter: getInvCode
+                setter: setInvCode
+            xml_attribute: true
+            type: string
+        offerBreakfast:
+            expose: true
+            access_type: public_method
+            serialized_name: OfferBreakfast
+            accessor:
+                getter: getOfferBreakfast
+                setter: setOfferBreakfast
+            xml_attribute: true
+            type: bool
+        offerLunch:
+            expose: true
+            access_type: public_method
+            serialized_name: OfferLunch
+            accessor:
+                getter: getOfferLunch
+                setter: setOfferLunch
+            xml_attribute: true
+            type: bool
+        offerDinner:
+            expose: true
+            access_type: public_method
+            serialized_name: OfferDinner
+            accessor:
+                getter: getOfferDinner
+                setter: setOfferDinner
+            xml_attribute: true
+            type: bool
+        offerBrunch:
+            expose: true
+            access_type: public_method
+            serialized_name: OfferBrunch
+            accessor:
+                getter: getOfferBrunch
+                setter: setOfferBrunch
+            xml_attribute: true
+            type: bool
+        proximityCode:
+            expose: true
+            access_type: public_method
+            serialized_name: ProximityCode
+            accessor:
+                getter: getProximityCode
+                setter: setProximityCode
+            xml_attribute: true
+            type: string
+        iD:
+            expose: true
+            access_type: public_method
+            serialized_name: ID
+            accessor:
+                getter: getID
+                setter: setID
+            xml_attribute: true
+            type: string
+        sort:
+            expose: true
+            access_type: public_method
+            serialized_name: Sort
+            accessor:
+                getter: getSort
+                setter: setSort
+            xml_attribute: true
+            type: int
+        multimediaDescriptions:
+            expose: true
+            access_type: public_method
+            serialized_name: MultimediaDescriptions
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getMultimediaDescriptions
+                setter: setMultimediaDescriptions
+            type: OTA\RestaurantType\MultimediaDescriptionsAType
+        relativePosition:
+            expose: true
+            access_type: public_method
+            serialized_name: RelativePosition
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getRelativePosition
+                setter: setRelativePosition
+            type: OTA\RelativePositionType
+        operationSchedules:
+            expose: true
+            access_type: public_method
+            serialized_name: OperationSchedules
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getOperationSchedules
+                setter: setOperationSchedules
+            type: array<OTA\OperationSchedulesPlusChargeType\OperationScheduleAType>
+            xml_list:
+                inline: false
+                entry_name: OperationSchedule
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        infoCodes:
+            expose: true
+            access_type: public_method
+            serialized_name: InfoCodes
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getInfoCodes
+                setter: setInfoCodes
+            type: array<OTA\RestaurantType\InfoCodesAType\InfoCodeAType>
+            xml_list:
+                inline: false
+                entry_name: InfoCode
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        cuisineCodes:
+            expose: true
+            access_type: public_method
+            serialized_name: CuisineCodes
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getCuisineCodes
+                setter: setCuisineCodes
+            type: array<OTA\RestaurantType\CuisineCodesAType\CuisineCodeAType>
+            xml_list:
+                inline: false
+                entry_name: CuisineCode
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        descriptiveText:
+            expose: true
+            access_type: public_method
+            serialized_name: DescriptiveText
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getDescriptiveText
+                setter: setDescriptiveText
+            type: string

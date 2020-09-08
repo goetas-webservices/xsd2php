@@ -1,0 +1,12 @@
+OTA\OTACruiseBookingDocumentRQ\OTACruiseBookingDocumentRQAType\CruiseDocumentAType:
+    properties:
+        recipientInfo:
+            expose: true
+            access_type: public_method
+            serialized_name: RecipientInfo
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getRecipientInfo
+                setter: setRecipientInfo
+            type: OTA\ContactPersonType

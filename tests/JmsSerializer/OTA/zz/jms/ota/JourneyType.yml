@@ -1,0 +1,40 @@
+OTA\JourneyType:
+    properties:
+        routeCode:
+            expose: true
+            access_type: public_method
+            serialized_name: RouteCode
+            accessor:
+                getter: getRouteCode
+                setter: setRouteCode
+            xml_attribute: true
+            type: string
+        routeDescription:
+            expose: true
+            access_type: public_method
+            serialized_name: RouteDescription
+            accessor:
+                getter: getRouteDescription
+                setter: setRouteDescription
+            xml_attribute: true
+            type: string
+        originLocation:
+            expose: true
+            access_type: public_method
+            serialized_name: OriginLocation
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getOriginLocation
+                setter: setOriginLocation
+            type: OTA\LocationType
+        destinationLocation:
+            expose: true
+            access_type: public_method
+            serialized_name: DestinationLocation
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getDestinationLocation
+                setter: setDestinationLocation
+            type: OTA\LocationType

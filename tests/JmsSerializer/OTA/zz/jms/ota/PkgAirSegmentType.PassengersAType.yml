@@ -1,0 +1,11 @@
+OTA\PkgAirSegmentType\PassengersAType:
+    properties:
+        passengerRPH:
+            expose: true
+            access_type: public_method
+            serialized_name: PassengerRPH
+            accessor:
+                getter: getPassengerRPH
+                setter: setPassengerRPH
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Jms\SimpleListOf<string>

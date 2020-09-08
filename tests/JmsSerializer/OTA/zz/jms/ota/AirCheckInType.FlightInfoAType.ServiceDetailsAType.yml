@@ -1,0 +1,70 @@
+OTA\AirCheckInType\FlightInfoAType\ServiceDetailsAType:
+    properties:
+        deniedBoardingIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: DeniedBoardingIndicator
+            accessor:
+                getter: getDeniedBoardingIndicator
+                setter: setDeniedBoardingIndicator
+            xml_attribute: true
+            type: bool
+        flightProductName:
+            expose: true
+            access_type: public_method
+            serialized_name: FlightProductName
+            accessor:
+                getter: getFlightProductName
+                setter: setFlightProductName
+            xml_attribute: true
+            type: string
+        inFlightServiceCodes:
+            expose: true
+            access_type: public_method
+            serialized_name: InFlightServiceCodes
+            accessor:
+                getter: getInFlightServiceCodes
+                setter: setInFlightServiceCodes
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Jms\SimpleListOf<string>
+        unitOfMeasureQuantity:
+            expose: true
+            access_type: public_method
+            serialized_name: UnitOfMeasureQuantity
+            accessor:
+                getter: getUnitOfMeasureQuantity
+                setter: setUnitOfMeasureQuantity
+            xml_attribute: true
+            type: float
+        unitOfMeasure:
+            expose: true
+            access_type: public_method
+            serialized_name: UnitOfMeasure
+            accessor:
+                getter: getUnitOfMeasure
+                setter: setUnitOfMeasure
+            xml_attribute: true
+            type: string
+        unitOfMeasureCode:
+            expose: true
+            access_type: public_method
+            serialized_name: UnitOfMeasureCode
+            accessor:
+                getter: getUnitOfMeasureCode
+                setter: setUnitOfMeasureCode
+            xml_attribute: true
+            type: string
+        mealService:
+            expose: true
+            access_type: public_method
+            serialized_name: MealService
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getMealService
+                setter: setMealService
+            xml_list:
+                inline: true
+                entry_name: MealService
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\AirCheckInType\FlightInfoAType\ServiceDetailsAType\MealServiceAType>

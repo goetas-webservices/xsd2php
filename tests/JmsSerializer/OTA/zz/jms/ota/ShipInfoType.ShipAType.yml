@@ -1,0 +1,128 @@
+OTA\ShipInfoType\ShipAType:
+    properties:
+        stabilizedIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: StabilizedIndicator
+            accessor:
+                getter: getStabilizedIndicator
+                setter: setStabilizedIndicator
+            xml_attribute: true
+            type: bool
+        registrationCountryCode:
+            expose: true
+            access_type: public_method
+            serialized_name: RegistrationCountryCode
+            accessor:
+                getter: getRegistrationCountryCode
+                setter: setRegistrationCountryCode
+            xml_attribute: true
+            type: string
+        restaurantQuantity:
+            expose: true
+            access_type: public_method
+            serialized_name: RestaurantQuantity
+            accessor:
+                getter: getRestaurantQuantity
+                setter: setRestaurantQuantity
+            xml_attribute: true
+            type: int
+        elevatorQuantity:
+            expose: true
+            access_type: public_method
+            serialized_name: ElevatorQuantity
+            accessor:
+                getter: getElevatorQuantity
+                setter: setElevatorQuantity
+            xml_attribute: true
+            type: int
+        maxCrewQuantity:
+            expose: true
+            access_type: public_method
+            serialized_name: MaxCrewQuantity
+            accessor:
+                getter: getMaxCrewQuantity
+                setter: setMaxCrewQuantity
+            xml_attribute: true
+            type: int
+        maxGuestQuantity:
+            expose: true
+            access_type: public_method
+            serialized_name: MaxGuestQuantity
+            accessor:
+                getter: getMaxGuestQuantity
+                setter: setMaxGuestQuantity
+            xml_attribute: true
+            type: int
+        cruisingSpeed:
+            expose: true
+            access_type: public_method
+            serialized_name: CruisingSpeed
+            accessor:
+                getter: getCruisingSpeed
+                setter: setCruisingSpeed
+            xml_attribute: true
+            type: float
+        maxSpeed:
+            expose: true
+            access_type: public_method
+            serialized_name: MaxSpeed
+            accessor:
+                getter: getMaxSpeed
+                setter: setMaxSpeed
+            xml_attribute: true
+            type: float
+        insideCabinQuantity:
+            expose: true
+            access_type: public_method
+            serialized_name: InsideCabinQuantity
+            accessor:
+                getter: getInsideCabinQuantity
+                setter: setInsideCabinQuantity
+            xml_attribute: true
+            type: int
+        outsideCabinQuantity:
+            expose: true
+            access_type: public_method
+            serialized_name: OutsideCabinQuantity
+            accessor:
+                getter: getOutsideCabinQuantity
+                setter: setOutsideCabinQuantity
+            xml_attribute: true
+            type: int
+        inauguralDate:
+            expose: true
+            access_type: public_method
+            serialized_name: InauguralDate
+            accessor:
+                getter: getInauguralDate
+                setter: setInauguralDate
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\Date
+        refurbishedDate:
+            expose: true
+            access_type: public_method
+            serialized_name: RefurbishedDate
+            accessor:
+                getter: getRefurbishedDate
+                setter: setRefurbishedDate
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\Date
+        builtDate:
+            expose: true
+            access_type: public_method
+            serialized_name: BuiltDate
+            accessor:
+                getter: getBuiltDate
+                setter: setBuiltDate
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\Date
+        nextRefurbishDate:
+            expose: true
+            access_type: public_method
+            serialized_name: NextRefurbishDate
+            accessor:
+                getter: getNextRefurbishDate
+                setter: setNextRefurbishDate
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\Date

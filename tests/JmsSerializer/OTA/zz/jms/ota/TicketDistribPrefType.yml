@@ -1,0 +1,37 @@
+OTA\TicketDistribPrefType:
+    properties:
+        __value:
+            expose: true
+            xml_value: true
+            access_type: public_method
+            accessor:
+                getter: value
+                setter: value
+            type: string
+        preferLevel:
+            expose: true
+            access_type: public_method
+            serialized_name: PreferLevel
+            accessor:
+                getter: getPreferLevel
+                setter: setPreferLevel
+            xml_attribute: true
+            type: string
+        distribType:
+            expose: true
+            access_type: public_method
+            serialized_name: DistribType
+            accessor:
+                getter: getDistribType
+                setter: setDistribType
+            xml_attribute: true
+            type: string
+        ticketTime:
+            expose: true
+            access_type: public_method
+            serialized_name: TicketTime
+            accessor:
+                getter: getTicketTime
+                setter: setTicketTime
+            xml_attribute: true
+            type: DateInterval

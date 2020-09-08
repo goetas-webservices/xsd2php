@@ -1,0 +1,120 @@
+OTA\ViewershipsType\ViewershipAType:
+    properties:
+        viewershipRPH:
+            expose: true
+            access_type: public_method
+            serialized_name: ViewershipRPH
+            accessor:
+                getter: getViewershipRPH
+                setter: setViewershipRPH
+            xml_attribute: true
+            type: string
+        viewOnly:
+            expose: true
+            access_type: public_method
+            serialized_name: ViewOnly
+            accessor:
+                getter: getViewOnly
+                setter: setViewOnly
+            xml_attribute: true
+            type: bool
+        viewershipCodes:
+            expose: true
+            access_type: public_method
+            serialized_name: ViewershipCodes
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getViewershipCodes
+                setter: setViewershipCodes
+            type: OTA\ViewershipsType\ViewershipAType\ViewershipCodesAType
+        systemCodes:
+            expose: true
+            access_type: public_method
+            serialized_name: SystemCodes
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getSystemCodes
+                setter: setSystemCodes
+            type: OTA\ViewershipsType\ViewershipAType\SystemCodesAType
+        profileTypes:
+            expose: true
+            access_type: public_method
+            serialized_name: ProfileTypes
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getProfileTypes
+                setter: setProfileTypes
+            type: array<OTA\ViewershipsType\ViewershipAType\ProfileTypesAType\ProfileTypeAType>
+            xml_list:
+                inline: false
+                entry_name: ProfileType
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        profileRefs:
+            expose: true
+            access_type: public_method
+            serialized_name: ProfileRefs
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getProfileRefs
+                setter: setProfileRefs
+            type: array<OTA\UniqueIDType>
+            xml_list:
+                inline: false
+                entry_name: ProfileRef
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        profiles:
+            expose: true
+            access_type: public_method
+            serialized_name: Profiles
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getProfiles
+                setter: setProfiles
+            type: array<OTA\ProfileType>
+            xml_list:
+                inline: false
+                entry_name: Profile
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        locationCodes:
+            expose: true
+            access_type: public_method
+            serialized_name: LocationCodes
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getLocationCodes
+                setter: setLocationCodes
+            type: OTA\ViewershipsType\ViewershipAType\LocationCodesAType
+        bookingChannelCodes:
+            expose: true
+            access_type: public_method
+            serialized_name: BookingChannelCodes
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getBookingChannelCodes
+                setter: setBookingChannelCodes
+            type: OTA\ViewershipsType\ViewershipAType\BookingChannelCodesAType
+        distributorTypes:
+            expose: true
+            access_type: public_method
+            serialized_name: DistributorTypes
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getDistributorTypes
+                setter: setDistributorTypes
+            type: array<OTA\ViewershipsType\ViewershipAType\DistributorTypesAType\DistributorTypeAType>
+            xml_list:
+                inline: false
+                entry_name: DistributorType
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'

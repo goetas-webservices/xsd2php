@@ -1,0 +1,28 @@
+OTA\PropertyClassPrefType:
+    properties:
+        __value:
+            expose: true
+            xml_value: true
+            access_type: public_method
+            accessor:
+                getter: value
+                setter: value
+            type: string
+        preferLevel:
+            expose: true
+            access_type: public_method
+            serialized_name: PreferLevel
+            accessor:
+                getter: getPreferLevel
+                setter: setPreferLevel
+            xml_attribute: true
+            type: string
+        propertyClassType:
+            expose: true
+            access_type: public_method
+            serialized_name: PropertyClassType
+            accessor:
+                getter: getPropertyClassType
+                setter: setPropertyClassType
+            xml_attribute: true
+            type: string

@@ -1,0 +1,22 @@
+OTA\OTARailBookRQ\OTARailBookRQAType\RailBookInfoAType\FulfillmentAType:
+    properties:
+        deliveryAddress:
+            expose: true
+            access_type: public_method
+            serialized_name: DeliveryAddress
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getDeliveryAddress
+                setter: setDeliveryAddress
+            type: OTA\AddressType
+        name:
+            expose: true
+            access_type: public_method
+            serialized_name: Name
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getName
+                setter: setName
+            type: OTA\PersonNameType

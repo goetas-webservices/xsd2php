@@ -1,0 +1,19 @@
+OTA\RailFareType\BulletinsAType\BulletinIDAType:
+    properties:
+        __value:
+            expose: true
+            xml_value: true
+            access_type: public_method
+            accessor:
+                getter: value
+                setter: value
+            type: string
+        bulletinCode:
+            expose: true
+            access_type: public_method
+            serialized_name: BulletinCode
+            accessor:
+                getter: getBulletinCode
+                setter: setBulletinCode
+            xml_attribute: true
+            type: string

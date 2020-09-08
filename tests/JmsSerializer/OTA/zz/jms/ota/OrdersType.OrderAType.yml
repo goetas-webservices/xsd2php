@@ -1,0 +1,44 @@
+OTA\OrdersType\OrderAType:
+    properties:
+        orderType:
+            expose: true
+            access_type: public_method
+            serialized_name: OrderType
+            accessor:
+                getter: getOrderType
+                setter: setOrderType
+            xml_attribute: true
+            type: string
+        orderID:
+            expose: true
+            access_type: public_method
+            serialized_name: OrderID
+            accessor:
+                getter: getOrderID
+                setter: setOrderID
+            xml_attribute: true
+            type: string
+        listOfRecipientRPH:
+            expose: true
+            access_type: public_method
+            serialized_name: ListOfRecipientRPH
+            accessor:
+                getter: getListOfRecipientRPH
+                setter: setListOfRecipientRPH
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Jms\SimpleListOf<string>
+        products:
+            expose: true
+            access_type: public_method
+            serialized_name: Products
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getProducts
+                setter: setProducts
+            type: array<OTA\OrdersType\OrderAType\ProductsAType\ProductAType>
+            xml_list:
+                inline: false
+                entry_name: Product
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'

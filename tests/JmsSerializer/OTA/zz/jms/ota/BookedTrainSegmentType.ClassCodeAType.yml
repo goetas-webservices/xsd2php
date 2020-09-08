@@ -1,0 +1,20 @@
+OTA\BookedTrainSegmentType\ClassCodeAType:
+    properties:
+        classCode:
+            expose: true
+            access_type: public_method
+            serialized_name: ClassCode
+            accessor:
+                getter: getClassCode
+                setter: setClassCode
+            xml_attribute: true
+            type: string
+        quantity:
+            expose: true
+            access_type: public_method
+            serialized_name: Quantity
+            accessor:
+                getter: getQuantity
+                setter: setQuantity
+            xml_attribute: true
+            type: int

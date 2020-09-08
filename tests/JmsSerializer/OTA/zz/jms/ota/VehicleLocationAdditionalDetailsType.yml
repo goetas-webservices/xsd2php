@@ -1,0 +1,82 @@
+OTA\VehicleLocationAdditionalDetailsType:
+    properties:
+        vehRentLocInfos:
+            expose: true
+            access_type: public_method
+            serialized_name: VehRentLocInfos
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getVehRentLocInfos
+                setter: setVehRentLocInfos
+            type: array<OTA\VehicleLocationInformationType>
+            xml_list:
+                inline: false
+                entry_name: VehRentLocInfo
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        parkLocation:
+            expose: true
+            access_type: public_method
+            serialized_name: ParkLocation
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getParkLocation
+                setter: setParkLocation
+            type: OTA\VehicleWhereAtFacilityType
+        counterLocation:
+            expose: true
+            access_type: public_method
+            serialized_name: CounterLocation
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getCounterLocation
+                setter: setCounterLocation
+            type: OTA\VehicleWhereAtFacilityType
+        operationSchedules:
+            expose: true
+            access_type: public_method
+            serialized_name: OperationSchedules
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getOperationSchedules
+                setter: setOperationSchedules
+            type: OTA\OperationSchedulesType
+        shuttle:
+            expose: true
+            access_type: public_method
+            serialized_name: Shuttle
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getShuttle
+                setter: setShuttle
+            type: OTA\VehicleLocationAdditionalDetailsType\ShuttleAType
+        oneWayDropLocations:
+            expose: true
+            access_type: public_method
+            serialized_name: OneWayDropLocations
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getOneWayDropLocations
+                setter: setOneWayDropLocations
+            type: array<OTA\VehicleLocationAdditionalDetailsType\OneWayDropLocationsAType\OneWayDropLocationAType>
+            xml_list:
+                inline: false
+                entry_name: OneWayDropLocation
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        tPAExtensions:
+            expose: true
+            access_type: public_method
+            serialized_name: TPA_Extensions
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getTPAExtensions
+                setter: setTPAExtensions
+            type: OTA\TPAExtensionsType

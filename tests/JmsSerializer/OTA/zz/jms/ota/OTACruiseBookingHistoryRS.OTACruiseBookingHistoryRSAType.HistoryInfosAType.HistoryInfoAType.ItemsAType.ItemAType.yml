@@ -1,0 +1,47 @@
+OTA\OTACruiseBookingHistoryRS\OTACruiseBookingHistoryRSAType\HistoryInfosAType\HistoryInfoAType\ItemsAType\ItemAType:
+    properties:
+        guestID:
+            expose: true
+            access_type: public_method
+            serialized_name: GuestID
+            accessor:
+                getter: getGuestID
+                setter: setGuestID
+            xml_attribute: true
+            type: string
+        itemName:
+            expose: true
+            access_type: public_method
+            serialized_name: ItemName
+            accessor:
+                getter: getItemName
+                setter: setItemName
+            xml_attribute: true
+            type: string
+        oldValue:
+            expose: true
+            access_type: public_method
+            serialized_name: OldValue
+            accessor:
+                getter: getOldValue
+                setter: setOldValue
+            xml_attribute: true
+            type: string
+        newValue:
+            expose: true
+            access_type: public_method
+            serialized_name: NewValue
+            accessor:
+                getter: getNewValue
+                setter: setNewValue
+            xml_attribute: true
+            type: string
+        classification:
+            expose: true
+            access_type: public_method
+            serialized_name: Classification
+            accessor:
+                getter: getClassification
+                setter: setClassification
+            xml_attribute: true
+            type: string

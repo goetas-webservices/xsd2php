@@ -1,0 +1,66 @@
+OTA\ItineraryInfoType:
+    properties:
+        contactInfo:
+            expose: true
+            access_type: public_method
+            serialized_name: ContactInfo
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getContactInfo
+                setter: setContactInfo
+            type: OTA\ContactPersonType
+        reservationItems:
+            expose: true
+            access_type: public_method
+            serialized_name: ReservationItems
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getReservationItems
+                setter: setReservationItems
+            type: OTA\ReservationItemsType
+        ticketing:
+            expose: true
+            access_type: public_method
+            serialized_name: Ticketing
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getTicketing
+                setter: setTicketing
+            type: OTA\ItineraryInfoType\TicketingAType
+        itineraryPricing:
+            expose: true
+            access_type: public_method
+            serialized_name: ItineraryPricing
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getItineraryPricing
+                setter: setItineraryPricing
+            xml_list:
+                inline: true
+                entry_name: ItineraryPricing
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\ItinPricingType>
+        specialRequestDetails:
+            expose: true
+            access_type: public_method
+            serialized_name: SpecialRequestDetails
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getSpecialRequestDetails
+                setter: setSpecialRequestDetails
+            type: OTA\ItineraryInfoType\SpecialRequestDetailsAType
+        tPAExtensions:
+            expose: true
+            access_type: public_method
+            serialized_name: TPA_Extensions
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getTPAExtensions
+                setter: setTPAExtensions
+            type: OTA\TPAExtensionsType

@@ -1,0 +1,35 @@
+OTA\CabinAvailabilityType:
+    properties:
+        cabinType:
+            expose: true
+            access_type: public_method
+            serialized_name: CabinType
+            accessor:
+                getter: getCabinType
+                setter: setCabinType
+            xml_attribute: true
+            type: string
+        meal:
+            expose: true
+            access_type: public_method
+            serialized_name: Meal
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getMeal
+                setter: setMeal
+            xml_list:
+                inline: true
+                entry_name: Meal
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\CabinAvailabilityType\MealAType>
+        baggageAllowance:
+            expose: true
+            access_type: public_method
+            serialized_name: BaggageAllowance
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getBaggageAllowance
+                setter: setBaggageAllowance
+            type: OTA\CabinAvailabilityType\BaggageAllowanceAType

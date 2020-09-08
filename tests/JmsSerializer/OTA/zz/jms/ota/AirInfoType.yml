@@ -1,0 +1,59 @@
+OTA\AirInfoType:
+    properties:
+        departureDateTime:
+            expose: true
+            access_type: public_method
+            serialized_name: DepartureDateTime
+            accessor:
+                getter: getDepartureDateTime
+                setter: setDepartureDateTime
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime
+        arrivalDateTime:
+            expose: true
+            access_type: public_method
+            serialized_name: ArrivalDateTime
+            accessor:
+                getter: getArrivalDateTime
+                setter: setArrivalDateTime
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime
+        airlineCabinClass:
+            expose: true
+            access_type: public_method
+            serialized_name: AirlineCabinClass
+            accessor:
+                getter: getAirlineCabinClass
+                setter: setAirlineCabinClass
+            xml_attribute: true
+            type: string
+        departureCity:
+            expose: true
+            access_type: public_method
+            serialized_name: DepartureCity
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getDepartureCity
+                setter: setDepartureCity
+            type: OTA\LocationType
+        arrivalCity:
+            expose: true
+            access_type: public_method
+            serialized_name: ArrivalCity
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getArrivalCity
+                setter: setArrivalCity
+            type: OTA\LocationType
+        airline:
+            expose: true
+            access_type: public_method
+            serialized_name: Airline
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getAirline
+                setter: setAirline
+            type: OTA\OperatingAirlineType

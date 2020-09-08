@@ -1,0 +1,77 @@
+OTA\VehicleReservationType:
+    properties:
+        createDateTime:
+            expose: true
+            access_type: public_method
+            serialized_name: CreateDateTime
+            accessor:
+                getter: getCreateDateTime
+                setter: setCreateDateTime
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\DateTime
+        creatorID:
+            expose: true
+            access_type: public_method
+            serialized_name: CreatorID
+            accessor:
+                getter: getCreatorID
+                setter: setCreatorID
+            xml_attribute: true
+            type: string
+        lastModifyDateTime:
+            expose: true
+            access_type: public_method
+            serialized_name: LastModifyDateTime
+            accessor:
+                getter: getLastModifyDateTime
+                setter: setLastModifyDateTime
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\DateTime
+        lastModifierID:
+            expose: true
+            access_type: public_method
+            serialized_name: LastModifierID
+            accessor:
+                getter: getLastModifierID
+                setter: setLastModifierID
+            xml_attribute: true
+            type: string
+        purgeDate:
+            expose: true
+            access_type: public_method
+            serialized_name: PurgeDate
+            accessor:
+                getter: getPurgeDate
+                setter: setPurgeDate
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\Date
+        customer:
+            expose: true
+            access_type: public_method
+            serialized_name: Customer
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getCustomer
+                setter: setCustomer
+            type: OTA\CustomerPrimaryAdditionalType
+        vehSegmentCore:
+            expose: true
+            access_type: public_method
+            serialized_name: VehSegmentCore
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getVehSegmentCore
+                setter: setVehSegmentCore
+            type: OTA\VehicleReservationType\VehSegmentCoreAType
+        vehSegmentInfo:
+            expose: true
+            access_type: public_method
+            serialized_name: VehSegmentInfo
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getVehSegmentInfo
+                setter: setVehSegmentInfo
+            type: OTA\VehicleSegmentAdditionalInfoType

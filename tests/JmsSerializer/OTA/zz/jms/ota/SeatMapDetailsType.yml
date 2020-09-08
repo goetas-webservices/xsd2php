@@ -1,0 +1,25 @@
+OTA\SeatMapDetailsType:
+    properties:
+        travelerRefNumberRPHs:
+            expose: true
+            access_type: public_method
+            serialized_name: TravelerRefNumberRPHs
+            accessor:
+                getter: getTravelerRefNumberRPHs
+                setter: setTravelerRefNumberRPHs
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Jms\SimpleListOf<string>
+        cabinClass:
+            expose: true
+            access_type: public_method
+            serialized_name: CabinClass
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getCabinClass
+                setter: setCabinClass
+            xml_list:
+                inline: true
+                entry_name: CabinClass
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\CabinClassType>

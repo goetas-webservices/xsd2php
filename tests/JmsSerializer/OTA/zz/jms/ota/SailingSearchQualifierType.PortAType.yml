@@ -1,0 +1,65 @@
+OTA\SailingSearchQualifierType\PortAType:
+    properties:
+        portCode:
+            expose: true
+            access_type: public_method
+            serialized_name: PortCode
+            accessor:
+                getter: getPortCode
+                setter: setPortCode
+            xml_attribute: true
+            type: string
+        portName:
+            expose: true
+            access_type: public_method
+            serialized_name: PortName
+            accessor:
+                getter: getPortName
+                setter: setPortName
+            xml_attribute: true
+            type: string
+        portCountryCode:
+            expose: true
+            access_type: public_method
+            serialized_name: PortCountryCode
+            accessor:
+                getter: getPortCountryCode
+                setter: setPortCountryCode
+            xml_attribute: true
+            type: string
+        dockIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: DockIndicator
+            accessor:
+                getter: getDockIndicator
+                setter: setDockIndicator
+            xml_attribute: true
+            type: bool
+        shorexIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: ShorexIndicator
+            accessor:
+                getter: getShorexIndicator
+                setter: setShorexIndicator
+            xml_attribute: true
+            type: bool
+        embarkIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: EmbarkIndicator
+            accessor:
+                getter: getEmbarkIndicator
+                setter: setEmbarkIndicator
+            xml_attribute: true
+            type: bool
+        disembarkIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: DisembarkIndicator
+            accessor:
+                getter: getDisembarkIndicator
+                setter: setDisembarkIndicator
+            xml_attribute: true
+            type: bool

@@ -1,0 +1,65 @@
+OTA\OTAHotelInvBlockNotifRQ\OTAHotelInvBlockNotifRQAType\InvBlocksAType\InvBlockDatesAType:
+    properties:
+        start:
+            expose: true
+            access_type: public_method
+            serialized_name: Start
+            accessor:
+                getter: getStart
+                setter: setStart
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime
+        duration:
+            expose: true
+            access_type: public_method
+            serialized_name: Duration
+            accessor:
+                getter: getDuration
+                setter: setDuration
+            xml_attribute: true
+            type: DateInterval
+        end:
+            expose: true
+            access_type: public_method
+            serialized_name: End
+            accessor:
+                getter: getEnd
+                setter: setEnd
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime
+        endDateExtensionIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: EndDateExtensionIndicator
+            accessor:
+                getter: getEndDateExtensionIndicator
+                setter: setEndDateExtensionIndicator
+            xml_attribute: true
+            type: bool
+        absoluteCutoff:
+            expose: true
+            access_type: public_method
+            serialized_name: AbsoluteCutoff
+            accessor:
+                getter: getAbsoluteCutoff
+                setter: setAbsoluteCutoff
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime
+        offsetDuration:
+            expose: true
+            access_type: public_method
+            serialized_name: OffsetDuration
+            accessor:
+                getter: getOffsetDuration
+                setter: setOffsetDuration
+            xml_attribute: true
+            type: DateInterval
+        offsetCalculationMode:
+            expose: true
+            access_type: public_method
+            serialized_name: OffsetCalculationMode
+            accessor:
+                getter: getOffsetCalculationMode
+                setter: setOffsetCalculationMode
+            xml_attribute: true
+            type: string

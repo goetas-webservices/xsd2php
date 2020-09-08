@@ -1,0 +1,34 @@
+OTA\OTACruiseShorexAvailRS\OTACruiseShorexAvailRSAType\ShorexPackagesAType\ShorexPackageAType:
+    properties:
+        description:
+            expose: true
+            access_type: public_method
+            serialized_name: Description
+            accessor:
+                getter: getDescription
+                setter: setDescription
+            xml_attribute: true
+            type: string
+        selectionAllowedIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: SelectionAllowedIndicator
+            accessor:
+                getter: getSelectionAllowedIndicator
+                setter: setSelectionAllowedIndicator
+            xml_attribute: true
+            type: bool
+        priceInfo:
+            expose: true
+            access_type: public_method
+            serialized_name: PriceInfo
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getPriceInfo
+                setter: setPriceInfo
+            xml_list:
+                inline: true
+                entry_name: PriceInfo
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\OTACruiseShorexAvailRS\OTACruiseShorexAvailRSAType\ShorexPackagesAType\ShorexPackageAType\PriceInfoAType>

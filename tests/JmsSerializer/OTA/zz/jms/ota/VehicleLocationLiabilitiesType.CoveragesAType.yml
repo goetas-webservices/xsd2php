@@ -1,0 +1,16 @@
+OTA\VehicleLocationLiabilitiesType\CoveragesAType:
+    properties:
+        coverage:
+            expose: true
+            access_type: public_method
+            serialized_name: Coverage
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getCoverage
+                setter: setCoverage
+            xml_list:
+                inline: true
+                entry_name: Coverage
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\VehicleLocationLiabilitiesType\CoveragesAType\CoverageAType>

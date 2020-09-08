@@ -1,0 +1,29 @@
+OTA\RatePlanType\RestrictionStatusAType:
+    properties:
+        restriction:
+            expose: true
+            access_type: public_method
+            serialized_name: Restriction
+            accessor:
+                getter: getRestriction
+                setter: setRestriction
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Jms\SimpleListOf<string>
+        status:
+            expose: true
+            access_type: public_method
+            serialized_name: Status
+            accessor:
+                getter: getStatus
+                setter: setStatus
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Jms\SimpleListOf<string>
+        sellThroughOpenIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: SellThroughOpenIndicator
+            accessor:
+                getter: getSellThroughOpenIndicator
+                setter: setSellThroughOpenIndicator
+            xml_attribute: true
+            type: bool

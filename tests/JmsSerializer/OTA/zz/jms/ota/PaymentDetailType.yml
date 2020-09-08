@@ -1,0 +1,12 @@
+OTA\PaymentDetailType:
+    properties:
+        paymentAmount:
+            expose: true
+            access_type: public_method
+            serialized_name: PaymentAmount
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getPaymentAmount
+                setter: setPaymentAmount
+            type: OTA\PaymentDetailType\PaymentAmountAType

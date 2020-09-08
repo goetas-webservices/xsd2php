@@ -1,0 +1,11 @@
+OTA\AirCheckInType\MessageFunctionAType:
+    properties:
+        function:
+            expose: true
+            access_type: public_method
+            serialized_name: Function
+            accessor:
+                getter: getFunction
+                setter: setFunction
+            xml_attribute: true
+            type: string

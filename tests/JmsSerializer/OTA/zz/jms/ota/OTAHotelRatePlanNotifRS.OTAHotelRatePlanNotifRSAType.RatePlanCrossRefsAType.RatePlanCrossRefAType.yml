@@ -1,0 +1,38 @@
+OTA\OTAHotelRatePlanNotifRS\OTAHotelRatePlanNotifRSAType\RatePlanCrossRefsAType\RatePlanCrossRefAType:
+    properties:
+        requestRatePlanCode:
+            expose: true
+            access_type: public_method
+            serialized_name: RequestRatePlanCode
+            accessor:
+                getter: getRequestRatePlanCode
+                setter: setRequestRatePlanCode
+            xml_attribute: true
+            type: string
+        requestRatePlanGroupingCode:
+            expose: true
+            access_type: public_method
+            serialized_name: RequestRatePlanGroupingCode
+            accessor:
+                getter: getRequestRatePlanGroupingCode
+                setter: setRequestRatePlanGroupingCode
+            xml_attribute: true
+            type: string
+        responseRatePlanCode:
+            expose: true
+            access_type: public_method
+            serialized_name: ResponseRatePlanCode
+            accessor:
+                getter: getResponseRatePlanCode
+                setter: setResponseRatePlanCode
+            xml_attribute: true
+            type: string
+        responseRatePlanGroupingCode:
+            expose: true
+            access_type: public_method
+            serialized_name: ResponseRatePlanGroupingCode
+            accessor:
+                getter: getResponseRatePlanGroupingCode
+                setter: setResponseRatePlanGroupingCode
+            xml_attribute: true
+            type: string

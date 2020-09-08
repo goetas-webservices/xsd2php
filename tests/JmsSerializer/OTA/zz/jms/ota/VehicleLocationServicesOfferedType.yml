@@ -1,0 +1,57 @@
+OTA\VehicleLocationServicesOfferedType:
+    properties:
+        onLocationServices:
+            expose: true
+            access_type: public_method
+            serialized_name: OnLocationServices
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getOnLocationServices
+                setter: setOnLocationServices
+            type: array<OTA\VehicleLocationServicesOfferedType\OnLocationServicesAType\OnLocationServiceAType>
+            xml_list:
+                inline: false
+                entry_name: OnLocationService
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        offLocationServices:
+            expose: true
+            access_type: public_method
+            serialized_name: OffLocationServices
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getOffLocationServices
+                setter: setOffLocationServices
+            type: array<OTA\VehicleLocationServicesOfferedType\OffLocationServicesAType\OffLocationServiceAType>
+            xml_list:
+                inline: false
+                entry_name: OffLocationService
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        specialEquipments:
+            expose: true
+            access_type: public_method
+            serialized_name: SpecialEquipments
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getSpecialEquipments
+                setter: setSpecialEquipments
+            type: array<OTA\VehicleLocationServicesOfferedType\SpecialEquipmentsAType\SpecialEquipmentAType>
+            xml_list:
+                inline: false
+                entry_name: SpecialEquipment
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        tPAExtensions:
+            expose: true
+            access_type: public_method
+            serialized_name: TPA_Extensions
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getTPAExtensions
+                setter: setTPAExtensions
+            type: OTA\TPAExtensionsType

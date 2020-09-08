@@ -1,0 +1,56 @@
+OTA\EventType\EventAType\SitesAType\SiteAType\EventDaysAType\EventDayAType:
+    properties:
+        dayNumber:
+            expose: true
+            access_type: public_method
+            serialized_name: DayNumber
+            accessor:
+                getter: getDayNumber
+                setter: setDayNumber
+            xml_attribute: true
+            type: int
+        eventDayFunctions:
+            expose: true
+            access_type: public_method
+            serialized_name: EventDayFunctions
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getEventDayFunctions
+                setter: setEventDayFunctions
+            type: array<OTA\EventType\EventAType\SitesAType\SiteAType\EventDaysAType\EventDayAType\EventDayFunctionsAType\EventDayFunctionAType>
+            xml_list:
+                inline: false
+                entry_name: EventDayFunction
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        services:
+            expose: true
+            access_type: public_method
+            serialized_name: Services
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getServices
+                setter: setServices
+            type: array<OTA\EventType\EventAType\SitesAType\SiteAType\EventDaysAType\EventDayAType\ServicesAType\ServiceAType>
+            xml_list:
+                inline: false
+                entry_name: Service
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        offSiteTransportations:
+            expose: true
+            access_type: public_method
+            serialized_name: OffSiteTransportations
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getOffSiteTransportations
+                setter: setOffSiteTransportations
+            type: array<OTA\EventType\EventAType\SitesAType\SiteAType\EventDaysAType\EventDayAType\OffSiteTransportationsAType\OffSiteTransportationAType>
+            xml_list:
+                inline: false
+                entry_name: OffSiteTransportation
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'

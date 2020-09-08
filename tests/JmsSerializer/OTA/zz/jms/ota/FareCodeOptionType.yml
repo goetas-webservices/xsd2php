@@ -1,0 +1,57 @@
+OTA\FareCodeOptionType:
+    properties:
+        listOfFareQualifierCode:
+            expose: true
+            access_type: public_method
+            serialized_name: ListOfFareQualifierCode
+            accessor:
+                getter: getListOfFareQualifierCode
+                setter: setListOfFareQualifierCode
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Jms\SimpleListOf<string>
+        status:
+            expose: true
+            access_type: public_method
+            serialized_name: Status
+            accessor:
+                getter: getStatus
+                setter: setStatus
+            xml_attribute: true
+            type: string
+        fareDescription:
+            expose: true
+            access_type: public_method
+            serialized_name: FareDescription
+            accessor:
+                getter: getFareDescription
+                setter: setFareDescription
+            xml_attribute: true
+            type: string
+        fareCode:
+            expose: true
+            access_type: public_method
+            serialized_name: FareCode
+            accessor:
+                getter: getFareCode
+                setter: setFareCode
+            xml_attribute: true
+            type: string
+        groupCode:
+            expose: true
+            access_type: public_method
+            serialized_name: GroupCode
+            accessor:
+                getter: getGroupCode
+                setter: setGroupCode
+            xml_attribute: true
+            type: string
+        fareRemark:
+            expose: true
+            access_type: public_method
+            serialized_name: FareRemark
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getFareRemark
+                setter: setFareRemark
+            type: OTA\FareCodeOptionType\FareRemarkAType

@@ -1,0 +1,77 @@
+OTA\CostingItemType:
+    properties:
+        description:
+            expose: true
+            access_type: public_method
+            serialized_name: Description
+            accessor:
+                getter: getDescription
+                setter: setDescription
+            xml_attribute: true
+            type: string
+        quantity:
+            expose: true
+            access_type: public_method
+            serialized_name: Quantity
+            accessor:
+                getter: getQuantity
+                setter: setQuantity
+            xml_attribute: true
+            type: int
+        inventoryItemRPH:
+            expose: true
+            access_type: public_method
+            serialized_name: InventoryItemRPH
+            accessor:
+                getter: getInventoryItemRPH
+                setter: setInventoryItemRPH
+            xml_attribute: true
+            type: string
+        passengerRPH:
+            expose: true
+            access_type: public_method
+            serialized_name: PassengerRPH
+            accessor:
+                getter: getPassengerRPH
+                setter: setPassengerRPH
+            xml_attribute: true
+            type: string
+        costBasis:
+            expose: true
+            access_type: public_method
+            serialized_name: CostBasis
+            accessor:
+                getter: getCostBasis
+                setter: setCostBasis
+            xml_attribute: true
+            type: string
+        unitCost:
+            expose: true
+            access_type: public_method
+            serialized_name: UnitCost
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getUnitCost
+                setter: setUnitCost
+            type: OTA\CostingItemType\UnitCostAType
+        extendedCost:
+            expose: true
+            access_type: public_method
+            serialized_name: ExtendedCost
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getExtendedCost
+                setter: setExtendedCost
+            type: OTA\CostingItemType\ExtendedCostAType
+        commission:
+            expose: true
+            access_type: public_method
+            serialized_name: Commission
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getCommission
+                setter: setCommission
+            type: OTA\CostingItemType\CommissionAType

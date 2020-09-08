@@ -1,0 +1,27 @@
+OTA\VehicleRetrieveResRSCoreType:
+    properties:
+        vehReservation:
+            expose: true
+            access_type: public_method
+            serialized_name: VehReservation
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getVehReservation
+                setter: setVehReservation
+            type: OTA\VehicleReservationType
+        vehResSummaries:
+            expose: true
+            access_type: public_method
+            serialized_name: VehResSummaries
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getVehResSummaries
+                setter: setVehResSummaries
+            type: array<OTA\VehicleReservationSummaryType>
+            xml_list:
+                inline: false
+                entry_name: VehResSummary
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'

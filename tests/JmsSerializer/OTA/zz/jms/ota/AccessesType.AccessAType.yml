@@ -1,0 +1,49 @@
+OTA\AccessesType\AccessAType:
+    properties:
+        actionType:
+            expose: true
+            access_type: public_method
+            serialized_name: ActionType
+            accessor:
+                getter: getActionType
+                setter: setActionType
+            xml_attribute: true
+            type: string
+        actionDateTime:
+            expose: true
+            access_type: public_method
+            serialized_name: ActionDateTime
+            accessor:
+                getter: getActionDateTime
+                setter: setActionDateTime
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\DateTime
+        iD:
+            expose: true
+            access_type: public_method
+            serialized_name: ID
+            accessor:
+                getter: getID
+                setter: setID
+            xml_attribute: true
+            type: string
+        accessPerson:
+            expose: true
+            access_type: public_method
+            serialized_name: AccessPerson
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getAccessPerson
+                setter: setAccessPerson
+            type: OTA\PersonNameType
+        accessComment:
+            expose: true
+            access_type: public_method
+            serialized_name: AccessComment
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getAccessComment
+                setter: setAccessComment
+            type: OTA\FreeTextType

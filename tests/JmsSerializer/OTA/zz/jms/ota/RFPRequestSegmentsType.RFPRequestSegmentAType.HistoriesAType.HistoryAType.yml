@@ -1,0 +1,196 @@
+OTA\RFPRequestSegmentsType\RFPRequestSegmentAType\HistoriesAType\HistoryAType:
+    properties:
+        start:
+            expose: true
+            access_type: public_method
+            serialized_name: Start
+            accessor:
+                getter: getStart
+                setter: setStart
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime
+        duration:
+            expose: true
+            access_type: public_method
+            serialized_name: Duration
+            accessor:
+                getter: getDuration
+                setter: setDuration
+            xml_attribute: true
+            type: DateInterval
+        end:
+            expose: true
+            access_type: public_method
+            serialized_name: End
+            accessor:
+                getter: getEnd
+                setter: setEnd
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime
+        meetingName:
+            expose: true
+            access_type: public_method
+            serialized_name: MeetingName
+            accessor:
+                getter: getMeetingName
+                setter: setMeetingName
+            xml_attribute: true
+            type: string
+        siteName:
+            expose: true
+            access_type: public_method
+            serialized_name: SiteName
+            accessor:
+                getter: getSiteName
+                setter: setSiteName
+            xml_attribute: true
+            type: string
+        attendeeQuantity:
+            expose: true
+            access_type: public_method
+            serialized_name: AttendeeQuantity
+            accessor:
+                getter: getAttendeeQuantity
+                setter: setAttendeeQuantity
+            xml_attribute: true
+            type: int
+        roomBlockQuantity:
+            expose: true
+            access_type: public_method
+            serialized_name: RoomBlockQuantity
+            accessor:
+                getter: getRoomBlockQuantity
+                setter: setRoomBlockQuantity
+            xml_attribute: true
+            type: int
+        roomPickupQuantity:
+            expose: true
+            access_type: public_method
+            serialized_name: RoomPickupQuantity
+            accessor:
+                getter: getRoomPickupQuantity
+                setter: setRoomPickupQuantity
+            xml_attribute: true
+            type: int
+        totalGuestRoomAmount:
+            expose: true
+            access_type: public_method
+            serialized_name: TotalGuestRoomAmount
+            accessor:
+                getter: getTotalGuestRoomAmount
+                setter: setTotalGuestRoomAmount
+            xml_attribute: true
+            type: float
+        totalFoodAndBevAmount:
+            expose: true
+            access_type: public_method
+            serialized_name: TotalFoodAndBevAmount
+            accessor:
+                getter: getTotalFoodAndBevAmount
+                setter: setTotalFoodAndBevAmount
+            xml_attribute: true
+            type: float
+        totalMeetingRoomRentalAmount:
+            expose: true
+            access_type: public_method
+            serialized_name: TotalMeetingRoomRentalAmount
+            accessor:
+                getter: getTotalMeetingRoomRentalAmount
+                setter: setTotalMeetingRoomRentalAmount
+            xml_attribute: true
+            type: float
+        totalAudioVisualRentalAmount:
+            expose: true
+            access_type: public_method
+            serialized_name: TotalAudioVisualRentalAmount
+            accessor:
+                getter: getTotalAudioVisualRentalAmount
+                setter: setTotalAudioVisualRentalAmount
+            xml_attribute: true
+            type: float
+        totalMiscAmount:
+            expose: true
+            access_type: public_method
+            serialized_name: TotalMiscAmount
+            accessor:
+                getter: getTotalMiscAmount
+                setter: setTotalMiscAmount
+            xml_attribute: true
+            type: float
+        postEventReportExistsInd:
+            expose: true
+            access_type: public_method
+            serialized_name: PostEventReportExistsInd
+            accessor:
+                getter: getPostEventReportExistsInd
+                setter: setPostEventReportExistsInd
+            xml_attribute: true
+            type: bool
+        currencyCode:
+            expose: true
+            access_type: public_method
+            serialized_name: CurrencyCode
+            accessor:
+                getter: getCurrencyCode
+                setter: setCurrencyCode
+            xml_attribute: true
+            type: string
+        decimalPlaces:
+            expose: true
+            access_type: public_method
+            serialized_name: DecimalPlaces
+            accessor:
+                getter: getDecimalPlaces
+                setter: setDecimalPlaces
+            xml_attribute: true
+            type: int
+        uniqueID:
+            expose: true
+            access_type: public_method
+            serialized_name: UniqueID
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getUniqueID
+                setter: setUniqueID
+            type: OTA\UniqueIDType
+        contactInfos:
+            expose: true
+            access_type: public_method
+            serialized_name: ContactInfos
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getContactInfos
+                setter: setContactInfos
+            type: array<OTA\ContactPersonType>
+            xml_list:
+                inline: false
+                entry_name: ContactInfo
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        daySummaries:
+            expose: true
+            access_type: public_method
+            serialized_name: DaySummaries
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getDaySummaries
+                setter: setDaySummaries
+            type: array<OTA\RFPRequestSegmentsType\RFPRequestSegmentAType\HistoriesAType\HistoryAType\DaySummariesAType\DaySummaryAType>
+            xml_list:
+                inline: false
+                entry_name: DaySummary
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        comments:
+            expose: true
+            access_type: public_method
+            serialized_name: Comments
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getComments
+                setter: setComments
+            type: OTA\ParagraphType

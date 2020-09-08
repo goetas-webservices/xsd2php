@@ -1,0 +1,30 @@
+OTA\RatePlanType\RatePlanInclusionsAType:
+    properties:
+        taxInclusive:
+            expose: true
+            access_type: public_method
+            serialized_name: TaxInclusive
+            accessor:
+                getter: getTaxInclusive
+                setter: setTaxInclusive
+            xml_attribute: true
+            type: bool
+        serviceFeeInclusive:
+            expose: true
+            access_type: public_method
+            serialized_name: ServiceFeeInclusive
+            accessor:
+                getter: getServiceFeeInclusive
+                setter: setServiceFeeInclusive
+            xml_attribute: true
+            type: bool
+        ratePlanInclusionDesciption:
+            expose: true
+            access_type: public_method
+            serialized_name: RatePlanInclusionDesciption
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getRatePlanInclusionDesciption
+                setter: setRatePlanInclusionDesciption
+            type: OTA\ParagraphType

@@ -1,0 +1,25 @@
+OTA\OTAAirBookRQ\OTAAirBookRQAType\PriceInfoAType:
+    properties:
+        participationLevel:
+            expose: true
+            access_type: public_method
+            serialized_name: ParticipationLevel
+            accessor:
+                getter: getParticipationLevel
+                setter: setParticipationLevel
+            xml_attribute: true
+            type: string
+        pricingPref:
+            expose: true
+            access_type: public_method
+            serialized_name: PricingPref
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getPricingPref
+                setter: setPricingPref
+            xml_list:
+                inline: true
+                entry_name: PricingPref
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\OTAAirBookRQ\OTAAirBookRQAType\PriceInfoAType\PricingPrefAType>

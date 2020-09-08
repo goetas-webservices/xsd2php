@@ -1,0 +1,25 @@
+OTA\OTAScreenTextRS\OTAScreenTextRSAType\TextScreensAType\TextScreenAType:
+    properties:
+        screenSequenceNum:
+            expose: true
+            access_type: public_method
+            serialized_name: ScreenSequenceNum
+            accessor:
+                getter: getScreenSequenceNum
+                setter: setScreenSequenceNum
+            xml_attribute: true
+            type: int
+        textData:
+            expose: true
+            access_type: public_method
+            serialized_name: TextData
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getTextData
+                setter: setTextData
+            xml_list:
+                inline: true
+                entry_name: TextData
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<string>

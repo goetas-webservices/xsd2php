@@ -1,0 +1,38 @@
+OTA\OTAAirDemandTicketRQ\OTAAirDemandTicketRQAType\DemandTicketDetailAType\PaymentInfoAType\CreditCardInfoAType:
+    properties:
+        approvalCode:
+            expose: true
+            access_type: public_method
+            serialized_name: ApprovalCode
+            accessor:
+                getter: getApprovalCode
+                setter: setApprovalCode
+            xml_attribute: true
+            type: string
+        cardPresentInd:
+            expose: true
+            access_type: public_method
+            serialized_name: CardPresentInd
+            accessor:
+                getter: getCardPresentInd
+                setter: setCardPresentInd
+            xml_attribute: true
+            type: bool
+        extendedPaymentCode:
+            expose: true
+            access_type: public_method
+            serialized_name: ExtendedPaymentCode
+            accessor:
+                getter: getExtendedPaymentCode
+                setter: setExtendedPaymentCode
+            xml_attribute: true
+            type: string
+        amount:
+            expose: true
+            access_type: public_method
+            serialized_name: Amount
+            accessor:
+                getter: getAmount
+                setter: setAmount
+            xml_attribute: true
+            type: float

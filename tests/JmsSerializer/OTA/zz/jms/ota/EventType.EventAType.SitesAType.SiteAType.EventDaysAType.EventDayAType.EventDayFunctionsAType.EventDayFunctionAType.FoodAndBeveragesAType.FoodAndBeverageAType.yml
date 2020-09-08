@@ -1,0 +1,86 @@
+OTA\EventType\EventAType\SitesAType\SiteAType\EventDaysAType\EventDayAType\EventDayFunctionsAType\EventDayFunctionAType\FoodAndBeveragesAType\FoodAndBeverageAType:
+    properties:
+        setForQuantity:
+            expose: true
+            access_type: public_method
+            serialized_name: SetForQuantity
+            accessor:
+                getter: getSetForQuantity
+                setter: setSetForQuantity
+            xml_attribute: true
+            type: int
+        serviceTime:
+            expose: true
+            access_type: public_method
+            serialized_name: ServiceTime
+            accessor:
+                getter: getServiceTime
+                setter: setServiceTime
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime
+        attendeeQuantity:
+            expose: true
+            access_type: public_method
+            serialized_name: AttendeeQuantity
+            accessor:
+                getter: getAttendeeQuantity
+                setter: setAttendeeQuantity
+            xml_attribute: true
+            type: int
+        guaranteeQuantity:
+            expose: true
+            access_type: public_method
+            serialized_name: GuaranteeQuantity
+            accessor:
+                getter: getGuaranteeQuantity
+                setter: setGuaranteeQuantity
+            xml_attribute: true
+            type: int
+        mealTypeCode:
+            expose: true
+            access_type: public_method
+            serialized_name: MealTypeCode
+            accessor:
+                getter: getMealTypeCode
+                setter: setMealTypeCode
+            xml_attribute: true
+            type: string
+        serviceTypeCode:
+            expose: true
+            access_type: public_method
+            serialized_name: ServiceTypeCode
+            accessor:
+                getter: getServiceTypeCode
+                setter: setServiceTypeCode
+            xml_attribute: true
+            type: string
+        comments:
+            expose: true
+            access_type: public_method
+            serialized_name: Comments
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getComments
+                setter: setComments
+            type: array<OTA\ParagraphType>
+            xml_list:
+                inline: false
+                entry_name: Comment
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        menus:
+            expose: true
+            access_type: public_method
+            serialized_name: Menus
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getMenus
+                setter: setMenus
+            type: array<OTA\EventType\EventAType\SitesAType\SiteAType\EventDaysAType\EventDayAType\EventDayFunctionsAType\EventDayFunctionAType\FoodAndBeveragesAType\FoodAndBeverageAType\MenusAType\MenuAType>
+            xml_list:
+                inline: false
+                entry_name: Menu
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'

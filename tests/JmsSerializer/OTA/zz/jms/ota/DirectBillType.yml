@@ -1,0 +1,58 @@
+OTA\DirectBillType:
+    properties:
+        shareSynchInd:
+            expose: true
+            access_type: public_method
+            serialized_name: ShareSynchInd
+            accessor:
+                getter: getShareSynchInd
+                setter: setShareSynchInd
+            xml_attribute: true
+            type: string
+        shareMarketInd:
+            expose: true
+            access_type: public_method
+            serialized_name: ShareMarketInd
+            accessor:
+                getter: getShareMarketInd
+                setter: setShareMarketInd
+            xml_attribute: true
+            type: string
+        directBillID:
+            expose: true
+            access_type: public_method
+            serialized_name: DirectBill_ID
+            accessor:
+                getter: getDirectBillID
+                setter: setDirectBillID
+            xml_attribute: true
+            type: string
+        billingNumber:
+            expose: true
+            access_type: public_method
+            serialized_name: BillingNumber
+            accessor:
+                getter: getBillingNumber
+                setter: setBillingNumber
+            xml_attribute: true
+            type: string
+        companyName:
+            expose: true
+            access_type: public_method
+            serialized_name: CompanyName
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getCompanyName
+                setter: setCompanyName
+            type: OTA\DirectBillType\CompanyNameAType
+        address:
+            expose: true
+            access_type: public_method
+            serialized_name: Address
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getAddress
+                setter: setAddress
+            type: OTA\AddressInfoType

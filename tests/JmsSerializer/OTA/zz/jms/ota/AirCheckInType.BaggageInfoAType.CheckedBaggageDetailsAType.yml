@@ -1,0 +1,103 @@
+OTA\AirCheckInType\BaggageInfoAType\CheckedBaggageDetailsAType:
+    properties:
+        baggagePoolIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: BaggagePoolIndicator
+            accessor:
+                getter: getBaggagePoolIndicator
+                setter: setBaggagePoolIndicator
+            xml_attribute: true
+            type: bool
+        heavyBagIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: HeavyBagIndicator
+            accessor:
+                getter: getHeavyBagIndicator
+                setter: setHeavyBagIndicator
+            xml_attribute: true
+            type: bool
+        shortCheckLocationCode:
+            expose: true
+            access_type: public_method
+            serialized_name: ShortCheckLocationCode
+            accessor:
+                getter: getShortCheckLocationCode
+                setter: setShortCheckLocationCode
+            xml_attribute: true
+            type: string
+        shortCheckCodeContext:
+            expose: true
+            access_type: public_method
+            serialized_name: ShortCheckCodeContext
+            accessor:
+                getter: getShortCheckCodeContext
+                setter: setShortCheckCodeContext
+            xml_attribute: true
+            type: string
+        bagStandByIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: BagStandByIndicator
+            accessor:
+                getter: getBagStandByIndicator
+                setter: setBagStandByIndicator
+            xml_attribute: true
+            type: bool
+        priorityHandlingIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: PriorityHandlingIndicator
+            accessor:
+                getter: getPriorityHandlingIndicator
+                setter: setPriorityHandlingIndicator
+            xml_attribute: true
+            type: bool
+        hotConnectionIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: HotConnectionIndicator
+            accessor:
+                getter: getHotConnectionIndicator
+                setter: setHotConnectionIndicator
+            xml_attribute: true
+            type: bool
+        voluntarySeparationIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: VoluntarySeparationIndicator
+            accessor:
+                getter: getVoluntarySeparationIndicator
+                setter: setVoluntarySeparationIndicator
+            xml_attribute: true
+            type: bool
+        bagSecurityStatus:
+            expose: true
+            access_type: public_method
+            serialized_name: BagSecurityStatus
+            accessor:
+                getter: getBagSecurityStatus
+                setter: setBagSecurityStatus
+            xml_attribute: true
+            type: string
+        checkedBagWeight:
+            expose: true
+            access_type: public_method
+            serialized_name: CheckedBagWeight
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getCheckedBagWeight
+                setter: setCheckedBagWeight
+            type: OTA\AirCheckInType\BaggageInfoAType\CheckedBaggageDetailsAType\CheckedBagWeightAType
+        bagTagDetails:
+            expose: true
+            access_type: public_method
+            serialized_name: BagTagDetails
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getBagTagDetails
+                setter: setBagTagDetails
+            type: OTA\AirCheckInType\BaggageInfoAType\CheckedBaggageDetailsAType\BagTagDetailsAType

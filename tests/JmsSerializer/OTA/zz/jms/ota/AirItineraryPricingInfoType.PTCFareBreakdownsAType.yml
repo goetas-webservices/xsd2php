@@ -1,0 +1,16 @@
+OTA\AirItineraryPricingInfoType\PTCFareBreakdownsAType:
+    properties:
+        pTCFareBreakdown:
+            expose: true
+            access_type: public_method
+            serialized_name: PTC_FareBreakdown
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getPTCFareBreakdown
+                setter: setPTCFareBreakdown
+            xml_list:
+                inline: true
+                entry_name: PTC_FareBreakdown
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\PTCFareBreakdownType>

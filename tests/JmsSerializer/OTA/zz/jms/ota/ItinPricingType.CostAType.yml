@@ -1,0 +1,11 @@
+OTA\ItinPricingType\CostAType:
+    properties:
+        formOfPaymentRPH:
+            expose: true
+            access_type: public_method
+            serialized_name: FormOfPaymentRPH
+            accessor:
+                getter: getFormOfPaymentRPH
+                setter: setFormOfPaymentRPH
+            xml_attribute: true
+            type: string

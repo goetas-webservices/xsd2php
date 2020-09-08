@@ -1,0 +1,74 @@
+OTA\MultimediaDescriptionType:
+    properties:
+        infoCode:
+            expose: true
+            access_type: public_method
+            serialized_name: InfoCode
+            accessor:
+                getter: getInfoCode
+                setter: setInfoCode
+            xml_attribute: true
+            type: string
+        additionalDetailCode:
+            expose: true
+            access_type: public_method
+            serialized_name: AdditionalDetailCode
+            accessor:
+                getter: getAdditionalDetailCode
+                setter: setAdditionalDetailCode
+            xml_attribute: true
+            type: string
+        iD:
+            expose: true
+            access_type: public_method
+            serialized_name: ID
+            accessor:
+                getter: getID
+                setter: setID
+            xml_attribute: true
+            type: string
+        videoItems:
+            expose: true
+            access_type: public_method
+            serialized_name: VideoItems
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getVideoItems
+                setter: setVideoItems
+            type: array<OTA\VideoItemsType\VideoItemAType>
+            xml_list:
+                inline: false
+                entry_name: VideoItem
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        imageItems:
+            expose: true
+            access_type: public_method
+            serialized_name: ImageItems
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getImageItems
+                setter: setImageItems
+            type: array<OTA\ImageItemsType\ImageItemAType>
+            xml_list:
+                inline: false
+                entry_name: ImageItem
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        textItems:
+            expose: true
+            access_type: public_method
+            serialized_name: TextItems
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getTextItems
+                setter: setTextItems
+            type: array<OTA\TextItemsType\TextItemAType>
+            xml_list:
+                inline: false
+                entry_name: TextItem
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'

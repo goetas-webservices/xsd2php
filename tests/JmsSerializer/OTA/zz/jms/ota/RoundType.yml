@@ -1,0 +1,138 @@
+OTA\RoundType:
+    properties:
+        roundID:
+            expose: true
+            access_type: public_method
+            serialized_name: RoundID
+            accessor:
+                getter: getRoundID
+                setter: setRoundID
+            xml_attribute: true
+            type: int
+        playDateTime:
+            expose: true
+            access_type: public_method
+            serialized_name: PlayDateTime
+            accessor:
+                getter: getPlayDateTime
+                setter: setPlayDateTime
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime
+        numberOfGolfers:
+            expose: true
+            access_type: public_method
+            serialized_name: NumberOfGolfers
+            accessor:
+                getter: getNumberOfGolfers
+                setter: setNumberOfGolfers
+            xml_attribute: true
+            type: int
+        packageID:
+            expose: true
+            access_type: public_method
+            serialized_name: PackageID
+            accessor:
+                getter: getPackageID
+                setter: setPackageID
+            xml_attribute: true
+            type: string
+        startingTee:
+            expose: true
+            access_type: public_method
+            serialized_name: StartingTee
+            accessor:
+                getter: getStartingTee
+                setter: setStartingTee
+            xml_attribute: true
+            type: string
+        numberOfCarts:
+            expose: true
+            access_type: public_method
+            serialized_name: NumberOfCarts
+            accessor:
+                getter: getNumberOfCarts
+                setter: setNumberOfCarts
+            xml_attribute: true
+            type: int
+        amount:
+            expose: true
+            access_type: public_method
+            serialized_name: Amount
+            accessor:
+                getter: getAmount
+                setter: setAmount
+            xml_attribute: true
+            type: float
+        currencyCode:
+            expose: true
+            access_type: public_method
+            serialized_name: CurrencyCode
+            accessor:
+                getter: getCurrencyCode
+                setter: setCurrencyCode
+            xml_attribute: true
+            type: string
+        decimalPlaces:
+            expose: true
+            access_type: public_method
+            serialized_name: DecimalPlaces
+            accessor:
+                getter: getDecimalPlaces
+                setter: setDecimalPlaces
+            xml_attribute: true
+            type: int
+        charges:
+            expose: true
+            access_type: public_method
+            serialized_name: Charges
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getCharges
+                setter: setCharges
+            type: array<OTA\FeeType>
+            xml_list:
+                inline: false
+                entry_name: Charge
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        cancel:
+            expose: true
+            access_type: public_method
+            serialized_name: Cancel
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getCancel
+                setter: setCancel
+            type: OTA\CancelRuleType
+        golfers:
+            expose: true
+            access_type: public_method
+            serialized_name: Golfers
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getGolfers
+                setter: setGolfers
+            type: array<OTA\GolferType>
+            xml_list:
+                inline: false
+                entry_name: Golfer
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        rateQualifiers:
+            expose: true
+            access_type: public_method
+            serialized_name: RateQualifiers
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getRateQualifiers
+                setter: setRateQualifiers
+            type: array<OTA\RateQualifierType>
+            xml_list:
+                inline: false
+                entry_name: RateQualifier
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'

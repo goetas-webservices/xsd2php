@@ -1,0 +1,29 @@
+OTA\VehicleChargeType\MinMaxAType:
+    properties:
+        maxCharge:
+            expose: true
+            access_type: public_method
+            serialized_name: MaxCharge
+            accessor:
+                getter: getMaxCharge
+                setter: setMaxCharge
+            xml_attribute: true
+            type: float
+        minCharge:
+            expose: true
+            access_type: public_method
+            serialized_name: MinCharge
+            accessor:
+                getter: getMinCharge
+                setter: setMinCharge
+            xml_attribute: true
+            type: float
+        maxChargeDays:
+            expose: true
+            access_type: public_method
+            serialized_name: MaxChargeDays
+            accessor:
+                getter: getMaxChargeDays
+                setter: setMaxChargeDays
+            xml_attribute: true
+            type: int

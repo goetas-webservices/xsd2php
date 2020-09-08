@@ -1,0 +1,20 @@
+OTA\PoliciesType\PolicyAType\TaxPoliciesAType\TaxPolicyAType:
+    properties:
+        nightsForTaxExemptionQuantity:
+            expose: true
+            access_type: public_method
+            serialized_name: NightsForTaxExemptionQuantity
+            accessor:
+                getter: getNightsForTaxExemptionQuantity
+                setter: setNightsForTaxExemptionQuantity
+            xml_attribute: true
+            type: int
+        taxableNightsQuantity:
+            expose: true
+            access_type: public_method
+            serialized_name: TaxableNightsQuantity
+            accessor:
+                getter: getTaxableNightsQuantity
+                setter: setTaxableNightsQuantity
+            xml_attribute: true
+            type: int

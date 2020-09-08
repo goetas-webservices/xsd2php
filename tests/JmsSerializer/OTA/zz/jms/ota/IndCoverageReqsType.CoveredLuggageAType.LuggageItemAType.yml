@@ -1,0 +1,41 @@
+OTA\IndCoverageReqsType\CoveredLuggageAType\LuggageItemAType:
+    properties:
+        luggageType:
+            expose: true
+            access_type: public_method
+            serialized_name: LuggageType
+            accessor:
+                getter: getLuggageType
+                setter: setLuggageType
+            xml_attribute: true
+            type: string
+        luggageDescription:
+            expose: true
+            access_type: public_method
+            serialized_name: LuggageDescription
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getLuggageDescription
+                setter: setLuggageDescription
+            type: OTA\FreeTextType
+        itemDeclaredValue:
+            expose: true
+            access_type: public_method
+            serialized_name: ItemDeclaredValue
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getItemDeclaredValue
+                setter: setItemDeclaredValue
+            type: OTA\IndCoverageReqsType\CoveredLuggageAType\LuggageItemAType\ItemDeclaredValueAType
+        luggagePremium:
+            expose: true
+            access_type: public_method
+            serialized_name: LuggagePremium
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getLuggagePremium
+                setter: setLuggagePremium
+            type: OTA\IndCoverageReqsType\CoveredLuggageAType\LuggageItemAType\LuggagePremiumAType

@@ -1,0 +1,26 @@
+OTA\RFPRequestSegmentsType\RFPRequestSegmentAType\DatesAType:
+    properties:
+        date:
+            expose: true
+            access_type: public_method
+            serialized_name: Date
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getDate
+                setter: setDate
+            xml_list:
+                inline: true
+                entry_name: Date
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\RFPRequestSegmentsType\RFPRequestSegmentAType\DatesAType\DateAType>
+        comments:
+            expose: true
+            access_type: public_method
+            serialized_name: Comments
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getComments
+                setter: setComments
+            type: OTA\ParagraphType

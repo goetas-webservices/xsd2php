@@ -1,0 +1,192 @@
+OTA\OTAHotelBookingRuleRS\OTAHotelBookingRuleRSAType\RuleMessageAType:
+    properties:
+        chainCode:
+            expose: true
+            access_type: public_method
+            serialized_name: ChainCode
+            accessor:
+                getter: getChainCode
+                setter: setChainCode
+            xml_attribute: true
+            type: string
+        brandCode:
+            expose: true
+            access_type: public_method
+            serialized_name: BrandCode
+            accessor:
+                getter: getBrandCode
+                setter: setBrandCode
+            xml_attribute: true
+            type: string
+        hotelCode:
+            expose: true
+            access_type: public_method
+            serialized_name: HotelCode
+            accessor:
+                getter: getHotelCode
+                setter: setHotelCode
+            xml_attribute: true
+            type: string
+        hotelCityCode:
+            expose: true
+            access_type: public_method
+            serialized_name: HotelCityCode
+            accessor:
+                getter: getHotelCityCode
+                setter: setHotelCityCode
+            xml_attribute: true
+            type: string
+        hotelName:
+            expose: true
+            access_type: public_method
+            serialized_name: HotelName
+            accessor:
+                getter: getHotelName
+                setter: setHotelName
+            xml_attribute: true
+            type: string
+        hotelCodeContext:
+            expose: true
+            access_type: public_method
+            serialized_name: HotelCodeContext
+            accessor:
+                getter: getHotelCodeContext
+                setter: setHotelCodeContext
+            xml_attribute: true
+            type: string
+        chainName:
+            expose: true
+            access_type: public_method
+            serialized_name: ChainName
+            accessor:
+                getter: getChainName
+                setter: setChainName
+            xml_attribute: true
+            type: string
+        brandName:
+            expose: true
+            access_type: public_method
+            serialized_name: BrandName
+            accessor:
+                getter: getBrandName
+                setter: setBrandName
+            xml_attribute: true
+            type: string
+        areaID:
+            expose: true
+            access_type: public_method
+            serialized_name: AreaID
+            accessor:
+                getter: getAreaID
+                setter: setAreaID
+            xml_attribute: true
+            type: string
+        currencyCode:
+            expose: true
+            access_type: public_method
+            serialized_name: CurrencyCode
+            accessor:
+                getter: getCurrencyCode
+                setter: setCurrencyCode
+            xml_attribute: true
+            type: string
+        infoSource:
+            expose: true
+            access_type: public_method
+            serialized_name: InfoSource
+            accessor:
+                getter: getInfoSource
+                setter: setInfoSource
+            xml_attribute: true
+            type: string
+        stateProv:
+            expose: true
+            access_type: public_method
+            serialized_name: StateProv
+            accessor:
+                getter: getStateProv
+                setter: setStateProv
+            xml_attribute: true
+            type: string
+        postalCode:
+            expose: true
+            access_type: public_method
+            serialized_name: PostalCode
+            accessor:
+                getter: getPostalCode
+                setter: setPostalCode
+            xml_attribute: true
+            type: string
+        country:
+            expose: true
+            access_type: public_method
+            serialized_name: Country
+            accessor:
+                getter: getCountry
+                setter: setCountry
+            xml_attribute: true
+            type: string
+        commissionPercent:
+            expose: true
+            access_type: public_method
+            serialized_name: CommissionPercent
+            accessor:
+                getter: getCommissionPercent
+                setter: setCommissionPercent
+            xml_attribute: true
+            type: float
+        statusApplication:
+            expose: true
+            access_type: public_method
+            serialized_name: StatusApplication
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getStatusApplication
+                setter: setStatusApplication
+            type: OTA\OTAHotelBookingRuleRS\OTAHotelBookingRuleRSAType\RuleMessageAType\StatusApplicationAType
+        guestCounts:
+            expose: true
+            access_type: public_method
+            serialized_name: GuestCounts
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getGuestCounts
+                setter: setGuestCounts
+            type: OTA\GuestCountType
+        bookingRules:
+            expose: true
+            access_type: public_method
+            serialized_name: BookingRules
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getBookingRules
+                setter: setBookingRules
+            type: array<OTA\BookingRulesType\BookingRuleAType>
+            xml_list:
+                inline: false
+                entry_name: BookingRule
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        advisoryText:
+            expose: true
+            access_type: public_method
+            serialized_name: AdvisoryText
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getAdvisoryText
+                setter: setAdvisoryText
+            type: OTA\ParagraphType
+        tPAExtensions:
+            expose: true
+            access_type: public_method
+            serialized_name: TPA_Extensions
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getTPAExtensions
+                setter: setTPAExtensions
+            type: OTA\TPAExtensionsType

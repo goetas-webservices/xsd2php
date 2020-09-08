@@ -1,0 +1,66 @@
+OTA\RateType\RateAType:
+    properties:
+        duration:
+            expose: true
+            access_type: public_method
+            serialized_name: Duration
+            accessor:
+                getter: getDuration
+                setter: setDuration
+            xml_attribute: true
+            type: DateInterval
+        rateMode:
+            expose: true
+            access_type: public_method
+            serialized_name: RateMode
+            accessor:
+                getter: getRateMode
+                setter: setRateMode
+            xml_attribute: true
+            type: string
+        cachedIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: CachedIndicator
+            accessor:
+                getter: getCachedIndicator
+                setter: setCachedIndicator
+            xml_attribute: true
+            type: bool
+        rateSource:
+            expose: true
+            access_type: public_method
+            serialized_name: RateSource
+            accessor:
+                getter: getRateSource
+                setter: setRateSource
+            xml_attribute: true
+            type: string
+        rateTypeCode:
+            expose: true
+            access_type: public_method
+            serialized_name: RateTypeCode
+            accessor:
+                getter: getRateTypeCode
+                setter: setRateTypeCode
+            xml_attribute: true
+            type: string
+        roomPricingType:
+            expose: true
+            access_type: public_method
+            serialized_name: RoomPricingType
+            accessor:
+                getter: getRoomPricingType
+                setter: setRoomPricingType
+            xml_attribute: true
+            type: string
+        tPAExtensions:
+            expose: true
+            access_type: public_method
+            serialized_name: TPA_Extensions
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getTPAExtensions
+                setter: setTPAExtensions
+            type: OTA\TPAExtensionsType

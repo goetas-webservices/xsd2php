@@ -1,0 +1,92 @@
+OTA\GuaranteeType\GuaranteesAcceptedAType\GuaranteeAcceptedAType:
+    properties:
+        default:
+            expose: true
+            access_type: public_method
+            serialized_name: Default
+            accessor:
+                getter: getDefault
+                setter: setDefault
+            xml_attribute: true
+            type: bool
+        noCardHolderInfoReqInd:
+            expose: true
+            access_type: public_method
+            serialized_name: NoCardHolderInfoReqInd
+            accessor:
+                getter: getNoCardHolderInfoReqInd
+                setter: setNoCardHolderInfoReqInd
+            xml_attribute: true
+            type: bool
+        nameReqInd:
+            expose: true
+            access_type: public_method
+            serialized_name: NameReqInd
+            accessor:
+                getter: getNameReqInd
+                setter: setNameReqInd
+            xml_attribute: true
+            type: bool
+        addressReqInd:
+            expose: true
+            access_type: public_method
+            serialized_name: AddressReqInd
+            accessor:
+                getter: getAddressReqInd
+                setter: setAddressReqInd
+            xml_attribute: true
+            type: bool
+        phoneReqInd:
+            expose: true
+            access_type: public_method
+            serialized_name: PhoneReqInd
+            accessor:
+                getter: getPhoneReqInd
+                setter: setPhoneReqInd
+            xml_attribute: true
+            type: bool
+        interbankNbrReqInd:
+            expose: true
+            access_type: public_method
+            serialized_name: InterbankNbrReqInd
+            accessor:
+                getter: getInterbankNbrReqInd
+                setter: setInterbankNbrReqInd
+            xml_attribute: true
+            type: bool
+        bookingSourceAllowedInd:
+            expose: true
+            access_type: public_method
+            serialized_name: BookingSourceAllowedInd
+            accessor:
+                getter: getBookingSourceAllowedInd
+                setter: setBookingSourceAllowedInd
+            xml_attribute: true
+            type: bool
+        corpDiscountNbrAllowedInd:
+            expose: true
+            access_type: public_method
+            serialized_name: CorpDiscountNbrAllowedInd
+            accessor:
+                getter: getCorpDiscountNbrAllowedInd
+                setter: setCorpDiscountNbrAllowedInd
+            xml_attribute: true
+            type: bool
+        guaranteeTypeCode:
+            expose: true
+            access_type: public_method
+            serialized_name: GuaranteeTypeCode
+            accessor:
+                getter: getGuaranteeTypeCode
+                setter: setGuaranteeTypeCode
+            xml_attribute: true
+            type: string
+        guaranteeID:
+            expose: true
+            access_type: public_method
+            serialized_name: GuaranteeID
+            accessor:
+                getter: getGuaranteeID
+                setter: setGuaranteeID
+            xml_attribute: true
+            type: string

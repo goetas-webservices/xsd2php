@@ -1,0 +1,11 @@
+OTA\AirItineraryType\OriginDestinationOptionsAType\OriginDestinationOptionAType:
+    properties:
+        refNumber:
+            expose: true
+            access_type: public_method
+            serialized_name: RefNumber
+            accessor:
+                getter: getRefNumber
+                setter: setRefNumber
+            xml_attribute: true
+            type: int

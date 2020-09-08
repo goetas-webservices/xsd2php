@@ -1,0 +1,17 @@
+OTA\OTAHotelRFPMeetingNotifRS\OTAHotelRFPMeetingNotifRSAType\MessageIDAType:
+    properties:
+        rFPIDs:
+            expose: true
+            access_type: public_method
+            serialized_name: RFP_IDs
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getRFPIDs
+                setter: setRFPIDs
+            type: array<OTA\OTAHotelRFPMeetingNotifRS\OTAHotelRFPMeetingNotifRSAType\MessageIDAType\RFPIDsAType\RFPIDAType>
+            xml_list:
+                inline: false
+                entry_name: RFP_ID
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'

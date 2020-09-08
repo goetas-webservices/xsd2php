@@ -1,0 +1,20 @@
+OTA\VehicleModifyRQCoreType\RateRestrictionAType:
+    properties:
+        cancellationPenaltyInd:
+            expose: true
+            access_type: public_method
+            serialized_name: CancellationPenaltyInd
+            accessor:
+                getter: getCancellationPenaltyInd
+                setter: setCancellationPenaltyInd
+            xml_attribute: true
+            type: bool
+        modificationPenaltyInd:
+            expose: true
+            access_type: public_method
+            serialized_name: ModificationPenaltyInd
+            accessor:
+                getter: getModificationPenaltyInd
+                setter: setModificationPenaltyInd
+            xml_attribute: true
+            type: bool

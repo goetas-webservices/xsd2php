@@ -1,0 +1,20 @@
+OTA\IndCoverageReqsType\PreexistingConditionsAType\PreexistingConditionAType:
+    properties:
+        diagnosisDate:
+            expose: true
+            access_type: public_method
+            serialized_name: DiagnosisDate
+            accessor:
+                getter: getDiagnosisDate
+                setter: setDiagnosisDate
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\Date
+        lastTreatmentDate:
+            expose: true
+            access_type: public_method
+            serialized_name: LastTreatmentDate
+            accessor:
+                getter: getLastTreatmentDate
+                setter: setLastTreatmentDate
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\Date

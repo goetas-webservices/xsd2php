@@ -1,0 +1,83 @@
+OTA\VideoItemsType\VideoItemAType:
+    properties:
+        language:
+            expose: true
+            access_type: public_method
+            serialized_name: Language
+            accessor:
+                getter: getLanguage
+                setter: setLanguage
+            xml_attribute: true
+            type: string
+        caption:
+            expose: true
+            access_type: public_method
+            serialized_name: Caption
+            accessor:
+                getter: getCaption
+                setter: setCaption
+            xml_attribute: true
+            type: string
+        removal:
+            expose: true
+            access_type: public_method
+            serialized_name: Removal
+            accessor:
+                getter: getRemoval
+                setter: setRemoval
+            xml_attribute: true
+            type: bool
+        version:
+            expose: true
+            access_type: public_method
+            serialized_name: Version
+            accessor:
+                getter: getVersion
+                setter: setVersion
+            xml_attribute: true
+            type: string
+        createDateTime:
+            expose: true
+            access_type: public_method
+            serialized_name: CreateDateTime
+            accessor:
+                getter: getCreateDateTime
+                setter: setCreateDateTime
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\DateTime
+        creatorID:
+            expose: true
+            access_type: public_method
+            serialized_name: CreatorID
+            accessor:
+                getter: getCreatorID
+                setter: setCreatorID
+            xml_attribute: true
+            type: string
+        lastModifyDateTime:
+            expose: true
+            access_type: public_method
+            serialized_name: LastModifyDateTime
+            accessor:
+                getter: getLastModifyDateTime
+                setter: setLastModifyDateTime
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\DateTime
+        lastModifierID:
+            expose: true
+            access_type: public_method
+            serialized_name: LastModifierID
+            accessor:
+                getter: getLastModifierID
+                setter: setLastModifierID
+            xml_attribute: true
+            type: string
+        purgeDate:
+            expose: true
+            access_type: public_method
+            serialized_name: PurgeDate
+            accessor:
+                getter: getPurgeDate
+                setter: setPurgeDate
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\Date

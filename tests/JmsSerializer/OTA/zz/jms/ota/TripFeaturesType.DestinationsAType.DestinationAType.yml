@@ -1,0 +1,29 @@
+OTA\TripFeaturesType\DestinationsAType\DestinationAType:
+    properties:
+        arrivalDate:
+            expose: true
+            access_type: public_method
+            serialized_name: ArrivalDate
+            accessor:
+                getter: getArrivalDate
+                setter: setArrivalDate
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\Date
+        departureDate:
+            expose: true
+            access_type: public_method
+            serialized_name: DepartureDate
+            accessor:
+                getter: getDepartureDate
+                setter: setDepartureDate
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\Date
+        areaID:
+            expose: true
+            access_type: public_method
+            serialized_name: AreaID
+            accessor:
+                getter: getAreaID
+                setter: setAreaID
+            xml_attribute: true
+            type: string

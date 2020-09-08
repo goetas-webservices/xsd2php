@@ -1,0 +1,29 @@
+OTA\PTCFareBreakdownType\TicketDesignatorsAType\TicketDesignatorAType:
+    properties:
+        flightRefRPH:
+            expose: true
+            access_type: public_method
+            serialized_name: FlightRefRPH
+            accessor:
+                getter: getFlightRefRPH
+                setter: setFlightRefRPH
+            xml_attribute: true
+            type: string
+        ticketDesignatorCode:
+            expose: true
+            access_type: public_method
+            serialized_name: TicketDesignatorCode
+            accessor:
+                getter: getTicketDesignatorCode
+                setter: setTicketDesignatorCode
+            xml_attribute: true
+            type: string
+        ticketDesignatorExtension:
+            expose: true
+            access_type: public_method
+            serialized_name: TicketDesignatorExtension
+            accessor:
+                getter: getTicketDesignatorExtension
+                setter: setTicketDesignatorExtension
+            xml_attribute: true
+            type: string

@@ -1,0 +1,11 @@
+OTA\OTAVehExchangeRS\OTAVehExchangeRSAType\ExchangeLocationDetailsAType:
+    properties:
+        exchangeDateTime:
+            expose: true
+            access_type: public_method
+            serialized_name: ExchangeDateTime
+            accessor:
+                getter: getExchangeDateTime
+                setter: setExchangeDateTime
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\DateTime

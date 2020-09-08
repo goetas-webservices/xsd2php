@@ -1,0 +1,182 @@
+OTA\AirCheckInType\PassengerInfoAType\TicketingInfoAType:
+    properties:
+        airlineAccountingCode:
+            expose: true
+            access_type: public_method
+            serialized_name: AirlineAccountingCode
+            accessor:
+                getter: getAirlineAccountingCode
+                setter: setAirlineAccountingCode
+            xml_attribute: true
+            type: string
+        formAndSerialNumber:
+            expose: true
+            access_type: public_method
+            serialized_name: FormAndSerialNumber
+            accessor:
+                getter: getFormAndSerialNumber
+                setter: setFormAndSerialNumber
+            xml_attribute: true
+            type: string
+        agencyCode:
+            expose: true
+            access_type: public_method
+            serialized_name: AgencyCode
+            accessor:
+                getter: getAgencyCode
+                setter: setAgencyCode
+            xml_attribute: true
+            type: string
+        countryCodeOfIssue:
+            expose: true
+            access_type: public_method
+            serialized_name: CountryCodeOfIssue
+            accessor:
+                getter: getCountryCodeOfIssue
+                setter: setCountryCodeOfIssue
+            xml_attribute: true
+            type: string
+        issuingCompanyName:
+            expose: true
+            access_type: public_method
+            serialized_name: IssuingCompanyName
+            accessor:
+                getter: getIssuingCompanyName
+                setter: setIssuingCompanyName
+            xml_attribute: true
+            type: string
+        endorsementInfo:
+            expose: true
+            access_type: public_method
+            serialized_name: EndorsementInfo
+            accessor:
+                getter: getEndorsementInfo
+                setter: setEndorsementInfo
+            xml_attribute: true
+            type: string
+        dateOfIssue:
+            expose: true
+            access_type: public_method
+            serialized_name: DateOfIssue
+            accessor:
+                getter: getDateOfIssue
+                setter: setDateOfIssue
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime
+        originalDateofIssue:
+            expose: true
+            access_type: public_method
+            serialized_name: OriginalDateofIssue
+            accessor:
+                getter: getOriginalDateofIssue
+                setter: setOriginalDateofIssue
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime
+        issuingAgentID:
+            expose: true
+            access_type: public_method
+            serialized_name: IssuingAgentID
+            accessor:
+                getter: getIssuingAgentID
+                setter: setIssuingAgentID
+            xml_attribute: true
+            type: string
+        ticketBookReference:
+            expose: true
+            access_type: public_method
+            serialized_name: TicketBookReference
+            accessor:
+                getter: getTicketBookReference
+                setter: setTicketBookReference
+            xml_attribute: true
+            type: string
+        companyShortName:
+            expose: true
+            access_type: public_method
+            serialized_name: CompanyShortName
+            accessor:
+                getter: getCompanyShortName
+                setter: setCompanyShortName
+            xml_attribute: true
+            type: string
+        travelSector:
+            expose: true
+            access_type: public_method
+            serialized_name: TravelSector
+            accessor:
+                getter: getTravelSector
+                setter: setTravelSector
+            xml_attribute: true
+            type: string
+        code:
+            expose: true
+            access_type: public_method
+            serialized_name: Code
+            accessor:
+                getter: getCode
+                setter: setCode
+            xml_attribute: true
+            type: string
+        codeContext:
+            expose: true
+            access_type: public_method
+            serialized_name: CodeContext
+            accessor:
+                getter: getCodeContext
+                setter: setCodeContext
+            xml_attribute: true
+            type: string
+        couponInfo:
+            expose: true
+            access_type: public_method
+            serialized_name: CouponInfo
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getCouponInfo
+                setter: setCouponInfo
+            xml_list:
+                inline: true
+                entry_name: CouponInfo
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\AirCheckInType\PassengerInfoAType\TicketingInfoAType\CouponInfoAType>
+        pricingInfo:
+            expose: true
+            access_type: public_method
+            serialized_name: PricingInfo
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getPricingInfo
+                setter: setPricingInfo
+            type: OTA\FareType
+        paymentTotal:
+            expose: true
+            access_type: public_method
+            serialized_name: PaymentTotal
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getPaymentTotal
+                setter: setPaymentTotal
+            type: OTA\AirCheckInType\PassengerInfoAType\TicketingInfoAType\PaymentTotalAType
+        cityCodeOfIssue:
+            expose: true
+            access_type: public_method
+            serialized_name: CityCodeOfIssue
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getCityCodeOfIssue
+                setter: setCityCodeOfIssue
+            type: OTA\LocationType
+        aCNNumber:
+            expose: true
+            access_type: public_method
+            serialized_name: ACN_Number
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getACNNumber
+                setter: setACNNumber
+            type: OTA\UniqueIDType

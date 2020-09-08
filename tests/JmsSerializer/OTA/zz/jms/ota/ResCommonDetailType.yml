@@ -1,0 +1,142 @@
+OTA\ResCommonDetailType:
+    properties:
+        guestCounts:
+            expose: true
+            access_type: public_method
+            serialized_name: GuestCounts
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getGuestCounts
+                setter: setGuestCounts
+            type: OTA\GuestCountType
+        timeSpan:
+            expose: true
+            access_type: public_method
+            serialized_name: TimeSpan
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getTimeSpan
+                setter: setTimeSpan
+            type: OTA\DateTimeSpanType
+        resGuestRPHs:
+            expose: true
+            access_type: public_method
+            serialized_name: ResGuestRPHs
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getResGuestRPHs
+                setter: setResGuestRPHs
+            type: array<OTA\ResGuestRPHsType\ResGuestRPHAType>
+            xml_list:
+                inline: false
+                entry_name: ResGuestRPH
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        memberships:
+            expose: true
+            access_type: public_method
+            serialized_name: Memberships
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getMemberships
+                setter: setMemberships
+            type: array<OTA\MembershipType\MembershipAType>
+            xml_list:
+                inline: false
+                entry_name: Membership
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        comments:
+            expose: true
+            access_type: public_method
+            serialized_name: Comments
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getComments
+                setter: setComments
+            type: array<OTA\CommentType\CommentAType>
+            xml_list:
+                inline: false
+                entry_name: Comment
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        specialRequests:
+            expose: true
+            access_type: public_method
+            serialized_name: SpecialRequests
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getSpecialRequests
+                setter: setSpecialRequests
+            type: array<OTA\SpecialRequestType\SpecialRequestAType>
+            xml_list:
+                inline: false
+                entry_name: SpecialRequest
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        guarantee:
+            expose: true
+            access_type: public_method
+            serialized_name: Guarantee
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getGuarantee
+                setter: setGuarantee
+            type: OTA\GuaranteeType
+        depositPayments:
+            expose: true
+            access_type: public_method
+            serialized_name: DepositPayments
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getDepositPayments
+                setter: setDepositPayments
+            type: array<OTA\RequiredPaymentsType\GuaranteePaymentAType>
+            xml_list:
+                inline: false
+                entry_name: GuaranteePayment
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        cancelPenalties:
+            expose: true
+            access_type: public_method
+            serialized_name: CancelPenalties
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getCancelPenalties
+                setter: setCancelPenalties
+            type: OTA\CancelPenaltiesType
+        fees:
+            expose: true
+            access_type: public_method
+            serialized_name: Fees
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getFees
+                setter: setFees
+            type: array<OTA\FeeType>
+            xml_list:
+                inline: false
+                entry_name: Fee
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        total:
+            expose: true
+            access_type: public_method
+            serialized_name: Total
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getTotal
+                setter: setTotal
+            type: OTA\TotalType

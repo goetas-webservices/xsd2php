@@ -1,0 +1,49 @@
+OTA\SpecialServiceRequestType:
+    properties:
+        sSRCode:
+            expose: true
+            access_type: public_method
+            serialized_name: SSRCode
+            accessor:
+                getter: getSSRCode
+                setter: setSSRCode
+            xml_attribute: true
+            type: string
+        serviceQuantity:
+            expose: true
+            access_type: public_method
+            serialized_name: ServiceQuantity
+            accessor:
+                getter: getServiceQuantity
+                setter: setServiceQuantity
+            xml_attribute: true
+            type: int
+        status:
+            expose: true
+            access_type: public_method
+            serialized_name: Status
+            accessor:
+                getter: getStatus
+                setter: setStatus
+            xml_attribute: true
+            type: string
+        airline:
+            expose: true
+            access_type: public_method
+            serialized_name: Airline
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getAirline
+                setter: setAirline
+            type: OTA\CompanyNameType
+        text:
+            expose: true
+            access_type: public_method
+            serialized_name: Text
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getText
+                setter: setText
+            type: string

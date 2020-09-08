@@ -1,0 +1,16 @@
+OTA\HotelReservationIDsType:
+    properties:
+        hotelReservationID:
+            expose: true
+            access_type: public_method
+            serialized_name: HotelReservationID
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getHotelReservationID
+                setter: setHotelReservationID
+            xml_list:
+                inline: true
+                entry_name: HotelReservationID
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\HotelReservationIDsType\HotelReservationIDAType>

@@ -1,0 +1,20 @@
+OTA\CruiseGuestDetailType\AirAccommodationsAType\AirAccommodationAType:
+    properties:
+        comment:
+            expose: true
+            access_type: public_method
+            serialized_name: Comment
+            accessor:
+                getter: getComment
+                setter: setComment
+            xml_attribute: true
+            type: string
+        airAccommodationType:
+            expose: true
+            access_type: public_method
+            serialized_name: AirAccommodationType
+            accessor:
+                getter: getAirAccommodationType
+                setter: setAirAccommodationType
+            xml_attribute: true
+            type: string

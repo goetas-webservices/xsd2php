@@ -1,0 +1,106 @@
+OTA\DocumentHandlingType:
+    properties:
+        documentTypeCode:
+            expose: true
+            access_type: public_method
+            serialized_name: DocumentTypeCode
+            accessor:
+                getter: getDocumentTypeCode
+                setter: setDocumentTypeCode
+            xml_attribute: true
+            type: string
+        deliveryMethodCode:
+            expose: true
+            access_type: public_method
+            serialized_name: DeliveryMethodCode
+            accessor:
+                getter: getDeliveryMethodCode
+                setter: setDeliveryMethodCode
+            xml_attribute: true
+            type: string
+        documentDestination:
+            expose: true
+            access_type: public_method
+            serialized_name: DocumentDestination
+            accessor:
+                getter: getDocumentDestination
+                setter: setDocumentDestination
+            xml_attribute: true
+            type: string
+        selectedOptionIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: SelectedOptionIndicator
+            accessor:
+                getter: getSelectedOptionIndicator
+                setter: setSelectedOptionIndicator
+            xml_attribute: true
+            type: bool
+        defaultIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: DefaultIndicator
+            accessor:
+                getter: getDefaultIndicator
+                setter: setDefaultIndicator
+            xml_attribute: true
+            type: bool
+        addressRequiredIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: AddressRequiredIndicator
+            accessor:
+                getter: getAddressRequiredIndicator
+                setter: setAddressRequiredIndicator
+            xml_attribute: true
+            type: bool
+        addressRPH:
+            expose: true
+            access_type: public_method
+            serialized_name: AddressRPH
+            accessor:
+                getter: getAddressRPH
+                setter: setAddressRPH
+            xml_attribute: true
+            type: string
+        emailRPH:
+            expose: true
+            access_type: public_method
+            serialized_name: EmailRPH
+            accessor:
+                getter: getEmailRPH
+                setter: setEmailRPH
+            xml_attribute: true
+            type: string
+        telephoneRPH:
+            expose: true
+            access_type: public_method
+            serialized_name: TelephoneRPH
+            accessor:
+                getter: getTelephoneRPH
+                setter: setTelephoneRPH
+            xml_attribute: true
+            type: string
+        documentLanguage:
+            expose: true
+            access_type: public_method
+            serialized_name: DocumentLanguage
+            accessor:
+                getter: getDocumentLanguage
+                setter: setDocumentLanguage
+            xml_attribute: true
+            type: string
+        vendorOption:
+            expose: true
+            access_type: public_method
+            serialized_name: VendorOption
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getVendorOption
+                setter: setVendorOption
+            xml_list:
+                inline: true
+                entry_name: VendorOption
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\DocumentHandlingType\VendorOptionAType>

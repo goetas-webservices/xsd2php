@@ -1,0 +1,29 @@
+OTA\ViewershipsType\ViewershipAType\LocationCodesAType\LocationCodeAType:
+    properties:
+        cityCode:
+            expose: true
+            access_type: public_method
+            serialized_name: CityCode
+            accessor:
+                getter: getCityCode
+                setter: setCityCode
+            xml_attribute: true
+            type: string
+        stateProvinceCode:
+            expose: true
+            access_type: public_method
+            serialized_name: StateProvinceCode
+            accessor:
+                getter: getStateProvinceCode
+                setter: setStateProvinceCode
+            xml_attribute: true
+            type: string
+        countryCode:
+            expose: true
+            access_type: public_method
+            serialized_name: CountryCode
+            accessor:
+                getter: getCountryCode
+                setter: setCountryCode
+            xml_attribute: true
+            type: string

@@ -1,0 +1,11 @@
+OTA\FlightSegmentType\MarketingAirlineAType:
+    properties:
+        singleVendorInd:
+            expose: true
+            access_type: public_method
+            serialized_name: SingleVendorInd
+            accessor:
+                getter: getSingleVendorInd
+                setter: setSingleVendorInd
+            xml_attribute: true
+            type: string

@@ -1,0 +1,75 @@
+OTA\AirCheckInType\BaggageInfoAType\CheckedBaggageDetailsAType\BagTagDetailsAType:
+    properties:
+        type:
+            expose: true
+            access_type: public_method
+            serialized_name: Type
+            accessor:
+                getter: getType
+                setter: setType
+            xml_attribute: true
+            type: string
+        issuerCode:
+            expose: true
+            access_type: public_method
+            serialized_name: IssuerCode
+            accessor:
+                getter: getIssuerCode
+                setter: setIssuerCode
+            xml_attribute: true
+            type: string
+        serialNumber:
+            expose: true
+            access_type: public_method
+            serialized_name: SerialNumber
+            accessor:
+                getter: getSerialNumber
+                setter: setSerialNumber
+            xml_attribute: true
+            type: string
+        issuanceMethod:
+            expose: true
+            access_type: public_method
+            serialized_name: IssuanceMethod
+            accessor:
+                getter: getIssuanceMethod
+                setter: setIssuanceMethod
+            xml_attribute: true
+            type: string
+        carrierCode:
+            expose: true
+            access_type: public_method
+            serialized_name: CarrierCode
+            accessor:
+                getter: getCarrierCode
+                setter: setCarrierCode
+            xml_attribute: true
+            type: string
+        specialType:
+            expose: true
+            access_type: public_method
+            serialized_name: SpecialType
+            accessor:
+                getter: getSpecialType
+                setter: setSpecialType
+            xml_attribute: true
+            type: string
+        conjunctionBagTagInd:
+            expose: true
+            access_type: public_method
+            serialized_name: ConjunctionBagTagInd
+            accessor:
+                getter: getConjunctionBagTagInd
+                setter: setConjunctionBagTagInd
+            xml_attribute: true
+            type: bool
+        length:
+            expose: true
+            access_type: public_method
+            serialized_name: Length
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getLength
+                setter: setLength
+            type: OTA\AirCheckInType\BaggageInfoAType\CheckedBaggageDetailsAType\BagTagDetailsAType\LengthAType

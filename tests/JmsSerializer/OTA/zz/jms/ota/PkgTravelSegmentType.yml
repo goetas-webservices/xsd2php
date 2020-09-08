@@ -1,0 +1,12 @@
+OTA\PkgTravelSegmentType:
+    properties:
+        airSegment:
+            expose: true
+            access_type: public_method
+            serialized_name: AirSegment
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getAirSegment
+                setter: setAirSegment
+            type: OTA\PkgAirSegmentType

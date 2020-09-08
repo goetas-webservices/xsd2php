@@ -1,0 +1,28 @@
+OTA\TimeDurationType:
+    properties:
+        __value:
+            expose: true
+            xml_value: true
+            access_type: public_method
+            accessor:
+                getter: value
+                setter: value
+            type: DateInterval
+        minimum:
+            expose: true
+            access_type: public_method
+            serialized_name: Minimum
+            accessor:
+                getter: getMinimum
+                setter: setMinimum
+            xml_attribute: true
+            type: DateInterval
+        maximum:
+            expose: true
+            access_type: public_method
+            serialized_name: Maximum
+            accessor:
+                getter: getMaximum
+                setter: setMaximum
+            xml_attribute: true
+            type: DateInterval

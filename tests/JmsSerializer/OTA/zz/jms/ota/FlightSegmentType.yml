@@ -1,0 +1,30 @@
+OTA\FlightSegmentType:
+    properties:
+        flightNumber:
+            expose: true
+            access_type: public_method
+            serialized_name: FlightNumber
+            accessor:
+                getter: getFlightNumber
+                setter: setFlightNumber
+            xml_attribute: true
+            type: string
+        tourOperatorFlightID:
+            expose: true
+            access_type: public_method
+            serialized_name: TourOperatorFlightID
+            accessor:
+                getter: getTourOperatorFlightID
+                setter: setTourOperatorFlightID
+            xml_attribute: true
+            type: string
+        marketingAirline:
+            expose: true
+            access_type: public_method
+            serialized_name: MarketingAirline
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getMarketingAirline
+                setter: setMarketingAirline
+            type: OTA\FlightSegmentType\MarketingAirlineAType

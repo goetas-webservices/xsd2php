@@ -1,0 +1,126 @@
+OTA\ServicesType\ServiceAType:
+    properties:
+        servicePricingType:
+            expose: true
+            access_type: public_method
+            serialized_name: ServicePricingType
+            accessor:
+                getter: getServicePricingType
+                setter: setServicePricingType
+            xml_attribute: true
+            type: string
+        reservationStatusType:
+            expose: true
+            access_type: public_method
+            serialized_name: ReservationStatusType
+            accessor:
+                getter: getReservationStatusType
+                setter: setReservationStatusType
+            xml_attribute: true
+            type: string
+        serviceRPH:
+            expose: true
+            access_type: public_method
+            serialized_name: ServiceRPH
+            accessor:
+                getter: getServiceRPH
+                setter: setServiceRPH
+            xml_attribute: true
+            type: string
+        serviceInventoryCode:
+            expose: true
+            access_type: public_method
+            serialized_name: ServiceInventoryCode
+            accessor:
+                getter: getServiceInventoryCode
+                setter: setServiceInventoryCode
+            xml_attribute: true
+            type: string
+        ratePlanCode:
+            expose: true
+            access_type: public_method
+            serialized_name: RatePlanCode
+            accessor:
+                getter: getRatePlanCode
+                setter: setRatePlanCode
+            xml_attribute: true
+            type: string
+        inventoryBlockCode:
+            expose: true
+            access_type: public_method
+            serialized_name: InventoryBlockCode
+            accessor:
+                getter: getInventoryBlockCode
+                setter: setInventoryBlockCode
+            xml_attribute: true
+            type: string
+        priceGuaranteed:
+            expose: true
+            access_type: public_method
+            serialized_name: PriceGuaranteed
+            accessor:
+                getter: getPriceGuaranteed
+                setter: setPriceGuaranteed
+            xml_attribute: true
+            type: bool
+        inclusive:
+            expose: true
+            access_type: public_method
+            serialized_name: Inclusive
+            accessor:
+                getter: getInclusive
+                setter: setInclusive
+            xml_attribute: true
+            type: bool
+        quantity:
+            expose: true
+            access_type: public_method
+            serialized_name: Quantity
+            accessor:
+                getter: getQuantity
+                setter: setQuantity
+            xml_attribute: true
+            type: int
+        requestedIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: RequestedIndicator
+            accessor:
+                getter: getRequestedIndicator
+                setter: setRequestedIndicator
+            xml_attribute: true
+            type: bool
+        price:
+            expose: true
+            access_type: public_method
+            serialized_name: Price
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getPrice
+                setter: setPrice
+            xml_list:
+                inline: true
+                entry_name: Price
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\AmountType>
+        serviceDetails:
+            expose: true
+            access_type: public_method
+            serialized_name: ServiceDetails
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getServiceDetails
+                setter: setServiceDetails
+            type: OTA\ResCommonDetailType
+        tPAExtensions:
+            expose: true
+            access_type: public_method
+            serialized_name: TPA_Extensions
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getTPAExtensions
+                setter: setTPAExtensions
+            type: OTA\TPAExtensionsType

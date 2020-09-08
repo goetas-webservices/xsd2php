@@ -1,0 +1,67 @@
+OTA\AmenityOptionType:
+    properties:
+        optionCode:
+            expose: true
+            access_type: public_method
+            serialized_name: OptionCode
+            accessor:
+                getter: getOptionCode
+                setter: setOptionCode
+            xml_attribute: true
+            type: string
+        quantity:
+            expose: true
+            access_type: public_method
+            serialized_name: Quantity
+            accessor:
+                getter: getQuantity
+                setter: setQuantity
+            xml_attribute: true
+            type: int
+        deliveryDate:
+            expose: true
+            access_type: public_method
+            serialized_name: DeliveryDate
+            accessor:
+                getter: getDeliveryDate
+                setter: setDeliveryDate
+            xml_attribute: true
+            type: GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime
+        deliveryLocation:
+            expose: true
+            access_type: public_method
+            serialized_name: DeliveryLocation
+            accessor:
+                getter: getDeliveryLocation
+                setter: setDeliveryLocation
+            xml_attribute: true
+            type: string
+        modifiableIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: ModifiableIndicator
+            accessor:
+                getter: getModifiableIndicator
+                setter: setModifiableIndicator
+            xml_attribute: true
+            type: bool
+        originator:
+            expose: true
+            access_type: public_method
+            serialized_name: Originator
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getOriginator
+                setter: setOriginator
+            type: OTA\PersonNameType
+        message:
+            expose: true
+            access_type: public_method
+            serialized_name: Message
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getMessage
+                setter: setMessage
+            type: OTA\ParagraphType

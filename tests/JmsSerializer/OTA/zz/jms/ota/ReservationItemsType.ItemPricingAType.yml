@@ -1,0 +1,12 @@
+OTA\ReservationItemsType\ItemPricingAType:
+    properties:
+        airFareInfo:
+            expose: true
+            access_type: public_method
+            serialized_name: AirFareInfo
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getAirFareInfo
+                setter: setAirFareInfo
+            type: OTA\BookingPriceInfoType

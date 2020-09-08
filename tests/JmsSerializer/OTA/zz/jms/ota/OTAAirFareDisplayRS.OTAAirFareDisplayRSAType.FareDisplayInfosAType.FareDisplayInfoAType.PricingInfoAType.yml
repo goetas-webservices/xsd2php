@@ -1,0 +1,57 @@
+OTA\OTAAirFareDisplayRS\OTAAirFareDisplayRSAType\FareDisplayInfosAType\FareDisplayInfoAType\PricingInfoAType:
+    properties:
+        passengerTypeCode:
+            expose: true
+            access_type: public_method
+            serialized_name: PassengerTypeCode
+            accessor:
+                getter: getPassengerTypeCode
+                setter: setPassengerTypeCode
+            xml_attribute: true
+            type: string
+        codeContext:
+            expose: true
+            access_type: public_method
+            serialized_name: CodeContext
+            accessor:
+                getter: getCodeContext
+                setter: setCodeContext
+            xml_attribute: true
+            type: string
+        convertedToEuroInd:
+            expose: true
+            access_type: public_method
+            serialized_name: ConvertedToEuroInd
+            accessor:
+                getter: getConvertedToEuroInd
+                setter: setConvertedToEuroInd
+            xml_attribute: true
+            type: bool
+        codeOnlyFaresInd:
+            expose: true
+            access_type: public_method
+            serialized_name: CodeOnlyFaresInd
+            accessor:
+                getter: getCodeOnlyFaresInd
+                setter: setCodeOnlyFaresInd
+            xml_attribute: true
+            type: bool
+        accountCode:
+            expose: true
+            access_type: public_method
+            serialized_name: AccountCode
+            accessor:
+                getter: getAccountCode
+                setter: setAccountCode
+            xml_attribute: true
+            type: string
+        seasonalInfo:
+            expose: true
+            access_type: public_method
+            serialized_name: SeasonalInfo
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getSeasonalInfo
+                setter: setSeasonalInfo
+            type: OTA\OTAAirFareDisplayRS\OTAAirFareDisplayRSAType\FareDisplayInfosAType\FareDisplayInfoAType\PricingInfoAType\SeasonalInfoAType

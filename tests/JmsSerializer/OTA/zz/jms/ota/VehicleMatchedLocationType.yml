@@ -1,0 +1,35 @@
+OTA\VehicleMatchedLocationType:
+    properties:
+        alternateLocInd:
+            expose: true
+            access_type: public_method
+            serialized_name: AlternateLocInd
+            accessor:
+                getter: getAlternateLocInd
+                setter: setAlternateLocInd
+            xml_attribute: true
+            type: bool
+        locationDetail:
+            expose: true
+            access_type: public_method
+            serialized_name: LocationDetail
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getLocationDetail
+                setter: setLocationDetail
+            type: OTA\VehicleLocationDetailsType
+        vehLocSearchCriterion:
+            expose: true
+            access_type: public_method
+            serialized_name: VehLocSearchCriterion
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getVehLocSearchCriterion
+                setter: setVehLocSearchCriterion
+            xml_list:
+                inline: true
+                entry_name: VehLocSearchCriterion
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\ItemSearchCriterionType>

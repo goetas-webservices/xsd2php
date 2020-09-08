@@ -1,0 +1,110 @@
+OTA\TravelSegmentType:
+    properties:
+        rPH:
+            expose: true
+            access_type: public_method
+            serialized_name: RPH
+            accessor:
+                getter: getRPH
+                setter: setRPH
+            xml_attribute: true
+            type: string
+        status:
+            expose: true
+            access_type: public_method
+            serialized_name: Status
+            accessor:
+                getter: getStatus
+                setter: setStatus
+            xml_attribute: true
+            type: string
+        air:
+            expose: true
+            access_type: public_method
+            serialized_name: Air
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getAir
+                setter: setAir
+            type: OTA\TravelSegmentType\AirAType
+        vehicle:
+            expose: true
+            access_type: public_method
+            serialized_name: Vehicle
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getVehicle
+                setter: setVehicle
+            type: OTA\VehicleSegmentCoreType
+        hotel:
+            expose: true
+            access_type: public_method
+            serialized_name: Hotel
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getHotel
+                setter: setHotel
+            type: OTA\TravelSegmentType\HotelAType
+        rail:
+            expose: true
+            access_type: public_method
+            serialized_name: Rail
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getRail
+                setter: setRail
+            type: OTA\TravelSegmentType\RailAType
+        cruise:
+            expose: true
+            access_type: public_method
+            serialized_name: Cruise
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getCruise
+                setter: setCruise
+            type: OTA\TravelSegmentType\CruiseAType
+        tour:
+            expose: true
+            access_type: public_method
+            serialized_name: Tour
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getTour
+                setter: setTour
+            type: OTA\TravelSegmentType\TourAType
+        general:
+            expose: true
+            access_type: public_method
+            serialized_name: General
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getGeneral
+                setter: setGeneral
+            type: OTA\TravelSegmentType\GeneralAType
+        package:
+            expose: true
+            access_type: public_method
+            serialized_name: Package
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getPackage
+                setter: setPackage
+            type: OTA\TravelSegmentType\PackageAType
+        tPAExtensions:
+            expose: true
+            access_type: public_method
+            serialized_name: TPA_Extensions
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getTPAExtensions
+                setter: setTPAExtensions
+            type: OTA\TPAExtensionsType

@@ -1,0 +1,16 @@
+OTA\LoyaltyTravelInfoType\AirFlightInfoAType:
+    properties:
+        flightSegment:
+            expose: true
+            access_type: public_method
+            serialized_name: FlightSegment
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getFlightSegment
+                setter: setFlightSegment
+            xml_list:
+                inline: true
+                entry_name: FlightSegment
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            type: array<OTA\FlightSegmentBaseType>

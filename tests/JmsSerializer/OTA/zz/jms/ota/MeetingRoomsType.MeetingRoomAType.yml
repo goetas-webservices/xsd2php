@@ -1,0 +1,166 @@
+OTA\MeetingRoomsType\MeetingRoomAType:
+    properties:
+        irregular:
+            expose: true
+            access_type: public_method
+            serialized_name: Irregular
+            accessor:
+                getter: getIrregular
+                setter: setIrregular
+            xml_attribute: true
+            type: bool
+        propertySystemName:
+            expose: true
+            access_type: public_method
+            serialized_name: PropertySystemName
+            accessor:
+                getter: getPropertySystemName
+                setter: setPropertySystemName
+            xml_attribute: true
+            type: string
+        roomName:
+            expose: true
+            access_type: public_method
+            serialized_name: RoomName
+            accessor:
+                getter: getRoomName
+                setter: setRoomName
+            xml_attribute: true
+            type: string
+        sort:
+            expose: true
+            access_type: public_method
+            serialized_name: Sort
+            accessor:
+                getter: getSort
+                setter: setSort
+            xml_attribute: true
+            type: int
+        meetingRoomCapacity:
+            expose: true
+            access_type: public_method
+            serialized_name: MeetingRoomCapacity
+            accessor:
+                getter: getMeetingRoomCapacity
+                setter: setMeetingRoomCapacity
+            xml_attribute: true
+            type: int
+        removal:
+            expose: true
+            access_type: public_method
+            serialized_name: Removal
+            accessor:
+                getter: getRemoval
+                setter: setRemoval
+            xml_attribute: true
+            type: bool
+        iD:
+            expose: true
+            access_type: public_method
+            serialized_name: ID
+            accessor:
+                getter: getID
+                setter: setID
+            xml_attribute: true
+            type: string
+        access:
+            expose: true
+            access_type: public_method
+            serialized_name: Access
+            accessor:
+                getter: getAccess
+                setter: setAccess
+            xml_attribute: true
+            type: string
+        meetingRoomTypeCode:
+            expose: true
+            access_type: public_method
+            serialized_name: MeetingRoomTypeCode
+            accessor:
+                getter: getMeetingRoomTypeCode
+                setter: setMeetingRoomTypeCode
+            xml_attribute: true
+            type: string
+        meetingRoomLevel:
+            expose: true
+            access_type: public_method
+            serialized_name: MeetingRoomLevel
+            accessor:
+                getter: getMeetingRoomLevel
+                setter: setMeetingRoomLevel
+            xml_attribute: true
+            type: string
+        dedicatedIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: DedicatedIndicator
+            accessor:
+                getter: getDedicatedIndicator
+                setter: setDedicatedIndicator
+            xml_attribute: true
+            type: bool
+        codes:
+            expose: true
+            access_type: public_method
+            serialized_name: Codes
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getCodes
+                setter: setCodes
+            type: array<OTA\MeetingRoomCodeType>
+            xml_list:
+                inline: false
+                entry_name: Code
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        dimension:
+            expose: true
+            access_type: public_method
+            serialized_name: Dimension
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getDimension
+                setter: setDimension
+            type: OTA\MeetingRoomsType\MeetingRoomAType\DimensionAType
+        availableCapacities:
+            expose: true
+            access_type: public_method
+            serialized_name: AvailableCapacities
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getAvailableCapacities
+                setter: setAvailableCapacities
+            type: array<OTA\MeetingRoomCapacityType>
+            xml_list:
+                inline: false
+                entry_name: MeetingRoomCapacity
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        features:
+            expose: true
+            access_type: public_method
+            serialized_name: Features
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getFeatures
+                setter: setFeatures
+            type: array<OTA\FeaturesType\FeatureAType>
+            xml_list:
+                inline: false
+                entry_name: Feature
+                skip_when_empty: true
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+        multimediaDescriptions:
+            expose: true
+            access_type: public_method
+            serialized_name: MultimediaDescriptions
+            xml_element:
+                namespace: 'http://www.opentravel.org/OTA/2003/05'
+            accessor:
+                getter: getMultimediaDescriptions
+                setter: setMultimediaDescriptions
+            type: OTA\MultimediaDescriptionsType
