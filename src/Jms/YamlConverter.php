@@ -564,13 +564,7 @@ class YamlConverter extends AbstractConverter
             }
         }
 
-        if ($element instanceof ElementRef) {
-            $elRefClass = $this->visitElementDef($element->getSchema(), $element->getReferencedElement());
-
-            $property['type'] = $this->findPHPClass($elRefClass, $element->getReferencedElement());
-        } else {
-            $property['type'] = $this->findPHPClass($class, $element);
-        }
+        $property['type'] = $this->findPHPElementClassName($class, $element);
 
         return $property;
     }
@@ -599,5 +593,19 @@ class YamlConverter extends AbstractConverter
         }
 
         return key($visited);
+    }
+
+    private function findPHPElementClassName(&$class, ElementItem $element): string
+    {
+        if ($element instanceof ElementRef) {
+            $elRefClass = $this->visitElementDef($element->getSchema(), $element->getReferencedElement());
+            $refType = $this->findPHPClass($elRefClass, $element->getReferencedElement());
+
+            if ($this->typeHasValue($element->getReferencedElement()->getType(), $elRefClass, $element->getReferencedElement())) {
+                return $refType;
+            }
+        }
+        return $this->findPHPClass($class, $element);
+
     }
 }
