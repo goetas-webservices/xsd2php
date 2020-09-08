@@ -101,7 +101,7 @@ OTA\RailFareType:
             accessor:
                 getter: getFarePrices
                 setter: setFarePrices
-            type: array<OTA\FareRuleType\FareRuleTypeAType>
+            type: array<OTA\FareRuleType>
             xml_list:
                 inline: false
                 entry_name: FareRuleType

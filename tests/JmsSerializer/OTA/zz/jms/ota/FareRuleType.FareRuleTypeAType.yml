@@ -23,4 +23,4 @@ OTA\FareRuleType\FareRuleTypeAType:
             accessor:
                 getter: getTotalFare
                 setter: setTotalFare
-            type: OTA\TotalFare\TotalFareAType
+            type: OTA\TotalFare

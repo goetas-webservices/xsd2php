@@ -60,4 +60,4 @@ OTA\UpdatePositionType:
             accessor:
                 getter: getRoot
                 setter: setRoot
-            type: OTA\Root\RootAType
+            type: OTA\Root
