@@ -43,7 +43,7 @@ class YamlConverter extends AbstractConverter
         });
 
         $this->addAliasMap('http://www.w3.org/2001/XMLSchema', 'base64Binary', function (Type $type) {
-            return "GoetasWebservices\Xsd\XsdToPhp\XMLSchema\Base64Binary";
+            return "GoetasWebservices\Xsd\XsdToPhp\Jms\Base64Encoded";
         });
     }
 
