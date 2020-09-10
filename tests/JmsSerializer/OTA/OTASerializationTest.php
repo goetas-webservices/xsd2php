@@ -38,7 +38,7 @@ class OTASerializationTest extends \PHPUnit_Framework_TestCase
             ['http://www.opentravel.org/OTA/2003/05', 'DateOrTimeOrDateTimeType', 'GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime'],
             ['http://www.opentravel.org/OTA/2003/05', 'DateOrDateTimeType', 'GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime'],
             ['http://www.opentravel.org/OTA/2003/05', 'TimeOrDateTimeType', 'GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime'],
-        ]);
+        ], __DIR__ .'/zz');
 
         $reader = new SchemaReader();
         $schemas = [];
@@ -160,7 +160,7 @@ class OTASerializationTest extends \PHPUnit_Framework_TestCase
 
         $notEqual = strpos($diff, '<dm:copy count="1"/>') === false || strlen($diff) > 110;
 
-        if (0 && $notEqual) {
+        if (1 && $notEqual) {
             file_put_contents('a.xml', $original);
             file_put_contents('b.xml', $new);
             file_put_contents('c.xml', $diff);

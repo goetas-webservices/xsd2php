@@ -417,7 +417,9 @@ class PhpConverter extends AbstractConverter
         $t = $element->getType();
 
         if ($arrayize) {
+
             if ($itemOfArray = $this->isArrayType($t)) {
+
                 if (!$itemOfArray->getName()) {
                     if ($element instanceof ElementRef) {
                         $refClass = $this->visitElementDef($element->getReferencedElement());
@@ -437,6 +439,7 @@ class PhpConverter extends AbstractConverter
 
                 return $property;
             } elseif ($itemOfArray = $this->isArrayNestedElement($t)) {
+
                 if (!$t->getName()) {
                     if ($element instanceof ElementRef) {
                         $refClass = $this->visitElementDef($element->getReferencedElement());
@@ -447,7 +450,7 @@ class PhpConverter extends AbstractConverter
 
                     $classType = $this->visitTypeAnonymous($t, $element->getName(), $itemClass);
                 } else {
-                    $classType = $this->visitType($t);
+                    $classType = $this->visitType($t, true);
                 }
                 $elementProp = $this->visitElement($classType, $schema, $itemOfArray, false);
                 $property->setType(new PHPClassOf($elementProp));
