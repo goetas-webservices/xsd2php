@@ -558,7 +558,7 @@ class YamlConverter extends AbstractConverter
                     $property['xml_list']['namespace'] = $elementNamespace;
                 }
 
-                $property['type'] = 'array<' . $this->findPHPClass($class, $element) . '>';
+                $property['type'] = 'array<' . $this->findPHPElementClassName($class, $element) . '>';
 
                 return $property;
             }
@@ -573,7 +573,7 @@ class YamlConverter extends AbstractConverter
     {
         $type = $node->getType();
 
-        if ($alias = $this->getTypeAlias($node->getType())) {
+        if ($alias = $this->getTypeAlias($type)) {
             return $alias;
         }
 
@@ -606,6 +606,5 @@ class YamlConverter extends AbstractConverter
             }
         }
         return $this->findPHPClass($class, $element);
-
     }
 }
