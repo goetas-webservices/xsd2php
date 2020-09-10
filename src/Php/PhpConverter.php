@@ -257,7 +257,9 @@ class PhpConverter extends AbstractConverter
 
                 return $class;
             }
+
             if (($this->isArrayType($type) || $this->isArrayNestedElement($type)) && !$force) {
+
                 $this->classes[spl_object_hash($type)]['skip'] = true;
                 $this->skipByType[spl_object_hash($class)] = true;
 
@@ -454,7 +456,7 @@ class PhpConverter extends AbstractConverter
             } elseif ($this->isArrayElement($element)) {
                 $arg = new PHPArg($this->getNamingStrategy()->getPropertyName($element));
 
-                $arg->setType($this->findPHPClass($class, $element));
+                $arg->setType($this->findPHPElementClassName($class, $element));
                 $arg->setDefault([]);
                 $property->setType(new PHPClassOf($arg));
 
