@@ -7,6 +7,7 @@ use GoetasWebservices\XML\XSDReader\Schema\Attribute\AttributeItem;
 use GoetasWebservices\XML\XSDReader\Schema\Attribute\Group as AttributeGroup;
 use GoetasWebservices\XML\XSDReader\Schema\Element\Element;
 use GoetasWebservices\XML\XSDReader\Schema\Element\ElementDef;
+use GoetasWebservices\XML\XSDReader\Schema\Element\ElementItem;
 use GoetasWebservices\XML\XSDReader\Schema\Element\ElementRef;
 use GoetasWebservices\XML\XSDReader\Schema\Element\ElementSingle;
 use GoetasWebservices\XML\XSDReader\Schema\Element\Group;
@@ -461,12 +462,7 @@ class PhpConverter extends AbstractConverter
             }
         }
 
-        if ($element instanceof ElementRef) {
-            $refClass = $this->visitElementDef($element->getReferencedElement());
-            $property->setType($this->findPHPClass($refClass, $element->getReferencedElement(), true));
-        } else {
-            $property->setType($this->findPHPClass($class, $element, true));
-        }
+        $property->setType($this->findPHPElementClassName($class, $element));
 
         return $property;
     }
@@ -518,5 +514,19 @@ class PhpConverter extends AbstractConverter
         );
 
         return false;
+    }
+
+    private function findPHPElementClassName(PHPClass $class, ElementItem $element)
+    {
+        if ($element instanceof ElementRef) {
+            $elRefClass = $this->visitElementDef($element->getReferencedElement());
+            $refType = $this->findPHPClass($elRefClass, $element->getReferencedElement());
+
+            if ($this->typeHasValue($element->getReferencedElement()->getType(), $elRefClass, $element->getReferencedElement())) {
+                return $refType;
+            }
+        }
+
+        return $this->findPHPClass($class, $element);
     }
 }
