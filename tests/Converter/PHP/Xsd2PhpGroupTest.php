@@ -334,7 +334,7 @@ class Xsd2PhpGroupTest extends Xsd2PhpBase
             </xs:schema>
             ';
         $classes = $this->getClasses($content);
-        $this->assertCount(1, $classes);
+        $this->assertCount(2, $classes);
         $this->assertInstanceOf('GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPClass', $complexType1 = $classes['Example\ComplexType1Type']);
 
         $property = $complexType1->getProperty('strings');

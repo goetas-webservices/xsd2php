@@ -137,7 +137,7 @@ class PHPConversionTest extends \PHPUnit_Framework_TestCase
 
         $items = $this->getClasses($xml);
 
-        $this->assertCount(1, $items);
+        $this->assertCount(2, $items);
 
         $codegen = $items['Example\SingleType'];
         $this->assertTrue($codegen->hasMethod('issetId'));
@@ -173,7 +173,7 @@ class PHPConversionTest extends \PHPUnit_Framework_TestCase
 
         $items = $this->getClasses($xml);
 
-        $this->assertCount(2, $items);
+        $this->assertCount(3, $items);
 
         $single = $items['Example\SingleType'];
         $this->assertTrue($single->hasMethod('issetId'));
@@ -188,6 +188,9 @@ class PHPConversionTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($ary->hasMethod('getIdB'));
         $this->assertTrue($ary->hasMethod('setIdB'));
+
+        $ary = $items['Example\AryType'];
+        $this->assertTrue($ary->hasMethod('addToIdA'));
     }
 
     public function testMultipleArrayTypes()
@@ -213,11 +216,15 @@ class PHPConversionTest extends \PHPUnit_Framework_TestCase
 
         $items = $this->getClasses($xml);
 
-        $this->assertCount(1, $items);
+        $this->assertCount(2, $items);
 
         $single = $items['Example\SingleType'];
         $this->assertTrue($single->hasMethod('addToA'));
         $this->assertTrue($single->hasMethod('addToB'));
+
+        $this->assertNotEmpty($single->getMethod('addToB')->getParameters()['string']);
+
+        // this is not $items['Example\ArrayOfStrings']; important
     }
 
     public function testSimpleMulteplicity()

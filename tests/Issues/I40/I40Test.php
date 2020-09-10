@@ -9,7 +9,7 @@ use GoetasWebservices\Xsd\XsdToPhp\Php\PhpConverter;
 
 class I40Test extends \PHPUnit_Framework_TestCase
 {
-    public function testMissingClassZZ()
+    public function testMissingClass()
     {
         $reader = new SchemaReader();
         $schema = $reader->readFile(__DIR__ . '/data.xsd');
@@ -62,7 +62,7 @@ class I40Test extends \PHPUnit_Framework_TestCase
                                 'getter' => 'getAdditionalIdentifierType',
                                 'setter' => 'setAdditionalIdentifierType',
                             ],
-                            'type' => 'Epa\\Schema\\AdditionalIdentifierType\\AdditionalIdentifierTypeAType',
+                            'type' => 'Epa\\Schema\\AdditionalIdentifierType',
                         ],
                     ],
                 ],
@@ -125,21 +125,49 @@ class I40Test extends \PHPUnit_Framework_TestCase
         $this->assertArraySubset(array_keys($yamlItems), array_keys($phpClasses));
     }
 
-    public function testDetectSimpleParents()
+
+    public function getTestDetectSimpleParents()
+    {
+         return [
+             [__DIR__ . '/data_nested.xsd', 'string', [], []],
+             [__DIR__ . '/data_nested_array.xsd', 'array<string>', [
+                 'xml_list' =>
+                     array (
+                         'inline' => true,
+                         'entry_name' => 'AdditionalIdentifierRootEl',
+                     ),
+
+             ], []],
+// this will be done in the future
+//             [__DIR__ . '/data_nested_array_nested.xsd', 'array<string>', [
+//                 'xml_list' =>
+//                     array (
+//                         'inline' => false,
+//                         'entry_name' => 'AdditionalIdentifierRootEl',
+//                         'skip_when_empty' => false
+//                     ),
+//
+//             ],[]],
+         ];
+    }
+    /**
+     * @dataProvider getTestDetectSimpleParents
+     */
+    public function testDetectSimpleParents(string $f, string $t, array $extra, array $extraTypes)
     {
         $reader = new SchemaReader();
-        $schema = $reader->readFile(__DIR__ . '/data_nested.xsd');
+        $schema = $reader->readFile($f);
 
         $yamlConv = new YamlConverter(new ShortNamingStrategy());
         $yamlConv->addNamespace('', 'Epa\\Schema');
 
         $yamlItems = $yamlConv->convert([$schema]);
 
-        $this->assertEquals([
+        $this->assertEquals($extraTypes + [
             'Epa\\Schema\\UserType' => [
                 'Epa\\Schema\\UserType' => [
                     'properties' => [
-                        'additionalIdentifierRootEl' => [
+                        'additionalIdentifierRootEl' => $extra + [
                             'expose' => true,
                             'access_type' => 'public_method',
                             'serialized_name' => 'AdditionalIdentifierRootEl',
@@ -147,7 +175,7 @@ class I40Test extends \PHPUnit_Framework_TestCase
                                 'getter' => 'getAdditionalIdentifierRootEl',
                                 'setter' => 'setAdditionalIdentifierRootEl',
                             ],
-                            'type' => 'string',
+                            'type' => $t,
                         ],
                     ],
                 ],
@@ -187,10 +215,20 @@ class I40Test extends \PHPUnit_Framework_TestCase
         ], $yamlItems);
     }
 
-    public function testDetectSimpleParentsWithAttributes()
+    public function getTestDetectSimpleParentsWithAttributes()
+    {
+        return [
+            [__DIR__ . '/data_nested_with_attributes.xsd', 'Epa\\Schema\\AdditionalIdentifierRootEl', []],
+        ];
+    }
+
+    /**
+     * @dataProvider getTestDetectSimpleParentsWithAttributes
+     */
+    public function testDetectSimpleParentsWithAttributesZ(string $f, string $t, array $extra)
     {
         $reader = new SchemaReader();
-        $schema = $reader->readFile(__DIR__ . '/data_nested_with_attributes.xsd');
+        $schema = $reader->readFile($f);
 
         $yamlConv = new YamlConverter(new ShortNamingStrategy());
         $yamlConv->addNamespace('', 'Epa\\Schema');
@@ -206,7 +244,7 @@ class I40Test extends \PHPUnit_Framework_TestCase
             'Epa\\Schema\\UserType' => [
                 'Epa\\Schema\\UserType' => [
                     'properties' => [
-                        'additionalIdentifierRootEl' => [
+                        'additionalIdentifierRootEl' => $extra + [
                             'expose' => true,
                             'access_type' => 'public_method',
                             'serialized_name' => 'AdditionalIdentifierRootEl',
@@ -214,7 +252,7 @@ class I40Test extends \PHPUnit_Framework_TestCase
                                 'getter' => 'getAdditionalIdentifierRootEl',
                                 'setter' => 'setAdditionalIdentifierRootEl',
                             ],
-                            'type' => 'Epa\\Schema\\AdditionalIdentifierRootElType',
+                            'type' => $t,
                         ],
                     ],
                 ],
@@ -292,7 +330,7 @@ class I40Test extends \PHPUnit_Framework_TestCase
                                 'getter' => 'getAdditionalIdentifierRootEl',
                                 'setter' => 'setAdditionalIdentifierRootEl',
                             ],
-                            'type' => 'Epa\\Schema\\AdditionalIdentifierRootElType',
+                            'type' => 'Epa\\Schema\\AdditionalIdentifierRootEl',
                         ],
                     ],
                 ],

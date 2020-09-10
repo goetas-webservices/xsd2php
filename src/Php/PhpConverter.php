@@ -7,6 +7,7 @@ use GoetasWebservices\XML\XSDReader\Schema\Attribute\AttributeItem;
 use GoetasWebservices\XML\XSDReader\Schema\Attribute\Group as AttributeGroup;
 use GoetasWebservices\XML\XSDReader\Schema\Element\Element;
 use GoetasWebservices\XML\XSDReader\Schema\Element\ElementDef;
+use GoetasWebservices\XML\XSDReader\Schema\Element\ElementItem;
 use GoetasWebservices\XML\XSDReader\Schema\Element\ElementRef;
 use GoetasWebservices\XML\XSDReader\Schema\Element\ElementSingle;
 use GoetasWebservices\XML\XSDReader\Schema\Element\Group;
@@ -256,7 +257,9 @@ class PhpConverter extends AbstractConverter
 
                 return $class;
             }
+
             if (($this->isArrayType($type) || $this->isArrayNestedElement($type)) && !$force) {
+
                 $this->classes[spl_object_hash($type)]['skip'] = true;
                 $this->skipByType[spl_object_hash($class)] = true;
 
@@ -414,7 +417,9 @@ class PhpConverter extends AbstractConverter
         $t = $element->getType();
 
         if ($arrayize) {
+
             if ($itemOfArray = $this->isArrayType($t)) {
+
                 if (!$itemOfArray->getName()) {
                     if ($element instanceof ElementRef) {
                         $refClass = $this->visitElementDef($element->getReferencedElement());
@@ -434,6 +439,7 @@ class PhpConverter extends AbstractConverter
 
                 return $property;
             } elseif ($itemOfArray = $this->isArrayNestedElement($t)) {
+
                 if (!$t->getName()) {
                     if ($element instanceof ElementRef) {
                         $refClass = $this->visitElementDef($element->getReferencedElement());
@@ -444,7 +450,7 @@ class PhpConverter extends AbstractConverter
 
                     $classType = $this->visitTypeAnonymous($t, $element->getName(), $itemClass);
                 } else {
-                    $classType = $this->visitType($t);
+                    $classType = $this->visitType($t, true);
                 }
                 $elementProp = $this->visitElement($classType, $schema, $itemOfArray, false);
                 $property->setType(new PHPClassOf($elementProp));
@@ -453,7 +459,7 @@ class PhpConverter extends AbstractConverter
             } elseif ($this->isArrayElement($element)) {
                 $arg = new PHPArg($this->getNamingStrategy()->getPropertyName($element));
 
-                $arg->setType($this->findPHPClass($class, $element));
+                $arg->setType($this->findPHPElementClassName($class, $element));
                 $arg->setDefault([]);
                 $property->setType(new PHPClassOf($arg));
 
@@ -461,12 +467,7 @@ class PhpConverter extends AbstractConverter
             }
         }
 
-        if ($element instanceof ElementRef) {
-            $refClass = $this->visitElementDef($element->getReferencedElement());
-            $property->setType($this->findPHPClass($refClass, $element->getReferencedElement(), true));
-        } else {
-            $property->setType($this->findPHPClass($class, $element, true));
-        }
+        $property->setType($this->findPHPElementClassName($class, $element));
 
         return $property;
     }
@@ -518,5 +519,19 @@ class PhpConverter extends AbstractConverter
         );
 
         return false;
+    }
+
+    private function findPHPElementClassName(PHPClass $class, ElementItem $element)
+    {
+        if ($element instanceof ElementRef) {
+            $elRefClass = $this->visitElementDef($element->getReferencedElement());
+            $refType = $this->findPHPClass($elRefClass, $element->getReferencedElement());
+
+            if ($this->typeHasValue($element->getReferencedElement()->getType(), $elRefClass, $element->getReferencedElement())) {
+                return $refType;
+            }
+        }
+
+        return $this->findPHPClass($class, $element);
     }
 }

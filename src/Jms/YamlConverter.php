@@ -558,19 +558,13 @@ class YamlConverter extends AbstractConverter
                     $property['xml_list']['namespace'] = $elementNamespace;
                 }
 
-                $property['type'] = 'array<' . $this->findPHPClass($class, $element) . '>';
+                $property['type'] = 'array<' . $this->findPHPElementClassName($class, $element) . '>';
 
                 return $property;
             }
         }
 
-        if ($element instanceof ElementRef) {
-            $elRefClass = $this->visitElementDef($element->getSchema(), $element->getReferencedElement());
-
-            $property['type'] = $this->findPHPClass($elRefClass, $element->getReferencedElement());
-        } else {
-            $property['type'] = $this->findPHPClass($class, $element);
-        }
+        $property['type'] = $this->findPHPElementClassName($class, $element);
 
         return $property;
     }
@@ -579,7 +573,7 @@ class YamlConverter extends AbstractConverter
     {
         $type = $node->getType();
 
-        if ($alias = $this->getTypeAlias($node->getType())) {
+        if ($alias = $this->getTypeAlias($type)) {
             return $alias;
         }
 
@@ -599,5 +593,18 @@ class YamlConverter extends AbstractConverter
         }
 
         return key($visited);
+    }
+
+    private function findPHPElementClassName(&$class, ElementItem $element): string
+    {
+        if ($element instanceof ElementRef) {
+            $elRefClass = $this->visitElementDef($element->getSchema(), $element->getReferencedElement());
+            $refType = $this->findPHPClass($elRefClass, $element->getReferencedElement());
+
+            if ($this->typeHasValue($element->getReferencedElement()->getType(), $elRefClass, $element->getReferencedElement())) {
+                return $refType;
+            }
+        }
+        return $this->findPHPClass($class, $element);
     }
 }
