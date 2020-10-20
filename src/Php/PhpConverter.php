@@ -174,8 +174,7 @@ class PhpConverter extends AbstractConverter
 
             $skip = in_array($element->getSchema()->getTargetNamespace(), $this->baseSchemas, true)
                 || $this->getTypeAlias($type, $type->getSchema())
-                || $typeClass->getPropertyInHierarchy('__value')
-            ;
+                || $typeClass->getPropertyInHierarchy('__value');
             $this->classes[spl_object_hash($element)]['class'] = $class;
             $this->classes[spl_object_hash($element)]['skip'] = $skip;
             $this->skipByType[spl_object_hash($class)] = $skip;
@@ -266,7 +265,7 @@ class PhpConverter extends AbstractConverter
                 return $class;
             }
 
-            $this->classes[spl_object_hash($type)]['skip'] = $skip || (bool) $this->getTypeAlias($type);
+            $this->classes[spl_object_hash($type)]['skip'] = $skip || (bool)$this->getTypeAlias($type);
         } elseif ($force) {
             if (!($type instanceof SimpleType) && !$this->getTypeAlias($type)) {
                 $this->classes[spl_object_hash($type)]['skip'] = in_array($type->getSchema()->getTargetNamespace(), $this->baseSchemas, true);
@@ -404,7 +403,7 @@ class PhpConverter extends AbstractConverter
 
     /**
      * @param Element $element
-     * @param bool    $arrayize
+     * @param bool $arrayize
      *
      * @return \GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPProperty
      */
@@ -413,6 +412,9 @@ class PhpConverter extends AbstractConverter
         $property = new PHPProperty();
         $property->setName($this->getNamingStrategy()->getPropertyName($element));
         $property->setDoc($element->getDoc());
+        if ($element->isNil()) {
+            $property->setNullable(true);
+        }
 
         $t = $element->getType();
 

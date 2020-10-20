@@ -253,4 +253,32 @@ class PHPConversionTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($single->hasMethod('getId'));
         $this->assertTrue($single->hasMethod('setId'));
     }
+
+    public function testNillableElement()
+    {
+        $xml = '
+            <xs:schema targetNamespace="http://www.example.com"
+            xmlns:xs="http://www.w3.org/2001/XMLSchema">
+                <xs:complexType name="single">
+                    <xs:all>
+                        <xs:element name="date1" type="xs:date" nillable="true"/>
+                        <xs:element name="date2" type="xs:date"/>
+                        <xs:element name="str1" type="xs:string" nillable="true"/>
+                        <xs:element name="str2" type="xs:string"/>
+                    </xs:all>
+                </xs:complexType>
+            </xs:schema>';
+
+        $items = $this->getClasses($xml);
+        $codegen = $items['Example\SingleType'];
+
+        $this->assertTrue($codegen->hasMethod('setDate1'));
+        $this->assertNull($codegen->getMethod('setDate1')->getParameters()['date1']->getDefaultValue()->getValue());
+        $this->assertTrue($codegen->hasMethod('setDate2'));
+        $this->assertNull($codegen->getMethod('setDate2')->getParameters()['date2']->getDefaultValue());
+        $this->assertTrue($codegen->hasMethod('setStr1'));
+        $this->assertNull($codegen->getMethod('setStr1')->getParameters()['str1']->getDefaultValue());
+        $this->assertTrue($codegen->hasMethod('setStr2'));
+        $this->assertNull($codegen->getMethod('setStr2')->getParameters()['str2']->getDefaultValue());
+    }
 }

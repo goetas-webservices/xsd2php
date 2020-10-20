@@ -10,6 +10,8 @@ class PHPArg
 
     protected $name;
 
+    protected $nullable = false;
+    
     protected $default;
 
     public function __construct($name = null, $type = null)
@@ -57,6 +59,18 @@ class PHPArg
         return $this;
     }
 
+    public function getNullable()
+    {
+        return $this->nullable;
+    }
+
+    public function setNullable($nullable)
+    {
+        $this->nullable = $nullable;
+        
+        return $this;
+    }
+    
     public function getDefault()
     {
         return $this->default;
