@@ -147,9 +147,6 @@ class ClassGenerator
                 if (($t = $p->getType()) && !$t->isNativeType()) {
                     $patramTag->setTypes($t->getPhpType());
                     $parameter->setType($t->getPhpType());
-                } elseif ($t && !$t->isNativeType()) {
-                    $patramTag->setTypes($t->getPhpType());
-                    $parameter->setType($t->getPhpType());
                 } elseif ($t) {
                     $patramTag->setTypes($t->getPhpType());
                 }
@@ -157,6 +154,10 @@ class ClassGenerator
                 $patramTag->setTypes($type->getPhpType());
                 $parameter->setType($type->getPhpType());
             }
+        }
+
+        if ($prop->getNullable() && $parameter->getType()) {
+            $parameter->setDefaultValue(null);
         }
 
         $methodBody .= '$this->' . $prop->getName() . ' = $' . $prop->getName() . ';' . PHP_EOL;
