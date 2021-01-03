@@ -361,6 +361,7 @@ class ClassGenerator
         $class->setNamespaceName($type->getNamespace() ?: null);
         $class->setName($type->getName());
         $class->setDocblock($docblock);
+        $class->setImplementedInterfaces($type->getImplements());
 
         if ($extends = $type->getExtends()) {
             if ($p = $extends->isSimpleType()) {
