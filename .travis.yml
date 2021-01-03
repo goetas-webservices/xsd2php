@@ -6,16 +6,18 @@ cache:
     - vendor
     - $HOME/.composer/cache
 php:
-  - 7.1
   - 7.2
+  - 7.3
+  - 7.4
 
 matrix:
   include:
-    - php: 7.1
+    - php: 7.2
       env: COMPOSER_FLAGS='--prefer-lowest --prefer-stable'
 
 before_script:
   - pecl install xmldiff
+  - composer self --1
   - echo "xdebug.max_nesting_level=1000" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
   - if [[ $TRAVIS_PHP_VERSION == '7.'* ]]; then composer --dev require ocramius/package-versions:^1.0 --no-update; fi
 
@@ -24,8 +26,4 @@ before_script:
 script:
   - vendor/phpunit/phpunit/phpunit $PHPUNIT_FLAGS
   - bin/xsd2php convert tests/config.yml tests/JmsSerializer/OTA/otaxml/OTA_AirAvailRQ.xsd -vv
-
-after_script:
-  - wget https://scrutinizer-ci.com/ocular.phar
-  - if [[ $TRAVIS_PHP_VERSION = '7.1' ]] ; then php ocular.phar code-coverage:upload --format=php-clover coverage.clover; fi
 
