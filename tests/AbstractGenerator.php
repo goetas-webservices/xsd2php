@@ -11,7 +11,9 @@ use GoetasWebservices\Xsd\XsdToPhp\Php\PathGenerator\Psr4PathGenerator as PhpPsr
 use GoetasWebservices\Xsd\XsdToPhp\Writer\JMSWriter;
 use GoetasWebservices\Xsd\XsdToPhp\Writer\PHPClassWriter;
 use GoetasWebservices\Xsd\XsdToPhp\Writer\PHPWriter;
+use JMS\Serializer\EventDispatcher\EventDispatcherInterface;
 use JMS\Serializer\Handler\HandlerRegistryInterface;
+use JMS\Serializer\SerializerBuilder;
 
 abstract class AbstractGenerator
 {
@@ -88,13 +90,20 @@ abstract class AbstractGenerator
         }
     }
 
-    public function buildSerializer($callback = null, array $metadataDirs = [])
+    public function buildSerializer($handlersCallback = null, array $metadataDirs = [], $listenersCallback = null)
     {
-        $serializerBuilder = \JMS\Serializer\SerializerBuilder::create();
-        $serializerBuilder->configureHandlers(function (HandlerRegistryInterface $h) use ($callback, $serializerBuilder) {
+        $serializerBuilder = SerializerBuilder::create();
+        $serializerBuilder->configureHandlers(function (HandlerRegistryInterface $h) use ($handlersCallback, $serializerBuilder) {
             $serializerBuilder->addDefaultHandlers();
-            if ($callback) {
-                call_user_func($callback, $h);
+            if ($handlersCallback) {
+                call_user_func($handlersCallback, $h);
+            }
+        });
+
+        $serializerBuilder->configureListeners(function (EventDispatcherInterface $d) use ($listenersCallback, $serializerBuilder) {
+            $serializerBuilder->addDefaultListeners();
+            if ($listenersCallback) {
+                call_user_func($listenersCallback, $d);
             }
         });
 
