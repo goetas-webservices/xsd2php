@@ -10,6 +10,8 @@ class PHPClass
 
     protected $doc;
 
+    protected $implements = [];
+
     public static function createFromFQCN($className)
     {
         if (($pos = strrpos($className, '\\')) !== false) {
@@ -17,6 +19,14 @@ class PHPClass
         } else {
             return new self($className);
         }
+    }
+
+    /**
+     * @return array
+     */
+    public function getImplements(): array
+    {
+        return $this->implements;
     }
 
     /**
@@ -38,6 +48,11 @@ class PHPClass
                 return $this->getPropertyInHierarchy('__value');
             }
         }
+    }
+
+    public function setImplements(array $fqcn)
+    {
+        $this->implements = $fqcn;
     }
 
     public function getPhpType()
