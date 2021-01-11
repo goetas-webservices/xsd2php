@@ -144,20 +144,24 @@ class ClassGenerator
         } elseif ($type) {
             if ($type->isNativeType()) {
                 $patramTag->setTypes($type->getPhpType());
-                $parameter->setType($type->getPhpType()); // Added by rvdb
+                $parameter->setType($type->getPhpType()); // Added by rvdb: add strict typing for scalar arguments
             } elseif ($p = $type->isSimpleType()) {
                 if (($t = $p->getType()) && !$t->isNativeType()) {
                     $patramTag->setTypes($t->getPhpType());
                     $parameter->setType($t->getPhpType());
                 } elseif ($t) {
                     $patramTag->setTypes($t->getPhpType());
-                    $parameter->setType($t->getPhpType()); // Added by rvdb
+                    $parameter->setType($t->getPhpType()); // Added by rvdb: add strict typing for simple arguments
 
                 }
             } else {
                 $patramTag->setTypes($type->getPhpType());
                 $parameter->setType(($prop->getNullable() ? '?' : '') . $type->getPhpType());
             }
+        }
+
+        if ($prop->getDefault() === null) {      // Added by rvdb: make setter arguments nullable
+            $parameter->setDefaultValue(null);
         }
 
         if ($prop->getNullable() && $parameter->getType()) {
