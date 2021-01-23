@@ -6,11 +6,11 @@ use Doctrine\Common\Inflector\Inflector;
 use GoetasWebservices\XML\XSDReader\Schema\Item;
 use GoetasWebservices\XML\XSDReader\Schema\Type\Type;
 
-class LongNamingStrategy extends AbstractNamingStrategy
+class NoConflictLongNamingStrategy extends AbstractNamingStrategy
 {
     public function getTypeName(Type $type)
     {
-        return $this->classify($type->getName()) . 'Type';
+        return $this->classify($type->getName()) . 'PHPType';
     }
 
     public function getAnonymousTypeName(Type $type, $parentName)
