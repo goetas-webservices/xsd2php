@@ -19,6 +19,7 @@ abstract class AbstractGenerator
 {
     protected $targetNs = [];
     protected $aliases = [];
+    protected $strictTypes;
 
     protected $phpDir;
     protected $jmsDir;
@@ -28,12 +29,14 @@ abstract class AbstractGenerator
 
     private $loader;
 
-    public function __construct(array $targetNs, array $aliases = [], $tmp = null)
+
+    public function __construct(array $targetNs, array $aliases = [], $tmp = null, bool $strictTypes = false)
     {
         $tmp = $tmp ?: sys_get_temp_dir();
 
         $this->targetNs = $targetNs;
         $this->aliases = $aliases;
+        $this->strictTypes = $strictTypes;
 
         $this->phpDir = "$tmp/php";
         $this->jmsDir = "$tmp/jms";
@@ -146,7 +149,7 @@ abstract class AbstractGenerator
         $pathGenerator = new PhpPsr4PathGenerator($paths);
 
         $classWriter = new PHPClassWriter($pathGenerator);
-        $writer = new PHPWriter($classWriter, new ClassGenerator());
+        $writer = new PHPWriter($classWriter, new ClassGenerator($this->strictTypes));
         $writer->write($items);
     }
 
