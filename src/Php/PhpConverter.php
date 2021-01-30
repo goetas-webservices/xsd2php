@@ -173,8 +173,8 @@ class PhpConverter extends AbstractConverter
             $class->setExtends($typeClass);
 
             $skip = in_array($element->getSchema()->getTargetNamespace(), $this->baseSchemas, true)
-                || $this->getTypeAlias($type, $type->getSchema())
-                || $typeClass->getPropertyInHierarchy('__value');
+                || $this->getTypeAlias($type, $type->getSchema());
+
             $this->classes[spl_object_hash($element)]['class'] = $class;
             $this->classes[spl_object_hash($element)]['skip'] = $skip;
             $this->skipByType[spl_object_hash($class)] = $skip;

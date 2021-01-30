@@ -178,10 +178,15 @@ class YamlConverter extends AbstractConverter
                 $visitedTypeClass = $this->visitType($type);
             }
 
+
             $data['extends'] = $visitedTypeClass;
             $this->classes[spl_object_hash($element)]['skip'] = in_array($element->getSchema()->getTargetNamespace(), $this->baseSchemas, true)
                 || $this->getTypeAlias($type, $type->getSchema())
-                || $this->getPropertyInHierarchy($visitedTypeClass, '__value');
+            ;
+
+            if (!$this->classes[spl_object_hash($element)]['skip'] && ($p = $this->getPropertyInHierarchy($visitedTypeClass, '__value'))) {
+                $data['properties']['__value'] = $p;
+            }
         }
 
         return $this->classes[spl_object_hash($element)]['class'];
