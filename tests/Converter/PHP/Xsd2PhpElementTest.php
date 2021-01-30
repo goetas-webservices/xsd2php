@@ -39,7 +39,7 @@ class Xsd2PhpElementTest extends Xsd2PhpBase
             ';
         $classes = $this->converter->convert([$this->reader->readString($content)]);
 
-        $this->assertCount(0, $classes);
+        $this->assertCount(1, $classes);
     }
 
     /**
@@ -75,6 +75,6 @@ class Xsd2PhpElementTest extends Xsd2PhpBase
             ';
         $classes = $this->converter->convert([$this->reader->readString($content)]);
 
-        $this->assertCount(0, $classes);
+        $this->assertCount(1, $classes);
     }
 }

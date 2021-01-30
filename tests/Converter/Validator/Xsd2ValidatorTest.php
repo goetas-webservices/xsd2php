@@ -210,7 +210,7 @@ class Xsd2ValidatorTest extends \PHPUnit_Framework_TestCase
 
         $classes = $this->getClasses($xml);
 
-        $this->assertCount(1, $classes);
+        $this->assertCount(2, $classes);
 
         $this->assertEquals(
             [

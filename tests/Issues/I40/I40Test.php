@@ -164,6 +164,23 @@ class I40Test extends \PHPUnit_Framework_TestCase
         $yamlItems = $yamlConv->convert([$schema]);
 
         $this->assertEquals($extraTypes + [
+                'Epa\Schema\AdditionalIdentifierRootEl' => [
+                    'Epa\Schema\AdditionalIdentifierRootEl' => [
+                        'xml_root_name' => 'AdditionalIdentifierRootEl',
+                        'properties' => [
+                            '__value' => [
+                                'expose' => true,
+                                'xml_value' => true,
+                                'access_type' => 'public_method',
+                                'accessor' => [
+                                    'getter' => 'value',
+                                    'setter' => 'value',
+                                ],
+                                'type' => 'string',
+                            ],
+                        ],
+                    ]
+                ],
             'Epa\\Schema\\UserType' => [
                 'Epa\\Schema\\UserType' => [
                     'properties' => [
