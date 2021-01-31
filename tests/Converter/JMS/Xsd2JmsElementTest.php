@@ -74,7 +74,7 @@ class Xsd2PhpElementTest extends Xsd2JmsBase
             ';
 
         $classes = $this->getClasses($xml);
-        $this->assertCount(0, $classes);
+        $this->assertCount(1, $classes);
     }
 
     /**
@@ -109,7 +109,7 @@ class Xsd2PhpElementTest extends Xsd2JmsBase
             ';
 
         $classes = $this->getClasses($xml);
-        $this->assertCount(0, $classes);
+        $this->assertCount(1, $classes);
     }
 
     public function testUnqualifiedNsQualifiedElement()

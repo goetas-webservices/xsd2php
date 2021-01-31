@@ -33,8 +33,7 @@
     "phpunit/phpunit": "^5.0",
     "jms/serializer": "^1.9|^2.0|^3.0",
     "goetas-webservices/xsd2php-runtime": "^0.2.13@dev",
-    "symfony/validator": "^2.3.24|^3.0|^4.0",
-    "ext-xmldiff": "*"
+    "symfony/validator": "^2.3.24|^3.0|^4.0"
   },
   "autoload": {
     "psr-4": {
