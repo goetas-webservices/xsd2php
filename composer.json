@@ -24,7 +24,7 @@
     "symfony/yaml": "^2.2|^3.0|^4.0|^5.0",
     "symfony/config": "^2.2|^3.0|^4.0|^5.0",
     "goetas-webservices/xsd-reader": "^0.3.7",
-    "doctrine/inflector": "^1.0",
+    "doctrine/inflector": "^2.0",
     "laminas/laminas-code": "^3.3.2",
 
     "psr/log": "^1.0"
