@@ -2,7 +2,7 @@
 
 namespace GoetasWebservices\Xsd\XsdToPhp\Tests;
 
-use Doctrine\Inflector\Inflector;
+use Doctrine\Inflector\InflectorFactory;
 use GoetasWebservices\XML\XSDReader\Schema\Type\Type;
 use GoetasWebservices\Xsd\XsdToPhp\Naming\ShortNamingStrategy;
 
@@ -50,6 +50,6 @@ class VeryShortNamingStrategy extends ShortNamingStrategy
      */
     private function classify($name)
     {
-        return Inflector::classify(str_replace('.', ' ', $name));
+        return InflectorFactory::create()->build()->classify(str_replace('.', ' ', $name));
     }
 }

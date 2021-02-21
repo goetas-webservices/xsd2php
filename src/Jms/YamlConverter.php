@@ -2,7 +2,7 @@
 
 namespace GoetasWebservices\Xsd\XsdToPhp\Jms;
 
-use Doctrine\Inflector\Inflector;
+use Doctrine\Inflector\InflectorFactory;
 use Exception;
 use GoetasWebservices\XML\XSDReader\Schema\Attribute\AttributeContainer;
 use GoetasWebservices\XML\XSDReader\Schema\Attribute\AttributeItem;
@@ -379,8 +379,8 @@ class YamlConverter extends AbstractConverter
         $property['access_type'] = 'public_method';
         $property['serialized_name'] = $attribute->getName();
 
-        $property['accessor']['getter'] = 'get' . Inflector::classify($this->getNamingStrategy()->getPropertyName($attribute));
-        $property['accessor']['setter'] = 'set' . Inflector::classify($this->getNamingStrategy()->getPropertyName($attribute));
+        $property['accessor']['getter'] = 'get' . InflectorFactory::create()->build()->classify($this->getNamingStrategy()->getPropertyName($attribute));
+        $property['accessor']['setter'] = 'set' . InflectorFactory::create()->build()->classify($this->getNamingStrategy()->getPropertyName($attribute));
 
         $property['xml_attribute'] = true;
 
@@ -496,8 +496,8 @@ class YamlConverter extends AbstractConverter
             $property['xml_element']['namespace'] = $elementNamespace;
         }
 
-        $property['accessor']['getter'] = 'get' . Inflector::classify($this->getNamingStrategy()->getPropertyName($element));
-        $property['accessor']['setter'] = 'set' . Inflector::classify($this->getNamingStrategy()->getPropertyName($element));
+        $property['accessor']['getter'] = 'get' . InflectorFactory::create()->build()->classify($this->getNamingStrategy()->getPropertyName($element));
+        $property['accessor']['setter'] = 'set' . InflectorFactory::create()->build()->classify($this->getNamingStrategy()->getPropertyName($element));
         $t = $element->getType();
 
         if ($arrayize) {

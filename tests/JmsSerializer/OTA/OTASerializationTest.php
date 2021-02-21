@@ -2,7 +2,7 @@
 
 namespace GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA;
 
-use Doctrine\Inflector\Inflector;
+use Doctrine\Inflector\InflectorFactory;
 use GoetasWebservices\XML\XSDReader\SchemaReader;
 use GoetasWebservices\Xsd\XsdToPhp\Tests\Generator;
 use GoetasWebservices\Xsd\XsdToPhpRuntime\Jms\Handler\BaseTypesHandler;
@@ -224,7 +224,7 @@ class OTASerializationTest extends \PHPUnit_Framework_TestCase
             if (is_file($dir . '/' . $name)) {
                 $tests[$n][0] = $file;
                 $tests[$n][1] = $dir . '/' . $name;
-                $tests[$n][2] = self::$namespace . '\\' . Inflector::classify(str_replace('.xsd', '', $name));
+                $tests[$n][2] = self::$namespace . '\\' . InflectorFactory::create()->build()->classify(str_replace('.xsd', '', $name));
             }
         }
 
