@@ -2,7 +2,7 @@
 
 namespace GoetasWebservices\Xsd\XsdToPhp\Tests;
 
-use Doctrine\Common\Inflector\Inflector;
+use Doctrine\Inflector\Inflector;
 use GoetasWebservices\XML\XSDReader\Schema\Type\Type;
 use GoetasWebservices\Xsd\XsdToPhp\Naming\ShortNamingStrategy;
 

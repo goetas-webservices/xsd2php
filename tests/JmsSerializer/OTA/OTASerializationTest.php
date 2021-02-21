@@ -2,7 +2,7 @@
 
 namespace GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA;
 
-use Doctrine\Common\Inflector\Inflector;
+use Doctrine\Inflector\Inflector;
 use GoetasWebservices\XML\XSDReader\SchemaReader;
 use GoetasWebservices\Xsd\XsdToPhp\Tests\Generator;
 use GoetasWebservices\Xsd\XsdToPhpRuntime\Jms\Handler\BaseTypesHandler;

@@ -2,7 +2,7 @@
 
 namespace GoetasWebservices\Xsd\XsdToPhp\Jms;
 
-use Doctrine\Common\Inflector\Inflector;
+use Doctrine\Inflector\Inflector;
 use Exception;
 use GoetasWebservices\XML\XSDReader\Schema\Attribute\AttributeContainer;
 use GoetasWebservices\XML\XSDReader\Schema\Attribute\AttributeItem;
