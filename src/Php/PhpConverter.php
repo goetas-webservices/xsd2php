@@ -412,7 +412,7 @@ class PhpConverter extends AbstractConverter
         $property = new PHPProperty();
         $property->setName($this->getNamingStrategy()->getPropertyName($element));
         $property->setDoc($element->getDoc());
-        if ($element->isNil()) {
+        if ($element->isNil() || $element->getMin() === 0) {
             $property->setNullable(true);
         }
 

@@ -152,7 +152,7 @@ class ClassGenerator
                 }
             } else {
                 $patramTag->setTypes($type->getPhpType());
-                $parameter->setType($type->getPhpType());
+                $parameter->setType(($prop->getNullable() ? '?' : '') . $type->getPhpType());
             }
         }
 
