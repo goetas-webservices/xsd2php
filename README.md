@@ -161,6 +161,14 @@ $newXml = $serializer->serialize($object, 'xml');
 
 ```
 
+To disable the CDATA, configure JMS as so:
+
+```yaml
+xsd2php:
+  configs_jms:
+    xml_cdata: false
+```
+
 Validation
 ----------
 
