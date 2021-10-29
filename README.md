@@ -70,6 +70,8 @@ xsd2php:
 #    "http://www.example.org/test/somefile.xsd": somefile.xsd
 #  known_namespace_locations: # optional
 #    "urn:veloconnect:catalog-1.1": xsd/catalog-1.1.xsd
+# configs_jms:  #optional
+#   xml_cdata: false # Disables CDATA
 ```
 
 Here is an explanation on the meaning of each parameter:
@@ -102,6 +104,7 @@ Here is an explanation on the meaning of each parameter:
 * `xsd2php.known_namespace_locations` (optional) Specify schema location by namespace.
   This can be used to read schemas which import namespaces but do not specify schemaLocation attributes.
 
+* `xsd2php.configs_jms.xml_cdata` (optional) Specify if CDATA should be used or not in serialization.
 
 ## Generate PHP classes and JMS metadata info
 
@@ -159,6 +162,14 @@ $object = $serializer->deserialize('<some xml/>', 'TestNs\MyObject', 'xml');
 // serialize the Demo\MyObject back into XML
 $newXml = $serializer->serialize($object, 'xml');
 
+```
+
+To disable the CDATA, configure JMS as so:
+
+```yaml
+xsd2php:
+  configs_jms:
+    xml_cdata: false
 ```
 
 Validation
