@@ -4,13 +4,7 @@
             <xs:element name="RequiredElementList">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element name="NestedElement" type="xs:integer" minOccurs="0" maxOccurs="unbounded"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="OptionalElementList" minOccurs="0">
-                <xs:complexType>
-                    <xs:sequence>
+                        <xs:ele
                         <xs:element name="NestedElement" type="xs:integer" minOccurs="0" maxOccurs="unbounded"/>
                     </xs:sequence>
                 </xs:comexType>
