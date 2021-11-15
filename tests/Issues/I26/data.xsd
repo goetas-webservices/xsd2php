@@ -13,7 +13,7 @@
                     <xs:sequence>
                         <xs:element name="NestedElement" type="xs:integer" minOccurs="0" maxOccurs="unbounded"/>
                     </xs:sequence>
-                </xs:complexType>
+                </xs:comexType>
             </xs:element>
         </xs:sequence>
     </xs:complexType>
