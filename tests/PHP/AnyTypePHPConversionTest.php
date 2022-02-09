@@ -7,8 +7,9 @@ use GoetasWebservices\Xsd\XsdToPhp\Jms\YamlConverter;
 use GoetasWebservices\Xsd\XsdToPhp\Naming\ShortNamingStrategy;
 use GoetasWebservices\Xsd\XsdToPhp\Php\ClassGenerator;
 use GoetasWebservices\Xsd\XsdToPhp\Php\PhpConverter;
+use PHPUnit\Framework\TestCase;
 
-class AnyTypePHPConversionTest extends \PHPUnit_Framework_TestCase
+class AnyTypePHPConversionTest extends TestCase
 {
     /**
      * @param mixed $xml
