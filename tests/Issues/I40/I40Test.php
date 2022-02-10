@@ -2,12 +2,14 @@
 
 namespace GoetasWebservices\Xsd\XsdToPhp\Tests\Issues\I40;
 
+use DMS\PHPUnitExtensions\ArraySubset\Assert;
 use GoetasWebservices\XML\XSDReader\SchemaReader;
 use GoetasWebservices\Xsd\XsdToPhp\Jms\YamlConverter;
 use GoetasWebservices\Xsd\XsdToPhp\Naming\ShortNamingStrategy;
 use GoetasWebservices\Xsd\XsdToPhp\Php\PhpConverter;
+use PHPUnit\Framework\TestCase;
 
-class I40Test extends \PHPUnit_Framework_TestCase
+class I40Test extends TestCase
 {
     public function testMissingClass()
     {
@@ -122,7 +124,7 @@ class I40Test extends \PHPUnit_Framework_TestCase
         $this->assertCount(count($yamlItems), $phpClasses);
         ksort($yamlItems);
         ksort($phpClasses);
-        $this->assertArraySubset(array_keys($yamlItems), array_keys($phpClasses));
+        Assert::assertArraySubset(array_keys($yamlItems), array_keys($phpClasses));
     }
 
 
@@ -317,7 +319,7 @@ class I40Test extends \PHPUnit_Framework_TestCase
         $this->assertCount(count($yamlItems), $phpClasses);
         ksort($yamlItems);
         ksort($phpClasses);
-        $this->assertArraySubset(array_keys($yamlItems), array_keys($phpClasses));
+        Assert::assertArraySubset(array_keys($yamlItems), array_keys($phpClasses));
     }
 
     public function testDetectSimpleParentsWithAttributesInTheMiddle()
@@ -406,6 +408,6 @@ class I40Test extends \PHPUnit_Framework_TestCase
         ksort($phpClasses);
 
         $this->assertCount(count($yamlItems), $phpClasses);
-        $this->assertArraySubset(array_keys($yamlItems), array_keys($phpClasses));
+        Assert::assertArraySubset(array_keys($yamlItems), array_keys($phpClasses));
     }
 }

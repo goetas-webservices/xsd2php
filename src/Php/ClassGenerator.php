@@ -2,7 +2,7 @@
 
 namespace GoetasWebservices\Xsd\XsdToPhp\Php;
 
-use Doctrine\Common\Inflector\Inflector;
+use Doctrine\Inflector\InflectorFactory;
 use GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPClass;
 use GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPClassOf;
 use GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPProperty;
@@ -125,7 +125,8 @@ class ClassGenerator
 
         $type = $prop->getType();
 
-        $method = new MethodGenerator('set' . Inflector::classify($prop->getName()));
+        $inflector = InflectorFactory::create()->build();
+        $method = new MethodGenerator('set' . $inflector->classify($prop->getName()));
 
         $parameter = new ParameterGenerator($prop->getName());
 
@@ -171,6 +172,8 @@ class ClassGenerator
 
     private function handleGetter(Generator\ClassGenerator $generator, PHPProperty $prop, PHPClass $class)
     {
+        $inflector = InflectorFactory::create()->build();
+
         if ($prop->getType() instanceof PHPClassOf) {
             $docblock = new DocBlockGenerator();
             $docblock->setWordWrap(false);
@@ -186,7 +189,8 @@ class ClassGenerator
 
             $paramIndex = new ParameterGenerator('index');
 
-            $method = new MethodGenerator('isset' . Inflector::classify($prop->getName()), [$paramIndex]);
+
+            $method = new MethodGenerator('isset' . $inflector->classify($prop->getName()), [$paramIndex]);
             $method->setDocBlock($docblock);
             $method->setBody('return isset($this->' . $prop->getName() . '[$index]);');
             $generator->addMethodFromGenerator($method);
@@ -204,7 +208,7 @@ class ClassGenerator
 
             $docblock->setTag(new ReturnTag('void'));
 
-            $method = new MethodGenerator('unset' . Inflector::classify($prop->getName()), [$paramIndex]);
+            $method = new MethodGenerator('unset' . $inflector->classify($prop->getName()), [$paramIndex]);
             $method->setDocBlock($docblock);
             $method->setBody('unset($this->' . $prop->getName() . '[$index]);');
             $generator->addMethodFromGenerator($method);
@@ -242,7 +246,7 @@ class ClassGenerator
 
         $docblock->setTag($tag);
 
-        $method = new MethodGenerator('get' . Inflector::classify($prop->getName()));
+        $method = new MethodGenerator('get' . $inflector->classify($prop->getName()));
         $method->setDocBlock($docblock);
         $method->setBody('return $this->' . $prop->getName() . ';');
 
@@ -269,7 +273,8 @@ class ClassGenerator
         $patramTag = new ParamTag($propName, $type->getArg()->getType()->getPhpType());
         $docblock->setTag($patramTag);
 
-        $method = new MethodGenerator('addTo' . Inflector::classify($prop->getName()));
+        $inflector = InflectorFactory::create()->build();
+        $method = new MethodGenerator('addTo' . $inflector->classify($prop->getName()));
 
         $parameter = new ParameterGenerator($propName);
         $tt = $type->getArg()->getType();

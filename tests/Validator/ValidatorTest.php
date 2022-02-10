@@ -4,17 +4,18 @@ namespace GoetasWebservices\Xsd\XsdToPhp\Tests\Php\PathGenerator;
 
 use Composer\Autoload\ClassLoader;
 use ota\TestNotNullType;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Validator\Validation;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-class ValidatorTest extends \PHPUnit_Framework_TestCase
+class ValidatorTest extends TestCase
 {
     /**
      * @var ValidatorInterface
      */
     protected $validator;
 
-    public function setUp()
+    public function setUp(): void
     {
         $loader = new ClassLoader();
         $loader->addPsr4('ota\\', __DIR__ . '/ota/php');

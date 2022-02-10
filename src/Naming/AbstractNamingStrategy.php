@@ -2,7 +2,7 @@
 
 namespace GoetasWebservices\Xsd\XsdToPhp\Naming;
 
-use Doctrine\Common\Inflector\Inflector;
+use Doctrine\Inflector\InflectorFactory;
 use GoetasWebservices\XML\XSDReader\Schema\Item;
 use GoetasWebservices\XML\XSDReader\Schema\Type\Type;
 
@@ -99,11 +99,15 @@ abstract class AbstractNamingStrategy implements NamingStrategy
 
     public function getPropertyName($item)
     {
-        return Inflector::camelize(str_replace('.', ' ', $item->getName()));
+        $inflector = InflectorFactory::create()->build();
+
+        return $inflector->camelize(str_replace('.', ' ', $item->getName()));
     }
 
     protected function classify($name)
     {
-        return Inflector::classify(str_replace('.', ' ', $name));
+        $inflector = InflectorFactory::create()->build();
+
+        return $inflector->classify(str_replace('.', ' ', $name));
     }
 }

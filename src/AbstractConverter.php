@@ -51,6 +51,11 @@ abstract class AbstractConverter
         });
     }
 
+    public function getTypeAliases(): array
+    {
+        return $this->typeAliases;
+    }
+
     public function getTypeAlias($type, Schema $schemapos = null)
     {
         $schema = $schemapos ?: $type->getSchema();

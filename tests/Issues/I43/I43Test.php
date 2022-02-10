@@ -4,8 +4,9 @@ namespace GoetasWebservices\Xsd\XsdToPhp\Tests\Issues\I40;
 
 use GoetasWebservices\XML\XSDReader\SchemaReader;
 use GoetasWebservices\Xsd\XsdToPhp\Tests\Generator;
+use PHPUnit\Framework\TestCase;
 
-class I43Test extends \PHPUnit_Framework_TestCase
+class I43Test extends TestCase
 {
     /**
      * @group long

@@ -5,8 +5,9 @@ namespace GoetasWebservices\Xsd\XsdToPhp\Tests\Issues\I26;
 use GoetasWebservices\XML\XSDReader\SchemaReader;
 use GoetasWebservices\Xsd\XsdToPhp\Jms\YamlConverter;
 use GoetasWebservices\Xsd\XsdToPhp\Naming\ShortNamingStrategy;
+use PHPUnit\Framework\TestCase;
 
-class I26Test extends \PHPUnit_Framework_TestCase
+class I26Test extends TestCase
 {
     public function testSkipWhenEmptyOnOptionalAndRequiredLists()
     {

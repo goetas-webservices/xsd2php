@@ -6,8 +6,9 @@ use GoetasWebservices\XML\XSDReader\SchemaReader;
 use GoetasWebservices\Xsd\XsdToPhp\Naming\ShortNamingStrategy;
 use GoetasWebservices\Xsd\XsdToPhp\Php\ClassGenerator;
 use GoetasWebservices\Xsd\XsdToPhp\Php\PhpConverter;
+use PHPUnit\Framework\TestCase;
 
-class PHPConversionTest extends \PHPUnit_Framework_TestCase
+class PHPConversionTest extends TestCase
 {
     /**
      * @param mixed $xml
