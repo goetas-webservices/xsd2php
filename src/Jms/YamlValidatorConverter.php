@@ -77,12 +77,19 @@ class YamlValidatorConverter extends YamlConverter
         $rules = [];
 
         if (($restrictions = $type->getRestriction()) && $checks = $restrictions->getChecks()) {
+            $propertyType = isset($property['type']) ? $property['type'] : null;
             foreach ($checks as $key => $check) {
                 switch ($key) {
                     case 'enumeration':
                         $rules[] = [
                             'Choice' => [
-                                'choices' => array_map(function ($enum) {
+                                'choices' => array_map(function ($enum) use ($propertyType) {
+                                    if ($propertyType === 'int') {
+                                        return (int)$enum['value'];
+                                    }
+                                    if ($propertyType === 'float') {
+                                        return (float)$enum['value'];
+                                    }
                                     return $enum['value'];
                                 }, $check),
                             ],
@@ -250,7 +257,7 @@ class YamlValidatorConverter extends YamlConverter
      * from a schema attribute including required rule.
      *
      * @param AttributeItem $element
-     * @param bool          $arrayize
+     * @param bool $arrayize
      */
     private function loadValidatorAttribute(array &$property, AttributeItem $attribute)
     {
@@ -273,8 +280,8 @@ class YamlValidatorConverter extends YamlConverter
      * Override necessary to improve method to load validations from schema type.
      *
      * @param PHPClass $class
-     * @param array    $data
-     * @param string   $name
+     * @param array $data
+     * @param string $name
      */
     protected function visitSimpleType(&$class, &$data, SimpleType $type, $name)
     {
@@ -295,7 +302,7 @@ class YamlValidatorConverter extends YamlConverter
      * Override necessary to improve method to load validations from schema element.
      *
      * @param PHPClass $class
-     * @param bool     $arrayize
+     * @param bool $arrayize
      *
      * @return PHPProperty
      */
@@ -328,8 +335,8 @@ class YamlValidatorConverter extends YamlConverter
      * Responsible for handler all properties from extension types.
      *
      * @param PHPClass $class
-     * @param array    $data
-     * @param string   $parentName
+     * @param array $data
+     * @param string $parentName
      */
     protected function &handleClassExtension(&$class, &$data, Type $type, $parentName)
     {
