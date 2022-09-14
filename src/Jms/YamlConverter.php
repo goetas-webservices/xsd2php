@@ -480,7 +480,7 @@ class YamlConverter extends AbstractConverter
      * @param Element  $element
      * @param bool     $arrayize
      *
-     * @return \GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPProperty
+     * @return array
      */
     protected function &visitElement(&$class, Schema $schema, ElementItem $element, $arrayize = true)
     {
