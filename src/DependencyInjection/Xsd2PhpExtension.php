@@ -64,7 +64,7 @@ class Xsd2PhpExtension extends Extension
         return strtr($ns, '/', '\\');
     }
 
-    public function getAlias()
+    public function getAlias(): string
     {
         return 'xsd2php';
     }
