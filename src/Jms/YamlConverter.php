@@ -160,6 +160,11 @@ class YamlConverter extends AbstractConverter
             $data = [];
             $ns = $className;
             $class[$ns] = &$data;
+
+            if (!empty($this->xmlNamespaces)) {
+                $data['xml_namespaces'] = array_flip($this->xmlNamespaces);
+            }
+
             $data['xml_root_name'] = $element->getName();
 
             if ($schema->getTargetNamespace()) {
@@ -167,6 +172,11 @@ class YamlConverter extends AbstractConverter
 
                 if (!$schema->getElementsQualification() && !($element instanceof Element && $element->isQualified())) {
                     $data['xml_root_name'] = 'ns-' . substr(sha1($data['xml_root_namespace']), 0, 8) . ':' . $element->getName();
+                }
+
+                // Force XML namespace prefix if prefix is defined.
+                if (isset($this->xmlNamespaces[$data['xml_root_namespace']])) {
+                    $data['xml_root_name'] = $this->xmlNamespaces[$data['xml_root_namespace']] . ':' . $element->getName();
                 }
             }
             $this->classes[spl_object_hash($element)]['class'] = &$class;
