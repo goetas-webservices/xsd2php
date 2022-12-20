@@ -17,6 +17,13 @@ use Laminas\Code\Generator\PropertyGenerator;
 
 class ClassGenerator
 {
+    private $strictTypes;
+
+    public function __construct(bool $strictTypes = false)
+    {
+        $this->strictTypes = $strictTypes;
+    }
+
     private function handleBody(Generator\ClassGenerator $class, PHPClass $type)
     {
         foreach ($type->getProperties() as $prop) {
@@ -144,17 +151,27 @@ class ClassGenerator
         } elseif ($type) {
             if ($type->isNativeType()) {
                 $patramTag->setTypes($type->getPhpType());
+                if ($this->strictTypes) {
+                    $parameter->setType($type->getPhpType());
+                }
             } elseif ($p = $type->isSimpleType()) {
                 if (($t = $p->getType()) && !$t->isNativeType()) {
                     $patramTag->setTypes($t->getPhpType());
                     $parameter->setType($t->getPhpType());
                 } elseif ($t) {
                     $patramTag->setTypes($t->getPhpType());
+                    if ($this->strictTypes) {
+                        $parameter->setType($t->getPhpType());
+                    }
                 }
             } else {
                 $patramTag->setTypes($type->getPhpType());
                 $parameter->setType(($prop->getNullable() ? '?' : '') . $type->getPhpType());
             }
+        }
+
+        if ($this->strictTypes && $prop->getDefault() === null) {
+            $parameter->setDefaultValue(null);
         }
 
         if ($prop->getNullable() && $parameter->getType()) {
