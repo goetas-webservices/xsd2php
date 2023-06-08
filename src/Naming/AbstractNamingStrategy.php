@@ -58,6 +58,7 @@ abstract class AbstractNamingStrategy implements NamingStrategy
         'interface',
         'isset',
         'list',
+        'match',
         'mixed',
         'namespace',
         'new',
