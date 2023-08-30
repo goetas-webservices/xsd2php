@@ -126,6 +126,17 @@ class Xsd2ValidatorTest extends TestCase
             ],
             // pattern / Regex
             [
+                '<xs:pattern value="[\\p{IsBasicLatin}\\p{IsLatin-1Supplement}]+"/>',
+                [
+                    [
+                        'Regex' => [
+                            'pattern' => '~[\\x00-\\x7F\\x{0080}-\\x{00FF}]+~',
+                            'groups' => ['xsd_rules'],
+                        ],
+                    ],
+                ],
+            ],
+            [
                 '<xs:pattern value="\\([0-9]{2}\\)\\s[0-9]{4}-[0-9]{4,5}"/>',
                 [
                     [
