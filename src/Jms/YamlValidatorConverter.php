@@ -146,14 +146,11 @@ class YamlValidatorConverter extends YamlConverter
                             // initial support for https://www.w3.org/TR/xsd-unicode-blocknames/
                             // not supported by standard php regex implementation
                             $regexPattern = strtr($item['value'], [
-                                '\p{IsBasicLatin}' => '[\x00-\x7F]',
-                                '\p{IsIsBasicLatin}' => '[\x{0000}-\x{007F}]',
-                                '\p{IsLatin-1Supplement}' => '[\x{0080}-\x{00FF}]',
-                                '\p{IsLatinExtended-A}' => '[\x{0100}-\x{024F}]',
-                                '\p{IsLatinExtended-B}' => '[\x{0180}-\x{024F}]',
+                                '\p{IsBasicLatin}' => '\p{Latin}',
+                                '\p{IsLatin-1Supplement}' => '\p{S}',
                             ]);
                             $rules[] = [
-                                'Regex' => ['pattern' => "~{$regexPattern}~"],
+                                'Regex' => ['pattern' => "~{$regexPattern}~u"],
                             ];
                         }
                         break;

@@ -130,7 +130,7 @@ class Xsd2ValidatorTest extends TestCase
                 [
                     [
                         'Regex' => [
-                            'pattern' => '~[\\x00-\\x7F][\\x{0080}-\\x{00FF}]~',
+                            'pattern' => '~\p{Latin}\p{S}~u',
                             'groups' => ['xsd_rules'],
                         ],
                     ],
@@ -141,7 +141,7 @@ class Xsd2ValidatorTest extends TestCase
                 [
                     [
                         'Regex' => [
-                            'pattern' => '~\\([0-9]{2}\\)\\s[0-9]{4}-[0-9]{4,5}~',
+                            'pattern' => '~\\([0-9]{2}\\)\\s[0-9]{4}-[0-9]{4,5}~u',
                             'groups' => ['xsd_rules'],
                         ],
                     ],
