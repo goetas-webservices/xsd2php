@@ -145,10 +145,20 @@ class YamlValidatorConverter extends YamlConverter
                         foreach ($check as $item) {
                             // initial support for https://www.w3.org/TR/xsd-unicode-blocknames/
                             // not supported by standard php regex implementation
-                            $regexPattern = strtr($item['value'], [
-                                '\p{IsBasicLatin}' => '\p{Latin}',
-                                '\p{IsLatin-1Supplement}' => '\p{S}',
-                            ]);
+                            // \p{IsBasicLatin} represents a range, but the expression might be alraedy in a range,
+                            // so we try our best and detect it if is in a range or not
+                            $regexPattern =  $item['value'];
+                            $unicodeClasses = [
+                                '\p{IsBasicLatin}' => '\x{0000}-\x{007F}',
+                                '\p{IsLatin-1Supplement}' => '\x{0080}-\x{00FF}',
+                            ];
+                            foreach ($unicodeClasses as $from => $to) {
+                                if (preg_match('~\[.*'.preg_quote($from, '~').'.*\]~', $regexPattern)) {
+                                    $regexPattern = str_replace($from, $to, $regexPattern);
+                                } else {
+                                    $regexPattern = str_replace($from, "[$to]", $regexPattern);
+                                }
+                            }
                             $rules[] = [
                                 'Regex' => ['pattern' => "~{$regexPattern}~u"],
                             ];
