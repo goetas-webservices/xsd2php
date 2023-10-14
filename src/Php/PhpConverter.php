@@ -11,6 +11,7 @@ use GoetasWebservices\XML\XSDReader\Schema\Element\ElementItem;
 use GoetasWebservices\XML\XSDReader\Schema\Element\ElementRef;
 use GoetasWebservices\XML\XSDReader\Schema\Element\ElementSingle;
 use GoetasWebservices\XML\XSDReader\Schema\Element\Group;
+use GoetasWebservices\XML\XSDReader\Schema\Element\Choice;
 use GoetasWebservices\XML\XSDReader\Schema\Item;
 use GoetasWebservices\XML\XSDReader\Schema\Schema;
 use GoetasWebservices\XML\XSDReader\Schema\Type\BaseComplexType;
@@ -118,6 +119,21 @@ class PhpConverter extends AbstractConverter
         }
     }
 
+    /**
+     * Process xsd:complexType xsd:choice xsd:element
+     * 
+     * @param PHPClass $class
+     * @param Schema $schema
+     * @param Choice $choice
+     */
+    private function visitChoice(PHPClass $class, Schema $schema, Choice $choice)
+    {
+        foreach ($choice->getElements() as $choiceOption) {
+            $property = $this->visitElement($class, $schema, $choiceOption);
+            $class->addProperty($property);
+        }
+    }
+    
     private function visitGroup(PHPClass $class, Schema $schema, Group $group)
     {
         foreach ($group->getElements() as $childGroup) {
@@ -304,7 +320,9 @@ class PhpConverter extends AbstractConverter
     {
         $schema = $type->getSchema();
         foreach ($type->getElements() as $element) {
-            if ($element instanceof Group) {
+            if ($element instanceof Choice) {
+                $this->visitChoice($class, $schema, $element);
+            } elseif ($element instanceof Group) {
                 $this->visitGroup($class, $schema, $element);
             } else {
                 $property = $this->visitElement($class, $schema, $element);
