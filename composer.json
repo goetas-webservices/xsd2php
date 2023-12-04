@@ -18,11 +18,11 @@
   ],
   "license": "MIT",
   "require": {
-    "php": ">=7.2|^8.0",
-    "symfony/console": "^2.7|^3.0|^4.0|^5.0|^6.0",
-    "symfony/dependency-injection": "^2.2|^3.0|^4.0|^5.0|^6.0",
-    "symfony/yaml": "^2.2|^3.0|^4.0|^5.0|^6.0",
-    "symfony/config": "^2.2|^3.0|^4.0|^5.0|^6.0",
+    "php": "^8.0",
+    "symfony/console": "^4.0|^5.0|^6.0",
+    "symfony/dependency-injection": "^4.0|^5.0|^6.0",
+    "symfony/yaml": "^4.0|^5.0|^6.0",
+    "symfony/config": "^4.0|^5.0|^6.0",
     "goetas-webservices/xsd-reader": "^0.3.7 | ^0.4.1",
     "doctrine/inflector": "^2.0",
     "laminas/laminas-code": "^3.3.2|^4.0",
@@ -47,7 +47,7 @@
   },
   "extra": {
     "branch-alias": {
-      "dev-master": "0.4-dev"
+      "dev-master": "1.x-dev"
     }
   },
   "bin": [
