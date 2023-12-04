@@ -105,8 +105,8 @@ class AnyTypePHPConversionTest extends TestCase
 
         $returnTags = $single->getMethod('getId')->getDocBlock()->getTags();
 
-        $this->assertCount(1, $returnTags);
-        $this->assertEquals(['mixed'], $returnTags[0]->getTypes());
+        $this->assertCount(0, $returnTags);
+        $this->assertEquals('mixed', (string)$single->getMethod('getId')->getReturnType());
     }
 
     public function testSimpleAnyTypeYaml()

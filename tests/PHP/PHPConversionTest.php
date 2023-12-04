@@ -146,9 +146,11 @@ class PHPConversionTest extends TestCase
 
         $this->assertTrue($codegen->hasMethod('getId'));
         $this->assertTrue($codegen->hasMethod('setId'));
+        $this->assertEquals('static',(string)$codegen->getMethod('setId')->getReturnType());
+        $this->assertEquals('array',(string)$codegen->getMethod('getId')->getReturnType());
 
-        $this->assertNull($codegen->getMethod('issetId')->getParameters()['index']->getType());
-        $this->assertNull($codegen->getMethod('issetId')->getParameters()['index']->getType());
+        $this->assertEquals('int|string',$codegen->getMethod('issetId')->getParameters()['index']->getType());
+        $this->assertEquals('int|string',$codegen->getMethod('unsetId')->getParameters()['index']->getType());
     }
 
     public function testNestedMulteplicity()
@@ -278,7 +280,7 @@ class PHPConversionTest extends TestCase
         $this->assertTrue($codegen->hasMethod('setDate2'));
         $this->assertNull($codegen->getMethod('setDate2')->getParameters()['date2']->getDefaultValue());
         $this->assertTrue($codegen->hasMethod('setStr1'));
-        $this->assertNull($codegen->getMethod('setStr1')->getParameters()['str1']->getDefaultValue());
+        $this->assertNull($codegen->getMethod('setStr1')->getParameters()['str1']->getDefaultValue()->getValue());
         $this->assertTrue($codegen->hasMethod('setStr2'));
         $this->assertNull($codegen->getMethod('setStr2')->getParameters()['str2']->getDefaultValue());
     }

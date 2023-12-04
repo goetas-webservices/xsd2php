@@ -6,6 +6,7 @@ use Exception;
 use GoetasWebservices\XML\XSDReader\Schema\Attribute\AttributeItem;
 use GoetasWebservices\XML\XSDReader\Schema\Attribute\Group as AttributeGroup;
 use GoetasWebservices\XML\XSDReader\Schema\Element\Element;
+use GoetasWebservices\XML\XSDReader\Schema\Element\ElementContainer;
 use GoetasWebservices\XML\XSDReader\Schema\Element\ElementDef;
 use GoetasWebservices\XML\XSDReader\Schema\Element\ElementItem;
 use GoetasWebservices\XML\XSDReader\Schema\Element\ElementRef;
@@ -116,33 +117,6 @@ class PhpConverter extends AbstractConverter
         }
         if ($type instanceof ComplexType) {
             $this->visitComplexType($class, $type);
-        }
-    }
-
-    /**
-     * Process xsd:complexType xsd:choice xsd:element
-     * 
-     * @param PHPClass $class
-     * @param Schema $schema
-     * @param Choice $choice
-     */
-    private function visitChoice(PHPClass $class, Schema $schema, Choice $choice)
-    {
-        foreach ($choice->getElements() as $choiceOption) {
-            $property = $this->visitElement($class, $schema, $choiceOption);
-            $class->addProperty($property);
-        }
-    }
-    
-    private function visitGroup(PHPClass $class, Schema $schema, Group $group)
-    {
-        foreach ($group->getElements() as $childGroup) {
-            if ($childGroup instanceof Group) {
-                $this->visitGroup($class, $schema, $childGroup);
-            } else {
-                $property = $this->visitElement($class, $schema, $childGroup);
-                $class->addProperty($property);
-            }
         }
     }
 
@@ -319,17 +293,26 @@ class PhpConverter extends AbstractConverter
     private function visitComplexType(PHPClass $class, ComplexType $type)
     {
         $schema = $type->getSchema();
-        foreach ($type->getElements() as $element) {
-            if ($element instanceof Choice) {
-                $this->visitChoice($class, $schema, $element);
-            } elseif ($element instanceof Group) {
-                $this->visitGroup($class, $schema, $element);
-            } else {
-                $property = $this->visitElement($class, $schema, $element);
-                $class->addProperty($property);
-            }
+        foreach ($this->flattElements($type) as $element) {
+            $property = $this->visitElement($class, $schema, $element);
+            $class->addProperty($property);
         }
     }
+
+    private function flattElements(ElementContainer $container)
+    {
+        $items = [];
+        foreach ($container->getElements() as $attr) {
+            if ($attr instanceof ElementContainer) {
+                $items = array_merge($items, $this->flattElements($attr));
+            } else {
+                $items[] = $attr;
+            }
+        }
+
+        return $items;
+    }
+
 
     private function visitSimpleType(PHPClass $class, SimpleType $type)
     {
