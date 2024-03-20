@@ -19,10 +19,10 @@
   "license": "MIT",
   "require": {
     "php": ">=7.2|^8.0",
-    "symfony/console": "^2.7|^3.0|^4.0|^5.0|^6.0",
-    "symfony/dependency-injection": "^2.2|^3.0|^4.0|^5.0|^6.0",
-    "symfony/yaml": "^2.2|^3.0|^4.0|^5.0|^6.0",
-    "symfony/config": "^2.2|^3.0|^4.0|^5.0|^6.0",
+    "symfony/console": "^2.7|^3.0|^4.0|^5.0|^6.0|^7.0",
+    "symfony/dependency-injection": "^2.2|^3.0|^4.0|^5.0|^6.0|^7.0",
+    "symfony/yaml": "^2.2|^3.0|^4.0|^5.0|^6.0|^7.0",
+    "symfony/config": "^2.2|^3.0|^4.0|^5.0|^6.0|^7.0",
     "goetas-webservices/xsd-reader": "^0.3.7 | ^0.4.1",
     "doctrine/inflector": "^2.0",
     "laminas/laminas-code": "^3.3.2|^4.0",
@@ -32,7 +32,7 @@
     "phpunit/phpunit": "^6.0|^7.0|^8.0|^9.0",
     "jms/serializer": "^1.9|^2.0|^3.0",
     "goetas-webservices/xsd2php-runtime": "^0.2.13@dev",
-    "symfony/validator": "^2.3.24|^3.0|^4.0|^5.0|^6.0",
+    "symfony/validator": "^2.3.24|^3.0|^4.0|^5.0|^6.0|^7.0",
     "dms/phpunit-arraysubset-asserts": "^0.3.1"
   },
   "autoload": {

@@ -42,7 +42,7 @@ class Convert extends Command
     /**
      * @see Console\Command\Command
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->loadConfigurations($input->getArgument('config'));
         $src = $input->getArgument('src');
