@@ -12,6 +12,7 @@ use GoetasWebservices\XML\XSDReader\Schema\Element\ElementRef;
 use GoetasWebservices\XML\XSDReader\Schema\Element\ElementSingle;
 use GoetasWebservices\XML\XSDReader\Schema\Element\Group;
 use GoetasWebservices\XML\XSDReader\Schema\Element\Choice;
+use GoetasWebservices\XML\XSDReader\Schema\Element\Sequence;
 use GoetasWebservices\XML\XSDReader\Schema\Item;
 use GoetasWebservices\XML\XSDReader\Schema\Schema;
 use GoetasWebservices\XML\XSDReader\Schema\Type\BaseComplexType;
@@ -118,10 +119,29 @@ class PhpConverter extends AbstractConverter
             $this->visitComplexType($class, $type);
         }
     }
-
+	
+	/**
+	 * Process xsd:complexType xsd:sequence xsd:element
+	 *
+	 * @param PHPClass $class
+	 * @param Schema $schema
+	 * @param Sequence $sequence
+	 */
+	private function visitSequence(PHPClass $class, Schema $schema, Sequence $sequence)
+	{
+		foreach ($sequence->getElements() as $childSequence) {
+			if ($childSequence instanceof Group) {
+				$this->visitGroup($class, $schema, $childSequence);
+			} else {
+				$property = $this->visitElement($class, $schema, $childSequence);
+				$class->addProperty($property);
+			}
+		}
+	}
+	
     /**
      * Process xsd:complexType xsd:choice xsd:element
-     * 
+     *
      * @param PHPClass $class
      * @param Schema $schema
      * @param Choice $choice
@@ -129,8 +149,12 @@ class PhpConverter extends AbstractConverter
     private function visitChoice(PHPClass $class, Schema $schema, Choice $choice)
     {
         foreach ($choice->getElements() as $choiceOption) {
-            $property = $this->visitElement($class, $schema, $choiceOption);
-            $class->addProperty($property);
+			if ($choiceOption instanceof Sequence) {
+				$this->visitSequence($class, $schema, $choiceOption);
+			} else {
+				$property = $this->visitElement($class, $schema, $choiceOption);
+				$class->addProperty($property);
+			}
         }
     }
     
@@ -320,7 +344,9 @@ class PhpConverter extends AbstractConverter
     {
         $schema = $type->getSchema();
         foreach ($type->getElements() as $element) {
-            if ($element instanceof Choice) {
+			if ($element instanceof Sequence) {
+				$this->visitSequence($class, $schema, $element);
+			} elseif ($element instanceof Choice) {
                 $this->visitChoice($class, $schema, $element);
             } elseif ($element instanceof Group) {
                 $this->visitGroup($class, $schema, $element);
