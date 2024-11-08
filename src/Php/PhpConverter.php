@@ -5,6 +5,7 @@ namespace GoetasWebservices\Xsd\XsdToPhp\Php;
 use Exception;
 use GoetasWebservices\XML\XSDReader\Schema\Attribute\AttributeItem;
 use GoetasWebservices\XML\XSDReader\Schema\Attribute\Group as AttributeGroup;
+use GoetasWebservices\XML\XSDReader\Schema\Element\Any\Any;
 use GoetasWebservices\XML\XSDReader\Schema\Element\Element;
 use GoetasWebservices\XML\XSDReader\Schema\Element\ElementDef;
 use GoetasWebservices\XML\XSDReader\Schema\Element\ElementItem;
@@ -298,7 +299,6 @@ class PhpConverter extends AbstractConverter
             }
 
             if (($this->isArrayType($type) || $this->isArrayNestedElement($type)) && !$force) {
-
                 $this->classes[spl_object_hash($type)]['skip'] = true;
                 $this->skipByType[spl_object_hash($class)] = true;
 
@@ -451,11 +451,16 @@ class PhpConverter extends AbstractConverter
      *
      * @return \GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPProperty
      */
-    private function visitElement(PHPClass $class, Schema $schema, ElementSingle $element, $arrayize = true)
+    private function visitElement(PHPClass $class, Schema $schema, ElementSingle|Any $element, $arrayize = true)
     {
         $property = new PHPProperty();
         $property->setName($this->getNamingStrategy()->getPropertyName($element));
         $property->setDoc($element->getDoc());
+
+        if ($element instanceof Any) {
+            return $property;
+        }
+
         if ($element->isNil() || $element->getMin() === 0) {
             $property->setNullable(true);
         }
@@ -463,9 +468,7 @@ class PhpConverter extends AbstractConverter
         $t = $element->getType();
 
         if ($arrayize) {
-
             if ($itemOfArray = $this->isArrayType($t)) {
-
                 if (!$itemOfArray->getName()) {
                     if ($element instanceof ElementRef) {
                         $refClass = $this->visitElementDef($element->getReferencedElement());
@@ -485,7 +488,6 @@ class PhpConverter extends AbstractConverter
 
                 return $property;
             } elseif ($itemOfArray = $this->isArrayNestedElement($t)) {
-
                 if (!$t->getName()) {
                     if ($element instanceof ElementRef) {
                         $refClass = $this->visitElementDef($element->getReferencedElement());

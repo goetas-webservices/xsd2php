@@ -6,6 +6,7 @@ use Doctrine\Inflector\InflectorFactory;
 use Exception;
 use GoetasWebservices\XML\XSDReader\Schema\Attribute\AttributeContainer;
 use GoetasWebservices\XML\XSDReader\Schema\Attribute\AttributeItem;
+use GoetasWebservices\XML\XSDReader\Schema\Element\Any\Any;
 use GoetasWebservices\XML\XSDReader\Schema\Element\Element;
 use GoetasWebservices\XML\XSDReader\Schema\Element\ElementContainer;
 use GoetasWebservices\XML\XSDReader\Schema\Element\ElementDef;
@@ -444,7 +445,8 @@ class YamlConverter extends AbstractConverter
 
         if (
             (isset($props['properties']) && count($props['properties']) > 0 && !isset($props['properties'][$prop])) ||
-            (isset($props['properties']) && count($props['properties']) > 1)) {
+            (isset($props['properties']) && count($props['properties']) > 1)
+        ) {
             return false;
         }
 
@@ -466,7 +468,9 @@ class YamlConverter extends AbstractConverter
      */
     protected function getElementNamespace(Schema $schema, ElementItem $element)
     {
-        if ($element->getSchema()->getTargetNamespace() &&
+        if (
+            (!$element instanceof Any) &&
+            $element->getSchema()->getTargetNamespace() &&
             ($schema->getElementsQualification() || ($element instanceof Element && $element->isQualified()) || !$element->isLocal())
         ) {
             return $element->getSchema()->getTargetNamespace();
@@ -482,7 +486,7 @@ class YamlConverter extends AbstractConverter
      *
      * @return array
      */
-    protected function &visitElement(&$class, Schema $schema, ElementItem $element, $arrayize = true)
+    protected function &visitElement(&$class, Schema $schema, ElementItem|Any $element, $arrayize = true)
     {
         $property = [];
         $property['expose'] = true;
@@ -500,6 +504,11 @@ class YamlConverter extends AbstractConverter
         $inflector = InflectorFactory::create()->build();
         $property['accessor']['getter'] = 'get' . $inflector->classify($this->getNamingStrategy()->getPropertyName($element));
         $property['accessor']['setter'] = 'set' . $inflector->classify($this->getNamingStrategy()->getPropertyName($element));
+
+        if ($element instanceof Any) {
+            return $property;
+        }
+
         $t = $element->getType();
 
         if ($arrayize) {
