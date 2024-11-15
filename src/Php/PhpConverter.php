@@ -55,7 +55,7 @@ class PhpConverter extends AbstractConverter
 
     private $classes = [];
 
-    public function convert(array $schemas)
+    public function convert(array $schemas): array
     {
         $visited = [];
         $this->classes = [];
@@ -69,7 +69,7 @@ class PhpConverter extends AbstractConverter
     /**
      * @return PHPClass[]
      */
-    private function getTypes()
+    private function getTypes(): array
     {
         uasort($this->classes, function ($a, $b) {
             return strcmp($a['class']->getFullName(), $b['class']->getFullName());
@@ -84,7 +84,7 @@ class PhpConverter extends AbstractConverter
         return $ret;
     }
 
-    private function navigate(Schema $schema, array &$visited)
+    private function navigate(Schema $schema, array &$visited): void
     {
         if (isset($visited[spl_object_hash($schema)])) {
             return;
@@ -105,7 +105,7 @@ class PhpConverter extends AbstractConverter
         }
     }
 
-    private function visitTypeBase(PHPClass $class, Type $type)
+    private function visitTypeBase(PHPClass $class, Type $type): void
     {
         $class->setAbstract($type->isAbstract());
 
@@ -119,7 +119,7 @@ class PhpConverter extends AbstractConverter
             $this->visitComplexType($class, $type);
         }
     }
-	
+
 	/**
 	 * Process xsd:complexType xsd:sequence xsd:element
 	 *
@@ -127,18 +127,20 @@ class PhpConverter extends AbstractConverter
 	 * @param Schema $schema
 	 * @param Sequence $sequence
 	 */
-	private function visitSequence(PHPClass $class, Schema $schema, Sequence $sequence)
-	{
+	private function visitSequence(PHPClass $class, Schema $schema, Sequence $sequence): void
+    {
 		foreach ($sequence->getElements() as $childSequence) {
-			if ($childSequence instanceof Group) {
+            if ($childSequence instanceof Group) {
 				$this->visitGroup($class, $schema, $childSequence);
-			} else {
+			} elseif ($childSequence instanceof Choice) {
+                $this->visitChoice($class, $schema, $childSequence);
+            } else {
 				$property = $this->visitElement($class, $schema, $childSequence);
 				$class->addProperty($property);
 			}
 		}
 	}
-	
+
     /**
      * Process xsd:complexType xsd:choice xsd:element
      *
@@ -146,7 +148,7 @@ class PhpConverter extends AbstractConverter
      * @param Schema $schema
      * @param Choice $choice
      */
-    private function visitChoice(PHPClass $class, Schema $schema, Choice $choice)
+    private function visitChoice(PHPClass $class, Schema $schema, Choice $choice): void
     {
         foreach ($choice->getElements() as $choiceOption) {
 			if ($choiceOption instanceof Sequence) {
@@ -157,8 +159,8 @@ class PhpConverter extends AbstractConverter
 			}
         }
     }
-    
-    private function visitGroup(PHPClass $class, Schema $schema, Group $group)
+
+    private function visitGroup(PHPClass $class, Schema $schema, Group $group): void
     {
         foreach ($group->getElements() as $childGroup) {
             if ($childGroup instanceof Group) {
@@ -170,7 +172,7 @@ class PhpConverter extends AbstractConverter
         }
     }
 
-    private function visitAttributeGroup(PHPClass $class, Schema $schema, AttributeGroup $att)
+    private function visitAttributeGroup(PHPClass $class, Schema $schema, AttributeGroup $att): void
     {
         foreach ($att->getAttributes() as $childAttr) {
             if ($childAttr instanceof AttributeGroup) {
@@ -223,7 +225,7 @@ class PhpConverter extends AbstractConverter
         return $this->classes[spl_object_hash($element)]['class'];
     }
 
-    public function isSkip($class)
+    public function isSkip($class): bool
     {
         return !empty($this->skipByType[spl_object_hash($class)]);
     }
@@ -340,7 +342,7 @@ class PhpConverter extends AbstractConverter
         return $this->classes[spl_object_hash($type)]['class'];
     }
 
-    private function visitComplexType(PHPClass $class, ComplexType $type)
+    private function visitComplexType(PHPClass $class, ComplexType $type): void
     {
         $schema = $type->getSchema();
         foreach ($type->getElements() as $element) {
@@ -357,7 +359,7 @@ class PhpConverter extends AbstractConverter
         }
     }
 
-    private function visitSimpleType(PHPClass $class, SimpleType $type)
+    private function visitSimpleType(PHPClass $class, SimpleType $type): void
     {
         if ($restriction = $type->getRestriction()) {
             $parent = $restriction->getBase();
@@ -387,7 +389,7 @@ class PhpConverter extends AbstractConverter
         }
     }
 
-    private function handleClassExtension(PHPClass $class, Type $type)
+    private function handleClassExtension(PHPClass $class, Type $type): void
     {
         if ($alias = $this->getTypeAlias($type)) {
             $c = PHPClass::createFromFQCN($alias);
@@ -401,7 +403,7 @@ class PhpConverter extends AbstractConverter
         }
     }
 
-    private function visitBaseComplexType(PHPClass $class, BaseComplexType $type)
+    private function visitBaseComplexType(PHPClass $class, BaseComplexType $type): void
     {
         $parent = $type->getParent();
         if ($parent) {
