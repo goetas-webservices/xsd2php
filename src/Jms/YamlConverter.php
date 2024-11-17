@@ -124,6 +124,7 @@ class YamlConverter extends AbstractConverter
 
         return $ret;
     }
+
     /**
      * @param array<string,bool> $visited
      */
@@ -147,11 +148,7 @@ class YamlConverter extends AbstractConverter
             }
         }
     }
-    /**
-     * @param mixed $class
-     * @param mixed $data
-     * @param mixed $name
-     */
+
     private function visitTypeBase(&$class, &$data, Type $type, $name): void
     {
         if ($type instanceof BaseComplexType) {
@@ -303,10 +300,7 @@ class YamlConverter extends AbstractConverter
 
         return $this->classes[spl_object_hash($type)]['class'];
     }
-    /**
-     * @param mixed $class
-     * @param mixed $data
-     */
+
     private function visitComplexType(&$class, &$data, ComplexType $type): void
     {
         $schema = $type->getSchema();
@@ -318,11 +312,7 @@ class YamlConverter extends AbstractConverter
             $data['properties'][$propName] = $this->visitElement($class, $schema, $element);
         }
     }
-    /**
-     * @param mixed $class
-     * @param mixed $data
-     * @param mixed $name
-     */
+
     protected function visitSimpleType(&$class, &$data, SimpleType $type, $name): void
     {
         if ($restriction = $type->getRestriction()) {
@@ -337,11 +327,7 @@ class YamlConverter extends AbstractConverter
             }
         }
     }
-    /**
-     * @param mixed $class
-     * @param mixed $data
-     * @param mixed $name
-     */
+
     private function visitBaseComplexType(&$class, &$data, BaseComplexType $type, $name): void
     {
         $parent = $type->getParent();
@@ -361,12 +347,7 @@ class YamlConverter extends AbstractConverter
             $data['properties'][$propName] = $this->visitAttribute($class, $schema, $attr);
         }
     }
-    /**
-     * @param array<string,mixed> $class
-     * @param array<string,mixed> $data
-     *
-     * @return array<string,mixed>
-     */
+
     protected function &handleClassExtension(array &$class, array &$data, Type $type, string $parentName): array
     {
         $property = [];
@@ -403,10 +384,7 @@ class YamlConverter extends AbstractConverter
 
         return $property;
     }
-    /**
-     * @param array<int,mixed> $class
-     * @return array<string,mixed>
-     */
+
     protected function &visitAttribute(array &$class, Schema $schema, AttributeItem $attribute): array
     {
         $property = [];
