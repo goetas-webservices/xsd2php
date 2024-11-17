@@ -199,10 +199,7 @@ class ClassGenerator
             $parameter->setDefaultValue(null);
         }
 
-        if (!$prop->getFixed()) {
-            $methodBody .= '$this->' . $name . ' = $' . $name . ';' . PHP_EOL;
-        }
-        $methodBody .= 'return $this;';
+        $methodBody .= '$this->' . $name . ' = $' . $name . ';' . PHP_EOL . 'return $this;';
         $method->setDocBlock($docblock);
         $method->setBody($methodBody);
         $method->setParameter($parameter);
