@@ -145,7 +145,7 @@ class ClassGenerator
         $docblock->setWordWrap(false);
         $docblock->setShortDescription('Sets a new ' . $name);
 
-        if ($prop->getFixed() !== null && $prop->getDoc()) {
+        if ($prop->getDoc()) {
             $docblock->setLongDescription($prop->getDoc());
         }
 
