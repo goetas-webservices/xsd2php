@@ -27,11 +27,6 @@ class OTASerializationTest extends TestCase
     private static $namespace = 'OTA';
     private static $files = [];
 
-    protected function setUp(): void
-    {
-        $this->markTestIncomplete();
-    }
-
     public static function setUpBeforeClass(): void
     {
         if (!self::$files) {
