@@ -56,6 +56,11 @@ class Xsd2PhpExtension extends Extension
             $converter->addMethodCall('setUseCdata', [$config['configs_jms']['xml_cdata']]);
         }
 
+        if ($config['strict_types'] ?? false) {
+            $container->getDefinition('goetas_webservices.xsd2php.php.class_generator')
+                ->addMethodCall('enableStrictTypes');
+        }
+
         $container->setParameter('goetas_webservices.xsd2php.config', $config);
     }
 

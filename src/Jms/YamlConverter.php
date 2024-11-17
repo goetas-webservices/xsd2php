@@ -6,6 +6,7 @@ use Doctrine\Inflector\InflectorFactory;
 use Exception;
 use GoetasWebservices\XML\XSDReader\Schema\Attribute\AttributeContainer;
 use GoetasWebservices\XML\XSDReader\Schema\Attribute\AttributeItem;
+use GoetasWebservices\XML\XSDReader\Schema\Attribute\AttributeSingle;
 use GoetasWebservices\XML\XSDReader\Schema\Element\Element;
 use GoetasWebservices\XML\XSDReader\Schema\Element\ElementContainer;
 use GoetasWebservices\XML\XSDReader\Schema\Element\ElementDef;
@@ -26,7 +27,7 @@ use GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPClass;
 
 class YamlConverter extends AbstractConverter
 {
-    protected $useCdata = true;
+    protected bool $useCdata = true;
 
     public function __construct(NamingStrategy $namingStrategy)
     {
@@ -47,7 +48,7 @@ class YamlConverter extends AbstractConverter
         });
     }
 
-    public function setUseCdata($value)
+    public function setUseCdata(bool $value): static
     {
         $this->logger->info("Set useCdata $value");
         $this->useCdata = $value;
@@ -57,7 +58,7 @@ class YamlConverter extends AbstractConverter
 
     private $classes = [];
 
-    public function convert(array $schemas)
+    public function convert(array $schemas): array
     {
         $visited = [];
         $this->classes = [];
@@ -68,7 +69,10 @@ class YamlConverter extends AbstractConverter
         return $this->getTypes();
     }
 
-    private function flattAttributes(AttributeContainer $container)
+    /**
+     * @return AttributeContainer[]
+     */
+    private function flattAttributes(AttributeContainer $container): array
     {
         $items = [];
         foreach ($container->getAttributes() as $attr) {
@@ -82,7 +86,10 @@ class YamlConverter extends AbstractConverter
         return $items;
     }
 
-    private function flattElements(ElementContainer $container)
+    /**
+     * @return ElementContainer[]
+     */
+    private function flattElements(ElementContainer $container): array
     {
         $items = [];
         foreach ($container->getElements() as $attr) {
@@ -99,7 +106,7 @@ class YamlConverter extends AbstractConverter
     /**
      * @return PHPClass[]
      */
-    public function getTypes()
+    public function getTypes(): array
     {
         uasort($this->classes, function ($a, $b) {
             return strcmp(key($a), key($b));
@@ -117,8 +124,10 @@ class YamlConverter extends AbstractConverter
 
         return $ret;
     }
-
-    private function navigate(Schema $schema, array &$visited)
+    /**
+     * @param array<string,bool> $visited
+     */
+    private function navigate(Schema $schema, array &$visited): void
     {
         if (isset($visited[spl_object_hash($schema)])) {
             return;
@@ -138,8 +147,12 @@ class YamlConverter extends AbstractConverter
             }
         }
     }
-
-    private function visitTypeBase(&$class, &$data, Type $type, $name)
+    /**
+     * @param mixed $class
+     * @param mixed $data
+     * @param mixed $name
+     */
+    private function visitTypeBase(&$class, &$data, Type $type, $name): void
     {
         if ($type instanceof BaseComplexType) {
             $this->visitBaseComplexType($class, $data, $type, $name);
@@ -152,7 +165,7 @@ class YamlConverter extends AbstractConverter
         }
     }
 
-    public function &visitElementDef(Schema $schema, ElementDef $element)
+    public function &visitElementDef(Schema $schema, ElementDef $element): array
     {
         if (!isset($this->classes[spl_object_hash($element)])) {
             $className = $this->findPHPNamespace($element) . '\\' . $this->getNamingStrategy()->getItemName($element);
@@ -166,7 +179,8 @@ class YamlConverter extends AbstractConverter
                 $data['xml_root_namespace'] = $schema->getTargetNamespace();
 
                 if (!$schema->getElementsQualification() && !($element instanceof Element && $element->isQualified())) {
-                    $data['xml_root_name'] = 'ns-' . substr(sha1($data['xml_root_namespace']), 0, 8) . ':' . $element->getName();
+                    $data['xml_root_name'] = 'ns-' . substr(sha1($data['xml_root_namespace']), 0, 8)
+                        . ':' . $element->getName();
                 }
             }
             $this->classes[spl_object_hash($element)]['class'] = &$class;
@@ -180,11 +194,14 @@ class YamlConverter extends AbstractConverter
 
 
             $data['extends'] = $visitedTypeClass;
-            $this->classes[spl_object_hash($element)]['skip'] = in_array($element->getSchema()->getTargetNamespace(), $this->baseSchemas, true)
-                || $this->getTypeAlias($type, $type->getSchema())
-            ;
+            $this->classes[spl_object_hash($element)]['skip'] =
+                in_array($element->getSchema()->getTargetNamespace(), $this->baseSchemas, true) ||
+                $this->getTypeAlias($type, $type->getSchema());
 
-            if (!$this->classes[spl_object_hash($element)]['skip'] && ($p = $this->getPropertyInHierarchy($visitedTypeClass, '__value'))) {
+            if (
+                !$this->classes[spl_object_hash($element)]['skip'] &&
+                ($p = $this->getPropertyInHierarchy($visitedTypeClass, '__value'))
+            ) {
                 $data['properties']['__value'] = $p;
             }
         }
@@ -192,7 +209,7 @@ class YamlConverter extends AbstractConverter
         return $this->classes[spl_object_hash($element)]['class'];
     }
 
-    private function findPHPNamespace(SchemaItem $item)
+    private function findPHPNamespace(SchemaItem $item): string
     {
         $schema = $item->getSchema();
 
@@ -203,7 +220,7 @@ class YamlConverter extends AbstractConverter
         return $this->namespaces[$schema->getTargetNamespace()];
     }
 
-    private function findPHPName(Type $type)
+    private function findPHPName(Type $type): string
     {
         $schema = $type->getSchema();
 
@@ -217,7 +234,10 @@ class YamlConverter extends AbstractConverter
         return $ns . '\\' . $name;
     }
 
-    public function &visitType(Type $type, $force = false)
+    /**
+     * @return array<string,array{}>
+     */
+    public function &visitType(Type $type, bool $force = false): array
     {
         $skip = in_array($type->getSchema()->getTargetNamespace(), $this->baseSchemas, true);
 
@@ -264,13 +284,7 @@ class YamlConverter extends AbstractConverter
         return $this->classes[spl_object_hash($type)]['class'];
     }
 
-    /**
-     * @param string $parentName
-     * @param string $parentClass
-     *
-     * @return array
-     */
-    private function &visitTypeAnonymous(Type $type, $parentName, $parentClass)
+    private function &visitTypeAnonymous(Type $type, $parentName, $parentClass): array
     {
         if (!isset($this->classes[spl_object_hash($type)])) {
             $class = [];
@@ -289,19 +303,27 @@ class YamlConverter extends AbstractConverter
 
         return $this->classes[spl_object_hash($type)]['class'];
     }
-
-    private function visitComplexType(&$class, &$data, ComplexType $type)
+    /**
+     * @param mixed $class
+     * @param mixed $data
+     */
+    private function visitComplexType(&$class, &$data, ComplexType $type): void
     {
         $schema = $type->getSchema();
         if (!isset($data['properties'])) {
             $data['properties'] = [];
         }
         foreach ($this->flattElements($type) as $element) {
-            $data['properties'][$this->getNamingStrategy()->getPropertyName($element)] = $this->visitElement($class, $schema, $element);
+            $propName = $this->getNamingStrategy()->getPropertyName($element);
+            $data['properties'][$propName] = $this->visitElement($class, $schema, $element);
         }
     }
-
-    protected function visitSimpleType(&$class, &$data, SimpleType $type, $name)
+    /**
+     * @param mixed $class
+     * @param mixed $data
+     * @param mixed $name
+     */
+    protected function visitSimpleType(&$class, &$data, SimpleType $type, $name): void
     {
         if ($restriction = $type->getRestriction()) {
             $parent = $restriction->getBase();
@@ -315,8 +337,12 @@ class YamlConverter extends AbstractConverter
             }
         }
     }
-
-    private function visitBaseComplexType(&$class, &$data, BaseComplexType $type, $name)
+    /**
+     * @param mixed $class
+     * @param mixed $data
+     * @param mixed $name
+     */
+    private function visitBaseComplexType(&$class, &$data, BaseComplexType $type, $name): void
     {
         $parent = $type->getParent();
         if ($parent) {
@@ -331,11 +357,17 @@ class YamlConverter extends AbstractConverter
             $data['properties'] = [];
         }
         foreach ($this->flattAttributes($type) as $attr) {
-            $data['properties'][$this->getNamingStrategy()->getPropertyName($attr)] = $this->visitAttribute($class, $schema, $attr);
+            $propName = $this->getNamingStrategy()->getPropertyName($attr);
+            $data['properties'][$propName] = $this->visitAttribute($class, $schema, $attr);
         }
     }
-
-    protected function &handleClassExtension(&$class, &$data, Type $type, $parentName)
+    /**
+     * @param array<string,mixed> $class
+     * @param array<string,mixed> $data
+     *
+     * @return array<string,mixed>
+     */
+    protected function &handleClassExtension(array &$class, array &$data, Type $type, string $parentName): array
     {
         $property = [];
         if ($alias = $this->getTypeAlias($type)) {
@@ -371,8 +403,11 @@ class YamlConverter extends AbstractConverter
 
         return $property;
     }
-
-    protected function &visitAttribute(&$class, Schema $schema, AttributeItem $attribute)
+    /**
+     * @param array<int,mixed> $class
+     * @return array<string,mixed>
+     */
+    protected function &visitAttribute(array &$class, Schema $schema, AttributeItem $attribute): array
     {
         $property = [];
         $property['expose'] = true;
@@ -380,18 +415,26 @@ class YamlConverter extends AbstractConverter
         $property['serialized_name'] = $attribute->getName();
 
         $inflector = InflectorFactory::create()->build();
-        $property['accessor']['getter'] = 'get' . $inflector->classify($this->getNamingStrategy()->getPropertyName($attribute));
-        $property['accessor']['setter'] = 'set' . $inflector->classify($this->getNamingStrategy()->getPropertyName($attribute));
+        $property['accessor']['getter'] =
+            'get' . $inflector->classify($this->getNamingStrategy()->getPropertyName($attribute));
+        $property['accessor']['setter'] =
+            'set' . $inflector->classify($this->getNamingStrategy()->getPropertyName($attribute));
+
+        if ($attribute instanceof AttributeSingle && $attribute->getFixed()) {
+            unset($property['accessor']['setter']);
+        }
 
         $property['xml_attribute'] = true;
 
+        /** @var AttributeSingle $attribute*/
         if ($alias = $this->getTypeAlias($attribute)) {
             $property['type'] = $alias;
         } elseif ($itemOfArray = $this->isArrayType($attribute->getType())) {
             if ($valueProp = $this->typeHasValue($itemOfArray, $class, 'xx')) {
                 $property['type'] = "GoetasWebservices\Xsd\XsdToPhp\Jms\SimpleListOf<" . $valueProp . '>';
             } else {
-                $property['type'] = "GoetasWebservices\Xsd\XsdToPhp\Jms\SimpleListOf<" . $this->findPHPName($itemOfArray) . '>';
+                $property['type'] = "GoetasWebservices\Xsd\XsdToPhp\Jms\SimpleListOf<"
+                   . $this->findPHPName($itemOfArray) . '>';
             }
         } else {
             $property['type'] = $this->findPHPClass($class, $attribute);
@@ -400,7 +443,7 @@ class YamlConverter extends AbstractConverter
         return $property;
     }
 
-    protected function typeHasValue(Type $type, $parentClass, $name)
+    protected function typeHasValue(Type $type, array $parentClass, $name): string|false
     {
         $newType = null;
         do {
@@ -430,21 +473,28 @@ class YamlConverter extends AbstractConverter
                 return $prop['type'];
             }
         } while (
-            (method_exists($type, 'getRestriction') && $type->getRestriction() && ($newType = $type->getRestriction()->getBase()))
-            ||
-            (method_exists($type, 'getExtension') && $type->getExtension() && ($newType = $type->getExtension()->getBase()))
+            (
+                method_exists($type, 'getRestriction') &&
+                $type->getRestriction() &&
+                    ($newType = $type->getRestriction()->getBase())
+            ) || (
+                method_exists($type, 'getExtension') &&
+                $type->getExtension() &&
+                ($newType = $type->getExtension()->getBase())
+            )
         );
 
         return false;
     }
 
-    public function getPropertyInHierarchy($class, $prop)
+    public function getPropertyInHierarchy(array $class, string $prop): array|false
     {
         $props = reset($class);
 
         if (
             (isset($props['properties']) && count($props['properties']) > 0 && !isset($props['properties'][$prop])) ||
-            (isset($props['properties']) && count($props['properties']) > 1)) {
+            (isset($props['properties']) && count($props['properties']) > 1)
+        ) {
             return false;
         }
 
@@ -459,15 +509,15 @@ class YamlConverter extends AbstractConverter
         return false;
     }
 
-    /**
-     * @param Element|ElementSingle $element
-     *
-     * @return string|null
-     */
-    protected function getElementNamespace(Schema $schema, ElementItem $element)
+    protected function getElementNamespace(Schema $schema, ElementItem $element): ?string
     {
-        if ($element->getSchema()->getTargetNamespace() &&
-            ($schema->getElementsQualification() || ($element instanceof Element && $element->isQualified()) || !$element->isLocal())
+        if (
+            $element->getSchema()->getTargetNamespace() &&
+            (
+                $schema->getElementsQualification() ||
+                ($element instanceof Element && $element->isQualified()) ||
+                ($element instanceof ElementSingle && !$element->isLocal())
+            )
         ) {
             return $element->getSchema()->getTargetNamespace();
         }
@@ -475,14 +525,7 @@ class YamlConverter extends AbstractConverter
         return null;
     }
 
-    /**
-     * @param PHPClass $class
-     * @param Element  $element
-     * @param bool     $arrayize
-     *
-     * @return array
-     */
-    protected function &visitElement(&$class, Schema $schema, ElementItem $element, $arrayize = true)
+    protected function &visitElement(array &$class, Schema $schema, ElementItem $element, bool $arrayize = true): array
     {
         $property = [];
         $property['expose'] = true;
@@ -498,9 +541,20 @@ class YamlConverter extends AbstractConverter
         }
 
         $inflector = InflectorFactory::create()->build();
-        $property['accessor']['getter'] = 'get' . $inflector->classify($this->getNamingStrategy()->getPropertyName($element));
-        $property['accessor']['setter'] = 'set' . $inflector->classify($this->getNamingStrategy()->getPropertyName($element));
+        $property['accessor']['getter'] = 'get' .
+            $inflector->classify($this->getNamingStrategy()->getPropertyName($element));
+        $property['accessor']['setter'] = 'set' .
+            $inflector->classify($this->getNamingStrategy()->getPropertyName($element));
+
+        if (!$element instanceof ElementSingle) {
+            return $property;
+        }
+
         $t = $element->getType();
+
+        if ($element->getFixed()) {
+            unset($property['accessor']['setter']);
+        }
 
         if ($arrayize) {
             if ($itemOfArray = $this->isArrayNestedElement($t)) {
@@ -576,7 +630,7 @@ class YamlConverter extends AbstractConverter
         return $property;
     }
 
-    protected function findPHPClass(&$class, Item $node)
+    protected function findPHPClass(array &$class, Item $node): string|null
     {
         $type = $node->getType();
 
@@ -602,7 +656,7 @@ class YamlConverter extends AbstractConverter
         return key($visited);
     }
 
-    private function findPHPElementClassName(&$class, ElementItem $element): string
+    private function findPHPElementClassName(array &$class, ElementItem $element): string
     {
         if ($element instanceof ElementRef) {
             $elRefClass = $this->visitElementDef($element->getSchema(), $element->getReferencedElement());

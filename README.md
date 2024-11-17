@@ -118,6 +118,8 @@ Here is an explanation on the meaning of each parameter:
 
 * `xsd2php.known_locations` (optional) override remote location with a local file.
 
+* `xsd2php.strict_types` (optional) enable strict types for setter arguments.
+
 * `xsd2php.known_namespace_locations` (optional) Specify schema location by namespace.
   This can be used to read schemas which import namespaces but do not specify schemaLocation attributes.
 

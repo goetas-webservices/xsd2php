@@ -2,7 +2,7 @@
 
 namespace GoetasWebservices\Xsd\XsdToPhp\Tests\Converter\JMS;
 
-class Xsd2PhpElementTest extends Xsd2JmsBase
+class Xsd2JmsElementTest extends Xsd2JmsBase
 {
     /**
      * @dataProvider getPrimitiveTypeConversions
@@ -324,6 +324,8 @@ class Xsd2PhpElementTest extends Xsd2JmsBase
                         ],
                     ],
                 ],
-            ], $classes);
+            ],
+            $classes
+        );
     }
 }
