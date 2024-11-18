@@ -395,6 +395,9 @@ class ClassGenerator
 
             $value = $prop->getFixed() ?? $prop->getDefault();
             if ($value !== null) {
+                if ($type->getName() === 'bool') {
+                    $value = $value === 'true';
+                }
                 $generatedProp->setDefaultValue($value);
             }
         }
