@@ -120,26 +120,26 @@ class PhpConverter extends AbstractConverter
         }
     }
 
-	/**
-	 * Process xsd:complexType xsd:sequence xsd:element
-	 *
-	 * @param PHPClass $class
-	 * @param Schema $schema
-	 * @param Sequence $sequence
-	 */
-	private function visitSequence(PHPClass $class, Schema $schema, Sequence $sequence): void
+    /**
+     * Process xsd:complexType xsd:sequence xsd:element
+     *
+     * @param PHPClass $class
+     * @param Schema $schema
+     * @param Sequence $sequence
+     */
+    private function visitSequence(PHPClass $class, Schema $schema, Sequence $sequence): void
     {
-		foreach ($sequence->getElements() as $childSequence) {
+        foreach ($sequence->getElements() as $childSequence) {
             if ($childSequence instanceof Group) {
-				$this->visitGroup($class, $schema, $childSequence);
-			} elseif ($childSequence instanceof Choice) {
+                $this->visitGroup($class, $schema, $childSequence);
+            } elseif ($childSequence instanceof Choice) {
                 $this->visitChoice($class, $schema, $childSequence);
             } else {
-				$property = $this->visitElement($class, $schema, $childSequence);
-				$class->addProperty($property);
-			}
-		}
-	}
+                $property = $this->visitElement($class, $schema, $childSequence);
+                $class->addProperty($property);
+            }
+        }
+    }
 
     /**
      * Process xsd:complexType xsd:choice xsd:element
@@ -151,12 +151,12 @@ class PhpConverter extends AbstractConverter
     private function visitChoice(PHPClass $class, Schema $schema, Choice $choice): void
     {
         foreach ($choice->getElements() as $choiceOption) {
-			if ($choiceOption instanceof Sequence) {
-				$this->visitSequence($class, $schema, $choiceOption);
-			} else {
-				$property = $this->visitElement($class, $schema, $choiceOption);
-				$class->addProperty($property);
-			}
+            if ($choiceOption instanceof Sequence) {
+                $this->visitSequence($class, $schema, $choiceOption);
+            } else {
+                $property = $this->visitElement($class, $schema, $choiceOption);
+                $class->addProperty($property);
+            }
         }
     }
 
@@ -240,12 +240,12 @@ class PhpConverter extends AbstractConverter
                     substr($className, $pos + 1),
                     substr($className, 0, $pos),
                 ];
-            } else {
-                return [
-                    $className,
-                    null,
-                ];
             }
+
+            return [
+                $className,
+                null,
+            ];
         }
 
         $name = $this->getNamingStrategy()->getTypeName($type);
@@ -320,7 +320,7 @@ class PhpConverter extends AbstractConverter
     /**
      * @param string $name
      *
-     * @return \GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPClass
+     * @return PHPClass
      */
     private function visitTypeAnonymous(Type $type, $name, PHPClass $parentClass)
     {
@@ -346,9 +346,9 @@ class PhpConverter extends AbstractConverter
     {
         $schema = $type->getSchema();
         foreach ($type->getElements() as $element) {
-			if ($element instanceof Sequence) {
-				$this->visitSequence($class, $schema, $element);
-			} elseif ($element instanceof Choice) {
+            if ($element instanceof Sequence) {
+                $this->visitSequence($class, $schema, $element);
+            } elseif ($element instanceof Choice) {
                 $this->visitChoice($class, $schema, $element);
             } elseif ($element instanceof Group) {
                 $this->visitGroup($class, $schema, $element);
@@ -451,7 +451,7 @@ class PhpConverter extends AbstractConverter
      * @param Element $element
      * @param bool $arrayize
      *
-     * @return \GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPProperty
+     * @return PHPProperty
      */
     private function visitElement(PHPClass $class, Schema $schema, ElementSingle $element, $arrayize = true)
     {
@@ -486,7 +486,9 @@ class PhpConverter extends AbstractConverter
                 $property->setType(new PHPClassOf($arg));
 
                 return $property;
-            } elseif ($itemOfArray = $this->isArrayNestedElement($t)) {
+            }
+
+            if ($itemOfArray = $this->isArrayNestedElement($t)) {
 
                 if (!$t->getName()) {
                     if ($element instanceof ElementRef) {
@@ -504,7 +506,9 @@ class PhpConverter extends AbstractConverter
                 $property->setType(new PHPClassOf($elementProp));
 
                 return $property;
-            } elseif ($this->isArrayElement($element)) {
+            }
+
+            if ($this->isArrayElement($element)) {
                 $arg = new PHPArg($this->getNamingStrategy()->getPropertyName($element));
 
                 $arg->setType($this->findPHPElementClassName($class, $element));
@@ -530,9 +534,9 @@ class PhpConverter extends AbstractConverter
         }
         if (!$node->getType()->getName()) {
             return $this->visitTypeAnonymous($node->getType(), $node->getName(), $class);
-        } else {
-            return $this->visitType($node->getType(), $force);
         }
+
+        return $this->visitType($node->getType(), $force);
     }
 
     private function typeHasValue(Type $type, PHPClass $parentClass, $name)
