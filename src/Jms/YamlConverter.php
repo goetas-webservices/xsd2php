@@ -398,10 +398,6 @@ class YamlConverter extends AbstractConverter
         $property['accessor']['setter'] =
             'set' . $inflector->classify($this->getNamingStrategy()->getPropertyName($attribute));
 
-        if ($attribute instanceof AttributeSingle && $attribute->getFixed()) {
-            unset($property['accessor']['setter']);
-        }
-
         $property['xml_attribute'] = true;
 
         /** @var AttributeSingle $attribute*/
@@ -513,10 +509,6 @@ class YamlConverter extends AbstractConverter
         if (!$this->useCdata) {
             $property['xml_element']['cdata'] = $this->useCdata;
         }
-        $elementNamespace = $this->getElementNamespace($schema, $element);
-        if ($elementNamespace) {
-            $property['xml_element']['namespace'] = $elementNamespace;
-        }
 
         $inflector = InflectorFactory::create()->build();
         $property['accessor']['getter'] = 'get' .
@@ -528,11 +520,12 @@ class YamlConverter extends AbstractConverter
             return $property;
         }
 
-        $t = $element->getType();
-
-        if ($element->getFixed()) {
-            unset($property['accessor']['setter']);
+        $elementNamespace = $this->getElementNamespace($schema, $element);
+        if ($elementNamespace && $element->isQualified()) {
+            $property['xml_element']['namespace'] = $elementNamespace;
         }
+
+        $t = $element->getType();
 
         if ($arrayize) {
             if ($itemOfArray = $this->isArrayNestedElement($t)) {
