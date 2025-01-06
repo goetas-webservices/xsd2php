@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 class I138Test extends TestCase
 {
-    public function testChioce()
+    public function testChoice()
     {
         $reader = new SchemaReader();
         $schema = $reader->readFile(__DIR__ . '/data.xsd');
