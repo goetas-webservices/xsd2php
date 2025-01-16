@@ -5,6 +5,7 @@ namespace GoetasWebservices\Xsd\XsdToPhp\Php;
 use Exception;
 use GoetasWebservices\XML\XSDReader\Schema\Attribute\AttributeItem;
 use GoetasWebservices\XML\XSDReader\Schema\Attribute\Group as AttributeGroup;
+use GoetasWebservices\XML\XSDReader\Schema\Element\Any\Any;
 use GoetasWebservices\XML\XSDReader\Schema\Element\Element;
 use GoetasWebservices\XML\XSDReader\Schema\Element\ElementDef;
 use GoetasWebservices\XML\XSDReader\Schema\Element\ElementItem;
@@ -134,6 +135,8 @@ class PhpConverter extends AbstractConverter
                 $this->visitGroup($class, $schema, $childSequence);
             } elseif ($childSequence instanceof Choice) {
                 $this->visitChoice($class, $schema, $childSequence);
+            } elseif ($childSequence instanceof Any) {
+                continue;
             } else {
                 $property = $this->visitElement($class, $schema, $childSequence);
                 $class->addProperty($property);
@@ -153,6 +156,10 @@ class PhpConverter extends AbstractConverter
         foreach ($choice->getElements() as $choiceOption) {
             if ($choiceOption instanceof Sequence) {
                 $this->visitSequence($class, $schema, $choiceOption);
+            } elseif ($choiceOption instanceof Group) {
+                $this->visitGroup($class, $schema, $choiceOption);
+            } elseif ($choiceOption instanceof Any) {
+                continue;
             } else {
                 $property = $this->visitElement($class, $schema, $choiceOption);
                 $class->addProperty($property);
@@ -165,6 +172,8 @@ class PhpConverter extends AbstractConverter
         foreach ($group->getElements() as $childGroup) {
             if ($childGroup instanceof Group) {
                 $this->visitGroup($class, $schema, $childGroup);
+            } elseif ($childGroup instanceof Any) {
+                continue;
             } else {
                 $property = $this->visitElement($class, $schema, $childGroup);
                 $class->addProperty($property);
@@ -352,6 +361,8 @@ class PhpConverter extends AbstractConverter
                 $this->visitChoice($class, $schema, $element);
             } elseif ($element instanceof Group) {
                 $this->visitGroup($class, $schema, $element);
+            } elseif ($element instanceof Any) {
+                continue;
             } else {
                 $property = $this->visitElement($class, $schema, $element);
                 $class->addProperty($property);

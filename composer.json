@@ -1,11 +1,15 @@
 {
-  "name": "goetas-webservices/xsd2php",
-  "description": "Convert XSD  (XML Schema) definitions into PHP classes and JMS metadata",
+  "name": "ryankubanempire/xsd2php",
+  "description": "Convert XSD  (XML Schema) definitions into PHP classes and JMS metadata. This is a fork of goetas-webservices/xsd2php",
   "type": "library",
   "authors": [
     {
       "name": "Asmir Mustafic",
       "email" : "goetas@gmail.com"
+    },
+    {
+      "name": "Jan Ryan Felipe",
+      "email": "ryan@kubanempire.com"
     }
   ],
   "keywords": [
@@ -23,7 +27,7 @@
     "symfony/dependency-injection": "^2.2|^3.0|^4.0|^5.0|^6.0|^7.0",
     "symfony/yaml": "^2.2|^3.0|^4.0|^5.0|^6.0|^7.0",
     "symfony/config": "^2.2|^3.0|^4.0|^5.0|^6.0|^7.0",
-    "goetas-webservices/xsd-reader": "^0.3.7 | ^0.4.1",
+    "ryankubanempire/xsd-reader": "dev-support-any-type",
     "doctrine/inflector": "^2.0",
     "laminas/laminas-code": "^3.3.2|^4.0",
     "psr/log": "^1.0 | ^2.0 | ^3.0"
