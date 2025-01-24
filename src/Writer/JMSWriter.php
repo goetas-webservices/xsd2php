@@ -17,7 +17,7 @@ class JMSWriter extends Writer implements LoggerAwareInterface
      */
     private $pathGenerator;
 
-    public function __construct(PathGenerator $pathGenerator, LoggerInterface $logger = null)
+    public function __construct(PathGenerator $pathGenerator, ?LoggerInterface $logger = null)
     {
         $this->pathGenerator = $pathGenerator;
         $this->logger = $logger ?: new NullLogger();
