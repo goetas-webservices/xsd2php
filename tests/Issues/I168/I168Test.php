@@ -1,12 +1,13 @@
 <?php
-namespace GoetasWebservices\Xsd\XsdToPhp\Tests\Issues\I63;
 
+namespace GoetasWebservices\Xsd\XsdToPhp\Tests\Issues\I168;
+
+use GoetasWebservices\XML\XSDReader\SchemaReader;
 use GoetasWebservices\Xsd\XsdToPhp\Naming\ShortNamingStrategy;
 use GoetasWebservices\Xsd\XsdToPhp\Php\PhpConverter;
-use GoetasWebservices\XML\XSDReader\SchemaReader;
 use PHPUnit\Framework\TestCase;
 
-class I138Test extends TestCase
+class I168Test extends TestCase
 {
     public function testChoice()
     {
@@ -18,7 +19,8 @@ class I138Test extends TestCase
 
         $items = $phpConv->convert([$schema]);
 
-        $this->assertTrue($items['Epa\ComplexType']->getProperty('option1')->getNullable());
-        $this->assertTrue($items['Epa\ComplexType']->getProperty('option2')->getNullable());
+        $this->assertTrue($items['Epa\ComplexType']->getProperty('key')->getNullable());
+        $this->assertTrue($items['Epa\ComplexType']->getProperty('stream')->getNullable());
+        $this->assertTrue($items['Epa\ComplexType']->getProperty('packet')->getNullable());
     }
 }
