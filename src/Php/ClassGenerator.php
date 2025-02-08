@@ -16,6 +16,7 @@ use Laminas\Code\Generator\DocBlockGenerator;
 use Laminas\Code\Generator\MethodGenerator;
 use Laminas\Code\Generator\ParameterGenerator;
 use Laminas\Code\Generator\PropertyGenerator;
+use Laminas\Code\Generator\ValueGenerator;
 
 class ClassGenerator
 {
@@ -199,9 +200,21 @@ class ClassGenerator
             $parameter->setDefaultValue(null);
         }
 
+        if ($prop->getNullable() && $parameter->getType()) {
+            $parameter->setDefaultValue(null);
+        }
+
+        if (
+            ($parameter->getDefaultValue() instanceof ValueGenerator) &&
+            $parameter->getDefaultValue()->getValue() === null && $parameter->getType() !== null &&
+            substr($parameter->getType(), 0, 1) !== '?'
+        ) {
+            $parameter->setType('?' . $parameter->getType());
+        }
+
         $methodBody .= '$this->' . $name . ' = $' . $name . ';' . PHP_EOL . 'return $this;';
-        $method->setDocBlock($docblock);
         $method->setBody($methodBody);
+        $method->setDocBlock($docblock);
         $method->setParameter($parameter);
 
         $generator->addMethodFromGenerator($method);

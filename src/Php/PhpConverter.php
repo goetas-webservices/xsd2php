@@ -36,7 +36,7 @@ class PhpConverter extends AbstractConverter
 
     private array $skipByType = [];
 
-    public function __construct(NamingStrategy $namingStrategy, LoggerInterface $loggerInterface = null)
+    public function __construct(NamingStrategy $namingStrategy, ?LoggerInterface $loggerInterface = null)
     {
         parent::__construct($namingStrategy, $loggerInterface);
 
@@ -134,6 +134,8 @@ class PhpConverter extends AbstractConverter
         foreach ($sequence->getElements() as $childSequence) {
             if ($childSequence instanceof Group) {
                 $this->visitGroup($class, $schema, $childSequence);
+            } elseif ($childSequence instanceof Choice) {
+                $this->visitChoice($class, $schema, $childSequence);
             } else {
                 $property = $this->visitElement($class, $schema, $childSequence);
                 $class->addProperty($property);
@@ -247,12 +249,12 @@ class PhpConverter extends AbstractConverter
                     substr($className, $pos + 1),
                     substr($className, 0, $pos),
                 ];
-            } else {
-                return [
-                    $className,
-                    null,
-                ];
             }
+
+            return [
+                $className,
+                null,
+            ];
         }
 
         $name = $this->getNamingStrategy()->getTypeName($type);
@@ -494,7 +496,9 @@ class PhpConverter extends AbstractConverter
                 $property->setType(new PHPClassOf($arg));
 
                 return $property;
-            } elseif ($itemOfArray = $this->isArrayNestedElement($t)) {
+            }
+
+            if ($itemOfArray = $this->isArrayNestedElement($t)) {
                 if (!$t->getName()) {
                     if ($element instanceof ElementRef) {
                         $refClass = $this->visitElementDef($element->getReferencedElement());
@@ -511,7 +515,9 @@ class PhpConverter extends AbstractConverter
                 $property->setType(new PHPClassOf($elementProp));
 
                 return $property;
-            } elseif ($this->isArrayElement($element)) {
+            }
+
+            if ($this->isArrayElement($element)) {
                 $arg = new PHPArg($this->getNamingStrategy()->getPropertyName($element));
 
                 $arg->setType($this->findPHPElementClassName($class, $element));
@@ -540,9 +546,9 @@ class PhpConverter extends AbstractConverter
         }
         if (!$node->getType()->getName()) {
             return $this->visitTypeAnonymous($node->getType(), $node->getName(), $class);
-        } else {
-            return $this->visitType($node->getType(), $force);
         }
+
+        return $this->visitType($node->getType(), $force);
     }
 
     private function typeHasValue(Type $type, PHPClass $parentClass, string $name): PHPClass|false

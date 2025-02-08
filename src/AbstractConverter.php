@@ -33,7 +33,7 @@ abstract class AbstractConverter
 
     protected array $aliasCache = [];
 
-    public function __construct(NamingStrategy $namingStrategy, LoggerInterface $logger = null)
+    public function __construct(NamingStrategy $namingStrategy, ?LoggerInterface $logger = null)
     {
         $this->namingStrategy = $namingStrategy;
         $this->logger = $logger ?: new NullLogger();

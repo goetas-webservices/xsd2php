@@ -16,7 +16,7 @@ class PHPWriter extends Writer implements LoggerAwareInterface
     protected $classWriter;
     private $generator;
 
-    public function __construct(PHPClassWriter $classWriter, ClassGenerator $generator, LoggerInterface $logger = null)
+    public function __construct(PHPClassWriter $classWriter, ClassGenerator $generator, ?LoggerInterface $logger = null)
     {
         $this->generator = $generator;
         $this->classWriter = $classWriter;
