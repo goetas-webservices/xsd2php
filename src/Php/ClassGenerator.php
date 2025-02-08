@@ -2,11 +2,13 @@
 
 namespace GoetasWebservices\Xsd\XsdToPhp\Php;
 
+use Doctrine\Inflector\Inflector;
 use Doctrine\Inflector\InflectorFactory;
 use GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPClass;
 use GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPClassOf;
 use GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPProperty;
 use Laminas\Code\Generator;
+use Laminas\Code\Generator\ClassGenerator as LaminasClassGenerator;
 use Laminas\Code\Generator\DocBlock\Tag\ParamTag;
 use Laminas\Code\Generator\DocBlock\Tag\ReturnTag;
 use Laminas\Code\Generator\DocBlock\Tag\VarTag;
@@ -18,23 +20,42 @@ use Laminas\Code\Generator\ValueGenerator;
 
 class ClassGenerator
 {
-    private $strictTypes;
+    private bool $strictTypes = false;
 
-    public function __construct(bool $strictTypes = false)
+    protected Inflector $inflector;
+
+    public function __construct()
     {
-        $this->strictTypes = $strictTypes;
+        $this->inflector = InflectorFactory::create()->build();
     }
 
-    private function handleBody(Generator\ClassGenerator $class, PHPClass $type)
+    public function enableStrictTypes(): void
+    {
+        $this->strictTypes = true;
+    }
+
+    private function handleBody(Generator\ClassGenerator $class, PHPClass $type): bool
     {
         foreach ($type->getProperties() as $prop) {
-            if ($prop->getName() !== '__value') {
-                $this->handleProperty($class, $prop);
-            }
-        }
-        foreach ($type->getProperties() as $prop) {
-            if ($prop->getName() !== '__value') {
-                $this->handleMethod($class, $prop, $type);
+            $name = $prop->getName();
+            if ($name !== '__value') {
+                $parentProp = $type->getPropertyInHierarchy($name, true);
+                $fixed = $prop->getFixed();
+                $valDiff = $parentProp &&
+                    (($fixed ?? $prop->getDefault()) !== ($parentProp->getFixed() ?? $parentProp->getDefault()));
+
+                if (!$parentProp || $valDiff) {
+                    $this->handleProperty($class, $prop);
+                }
+
+                if (!$parentProp) {
+                    $this->handleGetter($class, $prop, $type);
+                    $this->handleSetter($class, $prop, $type);
+
+                    if ($prop->getType() instanceof PHPClassOf) {
+                        $this->handleAdder($class, $prop, $type);
+                    }
+                }
             }
         }
 
@@ -45,8 +66,12 @@ class ClassGenerator
         return true;
     }
 
-    private function handleValueMethod(Generator\ClassGenerator $generator, PHPProperty $prop, PHPClass $class, $all = true)
-    {
+    private function handleValueMethod(
+        Generator\ClassGenerator $generator,
+        PHPProperty $prop,
+        PHPClass $class,
+        bool $all = true
+    ): void {
         $type = $prop->getType();
 
         $docblock = new DocBlockGenerator('Construct');
@@ -113,37 +138,37 @@ class ClassGenerator
         $generator->addMethodFromGenerator($method);
     }
 
-    private function handleSetter(Generator\ClassGenerator $generator, PHPProperty $prop, PHPClass $class)
+    private function handleSetter(Generator\ClassGenerator $generator, PHPProperty $prop, PHPClass $class): void
     {
+        $name = $prop->getName();
         $methodBody = '';
         $docblock = new DocBlockGenerator();
         $docblock->setWordWrap(false);
-
-        $docblock->setShortDescription('Sets a new ' . $prop->getName());
+        $docblock->setShortDescription('Sets a new ' . $name);
 
         if ($prop->getDoc()) {
             $docblock->setLongDescription($prop->getDoc());
         }
 
-        $patramTag = new ParamTag($prop->getName());
+        $patramTag = new ParamTag($name);
         $docblock->setTag($patramTag);
 
-        $return = new ReturnTag('self');
+        $return = new ReturnTag('static');
         $docblock->setTag($return);
 
         $type = $prop->getType();
 
-        $inflector = InflectorFactory::create()->build();
-        $method = new MethodGenerator('set' . $inflector->classify($prop->getName()));
+        $method = new MethodGenerator('set' . $this->inflector->classify($name));
 
-        $parameter = new ParameterGenerator($prop->getName());
+        $parameter = new ParameterGenerator($name);
 
         if ($type && $type instanceof PHPClassOf) {
             $patramTag->setTypes($type->getArg()
                     ->getType()->getPhpType() . '[]');
             $parameter->setType('array');
 
-            if ($p = $type->getArg()->getType()->isSimpleType()
+            if (
+                $p = $type->getArg()->getType()->isSimpleType()
             ) {
                 if (($t = $p->getType())) {
                     $patramTag->setTypes($t->getPhpType());
@@ -179,14 +204,15 @@ class ClassGenerator
             $parameter->setDefaultValue(null);
         }
 
-        if (($parameter->getDefaultValue() instanceof ValueGenerator) &&
+        if (
+            ($parameter->getDefaultValue() instanceof ValueGenerator) &&
             $parameter->getDefaultValue()->getValue() === null && $parameter->getType() !== null &&
-            substr($parameter->getType(), 0, 1) !== '?') {
+            substr($parameter->getType(), 0, 1) !== '?'
+        ) {
             $parameter->setType('?' . $parameter->getType());
         }
 
-        $methodBody .= '$this->' . $prop->getName() . ' = $' . $prop->getName() . ';' . PHP_EOL;
-        $methodBody .= 'return $this;';
+        $methodBody .= '$this->' . $name . ' = $' . $name . ';' . PHP_EOL . 'return $this;';
         $method->setBody($methodBody);
         $method->setDocBlock($docblock);
         $method->setParameter($parameter);
@@ -194,14 +220,14 @@ class ClassGenerator
         $generator->addMethodFromGenerator($method);
     }
 
-    private function handleGetter(Generator\ClassGenerator $generator, PHPProperty $prop, PHPClass $class)
+    private function handleGetter(Generator\ClassGenerator $generator, PHPProperty $prop, PHPClass $class): void
     {
-        $inflector = InflectorFactory::create()->build();
+        $name = $prop->getName();
 
         if ($prop->getType() instanceof PHPClassOf) {
             $docblock = new DocBlockGenerator();
             $docblock->setWordWrap(false);
-            $docblock->setShortDescription('isset ' . $prop->getName());
+            $docblock->setShortDescription("isset $name");
             if ($prop->getDoc()) {
                 $docblock->setLongDescription($prop->getDoc());
             }
@@ -214,14 +240,14 @@ class ClassGenerator
             $paramIndex = new ParameterGenerator('index');
 
 
-            $method = new MethodGenerator('isset' . $inflector->classify($prop->getName()), [$paramIndex]);
+            $method = new MethodGenerator('isset' . $this->inflector->classify($name), [$paramIndex]);
             $method->setDocBlock($docblock);
-            $method->setBody('return isset($this->' . $prop->getName() . '[$index]);');
+            $method->setBody('return isset($this->' . $name . '[$index]);');
             $generator->addMethodFromGenerator($method);
 
             $docblock = new DocBlockGenerator();
             $docblock->setWordWrap(false);
-            $docblock->setShortDescription('unset ' . $prop->getName());
+            $docblock->setShortDescription("unset $name");
             if ($prop->getDoc()) {
                 $docblock->setLongDescription($prop->getDoc());
             }
@@ -232,17 +258,17 @@ class ClassGenerator
 
             $docblock->setTag(new ReturnTag('void'));
 
-            $method = new MethodGenerator('unset' . $inflector->classify($prop->getName()), [$paramIndex]);
+            $method = new MethodGenerator('unset' . $this->inflector->classify($name), [$paramIndex]);
             $method->setDocBlock($docblock);
-            $method->setBody('unset($this->' . $prop->getName() . '[$index]);');
+            $method->setBody('unset($this->' . $name . '[$index]);');
+
             $generator->addMethodFromGenerator($method);
         }
-        // ////
 
         $docblock = new DocBlockGenerator();
         $docblock->setWordWrap(false);
 
-        $docblock->setShortDescription('Gets as ' . $prop->getName());
+        $docblock->setShortDescription("Gets as $name");
 
         if ($prop->getDoc()) {
             $docblock->setLongDescription($prop->getDoc());
@@ -269,16 +295,16 @@ class ClassGenerator
         }
 
         $docblock->setTag($tag);
-
-        $method = new MethodGenerator('get' . $inflector->classify($prop->getName()));
+        $method = new MethodGenerator('get' . $this->inflector->classify($name));
         $method->setDocBlock($docblock);
-        $method->setBody('return $this->' . $prop->getName() . ';');
+        $method->setBody('return $this->' . $name . ';');
 
         $generator->addMethodFromGenerator($method);
     }
 
-    private function handleAdder(Generator\ClassGenerator $generator, PHPProperty $prop, PHPClass $class)
+    private function handleAdder(Generator\ClassGenerator $generator, PHPProperty $prop, PHPClass $class): void
     {
+        /** @var PHPClassOf $type */
         $type = $prop->getType();
         $propName = $type->getArg()->getName();
 
@@ -291,14 +317,13 @@ class ClassGenerator
         }
 
         $return = new ReturnTag();
-        $return->setTypes('self');
+        $return->setTypes('static');
         $docblock->setTag($return);
 
         $patramTag = new ParamTag($propName, $type->getArg()->getType()->getPhpType());
         $docblock->setTag($patramTag);
 
-        $inflector = InflectorFactory::create()->build();
-        $method = new MethodGenerator('addTo' . $inflector->classify($prop->getName()));
+        $method = new MethodGenerator('addTo' . $this->inflector->classify($prop->getName()));
 
         $parameter = new ParameterGenerator($propName);
         $tt = $type->getArg()->getType();
@@ -326,26 +351,30 @@ class ClassGenerator
         $generator->addMethodFromGenerator($method);
     }
 
-    private function handleMethod(Generator\ClassGenerator $generator, PHPProperty $prop, PHPClass $class)
+    private function handleMethod(Generator\ClassGenerator $generator, PHPProperty $prop, PHPClass $class): void
     {
         if ($prop->getType() instanceof PHPClassOf) {
             $this->handleAdder($generator, $prop, $class);
         }
 
         $this->handleGetter($generator, $prop, $class);
-        $this->handleSetter($generator, $prop, $class);
+
+        if ($prop->getFixed()) {
+            $this->handleSetter($generator, $prop, $class);
+        }
     }
 
-    private function handleProperty(Generator\ClassGenerator $class, PHPProperty $prop)
+    private function handleProperty(Generator\ClassGenerator $class, PHPProperty $prop): void
     {
         $generatedProp = new PropertyGenerator($prop->getName());
-        $generatedProp->setVisibility(PropertyGenerator::VISIBILITY_PRIVATE);
+        $generatedProp->setVisibility($prop->getVisibility());
 
         $class->addPropertyFromGenerator($generatedProp);
 
-        if ($prop->getType() && (!$prop->getType()->getNamespace() && $prop->getType()->getName() == 'array')) {
-            // $generatedProp->setDefaultValue(array(), PropertyValueGenerator::TYPE_AUTO, PropertyValueGenerator::OUTPUT_SINGLE_LINE);
-        }
+        /* if ($prop->getType() && (!$prop->getType()->getNamespace() && $prop->getType()->getName() == 'array')) {
+            $generatedProp
+                ->setDefaultValue([], PropertyValueGenerator::TYPE_AUTO, PropertyValueGenerator::OUTPUT_SINGLE_LINE);
+        } */
 
         $docBlock = new DocBlockGenerator();
         $docBlock->setWordWrap(false);
@@ -366,6 +395,7 @@ class ClassGenerator
                     $tag->setTypes($t->getPhpType() . '[]');
                 }
             }
+
             $generatedProp->setDefaultValue($type->getArg()->getDefault());
         } elseif ($type) {
             if ($type->isNativeType()) {
@@ -375,13 +405,22 @@ class ClassGenerator
             } else {
                 $tag->setTypes($prop->getType()->getPhpType());
             }
+
+            $value = $prop->getFixed() ?? $prop->getDefault();
+            if ($value !== null) {
+                if ($type->getName() === 'bool') {
+                    $value = $value === 'true';
+                }
+                $generatedProp->setDefaultValue($value);
+            }
         }
+
         $docBlock->setTag($tag);
     }
 
-    public function generate(PHPClass $type)
+    public function generate(PHPClass $type): ?LaminasClassGenerator
     {
-        $class = new \Laminas\Code\Generator\ClassGenerator();
+        $class = new LaminasClassGenerator();
         $docblock = new DocBlockGenerator('Class representing ' . $type->getName());
         $docblock->setWordWrap(false);
         if ($type->getDoc()) {
@@ -389,7 +428,7 @@ class ClassGenerator
         }
         $class->setNamespaceName($type->getNamespace() ?: null);
         $class->setName($type->getName());
-        $class->setDocblock($docblock);
+        $class->setDocBlock($docblock);
         $class->setImplementedInterfaces($type->getImplements());
 
         if ($extends = $type->getExtends()) {
@@ -412,5 +451,7 @@ class ClassGenerator
         if ($this->handleBody($class, $type)) {
             return $class;
         }
+
+        return null;
     }
 }
