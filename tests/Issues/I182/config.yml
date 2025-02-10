@@ -1,0 +1,10 @@
+xsd2php:
+  namespaces:
+    'http://www.example.com': 'Example'
+  destinations_php:
+    'Example': example/php
+  destinations_jms:
+    'Example': example/jms
+  prefixes:
+    'http://www.example.com':
+      'root': 'prefix'

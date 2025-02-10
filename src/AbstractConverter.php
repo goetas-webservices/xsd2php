@@ -36,6 +36,8 @@ abstract class AbstractConverter
 
     protected $typeAliases = [];
 
+    protected $rootPrefixes = [];
+
     protected $aliasCache = [];
 
     public function addAliasMap($ns, $name, callable $handler)
@@ -56,7 +58,7 @@ abstract class AbstractConverter
         return $this->typeAliases;
     }
 
-    public function getTypeAlias($type, ?Schema $schemapos = null)
+    public function getTypeAlias($type, Schema $schemapos = null)
     {
         $schema = $schemapos ?: $type->getSchema();
 
@@ -69,7 +71,27 @@ abstract class AbstractConverter
         }
     }
 
-    public function __construct(NamingStrategy $namingStrategy, ?LoggerInterface $logger = null)
+    public function addRootPrefix($ns, $name, $prefix)
+    {
+        $this->logger->info("Added prefix $ns $prefix for $name");
+        $this->rootPrefixes[$ns][$name] = $prefix;
+    }
+
+    public function getRootPrefixes()
+    {
+        return $this->rootPrefixes;
+    }
+
+    public function getRootPrefix($type, Schema $schemapos = null)
+    {
+        $schema = $schemapos ?: $type->getSchema();
+
+        if (isset($this->rootPrefixes[$schema->getTargetNamespace()][$type->getName()])) {
+            return $this->rootPrefixes[$schema->getTargetNamespace()][$type->getName()];
+        }
+    }
+
+    public function __construct(NamingStrategy $namingStrategy, LoggerInterface $logger = null)
     {
         $this->namingStrategy = $namingStrategy;
         $this->logger = $logger ?: new NullLogger();

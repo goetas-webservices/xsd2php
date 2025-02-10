@@ -71,6 +71,12 @@ class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
+            ->arrayNode('prefixes')->fixXmlConfig('prefix')
+                ->prototype('array')
+                        ->prototype('scalar')
+                        ->end()
+                    ->end()
+                ->end()
             ->end();
 
         return $treeBuilder;
