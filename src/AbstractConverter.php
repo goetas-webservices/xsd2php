@@ -58,7 +58,7 @@ abstract class AbstractConverter
         return $this->typeAliases;
     }
 
-    public function getTypeAlias($type, Schema $schemapos = null)
+    public function getTypeAlias($type, ?Schema $schemapos = null)
     {
         $schema = $schemapos ?: $type->getSchema();
 
@@ -89,7 +89,7 @@ abstract class AbstractConverter
         }
     }
 
-    public function __construct(NamingStrategy $namingStrategy, LoggerInterface $logger = null)
+    public function __construct(NamingStrategy $namingStrategy, ?LoggerInterface $logger = null)
     {
         $this->namingStrategy = $namingStrategy;
         $this->logger = $logger ?: new NullLogger();
