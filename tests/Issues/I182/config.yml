@@ -7,4 +7,4 @@ xsd2php:
     'Example': example/jms
   prefixes:
     'http://www.example.com':
-      'root': 'prefix'
+      'Example\Root': 'prefix'

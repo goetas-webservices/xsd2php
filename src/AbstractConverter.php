@@ -82,12 +82,10 @@ abstract class AbstractConverter
         return $this->rootPrefixes;
     }
 
-    public function getRootPrefix($type, Schema $schemapos = null)
+    public function getRootPrefix($namespace, ?string $targetNamespace = null)
     {
-        $schema = $schemapos ?: $type->getSchema();
-
-        if (isset($this->rootPrefixes[$schema->getTargetNamespace()][$type->getName()])) {
-            return $this->rootPrefixes[$schema->getTargetNamespace()][$type->getName()];
+        if (isset($this->rootPrefixes[$targetNamespace][$namespace])) {
+            return $this->rootPrefixes[$targetNamespace][$namespace];
         }
     }
 

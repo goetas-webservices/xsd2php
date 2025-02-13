@@ -178,7 +178,7 @@ class YamlConverter extends AbstractConverter
                 $visitedTypeClass = $this->visitType($type);
             }
 
-            if ($prefix = $this->getRootPrefix($element, $type->getSchema())) {
+            if ($prefix = $this->getRootPrefix($ns, $schema->getTargetNamespace())) {
                 $data['xml_root_prefix'] = $prefix;
             }
 
