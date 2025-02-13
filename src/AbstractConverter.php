@@ -36,6 +36,8 @@ abstract class AbstractConverter
 
     protected $typeAliases = [];
 
+    protected $rootPrefixes = [];
+
     protected $aliasCache = [];
 
     public function addAliasMap($ns, $name, callable $handler)
@@ -66,6 +68,24 @@ abstract class AbstractConverter
         }
         if (isset($this->typeAliases[$schema->getTargetNamespace()][$type->getName()])) {
             return $this->aliasCache[$cid] = call_user_func($this->typeAliases[$schema->getTargetNamespace()][$type->getName()], $type);
+        }
+    }
+
+    public function addRootPrefix($ns, $name, $prefix)
+    {
+        $this->logger->info("Added prefix $ns $prefix for $name");
+        $this->rootPrefixes[$ns][$name] = $prefix;
+    }
+
+    public function getRootPrefixes()
+    {
+        return $this->rootPrefixes;
+    }
+
+    public function getRootPrefix($namespace, ?string $targetNamespace = null)
+    {
+        if (isset($this->rootPrefixes[$targetNamespace][$namespace])) {
+            return $this->rootPrefixes[$targetNamespace][$namespace];
         }
     }
 
