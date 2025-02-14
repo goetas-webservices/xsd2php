@@ -10,6 +10,7 @@ use GoetasWebservices\XML\XSDReader\Schema\Element\ElementDef;
 use GoetasWebservices\XML\XSDReader\Schema\Element\ElementItem;
 use GoetasWebservices\XML\XSDReader\Schema\Element\ElementRef;
 use GoetasWebservices\XML\XSDReader\Schema\Element\ElementSingle;
+use GoetasWebservices\XML\XSDReader\Schema\Element\Any\Any;
 use GoetasWebservices\XML\XSDReader\Schema\Element\Group;
 use GoetasWebservices\XML\XSDReader\Schema\Element\Choice;
 use GoetasWebservices\XML\XSDReader\Schema\Element\Sequence;
@@ -352,6 +353,8 @@ class PhpConverter extends AbstractConverter
                 $this->visitChoice($class, $schema, $element);
             } elseif ($element instanceof Group) {
                 $this->visitGroup($class, $schema, $element);
+            } elseif ($element instanceof Any) {
+                return;
             } else {
                 $property = $this->visitElement($class, $schema, $element);
                 $class->addProperty($property);
