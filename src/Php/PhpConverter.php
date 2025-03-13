@@ -4,6 +4,7 @@ namespace GoetasWebservices\Xsd\XsdToPhp\Php;
 
 use Exception;
 use GoetasWebservices\XML\XSDReader\Schema\Attribute\AttributeItem;
+use GoetasWebservices\XML\XSDReader\Schema\Element\ElementContainer;
 use GoetasWebservices\XML\XSDReader\Schema\Attribute\Group as AttributeGroup;
 use GoetasWebservices\XML\XSDReader\Schema\Element\Element;
 use GoetasWebservices\XML\XSDReader\Schema\Element\ElementDef;
@@ -130,7 +131,7 @@ class PhpConverter extends AbstractConverter
      */
     private function visitSequence(PHPClass $class, Schema $schema, Sequence $sequence): void
     {
-        foreach ($sequence->getElements() as $childSequence) {
+        foreach ($this->filterElements($sequence) as $childSequence) {
             if ($childSequence instanceof Group) {
                 $this->visitGroup($class, $schema, $childSequence);
             } elseif ($childSequence instanceof Choice) {
@@ -142,6 +143,11 @@ class PhpConverter extends AbstractConverter
         }
     }
 
+    private function filterElements(ElementContainer $container): array
+    {
+        return array_filter($container->getElements(), fn ($e) => !$e instanceof Any);
+    }
+
     /**
      * Process xsd:complexType xsd:choice xsd:element
      *
@@ -151,7 +157,7 @@ class PhpConverter extends AbstractConverter
      */
     private function visitChoice(PHPClass $class, Schema $schema, Choice $choice): void
     {
-        foreach ($choice->getElements() as $choiceOption) {
+        foreach ($this->filterElements($choice) as $choiceOption) {
             if ($choiceOption instanceof Sequence) {
                 $this->visitSequence($class, $schema, $choiceOption);
             } else {
@@ -163,7 +169,7 @@ class PhpConverter extends AbstractConverter
 
     private function visitGroup(PHPClass $class, Schema $schema, Group $group): void
     {
-        foreach ($group->getElements() as $childGroup) {
+        foreach ($this->filterElements($group) as $childGroup) {
             if ($childGroup instanceof Group) {
                 $this->visitGroup($class, $schema, $childGroup);
             } else {
@@ -346,15 +352,13 @@ class PhpConverter extends AbstractConverter
     private function visitComplexType(PHPClass $class, ComplexType $type): void
     {
         $schema = $type->getSchema();
-        foreach ($type->getElements() as $element) {
+        foreach ($this->filterElements($type) as $element) {
             if ($element instanceof Sequence) {
                 $this->visitSequence($class, $schema, $element);
             } elseif ($element instanceof Choice) {
                 $this->visitChoice($class, $schema, $element);
             } elseif ($element instanceof Group) {
                 $this->visitGroup($class, $schema, $element);
-            } elseif ($element instanceof Any) {
-                continue;
             } else {
                 $property = $this->visitElement($class, $schema, $element);
                 $class->addProperty($property);
