@@ -354,7 +354,7 @@ class PhpConverter extends AbstractConverter
             } elseif ($element instanceof Group) {
                 $this->visitGroup($class, $schema, $element);
             } elseif ($element instanceof Any) {
-                return;
+                continue;
             } else {
                 $property = $this->visitElement($class, $schema, $element);
                 $class->addProperty($property);
