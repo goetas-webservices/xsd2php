@@ -1,0 +1,38 @@
+name: Tests
+
+on: [push]
+
+jobs:
+  test:
+
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        php: [7.2, 7.3, 7.4, 8.0, 8.1]
+
+    name: PHP ${{ matrix.php }}
+
+    steps:
+
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Cache Dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.composer/cache/files
+          key: dependencies-php-${{ matrix.php }}-composer-${{ hashFiles('composer.json') }}
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: curl, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, iconv, mcrypt
+          coverage: none
+
+      - name: Install Dependencies
+        run: |
+          composer install --no-interaction
+      - name: Execute Tests
+        run: ./vendor/bin/phpunit

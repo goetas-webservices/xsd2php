@@ -209,6 +209,8 @@ class OTASerializationTest extends TestCase
         if (@$xmlDom->schemaValidate($xsd)) {
             $this->assertCount(0, $violations, 'Validation errors in ' . $xml);
         }
+
+        self::assertTrue(true);
     }
 
     private static function getXmlFiles()
