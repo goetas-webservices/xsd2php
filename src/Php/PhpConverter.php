@@ -14,6 +14,7 @@ use GoetasWebservices\XML\XSDReader\Schema\Element\ElementSingle;
 use GoetasWebservices\XML\XSDReader\Schema\Element\Any\Any;
 use GoetasWebservices\XML\XSDReader\Schema\Element\Group;
 use GoetasWebservices\XML\XSDReader\Schema\Element\Choice;
+use GoetasWebservices\XML\XSDReader\Schema\Element\GroupRef;
 use GoetasWebservices\XML\XSDReader\Schema\Element\Sequence;
 use GoetasWebservices\XML\XSDReader\Schema\Item;
 use GoetasWebservices\XML\XSDReader\Schema\Schema;
@@ -154,13 +155,23 @@ class PhpConverter extends AbstractConverter
      * @param PHPClass $class
      * @param Schema $schema
      * @param Choice $choice
+     * @param GroupRef|null $groupRef
      */
-    private function visitChoice(PHPClass $class, Schema $schema, Choice $choice): void
+    private function visitChoice(PHPClass $class, Schema $schema, Choice $choice, ?GroupRef $groupRef = null): void
     {
         foreach ($this->filterElements($choice) as $choiceOption) {
             if ($choiceOption instanceof Sequence) {
                 $this->visitSequence($class, $schema, $choiceOption);
+            } elseif ($choiceOption instanceof Choice) {
+                $this->visitChoice($class, $schema, $choiceOption);
+            } elseif ($choiceOption instanceof Group) {
+                $this->visitGroup($class, $schema, $choiceOption);
             } else {
+                /** @var Element $choiceOption */
+                if ($groupRef !== null) {
+                    $choiceOption->setMax($groupRef->getMax());
+                    $choiceOption->setMin($groupRef->getMin());
+                }
                 $property = $this->visitElement($class, $schema, $choiceOption);
                 $class->addProperty($property);
             }
@@ -172,6 +183,13 @@ class PhpConverter extends AbstractConverter
         foreach ($this->filterElements($group) as $childGroup) {
             if ($childGroup instanceof Group) {
                 $this->visitGroup($class, $schema, $childGroup);
+            } elseif ($childGroup instanceof Choice) {
+                $this->visitChoice(
+                    $class,
+                    $schema,
+                    $childGroup,
+                    $group instanceof GroupRef ? $group : null
+                );
             } else {
                 $property = $this->visitElement($class, $schema, $childGroup);
                 $class->addProperty($property);
@@ -307,7 +325,6 @@ class PhpConverter extends AbstractConverter
             }
 
             if (($this->isArrayType($type) || $this->isArrayNestedElement($type)) && !$force) {
-
                 $this->classes[spl_object_hash($type)]['skip'] = true;
                 $this->skipByType[spl_object_hash($class)] = true;
 
@@ -472,9 +489,7 @@ class PhpConverter extends AbstractConverter
         $t = $element->getType();
 
         if ($arrayize) {
-
             if ($itemOfArray = $this->isArrayType($t)) {
-
                 if (!$itemOfArray->getName()) {
                     if ($element instanceof ElementRef) {
                         $refClass = $this->visitElementDef($element->getReferencedElement());
@@ -496,7 +511,6 @@ class PhpConverter extends AbstractConverter
             }
 
             if ($itemOfArray = $this->isArrayNestedElement($t)) {
-
                 if (!$t->getName()) {
                     if ($element instanceof ElementRef) {
                         $refClass = $this->visitElementDef($element->getReferencedElement());
