@@ -143,8 +143,7 @@ class ClassGenerator
                     ->getType()->getPhpType() . '[]');
             $parameter->setType('array');
 
-            if ($p = $type->getArg()->getType()->isSimpleType()
-            ) {
+            if ($p = $type->getArg()->getType()->isSimpleType()) {
                 if (($t = $p->getType())) {
                     $patramTag->setTypes($t->getPhpType());
                 }
@@ -179,9 +178,13 @@ class ClassGenerator
             $parameter->setDefaultValue(null);
         }
 
-        if (($parameter->getDefaultValue() instanceof ValueGenerator) &&
-            $parameter->getDefaultValue()->getValue() === null && $parameter->getType() !== null &&
-            substr($parameter->getType(), 0, 1) !== '?') {
+        if (
+            ($parameter->getDefaultValue() instanceof ValueGenerator) &&
+            $parameter->getDefaultValue()->getValue() === null &&
+            $parameter->getType() !== null &&
+            substr($parameter->getType(), 0, 1) !== '?' &&
+            $parameter->getType() !== 'mixed'
+        ) {
             $parameter->setType('?' . $parameter->getType());
         }
 
