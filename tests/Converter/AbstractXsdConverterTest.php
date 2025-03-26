@@ -27,8 +27,8 @@ class AbstractXsdConverterTest extends TestCase
         $handlers = $this->converter->getTypeAliases();
 
         $this->assertArrayHasKey('http://www.example.com', $handlers);
-        $this->assertArrayHasKey('myType', $exmpleHandlers = $handlers['http://www.example.com']);
-        $this->assertSame($f, $exmpleHandlers['myType']);
+        $this->assertArrayHasKey('myType', $exampleHandlers = $handlers['http://www.example.com']);
+        $this->assertSame($f, $exampleHandlers['myType']);
     }
 
     public function testDefaultAliases()
@@ -51,5 +51,16 @@ class AbstractXsdConverterTest extends TestCase
 
         $this->assertArrayHasKey('http://www.example.com', $namespaces);
         $this->assertEquals('some\php\ns', $namespaces['http://www.example.com']);
+    }
+
+    public function testPrefixes()
+    {
+        $this->converter->addRootPrefix('http://www.example.com', 'root', 'prefix');
+
+        $handlers = $this->converter->getRootPrefixes();
+
+        $this->assertArrayHasKey('http://www.example.com', $handlers);
+        $this->assertArrayHasKey('root', $examplePrefixes = $handlers['http://www.example.com']);
+        $this->assertSame('prefix', $examplePrefixes['root']);
     }
 }

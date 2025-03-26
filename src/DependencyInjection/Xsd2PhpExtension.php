@@ -49,6 +49,11 @@ class Xsd2PhpExtension extends Extension
                     $converter->addMethodCall('addAliasMapType', [$xml, $type, self::sanitizePhp($php)]);
                 }
             }
+            foreach ($config['prefixes'] as $target => $data) {
+                foreach ($data as $element => $prefix) {
+                    $converter->addMethodCall('addRootPrefix', [$target, $element, $prefix]);
+                }
+            }
         }
 
         if ($config['configs_jms']) {
