@@ -15,6 +15,7 @@ use GoetasWebservices\XML\XSDReader\Schema\Element\Any\Any;
 use GoetasWebservices\XML\XSDReader\Schema\Element\Group;
 use GoetasWebservices\XML\XSDReader\Schema\Element\Choice;
 use GoetasWebservices\XML\XSDReader\Schema\Element\Sequence;
+use GoetasWebservices\XML\XSDReader\Schema\Element\GroupRef;
 use GoetasWebservices\XML\XSDReader\Schema\Item;
 use GoetasWebservices\XML\XSDReader\Schema\Schema;
 use GoetasWebservices\XML\XSDReader\Schema\Type\BaseComplexType;
@@ -131,14 +132,19 @@ class PhpConverter extends AbstractConverter
      */
     private function visitSequence(PHPClass $class, Schema $schema, Sequence $sequence): void
     {
-        foreach ($this->filterElements($sequence) as $childSequence) {
-            if ($childSequence instanceof Group) {
-                $this->visitGroup($class, $schema, $childSequence);
-            } elseif ($childSequence instanceof Choice) {
-                $this->visitChoice($class, $schema, $childSequence);
-            } else {
-                $property = $this->visitElement($class, $schema, $childSequence);
+        foreach ($this->filterElements($sequence) as $child) {
+            if ($child instanceof Group) {
+                $this->visitGroup($class, $schema, $child);
+            } elseif ($child instanceof Choice) {
+                $this->visitChoice($class, $schema, $child);
+            } elseif ($child instanceof ElementSingle) {
+                $property = $this->visitElement($class, $schema, $child);
                 $class->addProperty($property);
+            } elseif ($child instanceof GroupRef) {
+                // Recursively process GroupRef
+                $this->visitGroup($class, $schema, $child->getGroup());
+            } else {
+                throw new \InvalidArgumentException('Unsupported element type: ' . get_class($child));
             }
         }
     }
@@ -160,21 +166,33 @@ class PhpConverter extends AbstractConverter
         foreach ($this->filterElements($choice) as $choiceOption) {
             if ($choiceOption instanceof Sequence) {
                 $this->visitSequence($class, $schema, $choiceOption);
-            } else {
+            } elseif ($choiceOption instanceof Group) {
+                $this->visitGroup($class, $schema, $choiceOption);
+            } elseif ($choiceOption instanceof ElementSingle) {
                 $property = $this->visitElement($class, $schema, $choiceOption);
                 $class->addProperty($property);
+            } elseif ($choiceOption instanceof GroupRef) {
+                // Recursively process GroupRef
+                $this->visitGroup($class, $schema, $choiceOption->getGroup());
+            } else {
+                throw new \InvalidArgumentException('Unsupported element type: ' . get_class($choiceOption));
             }
         }
     }
 
     private function visitGroup(PHPClass $class, Schema $schema, Group $group): void
     {
-        foreach ($this->filterElements($group) as $childGroup) {
-            if ($childGroup instanceof Group) {
-                $this->visitGroup($class, $schema, $childGroup);
-            } else {
-                $property = $this->visitElement($class, $schema, $childGroup);
+        foreach ($this->filterElements($group) as $child) {
+            if ($child instanceof Group) {
+                $this->visitGroup($class, $schema, $child);
+            } elseif ($child instanceof ElementSingle) {
+                $property = $this->visitElement($class, $schema, $child);
                 $class->addProperty($property);
+            } elseif ($child instanceof GroupRef) {
+                // Recursively process GroupRef
+                $this->visitGroup($class, $schema, $child->getGroup());
+            } else {
+                throw new \InvalidArgumentException('Unsupported element type: ' . get_class($child));
             }
         }
     }
@@ -593,4 +611,5 @@ class PhpConverter extends AbstractConverter
 
         return $this->findPHPClass($class, $element);
     }
+
 }
