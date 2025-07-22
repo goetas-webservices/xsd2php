@@ -66,10 +66,10 @@ class Configuration implements ConfigurationInterface
                     ->end()
                 ->end()
                 ->arrayNode('aliases')->fixXmlConfig('alias')
-                    ->prototype('array')
-                        ->prototype('scalar')
-                        ->end()
+                    ->prototype('scalar')
                     ->end()
+                ->end()
+                ->booleanNode('strict_types')
                 ->end()
             ->end();
 

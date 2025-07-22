@@ -102,13 +102,13 @@ abstract class AbstractNamingStrategy implements NamingStrategy
     {
         $inflector = InflectorFactory::create()->build();
 
-        return $inflector->camelize(str_replace('.', ' ', $item->getName()));
+        return $inflector->camelize(str_replace(['.', ':'], ' ', $item->getName()));
     }
 
     protected function classify($name)
     {
         $inflector = InflectorFactory::create()->build();
 
-        return $inflector->classify(str_replace('.', ' ', $name));
+        return $inflector->classify(str_replace(['.', ':'], ' ', $name));
     }
 }

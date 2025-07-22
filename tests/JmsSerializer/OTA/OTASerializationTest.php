@@ -39,7 +39,7 @@ class OTASerializationTest extends TestCase
             ['http://www.opentravel.org/OTA/2003/05', 'DateOrTimeOrDateTimeType', 'GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime'],
             ['http://www.opentravel.org/OTA/2003/05', 'DateOrDateTimeType', 'GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime'],
             ['http://www.opentravel.org/OTA/2003/05', 'TimeOrDateTimeType', 'GoetasWebservices\Xsd\XsdToPhp\Tests\JmsSerializer\OTA\OTADateTime'],
-        ], __DIR__ .'/zz');
+        ], __DIR__ . '/zz');
 
         $reader = new SchemaReader();
         $schemas = [];
@@ -144,7 +144,7 @@ class OTASerializationTest extends TestCase
      */
     public function testConversion($xml, $xsd, $class)
     {
-        if (!class_exists('XMLDiff\Memory', false)){
+        if (!class_exists('XMLDiff\Memory', false)) {
             $this->markTestSkipped('XMLDiff not installed');
         }
 

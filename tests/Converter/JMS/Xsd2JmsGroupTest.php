@@ -2,7 +2,7 @@
 
 namespace GoetasWebservices\Xsd\XsdToPhp\Tests\Converter\JMS;
 
-class Xsd2PhpGroupTest extends Xsd2JmsBase
+class Xsd2JmsGroupTest extends Xsd2JmsBase
 {
     public function testGroupArray()
     {
@@ -183,7 +183,9 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
                         ],
                     ],
                 ],
-            ], $classes['Example\\ComplexType1Type']);
+            ],
+            $classes['Example\\ComplexType1Type']
+        );
 
         $this->assertEquals(
             [
@@ -206,7 +208,9 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
                         ],
                     ],
                 ],
-            ], $classes['Example\\ComplexType1Type\\String2AType']);
+            ],
+            $classes['Example\\ComplexType1Type\\String2AType']
+        );
     }
 
     public function testSomeAnonymousWithRefs()
@@ -306,7 +310,9 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
                         ],
                     ],
                 ],
-            ], $classes['Example\\ComplexType1Type']);
+            ],
+            $classes['Example\\ComplexType1Type']
+        );
 
         $this->assertEquals(
             [
@@ -340,7 +346,9 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
                         ],
                     ],
                 ],
-            ], $classes['Example\\ComplexType2Type']);
+            ],
+            $classes['Example\\ComplexType2Type']
+        );
     }
 
     public function getMaxOccurs()
@@ -412,7 +420,9 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
                         ],
                     ],
                 ],
-            ], $classes['Example\\ComplexType1Type']);
+            ],
+            $classes['Example\\ComplexType1Type']
+        );
     }
 
     /**
@@ -453,7 +463,9 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
                         ],
                     ],
                 ],
-            ], $classes['Example\\ComplexType1Type']);
+            ],
+            $classes['Example\\ComplexType1Type']
+        );
     }
 
     public function testGeneralParts()
@@ -606,7 +618,9 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
                         ],
                     ],
                 ],
-            ], $classes['Example\\ComplexType1Type']);
+            ],
+            $classes['Example\\ComplexType1Type']
+        );
     }
 
     public function testListOfRestriction()

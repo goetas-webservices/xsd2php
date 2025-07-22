@@ -4,7 +4,6 @@ namespace GoetasWebservices\Xsd\XsdToPhp\Jms;
 
 use GoetasWebservices\XML\XSDReader\Schema\Attribute\Attribute;
 use GoetasWebservices\XML\XSDReader\Schema\Attribute\AttributeItem;
-use GoetasWebservices\XML\XSDReader\Schema\Element\Element;
 use GoetasWebservices\XML\XSDReader\Schema\Element\ElementItem;
 use GoetasWebservices\XML\XSDReader\Schema\Schema;
 use GoetasWebservices\XML\XSDReader\Schema\Type\ComplexType;
@@ -20,7 +19,7 @@ class YamlValidatorConverter extends YamlConverter
      *
      * @return PHPClass[]
      */
-    public function getTypes()
+    public function getTypes(): array
     {
         $classes = parent::getTypes();
 
@@ -153,7 +152,7 @@ class YamlValidatorConverter extends YamlConverter
                                 '\p{IsLatin-1Supplement}' => '\x{0080}-\x{00FF}',
                             ];
                             foreach ($unicodeClasses as $from => $to) {
-                                if (preg_match('~\[.*'.preg_quote($from, '~').'.*\]~', $regexPattern)) {
+                                if (preg_match('~\[.*' . preg_quote($from, '~') . '.*\]~', $regexPattern)) {
                                     $regexPattern = str_replace($from, $to, $regexPattern);
                                 } else {
                                     $regexPattern = str_replace($from, "[$to]", $regexPattern);
@@ -212,12 +211,15 @@ class YamlValidatorConverter extends YamlConverter
     private function loadValidatorElement(array &$property, ElementItem $element)
     {
         /* @var $element Element */
-        $type = $element->getType();
+        $type = null;
+        if (method_exists($element, 'getType')) {
+            $type = $element->getType();
+        }
 
         $attrs = [];
-        $arrayized = strpos($property['type'], 'array<') === 0;
+        $arrayized = strpos($property['type'] ?? '', 'array<') === 0;
 
-        if ($arrayized) {
+        if ($arrayized && $type) {
             if ($itemOfArray = $this->isArrayNestedElement($type)) {
                 $attrs = [
                     'min' => min($element->getMin(), $itemOfArray->getMin()),
@@ -243,7 +245,11 @@ class YamlValidatorConverter extends YamlConverter
             unset($attrs['max']);
         }
 
-        $rules = $this->loadValidatorType($property, $type, $arrayized);
+        if ($type) {
+            $rules = $this->loadValidatorType($property, $type, $arrayized);
+        } else {
+            $rules = [];
+        }
 
         if ($element->getMin() > 0) {
             $property['validation'][] = [
@@ -299,7 +305,7 @@ class YamlValidatorConverter extends YamlConverter
      * @param array $data
      * @param string $name
      */
-    protected function visitSimpleType(&$class, &$data, SimpleType $type, $name)
+    protected function visitSimpleType(&$class, &$data, SimpleType $type, $name): void
     {
         parent::visitSimpleType($class, $data, $type, $name);
 
@@ -322,7 +328,7 @@ class YamlValidatorConverter extends YamlConverter
      *
      * @return PHPProperty
      */
-    protected function &visitElement(&$class, Schema $schema, ElementItem $element, $arrayize = true)
+    protected function &visitElement(array &$class, Schema $schema, ElementItem $element, bool $arrayize = true): array
     {
         $property = parent::visitElement($class, $schema, $element, $arrayize);
 
@@ -338,7 +344,7 @@ class YamlValidatorConverter extends YamlConverter
      *
      * @return array
      */
-    protected function &visitAttribute(&$class, Schema $schema, AttributeItem $attribute)
+    protected function &visitAttribute(array &$class, Schema $schema, AttributeItem $attribute): array
     {
         $property = parent::visitAttribute($class, $schema, $attribute);
 
@@ -354,7 +360,7 @@ class YamlValidatorConverter extends YamlConverter
      * @param array $data
      * @param string $parentName
      */
-    protected function &handleClassExtension(&$class, &$data, Type $type, $parentName)
+    protected function &handleClassExtension(array &$class, array &$data, Type $type, string $parentName): array
     {
         $property = parent::handleClassExtension($class, $data, $type, $parentName);
 
