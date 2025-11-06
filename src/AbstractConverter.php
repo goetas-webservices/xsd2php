@@ -27,6 +27,10 @@ abstract class AbstractConverter
         'http://www.w3.org/XML/1998/namespace' => '',
     ];
 
+    protected $xmlNamespaces = [
+        // namespace => prefix
+    ];
+
     /**
      * @var \GoetasWebservices\Xsd\XsdToPhp\Naming\NamingStrategy
      */
@@ -198,6 +202,14 @@ abstract class AbstractConverter
     {
         $this->logger->info("Added ns mapping $ns, $phpNamespace");
         $this->namespaces[$ns] = $phpNamespace;
+
+        return $this;
+    }
+
+    public function addXMLNamespace($prefix, $namespace)
+    {
+        $this->logger->info("Added XML namespace $prefix:$namespace");
+        $this->xmlNamespaces[$namespace] = $prefix;
 
         return $this;
     }
