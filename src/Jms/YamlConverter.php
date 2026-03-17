@@ -468,10 +468,10 @@ class YamlConverter extends AbstractConverter
      *
      * @return string|null
      */
-    protected function getElementNamespace(Schema $schema, ElementItem $element)
+    protected function getElementNamespace(Schema $_schema, ElementItem $element)
     {
         if ($element->getSchema()->getTargetNamespace() &&
-            ($schema->getElementsQualification() || ($element instanceof Element && $element->isQualified()) || !$element->isLocal())
+            (($element instanceof Element && $element->isQualified()) || !$element->isLocal())
         ) {
             return $element->getSchema()->getTargetNamespace();
         }
