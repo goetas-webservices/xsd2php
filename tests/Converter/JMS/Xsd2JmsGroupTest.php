@@ -7,7 +7,7 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
     public function testGroupArray()
     {
         $content = '
-             <xs:schema targetNamespace="http://www.example.com" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+             <xs:schema targetNamespace="http://www.example.com" xmlns="http://www.example.com" xmlns:xs="http://www.w3.org/2001/XMLSchema">
                 <xs:group name="EG_ExtensionList">
                     <xs:sequence>
                       <xs:element name="ext" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
@@ -213,7 +213,7 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
     {
         error_reporting(error_reporting() & ~E_NOTICE);
         $content = '
-             <xs:schema targetNamespace="http://www.example.com" xmlns:xs="http://www.w3.org/2001/XMLSchema"  xmlns:ex="http://www.example.com">
+             <xs:schema targetNamespace="http://www.example.com" xmlns="http://www.example.com" xmlns:xs="http://www.w3.org/2001/XMLSchema"  xmlns:ex="http://www.example.com">
                     <xs:complexType name="AddressBook">
                         <xs:sequence>
                             <xs:element ref="Contacts" minOccurs="0"/>                                                            
@@ -459,7 +459,7 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
     public function testGeneralParts()
     {
         $content = '
-             <xs:schema targetNamespace="http://www.example.com" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+             <xs:schema targetNamespace="http://www.example.com" xmlns="http://www.example.com" xmlns:xs="http://www.w3.org/2001/XMLSchema">
                 <xs:group name="group-1">
                     <xs:sequence>
                         <xs:element name="group-1-el-1" type="xs:string"/>
@@ -612,7 +612,7 @@ class Xsd2PhpGroupTest extends Xsd2JmsBase
     public function testListOfRestriction()
     {
         $xml = '
-            <xs:schema targetNamespace="http://www.example.com" xmlns:xs="http://www.w3.org/2001/XMLSchema"  xmlns:ex="http://www.example.com">
+            <xs:schema targetNamespace="http://www.example.com" xmlns="http://www.example.com" xmlns:xs="http://www.w3.org/2001/XMLSchema"  xmlns:ex="http://www.example.com">
             
                 <xs:simpleType name="JustRestriction">
                     <xs:restriction base="xs:float"/>

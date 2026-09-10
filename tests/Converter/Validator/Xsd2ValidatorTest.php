@@ -215,7 +215,7 @@ class Xsd2ValidatorTest extends TestCase
     public function testSimpleTypeWithValidations($xsRestrictions, $ymlValidations)
     {
         $xml = '
-             <xs:schema targetNamespace="http://www.example.com" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+             <xs:schema targetNamespace="http://www.example.com" xmlns="http://www.example.com" xmlns:xs="http://www.w3.org/2001/XMLSchema">
                 <xs:element name="element-one">
                     <xs:simpleType>
                          <xs:restriction base="xs:string">
@@ -1016,7 +1016,7 @@ class Xsd2ValidatorTest extends TestCase
     public function testComplexTypeWithExtension_1()
     {
         $content = '
-            <xs:schema targetNamespace="http://www.example.com" xmlns:xs="http://www.w3.org/2001/XMLSchema"  xmlns:ex="http://www.example.com">
+            <xs:schema targetNamespace="http://www.example.com" xmlns="http://www.example.com" xmlns:xs="http://www.w3.org/2001/XMLSchema"  xmlns:ex="http://www.example.com">
                 <xs:complexType name="personinfo">
                     <xs:sequence>
                         <xs:element name="firstname" type="xs:string"/>

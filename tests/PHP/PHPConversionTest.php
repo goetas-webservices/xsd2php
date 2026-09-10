@@ -122,7 +122,7 @@ class PHPConversionTest extends TestCase
     public function testMulteplicity()
     {
         $xml = '
-            <xs:schema targetNamespace="http://www.example.com"
+            <xs:schema targetNamespace="http://www.example.com" xmlns="http://www.example.com"
             xmlns:xs="http://www.w3.org/2001/XMLSchema">
                 <xs:complexType name="single">
                     <xs:all>
@@ -154,7 +154,7 @@ class PHPConversionTest extends TestCase
     public function testNestedMulteplicity()
     {
         $xml = '
-            <xs:schema targetNamespace="http://www.example.com" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+            <xs:schema targetNamespace="http://www.example.com" xmlns="http://www.example.com" xmlns:xs="http://www.w3.org/2001/XMLSchema">
                 <xs:complexType name="single">
                     <xs:all>
                         <xs:element name="id" type="ary" minOccurs="0"/>
@@ -197,7 +197,7 @@ class PHPConversionTest extends TestCase
     public function testMultipleArrayTypes()
     {
         $xml = '
-            <xs:schema targetNamespace="http://www.example.com"
+            <xs:schema targetNamespace="http://www.example.com" xmlns="http://www.example.com"
             xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
                 <xs:complexType name="ArrayOfStrings">
@@ -231,7 +231,7 @@ class PHPConversionTest extends TestCase
     public function testSimpleMulteplicity()
     {
         $xml = '
-            <xs:schema targetNamespace="http://www.example.com"
+            <xs:schema targetNamespace="http://www.example.com" xmlns="http://www.example.com"
             xmlns:xs="http://www.w3.org/2001/XMLSchema">
                 <xs:complexType name="single">
                     <xs:all>
