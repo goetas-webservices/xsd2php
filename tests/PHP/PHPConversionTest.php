@@ -228,6 +228,78 @@ class PHPConversionTest extends TestCase
         // this is not $items['Example\ArrayOfStrings']; important
     }
 
+    public function testArrayOfWrapperElementDefaultsFollowMinOccurs()
+    {
+        $xml = '
+            <xs:schema targetNamespace="http://www.example.com"
+            xmlns="http://www.example.com"
+            xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+                <xs:complexType name="ArrayOfStrings">
+                    <xs:all>
+                        <xs:element name="string" type="xs:string" maxOccurs="unbounded" minOccurs="0"/>
+                    </xs:all>
+                </xs:complexType>
+
+                <xs:complexType name="Single">
+                    <xs:all>
+                        <xs:element name="required" type="ArrayOfStrings"/>
+                        <xs:element name="optional" type="ArrayOfStrings" minOccurs="0"/>
+                    </xs:all>
+                </xs:complexType>
+
+            </xs:schema>';
+
+        $items = $this->getClasses($xml);
+        $single = $items['Example\SingleType'];
+
+        // minOccurs is absent -> defaults to 1 in XSD: the wrapper element is
+        // required in the response, so it must default to [] not null, otherwise
+        // the generated class produces no XML element at all when nothing was set,
+        // even though the schema requires the element to always be present.
+        $requiredDefault = $single->getProperty('required')->getDefaultValue();
+        $this->assertNotNull($requiredDefault, 'required array property must have an explicit default');
+        $this->assertSame([], $requiredDefault->getValue());
+
+        // minOccurs="0" -> the wrapper element is genuinely optional: null must be
+        // preserved so the serializer can still omit the element entirely.
+        $optionalDefault = $single->getProperty('optional')->getDefaultValue();
+        $this->assertNotNull($optionalDefault);
+        $this->assertNull($optionalDefault->getValue());
+    }
+
+    public function testArrayTypeListElementDefaultsFollowMinOccurs()
+    {
+        $xml = '
+            <xs:schema targetNamespace="http://www.example.com"
+            xmlns="http://www.example.com"
+            xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+                <xs:simpleType name="IntList">
+                    <xs:list itemType="xs:integer"/>
+                </xs:simpleType>
+
+                <xs:complexType name="Single">
+                    <xs:all>
+                        <xs:element name="required" type="IntList"/>
+                        <xs:element name="optional" type="IntList" minOccurs="0"/>
+                    </xs:all>
+                </xs:complexType>
+
+            </xs:schema>';
+
+        $items = $this->getClasses($xml);
+        $single = $items['Example\SingleType'];
+
+        $requiredDefault = $single->getProperty('required')->getDefaultValue();
+        $this->assertNotNull($requiredDefault, 'required array property must have an explicit default');
+        $this->assertSame([], $requiredDefault->getValue());
+
+        $optionalDefault = $single->getProperty('optional')->getDefaultValue();
+        $this->assertNotNull($optionalDefault);
+        $this->assertNull($optionalDefault->getValue());
+    }
+
     public function testSimpleMulteplicity()
     {
         $xml = '
@@ -253,6 +325,35 @@ class PHPConversionTest extends TestCase
 
         $this->assertTrue($single->hasMethod('getId'));
         $this->assertTrue($single->hasMethod('setId'));
+    }
+
+    public function testArrayTypeAttributeDefaultsFollowUse()
+    {
+        $xml = '
+            <xs:schema targetNamespace="http://www.example.com"
+            xmlns="http://www.example.com"
+            xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+                <xs:simpleType name="IntList">
+                    <xs:list itemType="xs:integer"/>
+                </xs:simpleType>
+
+                <xs:complexType name="single">
+                    <xs:attribute name="required" type="IntList" use="required"/>
+                    <xs:attribute name="optional" type="IntList"/>
+                </xs:complexType>
+            </xs:schema>';
+
+        $items = $this->getClasses($xml);
+        $single = $items['Example\SingleType'];
+
+        $requiredDefault = $single->getProperty('required')->getDefaultValue();
+        $this->assertNotNull($requiredDefault, 'required array attribute must have an explicit default');
+        $this->assertSame([], $requiredDefault->getValue());
+
+        $optionalDefault = $single->getProperty('optional')->getDefaultValue();
+        $this->assertNotNull($optionalDefault);
+        $this->assertNull($optionalDefault->getValue());
     }
 
     public function testNillableElement()

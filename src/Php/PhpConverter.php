@@ -3,6 +3,7 @@
 namespace GoetasWebservices\Xsd\XsdToPhp\Php;
 
 use Exception;
+use GoetasWebservices\XML\XSDReader\Schema\Attribute\Attribute;
 use GoetasWebservices\XML\XSDReader\Schema\Attribute\AttributeItem;
 use GoetasWebservices\XML\XSDReader\Schema\Element\ElementContainer;
 use GoetasWebservices\XML\XSDReader\Schema\Attribute\Group as AttributeGroup;
@@ -444,6 +445,9 @@ class PhpConverter extends AbstractConverter
             }
             $arg = new PHPArg($this->getNamingStrategy()->getPropertyName($attribute));
             $arg->setType($visitedType);
+            if ($attribute instanceof Attribute && $attribute->getUse() === Attribute::USE_REQUIRED) {
+                $arg->setDefault([]);
+            }
             $property->setType(new PHPClassOf($arg));
         } else {
             $property->setType($this->findPHPClass($class, $attribute, true));
@@ -490,6 +494,9 @@ class PhpConverter extends AbstractConverter
 
                 $arg = new PHPArg($this->getNamingStrategy()->getPropertyName($element));
                 $arg->setType($classType);
+                if ($element->getMin() > 0) {
+                    $arg->setDefault([]);
+                }
                 $property->setType(new PHPClassOf($arg));
 
                 return $property;
@@ -510,6 +517,9 @@ class PhpConverter extends AbstractConverter
                     $classType = $this->visitType($t, true);
                 }
                 $elementProp = $this->visitElement($classType, $schema, $itemOfArray, false);
+                if ($element->getMin() > 0) {
+                    $elementProp->setDefault([]);
+                }
                 $property->setType(new PHPClassOf($elementProp));
 
                 return $property;
