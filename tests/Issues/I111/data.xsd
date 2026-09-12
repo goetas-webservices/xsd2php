@@ -1,4 +1,4 @@
-<xs:schema elementFormDefault="qualified" targetNamespace="http://www.example.com" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ex="http://www.example2.com">
+<xs:schema elementFormDefault="qualified" targetNamespace="http://www.example.com" xmlns="http://www.example.com" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ex="http://www.example2.com">
 
     <xs:import namespace="http://www.example2.com" schemaLocation="data2.xsd"/>
 

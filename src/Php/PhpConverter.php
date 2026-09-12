@@ -158,7 +158,9 @@ class PhpConverter extends AbstractConverter
     private function visitChoice(PHPClass $class, Schema $schema, Choice $choice): void
     {
         foreach ($this->filterElements($choice) as $choiceOption) {
-            if ($choiceOption instanceof Sequence) {
+            if ($choiceOption instanceof Group) {
+                $this->visitGroup($class, $schema, $choiceOption);
+            } elseif ($choiceOption instanceof Sequence) {
                 $this->visitSequence($class, $schema, $choiceOption);
             } else {
                 $property = $this->visitElement($class, $schema, $choiceOption);
@@ -172,6 +174,10 @@ class PhpConverter extends AbstractConverter
         foreach ($this->filterElements($group) as $childGroup) {
             if ($childGroup instanceof Group) {
                 $this->visitGroup($class, $schema, $childGroup);
+            } elseif ($childGroup instanceof Sequence) {
+                $this->visitSequence($class, $schema, $childGroup);
+            } elseif ($childGroup instanceof Choice) {
+                $this->visitChoice($class, $schema, $childGroup);
             } else {
                 $property = $this->visitElement($class, $schema, $childGroup);
                 $class->addProperty($property);

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" version="3.002" id="OTA2003A2007B">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" version="3.002" id="OTA2003A2007B" xmlns="http://www.opentravel.org/OTA/2003/05">
 	<xs:include schemaLocation="OTA_HotelCommonTypes.xsd"/>
 	<xs:annotation>
 		<xs:documentation xml:lang="en">All Schema files in the OTA specification are made available according to the terms defined by the OTA License Agreement at http://www.opentravel.org/ota_downloads_form.cfm</xs:documentation>
