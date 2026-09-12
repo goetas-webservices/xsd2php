@@ -18,7 +18,7 @@
 xsd2php
 =======
 
-[![Build Status](https://travis-ci.org/goetas-webservices/xsd2php.svg?branch=master)](https://travis-ci.org/goetas-webservices/xsd2php)
+[![Tests](https://github.com/goetas-webservices/xsd2php/actions/workflows/tests.yml/badge.svg)](https://github.com/goetas-webservices/xsd2php/actions/workflows/tests.yml)
 [![Code Coverage](https://scrutinizer-ci.com/g/goetas-webservices/xsd2php/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/goetas-webservices/xsd2php/?branch=master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/goetas-webservices/xsd2php/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/goetas-webservices/xsd2php/?branch=master)
 

@@ -279,8 +279,9 @@ class YamlValidatorConverter extends YamlConverter
     {
         /* @var $element Element */
         $type = $attribute->getType();
+        $arrayized = (bool) $this->isArrayType($type);
 
-        $this->loadValidatorType($property, $type, false);
+        $rules = $this->loadValidatorType($property, $type, $arrayized);
 
         // Required properties
         if ($attribute instanceof Attribute) {
@@ -289,6 +290,12 @@ class YamlValidatorConverter extends YamlConverter
                     'NotNull' => null,
                 ];
             }
+        }
+
+        if ($arrayized && count($rules) > 0) {
+            $property['validation'][] = [
+                'All' => ['constraints' => $rules],
+            ];
         }
     }
 
