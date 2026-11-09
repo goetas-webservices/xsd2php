@@ -245,7 +245,7 @@ class YamlValidatorConverter extends YamlConverter
 
         $rules = $this->loadValidatorType($property, $type, $arrayized);
 
-        if ($element->getMin() > 0) {
+        if ($element->getMin() > 0 && !$this->isChoiceElement($element)) {
             $property['validation'][] = [
                 'NotNull' => null,
             ];
