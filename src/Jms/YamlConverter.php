@@ -7,6 +7,7 @@ use Exception;
 use GoetasWebservices\XML\XSDReader\Schema\Attribute\AttributeContainer;
 use GoetasWebservices\XML\XSDReader\Schema\Attribute\AttributeItem;
 use GoetasWebservices\XML\XSDReader\Schema\Element\Any\Any;
+use GoetasWebservices\XML\XSDReader\Schema\Element\Choice;
 use GoetasWebservices\XML\XSDReader\Schema\Element\Element;
 use GoetasWebservices\XML\XSDReader\Schema\Element\ElementContainer;
 use GoetasWebservices\XML\XSDReader\Schema\Element\ElementDef;
@@ -27,6 +28,13 @@ use GoetasWebservices\Xsd\XsdToPhp\Php\Structure\PHPClass;
 
 class YamlConverter extends AbstractConverter
 {
+
+    /**
+     * Elements reached through an xsd:choice, by spl_object_hash().
+     *
+     * @var bool[]
+     */
+    private $choiceElements = [];
     protected $useCdata = true;
 
     public function __construct(NamingStrategy $namingStrategy)
@@ -83,18 +91,32 @@ class YamlConverter extends AbstractConverter
         return $items;
     }
 
-    private function flattElements(ElementContainer $container)
+    private function flattElements(ElementContainer $container, bool $insideChoice = false)
     {
+        $insideChoice = $insideChoice || $container instanceof Choice;
+
         $items = [];
         foreach ($container->getElements() as $attr) {
             if ($attr instanceof ElementContainer) {
-                $items = array_merge($items, $this->flattElements($attr));
+                $items = array_merge($items, $this->flattElements($attr, $insideChoice));
             } else {
+                if ($insideChoice) {
+                    $this->choiceElements[spl_object_hash($attr)] = true;
+                }
                 $items[] = $attr;
             }
         }
 
         return $items;
+    }
+
+    /**
+     * Whether the element is an alternative of an xsd:choice: it is required only when it is the
+     * chosen one, so its own minOccurs (inherited from the choice) must not become a mandatory property.
+     */
+    protected function isChoiceElement(ElementItem $element): bool
+    {
+        return isset($this->choiceElements[spl_object_hash($element)]);
     }
 
     /**

@@ -292,6 +292,57 @@ class Xsd2ValidatorTest extends TestCase
         $this->assertCount(0, $classes);
     }
 
+    public function testChoiceElementsAreNotRequiredIndividually()
+    {
+        $content = '
+             <xs:schema targetNamespace="http://www.example.com" xmlns:xs="http://www.w3.org/2001/XMLSchema"  xmlns:ex="http://www.example.com">
+                <xs:complexType name="complexType-1">
+                    <xs:choice minOccurs="1" maxOccurs="1">
+                        <xs:element name="column1" type="xs:string"/>
+                        <xs:element name="column2" type="xs:string"/>
+                    </xs:choice>
+                </xs:complexType>
+            </xs:schema>
+            ';
+        $classes = $this->getClasses($content);
+
+        // exactly one of the two is present: a NotNull on each one would reject every valid object
+        $this->assertCount(0, $classes);
+    }
+
+    public function testChoiceDoesNotAffectRequiredSiblings()
+    {
+        $content = '
+             <xs:schema targetNamespace="http://www.example.com" xmlns:xs="http://www.w3.org/2001/XMLSchema"  xmlns:ex="http://www.example.com">
+                <xs:complexType name="complexType-1">
+                    <xs:sequence>
+                        <xs:element name="id" type="xs:string"/>
+                        <xs:choice minOccurs="1" maxOccurs="1">
+                            <xs:element name="column1" type="xs:string"/>
+                            <xs:element name="column2" type="xs:string"/>
+                        </xs:choice>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:schema>
+            ';
+        $classes = $this->getClasses($content);
+
+        $this->assertEquals(
+            [
+                'Example\\ComplexType1Type' => [
+                    'properties' => [
+                        'id' => [
+                            [
+                                'NotNull' => [
+                                    'groups' => ['xsd_rules'],
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ], $classes['Example\\ComplexType1Type']);
+    }
+
     /**
      * @dataProvider getRestrictionsValidations
      */
